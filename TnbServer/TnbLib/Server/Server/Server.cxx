@@ -23,15 +23,24 @@ void tnbLib::Server::Construct(const std::string& theCommand, const std::string&
 		// Global objects
 		switchToMakeTnbServerObject(objects::make_int, create_int, theValue)
 		switchToMakeTnbServerObject(objects::make_real, create_real, theValue)
+		switchToMakeTnbServerObject(objects::make_bool, create_bool, theValue)
 
 		// geometric objects
-		switchToMakeTnbServerObject(objects::make_pnt_2d, create_pnt_2d, theValue)
+		switchToMakeTnbServerObject(objects::make_pnt_2d_f1, create_pnt_2d_f1, theValue)
 		switchToMakeTnbServerObject(objects::make_vec_2d_f1, create_vec_2d_f1, theValue)
 		switchToMakeTnbServerObject(objects::make_dir_2d_f1, create_dir_2d_f1, theValue)
-		switchToMakeTnbServerObject(objects::make_axis_2d, create_axis_2d, theValue)
+		switchToMakeTnbServerObject(objects::make_axis_2d_f1, create_axis_2d_f1, theValue)
+
+		switchToMakeTnbServerObject(objects::make_pnt_2d_list, make_pnt_2d_list, theValue)
 
 		// cad objects
 		switchToMakeTnbServerObject(objects::make_circle_2d_f1, make_circle_2d_f1, theValue)
+		switchToMakeTnbServerObject(objects::make_segment_2d_f1, make_segment_2d_f1, theValue)
+
+		switchToMakeTnbServerObject(objects::make_interpl_curve_2d, make_interpl_curve_2d, theValue)
+
+		// make an exit
+		switchToMakeTnbServerObject(objects::exit, exit, theValue)
 		default:
 			throw Server_Error("No object constructor is existed for the command: " + theCommand);
 	}

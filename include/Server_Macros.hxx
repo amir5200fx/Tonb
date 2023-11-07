@@ -71,10 +71,10 @@ void Object##_RunTime_Selection::Run()										\
 		theObj_->Construct(theValue);										\
 	}
 
-#define streamBadTnbServerObject(Object)									\
+#define streamBadTnbServerObject(MSG)										\
 	nlohmann::json jData;													\
 	jData[SENSE] = GetRespType(RespType::bad);								\
-	jData[VALUE] = Object.GetMessageString();								\
+	jData[VALUE] = MSG;								\
 	theStream_ << jData
 
 #define switchToMakeTnbServerObject(ObjType, FuncName, String)				\
@@ -83,5 +83,8 @@ void Object##_RunTime_Selection::Run()										\
 		FuncName(String);													\
 		break;																\
 	}
+
+#define streamUnknownBadTnbServerObject()									\
+	catch(...) {streamBadTnbServerObject("Unknown Error has been occured");}
 
 #endif

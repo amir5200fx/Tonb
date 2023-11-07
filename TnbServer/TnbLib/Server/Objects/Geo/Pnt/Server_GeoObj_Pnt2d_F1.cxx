@@ -1,13 +1,13 @@
-#include <Server_GeoObj_Pnt2d.hxx>
+#include <Server_GeoObj_Pnt2d_F1.hxx>
 
 #include <Pnt2d.hxx>
 #include <Global_File.hxx>
 #include <json.hpp>
 
-const std::string tnbLib::Server_GeoObj_Pnt2d::Params::x = "geo_pnt_x_2d";
-const std::string tnbLib::Server_GeoObj_Pnt2d::Params::y = "geo_pnt_y_2d";
+const std::string tnbLib::Server_GeoObj_Pnt2d_F1::Params::x = "x";
+const std::string tnbLib::Server_GeoObj_Pnt2d_F1::Params::y = "y";
 
-void tnbLib::Server_GeoObj_Pnt2d::Construct(const std::string& theValue)
+void tnbLib::Server_GeoObj_Pnt2d_F1::Construct(const std::string& theValue)
 {
 	//std::cout << "POINT = " << theValue << std::endl;
 	double x = 0, y = 0;

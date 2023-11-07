@@ -1,4 +1,4 @@
-#include <Server_GeoObj_Axis2d.hxx>
+#include <Server_GeoObj_Axis2d_F1.hxx>
 
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
@@ -8,10 +8,10 @@
 
 #include <gp_Ax2d.hxx>
 
-const std::string tnbLib::Server_GeoObj_Axis2d::Params::centre = "geo_axis_2d_centre";
-const std::string tnbLib::Server_GeoObj_Axis2d::Params::dir = "geo_axis_2d_dir";
+const std::string tnbLib::Server_GeoObj_Axis2d_F1::Params::centre = "centre";
+const std::string tnbLib::Server_GeoObj_Axis2d_F1::Params::dir = "dir";
 
-void tnbLib::Server_GeoObj_Axis2d::Construct(const std::string& theValue)
+void tnbLib::Server_GeoObj_Axis2d_F1::Construct(const std::string& theValue)
 {
 	Pnt2d centre;
 	Dir2d dir;

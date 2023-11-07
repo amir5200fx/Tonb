@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbServer_EXPORT_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete\Shape;$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete;$(ProjectDir)TnbLib\Server\Objects\Tools;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Newton;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Bisect;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver;$(ProjectDir)TnbLib\Server\Objects\Num\Integration\Adapt;$(ProjectDir)TnbLib\Server\Objects\Num\Integration;$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Circle;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Tools;$(ProjectDir)TnbLib\Server\Error;$(ProjectDir)TnbLib\Server\Ws2;$(ProjectDir)TnbLib\Server\Socket\TCP;$(ProjectDir)TnbLib\Server\Socket;$(ProjectDir)TnbLib\Server\Server;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete\Shape;$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete;$(ProjectDir)TnbLib\Server\Objects\Tools;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Newton;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Bisect;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver;$(ProjectDir)TnbLib\Server\Objects\Num\Integration\Adapt;$(ProjectDir)TnbLib\Server\Objects\Num\Integration;$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Interpl;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Circle;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Segment;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global\Bool;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Tools;$(ProjectDir)TnbLib\Server\Error;$(ProjectDir)TnbLib\Server\Ws2;$(ProjectDir)TnbLib\Server\Socket\TCP;$(ProjectDir)TnbLib\Server\Socket;$(ProjectDir)TnbLib\Server\Server;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -136,7 +136,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbServer_EXPORT_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete\Shape;$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete;$(ProjectDir)TnbLib\Server\Objects\Tools;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Newton;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Bisect;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver;$(ProjectDir)TnbLib\Server\Objects\Num\Integration\Adapt;$(ProjectDir)TnbLib\Server\Objects\Num\Integration;$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Circle;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Tools;$(ProjectDir)TnbLib\Server\Error;$(ProjectDir)TnbLib\Server\Ws2;$(ProjectDir)TnbLib\Server\Socket\TCP;$(ProjectDir)TnbLib\Server\Socket;$(ProjectDir)TnbLib\Server\Server;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete\Shape;$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete;$(ProjectDir)TnbLib\Server\Objects\Tools;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Newton;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Bisect;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver;$(ProjectDir)TnbLib\Server\Objects\Num\Integration\Adapt;$(ProjectDir)TnbLib\Server\Objects\Num\Integration;$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Interpl;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Circle;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Segment;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global\Bool;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Tools;$(ProjectDir)TnbLib\Server\Error;$(ProjectDir)TnbLib\Server\Ws2;$(ProjectDir)TnbLib\Server\Socket\TCP;$(ProjectDir)TnbLib\Server\Socket;$(ProjectDir)TnbLib\Server\Server;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -152,13 +152,17 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Server\Macros\Server_Macros.hxx" />
     <ClInclude Include="TnbLib\Server\module\Server_Module.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.hxx" />
-    <ClInclude Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d_F1.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.hxx" />
-    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d_F1.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.hxx" />
@@ -180,13 +184,17 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.cxx" />
-    <ClCompile Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d_F1.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.cxx" />
-    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d_F1.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.cxx" />

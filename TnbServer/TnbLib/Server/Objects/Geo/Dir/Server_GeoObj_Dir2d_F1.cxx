@@ -4,8 +4,8 @@
 #include <Global_File.hxx>
 #include <json.hpp>
 
-const std::string tnbLib::Server_GeoObj_Dir2d_F1::Params::u = "geo_dir_u_2d";
-const std::string tnbLib::Server_GeoObj_Dir2d_F1::Params::v = "geo_dir_v_2d";
+const std::string tnbLib::Server_GeoObj_Dir2d_F1::Params::u = "u";
+const std::string tnbLib::Server_GeoObj_Dir2d_F1::Params::v = "v";
 
 void tnbLib::Server_GeoObj_Dir2d_F1::Construct(const std::string& theValue)
 {

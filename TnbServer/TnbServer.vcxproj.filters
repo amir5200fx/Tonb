@@ -100,14 +100,23 @@
     <Filter Include="TnbLib\Server\Socket\TCP">
       <UniqueIdentifier>{acb1eaa8-b15e-4c78-904f-ebea02ad61ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Server\Objects\Cad2d\Segment2d">
-      <UniqueIdentifier>{056f4e7e-1e99-4f13-a456-2384f2b635c1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Server\Objects\Cad2d\Rectangular2d">
       <UniqueIdentifier>{5e9e7767-21b8-463e-b7a8-fa596c292baf}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Server\Objects\Cad2d\Circle">
       <UniqueIdentifier>{edd497c0-e905-4523-ada0-01649f13596e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools">
+      <UniqueIdentifier>{4dceabc4-9000-432c-9f3a-e9ead3ad5c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl">
+      <UniqueIdentifier>{bc0dafb3-3e0c-42c0-9067-4cababc9d5a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global\Bool">
+      <UniqueIdentifier>{fe777fe0-37ee-4aa1-92ad-ebe58a7ee9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Segment">
+      <UniqueIdentifier>{056f4e7e-1e99-4f13-a456-2384f2b635c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +138,7 @@
     <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.hxx">
       <Filter>TnbLib\Server\Objects\Geo\Dir</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.hxx">
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.hxx">
       <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.hxx">
@@ -189,7 +198,7 @@
     <ClInclude Include="TnbLib\Server\Socket\TCP\Server_SockAddr_TCP.hxx">
       <Filter>TnbLib\Server\Socket\TCP</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d.hxx">
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.hxx">
       <Filter>TnbLib\Server\Objects\Geo\Axis</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.hxx">
@@ -197,6 +206,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Server\Ws2\Server_WsaStartup.hxx">
       <Filter>TnbLib\Server\Ws2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Interpl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.hxx">
+      <Filter>TnbLib\Server\Objects\Global\Bool</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Segment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,7 +239,7 @@
     <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.cxx">
       <Filter>TnbLib\Server\Objects\Geo\Dir</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.cxx">
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.cxx">
       <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.cxx">
@@ -272,7 +293,7 @@
     <ClCompile Include="TnbLib\Server\Socket\TCP\Server_SockAddr_TCP.cxx">
       <Filter>TnbLib\Server\Socket\TCP</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d.cxx">
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.cxx">
       <Filter>TnbLib\Server\Objects\Geo\Axis</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.cxx">
@@ -280,6 +301,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Ws2\Server_WsaStartup.cxx">
       <Filter>TnbLib\Server\Ws2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.cxx">
+      <Filter>TnbLib\Server\Objects\Global\Bool</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Segment</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

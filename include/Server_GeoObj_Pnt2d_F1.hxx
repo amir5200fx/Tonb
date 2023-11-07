@@ -1,13 +1,13 @@
 #pragma once
-#ifndef _Server_GeoObj_Pnt2d_Header
-#define _Server_GeoObj_Pnt2d_Header
+#ifndef _Server_GeoObj_Pnt2d_F1_Header
+#define _Server_GeoObj_Pnt2d_F1_Header
 
 #include <Server_Object.hxx>
 
 namespace tnbLib
 {
 
-	class Server_GeoObj_Pnt2d
+	class Server_GeoObj_Pnt2d_F1
 		: public Server_Object
 	{
 
@@ -23,7 +23,7 @@ namespace tnbLib
 
 		// default constructor
 
-		Server_GeoObj_Pnt2d()
+		Server_GeoObj_Pnt2d_F1()
 			= default;
 
 		// Public functions and operators

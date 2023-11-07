@@ -9,9 +9,9 @@
 
 #include <json.hpp>
 
-const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::centre = "make_circle_f1_centre";
-const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::radius = "make_circle_f1_radius";
-const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::name = "make_circle_f1_name";
+const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::centre = "centre";
+const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::radius = "radius";
+const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::name = "name";
 
 void tnbLib::Server_Cad2dObj_Circle_F1::Construct(const std::string& theValue)
 {
@@ -40,6 +40,6 @@ void tnbLib::Server_Cad2dObj_Circle_F1::Construct(const std::string& theValue)
 	}
 	catch (Standard_Failure& x)
 	{
-		streamBadTnbServerObject(x);
+		streamBadTnbServerObject(x.GetMessageString());
 	}
 }
