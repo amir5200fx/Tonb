@@ -9,37 +9,40 @@
 
 #include <json.hpp>
 
-const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::centre = "centre";
+const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::axis = "axis";
 const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::radius = "radius";
 const std::string tnbLib::Server_Cad2dObj_Circle_F1::Params::name = "name";
 
 void tnbLib::Server_Cad2dObj_Circle_F1::Construct(const std::string& theValue)
 {
-	gp_Ax2d centre;
+	gp_Ax2d axis;
 	double radius = 0;
 	std::string name;
 	{
 		defineTnbServerParser(theValue);
 		{
-			loadTnbServerObject(centre);
+			loadTnbServerObject(axis);
 		}
 		{
 			loadTnbServerObject(radius);
 		}
 		{
-			loadTnbServerObject(name);
+			name = loader.at(Params::name).get<std::string>();
 		}
 	}
 	// stream the value
 	try
 	{
-		gp_Circ2d g(centre, radius);
+		gp_Circ2d g(axis, radius);
 		auto value = Cad2d_Plane::MakeCircle(g);
 		value->SetName(name);
 		streamGoodTnbServerObject(value);
 	}
-	catch (Standard_Failure& x)
-	{
-		streamBadTnbServerObject(x.GetMessageString());
-	}
+	catchTnbServerErrors()
+}
+
+void tnbLib::Server_Cad2dObj_Circle_F1::MakeEmpty()
+{
+	std::shared_ptr<Cad2d_Plane> value;
+	streamGoodTnbServerObject(value);
 }

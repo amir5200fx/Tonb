@@ -32,6 +32,7 @@ namespace tnbLib
 		static TnbServer_EXPORT const std::string RESPONSE;
 		static TnbServer_EXPORT const std::string VALUE;
 		static TnbServer_EXPORT const std::string SENSE;
+		static TnbServer_EXPORT const std::string SERVER_MSG;
 
 		enum class RespType
 		{
@@ -45,6 +46,7 @@ namespace tnbLib
 		const auto& Stream() const { return theStream_; }
 
 		virtual void Construct(const std::string& theValue) = 0;
+		virtual void MakeEmpty();
 
 		static TnbServer_EXPORT std::string GetRespType(const RespType);
 		

@@ -9,7 +9,6 @@ const std::string tnbLib::Server_GeoObj_Pnt2d_F1::Params::y = "y";
 
 void tnbLib::Server_GeoObj_Pnt2d_F1::Construct(const std::string& theValue)
 {
-	//std::cout << "POINT = " << theValue << std::endl;
 	double x = 0, y = 0;
 	{
 		nlohmann::json loader = nlohmann::json::parse(theValue);

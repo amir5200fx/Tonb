@@ -100,9 +100,6 @@
     <Filter Include="TnbLib\Server\Socket\TCP">
       <UniqueIdentifier>{acb1eaa8-b15e-4c78-904f-ebea02ad61ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Server\Objects\Cad2d\Rectangular2d">
-      <UniqueIdentifier>{5e9e7767-21b8-463e-b7a8-fa596c292baf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Server\Objects\Cad2d\Circle">
       <UniqueIdentifier>{edd497c0-e905-4523-ada0-01649f13596e}</UniqueIdentifier>
     </Filter>
@@ -117,6 +114,27 @@
     </Filter>
     <Filter Include="TnbLib\Server\Objects\Cad2d\Segment">
       <UniqueIdentifier>{056f4e7e-1e99-4f13-a456-2384f2b635c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Area">
+      <UniqueIdentifier>{6fc98ba9-57d6-4119-bb5e-1a443ba84d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Curve">
+      <UniqueIdentifier>{13b3920b-1670-4bdf-9585-eaaaf2fe93f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\Discret">
+      <UniqueIdentifier>{4ebae8b5-709c-4ba4-b335-c6bb5d665451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean">
+      <UniqueIdentifier>{3c4b4cab-ad0c-4744-b7a9-fced5e030d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Rectangular">
+      <UniqueIdentifier>{5e9e7767-21b8-463e-b7a8-fa596c292baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv">
+      <UniqueIdentifier>{cf8bd017-46ce-4d37-a41f-c2c2edf2212a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv">
+      <UniqueIdentifier>{4287c783-23bd-4dbd-80af-a497a7f38fd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +237,30 @@
     <ClInclude Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.hxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Segment</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve_List.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean\Server_Cad2dObj_Boolean_Subtract_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Rectangular\Server_Cad2dObj_Rectangular_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Rectangular</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv\Server_Cad2dObj_RevCrv.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\RevCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -313,6 +355,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.cxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve_List.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean\Server_Cad2dObj_Boolean_Subtract_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Boolean</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Rectangular\Server_Cad2dObj_Rectangular_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Rectangular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv\Server_Cad2dObj_RevCrv.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\RevCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

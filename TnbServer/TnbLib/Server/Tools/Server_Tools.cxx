@@ -111,12 +111,14 @@ std::string tnbLib::Server_Tools::RetrieveMessage(const char* theMessage, int th
 	return std::move(result);
 }
 
-std::pair<tnbLib::Server_Tools::Command, tnbLib::Server_Tools::Value>
+std::tuple<tnbLib::Server::Command, tnbLib::Server::Flag, tnbLib::Server::Emptiness, tnbLib::Server::Value>
 tnbLib::Server_Tools::ParseMessage(const std::string& theMessage)
 {
 	//std::cout << "message = " << theMessage << std::endl;
 	nlohmann::json jsonData = nlohmann::json::parse(theMessage);
-	Command command{ jsonData.at(Server::REQUEST) };
-	Value value{ jsonData.at(Server::VALUE) };
-	return { std::move(command), std::move(value) };
+	Server::Command command{ jsonData.at(Server::REQUEST) };
+	Server::Value value{ jsonData.at(Server::VALUE) };
+	Server::Flag flag{jsonData.at(Server::FLAG)};
+	Server::Emptiness sense{jsonData.at(Server::EMPTINESS)};
+	return { std::move(command), std::move(flag), std::move(sense), std::move(value) };
 }

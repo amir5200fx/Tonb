@@ -3,6 +3,7 @@
 #define _Server_Tools_Header
 
 #include <Server_Module.hxx>
+#include <Server.hxx>
 
 #include <memory>
 #include <string>
@@ -18,15 +19,6 @@ namespace tnbLib
 
 	public:
 
-		struct Command
-		{
-			std::string stream;
-		};
-
-		struct Value
-		{
-			std::string stream;
-		};
 
 		static TnbServer_EXPORT std::string EndMessageChars(const std::string& theMessage);
 		static TnbServer_EXPORT std::string RemoveEndChars(const std::string& theMessage);
@@ -40,7 +32,7 @@ namespace tnbLib
 		static TnbServer_EXPORT std::string Receive(const std::shared_ptr<Server_Socket>&);
 		static TnbServer_EXPORT std::string RetrieveMessage(const char* theMessage, int theLen);
 
-		static TnbServer_EXPORT std::pair<Command, Value> ParseMessage(const std::string& theMessage);
+		static TnbServer_EXPORT std::tuple<Server::Command, Server::Flag, Server::Emptiness, Server::Value> ParseMessage(const std::string& theMessage);
 
 		static TnbServer_EXPORT void ThrowError(const std::string& message);
 		

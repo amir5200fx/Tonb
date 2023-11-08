@@ -1,3 +1,10 @@
+#include <TnbError.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
+
+
 #include <Server.hxx>
 #include <Server_Ws2.hxx>
 #include <Server_SockAddr_TCP.hxx>
@@ -5,12 +12,15 @@
 #include <Server_Tools.hxx>
 #include <Server_WsaStartup.hxx>
 
+
+
 #include <iostream>
 
 static unsigned short verbose = 1;
 
 int main()
 {
+	tnbLib::FatalError.throwExceptions();
 	try
 	{
 		tnbLib::Server_WsaStartup::verbose = verbose;
@@ -36,14 +46,17 @@ int main()
 
 			//std::cout << "MESSAGE : " << message << std::endl;
 
-			auto [command, value] = tnbLib::Server_Tools::ParseMessage(message);
+			auto [command, flag, sense, value] = tnbLib::Server_Tools::ParseMessage(message);
 
-			//std::cout << std::endl;
-			std::cout << "command: " << command.stream << std::endl;
-			std::cout << "value: " << value.stream << std::endl;
-			//std::cout << std::endl;
+			std::cout << "\n===========================================\n";
+			std::cout << "command: " << command.stream << "\n";
+			std::cout << "flag: " << flag.stream << "\n";
+			std::cout << "empty? " << sense.stream << "\n";
+			std::cout << "value: " << value.stream << "\n";
+			std::cout << "===========================================\n";
 
-			server->Construct(command.stream, value.stream);
+			server->Construct(command, flag, sense, value);
+
 			server->SendObj(client);
 
 			if (command.stream == "EXIT")

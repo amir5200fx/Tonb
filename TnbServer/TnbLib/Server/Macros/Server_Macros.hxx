@@ -2,6 +2,7 @@
 #ifndef _Server_Macros_Header
 #define _Server_Macros_Header
 
+#include <Server_Error.hxx>
 #include <sstream>
 
 #define defineTnbServerObject(ObjectName)									\
@@ -35,6 +36,16 @@ public:																		\
 	jData[VALUE] = stream.str();											\
 	theStream_ << jData
 
+#define streamWarningTnbServerObject(Object, MSG)							\
+	std::stringstream stream;												\
+	TNB_oARCH_FILE_TYPE oa(stream);											\
+	oa << (Object);															\
+	nlohmann::json jData;													\
+	jData[SENSE] = GetRespType(RespType::warning);							\
+	jData[SERVER_MSG] = MSG;												\
+	jData[VALUE] = stream.str();											\
+	theStream_ << jData
+
 #define initTnbCommands(Object, Command)									\
 	const std::string tnbLib::Object::command_name = Command
 
@@ -65,26 +76,50 @@ void Object##_RunTime_Selection::Run()										\
 	registerRuntimeSelectTnbServerObject(Object)
 
 #define createTnbServerObject(FuncName, Object)								\
-	void Server::FuncName(const std::string& theValue)						\
-	{																		\
-		theObj_ = std::make_shared<Object>();								\
-		theObj_->Construct(theValue);										\
+	void Server::FuncName(const std::string& theValue, const std::string& theSense)		\
+	{																					\
+		if (theSense == "no")															\
+		{																				\
+			theObj_ = std::make_shared<Object>();										\
+			theObj_->Construct(theValue);												\
+		}																				\
+		else																			\
+		{																				\
+			theObj_ = std::make_shared<Object>();										\
+			theObj_->MakeEmpty();														\
+		}																				\
+																						\
 	}
 
 #define streamBadTnbServerObject(MSG)										\
 	nlohmann::json jData;													\
 	jData[SENSE] = GetRespType(RespType::bad);								\
-	jData[VALUE] = MSG;								\
+	jData[VALUE] = MSG;														\
 	theStream_ << jData
 
-#define switchToMakeTnbServerObject(ObjType, FuncName, String)				\
+#define switchToMakeTnbServerObject(ObjType, FuncName, String, Sense)		\
 	case ObjType:															\
 	{																		\
-		FuncName(String);													\
+		FuncName(String, Sense);													\
 		break;																\
 	}
 
 #define streamUnknownBadTnbServerObject()									\
 	catch(...) {streamBadTnbServerObject("Unknown Error has been occured");}
+
+#define catchTnbServerErrors()												\
+catch (error& x)															\
+{																			\
+	streamBadTnbServerObject(x.message());									\
+}																			\
+catch (Standard_Failure& x)													\
+{																			\
+	streamBadTnbServerObject(x.GetMessageString());							\
+}																			\
+catch (Server_Error& x)														\
+{																			\
+	streamBadTnbServerObject(x.what());										\
+}																			\
+streamUnknownBadTnbServerObject()
 
 #endif

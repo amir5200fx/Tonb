@@ -16,7 +16,7 @@ namespace tnbLib
 	public:
 		struct Params
 		{
-			static const std::string centre;
+			static const std::string axis;
 			static const std::string radius;
 			static const std::string name;
 		};
@@ -30,6 +30,7 @@ namespace tnbLib
 		// Public functions and operators
 
 		TnbServer_EXPORT void Construct(const std::string& theValue) override;
+		TnbServer_EXPORT void MakeEmpty() override;
 		
 	};
 }
