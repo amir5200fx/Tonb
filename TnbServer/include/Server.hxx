@@ -7,6 +7,8 @@
 #include <memory>
 #include <map>
 
+#include "Server_Macros.hxx"
+
 namespace tnbLib
 {
 
@@ -30,6 +32,10 @@ namespace tnbLib
 			make_pnt_2d_f1,
 			make_pnt_3d,
 
+			retrv_compts_pnt_2d,
+			retrv_compts_vec_2d,
+			retrv_compts_dir_2d,
+
 			make_pnt_2d_list,
 
 			make_segment_2d_f1,
@@ -37,6 +43,18 @@ namespace tnbLib
 			make_rectangular_2d_f1,
 
 			make_curve_2d_list,
+			retv_first_parameter_curve_2d,
+			retv_last_parameter_curve_2d,
+			calc_pnt_curve_2d,
+			prj_pnt_curve_2d,
+			rev_curve_2d,
+
+			retv_area_2d_blocks,
+			retv_area_2d_block_curves,
+			combine_area_2d_blocks,
+			split_area_2d_block,
+			rename_area_2d_block,
+
 			make_area_2d,
 
 			make_interpl_curve_2d,
@@ -93,14 +111,29 @@ namespace tnbLib
 		void create_dir_3d(const std::string&, const std::string&);
 		void create_axis_2d_f1(const std::string&, const std::string&);
 
+		declareTnbServerFunction(retv_compts_pnt_2d);
+		declareTnbServerFunction(retv_compts_vec_2d);
+		declareTnbServerFunction(retv_compts_dir_2d);
+
 		void make_pnt_2d_list(const std::string&, const std::string&);
 
 		// cad functions
 		void make_segment_2d_f1(const std::string&, const std::string&);
 		void make_Segment_3d(const std::string&, const std::string&);
 
+		declareTnbServerFunction(retv_first_parameter_curve_2d);
+		declareTnbServerFunction(retv_last_parameter_curve_2d);
+		declareTnbServerFunction(calc_pnt_curve_2d);
+		declareTnbServerFunction(prj_pnt_curve_2d);
+		declareTnbServerFunction(rev_curve_2d);
 		void make_curve_2d_list(const std::string&, const std::string&);
 		void make_area_2d(const std::string&, const std::string&);
+
+		declareTnbServerFunction(retv_area_2d_blocks);
+		declareTnbServerFunction(retv_area_2d_block_curves);
+		declareTnbServerFunction(combine_area_2d_blocks);
+		declareTnbServerFunction(split_area_2d_block);
+		declareTnbServerFunction(rename_area_2d_block);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
 		void make_rectangular_2d_f1(const std::string&, const std::string&);

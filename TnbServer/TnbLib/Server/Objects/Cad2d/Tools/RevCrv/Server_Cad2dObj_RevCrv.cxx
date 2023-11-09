@@ -6,6 +6,9 @@
 
 #include <json.hpp>
 
+const std::string tnbLib::Server_Cad2dObj_RevCrv::Params::curve("curve");
+const std::string tnbLib::Server_Cad2dObj_RevCrv::Params::name("name");
+
 void tnbLib::Server_Cad2dObj_RevCrv::Construct(const std::string& theValue)
 {
 	std::shared_ptr<Pln_Edge> curve;

@@ -136,6 +136,12 @@
     <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv">
       <UniqueIdentifier>{4287c783-23bd-4dbd-80af-a497a7f38fd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv">
+      <UniqueIdentifier>{43d9b2da-afd3-4673-b837-d9c8c05359d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength">
+      <UniqueIdentifier>{84418209-bc94-4e59-9fc4-6af283c03ea9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -261,6 +267,33 @@
     <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.hxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv_GetParam.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv\Server_Cad2dObj_SplitCrv.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\SplitCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_CalcPntOnCurve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_FirstParCurve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_LastParCurve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_Compts.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -379,6 +412,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.cxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv_GetParam.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv\Server_Cad2dObj_SplitCrv.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\SplitCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_CalcPntOnCurve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_FirstParCurve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_LastParCurve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_Compts.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

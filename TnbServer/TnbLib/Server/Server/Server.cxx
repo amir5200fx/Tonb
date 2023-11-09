@@ -37,12 +37,25 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::make_dir_2d_f1, create_dir_2d_f1, value, sense, sense)
 		switchToMakeTnbServerObject(objects::make_axis_2d_f1, create_axis_2d_f1, value, sense)
 
+		switchToMakeTnbServerObject(objects::retrv_compts_pnt_2d, retv_compts_pnt_2d, value, sense)
+
 		switchToMakeTnbServerObject(objects::make_pnt_2d_list, make_pnt_2d_list, value, sense)
 
 		// cad objects
+		switchToMakeTnbServerObject(objects::retv_first_parameter_curve_2d, retv_first_parameter_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::retv_last_parameter_curve_2d, retv_last_parameter_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::calc_pnt_curve_2d, calc_pnt_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::prj_pnt_curve_2d, prj_pnt_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::rev_curve_2d, rev_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::make_circle_2d_f1, make_circle_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_rectangular_2d_f1, make_rectangular_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_segment_2d_f1, make_segment_2d_f1, value, sense)
+
+			switchToMakeTnbServerObject(objects::retv_area_2d_blocks, retv_area_2d_blocks, value, sense)
+			switchToMakeTnbServerObject(objects::retv_area_2d_block_curves, retv_area_2d_block_curves, value, sense)
+			switchToMakeTnbServerObject(objects::combine_area_2d_blocks, combine_area_2d_blocks, value, sense)
+	case objects::split_area_2d_block: { std::cout << "selected RIGHT" << std::endl; split_area_2d_block(value, sense); break; }
+			switchToMakeTnbServerObject(objects::rename_area_2d_block, rename_area_2d_block, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_curve_2d_list, make_curve_2d_list, value, sense)
 		switchToMakeTnbServerObject(objects::make_area_2d, make_area_2d, value, sense)

@@ -5,6 +5,8 @@
 #include <Server_Error.hxx>
 #include <sstream>
 
+#include <StdFail_NotDone.hxx>
+
 #define defineTnbServerObject(ObjectName)									\
 class ObjectName															\
 	: public Server_Object													\
@@ -34,6 +36,13 @@ public:																		\
 	nlohmann::json jData;													\
 	jData[SENSE] = GetRespType(RespType::good);								\
 	jData[VALUE] = stream.str();											\
+	theStream_ << jData
+
+#define streamRealValueTnbServerObject(value)								\
+	std::stringstream stream;												\
+	nlohmann::json jData;													\
+	jData[SENSE] = GetRespType(RespType::good);								\
+	jData[VALUE] = value;													\
 	theStream_ << jData
 
 #define streamWarningTnbServerObject(Object, MSG)							\
@@ -120,6 +129,13 @@ catch (Server_Error& x)														\
 {																			\
 	streamBadTnbServerObject(x.what());										\
 }																			\
+catch (StdFail_NotDone& x)													\
+{																			\
+	streamBadTnbServerObject(x.GetMessageString());							\
+}																			\
 streamUnknownBadTnbServerObject()
+
+#define declareTnbServerFunction(NAME)										\
+void NAME(const std::string&, const std::string&)
 
 #endif
