@@ -74,6 +74,7 @@ namespace tnbLib
 		DistFunc theDist_;
 
 		// Caches
+		std::shared_ptr<VoyageSim_Graph> thePosGraph_;
 		std::shared_ptr<VoyageSim_Graph> theGraph_;
 		std::map
 			<
@@ -140,6 +141,7 @@ namespace tnbLib
 		[[nodiscard]] const auto& Net() const { return theNet_; }
 		[[nodiscard]] const auto& Timelines() const { return theTimeLines_; }
 		[[nodiscard]] const auto& Graph() const { return theGraph_; }
+		[[nodiscard]] const auto& PosGraph() const { return thePosGraph_; }
 
 		[[nodiscard]] auto MinVel() const { return theMinVel_; }
 		[[nodiscard]] auto MaxVel() const { return theMaxVel_; }
