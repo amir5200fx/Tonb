@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{3d254320-d637-4284-9e2a-b306e5ce7a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server">
+      <UniqueIdentifier>{52c30fa0-e459-44cd-8daf-6de9121ac870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects">
+      <UniqueIdentifier>{0de27150-6980-42f3-95f6-ccb784a26781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Object">
+      <UniqueIdentifier>{198f4455-2342-4133-8029-3c4f2d870dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global">
+      <UniqueIdentifier>{56cd9c41-9347-424c-94fa-9b6809a540fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo">
+      <UniqueIdentifier>{7bc08391-1fdf-424c-8177-928139ecbb29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d">
+      <UniqueIdentifier>{d381c0ee-b62b-4ede-997d-49a854310c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad">
+      <UniqueIdentifier>{2bd59570-64a7-4481-b8d1-116a0af97248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num">
+      <UniqueIdentifier>{b1ce8d63-5cbb-46bf-974f-db102a33f3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Mesh">
+      <UniqueIdentifier>{04c85886-3b8b-4d5b-9b62-ab277ffe70e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Module">
+      <UniqueIdentifier>{1f09648b-b131-4beb-8ce6-138014cbeaa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global\Int">
+      <UniqueIdentifier>{c9f32a5f-65c7-47cc-9ab8-5c9df792f86f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global\Real">
+      <UniqueIdentifier>{ea337f8a-375f-411c-b322-bb723ac395a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global\Exit">
+      <UniqueIdentifier>{26f7f45c-ae64-4f3d-9e77-e4e399b466aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Dir">
+      <UniqueIdentifier>{5b187a79-e983-4e94-acc5-536f4d900daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Pnt">
+      <UniqueIdentifier>{1c9c20e3-3de4-4193-b2d6-e7e9836c1bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Vec">
+      <UniqueIdentifier>{2e3c6d50-da2b-402a-af1e-9a8481bee69b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Axis">
+      <UniqueIdentifier>{dcc87220-7878-4776-b268-73323ffe0cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num\Integration">
+      <UniqueIdentifier>{de72f6f8-f0b4-497b-851b-fa36d9701193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num\NonLinSolver">
+      <UniqueIdentifier>{9e00825d-21eb-4414-83f5-2b9e24156703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num\Integration\Adapt">
+      <UniqueIdentifier>{e1715038-c460-489f-99e2-f283a7e9b3ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect">
+      <UniqueIdentifier>{8b42fe32-2e76-493e-aec2-21b0c05081c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton">
+      <UniqueIdentifier>{109238cd-3d44-4fa7-a0d7-0382ecb7ed47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Server">
+      <UniqueIdentifier>{b5e46175-cc2c-4d98-b9a0-38a17d89eb56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Macros">
+      <UniqueIdentifier>{c270d4e0-448d-4a56-ab42-5344c41f85cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Socket">
+      <UniqueIdentifier>{ad113de0-14a8-4e01-8883-abc2fb8a64bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Ws2">
+      <UniqueIdentifier>{2bdd7504-87cc-4f05-9b69-cc3248ccd2f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Tools">
+      <UniqueIdentifier>{5257c3bf-7352-4056-ad71-cf03c3a4569e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Tools\Discrete">
+      <UniqueIdentifier>{4d375549-a03e-457e-bbf9-29963d429a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Tools\Discrete\Shape">
+      <UniqueIdentifier>{9178372c-3cd6-43ac-86a6-f34ef79d4081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Error">
+      <UniqueIdentifier>{00fe2569-b26f-4747-9a5b-4fa894f070c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Tools">
+      <UniqueIdentifier>{f7f59dd0-22f7-449c-aecb-cd49c3cd1302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Socket\TCP">
+      <UniqueIdentifier>{acb1eaa8-b15e-4c78-904f-ebea02ad61ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Circle">
+      <UniqueIdentifier>{edd497c0-e905-4523-ada0-01649f13596e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools">
+      <UniqueIdentifier>{4dceabc4-9000-432c-9f3a-e9ead3ad5c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl">
+      <UniqueIdentifier>{bc0dafb3-3e0c-42c0-9067-4cababc9d5a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global\Bool">
+      <UniqueIdentifier>{fe777fe0-37ee-4aa1-92ad-ebe58a7ee9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Segment">
+      <UniqueIdentifier>{056f4e7e-1e99-4f13-a456-2384f2b635c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Area">
+      <UniqueIdentifier>{6fc98ba9-57d6-4119-bb5e-1a443ba84d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Curve">
+      <UniqueIdentifier>{13b3920b-1670-4bdf-9585-eaaaf2fe93f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\Discret">
+      <UniqueIdentifier>{4ebae8b5-709c-4ba4-b335-c6bb5d665451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean">
+      <UniqueIdentifier>{3c4b4cab-ad0c-4744-b7a9-fced5e030d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Rectangular">
+      <UniqueIdentifier>{5e9e7767-21b8-463e-b7a8-fa596c292baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv">
+      <UniqueIdentifier>{cf8bd017-46ce-4d37-a41f-c2c2edf2212a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv">
+      <UniqueIdentifier>{4287c783-23bd-4dbd-80af-a497a7f38fd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv">
+      <UniqueIdentifier>{43d9b2da-afd3-4673-b837-d9c8c05359d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength">
+      <UniqueIdentifier>{84418209-bc94-4e59-9fc4-6af283c03ea9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
+      <Filter>TnbLib\Server\Objects\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.hxx">
+      <Filter>TnbLib\Server\Objects\Global\Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.hxx">
+      <Filter>TnbLib\Server\Objects\Global\Int</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.hxx">
+      <Filter>TnbLib\Server\Objects\Global\Real</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Dir</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Dir</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Vec</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Vec</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\module\Server_Module.hxx">
+      <Filter>TnbLib\Server\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg.hxx">
+      <Filter>TnbLib\Server\Objects\Num\Integration\Adapt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Num\Integration\Adapt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver.hxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Bisect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Bisect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver.hxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Newton</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Newton</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Server\Server.hxx">
+      <Filter>TnbLib\Server\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Macros\Server_Macros.hxx">
+      <Filter>TnbLib\Server\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Socket\Server_Socket.hxx">
+      <Filter>TnbLib\Server\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Ws2\Server_Ws2.hxx">
+      <Filter>TnbLib\Server\Ws2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Tools\Discrete\Shape\Server_ToolsObj_DiscrtShape2d.hxx">
+      <Filter>TnbLib\Server\Objects\Tools\Discrete\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Socket\Server_SockAddr.hxx">
+      <Filter>TnbLib\Server\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Error\Server_Error.hxx">
+      <Filter>TnbLib\Server\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Tools\Server_Tools.hxx">
+      <Filter>TnbLib\Server\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Socket\TCP\Server_SockAddr_TCP.hxx">
+      <Filter>TnbLib\Server\Socket\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Axis</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Ws2\Server_WsaStartup.hxx">
+      <Filter>TnbLib\Server\Ws2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Interpl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.hxx">
+      <Filter>TnbLib\Server\Objects\Global\Bool</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve_List.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean\Server_Cad2dObj_Boolean_Subtract_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Rectangular\Server_Cad2dObj_Rectangular_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Rectangular</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv\Server_Cad2dObj_RevCrv.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\RevCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv_GetParam.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv\Server_Cad2dObj_SplitCrv.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\SplitCrv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength_Info.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_CalcPntOnCurve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_FirstParCurve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_LastParCurve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_Compts.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
+      <Filter>TnbLib\Server\Objects\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.cxx">
+      <Filter>TnbLib\Server\Objects\Global\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.cxx">
+      <Filter>TnbLib\Server\Objects\Global\Int</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.cxx">
+      <Filter>TnbLib\Server\Objects\Global\Real</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Dir</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Dir</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Vec</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Vec</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg.cxx">
+      <Filter>TnbLib\Server\Objects\Num\Integration\Adapt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Num\Integration\Adapt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver.cxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Bisect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Bisect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver.cxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Newton</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Num\NonLinSolver\Newton</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Socket\Server_Socket.cxx">
+      <Filter>TnbLib\Server\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Tools\Discrete\Shape\Server_ToolsObj_DiscrtShape2d.cxx">
+      <Filter>TnbLib\Server\Objects\Tools\Discrete\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Socket\Server_SockAddr.cxx">
+      <Filter>TnbLib\Server\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Server\Server_Inits.cxx">
+      <Filter>TnbLib\Server\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Server\Server.cxx">
+      <Filter>TnbLib\Server\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Server\Server_Functs.cxx">
+      <Filter>TnbLib\Server\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Tools\Server_Tools.cxx">
+      <Filter>TnbLib\Server\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Socket\TCP\Server_SockAddr_TCP.cxx">
+      <Filter>TnbLib\Server\Socket\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Axis</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Ws2\Server_WsaStartup.cxx">
+      <Filter>TnbLib\Server\Ws2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.cxx">
+      <Filter>TnbLib\Server\Objects\Global\Bool</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve_List.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Discret</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean\Server_Cad2dObj_Boolean_Subtract_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\Boolean</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Rectangular\Server_Cad2dObj_Rectangular_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Rectangular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv\Server_Cad2dObj_RevCrv.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\RevCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv_GetParam.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv\Server_Cad2dObj_SplitCrv.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\SplitCrv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength_Info.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Tools\CalcLength</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_CalcPntOnCurve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_FirstParCurve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_LastParCurve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_Compts.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
