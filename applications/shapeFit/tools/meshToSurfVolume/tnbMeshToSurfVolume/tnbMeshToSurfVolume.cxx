@@ -14,7 +14,7 @@
 namespace tnbLib
 {
 
-	static std::shared_ptr<Cad_GeomSurface> mySurface;
+	static std::shared_ptr<Cad_GeomSurface> my_surface;
 	static std::shared_ptr<Entity3d_Triangulation> myMesh;
 
 	static double myUpperValue = 0;
@@ -35,11 +35,11 @@ namespace tnbLib
 	void loadSurfaceModel()
 	{
 		std::string myFileName;
-		mySurface =
+		my_surface =
 			file::LoadSingleFile
 			<std::shared_ptr<Cad_GeomSurface>>
 			(surf_directory, Cad_GeomSurface::extension, verbose, myFileName);
-		if (NOT mySurface)
+		if (NOT my_surface)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< " the surface file is null." << endl
@@ -249,7 +249,7 @@ namespace tnbLib
 			const auto& p2 = pts.at(Index_Of(i2));
 
 			Entity3d_Triangle t(p0, p1, p2);
-			CalcVolume(t, mySurface);
+			CalcVolume(t, my_surface);
 		}
 
 		std::cout << " - The Lower Volume: " << myLowerValue << std::endl;
