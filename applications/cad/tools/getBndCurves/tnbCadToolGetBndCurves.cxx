@@ -15,7 +15,7 @@ namespace tnbLib
 	static bool loadTag = false;
 	static bool exeTag = false;
 
-	static std::shared_ptr<Cad_GeomSurface> mySurface;
+	static std::shared_ptr<Cad_GeomSurface> my_surface;
 	static std::string myFileName;
 
 	static std::shared_ptr<Cad_GeomCurve> U0;
@@ -36,8 +36,8 @@ namespace tnbLib
 	{
 		file::CheckExtension(name);
 
-		mySurface = file::LoadFile<std::shared_ptr<Cad_GeomSurface>>(name + loadExt, verbose);
-		if (NOT mySurface)
+		my_surface = file::LoadFile<std::shared_ptr<Cad_GeomSurface>>(name + loadExt, verbose);
+		if (NOT my_surface)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "the surface is null" << endl
@@ -152,7 +152,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto surface = Handle(Geom_BSplineSurface)::DownCast(mySurface->Geometry());
+		auto surface = Handle(Geom_BSplineSurface)::DownCast(my_surface->Geometry());
 		if (NOT surface)
 		{
 			FatalErrorIn(FunctionSIG)

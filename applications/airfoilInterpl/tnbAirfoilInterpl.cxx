@@ -23,7 +23,7 @@ namespace tnbLib
 
 	std::shared_ptr<std::vector<Pnt3d>> myCoords;
 
-	static std::shared_ptr<Cad_GeomSurface> mySurface;
+	static std::shared_ptr<Cad_GeomSurface> my_surface;
 
 	void setVerbose(unsigned int i)
 	{
@@ -94,7 +94,7 @@ namespace tnbLib
 				<< "the application is not performed." << endl
 				<< abort(FatalError);
 		}
-		file::SaveTo(mySurface, name + Cad_GeomSurface::extension, verbose);
+		file::SaveTo(my_surface, name + Cad_GeomSurface::extension, verbose);
 	}
 
 	void saveTo()
@@ -124,7 +124,7 @@ namespace tnbLib
 		{
 			patch = new Geom_RectangularTrimmedSurface(surface, 0, spanLen, false);
 		}
-		mySurface = std::make_shared<Cad_GeomSurface>(0, name, std::move(patch));
+		my_surface = std::make_shared<Cad_GeomSurface>(0, name, std::move(patch));
 		if (verbose)
 		{
 			Info << endl
