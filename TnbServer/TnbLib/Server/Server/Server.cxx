@@ -55,12 +55,36 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 			switchToMakeTnbServerObject(objects::retv_area_2d_block_curves, retv_area_2d_block_curves, value, sense)
 			switchToMakeTnbServerObject(objects::combine_area_2d_blocks, combine_area_2d_blocks, value, sense)
 	case objects::split_area_2d_block: { std::cout << "selected RIGHT" << std::endl; split_area_2d_block(value, sense); break; }
-			switchToMakeTnbServerObject(objects::rename_area_2d_block, rename_area_2d_block, value, sense)
+		switchToMakeTnbServerObject(objects::rename_area_2d_block, rename_area_2d_block, value, sense)
 
-		switchToMakeTnbServerObject(objects::make_curve_2d_list, make_curve_2d_list, value, sense)
-		switchToMakeTnbServerObject(objects::make_area_2d, make_area_2d, value, sense)
+			switchToMakeTnbServerObject(objects::make_curve_2d_list, make_curve_2d_list, value, sense)
+			switchToMakeTnbServerObject(objects::make_area_2d, make_area_2d, value, sense)
 
-		switchToMakeTnbServerObject(objects::make_interpl_curve_2d, make_interpl_curve_2d, value, sense)
+			switchToMakeTnbServerObject(objects::make_interpl_curve_2d, make_interpl_curve_2d, value, sense)
+
+
+			// geo lib
+
+			switchToMakeTnbServerObject(objects::make_bnd_box_2d, make_bnd_box_2d, value, sense)
+			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_pnt_list, calc_bnd_box_2d_pnt_list, value, sense)
+			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_curve, calc_bnd_box_2d_curve, value, sense)
+			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_crv_list, calc_bnd_box_2d_crv_list, value, sense)
+			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_area, calc_bnd_box_2d_area, value, sense)
+			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_area_list, calc_bnd_box_2d_area_list, value, sense)
+
+
+		switchToMakeTnbServerObject(objects::do_bnd_box_2d_expand, do_bnd_box_2d_expand, value, sense)
+		switchToMakeTnbServerObject(objects::get_bnd_box_2d_dia, get_bnd_box_2d_dia, value, sense)
+		switchToMakeTnbServerObject(objects::get_bnd_box_2d_lengths, get_bnd_box_2d_lengths, value, sense)
+
+		switchToMakeTnbServerObject(objects::make_size_map_2d_uniform, make_size_map_2d_uniform, value, sense)
+			// Mesh lib
+			switchToMakeTnbServerObject(objects::make_mesh_ref_values_2d, make_mesh_ref_values_2d, value, sense)
+		switchToMakeTnbServerObject(objects::make_metric_prcsr_2d_settings, make_metric_prcsr_2d_settings, value, sense)
+		switchToMakeTnbServerObject(objects::make_metric_prcsr_2d, make_metric_prcsr_2d, value, sense)
+		// Num lib
+
+		switchToMakeTnbServerObject(objects::make_num_adapt_integ, make_num_adapt_integ, value, sense)
 
 		// tools
 		switchToMakeTnbServerObject(objects::make_discrete_shape_info_2d, make_discrete_shape_info_2d, value, sense)

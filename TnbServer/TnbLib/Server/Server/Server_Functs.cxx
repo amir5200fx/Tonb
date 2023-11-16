@@ -77,5 +77,31 @@ createTnbServerObject(make_discrete_shape_info_2d, Server_Cad2dObj_Discret_Info)
 createTnbServerObject(do_discret_2d, Server_Cad2dObj_Discret)
 createTnbServerObject(do_boolean_sub_2d, Server_Cad2dObj_Boolean_Subtract_F1)
 
+// geo lib
+#include <Server_Geo2dObj_BndBox.hxx>
+createTnbServerObject(make_bnd_box_2d, Server_Geo2dObj_BndBox_Create)
+createTnbServerObject(calc_bnd_box_2d_pnt_list, Server_Geo2dObj_BndBox_PntList)
+createTnbServerObject(calc_bnd_box_2d_curve, Server_Geo2dObj_BndBox_Curve)
+createTnbServerObject(calc_bnd_box_2d_crv_list, Server_Geo2dObj_BndBox_CrvList)
+createTnbServerObject(calc_bnd_box_2d_area, Server_Geo2dObj_BndBox_Area)
+createTnbServerObject(calc_bnd_box_2d_area_list, Server_Geo2dObj_BndBox_AreaList)
+
+createTnbServerObject(do_bnd_box_2d_expand, Server_Geo2dObj_BndBox_Expand)
+createTnbServerObject(get_bnd_box_2d_dia, Server_Geo2dObj_BndBox_GetDia)
+createTnbServerObject(get_bnd_box_2d_lengths, Server_Geo2dObj_BndBox_GetLengths)
+
+#include <Server_Geo2dObj.hxx>
+createTnbServerObject(make_size_map_2d_uniform, Server_Geo2dObj_SizeMap_Uniform)
+
+// Mesh lib
+#include <Server_Mesh2dObj.hxx>
+createTnbServerObject(make_mesh_ref_values_2d, Server_Mesh2dObj_RefValues)
+createTnbServerObject(make_metric_prcsr_2d_settings, Server_Mesh2dObj_MetricPrcsr_Settings)
+createTnbServerObject(make_metric_prcsr_2d, Server_Mesh2dObj_MetricPrcsr)
+
+#include <Server_NumObj_AdaptInteg_Info.hxx>
+// Num lib
+createTnbServerObject(make_num_adapt_integ, Server_NumObj_AdaptInteg_Info)
+
 #include <Server_GlobalObj_Exit.hxx>
 createTnbServerObject(exit, Server_GlobalObj_Exit)

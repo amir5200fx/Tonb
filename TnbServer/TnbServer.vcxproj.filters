@@ -145,6 +145,9 @@
     <Filter Include="TnbLib\Server\Objects\Mesh2d">
       <UniqueIdentifier>{697db720-65e4-4768-b9bf-7b8101ff953c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\BndBox">
+      <UniqueIdentifier>{57eab71b-fb5f-4098-afc2-66602f002044}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -300,6 +303,15 @@
     <ClInclude Include="TnbLib\Server\Objects\Mesh2d\Server_Mesh2dObj.hxx">
       <Filter>TnbLib\Server\Objects\Mesh2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\BndBox\Server_Geo2dObj_BndBox.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\BndBox</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.hxx">
+      <Filter>TnbLib\Server\Objects\Geo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -445,6 +457,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.cxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Mesh2d\Server_Mesh2dObj.cxx">
+      <Filter>TnbLib\Server\Objects\Mesh2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\BndBox\Server_Geo2dObj_BndBox.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\BndBox</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.cxx">
+      <Filter>TnbLib\Server\Objects\Geo</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

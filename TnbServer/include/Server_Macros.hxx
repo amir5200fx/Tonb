@@ -26,6 +26,16 @@ public:																		\
 	TNB_iARCH_FILE_TYPE ia(stream);											\
 	ia >> ObjectName
 
+#define loadTnbServerString(ObjectName)										\
+	ObjectName = loader.at(Params::ObjectName).get<std::string>()
+
+#define loadNonJSONTnbServer(ObjectName)									\
+	std::stringstream stream;												\
+	stream << theValue;														\
+	TNB_iARCH_FILE_TYPE ia(stream);											\
+	ia >> ObjectName;
+	
+
 #define defineTnbServerParser(String)										\
 	nlohmann::json loader = nlohmann::json::parse(String)
 
@@ -54,6 +64,19 @@ public:																		\
 	jData[SERVER_MSG] = MSG;												\
 	jData[VALUE] = stream.str();											\
 	theStream_ << jData
+
+#define serializedTnbObject(STR, Obj)										\
+	std::stringstream stream_s;												\
+	TNB_oARCH_FILE_TYPE oa(stream_s);										\
+	oa << (Obj);															\
+	STR = stream_s.str()
+
+#define serializedTnbObjectAtJSON(Obj, ObjName, JSON)						\
+{																			\
+	std::string str;														\
+	serializedTnbObject(str, Obj);											\
+	(JSON)[ObjName] = str;													\
+}
 
 #define initTnbCommands(Object, Command)									\
 	const std::string tnbLib::Object::command_name = Command

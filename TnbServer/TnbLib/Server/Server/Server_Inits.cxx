@@ -64,5 +64,30 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_CombineBl
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_RenameBlock, Server::objects::rename_area_2d_block, "rename_area_2d_block");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_SplitBlock, Server::objects::split_area_2d_block, "split_area_2d_block");
 
+// geo lib
+#include <Server_Geo2dObj_BndBox.hxx>
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Create, Server::objects::make_bnd_box_2d, "make_bnd_box_2d");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_PntList, Server::objects::calc_bnd_box_2d_pnt_list, "calc_bnd_box_2d_pnt_list");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Curve, Server::objects::calc_bnd_box_2d_curve, "calc_bnd_box_2d_curve");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_CrvList, Server::objects::calc_bnd_box_2d_crv_list, "calc_bnd_box_2d_crv_list");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Area, Server::objects::calc_bnd_box_2d_area, "calc_bnd_box_2d_area");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_AreaList, Server::objects::calc_bnd_box_2d_area_list, "calc_bnd_box_2d_area_list");
+
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Expand, Server::objects::do_bnd_box_2d_expand, "do_bnd_box_2d_expand");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetDia, Server::objects::get_bnd_box_2d_dia, "get_bnd_box_2d_dia");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetLengths, Server::objects::get_bnd_box_2d_lengths, "get_bnd_box_2d_lengths");
+
+#include <Server_Geo2dObj.hxx>
+defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Uniform, Server::objects::make_size_map_2d_uniform, "make_size_map_2d_uniform");
+
+#include <Server_Mesh2dObj.hxx>
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_RefValues, Server::objects::make_mesh_ref_values_2d, "make_mesh_ref_values_2d");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_MetricPrcsr_Settings, Server::objects::make_metric_prcsr_2d_settings, "make_metric_prcsr_2d_settings");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_MetricPrcsr, Server::objects::make_metric_prcsr_2d, "make_metric_prcsr_2d");
+
+// Num lib
+#include <Server_NumObj_AdaptInteg_Info.hxx>
+defineAndRegisterTnbServerObject(Server_NumObj_AdaptInteg_Info, Server::objects::make_num_adapt_integ, "make_num_adapt_integ");
+
 #include <Server_GlobalObj_Exit.hxx>
 defineAndRegisterTnbServerObject(Server_GlobalObj_Exit, Server::objects::exit, "EXIT");

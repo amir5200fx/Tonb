@@ -62,6 +62,31 @@ namespace tnbLib
 			make_discrete_shape_info_2d,
 			do_discret_2d,
 			do_boolean_sub_2d,
+
+			// geo lib
+
+			make_bnd_box_2d,
+			calc_bnd_box_2d_pnt_list,
+			calc_bnd_box_2d_curve,
+			calc_bnd_box_2d_crv_list,
+			calc_bnd_box_2d_area,
+			calc_bnd_box_2d_area_list,
+
+			do_bnd_box_2d_expand,
+			get_bnd_box_2d_dia,
+			get_bnd_box_2d_lengths,
+
+			make_size_map_2d_uniform,
+
+			// mesh lib
+
+			make_mesh_ref_values_2d,
+			make_metric_prcsr_2d_settings,
+			make_metric_prcsr_2d,
+
+			// num lib
+
+			make_num_adapt_integ,
 			
 			exit
 		};
@@ -139,6 +164,31 @@ namespace tnbLib
 		void make_rectangular_2d_f1(const std::string&, const std::string&);
 
 		void make_interpl_curve_2d(const std::string&, const std::string&);
+
+		// geo lib
+
+		declareTnbServerFunction(make_bnd_box_2d);
+		declareTnbServerFunction(calc_bnd_box_2d_pnt_list);
+		declareTnbServerFunction(calc_bnd_box_2d_curve);
+		declareTnbServerFunction(calc_bnd_box_2d_crv_list);
+		declareTnbServerFunction(calc_bnd_box_2d_area);
+		declareTnbServerFunction(calc_bnd_box_2d_area_list);
+
+		declareTnbServerFunction(do_bnd_box_2d_expand);
+		declareTnbServerFunction(get_bnd_box_2d_dia);
+		declareTnbServerFunction(get_bnd_box_2d_lengths);
+
+		declareTnbServerFunction(make_size_map_2d_uniform);
+
+		// mesh functions
+
+		declareTnbServerFunction(make_mesh_ref_values_2d);
+		declareTnbServerFunction(make_metric_prcsr_2d_settings);
+		declareTnbServerFunction(make_metric_prcsr_2d);
+
+		// num lib
+
+		declareTnbServerFunction(make_num_adapt_integ);
 
 		// tools functions
 
