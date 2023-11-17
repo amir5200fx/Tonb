@@ -27,6 +27,24 @@ namespace tnbLib
 		void Construct(const std::string& theValue) override;
 	};
 
+	class Server_Mesh2dObj_Mesh_Curve_OptPoint
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string tol;
+			static const std::string ur;
+			static const std::string max_lev;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_Mesh_Curve_OptPoint() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
 	class Server_Mesh2dObj_Mesh_Curve_Settings
 		: public Server_Object
 	{
@@ -88,6 +106,25 @@ namespace tnbLib
 
 		void Construct(const std::string& theValue) override;
 	};
+
+	class Server_Mesh2dObj_Region
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string solu_data;
+			static const std::string tol;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_Region() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
+	defineTnbServerObject(Server_Mesh2dObj_BndMesh);
 
 	class Server_Mesh2dObj_RefValues
 		: public Server_Object

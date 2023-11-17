@@ -20,7 +20,7 @@ namespace tnbLib
 			static const std::string tol;
 			static const std::string small;
 			static const std::string zero;
-			static const std::string under_relax;
+			static const std::string ur;
 			static const std::string max_nb_iters;
 		};
 

@@ -4,6 +4,7 @@
 #include <Aft_MetricPrcsr_Info.hxx>
 #include <Mesh2d_ReferenceValues.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Pln_Vertex.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Entity2d_Box.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
@@ -68,6 +69,36 @@ void tnbLib::Server_Mesh2dObj_MetricPrcsr::Construct(const std::string& theValue
 		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
+}
+
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_OptPoint::Params::tol("tol");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_OptPoint::Params::ur("ur");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_OptPoint::Params::max_lev("max_lev");
+
+#include <Mesh_CurveOptmPoint_Correction_Info.hxx>
+
+void tnbLib::Server_Mesh2dObj_Mesh_Curve_OptPoint::Construct(const std::string& theValue)
+{
+	double tol = 0;
+	double ur = 0;
+	int max_lev = 0;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(tol);
+		}
+		{
+			loadTnbServerObject(ur);
+		}
+		{
+			loadTnbServerObject(max_lev);
+		}
+	}
+	auto value = std::make_shared<Mesh_CurveOptmPoint_Correction_Info>();
+	value->SetTolerance(tol);
+	value->SetUnderRelaxation(ur);
+	value->SetMaxLevel(max_lev);
+	streamGoodTnbServerObject(value);
 }
 
 const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::length_integ("length_integ");
@@ -156,6 +187,7 @@ void tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Construct(const std::string& 
 		value->OverrideNewtonIterInfo(newton_solver);
 		value->OverrideCorrAlgInfo(opt_point);
 		value->OverrideBisectAlgInfo(bisect_solver);
+		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
 }
@@ -218,10 +250,12 @@ const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::size_fun("size_fun"
 const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::area("area");
 const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::node_gen("node_gen");
 
+#include <Aft2d_MetricPrcsr.hxx>
 #include <Aft2d_Element.hxx>
 #include <Aft2d_ElementAnIso.hxx>
 #include <Aft2d_StdOptNode.hxx>
 #include <Aft2d_SolutionData.hxx>
+#include <Aft2d_BoundaryOfPlane_Info.hxx>
 
 void tnbLib::Server_Mesh2dObj_SoluData::Construct(const std::string& theValue)
 {
@@ -283,12 +317,85 @@ void tnbLib::Server_Mesh2dObj_SoluData::Construct(const std::string& theValue)
 		value->LoadSizeFunction(size_fun);
 		value->LoadPlane(area);
 		value->LoadNodeCalculator(node_gen_alg);
-
+		{// creating the metric processor
+			auto metrics = std::make_shared<Aft2d_MetricPrcsr>(value->SizeFunction(), value->GlobalMetricInfo());
+			auto b = value->Plane()->BoundingBox(0);
+			metrics->SetDimSize(b.Diameter());
+			value->SetMetric(metrics);
+		}
 		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
 }
 
+const std::string tnbLib::Server_Mesh2dObj_Region::Params::solu_data("solu_data");
+const std::string tnbLib::Server_Mesh2dObj_Region::Params::tol("tol");
+
+namespace tnbLib
+{
+	auto retrieve_max_tol(const std::shared_ptr<Cad2d_Plane>& plane, double min_tol) -> double
+	{
+		std::vector<std::shared_ptr<Pln_Entity>> vertices;
+		plane->RetrieveCornersTo(vertices);
+
+		auto max_tol = min_tol;
+		for (const auto& x : vertices)
+		{
+			if (const auto vtx = std::dynamic_pointer_cast<Pln_Vertex>(x))
+			{
+				if (vtx->Precision() > max_tol)
+				{
+					max_tol = vtx->Precision();
+				}
+			}
+		}
+		return max_tol;
+	}
+}
+
+void tnbLib::Server_Mesh2dObj_Region::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Aft2d_SolutionData> solu_data;
+	double tol;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(solu_data);
+		}
+		{
+			loadTnbServerObject(tol);
+		}
+	}
+	try
+	{
+		if (!solu_data)
+		{
+			throw Server_Error("the solution data object is null.");
+		}
+		if (!solu_data->Plane())
+		{
+			throw Server_Error("no plane in the solution data has been found.");
+		}
+		tol = retrieve_max_tol(solu_data->Plane(), tol);
+
+		auto info = std::make_shared<Aft2d_BoundaryOfPlane_Info>();
+		info->SetMergeTolerance(tol * 1.05);
+		info->SetOverrideInfo(true);
+
+		info->OverrideGlobalCurve(solu_data->GlobalCurveInfo());
+		info->OverrideGlobalMetricPrcsr(solu_data->GlobalMetricInfo());
+		info->Curve() = solu_data->CurveInfo();
+
+		solu_data->SetBoundaryInfo(info);
+		streamGoodTnbServerObject(solu_data);
+	}
+	catchTnbServerErrors()
+}
+
+void tnbLib::Server_Mesh2dObj_BndMesh::Construct(const std::string& theValue)
+{
+	
+}
 
 const std::string tnbLib::Server_Mesh2dObj_RefValues::Params::base_size("base_size");
 const std::string tnbLib::Server_Mesh2dObj_RefValues::Params::growth_rate("growth_rate");

@@ -83,14 +83,17 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::make_metric_prcsr_2d_settings, make_metric_prcsr_2d_settings, value, sense)
 		switchToMakeTnbServerObject(objects::make_metric_prcsr_2d, make_metric_prcsr_2d, value, sense)
 
+		switchToMakeTnbServerObject(objects::make_mesh_curve_2d_opt_point_settings, make_mesh_curve_2d_opt_point_settings, value, sense)
 		switchToMakeTnbServerObject(objects::make_mesh_curve_2d_settings, make_mesh_curve_2d_settings, value, sense)
 		switchToMakeTnbServerObject(objects::do_mesh_curve_2d, do_mesh_curve_2d, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_mesh_2d_solu_data, make_mesh_2d_solu_data, value, sense)
+		switchToMakeTnbServerObject(objects::make_mesh_2d_region, make_mesh_2d_region, value, sense)
 		// Num lib
 
 		switchToMakeTnbServerObject(objects::make_num_adapt_integ, make_num_adapt_integ, value, sense)
 		switchToMakeTnbServerObject(objects::make_num_newton_solver, make_num_newton_solver, value, sense)
+			switchToMakeTnbServerObject(objects::make_num_bisect_solver, make_num_bisect_solver, value, sense)
 
 		// tools
 		switchToMakeTnbServerObject(objects::make_discrete_shape_info_2d, make_discrete_shape_info_2d, value, sense)

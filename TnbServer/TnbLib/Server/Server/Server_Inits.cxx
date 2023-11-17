@@ -87,16 +87,20 @@ defineAndRegisterTnbServerObject(Server_Mesh2dObj_RefValues, Server::objects::ma
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_MetricPrcsr_Settings, Server::objects::make_metric_prcsr_2d_settings, "make_metric_prcsr_2d_settings");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_MetricPrcsr, Server::objects::make_metric_prcsr_2d, "make_metric_prcsr_2d");
 
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve_OptPoint, Server::objects::make_mesh_curve_2d_opt_point_settings, "make_mesh_curve_2d_opt_point_settings");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve_Settings, Server::objects::make_mesh_curve_2d_settings, "make_mesh_curve_2d_settings");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve, Server::objects::do_mesh_curve_2d, "do_mesh_curve_2d");
 
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_SoluData, Server::objects::make_mesh_2d_solu_data, "make_mesh_2d_solu_data");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Region, Server::objects::make_mesh_2d_region, "make_mesh_2d_region");
 
 // Num lib
 #include <Server_NumObj_AdaptInteg_Info.hxx>
 #include <Server_NumObj_NewtonNonLinSolver_Info.hxx>
+#include <Server_NumObj_BisectNonLinSolver_Info.hxx>
 defineAndRegisterTnbServerObject(Server_NumObj_AdaptInteg_Info, Server::objects::make_num_adapt_integ, "make_num_adapt_integ");
 defineAndRegisterTnbServerObject(Server_NumObj_NewtonNonLinSolver_Info, Server::objects::make_num_newton_solver, "make_num_newton_solver");
+defineAndRegisterTnbServerObject(Server_NumObj_BisectNonLinSolver_Info, Server::objects::make_num_bisect_solver, "make_num_bisect_solver");
 
 #include <Server_GlobalObj_Exit.hxx>
 defineAndRegisterTnbServerObject(Server_GlobalObj_Exit, Server::objects::exit, "EXIT");
