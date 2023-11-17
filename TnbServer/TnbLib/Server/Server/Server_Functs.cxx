@@ -105,6 +105,7 @@ createTnbServerObject(do_mesh_curve_2d, Server_Mesh2dObj_Mesh_Curve)
 
 createTnbServerObject(make_mesh_2d_solu_data, Server_Mesh2dObj_SoluData)
 createTnbServerObject(make_mesh_2d_region, Server_Mesh2dObj_Region)
+createTnbServerObject(do_mesh_2d_bnd, Server_Mesh2dObj_BndMesh)
 
 // Num lib
 #include <Server_NumObj_AdaptInteg_Info.hxx>

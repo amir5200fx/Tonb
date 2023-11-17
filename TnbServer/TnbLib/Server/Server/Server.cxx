@@ -89,6 +89,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 		switchToMakeTnbServerObject(objects::make_mesh_2d_solu_data, make_mesh_2d_solu_data, value, sense)
 		switchToMakeTnbServerObject(objects::make_mesh_2d_region, make_mesh_2d_region, value, sense)
+		switchToMakeTnbServerObject(objects::do_mesh_2d_bnd, do_mesh_2d_bnd, value, sense)
 		// Num lib
 
 		switchToMakeTnbServerObject(objects::make_num_adapt_integ, make_num_adapt_integ, value, sense)

@@ -93,6 +93,7 @@ defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve, Server::objects::d
 
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_SoluData, Server::objects::make_mesh_2d_solu_data, "make_mesh_2d_solu_data");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_Region, Server::objects::make_mesh_2d_region, "make_mesh_2d_region");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_BndMesh, Server::objects::do_mesh_2d_bnd, "do_mesh_2d_bnd");
 
 // Num lib
 #include <Server_NumObj_AdaptInteg_Info.hxx>

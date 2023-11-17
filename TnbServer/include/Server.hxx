@@ -90,6 +90,7 @@ namespace tnbLib
 
 			make_mesh_2d_solu_data,
 			make_mesh_2d_region,
+			do_mesh_2d_bnd,
 
 			// num lib
 
@@ -201,6 +202,7 @@ namespace tnbLib
 
 		declareTnbServerFunction(make_mesh_2d_solu_data);
 		declareTnbServerFunction(make_mesh_2d_region);
+		declareTnbServerFunction(do_mesh_2d_bnd);
 
 		// num lib
 

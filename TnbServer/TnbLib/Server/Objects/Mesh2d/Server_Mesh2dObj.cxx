@@ -5,6 +5,7 @@
 #include <Mesh2d_ReferenceValues.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Pln_Vertex.hxx>
+#include <Cad_EntityManager.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Entity2d_Box.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
@@ -256,6 +257,11 @@ const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::node_gen("node_gen"
 #include <Aft2d_StdOptNode.hxx>
 #include <Aft2d_SolutionData.hxx>
 #include <Aft2d_BoundaryOfPlane_Info.hxx>
+#include <Aft2d_RegionPlane.hxx>
+#include <Aft2d_PlnWire.hxx>
+#include <Aft2d_RegionPlane.hxx>
+#include <Mesh_Physic.hxx>
+#include <Mesh2d_PlnCurve.hxx>
 
 void tnbLib::Server_Mesh2dObj_SoluData::Construct(const std::string& theValue)
 {
@@ -351,6 +357,51 @@ namespace tnbLib
 		}
 		return max_tol;
 	}
+
+	auto retrieve_curves(const Aft2d_RegionPlane& theRegion)
+	{
+		std::vector<std::shared_ptr<Aft2d_PlnWire>> wires;
+		theRegion.RetrieveWiresTo(wires);
+		std::map<int, std::shared_ptr<Mesh2d_PlnCurve>> curves;
+		for (const auto& w : wires)
+		{
+			for (const auto& x : w->Curves())
+			{
+				auto paired = std::make_pair(x->Index(), x);
+				if (NOT curves.insert(std::move(paired)).second)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "duplicate curve no. has been detected." << endl
+						<< " - id: " << x->Index() << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+		return std::move(curves);
+	}
+
+	void set_physics(const Cad2d_Plane& plane, const std::shared_ptr<Aft2d_RegionPlane>& theRegion)
+	{
+		auto curvesMap = retrieve_curves(*theRegion);
+		const auto& segments = plane.Segments();
+		for (const auto& x : segments->Blocks())
+		{
+			for (const auto& e : x.second->RetrieveEntities())
+			{
+				const auto& c = e->Curve();
+				auto iter = curvesMap.find(c->Index());
+				if (iter IS_EQUAL curvesMap.end())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "couldn't find the curve in the block." << endl
+						<< " id: " << c->Index() << endl
+						<< abort(FatalError);
+				}
+				auto physic = std::make_shared<Mesh_Physic>(0, x.first);
+				iter->second->SetPhysic(std::move(physic));
+			}
+		}
+	}
 }
 
 void tnbLib::Server_Mesh2dObj_Region::Construct(const std::string& theValue)
@@ -387,14 +438,52 @@ void tnbLib::Server_Mesh2dObj_Region::Construct(const std::string& theValue)
 		info->Curve() = solu_data->CurveInfo();
 
 		solu_data->SetBoundaryInfo(info);
+		{// creating the region
+			auto region = Aft2d_RegionPlane::MakePlane(solu_data->Plane());
+			set_physics(*solu_data->Plane(), region);
+
+			solu_data->SetRegion(std::move(region));
+		}
 		streamGoodTnbServerObject(solu_data);
 	}
 	catchTnbServerErrors()
 }
 
+#include <Aft2d_BoundaryOfPlane.hxx>
+
 void tnbLib::Server_Mesh2dObj_BndMesh::Construct(const std::string& theValue)
 {
-	
+	std::shared_ptr<Aft2d_SolutionData> solu_data;
+	{
+		loadNonJSONTnbServer(solu_data);
+	}
+	try
+	{
+		if (!solu_data)
+		{
+			throw Server_Error("the solution data is null.");
+		}
+		if (!solu_data->Region())
+		{
+			throw Server_Error("no region has been defined!");
+		}
+		if (!solu_data->BoundaryInfo())
+		{
+			throw Server_Error("no boundary settings has been found!");
+		}
+		if (!solu_data->Metric())
+		{
+			throw Server_Error("no metrics processor has been found.");
+		}
+		auto bnd = std::make_shared<Aft2d_BoundaryOfPlane>(solu_data->BoundaryInfo());
+		bnd->LoadMetricProcessor(solu_data->Metric());
+		bnd->LoadPlane(solu_data->Region());
+
+		bnd->Perform();
+		solu_data->SetBoundaryEdges(bnd->Boundaries());
+		streamGoodTnbServerObject(solu_data);
+	}
+	catchTnbServerErrors()
 }
 
 const std::string tnbLib::Server_Mesh2dObj_RefValues::Params::base_size("base_size");
