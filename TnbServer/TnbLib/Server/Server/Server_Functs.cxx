@@ -99,9 +99,17 @@ createTnbServerObject(make_mesh_ref_values_2d, Server_Mesh2dObj_RefValues)
 createTnbServerObject(make_metric_prcsr_2d_settings, Server_Mesh2dObj_MetricPrcsr_Settings)
 createTnbServerObject(make_metric_prcsr_2d, Server_Mesh2dObj_MetricPrcsr)
 
-#include <Server_NumObj_AdaptInteg_Info.hxx>
+createTnbServerObject(make_mesh_curve_2d_settings, Server_Mesh2dObj_Mesh_Curve_Settings)
+createTnbServerObject(do_mesh_curve_2d, Server_Mesh2dObj_Mesh_Curve)
+
+createTnbServerObject(make_mesh_2d_solu_data, Server_Mesh2dObj_SoluData)
+
 // Num lib
+#include <Server_NumObj_AdaptInteg_Info.hxx>
+#include <Server_NumObj_NewtonNonLinSolver_Info.hxx>
+#include <Server_NumObj_BisectNonLinSolver_Info.hxx>
 createTnbServerObject(make_num_adapt_integ, Server_NumObj_AdaptInteg_Info)
+createTnbServerObject(make_num_newton_solver, Server_NumObj_NewtonNonLinSolver_Info)
 
 #include <Server_GlobalObj_Exit.hxx>
 createTnbServerObject(exit, Server_GlobalObj_Exit)

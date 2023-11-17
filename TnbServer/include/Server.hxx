@@ -84,9 +84,15 @@ namespace tnbLib
 			make_metric_prcsr_2d_settings,
 			make_metric_prcsr_2d,
 
+			make_mesh_curve_2d_settings,
+			do_mesh_curve_2d,
+
+			make_mesh_2d_solu_data,
+
 			// num lib
 
 			make_num_adapt_integ,
+			make_num_newton_solver,
 			
 			exit
 		};
@@ -186,9 +192,15 @@ namespace tnbLib
 		declareTnbServerFunction(make_metric_prcsr_2d_settings);
 		declareTnbServerFunction(make_metric_prcsr_2d);
 
+		declareTnbServerFunction(make_mesh_curve_2d_settings);
+		declareTnbServerFunction(do_mesh_curve_2d);
+
+		declareTnbServerFunction(make_mesh_2d_solu_data);
+
 		// num lib
 
 		declareTnbServerFunction(make_num_adapt_integ);
+		declareTnbServerFunction(make_num_newton_solver);
 
 		// tools functions
 

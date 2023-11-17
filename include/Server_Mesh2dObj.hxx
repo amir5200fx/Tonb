@@ -27,6 +27,68 @@ namespace tnbLib
 		void Construct(const std::string& theValue) override;
 	};
 
+	class Server_Mesh2dObj_Mesh_Curve_Settings
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string length_integ;
+			static const std::string iter_integ;
+			static const std::string newton_solver;
+			static const std::string opt_point;
+			static const std::string bisect_solver;
+
+			static const std::string length_max_lev_sub;
+			static const std::string ur;
+			static const std::string ignore_non_conv;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_Mesh_Curve_Settings() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
+	class Server_Mesh2dObj_Mesh_Curve
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string curve;
+			static const std::string metrics;
+			static const std::string settings;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_Mesh_Curve() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
+	class Server_Mesh2dObj_SoluData
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string curve_settings;
+			static const std::string metric_settings;
+			static const std::string size_fun;
+			static const std::string area;
+			static const std::string node_gen;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_SoluData() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
 	class Server_Mesh2dObj_RefValues
 		: public Server_Object
 	{

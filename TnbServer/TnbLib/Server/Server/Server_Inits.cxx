@@ -80,14 +80,23 @@ defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetLengths, Server::obje
 #include <Server_Geo2dObj.hxx>
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Uniform, Server::objects::make_size_map_2d_uniform, "make_size_map_2d_uniform");
 
+// mesh lib
+
 #include <Server_Mesh2dObj.hxx>
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_RefValues, Server::objects::make_mesh_ref_values_2d, "make_mesh_ref_values_2d");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_MetricPrcsr_Settings, Server::objects::make_metric_prcsr_2d_settings, "make_metric_prcsr_2d_settings");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_MetricPrcsr, Server::objects::make_metric_prcsr_2d, "make_metric_prcsr_2d");
 
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve_Settings, Server::objects::make_mesh_curve_2d_settings, "make_mesh_curve_2d_settings");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve, Server::objects::do_mesh_curve_2d, "do_mesh_curve_2d");
+
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_SoluData, Server::objects::make_mesh_2d_solu_data, "make_mesh_2d_solu_data");
+
 // Num lib
 #include <Server_NumObj_AdaptInteg_Info.hxx>
+#include <Server_NumObj_NewtonNonLinSolver_Info.hxx>
 defineAndRegisterTnbServerObject(Server_NumObj_AdaptInteg_Info, Server::objects::make_num_adapt_integ, "make_num_adapt_integ");
+defineAndRegisterTnbServerObject(Server_NumObj_NewtonNonLinSolver_Info, Server::objects::make_num_newton_solver, "make_num_newton_solver");
 
 #include <Server_GlobalObj_Exit.hxx>
 defineAndRegisterTnbServerObject(Server_GlobalObj_Exit, Server::objects::exit, "EXIT");

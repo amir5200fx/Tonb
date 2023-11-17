@@ -9,6 +9,8 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <json.hpp>
 
+#include <StdFail_NotDone.hxx>
+
 void tnbLib::Server_Mesh2dObj_MetricPrcsr_Settings::Construct(const std::string& theValue)
 {
 	std::shared_ptr<NumAlg_AdaptiveInteg_Info> info;
@@ -63,6 +65,225 @@ void tnbLib::Server_Mesh2dObj_MetricPrcsr::Construct(const std::string& theValue
 		}
 		auto value = std::make_shared<Aft2d_MetricPrcsr>(size_fun, settings);
 		value->SetDimSize(dim);
+		streamGoodTnbServerObject(value);
+	}
+	catchTnbServerErrors()
+}
+
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::length_integ("length_integ");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::iter_integ("iter_integ");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::newton_solver("newton_solver");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::opt_point("opt_point");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::bisect_solver("bisect_solver");
+
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::length_max_lev_sub("length_max_lev_sub");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::ignore_non_conv("ignore_non_conv");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Params::ur("ur");
+
+#include <Mesh_Curve_Info.hxx>
+#include <Mesh_CurveOptmPoint_Correction_Info.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
+
+void tnbLib::Server_Mesh2dObj_Mesh_Curve_Settings::Construct(const std::string& theValue)
+{
+	std::shared_ptr<NumAlg_AdaptiveInteg_Info> length_integ;
+	std::shared_ptr<NumAlg_AdaptiveInteg_Info> iter_integ;
+	std::shared_ptr<NumAlg_NewtonSolver_Info> newton_solver;
+	std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info> opt_point;
+	std::shared_ptr<NumAlg_BisectionSolver_Info> bisect_solver;
+
+	int length_max_lev_sub;
+	bool ignore_non_conv;
+	double ur;
+	defineTnbServerParser(theValue);
+	{
+		loadTnbServerObject(length_integ);
+	}
+	{
+		loadTnbServerObject(iter_integ);
+	}
+	{
+		loadTnbServerObject(newton_solver);
+	}
+	{
+		loadTnbServerObject(opt_point);
+	}
+	{
+		loadTnbServerObject(bisect_solver);
+	}
+
+	{
+		loadTnbServerObject(length_max_lev_sub);
+	}
+	{
+		loadTnbServerObject(ur);
+	}
+	{
+		loadTnbServerObject(ignore_non_conv);
+	}
+	try
+	{
+		if (!length_integ)
+		{
+			throw Server_Error("the length integration object is null.");
+		}
+		if (!iter_integ)
+		{
+			throw Server_Error("the iteration integration object is null.");
+		}
+		if (!newton_solver)
+		{
+			throw Server_Error("the Newton solver object is null.");
+		}
+		if (!opt_point)
+		{
+			throw Server_Error("the optimum point object is null.");
+		}
+		if (!bisect_solver)
+		{
+			throw Server_Error("the Bisect solver object is null.");
+		}
+		auto value = std::make_shared<Mesh_Curve_Info>();
+
+		value->SetLengthCalcMaxLevel(length_max_lev_sub);
+		value->SetUnderRelaxation(ur);
+		value->SetIgnoreNonConvergency(ignore_non_conv);
+
+		value->OverrideOverallLengthIntgInfo(length_integ);
+		value->OverrideNewtonIntgInfo(iter_integ);
+		value->OverrideNewtonIterInfo(newton_solver);
+		value->OverrideCorrAlgInfo(opt_point);
+		value->OverrideBisectAlgInfo(bisect_solver);
+	}
+	catchTnbServerErrors()
+}
+
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve::Params::curve("curve");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve::Params::metrics("metrics");
+const std::string tnbLib::Server_Mesh2dObj_Mesh_Curve::Params::settings("settings");
+
+#include <Mesh2d_Curve.hxx>
+#include <Aft2d_MetricPrcsr.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Curve.hxx>
+
+void tnbLib::Server_Mesh2dObj_Mesh_Curve::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Pln_Edge> curve;
+	std::shared_ptr<Aft2d_MetricPrcsr> metrics;
+	std::shared_ptr<Mesh_Curve_Info> settings;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(curve);
+		}
+		{
+			loadTnbServerObject(metrics);
+		}
+		{
+			loadTnbServerObject(settings);
+		}
+	}
+	try
+	{
+		if (!curve)
+		{
+			throw Server_Error("the curve object is null.");
+		}
+		if (!metrics)
+		{
+			throw Server_Error("the metrics object is null.");
+		}
+		if (!settings)
+		{
+			throw Server_Error("the settings object is null.");
+		}
+		auto alg = std::make_shared<Mesh2d_Curve>();
+		const auto& g = curve->Curve();
+		alg->LoadCurve(g->Geometry(), g->FirstParameter(), g->LastParameter());
+		alg->LoadMap(metrics);
+		alg->LoadInfo(settings);
+		alg->Perform();
+		auto value = alg->Parameters();
+		streamGoodTnbServerObject(value);
+	}
+	catchTnbServerErrors()
+}
+
+const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::curve_settings("curve_settings");
+const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::metric_settings("metric_settings");
+const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::size_fun("size_fun");
+const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::area("area");
+const std::string tnbLib::Server_Mesh2dObj_SoluData::Params::node_gen("node_gen");
+
+#include <Aft2d_Element.hxx>
+#include <Aft2d_ElementAnIso.hxx>
+#include <Aft2d_StdOptNode.hxx>
+#include <Aft2d_SolutionData.hxx>
+
+void tnbLib::Server_Mesh2dObj_SoluData::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Mesh_Curve_Info> curve_settings;
+	std::shared_ptr<Aft_MetricPrcsr_Info> metric_settings;
+	std::shared_ptr<Geo2d_SizeFunction> size_fun;
+	std::shared_ptr<Cad2d_Plane> area;
+	std::string node_gen;
+	defineTnbServerParser(theValue);
+	{
+		loadTnbServerObject(curve_settings);
+	}
+	{
+		loadTnbServerObject(size_fun);
+	}
+	{
+		loadTnbServerObject(metric_settings);
+	}
+	{
+		loadTnbServerObject(area);
+	}
+	{
+		loadTnbServerString(node_gen);
+	}
+	try
+	{
+		if (!curve_settings)
+		{
+			throw Server_Error("the curve settings object is null.");
+		}
+		if (!metric_settings)
+		{
+			throw Server_Error("the metric settings object is null.");
+		}
+		if (!size_fun)
+		{
+			throw Server_Error("the size function object is null.");
+		}
+		if (!area)
+		{
+			throw Server_Error("the area object is null.");
+		}
+		std::shared_ptr<Aft2d_OptNode_Calculator> node_gen_alg;
+		if (node_gen == "standard")
+		{
+			node_gen_alg = std::make_shared<Aft2d_StdOptNode>();
+		}
+		else
+		{
+			std::stringstream stream;
+			stream << " Unrecognized node generator has been detected. The list of the node generators are:\n"
+				<< " - standard\n";
+			throw Server_Error(stream.str());
+		}
+		auto value = std::make_shared<Aft2d_SolutionData>();
+		value->LoadGlobalMetricInfo(metric_settings);
+		value->LoadGlobalCurveInfo(curve_settings);
+
+		value->LoadSizeFunction(size_fun);
+		value->LoadPlane(area);
+		value->LoadNodeCalculator(node_gen_alg);
+
 		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
