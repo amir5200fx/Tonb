@@ -14,6 +14,11 @@ void tnbLib::Pnt3d::AddToPlt(OFstream & theFile) const
 	theFile << X() << "  " << Y() << "  " << Z();
 }
 
+void tnbLib::Pnt3d::AddToPlt(std::stringstream& theStream) const
+{
+	theStream << X() << " " << Y() << " " << Z();
+}
+
 namespace tnbLib
 {
 

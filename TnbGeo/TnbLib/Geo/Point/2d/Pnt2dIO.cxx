@@ -20,6 +20,11 @@ void tnbLib::Pnt2d::AddToPlt(OFstream & theFile) const
 	theFile << X() << "  " << Y();
 }
 
+void tnbLib::Pnt2d::AddToPlt(std::stringstream& theStream) const
+{
+	theStream << X() << " " << Y();
+}
+
 namespace tnbLib
 {
 
