@@ -126,6 +126,49 @@ namespace tnbLib
 
 	defineTnbServerObject(Server_Mesh2dObj_BndMesh);
 
+	defineTnbServerObject(Server_Mesh2dObj_NodeGen_Std);
+
+	class Server_Mesh2dObj_Mesh
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string solu_data;
+			static const std::string node_gen;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_Mesh() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
+	defineTnbServerObject(Server_Mesh2dObj_Mesh_QualFun_Vlrms2Ratio);
+
+	defineTnbServerObject(Server_Mesh2dObj_Mesh_LaplacSmooth_AdjEdgesFun);
+
+	class Server_Mesh2dObj_LaplacSmooth
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			static const std::string solu_data;
+			static const std::string qual_fun;
+			static const std::string avg_fun;
+			static const std::string nb_iters;
+			static const std::string ur;
+		};
+
+		static const std::string command_name;
+
+		Server_Mesh2dObj_LaplacSmooth() = default;
+
+		void Construct(const std::string& theValue) override;
+	};
+
 	class Server_Mesh2dObj_RefValues
 		: public Server_Object
 	{

@@ -89,7 +89,16 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 		switchToMakeTnbServerObject(objects::make_mesh_2d_solu_data, make_mesh_2d_solu_data, value, sense)
 		switchToMakeTnbServerObject(objects::make_mesh_2d_region, make_mesh_2d_region, value, sense)
+		switchToMakeTnbServerObject(objects::make_mesh_2d_node_gen_std, make_mesh_2d_node_gen_std, value, sense)
 		switchToMakeTnbServerObject(objects::do_mesh_2d_bnd, do_mesh_2d_bnd, value, sense)
+		switchToMakeTnbServerObject(objects::do_mesh_2d, do_mesh_2d, value, sense)
+		switchToMakeTnbServerObject(objects::do_mesh_2d_laplac_smooth, do_mesh_2d_laplac_smooth, value, sense)
+
+		// post mesh
+
+		switchToMakeTnbServerObject(objects::make_mesh_2d_qual_fun_vlrms2ratio, make_mesh_2d_qual_fun_vlrms2ratio, value, sense)
+		switchToMakeTnbServerObject(objects::make_mesh_2d_laplac_smooth_ang_fun_adj_edges, make_mesh_2d_laplac_smooth_ang_fun_adj_edges, value, sense)
+
 		// Num lib
 
 		switchToMakeTnbServerObject(objects::make_num_adapt_integ, make_num_adapt_integ, value, sense)

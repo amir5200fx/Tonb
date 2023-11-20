@@ -90,7 +90,15 @@ namespace tnbLib
 
 			make_mesh_2d_solu_data,
 			make_mesh_2d_region,
+			make_mesh_2d_node_gen_std,
 			do_mesh_2d_bnd,
+			do_mesh_2d,
+			do_mesh_2d_laplac_smooth,
+
+			// post mesh
+
+			make_mesh_2d_qual_fun_vlrms2ratio,
+			make_mesh_2d_laplac_smooth_ang_fun_adj_edges,
 
 			// num lib
 
@@ -202,7 +210,15 @@ namespace tnbLib
 
 		declareTnbServerFunction(make_mesh_2d_solu_data);
 		declareTnbServerFunction(make_mesh_2d_region);
+		declareTnbServerFunction(make_mesh_2d_node_gen_std);
 		declareTnbServerFunction(do_mesh_2d_bnd);
+		declareTnbServerFunction(do_mesh_2d);
+		declareTnbServerFunction(do_mesh_2d_laplac_smooth);
+
+		// post mesh
+
+		declareTnbServerFunction(make_mesh_2d_qual_fun_vlrms2ratio);
+		declareTnbServerFunction(make_mesh_2d_laplac_smooth_ang_fun_adj_edges);
 
 		// num lib
 

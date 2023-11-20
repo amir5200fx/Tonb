@@ -93,7 +93,14 @@ defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_Curve, Server::objects::d
 
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_SoluData, Server::objects::make_mesh_2d_solu_data, "make_mesh_2d_solu_data");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_Region, Server::objects::make_mesh_2d_region, "make_mesh_2d_region");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_NodeGen_Std, Server::objects::make_mesh_2d_node_gen_std, "make_mesh_2d_node_gen_std");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_BndMesh, Server::objects::do_mesh_2d_bnd, "do_mesh_2d_bnd");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh, Server::objects::do_mesh_2d, "do_mesh_2d");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_LaplacSmooth, Server::objects::do_mesh_2d_laplac_smooth, "do_mesh_2d_laplac_smooth");
+
+// Post mesh
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_QualFun_Vlrms2Ratio, Server::objects::make_mesh_2d_qual_fun_vlrms2ratio, "make_mesh_2d_qual_fun_vlrms2ratio");
+defineAndRegisterTnbServerObject(Server_Mesh2dObj_Mesh_LaplacSmooth_AdjEdgesFun, Server::objects::make_mesh_2d_laplac_smooth_ang_fun_adj_edges, "make_mesh_2d_laplac_smooth_ang_fun_adj_edges");
 
 // Num lib
 #include <Server_NumObj_AdaptInteg_Info.hxx>

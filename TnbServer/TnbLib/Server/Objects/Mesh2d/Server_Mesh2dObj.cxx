@@ -486,6 +486,184 @@ void tnbLib::Server_Mesh2dObj_BndMesh::Construct(const std::string& theValue)
 	catchTnbServerErrors()
 }
 
+#include <Aft2d_StdOptNode.hxx>
+
+void tnbLib::Server_Mesh2dObj_NodeGen_Std::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Aft2d_OptNode_Calculator> value = std::make_shared<Aft2d_StdOptNode>();
+	streamGoodTnbServerObject(value);
+}
+
+
+#include <Aft2d_Model.hxx>
+#include <Aft_Tools.hxx>
+#include <Aft2d_StdOptNode.hxx>
+#include <Aft2d_SegmentEdge.hxx>
+#include <Aft2d_SegmentEdgeAnIso.hxx>
+#include <MeshPost2d_LaplacianSmoothing.hxx>
+#include <MeshPost2d_LaplacianSmoothing_AdjEdges.hxx>
+#include <MeshPost2d_QualityMap_Vlrms2Ratio.hxx>
+
+const std::string tnbLib::Server_Mesh2dObj_Mesh::Params::solu_data("solu_data");
+const std::string tnbLib::Server_Mesh2dObj_Mesh::Params::node_gen("node_gen");
+
+void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Aft2d_SolutionData> solu_data;
+	std::shared_ptr<Aft2d_OptNode_Calculator> node_gen;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(solu_data);
+		}
+		{
+			loadTnbServerObject(node_gen);
+		}
+	}
+	try
+	{
+		if (!solu_data)
+		{
+			throw Server_Error("the solution data is null.");
+		}
+		if (!node_gen)
+		{
+			throw Server_Error("node generator object is null!");
+		}
+		if (!solu_data->Region())
+		{
+			throw Server_Error("no region has been defined!");
+		}
+		if (!solu_data->BoundaryInfo())
+		{
+			throw Server_Error("no boundary settings has been found!");
+		}
+		if (!solu_data->Metric())
+		{
+			throw Server_Error("no metrics processor has been found.");
+		}
+		const auto& boundaries = solu_data->BoundaryEdges();
+		if (boundaries.empty())
+		{
+			throw Server_Error("no boundary edge has been found!");
+		}
+		solu_data->LoadNodeCalculator(node_gen);
+		solu_data->NodeCalculator()->SetMetricMap(solu_data->Metric());
+		if (!solu_data->NodeCalculator())
+		{
+			throw Server_Error("no node generator has been found!");
+		}
+		Aft_Tools::Connect(boundaries);
+
+		auto alg = std::make_shared<Aft2d_Model>();
+		alg->LoadMetricMap(solu_data->Metric());
+		alg->LoadBoundaryMetricMap(solu_data->Metric());
+		alg->LoadBoundaryEdges(Aft_Tools::UpCast(solu_data->BoundaryEdges()));
+		alg->LoadNodeCalculator(solu_data->NodeCalculator());
+
+		alg->Perform();
+		const auto& elm_map = alg->RetrieveElements();
+		std::vector<std::shared_ptr<Aft2d_Element>> elements;
+		elements.reserve(elm_map.size());
+		for (const auto& x: elm_map)
+		{
+			elements.emplace_back(x.second);
+		}
+		/**/
+		solu_data->SetElements(std::move(elements));
+		streamGoodTnbServerObject(solu_data);
+	}
+	catchTnbServerErrors()
+}
+
+#include <MeshPost2d_LaplacianSmoothing_AdjEdges.hxx>
+#include <MeshPost2d_QualityMap_Vlrms2Ratio.hxx>
+#include <MeshPost_LaplacianSmoothing_Info.hxx>
+
+void tnbLib::Server_Mesh2dObj_Mesh_QualFun_Vlrms2Ratio::Construct(const std::string& /*theValue*/)
+{
+	auto value = std::make_shared<MeshPost2d_QualityMap_Vlrms2Ratio>();
+	streamGoodTnbServerObject(value);
+}
+
+void tnbLib::Server_Mesh2dObj_Mesh_LaplacSmooth_AdjEdgesFun::Construct(const std::string& /*theValue*/)
+{
+	auto value = std::make_shared<MeshPost2d_LaplacianSmoothing_AdjEdges>();
+	streamGoodTnbServerObject(value);
+}
+
+
+const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::avg_fun("avg_fun");
+const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::nb_iters("nb_iters");
+const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::qual_fun("qual_fun");
+const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::solu_data("solu_data");
+const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::ur("ur");
+
+void tnbLib::Server_Mesh2dObj_LaplacSmooth::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Aft2d_SolutionData> solu_data;
+	std::shared_ptr<MeshPost2d_LaplacianSmoothing_AdjEdges> avg_fun;
+	std::shared_ptr<MeshPost2d_QualityMap_Vlrms2Ratio> qual_fun;
+	int nb_iters;
+	double ur;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(solu_data);
+		}
+		{
+			loadTnbServerObject(avg_fun);
+		}
+		{
+			loadTnbServerObject(qual_fun);
+		}
+		{
+			loadTnbServerObject(nb_iters);
+		}
+		{
+			loadTnbServerObject(ur);
+		}
+	}
+	try
+	{
+		if (!solu_data)
+		{
+			throw Server_Error("the solution data is null.");
+		}
+		const auto& elements = solu_data->Elements();
+		auto nodes_ref = Aft_Tools::RetrieveNodes(elements);
+		auto nodes = std::make_shared<std::vector<std::shared_ptr<Aft2d_Node>>>(std::move(nodes_ref));
+		if (!avg_fun)
+		{
+			throw Server_Error("no avg. function has been found.");
+		}
+		avg_fun->SetMetrics(solu_data->Metric());
+		if (!qual_fun)
+		{
+			throw Server_Error("no qual. function has been found.");
+		}
+		qual_fun->SetMetrics(solu_data->Metric());
+
+		auto info = std::make_shared<MeshPost_LaplacianSmoothing_Info>();
+		info->SetNbLevels(nb_iters);
+		info->SetUnderRelaxation(ur);
+
+		auto smooth_alg = std::make_shared<MeshPost2d_LaplacianSmoothing>();
+		smooth_alg->SetAvgFun(avg_fun);
+		smooth_alg->SetQualityFun(qual_fun);
+		smooth_alg->SetInfo(info);
+		smooth_alg->SetNodes(nodes);
+
+		smooth_alg->Perform();
+
+		solu_data->SetElements(std::move(elements));
+		streamGoodTnbServerObject(solu_data);
+	}
+	catchTnbServerErrors()
+
+	
+}
+
 const std::string tnbLib::Server_Mesh2dObj_RefValues::Params::base_size("base_size");
 const std::string tnbLib::Server_Mesh2dObj_RefValues::Params::growth_rate("growth_rate");
 const std::string tnbLib::Server_Mesh2dObj_RefValues::Params::boundary_growth_rate("boundary_growth_rate");

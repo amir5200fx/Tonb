@@ -33,7 +33,7 @@ public:																		\
 	std::stringstream stream;												\
 	stream << theValue;														\
 	TNB_iARCH_FILE_TYPE ia(stream);											\
-	ia >> ObjectName;
+	ia >> ObjectName
 	
 
 #define defineTnbServerParser(String)										\

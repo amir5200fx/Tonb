@@ -105,7 +105,14 @@ createTnbServerObject(do_mesh_curve_2d, Server_Mesh2dObj_Mesh_Curve)
 
 createTnbServerObject(make_mesh_2d_solu_data, Server_Mesh2dObj_SoluData)
 createTnbServerObject(make_mesh_2d_region, Server_Mesh2dObj_Region)
+createTnbServerObject(make_mesh_2d_node_gen_std, Server_Mesh2dObj_NodeGen_Std)
 createTnbServerObject(do_mesh_2d_bnd, Server_Mesh2dObj_BndMesh)
+createTnbServerObject(do_mesh_2d, Server_Mesh2dObj_Mesh)
+createTnbServerObject(do_mesh_2d_laplac_smooth, Server_Mesh2dObj_LaplacSmooth)
+
+// post mesh
+createTnbServerObject(make_mesh_2d_qual_fun_vlrms2ratio, Server_Mesh2dObj_Mesh_QualFun_Vlrms2Ratio)
+createTnbServerObject(make_mesh_2d_laplac_smooth_ang_fun_adj_edges, Server_Mesh2dObj_Mesh_LaplacSmooth_AdjEdgesFun)
 
 // Num lib
 #include <Server_NumObj_AdaptInteg_Info.hxx>
