@@ -109,7 +109,7 @@ void tnbLib::VoyageGeo_PathGeneration::Perform()
 		}
 		else
 		{
-			auto geom_2d = Pln_CurveTools::Interpolation(offsets);
+			auto geom_2d = Pln_CurveTools::Interpolation(coords);
 			auto curve_2d = std::make_shared<Pln_Curve>(++i, std::move(geom_2d));
 			curves.push_back(std::move(curve_2d));
 		}
