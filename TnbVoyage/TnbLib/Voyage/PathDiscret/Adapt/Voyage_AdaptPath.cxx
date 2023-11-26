@@ -120,6 +120,7 @@ void tnbLib::Voyage_AdaptPath::Perform()
 		const auto& p1 = sub1->GetPoint(0);
 		const auto& p2 = sub1->GetPoint(1);
 		const auto angle = std::abs(PI - Voyage_Tools::CalcTurningAngle(p0, p1, p2));
+		std::cout << "a0 = " << Voyage_Tools::CalcTurningAngle(p0, p1, p2) << std::endl;
 		std::cout << "angle = " << angle << ", crit= " << GetInfo()->TargetAngle() << std::endl;
 		if (angle > GetInfo()->TargetAngle())
 		{

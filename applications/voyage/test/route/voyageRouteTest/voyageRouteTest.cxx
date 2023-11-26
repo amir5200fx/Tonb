@@ -155,7 +155,7 @@ int main()
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));*/
 
-		IFstream ref_path_file("gcr.txt");
+		IFstream ref_path_file("PathBandarAbbasToSingapore.txt");
 		auto ref_path = std::make_shared<Voyage_RefPath>();
 		ref_path->Load(ref_path_file);
 
