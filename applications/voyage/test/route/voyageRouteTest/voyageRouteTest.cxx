@@ -18,6 +18,8 @@
 #include <Voyage_SizeMap.hxx>
 #include <Voyage_Waypoints.hxx>
 #include <Voyage_RefPath.hxx>
+#include <Voyage_AdaptPath.hxx>
+#include <Voyage_AdaptPath_Info.hxx>
 #include <VoyageMesh_SizeMap.hxx>
 #include <VoyageMesh_BaseSize.hxx>
 #include <VoyageMesh_BaseSizeInfo.hxx>
@@ -202,9 +204,25 @@ int main()
 		auto alg = std::make_shared<Voyage_PathDiscret>(path, metricInfo, h);
 		alg->Perform();
 
-		for (const auto& x : alg->Path()->Curves())
+		auto alg_info = std::make_shared<Voyage_AdaptPath_Info>();
+		alg_info->SetNbSamples(2);
+		
+		std::vector<std::shared_ptr<Entity2d_Polygon>> subs;
+		for (const auto& x: alg->Path()->Curves())
 		{
-			auto chain = Geo_Tools::RetrieveChain(*x->Mesh());
+			subs.emplace_back(x->Mesh());
+		}
+		{
+			auto alg = std::make_shared<Voyage_AdaptPath>(subs, alg_info);
+			alg->Perform();
+			subs = alg->Refined();
+		}
+
+		path->SetMesh(subs);
+		
+		for (const auto& x : subs)
+		{
+			auto chain = Geo_Tools::RetrieveChain(*x);
 			voyagePath->Add(*chain);
 		}
 

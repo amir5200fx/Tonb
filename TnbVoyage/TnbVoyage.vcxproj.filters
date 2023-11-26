@@ -409,6 +409,9 @@
     <Filter Include="TnbLib\Voyage\RefPath">
       <UniqueIdentifier>{1a00ebeb-5c0e-42b9-b713-3109ff11b127}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\PathDisret\Adapt">
+      <UniqueIdentifier>{78e3b3e9-a49e-49bc-a7c2-c2182975b8c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -771,6 +774,12 @@
     <ClInclude Include="TnbLib\Voyage\RefPath\Voyage_RefPath.hxx">
       <Filter>TnbLib\Voyage\RefPath</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath.hxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath_Info.hxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -970,6 +979,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\RefPath\Voyage_RefPath.cxx">
       <Filter>TnbLib\Voyage\RefPath</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath_Info.cxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath.cxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
