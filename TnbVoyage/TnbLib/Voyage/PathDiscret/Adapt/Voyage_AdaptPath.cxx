@@ -25,12 +25,11 @@ std::pair<tnbLib::Voyage_AdaptPath::SubPath, tnbLib::Voyage_AdaptPath::SubPath> 
 	const SubPath& thePath0, const SubPath& thePath1) const
 {
 	const auto nbLevs = GetInfo()->NbLevels();
-	const auto crit = static_cast<Standard_Real>(thePath0->NbPoints());
-	const auto max_nb_fronts = static_cast<Standard_Integer>((crit - 0.5) / 2.0);
-	const auto max_nb_backs = static_cast<Standard_Integer>((crit + 0.5) / 2.0);
 	SubPath s0, s1;
 	{
-		const auto nb_fronts = std::min(max_nb_fronts, nbLevs);
+		const auto crit = static_cast<Standard_Real>(thePath0->NbPoints());
+		const auto max_nb_fronts = static_cast<Standard_Integer>((crit - 0.5) / 2.0);
+		const auto nb_fronts = std::max(std::min(max_nb_fronts, nbLevs), 1);
 		std::vector<Pnt2d> coords;
 		for (Standard_Integer i = 0; i < thePath0->NbPoints() - nb_fronts - 1; i++)
 		{
@@ -51,7 +50,9 @@ std::pair<tnbLib::Voyage_AdaptPath::SubPath, tnbLib::Voyage_AdaptPath::SubPath> 
 		s0 = std::make_shared<Entity2d_Polygon>(std::move(coords), 0);
 	}
 	{
-		const auto nb_backs = std::min(max_nb_backs, nbLevs);
+		const auto crit = static_cast<Standard_Real>(thePath1->NbPoints());
+		const auto max_nb_backs = static_cast<Standard_Integer>((crit + 0.5) / 2.0);
+		const auto nb_backs = std::max(std::min(max_nb_backs, nbLevs), 1);
 		std::vector<Pnt2d> coords;
 		for (Standard_Integer i = 0; i < nb_backs; i++)
 		{
@@ -119,15 +120,20 @@ void tnbLib::Voyage_AdaptPath::Perform()
 		const auto& p0 = sub0->GetPoint(sub0->NbPoints() - 2);
 		const auto& p1 = sub1->GetPoint(0);
 		const auto& p2 = sub1->GetPoint(1);
-		const auto angle = std::abs(PI - Voyage_Tools::CalcTurningAngle(p0, p1, p2));
-		std::cout << "a0 = " << Voyage_Tools::CalcTurningAngle(p0, p1, p2) << std::endl;
-		std::cout << "angle = " << angle << ", crit= " << GetInfo()->TargetAngle() << std::endl;
-		if (angle > GetInfo()->TargetAngle())
+		const auto angle = Voyage_Tools::CalcTurningAngle(p0, p1, p2);
+		Standard_Real crit;
+		if (angle < 0)
 		{
-			std::cout << "size 0: " << sub0->NbPoints() << std::endl;
+			crit = PI + angle;
+		}
+		else
+		{
+			crit = PI - angle;
+		}
+		if (crit > GetInfo()->TargetAngle())
+		{
 			auto [new_sub0, new_sub1] = 
 				Subdivide(sub0, sub1);
-			std::cout << "size 1: " << new_sub0->NbPoints() << std::endl;
 			path.at(id0) = new_sub0;
 			path.at(id1) = new_sub1;
 		}
