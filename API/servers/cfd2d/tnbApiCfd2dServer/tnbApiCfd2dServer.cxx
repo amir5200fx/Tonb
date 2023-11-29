@@ -50,9 +50,9 @@ int main()
 
 			std::cout << "\n===========================================\n";
 			std::cout << "command: " << command.stream << "\n";
-			std::cout << "flag: " << flag.stream << "\n";
-			std::cout << "empty? " << sense.stream << "\n";
-			std::cout << "value: " << value.stream << "\n";
+			//std::cout << "flag: " << flag.stream << "\n";
+			//std::cout << "empty? " << sense.stream << "\n";
+			//std::cout << "value: " << value.stream << "\n";
 			std::cout << "===========================================\n";
 
 			server->Construct(command, flag, sense, value);

@@ -3,6 +3,7 @@
 #define _Mesh2d_VolumeSizeMapTool_Info_Header
 
 #include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <Standard_TypeDef.hxx>
 
@@ -22,6 +23,21 @@ namespace tnbLib
 		Standard_Boolean PostBalance_;
 
 		Standard_Integer theMaxNbCorrIters_;
+
+
+		// Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar& theUnBalancing_;
+			ar& theBucketSize_;
+			ar& theNbSamples_;
+			ar& PostBalance_;
+			ar& theMaxNbCorrIters_;
+		}
 
 	public:
 

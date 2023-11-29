@@ -24,6 +24,8 @@ namespace tnbLib
 		enum class objects
 		{
 			make_real = 0,
+			make_real_first,
+			make_real_last,
 			make_int,
 			make_bool,
 			make_vec_2d_f1,
@@ -48,12 +50,17 @@ namespace tnbLib
 			calc_pnt_curve_2d,
 			prj_pnt_curve_2d,
 			rev_curve_2d,
+			trim_curve_2d,
+			curve_2d_get_iden,
+			set_name_curve_2d,
 
 			retv_area_2d_blocks,
 			retv_area_2d_block_curves,
 			combine_area_2d_blocks,
+			combine_all_area_blocks,
 			split_area_2d_block,
 			rename_area_2d_block,
+			area_get_curves,
 
 			make_area_2d,
 
@@ -78,6 +85,23 @@ namespace tnbLib
 
 			make_size_map_2d_uniform,
 
+			// adaptive mesh stuff
+			make_size_map_2d_adaptive,
+			perform_size_map_2d_adaptive,
+
+			make_bnd_size_map_2d_ctrl,
+			make_vol_size_map_2d_ctrl,
+
+			vol_size_map_2d_ctrl_import_shape,
+			vol_size_map_2d_ctrl_get_condition,
+			vol_size_map_2d_ctrl_get_values,
+			vol_size_map_2d_ctrl_values_set_gr,
+			vol_size_map_2d_ctrl_values_get_size,
+			vol_size_map_2d_ctrl_size_value_target,
+			vol_size_map_2d_ctrl_size_value_type,
+
+			make_approx_curve_2d_settings,
+
 			// mesh lib
 
 			make_mesh_ref_values_2d,
@@ -95,6 +119,14 @@ namespace tnbLib
 			do_mesh_2d,
 			do_mesh_2d_laplac_smooth,
 
+			do_mesh_2d_bnd_layer_f1,
+
+			make_size_map_2d_ctrl_bnd,
+			make_size_map_2d_ctrl_vol,
+
+			extrude_mesh_2d_fea,
+
+
 			// post mesh
 
 			make_mesh_2d_qual_fun_vlrms2ratio,
@@ -105,6 +137,15 @@ namespace tnbLib
 			make_num_adapt_integ,
 			make_num_newton_solver,
 			make_num_bisect_solver,
+
+			// io
+
+			export_tri_2d_to_plt,
+			export_curve_2d_to_plt,
+			export_area_to_plt,
+			export_mesh_2d_to_plt,
+			export_mesh_2d_solu_data_to_plt,
+			export_mesh_2d_to_fea,
 			
 			exit
 		};
@@ -142,6 +183,8 @@ namespace tnbLib
 
 		// global functions
 		void create_real(const std::string&, const std::string&);
+		declareTnbServerFunction(make_real_first);
+		declareTnbServerFunction(make_real_last);
 		void create_int(const std::string&, const std::string&);
 		void create_bool(const std::string&, const std::string&);
 
@@ -169,14 +212,19 @@ namespace tnbLib
 		declareTnbServerFunction(calc_pnt_curve_2d);
 		declareTnbServerFunction(prj_pnt_curve_2d);
 		declareTnbServerFunction(rev_curve_2d);
+		declareTnbServerFunction(trim_curve_2d);
+		declareTnbServerFunction(set_name_curve_2d);
+		declareTnbServerFunction(curve_2d_get_iden);
 		void make_curve_2d_list(const std::string&, const std::string&);
 		void make_area_2d(const std::string&, const std::string&);
 
 		declareTnbServerFunction(retv_area_2d_blocks);
 		declareTnbServerFunction(retv_area_2d_block_curves);
 		declareTnbServerFunction(combine_area_2d_blocks);
+		declareTnbServerFunction(combine_all_area_blocks);
 		declareTnbServerFunction(split_area_2d_block);
 		declareTnbServerFunction(rename_area_2d_block);
+		declareTnbServerFunction(area_get_curves);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
 		void make_rectangular_2d_f1(const std::string&, const std::string&);
@@ -196,7 +244,25 @@ namespace tnbLib
 		declareTnbServerFunction(get_bnd_box_2d_dia);
 		declareTnbServerFunction(get_bnd_box_2d_lengths);
 
+		
+
 		declareTnbServerFunction(make_size_map_2d_uniform);
+
+		// adaptive size map stuff
+		declareTnbServerFunction(make_size_map_2d_adaptive);
+		declareTnbServerFunction(perform_size_map_2d_adaptive);
+
+		declareTnbServerFunction(make_vol_size_map_2d_ctrl);
+
+		declareTnbServerFunction(vol_size_map_2d_ctrl_import_shape);
+		declareTnbServerFunction(vol_size_map_2d_ctrl_get_condition);
+		declareTnbServerFunction(vol_size_map_2d_ctrl_get_values);
+		declareTnbServerFunction(vol_size_map_2d_ctrl_values_set_gr);
+		declareTnbServerFunction(vol_size_map_2d_ctrl_values_get_size);
+		declareTnbServerFunction(vol_size_map_2d_ctrl_size_value_target);
+		declareTnbServerFunction(vol_size_map_2d_ctrl_size_value_type);
+
+		declareTnbServerFunction(make_approx_curve_2d_settings);
 
 		// mesh functions
 
@@ -212,8 +278,14 @@ namespace tnbLib
 		declareTnbServerFunction(make_mesh_2d_region);
 		declareTnbServerFunction(make_mesh_2d_node_gen_std);
 		declareTnbServerFunction(do_mesh_2d_bnd);
+		declareTnbServerFunction(do_mesh_2d_bnd_layer_f1);
 		declareTnbServerFunction(do_mesh_2d);
 		declareTnbServerFunction(do_mesh_2d_laplac_smooth);
+
+		declareTnbServerFunction(make_size_map_2d_ctrl_bnd);
+		declareTnbServerFunction(make_size_map_2d_ctrl_vol);
+
+		declareTnbServerFunction(extrude_mesh_2d_fea);
 
 		// post mesh
 
@@ -225,6 +297,15 @@ namespace tnbLib
 		declareTnbServerFunction(make_num_adapt_integ);
 		declareTnbServerFunction(make_num_newton_solver);
 		declareTnbServerFunction(make_num_bisect_solver);
+
+		// io
+
+		declareTnbServerFunction(export_tri_2d_to_plt);
+		declareTnbServerFunction(export_curve_2d_to_plt);
+		declareTnbServerFunction(export_area_to_plt);
+		//declareTnbServerFunction(export_mesh_2d_to_plt);
+		declareTnbServerFunction(export_mesh_2d_solu_data_to_plt);
+		declareTnbServerFunction(export_mesh_2d_to_fea);
 
 		// tools functions
 

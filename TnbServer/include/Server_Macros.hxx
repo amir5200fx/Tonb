@@ -99,6 +99,20 @@ void Object##_RunTime_Selection::Run()										\
 	Server::Commands.insert({Object::command_name, Server_ObjType});		\
 }
 
+#define defineTnbServerParam(Par)											\
+	static const std::string Par
+
+#define implementTnbServerParam(Class, Par, ParName)						\
+	const std::string tnbLib::Class::Params::Par(ParName)
+
+#define constructTnbServerObject(Class)										\
+	static const std::string command_name;									\
+	Class() = default;														\
+	void Construct(const std::string& theValue) override
+
+#define implementTnbServerConstruction(Class)								\
+	void tnbLib::Class::Construct(const std::string& theValue)
+
 #define registerRuntimeSelectTnbServerObject(Object)						\
 	static const Object##_RunTime_Selection Object##_run_time_selection_Obj
 

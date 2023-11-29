@@ -27,6 +27,8 @@ namespace tnbLib
 
 		// Private functions and operators [7/19/2023 Payvand]
 
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
 		static TnbMesh_EXPORT std::vector<Pnt2d>
 			RetrieveInsidePoints
 			(
@@ -72,5 +74,7 @@ namespace tnbLib
 		TnbMesh_EXPORT void RemoveShape(const Standard_Integer theIndex);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh2d_VolumeSizeMapTool);
 
 #endif // !_Mesh2d_VolumeSizeMapTool_Header

@@ -107,6 +107,8 @@ namespace tnbLib
 		void Construct(const std::string& theValue) override;
 	};
 
+	defineTnbServerObject(Server_Mesh2dObj_SoluData_ExportMeshToPlt);
+
 	class Server_Mesh2dObj_Region
 		: public Server_Object
 	{
@@ -194,7 +196,39 @@ namespace tnbLib
 		void Construct(const std::string& theValue) override;
 	};
 
+	class Server_Mesh2dObj_BndLayer_F1
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(solu_data);
+			defineTnbServerParam(thick);
+			defineTnbServerParam(curves);
+			defineTnbServerParam(rate);
+			defineTnbServerParam(cluster_size);
+		};
 
+		constructTnbServerObject(Server_Mesh2dObj_BndLayer_F1);
+	};
+
+	defineTnbServerObject(Server_Mesh2dObj_ExportToFEA);
+
+	class Server_Mesh2dObj_Extrude_FEA
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(fea_mesh);
+			defineTnbServerParam(extrusion);
+			defineTnbServerParam(title);
+		};
+
+		constructTnbServerObject(Server_Mesh2dObj_Extrude_FEA);
+	};
+
+	defineTnbServerObject(Server_Mesh2dObj_ExportToPlt);
 }
 
 #endif

@@ -26,6 +26,12 @@ namespace tnbLib
 		void MakeEmpty() override;
 
 	};
+
+	defineTnbServerObject(Server_Cad2dObj_Area_GetNbCorners);
+	defineTnbServerObject(Server_Cad2dObj_Area_GetNbSegments);
+	defineTnbServerObject(Server_Cad2dObj_Area_ExportToPlt);
+
+	defineTnbServerObject(Server_Cad2dObj_Area_GetCurves);
 	
 }
 

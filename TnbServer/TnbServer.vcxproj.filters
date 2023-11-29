@@ -312,6 +312,9 @@
     <ClInclude Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.hxx">
       <Filter>TnbLib\Server\Objects\Geo</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -469,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.cxx">
       <Filter>TnbLib\Server\Objects\Geo</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

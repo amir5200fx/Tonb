@@ -7,6 +7,8 @@ createTnbServerObject(create_int, Server_GlobalObj_Int)
 
 #include <Server_GlobalObj_Real.hxx>
 createTnbServerObject(create_real, Server_GlobalObj_Real)
+createTnbServerObject(make_real_first, Server_GlobalObj_Real_First)
+createTnbServerObject(make_real_last, Server_GlobalObj_Real_Last)
 
 #include <Server_GlobalObj_Bool.hxx>
 createTnbServerObject(create_bool, Server_GlobalObj_Bool)
@@ -39,6 +41,7 @@ createTnbServerObject(create_axis_2d_f1, Server_GeoObj_Axis2d_F1)
 #include <Server_Cad2dObj_CalcPntOnCurve.hxx>
 #include <Server_Cad2dObj_RevCrv.hxx>
 #include <Server_Cad2dObj_Area_Manager.hxx>
+#include <Server_Cad2dObj_Curve.hxx>
 createTnbServerObject(make_circle_2d_f1, Server_Cad2dObj_Circle_F1)
 createTnbServerObject(make_rectangular_2d_f1, Server_Cad2dObj_Rectangular_F1)
 createTnbServerObject(make_segment_2d_f1, Server_Cad2dObj_Segment2d_F1)
@@ -49,10 +52,13 @@ createTnbServerObject(calc_pnt_curve_2d, Server_Cad2dObj_CalcPntOnCurve)
 createTnbServerObject(prj_pnt_curve_2d, Server_Cad2dObj_PrjPntCrv)
 createTnbServerObject(rev_curve_2d, Server_Cad2dObj_RevCrv)
 createTnbServerObject(make_area_2d, Server_Cad2dObj_Area_F1)
+createTnbServerObject(trim_curve_2d, Server_Cad2dObj_Curve_Trim)
+createTnbServerObject(set_name_curve_2d, Server_Cad2dObj_Curve_SetName)
 
 createTnbServerObject(retv_area_2d_blocks, Server_Cad2dObj_Area_Manager_Segments)
 createTnbServerObject(retv_area_2d_block_curves, Server_Cad2dObj_Area_Manager_Segments_BlockCurves)
 createTnbServerObject(combine_area_2d_blocks, Server_Cad2dObj_Area_Manager_Segments_CombineBlocks)
+createTnbServerObject(combine_all_area_blocks, Server_Cad2dObj_Area_Manager_CombineAll)
 void Server::split_area_2d_block(const std::string& theValue, const std::string& theSense)
 {
 	if (theSense == "no")
@@ -67,6 +73,8 @@ void Server::split_area_2d_block(const std::string& theValue, const std::string&
 	}
 }
 createTnbServerObject(rename_area_2d_block, Server_Cad2dObj_Area_Manager_Segments_RenameBlock)
+createTnbServerObject(area_get_curves, Server_Cad2dObj_Area_GetCurves);
+createTnbServerObject(curve_2d_get_iden, Server_Cad2dObj_Curve_GetIdent)
 
 #include <Server_Cad2dObj_Interpl_F1.hxx>
 #include <Server_Cad2dObj_Discret_Info.hxx>
@@ -92,7 +100,10 @@ createTnbServerObject(get_bnd_box_2d_lengths, Server_Geo2dObj_BndBox_GetLengths)
 
 #include <Server_Geo2dObj.hxx>
 createTnbServerObject(make_size_map_2d_uniform, Server_Geo2dObj_SizeMap_Uniform)
+createTnbServerObject(make_approx_curve_2d_settings, Server_Geo2dObj_ApproxCrv)
 
+createTnbServerObject(make_size_map_2d_ctrl_bnd, Server_Geo2dObj_SizeMap_BndControl)
+createTnbServerObject(make_size_map_2d_ctrl_vol, Server_Geo2dObj_SizeMap_VolControl)
 // Mesh lib
 #include <Server_Mesh2dObj.hxx>
 createTnbServerObject(make_mesh_ref_values_2d, Server_Mesh2dObj_RefValues)
@@ -110,6 +121,21 @@ createTnbServerObject(do_mesh_2d_bnd, Server_Mesh2dObj_BndMesh)
 createTnbServerObject(do_mesh_2d, Server_Mesh2dObj_Mesh)
 createTnbServerObject(do_mesh_2d_laplac_smooth, Server_Mesh2dObj_LaplacSmooth)
 
+createTnbServerObject(do_mesh_2d_bnd_layer_f1, Server_Mesh2dObj_BndLayer_F1)
+
+createTnbServerObject(extrude_mesh_2d_fea, Server_Mesh2dObj_Extrude_FEA)
+
+createTnbServerObject(make_size_map_2d_adaptive, Server_Geo2dObj_SizeMap_Adaptive)
+createTnbServerObject(perform_size_map_2d_adaptive, Server_Geo2dObj_SizeMap_Adapt_Perform)
+createTnbServerObject(make_vol_size_map_2d_ctrl, Server_Geo2dObj_SizeMap_MakeVol)
+
+createTnbServerObject(vol_size_map_2d_ctrl_import_shape, Server_Geo2dObj_SizeMap_ImptVol)
+createTnbServerObject(vol_size_map_2d_ctrl_get_condition, Server_Geo2dObj_SizeMap_Vol_GetCond)
+createTnbServerObject(vol_size_map_2d_ctrl_get_values, Server_Geo2dObj_SizeMap_Vol_GetValues)
+createTnbServerObject(vol_size_map_2d_ctrl_values_get_size, Server_Geo2dObj_SizeMap_Vol_GetSurfSize)
+createTnbServerObject(vol_size_map_2d_ctrl_size_value_target, Server_Geo2dObj_SizeMap_Vol_SetTargetSize)
+createTnbServerObject(vol_size_map_2d_ctrl_size_value_type, Server_Geo2dObj_SizeMap_Vol_SetValueType)
+createTnbServerObject(vol_size_map_2d_ctrl_values_set_gr, Server_Geo2dObj_SizeMap_Vol_ValuesGr)
 // post mesh
 createTnbServerObject(make_mesh_2d_qual_fun_vlrms2ratio, Server_Mesh2dObj_Mesh_QualFun_Vlrms2Ratio)
 createTnbServerObject(make_mesh_2d_laplac_smooth_ang_fun_adj_edges, Server_Mesh2dObj_Mesh_LaplacSmooth_AdjEdgesFun)
@@ -124,3 +150,12 @@ createTnbServerObject(make_num_bisect_solver, Server_NumObj_BisectNonLinSolver_I
 
 #include <Server_GlobalObj_Exit.hxx>
 createTnbServerObject(exit, Server_GlobalObj_Exit)
+
+#include <Server_Cad2dObj_Curve.hxx>
+// io
+createTnbServerObject(export_tri_2d_to_plt, Server_Geo2dObj_ExportMeshToPlt)
+//createTnbServerObject(export_mesh_2d_to_plt, Server_Mesh2dObj_ExportToPlt)
+createTnbServerObject(export_curve_2d_to_plt, Server_Cad2dObj_Curve_ExportToPlt)
+createTnbServerObject(export_area_to_plt, Server_Cad2dObj_Area_ExportToPlt)
+createTnbServerObject(export_mesh_2d_solu_data_to_plt, Server_Mesh2dObj_SoluData_ExportMeshToPlt)
+createTnbServerObject(export_mesh_2d_to_fea, Server_Mesh2dObj_ExportToFEA)

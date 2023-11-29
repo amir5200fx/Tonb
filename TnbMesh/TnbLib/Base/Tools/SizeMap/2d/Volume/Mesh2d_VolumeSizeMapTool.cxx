@@ -185,7 +185,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 
 	const auto& shapes = Shapes();
 	if (shapes.empty()) return;
-
 	const auto elemSize = this->GetTargetSurfaceSize();
 	if (verbose)
 	{
@@ -202,7 +201,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	}
 
 	const auto mergCrit = 1.0E-5 * expB.Diameter();
-
 	auto discretCrvInfo = std::make_shared<Discret_CurveInfo>();
 	discretCrvInfo->SetMaxSubdivide(10);
 	discretCrvInfo->SetMinSubdivide(4);
@@ -223,7 +221,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	engine.BUCKET_SIZE = AlgInfo()->BucketSize();
 
 	Standard_Integer nbSources = 0;
-
 	std::vector<Pnt2d> srcCoords;
 	std::vector<std::shared_ptr<hNode>> sources;
 	std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
@@ -302,7 +299,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 			}
 		}
 	}
-
 	if (verbose)
 	{
 		Info << endl
@@ -326,7 +322,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 				<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
 		}
 	}
-	
 	auto tris = std::make_shared<Entity2d_Triangulation>();
 	Debug_Null_Pointer(tris);
 	{// Triangulation [7/13/2023 Payvand]
@@ -353,7 +348,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 		//tris = delTri.Triangulation();
 		tris = delTri.Data();
 	}
-
 	if (verbose)
 	{
 		Info << endl
@@ -384,7 +378,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	bMesh->InitiateCurrentElement();
 	bMesh->SetBoundingBox(std::move(expB));
 	bMesh->Sources().resize(tris->NbPoints(), ReferenceValues()->BaseSize());
-
 	if (verbose)
 	{
 		Info << " Setting the sources into the background mesh..." << endl;
@@ -417,8 +410,8 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
-	OFstream myFile("sizeMap0.plt");
-	bMesh->ExportToPlt(myFile);
+	//stream myFile("sizeMap0.plt");
+	//esh->ExportToPlt(myFile);
 	ChangeBackMesh() = std::move(bMesh);
 	//std::cout << "finished" << std::endl;
 	Change_IsDone() = Standard_True;

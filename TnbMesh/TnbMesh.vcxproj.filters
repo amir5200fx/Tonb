@@ -7286,6 +7286,12 @@
     <ClCompile Include="TnbLib\BndLayer\Info\Mesh_BndLayer_Info.cxx">
       <Filter>TnbLib\BndLayer\Info</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Mesh_SizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_Import.jxx">

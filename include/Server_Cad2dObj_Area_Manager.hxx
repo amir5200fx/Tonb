@@ -29,6 +29,19 @@ namespace tnbLib
 
 	};
 
+	class Server_Cad2dObj_Area_Manager_CombineAll
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(area);
+			defineTnbServerParam(name);
+		};
+
+		constructTnbServerObject(Server_Cad2dObj_Area_Manager_CombineAll);
+	};
+
 	class Server_Cad2dObj_Area_Manager_Segments_BlockCurves
 		: public Server_Object
 	{
@@ -86,6 +99,8 @@ namespace tnbLib
 		void Construct(const std::string& theValue) override;
 		
 	};
+
+
 
 }
 

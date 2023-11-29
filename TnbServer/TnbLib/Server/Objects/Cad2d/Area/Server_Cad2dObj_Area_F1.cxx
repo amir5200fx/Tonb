@@ -17,7 +17,23 @@ void tnbLib::Server_Cad2dObj_Area_F1::Construct(const std::string& theValue)
 	{
 		defineTnbServerParser(theValue);
 		{
-			loadTnbServerObject(curve_list);
+			nlohmann::json json_array = nlohmann::json::parse(loader.at(Params::curve_list).get<std::string>());
+
+			// Check if the parsed JSON is an array
+			if (json_array.is_array()) {
+				// Access elements of the array
+				for (const auto& element : json_array) {
+					std::stringstream stream;
+					stream << element.get<std::string>();
+					TNB_iARCH_FILE_TYPE ia(stream);
+					std::shared_ptr<Pln_Edge> edge;
+					ia >> edge;
+					curve_list.emplace_back(std::move(edge));
+				}
+			}
+			else {
+				throw Server_Error("Couldn't load the curve list");
+			}
 		}
 		{
 			name = loader.at(Params::name).get<std::string>();
@@ -69,4 +85,58 @@ void tnbLib::Server_Cad2dObj_Area_F1::MakeEmpty()
 {
 	std::shared_ptr<Cad2d_Plane> value;
 	streamGoodTnbServerObject(value);
+}
+
+void tnbLib::Server_Cad2dObj_Area_ExportToPlt::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Cad2d_Plane> area;
+	{
+		loadNonJSONTnbServer(area);
+	}
+	try
+	{
+		if (!area)
+		{
+			throw Server_Error("the area object is null.");
+		}
+		std::stringstream str;
+		area->ExportToPlt(str);
+		nlohmann::json jData;
+		jData[SENSE] = GetRespType(RespType::good);
+		jData[VALUE] = str.str();
+		theStream_ << jData;
+	}
+	catchTnbServerErrors()
+}
+
+void tnbLib::Server_Cad2dObj_Area_GetCurves::Construct(const std::string& theValue)
+{
+	std::shared_ptr<Cad2d_Plane> area;
+	{
+		loadNonJSONTnbServer(area);
+	}
+	try
+	{
+		if (!area)
+		{
+			throw Server_Error("the area object is null.");
+		}
+		std::vector<std::shared_ptr<Pln_Entity>> entities;
+		area->RetrieveSegmentsTo(entities);
+		std::sort(entities.begin(), entities.end(), [](const std::shared_ptr<Pln_Entity>& e0, const std::shared_ptr<Pln_Entity>& e1) {return e0->Index() < e1->Index(); });
+		std::vector<std::string> edges;
+		for (const auto& ent: entities)
+		{
+			auto edge = std::dynamic_pointer_cast<Pln_Edge>(ent);
+			std::stringstream stream;
+			TNB_oARCH_FILE_TYPE io(stream);
+			io << edge;
+			edges.emplace_back(stream.str());
+		}
+		nlohmann::json jData;
+		jData[SENSE] = GetRespType(RespType::good);
+		jData[VALUE] = edges;
+		theStream_ << jData;
+	}
+	catchTnbServerErrors()
 }

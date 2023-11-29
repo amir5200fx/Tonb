@@ -19,6 +19,7 @@ const std::string tnbLib::Server::EMPTINESS = "empt";
 
 void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, const Emptiness& theSense, const Value& theValue)
 {
+	std::cout << "I recieved the command!\n";
 	theCommand_ = theCommand.stream;
 	theFlag_ = theFlag.stream;
 	const auto& value = theValue.stream;
@@ -29,6 +30,8 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		// Global objects
 		switchToMakeTnbServerObject(objects::make_int, create_int, value, sense)
 		switchToMakeTnbServerObject(objects::make_real, create_real, value, sense)
+		switchToMakeTnbServerObject(objects::make_real_first, make_real_first, value, sense)
+		switchToMakeTnbServerObject(objects::make_real_last, make_real_last, value, sense)
 		switchToMakeTnbServerObject(objects::make_bool, create_bool, value, sense)
 
 		// geometric objects
@@ -47,15 +50,20 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::calc_pnt_curve_2d, calc_pnt_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::prj_pnt_curve_2d, prj_pnt_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::rev_curve_2d, rev_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::trim_curve_2d, trim_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::set_name_curve_2d, set_name_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::make_circle_2d_f1, make_circle_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_rectangular_2d_f1, make_rectangular_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_segment_2d_f1, make_segment_2d_f1, value, sense)
+		switchToMakeTnbServerObject(objects::curve_2d_get_iden, curve_2d_get_iden, value, sense)
 
 			switchToMakeTnbServerObject(objects::retv_area_2d_blocks, retv_area_2d_blocks, value, sense)
 			switchToMakeTnbServerObject(objects::retv_area_2d_block_curves, retv_area_2d_block_curves, value, sense)
 			switchToMakeTnbServerObject(objects::combine_area_2d_blocks, combine_area_2d_blocks, value, sense)
-	case objects::split_area_2d_block: { std::cout << "selected RIGHT" << std::endl; split_area_2d_block(value, sense); break; }
+		switchToMakeTnbServerObject(objects::combine_all_area_blocks, combine_all_area_blocks, value, sense)
+	case objects::split_area_2d_block: { split_area_2d_block(value, sense); break; }
 		switchToMakeTnbServerObject(objects::rename_area_2d_block, rename_area_2d_block, value, sense)
+		switchToMakeTnbServerObject(objects::area_get_curves, area_get_curves, value, sense)
 
 			switchToMakeTnbServerObject(objects::make_curve_2d_list, make_curve_2d_list, value, sense)
 			switchToMakeTnbServerObject(objects::make_area_2d, make_area_2d, value, sense)
@@ -78,7 +86,22 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::get_bnd_box_2d_lengths, get_bnd_box_2d_lengths, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_size_map_2d_uniform, make_size_map_2d_uniform, value, sense)
-			// Mesh lib
+
+		// adaptive size map stuff
+		switchToMakeTnbServerObject(objects::make_size_map_2d_adaptive, make_size_map_2d_adaptive, value, sense)
+
+		switchToMakeTnbServerObject(objects::make_vol_size_map_2d_ctrl, make_vol_size_map_2d_ctrl, value, sense)
+		switchToMakeTnbServerObject(objects::perform_size_map_2d_adaptive, perform_size_map_2d_adaptive, value, sense)
+		switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_import_shape, vol_size_map_2d_ctrl_import_shape, value, sense)
+		switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_get_condition, vol_size_map_2d_ctrl_get_condition, value, sense)
+		switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_get_values, vol_size_map_2d_ctrl_get_values, value, sense)
+		switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_values_set_gr, vol_size_map_2d_ctrl_values_set_gr, value, sense)
+switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_values_get_size, vol_size_map_2d_ctrl_values_get_size, value, sense)
+switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_size_value_target, vol_size_map_2d_ctrl_size_value_target, value, sense)
+switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_size_value_type, vol_size_map_2d_ctrl_size_value_type, value, sense)
+		switchToMakeTnbServerObject(objects::make_approx_curve_2d_settings, make_approx_curve_2d_settings, value, sense)
+
+		// Mesh lib
 			switchToMakeTnbServerObject(objects::make_mesh_ref_values_2d, make_mesh_ref_values_2d, value, sense)
 		switchToMakeTnbServerObject(objects::make_metric_prcsr_2d_settings, make_metric_prcsr_2d_settings, value, sense)
 		switchToMakeTnbServerObject(objects::make_metric_prcsr_2d, make_metric_prcsr_2d, value, sense)
@@ -93,6 +116,12 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::do_mesh_2d_bnd, do_mesh_2d_bnd, value, sense)
 		switchToMakeTnbServerObject(objects::do_mesh_2d, do_mesh_2d, value, sense)
 		switchToMakeTnbServerObject(objects::do_mesh_2d_laplac_smooth, do_mesh_2d_laplac_smooth, value, sense)
+
+		switchToMakeTnbServerObject(objects::do_mesh_2d_bnd_layer_f1, do_mesh_2d_bnd_layer_f1, value, sense)
+
+		switchToMakeTnbServerObject(objects::extrude_mesh_2d_fea, extrude_mesh_2d_fea, value, sense)
+		switchToMakeTnbServerObject(objects::make_size_map_2d_ctrl_vol, make_size_map_2d_ctrl_vol, value, sense)
+		switchToMakeTnbServerObject(objects::make_size_map_2d_ctrl_bnd, make_size_map_2d_ctrl_bnd, value, sense)
 
 		// post mesh
 
@@ -109,6 +138,14 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::make_discrete_shape_info_2d, make_discrete_shape_info_2d, value, sense)
 		switchToMakeTnbServerObject(objects::do_discret_2d, do_discret_2d, value, sense)
 		switchToMakeTnbServerObject(objects::do_boolean_sub_2d, do_boolean_sub_2d, value, sense)
+
+		// io
+		switchToMakeTnbServerObject(objects::export_tri_2d_to_plt, export_tri_2d_to_plt, value, sense)
+		switchToMakeTnbServerObject(objects::export_curve_2d_to_plt, export_curve_2d_to_plt, value, sense)
+		switchToMakeTnbServerObject(objects::export_area_to_plt, export_area_to_plt, value, sense)
+		//switchToMakeTnbServerObject(objects::export_mesh_2d_to_plt, export_mesh_2d_to_plt, value, sense)
+		switchToMakeTnbServerObject(objects::export_mesh_2d_solu_data_to_plt, export_mesh_2d_solu_data_to_plt, value, sense)
+		switchToMakeTnbServerObject(objects::export_mesh_2d_to_fea, export_mesh_2d_to_fea, value, sense)
 		// make an exit
 		switchToMakeTnbServerObject(objects::exit, exit, value, sense)
 		default:
