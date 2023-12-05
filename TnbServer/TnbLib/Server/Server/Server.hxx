@@ -82,6 +82,9 @@ namespace tnbLib
 			do_bnd_box_2d_expand,
 			get_bnd_box_2d_dia,
 			get_bnd_box_2d_lengths,
+			get_bnd_box_2d_p0,
+			get_bnd_box_2d_p1,
+			get_bnd_box_2d_corners,
 
 			make_size_map_2d_uniform,
 
@@ -146,6 +149,12 @@ namespace tnbLib
 			export_mesh_2d_to_plt,
 			export_mesh_2d_solu_data_to_plt,
 			export_mesh_2d_to_fea,
+			export_mesh_fv_to_unv,
+
+			load_openfoam_init_cnds,
+			load_openfoam_bcs,
+			write_openfoam_init_cnds,
+			write_openfoam_bcs,
 			
 			exit
 		};
@@ -243,8 +252,9 @@ namespace tnbLib
 		declareTnbServerFunction(do_bnd_box_2d_expand);
 		declareTnbServerFunction(get_bnd_box_2d_dia);
 		declareTnbServerFunction(get_bnd_box_2d_lengths);
-
-		
+		declareTnbServerFunction(get_bnd_box_2d_p0);
+		declareTnbServerFunction(get_bnd_box_2d_p1);
+		declareTnbServerFunction(get_bnd_box_2d_corners);
 
 		declareTnbServerFunction(make_size_map_2d_uniform);
 
@@ -306,6 +316,12 @@ namespace tnbLib
 		//declareTnbServerFunction(export_mesh_2d_to_plt);
 		declareTnbServerFunction(export_mesh_2d_solu_data_to_plt);
 		declareTnbServerFunction(export_mesh_2d_to_fea);
+		declareTnbServerFunction(export_mesh_fv_to_unv);
+
+		declareTnbServerFunction(load_openfoam_init_cnds);
+		declareTnbServerFunction(load_openfoam_bcs);
+		declareTnbServerFunction(write_openfoam_init_cnds);
+		declareTnbServerFunction(write_openfoam_bcs);
 
 		// tools functions
 

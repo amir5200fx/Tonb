@@ -19,7 +19,7 @@ const std::string tnbLib::Server::EMPTINESS = "empt";
 
 void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, const Emptiness& theSense, const Value& theValue)
 {
-	std::cout << "I recieved the command!\n";
+	//std::cout << "I recieved the command!\n";
 	theCommand_ = theCommand.stream;
 	theFlag_ = theFlag.stream;
 	const auto& value = theValue.stream;
@@ -84,6 +84,9 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::do_bnd_box_2d_expand, do_bnd_box_2d_expand, value, sense)
 		switchToMakeTnbServerObject(objects::get_bnd_box_2d_dia, get_bnd_box_2d_dia, value, sense)
 		switchToMakeTnbServerObject(objects::get_bnd_box_2d_lengths, get_bnd_box_2d_lengths, value, sense)
+		switchToMakeTnbServerObject(objects::get_bnd_box_2d_p0, get_bnd_box_2d_p0, value, sense)
+		switchToMakeTnbServerObject(objects::get_bnd_box_2d_p1, get_bnd_box_2d_p1, value, sense)
+		switchToMakeTnbServerObject(objects::get_bnd_box_2d_corners, get_bnd_box_2d_corners, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_size_map_2d_uniform, make_size_map_2d_uniform, value, sense)
 
@@ -146,6 +149,12 @@ switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_size_value_type, vol_s
 		//switchToMakeTnbServerObject(objects::export_mesh_2d_to_plt, export_mesh_2d_to_plt, value, sense)
 		switchToMakeTnbServerObject(objects::export_mesh_2d_solu_data_to_plt, export_mesh_2d_solu_data_to_plt, value, sense)
 		switchToMakeTnbServerObject(objects::export_mesh_2d_to_fea, export_mesh_2d_to_fea, value, sense)
+		switchToMakeTnbServerObject(objects::export_mesh_fv_to_unv, export_mesh_fv_to_unv, value, sense)
+
+		switchToMakeTnbServerObject(objects::load_openfoam_init_cnds, load_openfoam_init_cnds, value, sense)
+		switchToMakeTnbServerObject(objects::load_openfoam_bcs, load_openfoam_bcs, value, sense)
+		switchToMakeTnbServerObject(objects::write_openfoam_init_cnds, write_openfoam_init_cnds, value, sense)
+		switchToMakeTnbServerObject(objects::write_openfoam_bcs, write_openfoam_bcs, value, sense)
 		// make an exit
 		switchToMakeTnbServerObject(objects::exit, exit, value, sense)
 		default:

@@ -148,6 +148,9 @@
     <Filter Include="TnbLib\Server\Objects\Geo\BndBox">
       <UniqueIdentifier>{57eab71b-fb5f-4098-afc2-66602f002044}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\OpenFOAM">
+      <UniqueIdentifier>{20b83a35-8d32-476a-8395-2586810d4c32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -315,6 +318,12 @@
     <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.hxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Mesh\Server_MeshObj.hxx">
+      <Filter>TnbLib\Server\Objects\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.hxx">
+      <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -475,6 +484,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.cxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Mesh\Server_MeshObj.cxx">
+      <Filter>TnbLib\Server\Objects\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.cxx">
+      <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

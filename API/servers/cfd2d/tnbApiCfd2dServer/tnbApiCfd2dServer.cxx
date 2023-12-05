@@ -41,7 +41,7 @@ int main()
 
 		while (true)
 		{
-			std::cout << "I accepted the connection..." << std::endl;
+			//std::cout << "I accepted the connection..." << std::endl;
 			auto message = tnbLib::Server_Tools::Receive(client);
 
 			//std::cout << "MESSAGE : " << message << std::endl;

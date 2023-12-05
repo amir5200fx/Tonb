@@ -117,6 +117,9 @@ namespace tnbLib
 
 	defineTnbServerObject(Server_Geo2dObj_BndBox_GetLengths);
 
+	defineTnbServerObject(Server_Geo2dObj_BndBox_GetP0);
+	defineTnbServerObject(Server_Geo2dObj_BndBox_GetP1);
+
 	class Server_Geo2dObj_BndBox_Expand
 		: public Server_Object
 	{

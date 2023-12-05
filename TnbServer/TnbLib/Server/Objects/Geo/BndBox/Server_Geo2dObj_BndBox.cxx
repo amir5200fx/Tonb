@@ -272,6 +272,38 @@ void tnbLib::Server_Geo2dObj_BndBox_GetCorners::Construct(const std::string& the
 	catchTnbServerErrors()
 }
 
+implementTnbServerConstruction(Server_Geo2dObj_BndBox_GetP0)
+{
+	std::shared_ptr<Entity2d_Box> b;
+	loadNonJSONTnbServer(b);
+	try
+	{
+		if (!b)
+		{
+			throw Server_Error("the bounding box object is null.");
+		}
+		Pnt2d pt = b->P0();
+		streamGoodTnbServerObject(pt);
+	}
+	catchTnbServerErrors()
+}
+
+implementTnbServerConstruction(Server_Geo2dObj_BndBox_GetP1)
+{
+	std::shared_ptr<Entity2d_Box> b;
+	loadNonJSONTnbServer(b);
+	try
+	{
+		if (!b)
+		{
+			throw Server_Error("the bounding box object is null.");
+		}
+		Pnt2d pt = b->P1();
+		streamGoodTnbServerObject(pt);
+	}
+	catchTnbServerErrors()
+}
+
 void tnbLib::Server_Geo2dObj_BndBox_GetLengths::Construct(const std::string& theValue)
 {
 	std::shared_ptr<Entity2d_Box> b;

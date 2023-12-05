@@ -12,6 +12,7 @@ using namespace tnbLib;
 #include <Server_GeoObj_Vec2d_F1.hxx>
 #include <Server_GeoObj_Dir2d_F1.hxx>
 #include <Server_GeoObj_Axis2d_F1.hxx>
+#include <Server_MeshObj.hxx>
 
 // the interger object
 defineAndRegisterTnbServerObject(Server_GlobalObj_Int, Server::objects::make_int, "make_int");
@@ -84,6 +85,9 @@ defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_AreaList, Server::object
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Expand, Server::objects::do_bnd_box_2d_expand, "do_bnd_box_2d_expand");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetDia, Server::objects::get_bnd_box_2d_dia, "get_bnd_box_2d_dia");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetLengths, Server::objects::get_bnd_box_2d_lengths, "get_bnd_box_2d_lengths");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP0, Server::objects::get_bnd_box_2d_p0, "get_bnd_box_2d_p0");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP1, Server::objects::get_bnd_box_2d_p1, "get_bnd_box_2d_p1");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetCorners, Server::objects::get_bnd_box_2d_corners, "get_bnd_box_2d_corners");
 
 #include <Server_Geo2dObj.hxx>
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Uniform, Server::objects::make_size_map_2d_uniform, "make_size_map_2d_uniform");
@@ -138,6 +142,7 @@ defineAndRegisterTnbServerObject(Server_NumObj_NewtonNonLinSolver_Info, Server::
 defineAndRegisterTnbServerObject(Server_NumObj_BisectNonLinSolver_Info, Server::objects::make_num_bisect_solver, "make_num_bisect_solver");
 
 #include <Server_Cad2dObj_Curve.hxx>
+#include <Server_FoamObj.hxx>
 // io
 //defineAndRegisterTnbServerObject(Server_Geo2dObj_ExportMeshToPlt, Server::objects::export_tri_2d_to_plt, "export_mesh_2d_to_plt");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_ExportToPlt, Server::objects::export_curve_2d_to_plt, "export_curve_2d_to_plt");
@@ -145,6 +150,11 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_ExportToPlt, Server::objec
 //defineAndRegisterTnbServerObject(Server_Mesh2dObj_ExportToPlt, Server::objects::export_mesh_2d_to_plt, "export_mesh_2d_to_plt");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_SoluData_ExportMeshToPlt, Server::objects::export_mesh_2d_solu_data_to_plt, "export_mesh_2d_solu_data_to_plt");
 defineAndRegisterTnbServerObject(Server_Mesh2dObj_ExportToFEA, Server::objects::export_mesh_2d_to_fea, "export_mesh_2d_to_fea");
+defineAndRegisterTnbServerObject(Server_MeshObj_ExportFvToUNV, Server::objects::export_mesh_fv_to_unv, "export_mesh_fv_to_unv");
+defineAndRegisterTnbServerObject(Server_FoamObj_LoadInitCs, Server::objects::load_openfoam_init_cnds, "load_openfoam_init_cnds");
+defineAndRegisterTnbServerObject(Server_FoamObj_LoadBcs, Server::objects::load_openfoam_bcs, "load_openfoam_bcs");
+defineAndRegisterTnbServerObject(Server_FoamObj_WriteInitCs, Server::objects::write_openfoam_init_cnds, "write_openfoam_init_cnds");
+defineAndRegisterTnbServerObject(Server_FoamObj_WriteBcs, Server::objects::write_openfoam_bcs, "write_openfoam_bcs");
 
 #include <Server_GlobalObj_Exit.hxx>
 defineAndRegisterTnbServerObject(Server_GlobalObj_Exit, Server::objects::exit, "EXIT");

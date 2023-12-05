@@ -1,5 +1,7 @@
 #include <Server.hxx>
 
+#include <Server_MeshObj.hxx>
+
 using namespace tnbLib;
 
 #include <Server_GlobalObj_Int.hxx>
@@ -97,6 +99,9 @@ createTnbServerObject(calc_bnd_box_2d_area_list, Server_Geo2dObj_BndBox_AreaList
 createTnbServerObject(do_bnd_box_2d_expand, Server_Geo2dObj_BndBox_Expand)
 createTnbServerObject(get_bnd_box_2d_dia, Server_Geo2dObj_BndBox_GetDia)
 createTnbServerObject(get_bnd_box_2d_lengths, Server_Geo2dObj_BndBox_GetLengths)
+createTnbServerObject(get_bnd_box_2d_p0, Server_Geo2dObj_BndBox_GetP0)
+createTnbServerObject(get_bnd_box_2d_p1, Server_Geo2dObj_BndBox_GetP1)
+createTnbServerObject(get_bnd_box_2d_corners, Server_Geo2dObj_BndBox_GetCorners)
 
 #include <Server_Geo2dObj.hxx>
 createTnbServerObject(make_size_map_2d_uniform, Server_Geo2dObj_SizeMap_Uniform)
@@ -152,6 +157,7 @@ createTnbServerObject(make_num_bisect_solver, Server_NumObj_BisectNonLinSolver_I
 createTnbServerObject(exit, Server_GlobalObj_Exit)
 
 #include <Server_Cad2dObj_Curve.hxx>
+#include <Server_FoamObj.hxx>
 // io
 createTnbServerObject(export_tri_2d_to_plt, Server_Geo2dObj_ExportMeshToPlt)
 //createTnbServerObject(export_mesh_2d_to_plt, Server_Mesh2dObj_ExportToPlt)
@@ -159,3 +165,8 @@ createTnbServerObject(export_curve_2d_to_plt, Server_Cad2dObj_Curve_ExportToPlt)
 createTnbServerObject(export_area_to_plt, Server_Cad2dObj_Area_ExportToPlt)
 createTnbServerObject(export_mesh_2d_solu_data_to_plt, Server_Mesh2dObj_SoluData_ExportMeshToPlt)
 createTnbServerObject(export_mesh_2d_to_fea, Server_Mesh2dObj_ExportToFEA)
+createTnbServerObject(export_mesh_fv_to_unv, Server_MeshObj_ExportFvToUNV)
+createTnbServerObject(load_openfoam_init_cnds, Server_FoamObj_LoadInitCs)
+createTnbServerObject(load_openfoam_bcs, Server_FoamObj_LoadBcs)
+createTnbServerObject(write_openfoam_init_cnds, Server_FoamObj_WriteInitCs)
+createTnbServerObject(write_openfoam_bcs, Server_FoamObj_WriteBcs)

@@ -689,7 +689,6 @@ void tnbLib::Server_Mesh2dObj_LaplacSmooth::Construct(const std::string& theValu
 
 		smooth_alg->Perform();
 
-		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
 	}
 	catchTnbServerErrors()
@@ -1818,10 +1817,12 @@ namespace tnbLib
 
 void tnbLib::Server_Mesh2dObj_ExportToFEA::Construct(const std::string& theValue)
 {
+	std::cout << "injaaaaaaaaaaaaaaaa" << std::endl;
 	std::shared_ptr<Aft2d_SolutionData> data;
 	{
 		loadNonJSONTnbServer(data);
 	}
+	std::cout << "injaaaaaaaaaaaaaaaa" << std::endl;
 	try
 	{
 		std::map<word, std::shared_ptr<std::vector<connectivity::dual>>> myPhysics;
