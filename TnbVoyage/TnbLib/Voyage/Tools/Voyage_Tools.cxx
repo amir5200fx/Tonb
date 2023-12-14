@@ -409,6 +409,26 @@ tnbLib::Voyage_Tools::CalcLength
 	return tot_dist;
 }
 
+Standard_Real tnbLib::Voyage_Tools::CalcDistance(const Pnt2d& theP0, const Pnt2d& theP1)
+{
+	constexpr auto radioTerrestre = 6372797.56085;
+
+	const auto latitude1 = Geo_Tools::DegToRadian(theP0.X());
+	const auto longitude1 = Geo_Tools::DegToRadian(theP0.Y());
+
+	const auto latitude2 = Geo_Tools::DegToRadian(theP1.X());
+	const auto longitude2 = Geo_Tools::DegToRadian(theP1.Y());
+
+	const auto haversine =
+		std::pow(std::sin((1.0 / 2.0) * (latitude2 - latitude1)), 2) +
+		std::cos(latitude1) * std::cos(latitude2) * std::pow(std::sin(1.0 / 2.0 * (longitude2 - longitude1)), 2);
+
+	const auto temp = 2.0 * std::asin(std::min(1.0, std::sqrt(haversine)));
+	const auto distancia_puntos = radioTerrestre * temp;
+
+	return distancia_puntos;
+}
+
 std::vector<Standard_Real> 
 tnbLib::Voyage_Tools::CalcParameters
 (
@@ -537,6 +557,15 @@ tnbLib::Voyage_Tools::ConvertToVoyageSystem
 		std::make_shared<Entity2d_Triangulation>
 		(std::move(coords), std::move(indices));
 	return std::move(tri);
+}
+
+tnbLib::Pnt2d tnbLib::Voyage_Tools::ConvertVoyageToGlobal(const Pnt2d& xy)
+{
+	const double signLat = xy.X() >= 0 ? 1.0 : -1.0;
+	const double signLon = xy.Y() >= 0 ? 1.0 : -1.0;
+	const auto dx = CalcDistance({ 0,0 }, { xy.X(), 0 });
+	const auto dy = CalcDistance({ 0,0 }, { 0, xy.Y() });
+	return { signLat * dx, signLon * dy };
 }
 
 Standard_Real 

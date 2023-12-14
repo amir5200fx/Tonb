@@ -193,7 +193,7 @@ int main()
 	}
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
-	Standard_Real hour = 10.0;
+	Standard_Real hour = 38;
 	auto h = vel * hour;
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
@@ -206,6 +206,7 @@ int main()
 
 		auto alg_info = std::make_shared<Voyage_AdaptPath_Info>();
 		alg_info->SetNbSamples(2);
+		alg_info->SetNbLevels(1);
 		
 		std::vector<std::shared_ptr<Entity2d_Polygon>> subs;
 		for (const auto& x: alg->Path()->Curves())

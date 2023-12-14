@@ -412,6 +412,12 @@
     <Filter Include="TnbLib\Voyage\PathDisret\Adapt">
       <UniqueIdentifier>{78e3b3e9-a49e-49bc-a7c2-c2182975b8c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\MinTime">
+      <UniqueIdentifier>{0da2c43b-a4ff-4379-9f85-ca2822d08a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\MinTime\Cost">
+      <UniqueIdentifier>{7309dc59-6cb0-4c95-9e05-8c10037d43b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -780,6 +786,18 @@
     <ClInclude Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath_Info.hxx">
       <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel2.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_Variables.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinTime\VoyageSim_MinTime.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinTime\Cost\VoyageSim_MinTime_Cost.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime\Cost</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -985,6 +1003,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath.cxx">
       <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel2.cxx">
+      <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\MinTime\VoyageSim_MinTime.cxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\MinTime\Cost\VoyageSim_MinTime_Cost.cxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime\Cost</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
