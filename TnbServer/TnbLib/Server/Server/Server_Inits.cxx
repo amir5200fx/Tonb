@@ -99,6 +99,7 @@ defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_VolControl, Server::obj
 
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Adaptive, Server::objects::make_size_map_2d_adaptive, "make_size_map_2d_adaptive");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_MakeVol, Server::objects::make_vol_size_map_2d_ctrl, "make_vol_size_map_2d_ctrl");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_MakeBnd, Server::objects::make_bnd_size_map_2d_ctrl, "make_bnd_size_map_2d_ctrl");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Adapt_Perform, Server::objects::perform_size_map_2d_adaptive, "perform_size_map_2d_adaptive");
 
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_ImptVol, Server::objects::vol_size_map_2d_ctrl_import_shape, "vol_size_map_2d_ctrl_import_shape");

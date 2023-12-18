@@ -383,11 +383,19 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Server_Geo2dObj_SizeMap_MakeBnd::IO)
 }
 
 implementTnbServerParam(Server_Geo2dObj_SizeMap_MakeBnd, size_map, "size_map");
+implementTnbServerParam(Server_Geo2dObj_SizeMap_MakeBnd, patches, "patches");
 implementTnbServerParam(Server_Geo2dObj_SizeMap_MakeBnd, name, "name");
+implementTnbServerParam(Server_Geo2dObj_SizeMap_MakeBnd, target, "target");
+implementTnbServerParam(Server_Geo2dObj_SizeMap_MakeBnd, growth_rate, "growth_rate");
+implementTnbServerParam(Server_Geo2dObj_SizeMap_MakeBnd, value_type, "value_type");
 
 implementTnbServerConstruction(Server_Geo2dObj_SizeMap_MakeBnd)
 {
 	std::string name;
+	std::vector<std::string> patches;
+	double target;
+	std::string value_type;
+	std::string growth_rate;
 	std::shared_ptr<Server_Geo2dObj_SizeMap_Adaptive::IO> size_map;
 	{
 		defineTnbServerParser(theValue);
@@ -396,6 +404,35 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_MakeBnd)
 		}
 		{
 			loadTnbServerObject(size_map);
+		}
+		{
+			nlohmann::json json_array = nlohmann::json::parse(loader.at(Params::patches).get<std::string>());
+			if (json_array.is_array())
+			{
+				for (const auto& element : json_array) {
+					patches.emplace_back(element.get<std::string>());
+					/*int id;
+					std::stringstream stream;
+					std::cout << element.get<std::string>() << std::endl;
+					stream << element.get<std::string>();
+					TNB_iARCH_FILE_TYPE ia(stream);
+					ia >> id;
+					volumes.emplace_back(id);*/
+				}
+			}
+			else
+			{
+				throw Server_Error("Couldn't load the volume list");
+			}
+		}
+		{
+			loadTnbServerObject(target);
+		}
+		{
+			loadTnbServerString(growth_rate);
+		}
+		{
+			loadTnbServerString(value_type);
 		}
 	}
 	try
@@ -409,10 +446,27 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_MakeBnd)
 		auto info = size_map->bnd_settings;
 		controler->CreateSizeMap(name, model, info);
 		auto bnd = controler->SelectMap(name);
-		auto value = std::make_shared<IO>();
-		value->size_map = size_map;
-		value->bnd = bnd;
-		streamGoodTnbServerObject(value);
+		for (const auto& x: patches)
+		{
+			bnd->ImportPatch(x);
+		}
+		bnd->MeshConditions()->SetCustomBoundaryGrowthRate(true);
+		bnd->MeshConditions()->SetCustomSurfaceSize(true);
+
+		bnd->MeshValues()->SurfaceSize()->SetMinSize(target);
+		bnd->MeshValues()->SurfaceSize()->SetTargetSize(target);
+		bnd->MeshValues()->SurfaceSize()->SetRelativeAbsolute(switch_to_value_type(value_type));
+		bnd->MeshValues()->SurfaceSize()->SetSizeMethod(Mesh_SizeMethodInfo::minAndTerget);
+
+		bnd->MeshValues()->SetBoundaryGrowthRate(switch_to_variation_rate_type(growth_rate));
+		try
+		{
+			streamGoodTnbServerObject(size_map);
+		}
+		catch (std::exception& x)
+		{
+			std::cout << x.what() << std::endl;
+		}
 	}
 	catchTnbServerErrors()
 }

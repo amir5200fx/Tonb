@@ -94,6 +94,8 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::make_size_map_2d_adaptive, make_size_map_2d_adaptive, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_vol_size_map_2d_ctrl, make_vol_size_map_2d_ctrl, value, sense)
+			switchToMakeTnbServerObject(objects::make_bnd_size_map_2d_ctrl, make_bnd_size_map_2d_ctrl, value, sense)
+
 		switchToMakeTnbServerObject(objects::perform_size_map_2d_adaptive, perform_size_map_2d_adaptive, value, sense)
 		switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_import_shape, vol_size_map_2d_ctrl_import_shape, value, sense)
 		switchToMakeTnbServerObject(objects::vol_size_map_2d_ctrl_get_condition, vol_size_map_2d_ctrl_get_condition, value, sense)

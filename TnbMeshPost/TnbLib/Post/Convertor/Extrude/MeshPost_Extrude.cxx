@@ -570,8 +570,6 @@ void tnbLib::MeshPost_Extrude::Perform()
 			<< "no triangulation has been found." << endl
 			<< abort(FatalError);
 	}
-	theExtrusion_ = 0.1;
-
 	const auto nodes = CalcNodes(mesh->Coords(), Extrusion());
 
 	auto [elements_2d, edges_2d, nodes_2d] =

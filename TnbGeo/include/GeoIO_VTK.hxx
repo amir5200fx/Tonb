@@ -2,6 +2,7 @@
 #ifndef _GeoIO_VTK_Header
 #define _GeoIO_VTK_Header
 
+#include <Entity3d_TetrahedralizationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
@@ -56,6 +57,9 @@ namespace tnbLib
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Triangulation&, const std::string& theTitle, std::stringstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Chain&, const std::string& theTitle, std::stringstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Polygon&, const std::string& theTitle, std::stringstream&);
+
+		TnbGeo_EXPORT void ExportField(const Entity2d_Triangulation&, const std::vector<Standard_Real>& theField, std::stringstream&);
+		TnbGeo_EXPORT void ExportField(const Entity3d_Tetrahedralization&, const std::vector<Standard_Real>& theField, std::stringstream&);
 	}
 }
 

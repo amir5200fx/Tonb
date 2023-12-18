@@ -283,7 +283,7 @@ implementTnbServerConstruction(Server_FoamObj_WriteInitCs)
 			dictionary boundaries;
 			{// boundaries
 				
-				for (const auto& b: body_j[BOUNDARY_FILED].items())
+				for (const auto& b: body_j.items())
 				{
 					dictionary items;
 					for(const auto& i: b.value().items())

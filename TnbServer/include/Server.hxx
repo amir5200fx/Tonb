@@ -263,6 +263,7 @@ namespace tnbLib
 		declareTnbServerFunction(perform_size_map_2d_adaptive);
 
 		declareTnbServerFunction(make_vol_size_map_2d_ctrl);
+		declareTnbServerFunction(make_bnd_size_map_2d_ctrl);
 
 		declareTnbServerFunction(vol_size_map_2d_ctrl_import_shape);
 		declareTnbServerFunction(vol_size_map_2d_ctrl_get_condition);

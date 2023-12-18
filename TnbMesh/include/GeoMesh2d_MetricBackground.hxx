@@ -24,6 +24,9 @@ namespace tnbLib
 
 	template<>
 	TnbMesh_EXPORT void GeoMesh2d_SingleMetricBackground::ExportToPlt(OFstream& File) const;
+	template <>
+	TnbMesh_EXPORT void GeoMesh2d_SingleMetricBackground::ExportToVtk(OFstream& File) const;
+
 }
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::GeoMesh2d_MetricBackground);

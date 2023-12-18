@@ -2,6 +2,7 @@
 
 #include <GeoMesh3d_Data.hxx>
 #include <TecPlot.hxx>
+#include <GeoIO_VTK.hxx>
 
 const std::string tnbLib::GeoMesh3d_Background::extension = ".sbckmsh3d";
 
@@ -23,6 +24,21 @@ void tnbLib::GeoMesh3d_SingleBackground::ExportToPlt(OFstream& File) const
 	}
 	const auto mesh = this->Mesh()->StaticData();
 	Io::ExportField("H", hs, mesh->Points(), mesh->Connectivity(), File);
+}
+
+template <>
+void tnbLib::GeoMesh3d_SingleBackground::ExportToVtk(OFstream& File) const
+{
+	if (NOT this->Mesh())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no mesh data has been found." << endl
+			<< abort(FatalError);
+	}
+	const auto mesh = this->Mesh()->StaticData();
+	std::stringstream stream;
+	vtkLib::ExportField(*mesh, this->Sources(), stream);
+	File << stream.str();
 }
 
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::GeoMesh3d_SingleBackground);

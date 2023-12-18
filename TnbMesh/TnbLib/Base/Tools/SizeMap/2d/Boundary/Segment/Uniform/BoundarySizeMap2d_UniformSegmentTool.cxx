@@ -14,6 +14,7 @@
 #include <Geo2d_BasicApprxCurve.hxx>
 #include <Geo2d_BasicApprxCurveAdaptor.hxx>
 #include <Geo2d_BalPrTree.hxx>
+#include <Geo2d_DelTri.hxx>
 #include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Triangulation.hxx>
@@ -338,10 +339,14 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 		timer.SetInfo(Global_TimerInfo_ms);
 
 		auto pnts = segmentTools::RetrieveNodes(engine, srcCoords, expB, mergCrit);
-		cgalLib::Geo2d_DelTri delTri(pnts);
-		delTri.Perform();
+		//cgalLib::Geo2d_DelTri delTri(pnts);
+		//delTri.Perform();
+		Geo2d_DelTri delTri(pnts);
+		delTri.Triangulate();
+		Debug_If_Condition_Message(NOT delTri.IsDone(), "the application is not performed.");
 
-		myTris = delTri.Triangulation();
+		//myTris = delTri.Triangulation();
+		myTris = delTri.Data();
 	}
 	if (verbose)
 	{
@@ -403,6 +408,9 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
+
+	OFstream my_file("srf.vtk");
+	bMesh->ExportToVtk(my_file);
 
 	ChangeBackMesh() = std::move(bMesh);
 	Change_IsDone() = Standard_True;

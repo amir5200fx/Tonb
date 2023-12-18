@@ -1817,12 +1817,10 @@ namespace tnbLib
 
 void tnbLib::Server_Mesh2dObj_ExportToFEA::Construct(const std::string& theValue)
 {
-	std::cout << "injaaaaaaaaaaaaaaaa" << std::endl;
 	std::shared_ptr<Aft2d_SolutionData> data;
 	{
 		loadNonJSONTnbServer(data);
 	}
-	std::cout << "injaaaaaaaaaaaaaaaa" << std::endl;
 	try
 	{
 		std::map<word, std::shared_ptr<std::vector<connectivity::dual>>> myPhysics;
@@ -1936,6 +1934,7 @@ implementTnbServerConstruction(Server_Mesh2dObj_Extrude_FEA)
 		const auto convertor = std::make_shared<MeshPost_Extrude>();
 		convertor->SetMesh2d(topology);
 		convertor->SetTitle(title);
+		convertor->SetValue(extrusion);
 		convertor->Perform();
 
 		auto fv = convertor->RetrieveIO();

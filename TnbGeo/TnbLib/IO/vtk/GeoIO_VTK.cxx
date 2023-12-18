@@ -1,5 +1,6 @@
 #include <GeoIO_VTK.hxx>
 
+#include <Entity3d_Tetrahedralization.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Chain.hxx>
@@ -306,4 +307,125 @@ void tnbLib::vtkLib::WriteMesh
 {
 	auto chain = Geo_Tools::RetrieveChain(thePoly);
 	WriteMesh(*chain, theTitle, theFile);
+}
+
+#include <vtk/vtkSmartPointer.h>
+#include <vtk/vtkPoints.h>
+#include <vtk/vtkPointData.h>
+#include <vtk/vtkCellArray.h>
+#include <vtk/vtkDoubleArray.h>
+#include <vtk/vtkPolyData.h>
+#include <vtk/vtkDataSetWriter.h>
+
+void tnbLib::vtkLib::ExportField(const Entity2d_Triangulation& theMesh, const std::vector<Standard_Real>& theField, std::stringstream& os)
+{
+	// Create a vtkPoints object to store the vertex coordinates
+	vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
+
+	// Add vertex coordinates to the vtkPoints object
+	for (const auto& x: theMesh.Points())
+	{
+		points->InsertNextPoint(x.X(), x.Y(), 0.0);
+	}
+
+	// Create a vtkCellArray object to store the connectivity information (triangles)
+	vtkSmartPointer<vtkCellArray> triangles = vtkSmartPointer<vtkCellArray>::New();
+	for (const auto& x: theMesh.Connectivity())
+	{
+		triangles->InsertNextCell(3);
+		triangles->InsertCellPoint(x.Value(0) - 1);
+		triangles->InsertCellPoint(x.Value(1) - 1);
+		triangles->InsertCellPoint(x.Value(2) - 1);
+	}
+
+	// Create a vtkPolyData object to store the points, cells, and scalar values
+	vtkSmartPointer<vtkPolyData> polyData = vtkSmartPointer<vtkPolyData>::New();
+	polyData->SetPoints(points);
+	polyData->SetPolys(triangles);
+
+	// Create a vtkDoubleArray to store scalar values
+	vtkSmartPointer<vtkDoubleArray> scalarValues = vtkSmartPointer<vtkDoubleArray>::New();
+	scalarValues->SetNumberOfValues(theMesh.NbPoints()); // Set the number of vertices
+
+	// Set scalar values for each vertex
+	Standard_Integer k = 0;
+	for (auto x: theField)
+	{
+		scalarValues->SetValue(k++, x);
+	}
+
+	// Set the scalar array and name for the scalar data
+	polyData->GetPointData()->SetScalars(scalarValues);
+	scalarValues->SetName("Scalars");
+
+
+	vtkSmartPointer<vtkDataSetWriter> writer = vtkSmartPointer<vtkDataSetWriter>::New();
+	// For XML-based VTK files, you can use vtkXMLPolyDataWriter
+	// vtkSmartPointer<vtkXMLPolyDataWriter> writer = vtkSmartPointer<vtkXMLPolyDataWriter>::New();
+
+	writer->SetInputData(polyData);
+	writer->SetFileName("output.vtk"); // This line is still required, but the file won't be created
+	writer->SetWriteToOutputString(1);
+	writer->Write();
+
+	
+	// Get the string buffer
+	os << writer->GetOutputStdString();
+}
+
+void tnbLib::vtkLib::ExportField(const Entity3d_Tetrahedralization& theMesh, const std::vector<Standard_Real>& theField,
+	std::stringstream& os)
+{
+	// Create a vtkPoints object to store the vertex coordinates
+	vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
+
+	// Add vertex coordinates to the vtkPoints object
+	for (const auto& x : theMesh.Points())
+	{
+		points->InsertNextPoint(x.X(), x.Y(), x.Z());
+	}
+
+	// Create a vtkCellArray object to store the connectivity information (triangles)
+	vtkSmartPointer<vtkCellArray> triangles = vtkSmartPointer<vtkCellArray>::New();
+	for (const auto& x : theMesh.Connectivity())
+	{
+		triangles->InsertNextCell(3);
+		triangles->InsertCellPoint(x.Value(0) - 1);
+		triangles->InsertCellPoint(x.Value(1) - 1);
+		triangles->InsertCellPoint(x.Value(2) - 1);
+	}
+
+	// Create a vtkPolyData object to store the points, cells, and scalar values
+	vtkSmartPointer<vtkPolyData> polyData = vtkSmartPointer<vtkPolyData>::New();
+	polyData->SetPoints(points);
+	polyData->SetPolys(triangles);
+
+	// Create a vtkDoubleArray to store scalar values
+	vtkSmartPointer<vtkDoubleArray> scalarValues = vtkSmartPointer<vtkDoubleArray>::New();
+	scalarValues->SetNumberOfValues(theMesh.NbPoints()); // Set the number of vertices
+
+	// Set scalar values for each vertex
+	Standard_Integer k = 0;
+	for (auto x : theField)
+	{
+		scalarValues->SetValue(k++, x);
+	}
+
+	// Set the scalar array and name for the scalar data
+	polyData->GetPointData()->SetScalars(scalarValues);
+	scalarValues->SetName("Scalars");
+
+
+	vtkSmartPointer<vtkDataSetWriter> writer = vtkSmartPointer<vtkDataSetWriter>::New();
+	// For XML-based VTK files, you can use vtkXMLPolyDataWriter
+	// vtkSmartPointer<vtkXMLPolyDataWriter> writer = vtkSmartPointer<vtkXMLPolyDataWriter>::New();
+
+	writer->SetInputData(polyData);
+	writer->SetFileName("output.vtk"); // This line is still required, but the file won't be created
+	writer->SetWriteToOutputString(1);
+	writer->Write();
+
+
+	// Get the string buffer
+	os << writer->GetOutputStdString();
 }

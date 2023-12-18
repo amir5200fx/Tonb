@@ -144,8 +144,12 @@ namespace tnbLib
 
 		struct Params
 		{
-			defineTnbServerParam(name);
 			defineTnbServerParam(size_map);
+			defineTnbServerParam(patches);
+			defineTnbServerParam(name);
+			defineTnbServerParam(target);
+			defineTnbServerParam(growth_rate);
+			defineTnbServerParam(value_type);
 		};
 
 		constructTnbServerObject(Server_Geo2dObj_SizeMap_MakeBnd);
