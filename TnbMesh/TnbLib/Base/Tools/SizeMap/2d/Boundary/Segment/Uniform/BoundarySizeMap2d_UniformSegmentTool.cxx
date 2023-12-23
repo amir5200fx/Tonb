@@ -409,8 +409,8 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
 
-	OFstream my_file("srf.vtk");
-	bMesh->ExportToVtk(my_file);
+	OFstream my_file("srf.plt");
+	bMesh->ExportToPlt(my_file);
 
 	ChangeBackMesh() = std::move(bMesh);
 	Change_IsDone() = Standard_True;
