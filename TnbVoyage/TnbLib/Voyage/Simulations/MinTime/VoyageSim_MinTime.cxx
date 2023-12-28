@@ -64,8 +64,7 @@ std::vector<std::shared_ptr<tnbLib::VoyageSim_Graph::Node>> tnbLib::VoyageSim_Mi
 			theCostFun_(
 				{ p0,theTime },
 				p1, { theDist_(p0, p1) },
-				thePower_,
-				{ theNbSamples_ }
+				thePower_
 		);
 		auto node =
 			std::make_shared<VoyageSim_Graph::Node>
@@ -126,6 +125,46 @@ tnbLib::VoyageSim_MinTime::CalcGraph
 	return std::move(graph);
 }
 
+std::vector<std::tuple<var::Location, var::Time, var::SOG>>
+tnbLib::VoyageSim_MinTime::RetrievePath
+(
+	const std::shared_ptr<VoyageSim_Graph::Node>& theNode
+) const
+{
+	Debug_Null_Pointer(theNode);
+	std::vector<std::tuple<var::Location, var::Time, var::SOG>> states;
+	auto current = theNode;
+	while (true)
+	{
+		{
+			auto iter = theTable_.find(current->Index());
+			if (iter IS_EQUAL theTable_.end())
+			{
+				FatalErrorIn(FunctionSIG) << endl
+					<< " the item isn't in the tree." << endl
+					<< " - index: " << current->Index() << endl
+					<< abort(FatalError);
+			}
+		}
+		const auto tableData = theTable_.at(current->Index());
+		const auto prev = tableData.second.lock();
+		if (NOT prev)
+		{
+			states.push_back({ {current->Coord()},{current->Time()},{0}});
+			break;
+		}
+		const auto cost = tableData.first;
+		const auto deltaT = current->Time() - prev->Time();
+		const auto deltaX = theDist_(prev->Coord(), current->Coord());
+		const auto vel = deltaX / (deltaT);
+		const auto thrust = cost / (deltaX);
+
+		states.push_back({ {current->Coord()},{current->Time()},{vel},});
+		current = prev;
+	}
+	return std::move(states);
+}
+
 void tnbLib::VoyageSim_MinTime::Perform()
 {
 	static auto cmp =
@@ -151,6 +190,7 @@ void tnbLib::VoyageSim_MinTime::Perform()
 			<< abort(FatalError);
 	}
 	const auto nodesMap = CalcGraphNodesMap();
+	theArrival_ = nodesMap.at(departure->Index());
 	const auto graph = CalcGraph(departure, nodesMap);
 	std::set<std::shared_ptr<VoyageSim_Graph::Node>, decltype(cmp)> unvisited(cmp), visited(cmp);
 	for (const auto& [id, edge] : graph->Edges())
@@ -159,8 +199,7 @@ void tnbLib::VoyageSim_MinTime::Perform()
 		unvisited.insert(edge->Node0());
 		unvisited.insert(edge->Node1());
 	}
-	std::map<Standard_Integer, std::pair<Standard_Real, std::weak_ptr<VoyageSim_Graph::Node>>>
-		table;
+	auto& table = theTable_;
 	for (const auto& x : unvisited)
 	{
 		Debug_Null_Pointer(x);
@@ -193,8 +232,7 @@ void tnbLib::VoyageSim_MinTime::Perform()
 						{ current->Coord(), current->Time() },
 						next->Coord(),
 						{ edge->Dist() },
-						thePower_,
-						theNbSamples_
+						thePower_
 					);
 				if (t.value < 0)
 				{

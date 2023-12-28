@@ -1,6 +1,8 @@
 ﻿#include <Aft_MetricPrcsr.hxx>
 #include <VoyageFun_CostFunction_Resistane.hxx>
 #include <VoyageFun_ProfiledCalmResist.hxx>
+#include <VoyageSim_MinTime.hxx>
+#include <VoyageSim_MinTime_Cost.hxx>
 #include <Voyage_Profile.hxx>
 #include <Voyage_RepairNet.hxx>
 #include <VoyageSim_MinFuel.hxx>
@@ -52,6 +54,7 @@
 #include <Entity2d_Box.hxx>
 #include <Pnt2d.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
@@ -388,14 +391,125 @@ int main()
 	double min_vel = 0.5 * avg_vel;
 	double max_vel = 1.2 * avg_vel;
 
-	double maxDay = 3;
-	
-	auto cost_fun = 
-		std::make_shared<VoyageFun_CostFunction_Resistane>
-	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,(maxDay+0.5)*24));
+	auto prcsr =
+		Voyage_Tools::MakeMetricPrcsr
+		(Voyage_Tools::MakeUniformSizeMap(*earth), *earth, *metricInfo);
+	auto my_dist_fun = [prcsr](const Pnt2d& theP0, const Pnt2d& theP1)
+		{
+			return prcsr->CalcDistance(theP0, theP1);
+		};
+
+	auto ocean_fun = [](const Pnt2d& coord, const double time)->std::pair<double, double>
+		{
+			return { 2.0,0.0 };
+		};
+
+	constexpr auto nb_of_samples = 5;
+	auto avg_ocean_vel = [ocean_fun, nb_of_samples](const Pnt2d& p0, const double t0, const Pnt2d& p1, const double t1)->std::pair<double, double>
+		{
+			double su, sv = 0;
+			const auto du = 1.0 / static_cast<double>(nb_of_samples - 1);
+			for (int i = 0; i <= nb_of_samples - 1; i++)
+			{
+				const auto p = p0 + i * du * (p1 - p0);
+				const auto t = t0 + i * du * (t1 - t0);
+				auto [u, v] = ocean_fun(p, t);
+				su += u;
+				sv += v;
+			}
+			su /= (nb_of_samples);
+			sv /= (nb_of_samples);
+			return { su, sv };
+		};
 
 	
-	VoyageSim_MinFuel::verbose = 1;
+	auto power_profile =
+		[avg_ocean_vel, profile](const voyageLib::variable::Path& path, const voyageLib::variable::Distance& dist)->voyageLib::variable::Power
+		{
+			const auto& s0 = path.start;
+			const auto& s1 = path.end;
+
+			const auto time0 = s0.time.value;
+			const auto time1 = s1.time.value;
+			const auto dt = time1 - time0;
+			if (dt <= 1.e-6)
+			{
+				return { 0 };
+			}
+			const auto& p0 = s0.coord;
+			const auto& p1 = s1.coord;
+
+			const auto d = dist.value;
+			const auto sog = d / dt;
+			const auto ship_dir = 
+				Vec2d(
+					Voyage_Tools::ConvertVoyageToGlobal(p1),
+					Voyage_Tools::ConvertToVoyageSystem(p0)
+				).Normalized();
+			const auto [u, v] = avg_ocean_vel(p0, time0, p1, time1);
+			if (std::sqrt(u * u + v * v) <= 10E-12)
+			{
+				return { profile->Value(sog) * d };
+			}
+			const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
+			if (flow_vel < 0)
+			{// if the ocean flow is against the velocity vector of the ship
+				const auto U = std::abs(flow_vel) + sog;
+				if (NOT INSIDE(U, profile->Lower(), profile->Upper()))
+				{
+					return { std::numeric_limits<float>::max() };
+				}
+				return { profile->Value(U) * d };
+			}
+			else
+			{
+				auto U = sog - std::abs(flow_vel);
+				if (U < profile->Lower())
+				{
+					return { 0 };
+				}
+				return { profile->Value(U) * d };
+			}
+		};
+
+	double maxDay = 3;
+	
+	auto bisect_info = std::make_shared<NumAlg_BisectionSolver_Info>();
+
+	auto cost_fun = std::make_shared<VoyageSim_MinTime_Cost>();
+	cost_fun->powFunc = power_profile;
+	cost_fun->SetInfo(bisect_info);
+	cost_fun->SetTimeRange({ {0}, {maxDay * 24} });
+
+	auto estimate_next_time = [maxDay](const var::Time& t)-> var::Time
+		{
+			return { maxDay };
+		};
+	
+
+	auto sim = std::make_shared<VoyageSim_MinTime>();
+	sim->SetNet(grid);
+	sim->SetPower({ 450.0 });
+	sim->SetDistFunc(my_dist_fun);
+	sim->SetResistFunc([cost_fun, estimate_next_time](
+		const var::State& s0, 
+		const Pnt2d& p1,
+		const var::Distance& dist,
+		const var::Power& power)-> var::Time
+	{
+			auto time_range = VoyageSim_MinTime_Cost::timeRange{ {s0.time}, estimate_next_time(s0.time) };
+			cost_fun->SetTimeRange(time_range);
+			return cost_fun->CalcTime(s0, p1, power, dist);
+	});
+
+	sim->Perform();
+	
+	/*auto cost_fun = 
+		std::make_shared<VoyageFun_CostFunction_Resistane>
+	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,(maxDay+0.5)*24));*/
+
+	
+	/*VoyageSim_MinFuel::verbose = 1;
 	auto sim = std::make_shared<VoyageSim_MinFuel>();
 
 	sim->SetMinVel(min_vel);
@@ -409,13 +523,7 @@ int main()
 	sim->SetBaseTime(0);
 	sim->SetMaxDay(maxDay);
 	{
-		auto prcsr = 
-			Voyage_Tools::MakeMetricPrcsr
-		(Voyage_Tools::MakeUniformSizeMap(*earth), *earth, *metricInfo);
-		auto my_dist_fun = [prcsr](const Pnt2d& theP0, const Pnt2d& theP1)
-		{
-			return prcsr->CalcDistance(theP0, theP1);
-		};
+		
 		sim->SetDistFunc(my_dist_fun);
 
 		auto weather_fun = 
@@ -440,19 +548,19 @@ int main()
 
 		sim->Init();
 		sim->Perform(grid->Departure()->Index());
-	}
+	}*/
 
 	//auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
-	auto best_path = sim->RetrievePath(sim->LowestCostNode());
+	auto best_path = sim->RetrievePath(sim->Arrival());
 
 	std::cout << " path size = " << best_path.size() << std::endl;
 
-	for (const auto& [loc, time, vel, power] : best_path)
+	for (const auto& [loc, time, vel] : best_path)
 	{
 		std::cout << " - coord: (" << loc.value << ")"
 			<< ", time: " << time.value
 			<< ", velocity: " << vel.value
-			<< ", power: " << power.value
+			<< ", power: " << vel.value
 			<< std::endl;
 	}
 

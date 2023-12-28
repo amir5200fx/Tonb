@@ -559,7 +559,8 @@ tnbLib::Voyage_Tools::ConvertToVoyageSystem
 	return std::move(tri);
 }
 
-tnbLib::Pnt2d tnbLib::Voyage_Tools::ConvertVoyageToGlobal(const Pnt2d& xy)
+tnbLib::Pnt2d
+tnbLib::Voyage_Tools::ConvertVoyageToGlobal(const Pnt2d& xy)
 {
 	const double signLat = xy.X() >= 0 ? 1.0 : -1.0;
 	const double signLon = xy.Y() >= 0 ? 1.0 : -1.0;
