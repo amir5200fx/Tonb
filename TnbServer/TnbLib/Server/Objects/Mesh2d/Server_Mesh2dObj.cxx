@@ -1,13 +1,16 @@
 #include <Aft2d_MetricPrcsrFwd.hxx>
 #include <Server_Mesh2dObj.hxx>
 
+#include <Aft_Tools.hxx>
 #include <Aft_MetricPrcsr_Info.hxx>
 #include <Mesh2d_ReferenceValues.hxx>
+#include <MeshBLayer2d_Offset2.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Pln_Vertex.hxx>
 #include <Cad_EntityManager.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Entity2d_Box.hxx>
+#include <Entity2d_CmpMesh.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <json.hpp>
 
@@ -603,6 +606,8 @@ void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
 			elements.emplace_back(x.second);
 		}
 		/**/
+		//OFstream myFile("myMesh.plt");
+		//alg->GetTriangulation()->ExportToPlt(myFile);
 		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
 	}
@@ -920,7 +925,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<Aft2d_Node> theNode_;
-		std::shared_ptr<Aft2d_Node> theOffset_;
+		std::vector<std::shared_ptr<Aft2d_Node>> theOffsets_;
 
 		std::weak_ptr<SupEdge> theBackward_;
 		std::weak_ptr<SupEdge> theForward_;
@@ -942,6 +947,7 @@ namespace tnbLib
 		// Public functions and operators
 
 		Standard_Integer NbEdges() const;
+		Standard_Integer NbOffsets() const;
 		Standard_Boolean HasBackward() const;
 		Standard_Boolean HasForward() const;
 		Standard_Boolean IsManifold() const;
@@ -949,7 +955,7 @@ namespace tnbLib
 		Pnt2d Coord() const;
 
 		const auto& Node() const { return theNode_; }
-		const auto& Offset() const { return theOffset_; }
+		const auto& Offsets() const { return theOffsets_; }
 
 		const auto& Backward() const { return theBackward_; }
 		const auto& Forward() const { return theForward_; }
@@ -959,8 +965,8 @@ namespace tnbLib
 		void SetNode(const std::shared_ptr<Aft2d_Node>& theNode) { theNode_ = theNode; }
 		void SetBackward(const std::weak_ptr<SupEdge>& theEdge) { theBackward_ = theEdge; }
 		void SetForward(const std::weak_ptr<SupEdge>& theEdge) { theForward_ = theEdge; }
-		void SetOffset(const std::shared_ptr<Aft2d_Node>& theNode) { theOffset_ = theNode; }
-		void SetOffset(std::shared_ptr<Aft2d_Node>&& theNode) { theOffset_ = std::move(theNode); }
+		void SetOffsets(const std::vector<std::shared_ptr<Aft2d_Node>>& theNodes) { theOffsets_ = theNodes; }
+		void SetOffsets(std::vector<std::shared_ptr<Aft2d_Node>>&& theNodes) { theOffsets_ = std::move(theNodes); }
 
 	};
 
@@ -971,7 +977,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<Aft2d_SegmentEdge> theEdge_;
-		std::shared_ptr<Aft2d_SegmentEdge> theOffset_;
+		std::vector<std::shared_ptr<Aft2d_SegmentEdge>> theOffsets_;
 
 		std::shared_ptr<SupNode> theNode0_;
 		std::shared_ptr<SupNode> theNode1_;
@@ -1002,11 +1008,11 @@ namespace tnbLib
 		const auto& Node1() const { return theNode1_; }
 
 		const auto& Edge() const { return theEdge_; }
-		const auto& Offset() const { return theOffset_; }
+		const auto& Offsets() const { return theOffsets_; }
 
 		void SetEdge(const std::shared_ptr<Aft2d_SegmentEdge>& theEdge) { theEdge_ = theEdge; }
-		void SetOffset(const std::shared_ptr<Aft2d_SegmentEdge>& theEdge) { theOffset_ = theEdge; }
-		void SetOffset(std::shared_ptr<Aft2d_SegmentEdge>&& theEdge) { theOffset_ = std::move(theEdge); }
+		void SetOffsets(const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>& theEdges) { theOffsets_ = theEdges; }
+		void SetOffsets(std::vector<std::shared_ptr<Aft2d_SegmentEdge>>&& theEdges) { theOffsets_ = std::move(theEdges); }
 
 	};
 
@@ -1054,11 +1060,14 @@ namespace tnbLib
 	namespace bndLayer
 	{
 
-		std::pair<std::vector<std::shared_ptr<Aft2d_SegmentEdge>>, std::shared_ptr<Entity2d_QuadMesh>>
-			CalcBndLayer(const std::vector<std::shared_ptr<SupEdge>>&, const Mesh_BndLayer_Info& theInfo);
+		std::pair<std::vector<std::shared_ptr<Aft2d_SegmentEdge>>, std::shared_ptr<Entity2d_CmpMesh>>
+			CalcBndLayer(const std::vector<std::shared_ptr<SupEdge>>&, const Mesh_BndLayer_Info& theInfo, const Standard_Integer nbNodes);
 
 		void SetOffsets(const std::vector<std::shared_ptr<SupNode>>&, const Entity2d_Polygon&);
+		void SefOffsets(const std::vector<std::shared_ptr<SupNode>>&, const std::vector<std::shared_ptr<MeshBLayer2d_Offset2::Node>>&);
 		void CalcOffsetEdges(const std::vector<std::shared_ptr<SupEdge>>&);
+
+		std::vector<std::shared_ptr<Aft2d_SegmentEdge>> CreateSegments(const Entity2d_Polygon&);
 	}
 }
 
@@ -1139,6 +1148,7 @@ tnbLib::tools::RetrieveSupEdges
 				sup_nodes.at(n0->Index()),
 				sup_nodes.at(n1->Index())
 			);
+		edge->SetEdge(x);
 		sup_nodes.at(n0->Index())->SetForward(edge);
 		sup_nodes.at(n1->Index())->SetBackward(edge);
 		sup_edges.emplace_back(std::move(edge));
@@ -1451,6 +1461,12 @@ tnbLib::SupNode::NbEdges() const
 	return nb_edges;
 }
 
+Standard_Integer
+tnbLib::SupNode::NbOffsets() const
+{
+	return static_cast<Standard_Integer>(theOffsets_.size());
+}
+
 Standard_Boolean
 tnbLib::SupNode::HasBackward() const
 {
@@ -1489,12 +1505,13 @@ tnbLib::SupNode::Next() const
 std::pair
 <
 	std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdge>>,
-	std::shared_ptr<tnbLib::Entity2d_QuadMesh>
+	std::shared_ptr<tnbLib::Entity2d_CmpMesh>
 >
 tnbLib::bndLayer::CalcBndLayer
 (
 	const std::vector<std::shared_ptr<SupEdge>>& theEdges,
-	const Mesh_BndLayer_Info& theInfo
+	const Mesh_BndLayer_Info& theInfo,
+	const Standard_Integer nbNodes
 )
 {
 	// retrieving the polygon
@@ -1502,7 +1519,7 @@ tnbLib::bndLayer::CalcBndLayer
 	const auto nodes = tools::RetrieveNodes(theEdges);
 	/*
 	 * We need to reverse the polygon due to the fact that the offseting algorithm
-	 * needs the polygon to be counter clockwise and we alredy know that an inner polygon is
+	 * needs the polygon to be counter clockwise and we already know that an inner polygon is
 	 * clockwise.
 	 */
 	polygon->Reverse(); // the polygon is reversed here.
@@ -1529,9 +1546,17 @@ tnbLib::bndLayer::CalcBndLayer
 	/*
 	 * Calculating the offset nodes
 	 */
-	SetOffsets(nodes, *offset);
+	const auto alg = std::make_shared<MeshBLayer2d_Offset2>();
+	alg->SetClusterSize(theInfo.NbLayars());
+	alg->SetRate(theInfo.GrowthRate());
+	alg->SetPolygon(polygon);
+	alg->SetGeoOffset(offset);
+	alg->SetChevronAngle(Geo_Tools::DegToRadian(theInfo.ChevAngle()));
+	alg->SetFirtLayer(theInfo.FirstLayerThick());
+	alg->Perform();
+	//SetOffsets(nodes, *offset);
 	//CalcOffsetEdges(theEdges);
-	std::shared_ptr<Entity2d_QuadMesh> mesh;
+	/*std::shared_ptr<Entity2d_QuadMesh> mesh;
 	{
 		const auto alg = std::make_shared<MeshBLayer2d_Offset>();
 		alg->SetClusterSize(theInfo.NbLayars());
@@ -1540,8 +1565,17 @@ tnbLib::bndLayer::CalcBndLayer
 		alg->SetOffset(offset);
 		alg->Perform();
 		mesh = alg->Mesh();
+	}*/
+	auto ni = nbNodes;
+	auto edges = tools::CreateEdges(*alg->RetrieveOffset());
+	{
+		auto nodes = Aft_Tools::RetrieveNodes(Aft_Tools::UpCast(edges));
+		for (const auto& n: nodes)
+		{
+			n->SetIndex(++ni);
+		}
 	}
-	return { tools::CreateEdges(*offset), mesh };
+	return { std::move(edges), alg->Mesh() };
 }
 
 void tnbLib::bndLayer::SetOffsets
@@ -1565,6 +1599,7 @@ void tnbLib::bndLayer::CalcOffsetEdges
 	const std::vector<std::shared_ptr<SupEdge>>& theEdges
 )
 {
+	Standard_Integer k = 0;
 	for (const auto& x : theEdges)
 	{
 		Debug_Null_Pointer(x);
@@ -1572,12 +1607,80 @@ void tnbLib::bndLayer::CalcOffsetEdges
 		const auto& n1 = x->Node1();
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
-		auto seg =
-			std::make_shared<Aft2d_SegmentEdge>
-			(x->Index(), n0->Offset(), n1->Offset());
-		x->SetOffset(std::move(seg));
+		if (n0->NbOffsets() IS_EQUAL 1 AND n1->NbOffsets() IS_EQUAL 1)
+		{
+			auto seg =
+				std::make_shared<Aft2d_SegmentEdge>
+				(++k, 
+					n0->Offsets().at(0), 
+					n1->Offsets().at(0));
+			x->SetOffsets({ std::move(seg) });
+			continue;
+		}
+		if (n0->NbOffsets() IS_EQUAL 1)
+		{
+			/*auto seg =
+				std::make_shared<Aft2d_SegmentEdge>
+				(++k,
+					n0->Offsets().at(0),
+					n1->Offsets().at(0));*/
+			std::vector<std::shared_ptr<Aft2d_Node>> nodes;
+			nodes.emplace_back(n0->Offsets().at(0));
+			for (const auto& i: n1->Offsets())
+			{
+				nodes.emplace_back(i);
+			}
+			std::vector<std::shared_ptr<Aft2d_SegmentEdge>> edges;
+			for (size_t i = 1; i < nodes.size(); i++)
+			{
+				const auto& m0 = nodes.at(i - 1);
+				const auto& m1 = nodes.at(i);
+				auto seg =
+					std::make_shared<Aft2d_SegmentEdge>(++k, m0, m1);
+				edges.emplace_back(std::move(seg));
+			}
+			x->SetOffsets(std::move(edges));
+			continue;
+		}
+		if (n1->NbOffsets() IS_EQUAL 1)
+		{
+			auto seg =
+				std::make_shared<Aft2d_SegmentEdge>
+				(++k,
+					n0->Offsets().at(n0->NbOffsets() - 1),
+					n1->Offsets().at(0));
+			x->SetOffsets({ std::move(seg) });
+		}
 	}
 }
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdge>>
+tnbLib::bndLayer::CreateSegments(const Entity2d_Polygon& thePolygon)
+{
+	Standard_Integer k = 0;
+	std::vector<std::shared_ptr<Aft2d_SegmentNode>> nodes;
+	const auto& pnts = thePolygon.Points();
+	for (size_t i = 0; i < pnts.size() - 1; i++)
+	{
+		auto node = std::make_shared<Aft2d_SegmentNode>(++k, pnts.at(i));
+		nodes.emplace_back(std::move(node));
+	}
+	k = 0;
+	std::vector<std::shared_ptr<Aft2d_SegmentEdge>> segments;
+	for (size_t i = 0; i < nodes.size(); i++)
+	{
+		auto v0 = i;
+		auto v1 = (i + 1) % nodes.size();
+		auto seg =
+			std::make_shared<Aft2d_SegmentEdge>
+			(++k,
+				nodes.at(v0),
+				nodes.at(v1));
+		segments.emplace_back(std::move(seg));
+	}
+	return std::move(segments);
+}
+
 
 #include <MeshBLayer2d_Offset.hxx>
 #include <Merge2d_QuadMesh.hxx>
@@ -1587,14 +1690,22 @@ implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, thick, "thick");
 implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, curves, "curves");
 implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, rate, "rate");
 implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, cluster_size, "cluster_size");
+implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, first_layer, "first_layer");
+implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, chevron_angle, "chevron_angle");
 
 void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue)
 {
+	auto cmp = [](const std::shared_ptr<Aft2d_SegmentEdge>& e0, const std::shared_ptr<Aft2d_SegmentEdge>& e1)
+		{
+			return e0->Index() < e1->Index();
+		};
 	std::shared_ptr<Aft2d_SolutionData> solu_data;
 	double thick;
 	std::vector<int> curves;
 	double rate;
 	int cluster_size;
+	double first_layer;
+	double chevron_angle;
 	{
 		defineTnbServerParser(theValue);
 		{
@@ -1622,6 +1733,12 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				throw Server_Error("Couldn't load the volume list");
 			}
 		}
+		{
+			loadTnbServerObject(first_layer);
+		}
+		{
+			loadTnbServerObject(chevron_angle);
+		}
 	}
 	try
 	{
@@ -1639,16 +1756,25 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 		myInfo->SetGrowthRate(rate);
 		myInfo->SetNbLayers(cluster_size);
 		myInfo->SetOuterLayerThick(thick);
+		myInfo->SetFirstLayerThick(first_layer);
+		myInfo->SetChevAngle(chevron_angle);
 		if (boundaries.empty())
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no boundary edge has been detected!" << endl
 				<< abort(FatalError);
 		}
+		auto nb_of_boundaries = boundaries.size();
+		auto nb_of_nodes = nb_of_boundaries;
+		std::set<std::shared_ptr<Aft2d_SegmentEdge>, decltype(cmp)> compact(cmp);
+		for (const auto& x: boundaries)
+		{
+			compact.insert(x);
+		}
 		//const auto& bnd_layer_list = soluData->BndLayerList();
 		if (!curves.empty())
 		{
-			std::vector<std::shared_ptr<Entity2d_QuadMesh>> meshes;
+			std::vector<std::shared_ptr<Entity2d_CmpMesh>> meshes;
 			/*
 			 * Retrieving the boundary map
 			 */
@@ -1665,11 +1791,17 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				 */
 				tools::CheckWire(x->edges);
 				auto [outer_layer, mesh] =
-					bndLayer::CalcBndLayer(x->edges, *myInfo);
-				const auto merge_alg = std::make_shared<Merge2d_QuadMesh>();
+					bndLayer::CalcBndLayer(x->edges, *myInfo, nb_of_nodes);
+				for (const auto& b: x->edges)
+				{
+					compact.erase(b->Edge());
+				}
+				OFstream myfile("bndMesh.plt");
+				mesh->ExportToPlt(myfile);
+				/*const auto merge_alg = std::make_shared<Merge2d_QuadMesh>();
 				merge_alg->Import(*mesh);
 				merge_alg->Perform();
-				mesh = merge_alg->Merged();
+				mesh = merge_alg->Merged();*/
 				meshes.emplace_back(std::move(mesh));
 				/*
 				 * The new offset edges has been saved on the super edges.
@@ -1677,26 +1809,50 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				 * Both of them have been saved on the super edge.
 				 */
 				{// replacing the boundary layer edges
-					std::map<int, std::shared_ptr<SupEdge>> sup_map;
-					for (const auto& e : x->edges)
+					for (const auto& b: outer_layer)
 					{
-						Global_Tools::InsertIgnoreDup(e->Index(), e, sup_map);
+						b->SetIndex(++nb_of_boundaries);
+						compact.insert(b);
+						const auto& n0 = b->Node0();
+						const auto& n1 = b->Node1();
+						b->SetCharLength(metrics->CalcDistance(n0->Coord(), n1->Coord()));
+						b->SetCentre(MEAN(n0->Coord(), n1->Coord()));
 					}
-					for (auto& bnd : boundaries)
-					{
-						if (auto iter = sup_map.find(bnd->Index()); iter NOT_EQUAL sup_map.end())
-						{
-							//bnd = iter->second->Edge();
-							const auto& n0 = bnd->Node0();
-							const auto& n1 = bnd->Node1();
-							bnd->SetCharLength(metrics->CalcDistance(n0->Coord(), n1->Coord()));
-							bnd->SetCentre(MEAN(n0->Coord(), n1->Coord()));
-						}
-					}
+					//std::map<int, std::shared_ptr<SupEdge>> sup_map;
+					//for (const auto& e : x->edges)
+					//{
+					//	Global_Tools::InsertIgnoreDup(e->Index(), e, sup_map);
+					//}
+					//for (auto& bnd : boundaries)
+					//{
+					//	if (auto iter = sup_map.find(bnd->Index()); iter NOT_EQUAL sup_map.end())
+					//	{
+					//		//bnd = iter->second->Edge();
+					//		const auto& n0 = bnd->Node0();
+					//		const auto& n1 = bnd->Node1();
+					//		bnd->SetCharLength(metrics->CalcDistance(n0->Coord(), n1->Coord()));
+					//		bnd->SetCentre(MEAN(n0->Coord(), n1->Coord()));
+					//	}
+					//}
 				}
 			}
+			std::vector<std::shared_ptr<Aft2d_SegmentEdge>> new_boundaries;
+			{
+				std::copy(compact.begin(), compact.end(), std::back_inserter(new_boundaries));
+				auto nodes = Aft_Tools::RetrieveNodes(Aft_Tools::UpCast(new_boundaries));
+				auto ni = 0;
+				for (const auto& n: nodes)
+				{
+					n->SetIndex(++ni);
+				}
+			}
+			nb_of_boundaries = 0;
+			for (const auto& b : new_boundaries)
+			{
+				b->SetIndex(++nb_of_boundaries);
+			}
 			solu_data->SetBndlayerMeshes(meshes);
-			solu_data->SetBoundaryEdges(std::move(boundaries));
+			solu_data->SetBoundaryEdges(new_boundaries);
 		}
 		else
 		{
@@ -1845,7 +2001,7 @@ void tnbLib::Server_Mesh2dObj_ExportToFEA::Construct(const std::string& theValue
 			const auto tri_mesh = Aft_Tools::RetrieveTriangleMesh(elements);
 			mesh->Add(*tri_mesh);
 		}
-		Entity2d_CmpMesh::Merge(*mesh);
+		Entity2d_CmpMesh::Merge(*mesh, 1.e-8);
 		Entity2d_CmpMesh::CheckInverseElements(*mesh);
 
 		const auto& region = data->Region();
