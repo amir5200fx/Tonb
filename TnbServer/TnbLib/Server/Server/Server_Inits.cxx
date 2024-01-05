@@ -39,6 +39,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Boolean_Subtract_F1, Server::ob
 
 #include <Server_Cad2dObj_Segment2d_F1.hxx>
 #include <Server_Cad2dObj_Circle_F1.hxx>
+#include <Server_Cad2dObj_Ellipse_F1.hxx>
 #include <Server_Cad2dObj_Rectangular_F1.hxx>
 #include <Server_Cad2dObj_Interpl_F1.hxx>
 #include <Server_Cad2dObj_Curve_List.hxx>
@@ -51,6 +52,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Boolean_Subtract_F1, Server::ob
 #include <Server_Cad2dObj_Area_Manager.hxx>
 #include <Server_Cad2dObj_Curve.hxx>
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Circle_F1, Server::objects::make_circle_2d_f1, "make_circle_2d_f1");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Ellipse_F1, Server::objects::make_ellipse_2d_f1, "make_ellipse_2d_f1");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Rectangular_F1, Server::objects::make_rectangular_2d_f1, "make_rectangular_2d_f1");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Interpl_F1, Server::objects::make_interpl_curve_2d, "make_interpl_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Segment2d_F1, Server::objects::make_segment_2d_f1, "make_segment_2d_f1");

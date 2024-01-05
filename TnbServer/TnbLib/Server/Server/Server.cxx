@@ -53,6 +53,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::trim_curve_2d, trim_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::set_name_curve_2d, set_name_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::make_circle_2d_f1, make_circle_2d_f1, value, sense)
+		switchToMakeTnbServerObject(objects::make_ellipse_2d_f1, make_ellipse_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_rectangular_2d_f1, make_rectangular_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_segment_2d_f1, make_segment_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::curve_2d_get_iden, curve_2d_get_iden, value, sense)

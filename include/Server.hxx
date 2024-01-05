@@ -42,6 +42,7 @@ namespace tnbLib
 
 			make_segment_2d_f1,
 			make_circle_2d_f1,
+			make_ellipse_2d_f1,
 			make_rectangular_2d_f1,
 
 			make_curve_2d_list,
@@ -236,6 +237,7 @@ namespace tnbLib
 		declareTnbServerFunction(area_get_curves);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
+		declareTnbServerFunction(make_ellipse_2d_f1);
 		void make_rectangular_2d_f1(const std::string&, const std::string&);
 
 		void make_interpl_curve_2d(const std::string&, const std::string&);

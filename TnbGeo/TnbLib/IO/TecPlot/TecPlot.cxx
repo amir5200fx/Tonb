@@ -41,10 +41,10 @@ void tnbLib::Io::WritePointsVariables
 	}
 
 	for (const auto& x : X)
-		theStream << x << "  ";
+		theStream << std::setw(15) << x << "  ";
 	theStream << "\n";
 	for (const auto& x : Y)
-		theStream << x << "  ";
+		theStream << std::setw(15) << x << "  ";
 	theStream << "\n";
 }
 

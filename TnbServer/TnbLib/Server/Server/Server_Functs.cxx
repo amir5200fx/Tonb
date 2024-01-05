@@ -34,6 +34,7 @@ createTnbServerObject(create_axis_2d_f1, Server_GeoObj_Axis2d_F1)
 
 #include <Server_Cad2dObj_Segment2d_F1.hxx>
 #include <Server_Cad2dObj_Circle_F1.hxx>
+#include <Server_Cad2dObj_Ellipse_F1.hxx>
 #include <Server_Cad2dObj_Rectangular_F1.hxx>
 #include <Server_Cad2dObj_PrjPntCrv.hxx>
 #include <Server_Cad2dObj_Curve_List.hxx>
@@ -45,6 +46,7 @@ createTnbServerObject(create_axis_2d_f1, Server_GeoObj_Axis2d_F1)
 #include <Server_Cad2dObj_Area_Manager.hxx>
 #include <Server_Cad2dObj_Curve.hxx>
 createTnbServerObject(make_circle_2d_f1, Server_Cad2dObj_Circle_F1)
+createTnbServerObject(make_ellipse_2d_f1, Server_Cad2dObj_Ellipse_F1)
 createTnbServerObject(make_rectangular_2d_f1, Server_Cad2dObj_Rectangular_F1)
 createTnbServerObject(make_segment_2d_f1, Server_Cad2dObj_Segment2d_F1)
 createTnbServerObject(make_curve_2d_list, Server_Cad2dObj_Curve_List)
