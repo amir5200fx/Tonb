@@ -92,6 +92,9 @@ defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP1, Server::objects::
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetCorners, Server::objects::get_bnd_box_2d_corners, "get_bnd_box_2d_corners");
 
 #include <Server_Geo2dObj.hxx>
+defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F1, Server::objects::make_size_map_2d_vol_f1, "make_size_map_2d_vol_f1");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F2, Server::objects::make_size_map_2d_vol_f2, "make_size_map_2d_vol_f2");
+
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Uniform, Server::objects::make_size_map_2d_uniform, "make_size_map_2d_uniform");
 
 defineAndRegisterTnbServerObject(Server_Geo2dObj_ApproxCrv, Server::objects::make_approx_curve_2d_settings, "make_approx_curve_2d_settings");

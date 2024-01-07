@@ -113,6 +113,9 @@ createTnbServerObject(make_size_map_2d_ctrl_bnd, Server_Geo2dObj_SizeMap_BndCont
 createTnbServerObject(make_size_map_2d_ctrl_vol, Server_Geo2dObj_SizeMap_VolControl)
 // Mesh lib
 #include <Server_Mesh2dObj.hxx>
+createTnbServerObject(make_size_map_2d_vol_f1, Server_Geo2dObj_SizeMap_Volume_F1)
+createTnbServerObject(make_size_map_2d_vol_f2, Server_Geo2dObj_SizeMap_Volume_F2)
+
 createTnbServerObject(make_mesh_ref_values_2d, Server_Mesh2dObj_RefValues)
 createTnbServerObject(make_metric_prcsr_2d_settings, Server_Mesh2dObj_MetricPrcsr_Settings)
 createTnbServerObject(make_metric_prcsr_2d, Server_Mesh2dObj_MetricPrcsr)

@@ -90,6 +90,9 @@ namespace tnbLib
 			make_size_map_2d_uniform,
 
 			// adaptive mesh stuff
+			make_size_map_2d_vol_f1,
+			make_size_map_2d_vol_f2,
+			
 			make_size_map_2d_adaptive,
 			perform_size_map_2d_adaptive,
 
@@ -261,6 +264,9 @@ namespace tnbLib
 		declareTnbServerFunction(make_size_map_2d_uniform);
 
 		// adaptive size map stuff
+		declareTnbServerFunction(make_size_map_2d_vol_f1);
+		declareTnbServerFunction(make_size_map_2d_vol_f2);
+		
 		declareTnbServerFunction(make_size_map_2d_adaptive);
 		declareTnbServerFunction(perform_size_map_2d_adaptive);
 
