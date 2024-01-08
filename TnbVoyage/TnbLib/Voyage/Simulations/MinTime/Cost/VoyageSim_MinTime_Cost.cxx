@@ -24,6 +24,7 @@ namespace tnbLib
 			const variable::State& theS0_;
 			const Pnt2d& theP1_;
 			const var::Distance& theDist_;
+			const var::Power& thePower_;
 			
 		public:
 
@@ -34,12 +35,14 @@ namespace tnbLib
 				const obj& theObj, 
 				const variable::State& theS0, 
 				const Pnt2d& theP1,
-				const var::Distance& theDist
+				const var::Distance& theDist,
+				const var::Power& thePower
 			)
 				: theObj_(theObj)
 				, theS0_(theS0)
 				, theP1_(theP1)
 				, theDist_(theDist)
+				, thePower_(thePower)
 			{}
 			
 			Standard_Real Value(const Standard_Real time) const;
@@ -52,7 +55,12 @@ namespace tnbLib
 Standard_Real
 tnbLib::voyageLib::MinTime_CostIntegFun::Value(const Standard_Real time) const
 {
-	return theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
+	std::cout << "time = " << time << std::endl;
+	auto power = theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
+	std::cout << "Power= " << power << std::endl;
+	auto value = thePower_.value - theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
+	std::cout << "value = " << value << std::endl;
+	return thePower_.value - theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
 }
 
 tnbLib::voyageLib::variable::Time
@@ -70,7 +78,9 @@ tnbLib::VoyageSim_MinTime_Cost::CalcTime
 			<< "no function is found." << endl
 			<< abort(FatalError);
 	}
-	voyageLib::MinTime_CostIntegFun bisectFun(*this, theS0, theP1, theDist);
+	std::cout << "distance= " << theDist.value << std::endl;
+
+	const voyageLib::MinTime_CostIntegFun bisectFun(*this, theS0, theP1, theDist, thePower);
 	NumAlg_BisectionSolver<voyageLib::MinTime_CostIntegFun, true>
 		alg(bisectFun, *SolvInfo());
 	try

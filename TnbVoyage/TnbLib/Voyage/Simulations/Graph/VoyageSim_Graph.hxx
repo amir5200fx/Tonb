@@ -219,6 +219,7 @@ namespace tnbLib
 		std::map<Standard_Integer, std::shared_ptr<Edge>> theEdges_;
 
 		std::shared_ptr<Node> theDeparture_;
+		std::shared_ptr<Node> theArrival_;
 
 		// Private functions and operators
 
@@ -235,6 +236,7 @@ namespace tnbLib
 
 		[[nodiscard]] const auto& Edges() const { return theEdges_; }
 		[[nodiscard]] const auto& Departure() const { return theDeparture_; }
+		[[nodiscard]] const auto& Arrival() const { return theArrival_; }
 		
 		auto& EdgesRef() { return theEdges_; }
 		auto& DepartureRef() { return theDeparture_; }
@@ -243,6 +245,7 @@ namespace tnbLib
 		TnbVoyage_EXPORT std::vector<std::pair<Position, Time>> RetrieveTempPositions() const;
 
 		void SetDeparture(const std::shared_ptr<Node>& theNode) { theDeparture_ = theNode; }
+		void SetArrival(const std::shared_ptr<Node>& theNode) { theArrival_ = theNode; }
 
 	 	TnbVoyage_EXPORT void ExportToPlt(OFstream&) const;
 

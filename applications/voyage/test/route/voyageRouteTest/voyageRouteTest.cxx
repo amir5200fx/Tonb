@@ -407,7 +407,7 @@ int main()
 	constexpr auto nb_of_samples = 5;
 	auto avg_ocean_vel = [ocean_fun, nb_of_samples](const Pnt2d& p0, const double t0, const Pnt2d& p1, const double t1)->std::pair<double, double>
 		{
-			double su, sv = 0;
+			double su = 0, sv = 0;
 			const auto du = 1.0 / static_cast<double>(nb_of_samples - 1);
 			for (int i = 0; i <= nb_of_samples - 1; i++)
 			{
@@ -432,6 +432,7 @@ int main()
 			const auto time0 = s0.time.value;
 			const auto time1 = s1.time.value;
 			const auto dt = time1 - time0;
+			std::cout << "t0: " << time0 << ", t1: " << time1 << ", dt: " << dt << std::endl;
 			if (dt <= 1.e-6)
 			{
 				return { 0 };
@@ -440,21 +441,24 @@ int main()
 			const auto& p1 = s1.coord;
 
 			const auto d = dist.value;
-			const auto sog = d / dt;
+			const auto sog = d / dt * 0.278; // kmph to mps
 			const auto ship_dir = 
 				Vec2d(
 					Voyage_Tools::ConvertVoyageToGlobal(p1),
 					Voyage_Tools::ConvertToVoyageSystem(p0)
 				).Normalized();
 			const auto [u, v] = avg_ocean_vel(p0, time0, p1, time1);
+			std::cout << "u = " << u << ", v = " << v << std::endl;
 			if (std::sqrt(u * u + v * v) <= 10E-12)
 			{
 				return { profile->Value(sog) * d };
 			}
 			const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
+			std::cout << "lower speed = " << profile->Lower() << ", upper speed = " << profile->Upper() << std::endl;
 			if (flow_vel < 0)
 			{// if the ocean flow is against the velocity vector of the ship
 				const auto U = std::abs(flow_vel) + sog;
+				std::cout << "U0 = " << U << std::endl;
 				if (NOT INSIDE(U, profile->Lower(), profile->Upper()))
 				{
 					return { std::numeric_limits<float>::max() };
@@ -464,6 +468,7 @@ int main()
 			else
 			{
 				auto U = sog - std::abs(flow_vel);
+				std::cout << "U1 = " << U << std::endl;
 				if (U < profile->Lower())
 				{
 					return { 0 };
@@ -483,13 +488,13 @@ int main()
 
 	auto estimate_next_time = [maxDay](const var::Time& t)-> var::Time
 		{
-			return { maxDay };
+			return { maxDay * 24 };
 		};
 	
 
 	auto sim = std::make_shared<VoyageSim_MinTime>();
 	sim->SetNet(grid);
-	sim->SetPower({ 450.0 });
+	sim->SetPower({ 6500.0 });
 	sim->SetDistFunc(my_dist_fun);
 	sim->SetResistFunc([cost_fun, estimate_next_time](
 		const var::State& s0, 
@@ -497,8 +502,9 @@ int main()
 		const var::Distance& dist,
 		const var::Power& power)-> var::Time
 	{
-			auto time_range = VoyageSim_MinTime_Cost::timeRange{ {s0.time}, estimate_next_time(s0.time) };
+		const auto time_range = VoyageSim_MinTime_Cost::timeRange{ {s0.time}, estimate_next_time(s0.time) };
 			cost_fun->SetTimeRange(time_range);
+			std::cout << "calc time..." << std::endl;
 			return cost_fun->CalcTime(s0, p1, power, dist);
 	});
 

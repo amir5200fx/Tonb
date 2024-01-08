@@ -92,16 +92,28 @@ tnbLib::VoyageSim_MinTime::CalcGraph
 	std::set<std::shared_ptr<VoyageWP_Net::Node>, decltype(cmp)> seed(cmp);
 	seed.insert(theDep);
 	Standard_Integer nb_edges = 0;
-	auto graph = std::make_shared<VoyageSim_Graph>();
+	auto graph = std::make_shared<VoyageSim_Graph>(); 
 	auto& edges = graph->EdgesRef();
+	const auto& dep = theNet_->Departure();
+	const auto& arv = theNet_->Arrival();
+	
 	while (!seed.empty())
 	{
 		auto current = *seed.begin();
+		
 		const auto& p0 = current->Coord();
 		Debug_Null_Pointer(current);
 		seed.erase(current); // remove the current node form the set
 		const auto& next_poses = current->Nexts();
 		const auto& n0 = theNodesMap.at(current->Index());
+		if (current IS_EQUAL dep)
+		{
+			graph->SetDeparture(n0);
+		}
+		if (current IS_EQUAL arv)
+		{
+			graph->SetArrival(n0);
+		}
 		std::vector<Standard_Real> next_dist;
 		for (const auto& [id, next_pos] : next_poses)
 		{
@@ -115,7 +127,8 @@ tnbLib::VoyageSim_MinTime::CalcGraph
 		{
 			const auto dis = next_dist.at(k++);
 			const auto& n1 = theNodesMap.at(id);
-			auto edge = std::make_shared<VoyageSim_Graph::Edge>(++nb_edges, VoyageSim_Graph::Edge::Array2{ n0, n1 });
+			auto edge = std::make_shared<VoyageSim_Graph::Edge>
+			(++nb_edges, VoyageSim_Graph::Edge::Array2{ n0, n1 });
 			Debug_Null_Pointer(edge);
 			n0->SetNext(edge->Index(), edge);
 			edge->SetDist(dis);
@@ -167,6 +180,7 @@ tnbLib::VoyageSim_MinTime::RetrievePath
 
 void tnbLib::VoyageSim_MinTime::Perform()
 {
+	std::cout << "min time simulation..." << std::endl;
 	static auto cmp =
 		[](
 			const std::shared_ptr<VoyageSim_Graph::Node>& n0,
@@ -189,9 +203,13 @@ void tnbLib::VoyageSim_MinTime::Perform()
 			<< "found no departure!" << endl
 			<< abort(FatalError);
 	}
+	std::cout << "calculate graph nodes map..." << std::endl;
 	const auto nodesMap = CalcGraphNodesMap();
+	std::cout << "graph nodes has been caculated." << std::endl;
 	theArrival_ = nodesMap.at(departure->Index());
+	std::cout << "calc graph..." << std::endl;
 	const auto graph = CalcGraph(departure, nodesMap);
+	std::cout << "the graph has been calculated." << std::endl;
 	std::set<std::shared_ptr<VoyageSim_Graph::Node>, decltype(cmp)> unvisited(cmp), visited(cmp);
 	for (const auto& [id, edge] : graph->Edges())
 	{
@@ -199,6 +217,7 @@ void tnbLib::VoyageSim_MinTime::Perform()
 		unvisited.insert(edge->Node0());
 		unvisited.insert(edge->Node1());
 	}
+	std::cout << "table" << std::endl;
 	auto& table = theTable_;
 	for (const auto& x : unvisited)
 	{
@@ -210,13 +229,19 @@ void tnbLib::VoyageSim_MinTime::Perform()
 		}
 		table.insert({ x->Index(), {RealLast(), std::shared_ptr<VoyageSim_Graph::Node>()} });
 	}
+	PAUSE;
 	auto current = graph->Departure();
+	Debug_Null_Pointer(current);
+	std::cout << "current index: " << current->Index() << std::endl;
 	table.at(current->Index()).first = 0;
+	std::cout << "main loop" << std::endl;
 	while (true)
 	{
 		Debug_Null_Pointer(current);
 		const auto current_value = table.at(current->Index()).first;
 		const auto& nexts = current->Nexts();
+		std::cout << "nexts: " << nexts.size() << std::endl;
+		PAUSE;
 		for (const auto& [id, x] : nexts)
 		{
 			const auto edge = x.lock();
@@ -234,6 +259,7 @@ void tnbLib::VoyageSim_MinTime::Perform()
 						{ edge->Dist() },
 						thePower_
 					);
+				std::cout << "time = " << t.value << std::endl;
 				if (t.value < 0)
 				{
 					FatalErrorIn(FunctionSIG) << endl
