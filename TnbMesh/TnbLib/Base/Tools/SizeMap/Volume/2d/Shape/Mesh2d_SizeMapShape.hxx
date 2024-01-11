@@ -44,12 +44,14 @@ namespace tnbLib
 		
 		Mesh2d_SizeMapShape(const std::shared_ptr<Cad2d_Plane>& theVolume)
 			: theVolume_(theVolume)
+			, theInfo_(DEFAULT_INFO)
 			, theNbSamples_(DEFAULT_NB_SAMPLES)
 			, theSize_(0)
 		{}
 
 		Mesh2d_SizeMapShape(std::shared_ptr<Cad2d_Plane>&& theVolume)
 			: theVolume_(std::move(theVolume))
+			, theInfo_(DEFAULT_INFO)
 			, theNbSamples_(DEFAULT_NB_SAMPLES)
 			, theSize_(0)
 		{}

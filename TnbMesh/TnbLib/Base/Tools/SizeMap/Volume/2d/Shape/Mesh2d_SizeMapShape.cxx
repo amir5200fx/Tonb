@@ -69,12 +69,12 @@ void tnbLib::Mesh2d_SizeMapShape::Perform()
 	discretFun->SetSize(elemSize);
 
 	const auto& wire = Volume()->OuterWire();
-
+	Debug_Null_Pointer(wire);
 	const auto alg = std::make_shared<Discret2d_Wire>();
 	alg->SetWire(wire);
 	alg->SetInfo(discretCrvInfo);
 	alg->SetFunction(discretFun);
-
+	
 	alg->Perform();
 	Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed!");
 	BoundaryRef() = alg->Polygon();

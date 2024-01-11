@@ -2299,6 +2299,9 @@
     <Filter Include="TnbLib\Base\Tools\SizeMap\Volume\3d">
       <UniqueIdentifier>{dfc7d269-8025-484a-8875-f4106c1a6afe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\MultiFun">
+      <UniqueIdentifier>{f1738a28-c646-4abd-9396-a59ba96c99c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5577,6 +5580,9 @@
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon\Mesh2d_SizeMapPolygon.hxx">
       <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_Multi.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7333,6 +7339,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon\Mesh2d_SizeMapPolygonIO.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_Multi.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_MultiIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -79,6 +79,7 @@ void Server::split_area_2d_block(const std::string& theValue, const std::string&
 createTnbServerObject(rename_area_2d_block, Server_Cad2dObj_Area_Manager_Segments_RenameBlock)
 createTnbServerObject(area_get_curves, Server_Cad2dObj_Area_GetCurves);
 createTnbServerObject(curve_2d_get_iden, Server_Cad2dObj_Curve_GetIdent)
+createTnbServerObject(area_2d_get_outer_poly, Server_Cad2dObj_Area_GetOuterPolygon)
 
 #include <Server_Cad2dObj_Interpl_F1.hxx>
 #include <Server_Cad2dObj_Discret_Info.hxx>
@@ -91,12 +92,15 @@ createTnbServerObject(do_boolean_sub_2d, Server_Cad2dObj_Boolean_Subtract_F1)
 
 // geo lib
 #include <Server_Geo2dObj_BndBox.hxx>
+#include <Server_Geo2dObj.hxx>
 createTnbServerObject(make_bnd_box_2d, Server_Geo2dObj_BndBox_Create)
 createTnbServerObject(calc_bnd_box_2d_pnt_list, Server_Geo2dObj_BndBox_PntList)
 createTnbServerObject(calc_bnd_box_2d_curve, Server_Geo2dObj_BndBox_Curve)
 createTnbServerObject(calc_bnd_box_2d_crv_list, Server_Geo2dObj_BndBox_CrvList)
 createTnbServerObject(calc_bnd_box_2d_area, Server_Geo2dObj_BndBox_Area)
 createTnbServerObject(calc_bnd_box_2d_area_list, Server_Geo2dObj_BndBox_AreaList)
+
+createTnbServerObject(poly_2d_rev, Server_Geo2dObj_RevPoly)
 
 createTnbServerObject(do_bnd_box_2d_expand, Server_Geo2dObj_BndBox_Expand)
 createTnbServerObject(get_bnd_box_2d_dia, Server_Geo2dObj_BndBox_GetDia)
@@ -105,7 +109,7 @@ createTnbServerObject(get_bnd_box_2d_p0, Server_Geo2dObj_BndBox_GetP0)
 createTnbServerObject(get_bnd_box_2d_p1, Server_Geo2dObj_BndBox_GetP1)
 createTnbServerObject(get_bnd_box_2d_corners, Server_Geo2dObj_BndBox_GetCorners)
 
-#include <Server_Geo2dObj.hxx>
+
 createTnbServerObject(make_size_map_2d_uniform, Server_Geo2dObj_SizeMap_Uniform)
 createTnbServerObject(make_approx_curve_2d_settings, Server_Geo2dObj_ApproxCrv)
 

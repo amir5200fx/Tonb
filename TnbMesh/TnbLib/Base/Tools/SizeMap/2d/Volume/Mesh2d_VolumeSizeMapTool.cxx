@@ -446,8 +446,8 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
-	//stream myFile("sizeMap0.plt");
-	//esh->ExportToPlt(myFile);
+	OFstream myFile("sizeMap0.plt");
+	bMesh->ExportToPlt(myFile);
 	ChangeBackMesh() = std::move(bMesh);
 	//std::cout << "finished" << std::endl;
 	Change_IsDone() = Standard_True;

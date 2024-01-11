@@ -23,6 +23,44 @@
 
 #include <Geo_BasicApprxCurve_Info.hxx>
 
+implementTnbServerConstruction(Server_Geo2dObj_RevPoly)
+{
+	std::shared_ptr<Entity2d_Polygon> poly;
+	{
+		loadNonJSONTnbServer(poly);
+	}
+	try
+	{
+		poly->Reverse();
+		streamGoodTnbServerObject(poly);
+	}
+	catchTnbServerErrors()
+}
+
+implementTnbServerConstruction(Server_Geo2dObj_OffsetPoly)
+{
+	std::shared_ptr<Entity2d_Polygon> poly;
+	double value;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(poly);
+		}
+		{
+			loadTnbServerObject(value);
+		}
+		try
+		{
+			if (!poly)
+			{
+				throw Server_Error("the polygon object is null.");
+			}
+			
+		}
+		catchTnbServerErrors()
+	}
+}
+
 namespace tnbLib
 {
 	auto switch_to_variation_rate_type(const std::string name)
@@ -289,7 +327,8 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_Volume_F1)
 	}
 	try
 	{
-		auto value = std::make_shared<Mesh2d_SizeMapShape>(shape);
+		std::shared_ptr<Mesh2d_SizeMapVolume> value = 
+			std::make_shared<Mesh2d_SizeMapShape>(shape);
 		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
@@ -303,7 +342,8 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_Volume_F2)
 	}
 	try
 	{
-		auto value = std::make_shared<Mesh2d_SizeMapPolygon>(shape);
+		std::shared_ptr<Mesh2d_SizeMapVolume> value = 
+			std::make_shared<Mesh2d_SizeMapPolygon>(shape);
 		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
@@ -350,13 +390,13 @@ void tnbLib::Server_Geo2dObj_SizeMap_Adaptive::Construct(const std::string& theV
 			{
 				for (const auto& element: json_array)
 				{
-					std::shared_ptr<Cad2d_Plane> area;
+					std::shared_ptr<Mesh2d_SizeMapVolume> area;
 					std::stringstream stream;
 					stream << element.get<std::string>();
 					TNB_iARCH_FILE_TYPE ia(stream);
 					ia >> area;
-					auto vol = std::make_shared<Mesh2d_SizeMapShape>(area);
-					volumes.emplace_back(std::move(vol));
+					//auto vol = std::make_shared<Mesh2d_SizeMapShape>(area);
+					volumes.emplace_back(std::move(area));
 				}
 			}
 			else

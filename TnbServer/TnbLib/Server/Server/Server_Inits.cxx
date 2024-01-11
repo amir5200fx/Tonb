@@ -74,9 +74,14 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_CombineBl
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_CombineAll, Server::objects::combine_all_area_blocks, "combine_all_area_blocks");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_RenameBlock, Server::objects::rename_area_2d_block, "rename_area_2d_block");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_SplitBlock, Server::objects::split_area_2d_block, "split_area_2d_block");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_GetOuterPolygon, Server::objects::area_2d_get_outer_poly, "area_2d_get_outer_poly");
 
 // geo lib
 #include <Server_Geo2dObj_BndBox.hxx>
+#include <Server_Geo2dObj.hxx>
+
+defineAndRegisterTnbServerObject(Server_Geo2dObj_RevPoly, Server::objects::poly_2d_rev, "poly_2d_rev");
+
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Create, Server::objects::make_bnd_box_2d, "make_bnd_box_2d");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_PntList, Server::objects::calc_bnd_box_2d_pnt_list, "calc_bnd_box_2d_pnt_list");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Curve, Server::objects::calc_bnd_box_2d_curve, "calc_bnd_box_2d_curve");
@@ -91,7 +96,7 @@ defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP0, Server::objects::
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP1, Server::objects::get_bnd_box_2d_p1, "get_bnd_box_2d_p1");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetCorners, Server::objects::get_bnd_box_2d_corners, "get_bnd_box_2d_corners");
 
-#include <Server_Geo2dObj.hxx>
+
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F1, Server::objects::make_size_map_2d_vol_f1, "make_size_map_2d_vol_f1");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F2, Server::objects::make_size_map_2d_vol_f2, "make_size_map_2d_vol_f2");
 

@@ -18,10 +18,13 @@ namespace tnbLib
 	class Mesh2d_VolumeSizeMapTool_Info;
 	class Mesh2d_VolumeSizeMapTool;
 	class Mesh2d_BoundarySizeMapTool;
+	class Mesh2d_SizeMapVolume;
 	class Mesh_Conditions;
 	class Mesh_Values;
 	class Mesh_SurfaceSizeValues;
 	class Cad2d_Plane;
+
+	defineTnbServerObject(Server_Geo2dObj_RevPoly);
 
 	class Server_Geo2dObj_ApproxCrv
 		: public Server_Object
@@ -93,6 +96,9 @@ namespace tnbLib
 		void Construct(const std::string& theValue) override;
 	};
 
+	defineTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F1);
+	defineTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F2);
+	
 	class Server_Geo2dObj_SizeMap_Adaptive
 		: public Server_Object
 	{
@@ -100,7 +106,7 @@ namespace tnbLib
 		struct IO
 		{
 			std::shared_ptr<Cad2d_Plane> model;
-			std::vector<std::shared_ptr<Cad2d_Plane>> volumes;
+			std::vector<std::shared_ptr<Mesh2d_SizeMapVolume>> volumes;
 
 			std::shared_ptr<Mesh2d_ReferenceValues> ref;
 

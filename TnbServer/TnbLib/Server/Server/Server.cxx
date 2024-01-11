@@ -65,6 +65,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		case objects::split_area_2d_block: { split_area_2d_block(value, sense); break; }
 		switchToMakeTnbServerObject(objects::rename_area_2d_block, rename_area_2d_block, value, sense)
 		switchToMakeTnbServerObject(objects::area_get_curves, area_get_curves, value, sense)
+		switchToMakeTnbServerObject(objects::area_2d_get_outer_poly, area_2d_get_outer_poly, value, sense)
 
 			switchToMakeTnbServerObject(objects::make_curve_2d_list, make_curve_2d_list, value, sense)
 			switchToMakeTnbServerObject(objects::make_area_2d, make_area_2d, value, sense)
@@ -81,6 +82,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_area, calc_bnd_box_2d_area, value, sense)
 			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_area_list, calc_bnd_box_2d_area_list, value, sense)
 
+		switchToMakeTnbServerObject(objects::poly_2d_rev, poly_2d_rev, value, sense)
 
 		switchToMakeTnbServerObject(objects::do_bnd_box_2d_expand, do_bnd_box_2d_expand, value, sense)
 		switchToMakeTnbServerObject(objects::get_bnd_box_2d_dia, get_bnd_box_2d_dia, value, sense)

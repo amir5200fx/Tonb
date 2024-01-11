@@ -62,6 +62,7 @@ namespace tnbLib
 			split_area_2d_block,
 			rename_area_2d_block,
 			area_get_curves,
+			area_2d_get_outer_poly,
 
 			make_area_2d,
 
@@ -79,6 +80,8 @@ namespace tnbLib
 			calc_bnd_box_2d_crv_list,
 			calc_bnd_box_2d_area,
 			calc_bnd_box_2d_area_list,
+
+			poly_2d_rev,
 
 			do_bnd_box_2d_expand,
 			get_bnd_box_2d_dia,
@@ -238,6 +241,7 @@ namespace tnbLib
 		declareTnbServerFunction(split_area_2d_block);
 		declareTnbServerFunction(rename_area_2d_block);
 		declareTnbServerFunction(area_get_curves);
+		declareTnbServerFunction(area_2d_get_outer_poly);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
 		declareTnbServerFunction(make_ellipse_2d_f1);
@@ -253,6 +257,8 @@ namespace tnbLib
 		declareTnbServerFunction(calc_bnd_box_2d_crv_list);
 		declareTnbServerFunction(calc_bnd_box_2d_area);
 		declareTnbServerFunction(calc_bnd_box_2d_area_list);
+
+		declareTnbServerFunction(poly_2d_rev);
 
 		declareTnbServerFunction(do_bnd_box_2d_expand);
 		declareTnbServerFunction(get_bnd_box_2d_dia);
