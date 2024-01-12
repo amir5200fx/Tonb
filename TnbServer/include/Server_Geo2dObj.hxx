@@ -26,6 +26,19 @@ namespace tnbLib
 
 	defineTnbServerObject(Server_Geo2dObj_RevPoly);
 
+	class Server_Geo2dObj_OffsetPoly
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(poly);
+			defineTnbServerParam(value);
+		};
+
+		constructTnbServerObject(Server_Geo2dObj_OffsetPoly);
+	};
+
 	class Server_Geo2dObj_ApproxCrv
 		: public Server_Object
 	{

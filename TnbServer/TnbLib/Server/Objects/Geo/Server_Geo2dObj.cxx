@@ -37,6 +37,9 @@ implementTnbServerConstruction(Server_Geo2dObj_RevPoly)
 	catchTnbServerErrors()
 }
 
+implementTnbServerParam(Server_Geo2dObj_OffsetPoly, poly, "poly");
+implementTnbServerParam(Server_Geo2dObj_OffsetPoly, value, "value");
+
 implementTnbServerConstruction(Server_Geo2dObj_OffsetPoly)
 {
 	std::shared_ptr<Entity2d_Polygon> poly;

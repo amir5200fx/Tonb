@@ -534,6 +534,8 @@ void tnbLib::Server_Mesh2dObj_NodeGen_Std::Construct(const std::string& theValue
 #include <Aft_Tools.hxx>
 #include <Aft2d_StdOptNode.hxx>
 #include <Aft2d_SegmentEdge.hxx>
+#include <Aft2d_Element.hxx>
+#include <Aft2d_ElementAnIso.hxx>
 #include <Aft2d_SegmentEdgeAnIso.hxx>
 #include <MeshPost2d_LaplacianSmoothing.hxx>
 #include <MeshPost2d_LaplacianSmoothing_AdjEdges.hxx>
@@ -606,8 +608,9 @@ void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
 			elements.emplace_back(x.second);
 		}
 		/**/
-		//OFstream myFile("myMesh.plt");
-		//alg->GetTriangulation()->ExportToPlt(myFile);
+		alg->CreateStaticMesh();
+		OFstream myFile("myMesh.plt");
+		alg->GetTriangulation()->ExportToPlt(myFile);
 		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
 	}
@@ -1687,7 +1690,8 @@ tnbLib::bndLayer::CreateSegments(const Entity2d_Polygon& thePolygon)
 	return std::move(segments);
 }
 
-
+#include <Mesh2d_MultiSizeMap.hxx>
+#include <GeoMesh2d_Background.hxx>
 #include <Mesh_SetSourcesNode.hxx>
 #include <MeshBLayer2d_Offset.hxx>
 #include <Merge2d_QuadMesh.hxx>
@@ -1841,7 +1845,16 @@ namespace tnbLib
 		return std::move(t);
 	}
 	
-	auto BoundaryLayerSizeMap(const std::shared_ptr<Entity2d_Polygon>& poly, const std::shared_ptr<Entity2d_Box>& theDomain, const std::shared_ptr<Geo2d_SizeFunction>& theSizeFun, double baseSize, double mergCrit)
+	std::shared_ptr<GeoMesh2d_Background> BoundaryLayerSizeMap
+	(
+		const std::shared_ptr<Entity2d_Polygon>& poly,
+		const Entity2d_Box& theDomain, 
+		const std::shared_ptr<Geo2d_SizeFunction>& theSizeFun,
+		const Mesh_VariationRateInfo rate,
+		int max_nb_iters,
+		double growth_rate,
+		double mergCrit
+	)
 	{
 		static auto calc_length = [](const Geo2d_SegmentGraphEdge& e)
 			{
@@ -1865,7 +1878,7 @@ namespace tnbLib
 		Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
 		engine.SetMaxUnbalancing(2);
 		engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
-		engine.SetGeometryRegion(*theDomain);
+		engine.SetGeometryRegion(theDomain);
 		engine.BUCKET_SIZE = 4;
 
 		Standard_Integer nbSources = 0;
@@ -1944,7 +1957,7 @@ namespace tnbLib
 			engine.PostBalance();
 		}
 
-		auto [pnts, enginePts] = RetrieveNodes(engine, srcCoords, *theDomain, mergCrit);
+		auto [pnts, enginePts] = RetrieveNodes(engine, srcCoords, theDomain, mergCrit);
 		auto tris = std::make_shared<Entity2d_Triangulation>();
 		Debug_Null_Pointer(tris);
 		{
@@ -1953,6 +1966,16 @@ namespace tnbLib
 			{
 				auto h = std::make_shared<hNode>(pt, theSizeFun->Value(pt));
 				sources.push_back(std::move(h));
+			}
+		}
+
+		double base_size = 0;
+		for (const auto& x: sources)
+		{
+			auto h = theSizeFun->Value(x->Coord());
+			if (h > base_size)
+			{
+				base_size = h;
 			}
 		}
 
@@ -1977,21 +2000,20 @@ namespace tnbLib
 
 		// initiate the current element [8/1/2022 Amir]
 		bMesh->InitiateCurrentElement();
-		bMesh->SetBoundingBox(*theDomain);
-		bMesh->Sources().resize(tris->NbPoints(), baseSize);
+		bMesh->SetBoundingBox(theDomain);
+		bMesh->Sources().resize(tris->NbPoints(), base_size);
 
 		auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 		Debug_Null_Pointer(hvInfo);
-		hvInfo->SetMaxNbIters(4);
-		hvInfo->SetFactor(Mesh_VariationRate::Rate(Mesh_VariationRateInfo::slow));
+		hvInfo->SetMaxNbIters(max_nb_iters);
+		hvInfo->SetFactor(Mesh_VariationRate::Rate(rate));
 
 		MeshBase_Tools::SetSourcesToMeshNearestPoint
-		(sources, baseSize, hvInfo->Factor(), *bMesh);
+		(sources, base_size, growth_rate, *bMesh);
 		sources.clear();
 
 		bMesh->HvCorrection(hvInfo);
-		auto fun = std::make_shared<GeoSizeFun2d_Background>(*theDomain, bMesh);
-		return std::move(fun);
+		return std::move(bMesh);
 	}
 
 	
@@ -2062,6 +2084,7 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				<< "No metric processor has been found." << endl
 				<< abort(FatalError);
 		}
+		const auto& size_fun = solu_data->SizeFunction();
 		const auto& bnd_info = solu_data->GlobalBndLayerInfo();
 		const auto myInfo = std::make_shared<Mesh_BndLayer_Info>();
 		//myInfo->SetFirstLayerThick(myThick);
@@ -2095,6 +2118,7 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 			 * Getting the inner wires
 			 */
 			const auto wires = tools::RetrieveWires(bnd_sets, curves);
+			std::vector<std::shared_ptr<GeoMesh2d_Background>> bmeshes;
 			for (const auto& x : wires)
 			{// for every wire on the list we need to create a bounady layer mesh.
 				/*
@@ -2104,12 +2128,21 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				tools::CheckWire(x->edges);
 				auto [outer_layer, mesh, poly] =
 					bndLayer::CalcBndLayer(x->edges, *myInfo, nb_of_nodes);
+				auto bmesh =
+					BoundaryLayerSizeMap
+					(
+						poly, size_fun->BoundingBox(),
+						size_fun, Mesh_VariationRateInfo::fast,
+						4, 0.3,
+						1.0e-6
+					);
+				bmeshes.emplace_back(bmesh);
 				for (const auto& b: x->edges)
 				{
 					compact.erase(b->Edge());
 				}
 				OFstream myfile("bndMesh.plt");
-				mesh->ExportToPlt(myfile);
+				bmesh->ExportToPlt(myfile);
 				/*const auto merge_alg = std::make_shared<Merge2d_QuadMesh>();
 				merge_alg->Import(*mesh);
 				merge_alg->Perform();
@@ -2148,6 +2181,11 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 					//}
 				}
 			}
+			auto multiBackMesh = std::make_shared<Mesh2d_MultiSizeMap>(std::move(bmeshes));
+			multiBackMesh->SetBoundingBox(size_fun->BoundingBox());
+			std::vector<std::shared_ptr<Geo2d_SizeFunction>> funs = 
+			{ size_fun, std::make_shared<GeoSizeFun2d_Background>(size_fun->BoundingBox(), multiBackMesh) };
+			auto multi_fun = std::make_shared<GeoSizeFun2d_Multi>(size_fun->BoundingBox(), funs);
 			std::vector<std::shared_ptr<Aft2d_SegmentEdge>> new_boundaries;
 			{
 				std::copy(compact.begin(), compact.end(), std::back_inserter(new_boundaries));
@@ -2165,6 +2203,9 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 			}
 			solu_data->SetBndlayerMeshes(meshes);
 			solu_data->SetBoundaryEdges(new_boundaries);
+			solu_data->LoadSizeFunction(multi_fun);
+
+			solu_data->Metric()->SetSizeFunction(multi_fun);
 		}
 		else
 		{
