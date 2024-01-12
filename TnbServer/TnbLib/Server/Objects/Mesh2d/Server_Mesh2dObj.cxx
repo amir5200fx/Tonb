@@ -534,6 +534,8 @@ void tnbLib::Server_Mesh2dObj_NodeGen_Std::Construct(const std::string& theValue
 #include <Aft_Tools.hxx>
 #include <Aft2d_StdOptNode.hxx>
 #include <Aft2d_SegmentEdge.hxx>
+#include <Aft2d_Element.hxx>
+#include <Aft2d_ElementAnIso.hxx>
 #include <Aft2d_SegmentEdgeAnIso.hxx>
 #include <MeshPost2d_LaplacianSmoothing.hxx>
 #include <MeshPost2d_LaplacianSmoothing_AdjEdges.hxx>
@@ -606,8 +608,9 @@ void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
 			elements.emplace_back(x.second);
 		}
 		/**/
-		//OFstream myFile("myMesh.plt");
-		//alg->GetTriangulation()->ExportToPlt(myFile);
+		alg->CreateStaticMesh();
+		OFstream myFile("myMesh.plt");
+		alg->GetTriangulation()->ExportToPlt(myFile);
 		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
 	}
@@ -1060,7 +1063,7 @@ namespace tnbLib
 	namespace bndLayer
 	{
 
-		std::pair<std::vector<std::shared_ptr<Aft2d_SegmentEdge>>, std::shared_ptr<Entity2d_CmpMesh>>
+		std::tuple<std::vector<std::shared_ptr<Aft2d_SegmentEdge>>, std::shared_ptr<Entity2d_CmpMesh>, std::shared_ptr<Entity2d_Polygon>>
 			CalcBndLayer(const std::vector<std::shared_ptr<SupEdge>>&, const Mesh_BndLayer_Info& theInfo, const Standard_Integer nbNodes);
 
 		void SetOffsets(const std::vector<std::shared_ptr<SupNode>>&, const Entity2d_Polygon&);
@@ -1502,10 +1505,11 @@ tnbLib::SupNode::Next() const
 	return nullptr;
 }
 
-std::pair
+std::tuple
 <
 	std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdge>>,
-	std::shared_ptr<tnbLib::Entity2d_CmpMesh>
+	std::shared_ptr<tnbLib::Entity2d_CmpMesh>,
+	std::shared_ptr<tnbLib::Entity2d_Polygon>
 >
 tnbLib::bndLayer::CalcBndLayer
 (
@@ -1568,14 +1572,19 @@ tnbLib::bndLayer::CalcBndLayer
 	}*/
 	auto ni = nbNodes;
 	auto edges = tools::CreateEdges(*alg->RetrieveOffset());
+	std::shared_ptr<Entity2d_Polygon> poly;
 	{
 		auto nodes = Aft_Tools::RetrieveNodes(Aft_Tools::UpCast(edges));
+		std::vector<Pnt2d> coords;
+		coords.reserve(nodes.size());
 		for (const auto& n: nodes)
 		{
 			n->SetIndex(++ni);
+			coords.emplace_back(n->Coord());
 		}
+		poly = std::make_shared<Entity2d_Polygon>(std::move(coords), 0);
 	}
-	return { std::move(edges), alg->Mesh() };
+	return { std::move(edges), alg->Mesh(), std::move(poly)};
 }
 
 void tnbLib::bndLayer::SetOffsets
@@ -1681,9 +1690,334 @@ tnbLib::bndLayer::CreateSegments(const Entity2d_Polygon& thePolygon)
 	return std::move(segments);
 }
 
-
+#include <Mesh2d_MultiSizeMap.hxx>
+#include <GeoMesh2d_Background.hxx>
+#include <Mesh_SetSourcesNode.hxx>
 #include <MeshBLayer2d_Offset.hxx>
 #include <Merge2d_QuadMesh.hxx>
+#include <Geo2d_BalPrTree.hxx>
+#include <Geo_GraphTools.hxx>
+#include <Geo2d_Graph.hxx>
+#include <Geo2d_SegmentGraphEdge.hxx>
+#include <Geo2d_GraphNode.hxx>
+#include <Geo2d_CGALPolygonCache.hxx>
+#include <Geo2d_DelTri.hxx>
+#include <GeoSizeFun2d_Multi.hxx>
+#include <GeoSizeFun2d_Background.hxx>
+#include <GeoMesh2d_Data.hxx>
+#include <Global_Timer.hxx>
+
+namespace tnbLib
+{
+	typedef Mesh_SetSourcesNode<Pnt2d, void> sourceNode;
+	typedef Mesh_SetSourcesNode<Pnt2d, Standard_Real> hNode;
+}
+
+namespace tnbLib
+{
+	void InsertToEngine
+	(
+		Pnt2d&& theCoord,
+		const Standard_Real theTol,
+		Geo_AdTree<std::shared_ptr<Pnt2d>>& engine
+	)
+	{
+		auto b = Geo_BoxTools::GetBox<Pnt2d>(theCoord, theTol);
+
+		std::vector<std::shared_ptr<Pnt2d>> items;
+		engine.GeometrySearch(b, items);
+		if (items.empty())
+		{
+			auto node = std::make_shared<Pnt2d>(std::move(theCoord));
+			Debug_Null_Pointer(node);
+			engine.InsertToGeometry(node);
+		}
+		else
+		{
+			Standard_Real minDis = RealLast();
+			for (const auto& i : items)
+			{
+				auto dis = i->Distance(theCoord);
+				if (dis < minDis)
+				{
+					minDis = dis;
+				}
+			}
+			if (minDis > theTol)
+			{
+				auto node = std::make_shared<Pnt2d>(std::move(theCoord));
+				Debug_Null_Pointer(node);
+				engine.InsertToGeometry(node);
+			}
+			else
+			{
+				// do nothing [8/25/2022 Amir]
+			}
+		}
+	}
+
+	void InsertCorners(Geo_AdTree<std::shared_ptr<Pnt2d>>& theEngine)
+	{
+		const auto& b = theEngine.GeometryBoundingBox();
+		{
+			auto pt = b.Corner(Box2d_PickAlgorithm_SW);
+			auto node = std::make_shared<Pnt2d>(std::move(pt));
+			theEngine.InsertToGeometry(node);
+		}
+		{
+			auto pt = b.Corner(Box2d_PickAlgorithm_SE);
+			auto node = std::make_shared<Pnt2d>(std::move(pt));
+			theEngine.InsertToGeometry(node);
+		}
+		{
+			auto pt = b.Corner(Box2d_PickAlgorithm_NE);
+			auto node = std::make_shared<Pnt2d>(std::move(pt));
+			theEngine.InsertToGeometry(node);
+		}
+		{
+			auto pt = b.Corner(Box2d_PickAlgorithm_NW);
+			auto node = std::make_shared<Pnt2d>(std::move(pt));
+			theEngine.InsertToGeometry(node);
+		}
+	}
+
+	auto RetrieveNodes
+	(
+		const Geo2d_BalPrTree<std::shared_ptr<sourceNode>>& theEngine,
+		const std::vector<Pnt2d>& theCoords,
+		const Entity2d_Box& theDomain,
+		const Standard_Real theTol
+	)
+	{
+		std::vector<Geo2d_BalPrTree<std::shared_ptr<sourceNode>>::leafNode*> leaves;
+		theEngine.RetrieveLeavesTo(leaves);
+
+		std::vector<std::shared_ptr<Entity2d_Box>> boxes;
+		boxes.reserve(leaves.size());
+		for (const auto& x : leaves)
+		{
+			Debug_Null_Pointer(x);
+			const auto& b = x->Box();
+			boxes.push_back(b);
+		}
+
+		Geo_AdTree<std::shared_ptr<Pnt2d>> engine;
+		engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt2d>& x)-> const auto& {return *x; });
+		engine.SetGeometryRegion(theDomain);
+
+		InsertCorners(engine);
+
+		for (const auto& x : boxes)
+		{
+			auto p0 = x->Corner(Box2d_PickAlgorithm_SW);
+			InsertToEngine(std::move(p0), theTol, engine);
+
+			auto p1 = x->Corner(Box2d_PickAlgorithm_SE);
+			InsertToEngine(std::move(p1), theTol, engine);
+
+			auto p2 = x->Corner(Box2d_PickAlgorithm_NE);
+			InsertToEngine(std::move(p2), theTol, engine);
+
+			auto p3 = x->Corner(Box2d_PickAlgorithm_NW);
+			InsertToEngine(std::move(p3), theTol, engine);
+		}
+
+		std::vector<std::shared_ptr<Pnt2d>> enginePts;
+		engine.RetrieveFromGeometryTo(enginePts);
+
+		for (auto x : theCoords)
+		{
+			InsertToEngine(std::move(x), theTol, engine);
+		}
+
+		std::vector<std::shared_ptr<Pnt2d>> items;
+		engine.RetrieveFromGeometryTo(items);
+
+		std::vector<Pnt2d> coords;
+		coords.reserve(items.size());
+		for (const auto& x : items)
+		{
+			coords.push_back(*x);
+		}
+		/*OFstream myFile("sizeMap.plt");
+		Io::ExportPoints(coords, myFile);*/
+		auto t = std::make_pair(std::move(coords), std::move(enginePts));
+		return std::move(t);
+	}
+	
+	std::shared_ptr<GeoMesh2d_Background> BoundaryLayerSizeMap
+	(
+		const std::shared_ptr<Entity2d_Polygon>& poly,
+		const Entity2d_Box& theDomain, 
+		const std::shared_ptr<Geo2d_SizeFunction>& theSizeFun,
+		const Mesh_VariationRateInfo rate,
+		int max_nb_iters,
+		double growth_rate,
+		double mergCrit
+	)
+	{
+		static auto calc_length = [](const Geo2d_SegmentGraphEdge& e)
+			{
+				const auto& n0 = e.Node0();
+				const auto& n1 = e.Node1();
+				return n0->Coord().Distance(n1->Coord());
+			};
+		static auto retrieve_inside_points = [](const std::vector<std::shared_ptr<Pnt2d>>& pnts, const Entity2d_Polygon& polygon)
+			{
+				Geo2d_CGALPolygonCache poly(polygon);
+				std::vector<Pnt2d> points;
+				for (const auto& x : pnts)
+				{
+					if (Geo_Tools::IsPointInsidePolygon(*x, poly))
+					{
+						points.push_back(*x);
+					}
+				}
+				return std::move(points);
+			};
+		Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
+		engine.SetMaxUnbalancing(2);
+		engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
+		engine.SetGeometryRegion(theDomain);
+		engine.BUCKET_SIZE = 4;
+
+		Standard_Integer nbSources = 0;
+		std::vector<Pnt2d> srcCoords;
+		std::vector<std::shared_ptr<hNode>> sources;
+		std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
+		auto graph = Geo_GraphTools::GetGraph(*poly);
+		for (const auto& edge : graph->Edges())
+		{
+			if (auto seg = std::dynamic_pointer_cast<Geo2d_SegmentGraphEdge>(edge.second))
+			{
+				const auto& node = seg->Node0();
+				const auto& neighbors = node->Edges();
+				Standard_Real sum = 0;
+				for (const auto& n : neighbors)
+				{
+					auto neighbor = std::dynamic_pointer_cast<Geo2d_SegmentGraphEdge>(n.second.lock());
+					Debug_Null_Pointer(neighbor);
+					sum += calc_length(*neighbor);
+				}
+				const auto& pt = node->Coord();
+				auto b = Geo_BoxTools::GetBox<Pnt2d>(pt, mergCrit);
+				std::vector<std::shared_ptr<sourceNode>> items;
+				engine.GeometrySearch(b, items);
+				if (items.empty())
+				{
+					//auto h = std::make_shared<hNode>(pt, elemSize);
+					auto node = std::make_shared<sourceNode>(pt);
+					Debug_Null_Pointer(node);
+					engine.InsertToGeometry(node);
+
+					++nbSources;
+
+					//sources.push_back(std::move(h));
+					srcCoords.push_back(std::move(pt));
+				}
+				else
+				{
+					Standard_Real minDis = RealLast();
+					for (const auto& i : items)
+					{
+						auto dis = i->Coord().Distance(pt);
+						if (dis < minDis)
+						{
+							minDis = dis;
+						}
+					}
+					if (minDis > mergCrit)
+					{
+						//auto h = std::make_shared<hNode>(pt, elemSize);
+						auto node = std::make_shared<sourceNode>(pt);
+						Debug_Null_Pointer(node);
+						engine.InsertToGeometry(node);
+
+						++nbSources;
+
+						//sources.push_back(std::move(h));
+						srcCoords.push_back(std::move(pt));
+					}
+					else
+					{
+						// do nothing [8/25/2022 Amir]
+					}
+				}
+				
+				auto h = std::make_shared<hNode>(node->Coord(), sum / static_cast<Standard_Real>(neighbors.size()));
+				sources.push_back(std::move(h));
+			}
+		}
+		
+		{// Approximation scope [7/13/2023 Payvand]
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
+
+			engine.SetMaxUnbalancing(/*AlgInfo()->Unbalancing()*/2);
+			engine.PostBalance();
+		}
+
+		auto [pnts, enginePts] = RetrieveNodes(engine, srcCoords, theDomain, mergCrit);
+		auto tris = std::make_shared<Entity2d_Triangulation>();
+		Debug_Null_Pointer(tris);
+		{
+			auto innerPts = retrieve_inside_points(enginePts, *poly);
+			for (const auto& pt : innerPts)
+			{
+				auto h = std::make_shared<hNode>(pt, theSizeFun->Value(pt));
+				sources.push_back(std::move(h));
+			}
+		}
+
+		double base_size = 0;
+		for (const auto& x: sources)
+		{
+			auto h = theSizeFun->Value(x->Coord());
+			if (h > base_size)
+			{
+				base_size = h;
+			}
+		}
+
+		Geo2d_DelTri delTri(pnts);
+		//delTri.Perform();
+		delTri.Triangulate();
+		Debug_If_Condition_Message(NOT delTri.IsDone(), "the application is not performed.");
+
+		//tris = delTri.Triangulation();
+		tris = delTri.Data();
+
+		auto meshData = std::make_shared<GeoMesh2d_Data>();
+		Debug_Null_Pointer(meshData);
+
+		// constructing a background mesh data [8/25/2022 Amir]
+		meshData->Construct(*tris);
+
+		const auto bMesh = std::make_shared<GeoMesh2d_SingleBackground>();
+		Debug_Null_Pointer(bMesh);
+
+		bMesh->LoadData(std::move(meshData));
+
+		// initiate the current element [8/1/2022 Amir]
+		bMesh->InitiateCurrentElement();
+		bMesh->SetBoundingBox(theDomain);
+		bMesh->Sources().resize(tris->NbPoints(), base_size);
+
+		auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
+		Debug_Null_Pointer(hvInfo);
+		hvInfo->SetMaxNbIters(max_nb_iters);
+		hvInfo->SetFactor(Mesh_VariationRate::Rate(rate));
+
+		MeshBase_Tools::SetSourcesToMeshNearestPoint
+		(sources, base_size, growth_rate, *bMesh);
+		sources.clear();
+
+		bMesh->HvCorrection(hvInfo);
+		return std::move(bMesh);
+	}
+
+	
+}
 
 implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, solu_data, "solu_data");
 implementTnbServerParam(Server_Mesh2dObj_BndLayer_F1, thick, "thick");
@@ -1750,6 +2084,7 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				<< "No metric processor has been found." << endl
 				<< abort(FatalError);
 		}
+		const auto& size_fun = solu_data->SizeFunction();
 		const auto& bnd_info = solu_data->GlobalBndLayerInfo();
 		const auto myInfo = std::make_shared<Mesh_BndLayer_Info>();
 		//myInfo->SetFirstLayerThick(myThick);
@@ -1783,6 +2118,7 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 			 * Getting the inner wires
 			 */
 			const auto wires = tools::RetrieveWires(bnd_sets, curves);
+			std::vector<std::shared_ptr<GeoMesh2d_Background>> bmeshes;
 			for (const auto& x : wires)
 			{// for every wire on the list we need to create a bounady layer mesh.
 				/*
@@ -1790,14 +2126,23 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				 * The new offset edges will be saved on the super edges.
 				 */
 				tools::CheckWire(x->edges);
-				auto [outer_layer, mesh] =
+				auto [outer_layer, mesh, poly] =
 					bndLayer::CalcBndLayer(x->edges, *myInfo, nb_of_nodes);
+				auto bmesh =
+					BoundaryLayerSizeMap
+					(
+						poly, size_fun->BoundingBox(),
+						size_fun, Mesh_VariationRateInfo::fast,
+						4, 0.3,
+						1.0e-6
+					);
+				bmeshes.emplace_back(bmesh);
 				for (const auto& b: x->edges)
 				{
 					compact.erase(b->Edge());
 				}
 				OFstream myfile("bndMesh.plt");
-				mesh->ExportToPlt(myfile);
+				bmesh->ExportToPlt(myfile);
 				/*const auto merge_alg = std::make_shared<Merge2d_QuadMesh>();
 				merge_alg->Import(*mesh);
 				merge_alg->Perform();
@@ -1836,6 +2181,11 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 					//}
 				}
 			}
+			auto multiBackMesh = std::make_shared<Mesh2d_MultiSizeMap>(std::move(bmeshes));
+			multiBackMesh->SetBoundingBox(size_fun->BoundingBox());
+			std::vector<std::shared_ptr<Geo2d_SizeFunction>> funs = 
+			{ size_fun, std::make_shared<GeoSizeFun2d_Background>(size_fun->BoundingBox(), multiBackMesh) };
+			auto multi_fun = std::make_shared<GeoSizeFun2d_Multi>(size_fun->BoundingBox(), funs);
 			std::vector<std::shared_ptr<Aft2d_SegmentEdge>> new_boundaries;
 			{
 				std::copy(compact.begin(), compact.end(), std::back_inserter(new_boundaries));
@@ -1853,6 +2203,9 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 			}
 			solu_data->SetBndlayerMeshes(meshes);
 			solu_data->SetBoundaryEdges(new_boundaries);
+			solu_data->LoadSizeFunction(multi_fun);
+
+			solu_data->Metric()->SetSizeFunction(multi_fun);
 		}
 		else
 		{

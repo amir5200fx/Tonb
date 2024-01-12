@@ -207,6 +207,8 @@ namespace tnbLib
 			defineTnbServerParam(curves);
 			defineTnbServerParam(rate);
 			defineTnbServerParam(cluster_size);
+			defineTnbServerParam(first_layer);
+			defineTnbServerParam(chevron_angle);
 		};
 
 		constructTnbServerObject(Server_Mesh2dObj_BndLayer_F1);

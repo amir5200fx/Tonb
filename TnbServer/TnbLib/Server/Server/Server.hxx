@@ -42,6 +42,7 @@ namespace tnbLib
 
 			make_segment_2d_f1,
 			make_circle_2d_f1,
+			make_ellipse_2d_f1,
 			make_rectangular_2d_f1,
 
 			make_curve_2d_list,
@@ -61,6 +62,7 @@ namespace tnbLib
 			split_area_2d_block,
 			rename_area_2d_block,
 			area_get_curves,
+			area_2d_get_outer_poly,
 
 			make_area_2d,
 
@@ -79,6 +81,8 @@ namespace tnbLib
 			calc_bnd_box_2d_area,
 			calc_bnd_box_2d_area_list,
 
+			poly_2d_rev,
+
 			do_bnd_box_2d_expand,
 			get_bnd_box_2d_dia,
 			get_bnd_box_2d_lengths,
@@ -89,6 +93,9 @@ namespace tnbLib
 			make_size_map_2d_uniform,
 
 			// adaptive mesh stuff
+			make_size_map_2d_vol_f1,
+			make_size_map_2d_vol_f2,
+			
 			make_size_map_2d_adaptive,
 			perform_size_map_2d_adaptive,
 
@@ -234,8 +241,10 @@ namespace tnbLib
 		declareTnbServerFunction(split_area_2d_block);
 		declareTnbServerFunction(rename_area_2d_block);
 		declareTnbServerFunction(area_get_curves);
+		declareTnbServerFunction(area_2d_get_outer_poly);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
+		declareTnbServerFunction(make_ellipse_2d_f1);
 		void make_rectangular_2d_f1(const std::string&, const std::string&);
 
 		void make_interpl_curve_2d(const std::string&, const std::string&);
@@ -249,6 +258,8 @@ namespace tnbLib
 		declareTnbServerFunction(calc_bnd_box_2d_area);
 		declareTnbServerFunction(calc_bnd_box_2d_area_list);
 
+		declareTnbServerFunction(poly_2d_rev);
+
 		declareTnbServerFunction(do_bnd_box_2d_expand);
 		declareTnbServerFunction(get_bnd_box_2d_dia);
 		declareTnbServerFunction(get_bnd_box_2d_lengths);
@@ -259,6 +270,9 @@ namespace tnbLib
 		declareTnbServerFunction(make_size_map_2d_uniform);
 
 		// adaptive size map stuff
+		declareTnbServerFunction(make_size_map_2d_vol_f1);
+		declareTnbServerFunction(make_size_map_2d_vol_f2);
+		
 		declareTnbServerFunction(make_size_map_2d_adaptive);
 		declareTnbServerFunction(perform_size_map_2d_adaptive);
 

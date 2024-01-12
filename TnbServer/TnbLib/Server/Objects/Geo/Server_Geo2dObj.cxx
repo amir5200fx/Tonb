@@ -6,6 +6,8 @@
 #include <Mesh2d_VolumeSizeMapTool.hxx>
 #include <Mesh2d_VolumeSizeMapTool_Info.hxx>
 #include <Mesh2d_BoundarySizeMapTool.hxx>
+#include <Mesh2d_SizeMapShape.hxx>
+#include <Mesh2d_SizeMapPolygon.hxx>
 #include <Mesh_SizeMethodInfo.hxx>
 #include <Mesh_VariationRateInfo.hxx>
 #include <Mesh2d_ReferenceValues.hxx>
@@ -14,11 +16,53 @@
 #include <GeoSizeFun2d_Uniform.hxx>
 #include <Geo_BasicApprxCurve_Info.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
 
 #include <json.hpp>
 
 #include <Geo_BasicApprxCurve_Info.hxx>
+
+implementTnbServerConstruction(Server_Geo2dObj_RevPoly)
+{
+	std::shared_ptr<Entity2d_Polygon> poly;
+	{
+		loadNonJSONTnbServer(poly);
+	}
+	try
+	{
+		poly->Reverse();
+		streamGoodTnbServerObject(poly);
+	}
+	catchTnbServerErrors()
+}
+
+implementTnbServerParam(Server_Geo2dObj_OffsetPoly, poly, "poly");
+implementTnbServerParam(Server_Geo2dObj_OffsetPoly, value, "value");
+
+implementTnbServerConstruction(Server_Geo2dObj_OffsetPoly)
+{
+	std::shared_ptr<Entity2d_Polygon> poly;
+	double value;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(poly);
+		}
+		{
+			loadTnbServerObject(value);
+		}
+		try
+		{
+			if (!poly)
+			{
+				throw Server_Error("the polygon object is null.");
+			}
+			
+		}
+		catchTnbServerErrors()
+	}
+}
 
 namespace tnbLib
 {
@@ -278,6 +322,36 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Server_Geo2dObj_SizeMap_Adaptive::IO)
 	ar& vol_settings;
 }
 
+implementTnbServerConstruction(Server_Geo2dObj_SizeMap_Volume_F1)
+{
+	std::shared_ptr<Cad2d_Plane> shape;
+	{
+		loadNonJSONTnbServer(shape);
+	}
+	try
+	{
+		std::shared_ptr<Mesh2d_SizeMapVolume> value = 
+			std::make_shared<Mesh2d_SizeMapShape>(shape);
+		streamGoodTnbServerObject(value);
+	}
+	catchTnbServerErrors()
+}
+
+implementTnbServerConstruction(Server_Geo2dObj_SizeMap_Volume_F2)
+{
+	std::shared_ptr<Entity2d_Polygon> shape;
+	{
+		loadNonJSONTnbServer(shape);
+	}
+	try
+	{
+		std::shared_ptr<Mesh2d_SizeMapVolume> value = 
+			std::make_shared<Mesh2d_SizeMapPolygon>(shape);
+		streamGoodTnbServerObject(value);
+	}
+	catchTnbServerErrors()
+}
+
 implementTnbServerParam(Server_Geo2dObj_SizeMap_Adaptive, ref, "ref");
 implementTnbServerParam(Server_Geo2dObj_SizeMap_Adaptive, model, "model");
 implementTnbServerParam(Server_Geo2dObj_SizeMap_Adaptive, volumes, "volumes");
@@ -286,12 +360,12 @@ implementTnbServerParam(Server_Geo2dObj_SizeMap_Adaptive, vol_sizemap_settings, 
 
 namespace tnbLib
 {
-	auto calc_bounding_box(const std::shared_ptr<Mesh2d_ReferenceValues>& ref, const std::vector<std::shared_ptr<Cad2d_Plane>>& volumes)
+	auto calc_bounding_box(const std::shared_ptr<Mesh2d_ReferenceValues>& ref, const std::vector<std::shared_ptr<Mesh2d_SizeMapVolume>>& volumes)
 	{
 		auto b = *ref->Region();
 		for (const auto& x:volumes)
 		{
-			b = Geo_BoxTools::Union(b, x->BoundingBox(0));
+			b = Geo_BoxTools::Union(b, x->CalcBoundingBox());
 		}
 		auto reg = std::make_shared<Entity2d_Box>(b.Expanded(b.Diameter() * 0.25));
 		return std::move(reg);
@@ -302,7 +376,7 @@ void tnbLib::Server_Geo2dObj_SizeMap_Adaptive::Construct(const std::string& theV
 {
 	std::shared_ptr<Mesh2d_ReferenceValues> ref;
 	std::shared_ptr<Cad2d_Plane> model;
-	std::vector<std::shared_ptr<Cad2d_Plane>> volumes;
+	std::vector<std::shared_ptr<Mesh2d_SizeMapVolume>> volumes;
 	std::shared_ptr<BoundarySizeMap2d_UniformSegmentTool_Info> bnd_sizemap_settings;
 	std::shared_ptr<Mesh2d_VolumeSizeMapTool_Info> vol_sizemap_settings;
 	{
@@ -319,11 +393,12 @@ void tnbLib::Server_Geo2dObj_SizeMap_Adaptive::Construct(const std::string& theV
 			{
 				for (const auto& element: json_array)
 				{
-					std::shared_ptr<Cad2d_Plane> area;
+					std::shared_ptr<Mesh2d_SizeMapVolume> area;
 					std::stringstream stream;
 					stream << element.get<std::string>();
 					TNB_iARCH_FILE_TYPE ia(stream);
 					ia >> area;
+					//auto vol = std::make_shared<Mesh2d_SizeMapShape>(area);
 					volumes.emplace_back(std::move(area));
 				}
 			}
@@ -561,7 +636,7 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_MakeVol)
 		auto vol = controler->SelectMap(name);
 		for (size_t i = 0; i < volumes.size(); i++)
 		{
-			vol->ImportShape(size_map->volumes.at(volumes.at(i))->Index(), size_map->volumes.at(volumes.at(i)));
+			vol->ImportVolume(size_map->volumes.at(volumes.at(i))->Index(), size_map->volumes.at(volumes.at(i)));
 		}
 		vol->MeshConditions()->SetCustomBoundaryGrowthRate(true);
 		vol->MeshConditions()->SetCustomSurfaceSize(true);
@@ -686,7 +761,7 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_ImptVol)
 		{
 			throw Server_Error("Bad index: Exceeds the boundary");
 		}
-		size_map->vol->ImportShape(id + 1, vols.at(id));
+		size_map->vol->ImportVolume(id + 1, vols.at(id));
 	}
 	catchTnbServerErrors()
 }
