@@ -33,9 +33,10 @@ namespace tnbLib
 			make_axis_2d_f1,
 			make_pnt_2d_f1,
 			make_pnt_3d,
+			make_ray_2d,
 
 			retrv_compts_pnt_2d,
-			retrv_compts_vec_2d,
+			retv_compts_vec_2d,
 			retrv_compts_dir_2d,
 
 			make_pnt_2d_list,
@@ -49,6 +50,7 @@ namespace tnbLib
 			retv_first_parameter_curve_2d,
 			retv_last_parameter_curve_2d,
 			calc_pnt_curve_2d,
+			calc_d1_curve_2d,
 			prj_pnt_curve_2d,
 			rev_curve_2d,
 			trim_curve_2d,
@@ -80,6 +82,8 @@ namespace tnbLib
 			calc_bnd_box_2d_crv_list,
 			calc_bnd_box_2d_area,
 			calc_bnd_box_2d_area_list,
+
+			calc_ray_2d_int_pnt,
 
 			poly_2d_rev,
 
@@ -217,6 +221,8 @@ namespace tnbLib
 		declareTnbServerFunction(retv_compts_vec_2d);
 		declareTnbServerFunction(retv_compts_dir_2d);
 
+		declareTnbServerFunction(make_ray_2d);
+
 		void make_pnt_2d_list(const std::string&, const std::string&);
 
 		// cad functions
@@ -226,6 +232,7 @@ namespace tnbLib
 		declareTnbServerFunction(retv_first_parameter_curve_2d);
 		declareTnbServerFunction(retv_last_parameter_curve_2d);
 		declareTnbServerFunction(calc_pnt_curve_2d);
+		declareTnbServerFunction(calc_d1_curve_2d);
 		declareTnbServerFunction(prj_pnt_curve_2d);
 		declareTnbServerFunction(rev_curve_2d);
 		declareTnbServerFunction(trim_curve_2d);
@@ -257,6 +264,8 @@ namespace tnbLib
 		declareTnbServerFunction(calc_bnd_box_2d_crv_list);
 		declareTnbServerFunction(calc_bnd_box_2d_area);
 		declareTnbServerFunction(calc_bnd_box_2d_area_list);
+
+		declareTnbServerFunction(calc_ray_2d_int_pnt);
 
 		declareTnbServerFunction(poly_2d_rev);
 

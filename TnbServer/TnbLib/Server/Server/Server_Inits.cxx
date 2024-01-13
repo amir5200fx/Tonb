@@ -12,6 +12,7 @@ using namespace tnbLib;
 #include <Server_GeoObj_Vec2d_F1.hxx>
 #include <Server_GeoObj_Dir2d_F1.hxx>
 #include <Server_GeoObj_Axis2d_F1.hxx>
+#include <Server_GeoObj_Ray2d.hxx>
 #include <Server_MeshObj.hxx>
 
 // the interger object
@@ -26,6 +27,10 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Dir2d_F1, Server::objects::make_d
 defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_axis_2d_f1, "make_axis_2d_f1");
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "Server_GeoObj_Vec2d_Cmpts");
+
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d, "make_ray_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Int, Server::objects::calc_ray_2d_int_pnt, "calc_ray_2d_int_pnt");
 
 #include <Server_GeoObj_Pnt2d_List.hxx>
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_List, Server::objects::make_pnt_2d_list, "make_pnt_2d_list");
@@ -60,6 +65,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_List, Server::objects::ma
 defineAndRegisterTnbServerObject(Server_Cad2dObj_FirstParCurve, Server::objects::retv_first_parameter_curve_2d, "retv_first_parameter_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_LastParCurve, Server::objects::retv_last_parameter_curve_2d, "retv_last_parameter_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_CalcPntOnCurve, Server::objects::calc_pnt_curve_2d, "calc_pnt_curve_2d");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_D1, Server::objects::calc_d1_curve_2d, "calc_d1_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_PrjPntCrv, Server::objects::prj_pnt_curve_2d, "prj_pnt_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_RevCrv, Server::objects::rev_curve_2d, "make_rev_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_Trim, Server::objects::trim_curve_2d, "trim_curve_2d");

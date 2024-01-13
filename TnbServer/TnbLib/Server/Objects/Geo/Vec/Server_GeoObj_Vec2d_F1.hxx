@@ -31,6 +31,8 @@ namespace tnbLib
 		TnbServer_EXPORT void Construct(const std::string&) override;
 
 	};
+
+	defineTnbServerObject(Server_GeoObj_Vec2d_Cmpts);
 }
 
 #endif

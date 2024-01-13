@@ -154,6 +154,9 @@
     <Filter Include="TnbLib\Server\Objects\Cad2d\Ellipse">
       <UniqueIdentifier>{6bd6dbf7-8ec3-4ea7-8978-9de64e0e61a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Ray">
+      <UniqueIdentifier>{2dd132a4-12ce-4154-a3a2-1e1c7dee63cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -330,6 +333,9 @@
     <ClInclude Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.hxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Ellipse</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -499,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.cxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Ellipse</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

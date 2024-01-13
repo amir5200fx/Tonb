@@ -41,13 +41,17 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::make_axis_2d_f1, create_axis_2d_f1, value, sense)
 
 		switchToMakeTnbServerObject(objects::retrv_compts_pnt_2d, retv_compts_pnt_2d, value, sense)
+		switchToMakeTnbServerObject(objects::retv_compts_vec_2d, retv_compts_vec_2d, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_pnt_2d_list, make_pnt_2d_list, value, sense)
+
+		switchToMakeTnbServerObject(objects::make_ray_2d, make_ray_2d, value, sense)
 
 		// cad objects
 		switchToMakeTnbServerObject(objects::retv_first_parameter_curve_2d, retv_first_parameter_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::retv_last_parameter_curve_2d, retv_last_parameter_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::calc_pnt_curve_2d, calc_pnt_curve_2d, value, sense)
+		switchToMakeTnbServerObject(objects::calc_d1_curve_2d, calc_d1_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::prj_pnt_curve_2d, prj_pnt_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::rev_curve_2d, rev_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::trim_curve_2d, trim_curve_2d, value, sense)
@@ -74,6 +78,8 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 
 			// geo lib
+
+		switchToMakeTnbServerObject(objects::calc_ray_2d_int_pnt, calc_ray_2d_int_pnt, value, sense)
 
 			switchToMakeTnbServerObject(objects::make_bnd_box_2d, make_bnd_box_2d, value, sense)
 			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_pnt_list, calc_bnd_box_2d_pnt_list, value, sense)
