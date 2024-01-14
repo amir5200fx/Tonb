@@ -20,6 +20,7 @@ namespace tnbLib
 			/*Private Data*/
 
 			const obj& theObj_;
+
 			
 			const variable::State& theS0_;
 			const Pnt2d& theP1_;
@@ -45,7 +46,7 @@ namespace tnbLib
 				, thePower_(thePower)
 			{}
 			
-			Standard_Real Value(const Standard_Real time) const;
+			Standard_Real Value(const Standard_Real velocity) const;
 		};
 
 		
@@ -53,14 +54,13 @@ namespace tnbLib
 }
 
 Standard_Real
-tnbLib::voyageLib::MinTime_CostIntegFun::Value(const Standard_Real time) const
+tnbLib::voyageLib::MinTime_CostIntegFun::Value(const Standard_Real U) const
 {
-	std::cout << "time = " << time << std::endl;
-	auto power = theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
-	std::cout << "Power= " << power << std::endl;
-	auto value = thePower_.value - theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
-	std::cout << "value = " << value << std::endl;
-	return thePower_.value - theObj_.powFunc({ theS0_, {theP1_, {time}} }, theDist_).value;
+	const auto t = theDist_.value / U;
+	const auto resist = theObj_.resistFunc({ theS0_, {theP1_, {t}} }, theDist_).value;
+	const auto power = resist * U;
+	const auto value = power - thePower_.value;
+	return value;
 }
 
 tnbLib::voyageLib::variable::Time
@@ -72,22 +72,21 @@ tnbLib::VoyageSim_MinTime_Cost::CalcTime
 	const var::Distance& theDist
 ) const
 {
-	if (NOT powFunc)
+	if (NOT resistFunc)
 	{
 		FatalErrorIn(FunctionSIG) << endl
 			<< "no function is found." << endl
 			<< abort(FatalError);
 	}
-	std::cout << "distance= " << theDist.value << std::endl;
-
 	const voyageLib::MinTime_CostIntegFun bisectFun(*this, theS0, theP1, theDist, thePower);
 	NumAlg_BisectionSolver<voyageLib::MinTime_CostIntegFun, true>
 		alg(bisectFun, *SolvInfo());
 	try
 	{
-		alg.Perform(TimeRange().first.value, TimeRange().second.value);
+		alg.Perform(VelRange().first.value, VelRange().second.value);
 		Debug_If_Condition_Message(NOT alg.IsDone(), "the application is not performed!");
-		return { MEAN(SolvInfo()->X0(), SolvInfo()->X1())};
+		const auto vel = MEAN(SolvInfo()->X0(), SolvInfo()->X1());
+		return { theDist.value / vel };
 	}
 	catch (const error& x)
 	{

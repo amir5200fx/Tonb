@@ -401,7 +401,7 @@ int main()
 
 	auto ocean_fun = [](const Pnt2d& coord, const double time)->std::pair<double, double>
 		{
-			return { 2.0,0.0 };
+			return { 0.0,0.0 };
 		};
 
 	constexpr auto nb_of_samples = 5;
@@ -423,8 +423,8 @@ int main()
 		};
 
 	
-	auto power_profile =
-		[avg_ocean_vel, profile](const voyageLib::variable::Path& path, const voyageLib::variable::Distance& dist)->voyageLib::variable::Power
+	auto resist_profile =
+		[avg_ocean_vel, profile](const voyageLib::variable::Path& path, const voyageLib::variable::Distance& dist)->voyageLib::variable::Resistance
 		{
 			const auto& s0 = path.start;
 			const auto& s1 = path.end;
@@ -432,7 +432,6 @@ int main()
 			const auto time0 = s0.time.value;
 			const auto time1 = s1.time.value;
 			const auto dt = time1 - time0;
-			std::cout << "t0: " << time0 << ", t1: " << time1 << ", dt: " << dt << std::endl;
 			if (dt <= 1.e-6)
 			{
 				return { 0 };
@@ -448,32 +447,28 @@ int main()
 					Voyage_Tools::ConvertToVoyageSystem(p0)
 				).Normalized();
 			const auto [u, v] = avg_ocean_vel(p0, time0, p1, time1);
-			std::cout << "u = " << u << ", v = " << v << std::endl;
 			if (std::sqrt(u * u + v * v) <= 10E-12)
 			{
-				return { profile->Value(sog) * d };
+				return { profile->Value(sog) };
 			}
 			const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
-			std::cout << "lower speed = " << profile->Lower() << ", upper speed = " << profile->Upper() << std::endl;
 			if (flow_vel < 0)
 			{// if the ocean flow is against the velocity vector of the ship
 				const auto U = std::abs(flow_vel) + sog;
-				std::cout << "U0 = " << U << std::endl;
 				if (NOT INSIDE(U, profile->Lower(), profile->Upper()))
 				{
 					return { std::numeric_limits<float>::max() };
 				}
-				return { profile->Value(U) * d };
+				return { profile->Value(U) };
 			}
 			else
 			{
 				auto U = sog - std::abs(flow_vel);
-				std::cout << "U1 = " << U << std::endl;
 				if (U < profile->Lower())
 				{
 					return { 0 };
 				}
-				return { profile->Value(U) * d };
+				return { profile->Value(U) };
 			}
 		};
 
@@ -482,29 +477,20 @@ int main()
 	auto bisect_info = std::make_shared<NumAlg_BisectionSolver_Info>();
 
 	auto cost_fun = std::make_shared<VoyageSim_MinTime_Cost>();
-	cost_fun->powFunc = power_profile;
+	cost_fun->resistFunc = resist_profile;
 	cost_fun->SetInfo(bisect_info);
-	cost_fun->SetTimeRange({ {0}, {maxDay * 24} });
-
-	auto estimate_next_time = [maxDay](const var::Time& t)-> var::Time
-		{
-			return { maxDay * 24 };
-		};
-	
+	cost_fun->SetVelRange({ {min_vel}, {max_vel} });
 
 	auto sim = std::make_shared<VoyageSim_MinTime>();
 	sim->SetNet(grid);
-	sim->SetPower({ 6500.0 });
+	sim->SetPower({ 500.0 });
 	sim->SetDistFunc(my_dist_fun);
-	sim->SetResistFunc([cost_fun, estimate_next_time](
+	sim->SetResistFunc([cost_fun](
 		const var::State& s0, 
 		const Pnt2d& p1,
 		const var::Distance& dist,
 		const var::Power& power)-> var::Time
 	{
-		const auto time_range = VoyageSim_MinTime_Cost::timeRange{ {s0.time}, estimate_next_time(s0.time) };
-			cost_fun->SetTimeRange(time_range);
-			std::cout << "calc time..." << std::endl;
 			return cost_fun->CalcTime(s0, p1, power, dist);
 	});
 

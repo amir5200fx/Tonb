@@ -65,7 +65,7 @@ namespace tnbLib
 		std::map
 			<
 			Standard_Integer,
-			std::pair<Standard_Real, std::weak_ptr<VoyageSim_Graph::Node>>
+			std::pair<Standard_Real, std::shared_ptr<VoyageSim_Graph::Node>>
 			>
 			theTable_;
 

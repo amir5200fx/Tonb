@@ -26,14 +26,15 @@ namespace tnbLib
 		
 
 		typedef std::pair<var::Time, var::Time> timeRange;
+		typedef std::pair<var::Velocity, var::Velocity> velRange;
 
-		std::function<var::Power(const var::Path&, const var::Distance&)> powFunc;
+		std::function<var::Resistance(const var::Path&, const var::Distance&)> resistFunc;
 
 	private:
 
 		/*Private Data*/
-
-		timeRange theTimeRange_;
+		
+		velRange theVelRange_;
 		
 		std::shared_ptr<NumAlg_BisectionSolver_Info> theInfo_;
 		
@@ -49,13 +50,19 @@ namespace tnbLib
 
 
 		// Public functions and operators
-
-		const auto& TimeRange() const { return theTimeRange_; }
+		
+		const auto& VelRange() const { return theVelRange_; }
 		const auto& SolvInfo() const { return theInfo_; }
 
-		TnbVoyage_EXPORT var::Time CalcTime(const var::State&, const Pnt2d&, const var::Power&, const var::Distance&) const;
+		TnbVoyage_EXPORT var::Time CalcTime
+		(
+			const var::State&,
+			const Pnt2d&,
+			const var::Power&,
+			const var::Distance&
+		) const;
 		
-		void SetTimeRange(const timeRange& theRange) { theTimeRange_ = theRange; }
+		void SetVelRange(const velRange& theRange) { theVelRange_ = theRange; }
 		void SetInfo(const std::shared_ptr<NumAlg_BisectionSolver_Info>& theInfo) { theInfo_ = theInfo; }
 		
 	};
