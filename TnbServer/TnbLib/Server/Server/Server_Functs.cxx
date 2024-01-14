@@ -34,7 +34,7 @@ createTnbServerObject(create_dir_2d_f1, Server_GeoObj_Dir2d_F1)
 createTnbServerObject(create_axis_2d_f1, Server_GeoObj_Axis2d_F1)
 
 #include <Server_GeoObj_Ray2d.hxx>
-createTnbServerObject(make_ray_2d, Server_GeoObj_Ray2d)
+createTnbServerObject(make_ray_2d_f1, Server_GeoObj_Ray2d)
 createTnbServerObject(calc_ray_2d_int_pnt, Server_GeoObj_Ray2d_Int)
 
 #include <Server_Cad2dObj_Segment2d_F1.hxx>

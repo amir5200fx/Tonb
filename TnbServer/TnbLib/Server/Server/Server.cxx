@@ -45,7 +45,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 		switchToMakeTnbServerObject(objects::make_pnt_2d_list, make_pnt_2d_list, value, sense)
 
-		switchToMakeTnbServerObject(objects::make_ray_2d, make_ray_2d, value, sense)
+		switchToMakeTnbServerObject(objects::make_ray_2d_f1, make_ray_2d_f1, value, sense)
 
 		// cad objects
 		switchToMakeTnbServerObject(objects::retv_first_parameter_curve_2d, retv_first_parameter_curve_2d, value, sense)

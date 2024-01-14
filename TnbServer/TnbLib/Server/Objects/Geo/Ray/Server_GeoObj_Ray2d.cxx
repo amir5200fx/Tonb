@@ -54,10 +54,11 @@ implementTnbServerConstruction(Server_GeoObj_Ray2d_Int)
 		nlohmann::json jData;
 		{
 			std::stringstream stream;
-			stream << pt;
+			TNB_oARCH_FILE_TYPE oa(stream);
+			oa << pt;
 			jData["value"] = stream.str();
 		}
-		jData["u1"] = cond;
+		jData["cond"] = cond;
 		std::stringstream stream;
 		stream << jData;
 		{

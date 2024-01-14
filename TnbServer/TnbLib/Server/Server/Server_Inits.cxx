@@ -27,9 +27,9 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Dir2d_F1, Server::objects::make_d
 defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_axis_2d_f1, "make_axis_2d_f1");
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
-defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "Server_GeoObj_Vec2d_Cmpts");
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "retv_compts_vec_2d");
 
-defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d, "make_ray_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d_f1, "make_ray_2d_f1");
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Int, Server::objects::calc_ray_2d_int_pnt, "calc_ray_2d_int_pnt");
 
 #include <Server_GeoObj_Pnt2d_List.hxx>

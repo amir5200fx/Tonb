@@ -33,7 +33,7 @@ namespace tnbLib
 			make_axis_2d_f1,
 			make_pnt_2d_f1,
 			make_pnt_3d,
-			make_ray_2d,
+			make_ray_2d_f1,
 
 			retrv_compts_pnt_2d,
 			retv_compts_vec_2d,
@@ -221,7 +221,7 @@ namespace tnbLib
 		declareTnbServerFunction(retv_compts_vec_2d);
 		declareTnbServerFunction(retv_compts_dir_2d);
 
-		declareTnbServerFunction(make_ray_2d);
+		declareTnbServerFunction(make_ray_2d_f1);
 
 		void make_pnt_2d_list(const std::string&, const std::string&);
 
