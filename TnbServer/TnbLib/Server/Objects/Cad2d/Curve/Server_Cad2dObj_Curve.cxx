@@ -123,3 +123,32 @@ implementTnbServerConstruction(Server_Cad2dObj_Curve_GetIdent)
 	}
 	catchTnbServerErrors()
 }
+
+implementTnbServerParam(Server_Cad2dObj_Curve_D1, curve, "curve");
+implementTnbServerParam(Server_Cad2dObj_Curve_D1, u, "u");
+
+implementTnbServerConstruction(Server_Cad2dObj_Curve_D1)
+{
+	std::shared_ptr<Pln_Edge> curve;
+	double u;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(curve);
+		}
+		{
+			loadTnbServerObject(u);
+		}
+	}
+	try
+	{
+		if (!curve)
+		{
+			throw Server_Error("the curve object is null.");
+		}
+		const auto& g = curve->Curve();
+		auto [pt, value] = g->D1(u);
+		streamGoodTnbServerObject(value);
+	}
+	catchTnbServerErrors()
+}

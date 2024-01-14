@@ -38,6 +38,18 @@ namespace tnbLib
 	};
 
 	defineTnbServerObject(Server_Cad2dObj_Curve_GetIdent);
+
+	class Server_Cad2dObj_Curve_D1
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(curve);
+			defineTnbServerParam(u);
+		};
+		constructTnbServerObject(Server_Cad2dObj_Curve_D1);
+	};
 }
 
 #endif
