@@ -25,6 +25,7 @@ createTnbServerObject(make_pnt_2d_list, Server_GeoObj_Pnt2d_List)
 
 #include <Server_GeoObj_Vec2d_F1.hxx>
 createTnbServerObject(create_vec_2d_f1, Server_GeoObj_Vec2d_F1)
+createTnbServerObject(retv_compts_vec_2d, Server_GeoObj_Vec2d_Cmpts)
 
 #include <Server_GeoObj_Dir2d_F1.hxx>
 createTnbServerObject(create_dir_2d_f1, Server_GeoObj_Dir2d_F1)
@@ -33,12 +34,12 @@ createTnbServerObject(create_dir_2d_f1, Server_GeoObj_Dir2d_F1)
 createTnbServerObject(create_axis_2d_f1, Server_GeoObj_Axis2d_F1)
 
 #include <Server_GeoObj_Ray2d.hxx>
-createTnbServerObject(make_ray_2d, Server_GeoObj_Ray2d)
-
-createTnbServerObject(calc_ray_2d_intsect, Server_GeoObj_Ray2d_Intersect)
+createTnbServerObject(make_ray_2d_f1, Server_GeoObj_Ray2d)
+createTnbServerObject(calc_ray_2d_int_pnt, Server_GeoObj_Ray2d_Int)
 
 #include <Server_Cad2dObj_Segment2d_F1.hxx>
 #include <Server_Cad2dObj_Circle_F1.hxx>
+#include <Server_Cad2dObj_Ellipse_F1.hxx>
 #include <Server_Cad2dObj_Rectangular_F1.hxx>
 #include <Server_Cad2dObj_PrjPntCrv.hxx>
 #include <Server_Cad2dObj_Curve_List.hxx>
@@ -50,13 +51,14 @@ createTnbServerObject(calc_ray_2d_intsect, Server_GeoObj_Ray2d_Intersect)
 #include <Server_Cad2dObj_Area_Manager.hxx>
 #include <Server_Cad2dObj_Curve.hxx>
 createTnbServerObject(make_circle_2d_f1, Server_Cad2dObj_Circle_F1)
+createTnbServerObject(make_ellipse_2d_f1, Server_Cad2dObj_Ellipse_F1)
 createTnbServerObject(make_rectangular_2d_f1, Server_Cad2dObj_Rectangular_F1)
 createTnbServerObject(make_segment_2d_f1, Server_Cad2dObj_Segment2d_F1)
 createTnbServerObject(make_curve_2d_list, Server_Cad2dObj_Curve_List)
 createTnbServerObject(retv_first_parameter_curve_2d, Server_Cad2dObj_FirstParCurve)
 createTnbServerObject(retv_last_parameter_curve_2d, Server_Cad2dObj_LastParCurve)
 createTnbServerObject(calc_pnt_curve_2d, Server_Cad2dObj_CalcPntOnCurve)
-createTnbServerObject(calc_tan_curve_2d, Server_Cad2dObj_Curve_CalcTangt)
+createTnbServerObject(calc_d1_curve_2d, Server_Cad2dObj_Curve_D1)
 createTnbServerObject(prj_pnt_curve_2d, Server_Cad2dObj_PrjPntCrv)
 createTnbServerObject(rev_curve_2d, Server_Cad2dObj_RevCrv)
 createTnbServerObject(make_area_2d, Server_Cad2dObj_Area_F1)
@@ -83,6 +85,7 @@ void Server::split_area_2d_block(const std::string& theValue, const std::string&
 createTnbServerObject(rename_area_2d_block, Server_Cad2dObj_Area_Manager_Segments_RenameBlock)
 createTnbServerObject(area_get_curves, Server_Cad2dObj_Area_GetCurves);
 createTnbServerObject(curve_2d_get_iden, Server_Cad2dObj_Curve_GetIdent)
+createTnbServerObject(area_2d_get_outer_poly, Server_Cad2dObj_Area_GetOuterPolygon)
 
 #include <Server_Cad2dObj_Interpl_F1.hxx>
 #include <Server_Cad2dObj_Discret_Info.hxx>
@@ -95,13 +98,15 @@ createTnbServerObject(do_boolean_sub_2d, Server_Cad2dObj_Boolean_Subtract_F1)
 
 // geo lib
 #include <Server_Geo2dObj_BndBox.hxx>
-#include <Server_GeoObj_Vec2d_F1.hxx>
+#include <Server_Geo2dObj.hxx>
 createTnbServerObject(make_bnd_box_2d, Server_Geo2dObj_BndBox_Create)
 createTnbServerObject(calc_bnd_box_2d_pnt_list, Server_Geo2dObj_BndBox_PntList)
 createTnbServerObject(calc_bnd_box_2d_curve, Server_Geo2dObj_BndBox_Curve)
 createTnbServerObject(calc_bnd_box_2d_crv_list, Server_Geo2dObj_BndBox_CrvList)
 createTnbServerObject(calc_bnd_box_2d_area, Server_Geo2dObj_BndBox_Area)
 createTnbServerObject(calc_bnd_box_2d_area_list, Server_Geo2dObj_BndBox_AreaList)
+
+createTnbServerObject(poly_2d_rev, Server_Geo2dObj_RevPoly)
 
 createTnbServerObject(do_bnd_box_2d_expand, Server_Geo2dObj_BndBox_Expand)
 createTnbServerObject(get_bnd_box_2d_dia, Server_Geo2dObj_BndBox_GetDia)
@@ -121,6 +126,9 @@ createTnbServerObject(make_size_map_2d_ctrl_bnd, Server_Geo2dObj_SizeMap_BndCont
 createTnbServerObject(make_size_map_2d_ctrl_vol, Server_Geo2dObj_SizeMap_VolControl)
 // Mesh lib
 #include <Server_Mesh2dObj.hxx>
+createTnbServerObject(make_size_map_2d_vol_f1, Server_Geo2dObj_SizeMap_Volume_F1)
+createTnbServerObject(make_size_map_2d_vol_f2, Server_Geo2dObj_SizeMap_Volume_F2)
+
 createTnbServerObject(make_mesh_ref_values_2d, Server_Mesh2dObj_RefValues)
 createTnbServerObject(make_metric_prcsr_2d_settings, Server_Mesh2dObj_MetricPrcsr_Settings)
 createTnbServerObject(make_metric_prcsr_2d, Server_Mesh2dObj_MetricPrcsr)

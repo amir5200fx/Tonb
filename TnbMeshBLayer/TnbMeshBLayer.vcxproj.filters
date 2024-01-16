@@ -147,6 +147,9 @@
     <ClInclude Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.hxx">
       <Filter>TnbLib\BLayer\2d\Offset</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset2.hxx">
+      <Filter>TnbLib\BLayer\2d\Offset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.cxx">
@@ -195,6 +198,9 @@
       <Filter>TnbLib\BLayer\2d\AdvLayer\ElementSet</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.cxx">
+      <Filter>TnbLib\BLayer\2d\Offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset2.cxx">
       <Filter>TnbLib\BLayer\2d\Offset</Filter>
     </ClCompile>
   </ItemGroup>

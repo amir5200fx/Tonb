@@ -151,8 +151,11 @@
     <Filter Include="TnbLib\Server\Objects\OpenFOAM">
       <UniqueIdentifier>{20b83a35-8d32-476a-8395-2586810d4c32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Ellipse">
+      <UniqueIdentifier>{6bd6dbf7-8ec3-4ea7-8978-9de64e0e61a9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="TnbLib\Server\Objects\Geo\Ray">
-      <UniqueIdentifier>{15c2a7bc-6dfb-4e2f-b952-2936d2c8b6c4}</UniqueIdentifier>
+      <UniqueIdentifier>{2dd132a4-12ce-4154-a3a2-1e1c7dee63cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -327,6 +330,9 @@
     <ClInclude Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.hxx">
       <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Ellipse</Filter>
+    </ClInclude>
     <ClInclude Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.hxx">
       <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
     </ClInclude>
@@ -496,6 +502,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.cxx">
       <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Ellipse</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.cxx">
       <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>

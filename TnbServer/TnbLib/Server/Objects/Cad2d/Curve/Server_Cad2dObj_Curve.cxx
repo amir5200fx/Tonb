@@ -124,10 +124,10 @@ implementTnbServerConstruction(Server_Cad2dObj_Curve_GetIdent)
 	catchTnbServerErrors()
 }
 
-implementTnbServerParam(Server_Cad2dObj_Curve_CalcTangt, curve, "curve");
-implementTnbServerParam(Server_Cad2dObj_Curve_CalcTangt, u, "u");
+implementTnbServerParam(Server_Cad2dObj_Curve_D1, curve, "curve");
+implementTnbServerParam(Server_Cad2dObj_Curve_D1, u, "u");
 
-implementTnbServerConstruction(Server_Cad2dObj_Curve_CalcTangt)
+implementTnbServerConstruction(Server_Cad2dObj_Curve_D1)
 {
 	std::shared_ptr<Pln_Edge> curve;
 	double u;
@@ -146,97 +146,9 @@ implementTnbServerConstruction(Server_Cad2dObj_Curve_CalcTangt)
 		{
 			throw Server_Error("the curve object is null.");
 		}
-		auto [pt, t] = curve->Curve()->D1(u);
-		streamGoodTnbServerObject(t);
-	}
-	catchTnbServerErrors()
-}
-
-implementTnbServerParam(Server_Cad2dObj_Nurbs, pnts, "pnts");
-implementTnbServerParam(Server_Cad2dObj_Nurbs, weights, "weights");
-implementTnbServerParam(Server_Cad2dObj_Nurbs, knots, "knots");
-implementTnbServerParam(Server_Cad2dObj_Nurbs, deg, "deg");
-implementTnbServerParam(Server_Cad2dObj_Nurbs, periodic, "periodic");
-implementTnbServerParam(Server_Cad2dObj_Nurbs, name, "name");
-
-implementTnbServerConstruction(Server_Cad2dObj_Nurbs)
-{
-	std::vector<Pnt2d> pnts;
-	std::vector<double> weights;
-	std::vector<double> knots;
-	int deg;
-	bool periodic = false;
-	std::string name;
-	{
-		defineTnbServerParser(theValue);
-		{
-			loadTnbServerObject(pnts);
-		}
-		{
-			//loadTnbServerObject(pnt_list);
-			nlohmann::json json_array = nlohmann::json::parse(loader.at(Params::pnts).get<std::string>());
-
-			// Check if the parsed JSON is an array
-			if (json_array.is_array()) {
-				// Access elements of the array
-				for (const auto& element : json_array) {
-					std::stringstream stream;
-					stream << element.get<std::string>();
-					TNB_iARCH_FILE_TYPE ia(stream);
-					Pnt2d item;
-					ia >> item;
-					pnts.emplace_back(std::move(item));
-				}
-			}
-			else {
-				throw Server_Error("Couldn't load the point list");
-			}
-		}
-		{
-			nlohmann::json json_array = nlohmann::json::parse(loader.at(Params::weights).get<std::string>());
-
-			// Check if the parsed JSON is an array
-			if (json_array.is_array()) {
-				// Access elements of the array
-				for (const auto& element : json_array) {
-					weights.emplace_back(element.get<double>());
-				}
-			}
-			else {
-				throw Server_Error("Couldn't load the weight list");
-			}
-		}
-		{
-			nlohmann::json json_array = nlohmann::json::parse(loader.at(Params::knots).get<std::string>());
-
-			// Check if the parsed JSON is an array
-			if (json_array.is_array()) {
-				// Access elements of the array
-				for (const auto& element : json_array) {
-					knots.emplace_back(element.get<double>());
-				}
-			}
-			else {
-				throw Server_Error("Couldn't load the knot list");
-			}
-		}
-		{
-			loadTnbServerObject(deg);
-		}
-		{
-			name = loader.at(Params::name).get<std::string>();
-		}
-		{
-			loadTnbServerObject(periodic);
-		}
-	}
-	try
-	{
-		auto g = Pln_Tools::MakeNurbs(pnts, weights, knots, deg, periodic);
-		auto edge = Pln_Tools::MakeEdge(g);
-		edge->SetName(name);
-		edge->Curve()->SetName(name);
-		streamGoodTnbServerObject(edge);
+		const auto& g = curve->Curve();
+		auto [pt, value] = g->D1(u);
+		streamGoodTnbServerObject(value);
 	}
 	catchTnbServerErrors()
 }

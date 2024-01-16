@@ -32,6 +32,8 @@ namespace tnbLib
 	defineTnbServerObject(Server_Cad2dObj_Area_ExportToPlt);
 
 	defineTnbServerObject(Server_Cad2dObj_Area_GetCurves);
+
+	defineTnbServerObject(Server_Cad2dObj_Area_GetOuterPolygon);
 	
 }
 

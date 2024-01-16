@@ -20,6 +20,7 @@ namespace tnbLib
 	class Cad2d_Plane;
 	class Mesh_Curve_Info;
 	class Mesh_BndLayer_Info;
+	class Entity2d_CmpMesh;
 
 	class Aft2d_SolutionDataBase
 	{
@@ -55,7 +56,7 @@ namespace tnbLib
 
 		std::shared_ptr<Entity2d_Polygon> theBoundaryMesh_;
 		std::shared_ptr<Entity2d_Triangulation> theMesh_;
-		std::vector<std::shared_ptr<Entity2d_QuadMesh>> theBndLayers_;
+		std::vector<std::shared_ptr<Entity2d_CmpMesh>> theBndLayers_;
 
 
 		// Private functions and operators [12/1/2021 Amir]
@@ -155,10 +156,10 @@ namespace tnbLib
 			theMesh_ = std::move(theMesh);
 		}
 
-		void SetBndlayerMeshes(const std::vector<std::shared_ptr<Entity2d_QuadMesh>>& theMeshes) 
+		void SetBndlayerMeshes(const std::vector<std::shared_ptr<Entity2d_CmpMesh>>& theMeshes) 
 		{ theBndLayers_ = theMeshes; }
 
-		void SetBndlayerMeshes(std::vector<std::shared_ptr<Entity2d_QuadMesh>>&& theMeshes)
+		void SetBndlayerMeshes(std::vector<std::shared_ptr<Entity2d_CmpMesh>>&& theMeshes)
 		{
 			theBndLayers_ = std::move(theMeshes);
 		}

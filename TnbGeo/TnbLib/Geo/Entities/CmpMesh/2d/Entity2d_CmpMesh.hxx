@@ -33,6 +33,9 @@ namespace tnbLib
 
 	public:
 
+		typedef Pnt2d ptType;
+		typedef  Entity2d_CmpConnect connectType;
+
 		static TnbGeo_EXPORT const std::string extension;
 
 		// default constructor

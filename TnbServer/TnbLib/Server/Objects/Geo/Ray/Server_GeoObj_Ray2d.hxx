@@ -13,14 +13,14 @@ namespace tnbLib
 	public:
 		struct Params
 		{
-			defineTnbServerParam(pnt);
-			defineTnbServerParam(vec);
+			defineTnbServerParam(point);
+			defineTnbServerParam(dir);
 		};
 
 		constructTnbServerObject(Server_GeoObj_Ray2d);
 	};
 
-	class Server_GeoObj_Ray2d_Intersect
+	class Server_GeoObj_Ray2d_Int
 		: public Server_Object
 	{
 	public:
@@ -29,9 +29,11 @@ namespace tnbLib
 			defineTnbServerParam(ray0);
 			defineTnbServerParam(ray1);
 		};
+		constructTnbServerObject(Server_GeoObj_Ray2d_Int);
+	};
 
 		constructTnbServerObject(Server_GeoObj_Ray2d_Intersect);
 	};
 }
 
-#endif
+#endif 

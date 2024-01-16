@@ -38,6 +38,25 @@ void tnbLib::Server_GeoObj_Vec2d_F1::Construct(const std::string& theValue)
 	theStream_ << jData;
 }
 
+implementTnbServerConstruction(Server_GeoObj_Vec2d_Cmpts)
+{
+	Vec2d d;
+	{
+		loadNonJSONTnbServer(d);
+	}
+	nlohmann::json jData;
+	jData["u0"] = d.X();
+	jData["u1"] = d.Y();
+	std::stringstream stream;
+	stream << jData;
+	{
+		nlohmann::json jData1;
+		jData1[SENSE] = GetRespType(RespType::good);
+		jData1[VALUE] = stream.str();
+		theStream_ << jData1;
+	}
+}
+
 implementTnbServerParam(Server_GeoObj_Vec2d_DotProduct, u0, "u0");
 implementTnbServerParam(Server_GeoObj_Vec2d_DotProduct, u1, "u1");
 

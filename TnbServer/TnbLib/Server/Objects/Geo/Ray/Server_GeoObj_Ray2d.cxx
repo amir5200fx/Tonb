@@ -1,36 +1,44 @@
 #include <Server_GeoObj_Ray2d.hxx>
 
-#include <json.hpp>
+#include <Geo_Tools.hxx>
 #include <Entity2d_Ray.hxx>
 #include <Pnt2d.hxx>
-#include <Geo_Tools.hxx>
+#include <Dir2d.hxx>
+#include <Global_Serialization.hxx>
 
-implementTnbServerParam(Server_GeoObj_Ray2d, pnt, "pnt");
-implementTnbServerParam(Server_GeoObj_Ray2d, vec, "vec");
+#include <json.hpp>
+
+implementTnbServerParam(Server_GeoObj_Ray2d, point, "point");
+implementTnbServerParam(Server_GeoObj_Ray2d, dir, "dir");
 
 implementTnbServerConstruction(Server_GeoObj_Ray2d)
 {
-	Pnt2d pnt;
-	Vec2d vec;
+	Pnt2d point;
+	Dir2d dir;
 	{
 		defineTnbServerParser(theValue);
 		{
-			loadTnbServerObject(pnt);
+			loadTnbServerObject(point);
 		}
 		{
-			loadTnbServerObject(vec);
+			loadTnbServerObject(dir);
 		}
 	}
-	auto value = std::make_shared<Entity2d_Ray>(pnt, vec);
-	streamGoodTnbServerObject(value);
+	try
+	{
+		auto value = std::make_shared<Entity2d_Ray>(point, dir);
+		streamGoodTnbServerObject(value);
+	}
+	catchTnbServerErrors()
 }
 
-implementTnbServerParam(Server_GeoObj_Ray2d_Intersect, ray0, "ray0");
-implementTnbServerParam(Server_GeoObj_Ray2d_Intersect, ray1, "ray1");
+implementTnbServerParam(Server_GeoObj_Ray2d_Int, ray0, "ray0");
+implementTnbServerParam(Server_GeoObj_Ray2d_Int, ray1, "ray1");
 
-implementTnbServerConstruction(Server_GeoObj_Ray2d_Intersect)
+implementTnbServerConstruction(Server_GeoObj_Ray2d_Int)
 {
-	std::shared_ptr<Entity2d_Ray> ray0, ray1;
+	std::shared_ptr<Entity2d_Ray> ray0;
+	std::shared_ptr<Entity2d_Ray> ray1;
 	{
 		defineTnbServerParser(theValue);
 		{
@@ -40,23 +48,27 @@ implementTnbServerConstruction(Server_GeoObj_Ray2d_Intersect)
 			loadTnbServerObject(ray1);
 		}
 	}
-	auto [pt, cond] = Geo_Tools::CalcIntersectionPoint_cgal(*ray0, *ray1);
-	std::stringstream stream_j;
+	try
 	{
+		auto [pt, cond] = Geo_Tools::CalcIntersectionPoint_cgal(*ray0, *ray1);
 		nlohmann::json jData;
 		{
 			std::stringstream stream;
 			TNB_oARCH_FILE_TYPE oa(stream);
 			oa << pt;
-			jData["pt"] = stream.str();
+			jData["value"] = stream.str();
 		}
 		{
-			jData["cond"] = cond;
+		jData["cond"] = cond;
+		std::stringstream stream;
+		stream << jData;
+		{
+			nlohmann::json jData1;
+			jData1[SENSE] = GetRespType(RespType::good);
+			jData1[VALUE] = stream.str();
+			theStream_ << jData1;
 		}
 		stream_j << jData;
 	}
-	nlohmann::json jData;
-	jData[SENSE] = GetRespType(RespType::good);
-	jData[VALUE] = stream_j.str();
-	theStream_ << jData;
+	catchTnbServerErrors()
 }

@@ -12,6 +12,7 @@ using namespace tnbLib;
 #include <Server_GeoObj_Vec2d_F1.hxx>
 #include <Server_GeoObj_Dir2d_F1.hxx>
 #include <Server_GeoObj_Axis2d_F1.hxx>
+#include <Server_GeoObj_Ray2d.hxx>
 #include <Server_MeshObj.hxx>
 #include <Server_GeoObj_Ray2d.hxx>
 
@@ -29,6 +30,10 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d, "make_ray_2d");
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "retv_compts_vec_2d");
+
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d_f1, "make_ray_2d_f1");
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Int, Server::objects::calc_ray_2d_int_pnt, "calc_ray_2d_int_pnt");
 
 #include <Server_GeoObj_Pnt2d_List.hxx>
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_List, Server::objects::make_pnt_2d_list, "make_pnt_2d_list");
@@ -42,6 +47,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Boolean_Subtract_F1, Server::ob
 
 #include <Server_Cad2dObj_Segment2d_F1.hxx>
 #include <Server_Cad2dObj_Circle_F1.hxx>
+#include <Server_Cad2dObj_Ellipse_F1.hxx>
 #include <Server_Cad2dObj_Rectangular_F1.hxx>
 #include <Server_Cad2dObj_Interpl_F1.hxx>
 #include <Server_Cad2dObj_Curve_List.hxx>
@@ -54,6 +60,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Boolean_Subtract_F1, Server::ob
 #include <Server_Cad2dObj_Area_Manager.hxx>
 #include <Server_Cad2dObj_Curve.hxx>
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Circle_F1, Server::objects::make_circle_2d_f1, "make_circle_2d_f1");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Ellipse_F1, Server::objects::make_ellipse_2d_f1, "make_ellipse_2d_f1");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Rectangular_F1, Server::objects::make_rectangular_2d_f1, "make_rectangular_2d_f1");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Interpl_F1, Server::objects::make_interpl_curve_2d, "make_interpl_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Segment2d_F1, Server::objects::make_segment_2d_f1, "make_segment_2d_f1");
@@ -61,7 +68,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_List, Server::objects::ma
 defineAndRegisterTnbServerObject(Server_Cad2dObj_FirstParCurve, Server::objects::retv_first_parameter_curve_2d, "retv_first_parameter_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_LastParCurve, Server::objects::retv_last_parameter_curve_2d, "retv_last_parameter_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_CalcPntOnCurve, Server::objects::calc_pnt_curve_2d, "calc_pnt_curve_2d");
-defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_CalcTangt, Server::objects::calc_tan_curve_2d, "calc_tan_curve_2d");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_D1, Server::objects::calc_d1_curve_2d, "calc_d1_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_PrjPntCrv, Server::objects::prj_pnt_curve_2d, "prj_pnt_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_RevCrv, Server::objects::rev_curve_2d, "make_rev_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_Trim, Server::objects::trim_curve_2d, "trim_curve_2d");
@@ -76,12 +83,17 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_CombineBl
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_CombineAll, Server::objects::combine_all_area_blocks, "combine_all_area_blocks");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_RenameBlock, Server::objects::rename_area_2d_block, "rename_area_2d_block");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_SplitBlock, Server::objects::split_area_2d_block, "split_area_2d_block");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_GetOuterPolygon, Server::objects::area_2d_get_outer_poly, "area_2d_get_outer_poly");
 
 // geo lib
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Intersect, Server::objects::calc_ray_2d_intsect, "calc_ray_2d_intsect");
 
 #include <Server_Geo2dObj_BndBox.hxx>
+#include <Server_Geo2dObj.hxx>
+
+defineAndRegisterTnbServerObject(Server_Geo2dObj_RevPoly, Server::objects::poly_2d_rev, "poly_2d_rev");
+
 defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_DotProduct, Server::objects::vec2d_dot, "vec2d_dot");
 defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_CrossProduct, Server::objects::vec2d_cross, "vec2d_cross");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Create, Server::objects::make_bnd_box_2d, "make_bnd_box_2d");
@@ -98,7 +110,10 @@ defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP0, Server::objects::
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetP1, Server::objects::get_bnd_box_2d_p1, "get_bnd_box_2d_p1");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_GetCorners, Server::objects::get_bnd_box_2d_corners, "get_bnd_box_2d_corners");
 
-#include <Server_Geo2dObj.hxx>
+
+defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F1, Server::objects::make_size_map_2d_vol_f1, "make_size_map_2d_vol_f1");
+defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Volume_F2, Server::objects::make_size_map_2d_vol_f2, "make_size_map_2d_vol_f2");
+
 defineAndRegisterTnbServerObject(Server_Geo2dObj_SizeMap_Uniform, Server::objects::make_size_map_2d_uniform, "make_size_map_2d_uniform");
 
 defineAndRegisterTnbServerObject(Server_Geo2dObj_ApproxCrv, Server::objects::make_approx_curve_2d_settings, "make_approx_curve_2d_settings");

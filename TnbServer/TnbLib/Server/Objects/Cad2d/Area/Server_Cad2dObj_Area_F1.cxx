@@ -3,7 +3,9 @@
 #include <Server_Error.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Pln_Wire.hxx>
 #include <Pln_Edge.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <TnbError.hxx>
 #include <json.hpp>
 
@@ -137,6 +139,25 @@ void tnbLib::Server_Cad2dObj_Area_GetCurves::Construct(const std::string& theVal
 		jData[SENSE] = GetRespType(RespType::good);
 		jData[VALUE] = edges;
 		theStream_ << jData;
+	}
+	catchTnbServerErrors()
+}
+
+implementTnbServerConstruction(Server_Cad2dObj_Area_GetOuterPolygon)
+{
+	std::shared_ptr<Cad2d_Plane> area;
+	{
+		loadNonJSONTnbServer(area);
+	}
+	try
+	{
+		if (!area)
+		{
+			throw Server_Error("the area object is null.");
+		}
+		const auto& outer = area->OuterWire();
+		auto poly = outer->Polygon();
+		streamGoodTnbServerObject(poly);
 	}
 	catchTnbServerErrors()
 }

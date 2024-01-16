@@ -171,6 +171,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Inner\MeshBLayer2d_InnerNode.hxx" />
     <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.hxx" />
     <ClInclude Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.hxx" />
+    <ClInclude Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset2.hxx" />
     <ClInclude Include="TnbLib\BLayer\2d\Tools\MeshBLayer2d_Tools.hxx" />
     <ClInclude Include="TnbLib\BLayer\module\MeshBLayer_Module.hxx" />
   </ItemGroup>
@@ -190,6 +191,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Inner\MeshBLayer2d_InnerNode.cxx" />
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.cxx" />
     <ClCompile Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.cxx" />
+    <ClCompile Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset2.cxx" />
     <ClCompile Include="TnbLib\BLayer\2d\Tools\MeshBLayer2d_Tools.cxx" />
   </ItemGroup>
   <ItemGroup>
