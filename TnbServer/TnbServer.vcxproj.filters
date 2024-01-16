@@ -151,6 +151,9 @@
     <Filter Include="TnbLib\Server\Objects\OpenFOAM">
       <UniqueIdentifier>{20b83a35-8d32-476a-8395-2586810d4c32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Ray">
+      <UniqueIdentifier>{15c2a7bc-6dfb-4e2f-b952-2936d2c8b6c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -324,6 +327,9 @@
     <ClInclude Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.hxx">
       <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -490,6 +496,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.cxx">
       <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

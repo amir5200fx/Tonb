@@ -13,6 +13,7 @@ using namespace tnbLib;
 #include <Server_GeoObj_Dir2d_F1.hxx>
 #include <Server_GeoObj_Axis2d_F1.hxx>
 #include <Server_MeshObj.hxx>
+#include <Server_GeoObj_Ray2d.hxx>
 
 // the interger object
 defineAndRegisterTnbServerObject(Server_GlobalObj_Int, Server::objects::make_int, "make_int");
@@ -24,6 +25,8 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_F1, Server::objects::make_p
 defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_F1, Server::objects::make_vec_2d_f1, "make_vec_2d_f1");
 defineAndRegisterTnbServerObject(Server_GeoObj_Dir2d_F1, Server::objects::make_dir_2d_f1, "make_dir_2d_f1");
 defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_axis_2d_f1, "make_axis_2d_f1");
+
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d, "make_ray_2d");
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
 
@@ -58,6 +61,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_List, Server::objects::ma
 defineAndRegisterTnbServerObject(Server_Cad2dObj_FirstParCurve, Server::objects::retv_first_parameter_curve_2d, "retv_first_parameter_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_LastParCurve, Server::objects::retv_last_parameter_curve_2d, "retv_last_parameter_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_CalcPntOnCurve, Server::objects::calc_pnt_curve_2d, "calc_pnt_curve_2d");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_CalcTangt, Server::objects::calc_tan_curve_2d, "calc_tan_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_PrjPntCrv, Server::objects::prj_pnt_curve_2d, "prj_pnt_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_RevCrv, Server::objects::rev_curve_2d, "make_rev_curve_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_Trim, Server::objects::trim_curve_2d, "trim_curve_2d");
@@ -74,7 +78,12 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_RenameBlo
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_SplitBlock, Server::objects::split_area_2d_block, "split_area_2d_block");
 
 // geo lib
+
+defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Intersect, Server::objects::calc_ray_2d_intsect, "calc_ray_2d_intsect");
+
 #include <Server_Geo2dObj_BndBox.hxx>
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_DotProduct, Server::objects::vec2d_dot, "vec2d_dot");
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_CrossProduct, Server::objects::vec2d_cross, "vec2d_cross");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Create, Server::objects::make_bnd_box_2d, "make_bnd_box_2d");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_PntList, Server::objects::calc_bnd_box_2d_pnt_list, "calc_bnd_box_2d_pnt_list");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Curve, Server::objects::calc_bnd_box_2d_curve, "calc_bnd_box_2d_curve");

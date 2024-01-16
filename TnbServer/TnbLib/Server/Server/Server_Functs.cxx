@@ -32,6 +32,11 @@ createTnbServerObject(create_dir_2d_f1, Server_GeoObj_Dir2d_F1)
 #include <Server_GeoObj_Axis2d_F1.hxx>
 createTnbServerObject(create_axis_2d_f1, Server_GeoObj_Axis2d_F1)
 
+#include <Server_GeoObj_Ray2d.hxx>
+createTnbServerObject(make_ray_2d, Server_GeoObj_Ray2d)
+
+createTnbServerObject(calc_ray_2d_intsect, Server_GeoObj_Ray2d_Intersect)
+
 #include <Server_Cad2dObj_Segment2d_F1.hxx>
 #include <Server_Cad2dObj_Circle_F1.hxx>
 #include <Server_Cad2dObj_Rectangular_F1.hxx>
@@ -51,6 +56,7 @@ createTnbServerObject(make_curve_2d_list, Server_Cad2dObj_Curve_List)
 createTnbServerObject(retv_first_parameter_curve_2d, Server_Cad2dObj_FirstParCurve)
 createTnbServerObject(retv_last_parameter_curve_2d, Server_Cad2dObj_LastParCurve)
 createTnbServerObject(calc_pnt_curve_2d, Server_Cad2dObj_CalcPntOnCurve)
+createTnbServerObject(calc_tan_curve_2d, Server_Cad2dObj_Curve_CalcTangt)
 createTnbServerObject(prj_pnt_curve_2d, Server_Cad2dObj_PrjPntCrv)
 createTnbServerObject(rev_curve_2d, Server_Cad2dObj_RevCrv)
 createTnbServerObject(make_area_2d, Server_Cad2dObj_Area_F1)
@@ -89,6 +95,7 @@ createTnbServerObject(do_boolean_sub_2d, Server_Cad2dObj_Boolean_Subtract_F1)
 
 // geo lib
 #include <Server_Geo2dObj_BndBox.hxx>
+#include <Server_GeoObj_Vec2d_F1.hxx>
 createTnbServerObject(make_bnd_box_2d, Server_Geo2dObj_BndBox_Create)
 createTnbServerObject(calc_bnd_box_2d_pnt_list, Server_Geo2dObj_BndBox_PntList)
 createTnbServerObject(calc_bnd_box_2d_curve, Server_Geo2dObj_BndBox_Curve)
@@ -104,6 +111,9 @@ createTnbServerObject(get_bnd_box_2d_p1, Server_Geo2dObj_BndBox_GetP1)
 createTnbServerObject(get_bnd_box_2d_corners, Server_Geo2dObj_BndBox_GetCorners)
 
 #include <Server_Geo2dObj.hxx>
+createTnbServerObject(vec2d_dot, Server_GeoObj_Vec2d_DotProduct)
+createTnbServerObject(vec2d_cross, Server_GeoObj_Vec2d_CrossProduct)
+
 createTnbServerObject(make_size_map_2d_uniform, Server_Geo2dObj_SizeMap_Uniform)
 createTnbServerObject(make_approx_curve_2d_settings, Server_Geo2dObj_ApproxCrv)
 

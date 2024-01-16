@@ -33,6 +33,11 @@ namespace tnbLib
 			make_axis_2d_f1,
 			make_pnt_2d_f1,
 			make_pnt_3d,
+			make_ray_2d,
+
+			// vector
+			vec2d_dot,
+			vec2d_cross,
 
 			retrv_compts_pnt_2d,
 			retrv_compts_vec_2d,
@@ -48,6 +53,7 @@ namespace tnbLib
 			retv_first_parameter_curve_2d,
 			retv_last_parameter_curve_2d,
 			calc_pnt_curve_2d,
+			calc_tan_curve_2d,
 			prj_pnt_curve_2d,
 			rev_curve_2d,
 			trim_curve_2d,
@@ -78,6 +84,8 @@ namespace tnbLib
 			calc_bnd_box_2d_crv_list,
 			calc_bnd_box_2d_area,
 			calc_bnd_box_2d_area_list,
+
+			calc_ray_2d_intsect,
 
 			do_bnd_box_2d_expand,
 			get_bnd_box_2d_dia,
@@ -219,6 +227,7 @@ namespace tnbLib
 		declareTnbServerFunction(retv_first_parameter_curve_2d);
 		declareTnbServerFunction(retv_last_parameter_curve_2d);
 		declareTnbServerFunction(calc_pnt_curve_2d);
+		declareTnbServerFunction(calc_tan_curve_2d);
 		declareTnbServerFunction(prj_pnt_curve_2d);
 		declareTnbServerFunction(rev_curve_2d);
 		declareTnbServerFunction(trim_curve_2d);
@@ -241,6 +250,13 @@ namespace tnbLib
 		void make_interpl_curve_2d(const std::string&, const std::string&);
 
 		// geo lib
+
+		declareTnbServerFunction(make_ray_2d);
+
+		declareTnbServerFunction(vec2d_dot);
+		declareTnbServerFunction(vec2d_cross);
+
+		declareTnbServerFunction(calc_ray_2d_intsect);
 
 		declareTnbServerFunction(make_bnd_box_2d);
 		declareTnbServerFunction(calc_bnd_box_2d_pnt_list);

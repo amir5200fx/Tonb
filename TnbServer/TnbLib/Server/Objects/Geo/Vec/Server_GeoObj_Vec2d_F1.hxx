@@ -31,6 +31,30 @@ namespace tnbLib
 		TnbServer_EXPORT void Construct(const std::string&) override;
 
 	};
+
+	class Server_GeoObj_Vec2d_DotProduct
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(u0);
+			defineTnbServerParam(u1);
+		};
+		constructTnbServerObject(Server_GeoObj_Vec2d_DotProduct);
+	};
+
+	class Server_GeoObj_Vec2d_CrossProduct
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(u0);
+			defineTnbServerParam(u1);
+		};
+		constructTnbServerObject(Server_GeoObj_Vec2d_CrossProduct);
+	};
 }
 
 #endif
