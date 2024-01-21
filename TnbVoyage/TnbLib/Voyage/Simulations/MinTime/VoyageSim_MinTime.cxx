@@ -171,8 +171,6 @@ tnbLib::VoyageSim_MinTime::RetrievePath
 		const auto deltaX = theDist_(prev->Coord(), current->Coord());
 		const auto vel = deltaX / (deltaT);
 		const auto thrust = cost / (deltaX);
-		std::cout << " - t1: " << current->Time() << ", t0: " << prev->Time() << std::endl;
-		std::cout << " - cost: " << cost << ", deltaT: " << deltaT << " dis: " << deltaX << ", vel: " << vel << std::endl;
 		states.push_back({ {current->Coord()},{tableData.first},{vel},});
 		current = prev;
 	}

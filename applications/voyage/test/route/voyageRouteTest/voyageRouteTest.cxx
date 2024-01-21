@@ -401,7 +401,7 @@ int main()
 
 	auto ocean_fun = [](const Pnt2d& coord, const double time)->std::pair<double, double>
 		{
-			return { 0.0,0.0 };
+			return { 1.0,2.0 };
 		};
 
 	constexpr auto nb_of_samples = 5;
