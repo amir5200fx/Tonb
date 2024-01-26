@@ -55,6 +55,8 @@ namespace tnbLib
 		};
 		constructTnbServerObject(Server_GeoObj_Vec2d_CrossProduct);
 	};
+
+	defineTnbServerObject(Server_GeoObj_Vec2d_Cmpts);
 }
 
 #endif

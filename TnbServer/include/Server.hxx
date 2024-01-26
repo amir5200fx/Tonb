@@ -35,6 +35,10 @@ namespace tnbLib
 			make_pnt_3d,
 			make_ray_2d_f1,
 
+			// vector
+			vec2d_dot,
+			vec2d_cross,
+
 			retrv_compts_pnt_2d,
 			retv_compts_vec_2d,
 			retrv_compts_dir_2d,
@@ -257,6 +261,13 @@ namespace tnbLib
 		void make_interpl_curve_2d(const std::string&, const std::string&);
 
 		// geo lib
+
+		declareTnbServerFunction(make_ray_2d);
+
+		declareTnbServerFunction(vec2d_dot);
+		declareTnbServerFunction(vec2d_cross);
+
+		declareTnbServerFunction(calc_ray_2d_intsect);
 
 		declareTnbServerFunction(make_bnd_box_2d);
 		declareTnbServerFunction(calc_bnd_box_2d_pnt_list);

@@ -32,8 +32,6 @@ namespace tnbLib
 		constructTnbServerObject(Server_GeoObj_Ray2d_Int);
 	};
 
-		constructTnbServerObject(Server_GeoObj_Ray2d_Intersect);
-	};
 }
 
 #endif 

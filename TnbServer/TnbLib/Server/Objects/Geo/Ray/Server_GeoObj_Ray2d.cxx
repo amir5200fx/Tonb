@@ -58,7 +58,6 @@ implementTnbServerConstruction(Server_GeoObj_Ray2d_Int)
 			oa << pt;
 			jData["value"] = stream.str();
 		}
-		{
 		jData["cond"] = cond;
 		std::stringstream stream;
 		stream << jData;
@@ -68,7 +67,6 @@ implementTnbServerConstruction(Server_GeoObj_Ray2d_Int)
 			jData1[VALUE] = stream.str();
 			theStream_ << jData1;
 		}
-		stream_j << jData;
 	}
 	catchTnbServerErrors()
 }

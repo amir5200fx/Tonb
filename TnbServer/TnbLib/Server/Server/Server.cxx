@@ -35,8 +35,6 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::make_bool, create_bool, value, sense)
 
 		// geometric objects
-		switchToMakeTnbServerObject(objects::make_ray_2d, make_ray_2d, value, sense)
-
 		switchToMakeTnbServerObject(objects::make_pnt_2d_f1, create_pnt_2d_f1, value, sense)
 		switchToMakeTnbServerObject(objects::make_vec_2d_f1, create_vec_2d_f1, value, sense, sense)
 		switchToMakeTnbServerObject(objects::make_dir_2d_f1, create_dir_2d_f1, value, sense, sense)

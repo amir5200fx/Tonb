@@ -16,6 +16,7 @@ namespace tnbLib
 			defineTnbServerParam(point);
 			defineTnbServerParam(dir);
 		};
+
 		constructTnbServerObject(Server_GeoObj_Ray2d);
 	};
 

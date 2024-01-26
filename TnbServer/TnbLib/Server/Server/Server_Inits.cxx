@@ -27,8 +27,6 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_F1, Server::objects::make_v
 defineAndRegisterTnbServerObject(Server_GeoObj_Dir2d_F1, Server::objects::make_dir_2d_f1, "make_dir_2d_f1");
 defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_axis_2d_f1, "make_axis_2d_f1");
 
-defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d, "make_ray_2d");
-
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
 defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "retv_compts_vec_2d");
 
@@ -86,9 +84,6 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_SplitBloc
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_GetOuterPolygon, Server::objects::area_2d_get_outer_poly, "area_2d_get_outer_poly");
 
 // geo lib
-
-defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Intersect, Server::objects::calc_ray_2d_intsect, "calc_ray_2d_intsect");
-
 #include <Server_Geo2dObj_BndBox.hxx>
 #include <Server_Geo2dObj.hxx>
 
