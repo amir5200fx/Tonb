@@ -47,6 +47,18 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 		switchToMakeTnbServerObject(objects::make_ray_2d_f1, make_ray_2d_f1, value, sense)
 
+
+		// transformatiosn
+
+		switchToMakeTnbServerObject(objects::make_trsf_2d, make_trsf_2d, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_mirror_by_pnt, trsf_2d_mirror_by_pnt, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_mirror_by_axis, trsf_2d_mirror_by_axis, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_rotation, trsf_2d_rotation, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_scale, trsf_2d_scale, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_transform_from_s1_to_s2, trsf_2d_transform_from_s1_to_s2, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_transform_to, trsf_2d_transform_to, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_translation, trsf_2d_translation, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_values, trsf_2d_values, value, sense)
 		// cad objects
 		switchToMakeTnbServerObject(objects::retv_first_parameter_curve_2d, retv_first_parameter_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::retv_last_parameter_curve_2d, retv_last_parameter_curve_2d, value, sense)

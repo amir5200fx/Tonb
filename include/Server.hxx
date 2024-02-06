@@ -39,6 +39,18 @@ namespace tnbLib
 			vec2d_dot,
 			vec2d_cross,
 
+			// trsf2d
+
+			make_trsf_2d,
+			trsf_2d_mirror_by_pnt,
+			trsf_2d_mirror_by_axis,
+			trsf_2d_rotation,
+			trsf_2d_scale,
+			trsf_2d_transform_from_s1_to_s2,
+			trsf_2d_transform_to,
+			trsf_2d_translation,
+			trsf_2d_values,
+
 			retrv_compts_pnt_2d,
 			retv_compts_vec_2d,
 			retrv_compts_dir_2d,
@@ -228,6 +240,17 @@ namespace tnbLib
 		declareTnbServerFunction(make_ray_2d_f1);
 
 		void make_pnt_2d_list(const std::string&, const std::string&);
+
+		// Transformations
+		declareTnbServerFunction(make_trsf_2d);
+		declareTnbServerFunction(trsf_2d_mirror_by_pnt);
+		declareTnbServerFunction(trsf_2d_mirror_by_axis);
+		declareTnbServerFunction(trsf_2d_rotation);
+		declareTnbServerFunction(trsf_2d_scale);
+		declareTnbServerFunction(trsf_2d_transform_from_s1_to_s2);
+		declareTnbServerFunction(trsf_2d_transform_to);
+		declareTnbServerFunction(trsf_2d_translation);
+		declareTnbServerFunction(trsf_2d_values);
 
 		// cad functions
 		void make_segment_2d_f1(const std::string&, const std::string&);
