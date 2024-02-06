@@ -8,6 +8,7 @@ using namespace tnbLib;
 #include <Server_GlobalObj_Real.hxx>
 #include <Server_GlobalObj_Bool.hxx>
 #include <Server_GeoObj_Pnt2d_F1.hxx>
+#include <Server_GeoObj_Pnt2d.hxx>
 #include <Server_GeoObj_Pnt2d_Compts.hxx>
 #include <Server_GeoObj_Vec2d_F1.hxx>
 #include <Server_GeoObj_Dir2d_F1.hxx>
@@ -29,6 +30,7 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
 defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "retv_compts_vec_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Trsf, Server::objects::pnt_2d_trsf, "pnt_2d_trsf");
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d_f1, "make_ray_2d_f1");
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Int, Server::objects::calc_ray_2d_int_pnt, "calc_ray_2d_int_pnt");

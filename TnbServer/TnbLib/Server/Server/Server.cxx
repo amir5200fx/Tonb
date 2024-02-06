@@ -42,6 +42,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 		switchToMakeTnbServerObject(objects::retrv_compts_pnt_2d, retv_compts_pnt_2d, value, sense)
 		switchToMakeTnbServerObject(objects::retv_compts_vec_2d, retv_compts_vec_2d, value, sense)
+		switchToMakeTnbServerObject(objects::pnt_2d_trsf, pnt_2d_trsf, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_pnt_2d_list, make_pnt_2d_list, value, sense)
 

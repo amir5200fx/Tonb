@@ -35,6 +35,8 @@ namespace tnbLib
 			make_pnt_3d,
 			make_ray_2d_f1,
 
+			pnt_2d_trsf,
+
 			// vector
 			vec2d_dot,
 			vec2d_cross,
@@ -237,6 +239,7 @@ namespace tnbLib
 		declareTnbServerFunction(retv_compts_pnt_2d);
 		declareTnbServerFunction(retv_compts_vec_2d);
 		declareTnbServerFunction(retv_compts_dir_2d);
+		declareTnbServerFunction(pnt_2d_trsf);
 
 		declareTnbServerFunction(make_ray_2d_f1);
 

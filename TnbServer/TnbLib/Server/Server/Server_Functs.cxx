@@ -2,6 +2,8 @@
 
 #include <Server_MeshObj.hxx>
 
+#include "Server_GeoObj_Pnt2d.hxx"
+
 using namespace tnbLib;
 
 #include <Server_GlobalObj_Int.hxx>
@@ -26,6 +28,7 @@ createTnbServerObject(make_pnt_2d_list, Server_GeoObj_Pnt2d_List)
 #include <Server_GeoObj_Vec2d_F1.hxx>
 createTnbServerObject(create_vec_2d_f1, Server_GeoObj_Vec2d_F1)
 createTnbServerObject(retv_compts_vec_2d, Server_GeoObj_Vec2d_Cmpts)
+createTnbServerObject(pnt_2d_trsf, Server_GeoObj_Pnt2d_Trsf)
 
 #include <Server_GeoObj_Dir2d_F1.hxx>
 createTnbServerObject(create_dir_2d_f1, Server_GeoObj_Dir2d_F1)
