@@ -36,6 +36,17 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Int, Server::objects::calc_
 #include <Server_GeoObj_Pnt2d_List.hxx>
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_List, Server::objects::make_pnt_2d_list, "make_pnt_2d_list");
 
+#include <Server_GeoObj_Trsf2d.hxx>
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d, Server::objects::make_trsf_2d, "make_trsf_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Mirror_By_Pnt, Server::objects::trsf_2d_mirror_by_pnt, "trsf_2d_mirror_by_pnt");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Mirror_By_Axis, Server::objects::trsf_2d_mirror_by_axis, "trsf_2d_mirror_by_axis");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Rotation, Server::objects::trsf_2d_rotation, "trsf_2d_rotation");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Scale, Server::objects::trsf_2d_scale, "trsf_2d_scale");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TrnsFromS1ToS2, Server::objects::trsf_2d_transform_from_s1_to_s2, "trsf_2d_transform_from_s1_to_s2");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TransfTo, Server::objects::trsf_2d_transform_to, "trsf_2d_transform_to");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Translation, Server::objects::trsf_2d_translation, "trsf_2d_translation");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Values, Server::objects::trsf_2d_values, "trsf_2d_values");
+
 #include <Server_Cad2dObj_Discret_Info.hxx>
 #include <Server_Cad2dObj_Discret.hxx>
 #include <Server_Cad2dObj_Boolean_Subtract_F1.hxx>
