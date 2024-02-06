@@ -85,6 +85,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_SetName, Server::objects:
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_GetIdent, Server::objects::curve_2d_get_iden, "curve_2d_get_iden");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_F1, Server::objects::make_area_2d, "make_area_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_GetCurves, Server::objects::area_get_curves, "area_get_curves");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Trsf, Server::objects::area_2d_trsf, "area_2d_trsf");
 
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments, Server::objects::retv_area_2d_blocks, "retv_area_2d_blocks");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_BlockCurves, Server::objects::retv_area_2d_block_curves, "retv_area_2d_block_curves");

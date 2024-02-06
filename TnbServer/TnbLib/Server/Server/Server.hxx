@@ -81,6 +81,7 @@ namespace tnbLib
 			rename_area_2d_block,
 			area_get_curves,
 			area_2d_get_outer_poly,
+			area_2d_trsf,
 
 			make_area_2d,
 
@@ -276,6 +277,7 @@ namespace tnbLib
 		declareTnbServerFunction(rename_area_2d_block);
 		declareTnbServerFunction(area_get_curves);
 		declareTnbServerFunction(area_2d_get_outer_poly);
+		declareTnbServerFunction(area_2d_trsf);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
 		declareTnbServerFunction(make_ellipse_2d_f1);

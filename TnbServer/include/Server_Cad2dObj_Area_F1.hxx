@@ -34,6 +34,18 @@ namespace tnbLib
 	defineTnbServerObject(Server_Cad2dObj_Area_GetCurves);
 
 	defineTnbServerObject(Server_Cad2dObj_Area_GetOuterPolygon);
+
+	class Server_Cad2dObj_Area_Trsf
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(trsf);
+			defineTnbServerParam(area);
+		};
+		constructTnbServerObject(Server_Cad2dObj_Area_Trsf);
+	};
 	
 }
 
