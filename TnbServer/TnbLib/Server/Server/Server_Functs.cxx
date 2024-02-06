@@ -95,6 +95,7 @@ void Server::split_area_2d_block(const std::string& theValue, const std::string&
 }
 createTnbServerObject(rename_area_2d_block, Server_Cad2dObj_Area_Manager_Segments_RenameBlock)
 createTnbServerObject(area_get_curves, Server_Cad2dObj_Area_GetCurves);
+createTnbServerObject(area_2d_trsf, Server_Cad2dObj_Area_Trsf)
 createTnbServerObject(curve_2d_get_iden, Server_Cad2dObj_Curve_GetIdent)
 createTnbServerObject(area_2d_get_outer_poly, Server_Cad2dObj_Area_GetOuterPolygon)
 

@@ -161,3 +161,31 @@ implementTnbServerConstruction(Server_Cad2dObj_Area_GetOuterPolygon)
 	}
 	catchTnbServerErrors()
 }
+
+implementTnbServerParam(Server_Cad2dObj_Area_Trsf, trsf, "trsf");
+implementTnbServerParam(Server_Cad2dObj_Area_Trsf, area, "area");
+
+implementTnbServerConstruction(Server_Cad2dObj_Area_Trsf)
+{
+	gp_Trsf2d trsf;
+	std::shared_ptr<Cad2d_Plane> area;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(trsf);
+		}
+		{
+			loadTnbServerObject(area);
+		}
+	}
+	try
+	{
+		if (NOT area)
+		{
+			throw Server_Error("the area object is null.");
+		}
+		area->Transform(trsf);
+		streamGoodTnbServerObject(area);
+	}
+	catchTnbServerErrors()
+}
