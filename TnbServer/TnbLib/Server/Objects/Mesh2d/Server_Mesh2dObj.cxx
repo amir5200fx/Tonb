@@ -1885,10 +1885,12 @@ namespace tnbLib
 				}
 				return std::move(points);
 			};
+		auto centre = theDomain.CalcCentre();
+		auto domain = Entity2d_Box(centre + 0.99 * (theDomain.P0() - centre), centre + 0.99 * (theDomain.P1() - centre));
 		Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
 		engine.SetMaxUnbalancing(2);
 		engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
-		engine.SetGeometryRegion(theDomain);
+		engine.SetGeometryRegion(domain);
 		engine.BUCKET_SIZE = 4;
 
 		Standard_Integer nbSources = 0;
@@ -1965,7 +1967,7 @@ namespace tnbLib
 			engine.SetMaxUnbalancing(/*AlgInfo()->Unbalancing()*/2);
 			engine.PostBalance();
 		}
-		auto [pnts, enginePts] = RetrieveNodes(engine, srcCoords, theDomain, mergCrit);
+		auto [pnts, enginePts] = RetrieveNodes(engine, srcCoords, domain, mergCrit);
 		auto tris = std::make_shared<Entity2d_Triangulation>();
 		Debug_Null_Pointer(tris);
 		{
@@ -1984,15 +1986,14 @@ namespace tnbLib
 			}
 		}
 		double base_size = 0;
-		for (const auto& x: sources)
+		for (const auto& x: pnts)
 		{
-			auto h = theSizeFun->Value(x->Coord());
+			auto h = theSizeFun->Value(x);
 			if (h > base_size)
 			{
 				base_size = h;
 			}
 		}
-
 		Geo2d_DelTri delTri(pnts);
 		//delTri.Perform();
 		delTri.Triangulate();
@@ -2013,7 +2014,7 @@ namespace tnbLib
 
 		// initiate the current element [8/1/2022 Amir]
 		bMesh->InitiateCurrentElement();
-		bMesh->SetBoundingBox(theDomain);
+		bMesh->SetBoundingBox(domain);
 		bMesh->Sources().resize(tris->NbPoints(), base_size);
 
 		auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
@@ -2024,6 +2025,8 @@ namespace tnbLib
 		(sources, base_size, growth_rate, *bMesh);
 		sources.clear();
 		bMesh->HvCorrection(hvInfo);
+		//OFstream myfile("airfoilsize.plt");
+		//bMesh->ExportToPlt(myfile);
 		return std::move(bMesh);
 	}
 
