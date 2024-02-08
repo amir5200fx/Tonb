@@ -2,6 +2,7 @@
 
 #include <Geo_Serialization.hxx>
 #include <Pnt2d.hxx>
+#include <Vec2d.hxx>
 
 #include <json.hpp>
 
@@ -238,6 +239,30 @@ implementTnbServerConstruction(Server_GeoObj_Trsf2d_Values)
 	try
 	{
 		trsf.SetValues(a11, a12, a13, a21, a22, a23);
+		streamGoodTnbServerObject(trsf);
+	}
+	catchTnbServerErrors()
+}
+
+implementTnbServerParam(Server_GeoObj_Trsf2d_TranslationPart, trsf, "trsf");
+implementTnbServerParam(Server_GeoObj_Trsf2d_TranslationPart, vect, "vect");
+
+implementTnbServerConstruction(Server_GeoObj_Trsf2d_TranslationPart)
+{
+	gp_Trsf2d trsf;
+	Vec2d vect;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(trsf);
+		}
+		{
+			loadTnbServerObject(vect);
+		}
+	}
+	try
+	{
+		trsf.SetTranslationPart(vect);
 		streamGoodTnbServerObject(trsf);
 	}
 	catchTnbServerErrors()

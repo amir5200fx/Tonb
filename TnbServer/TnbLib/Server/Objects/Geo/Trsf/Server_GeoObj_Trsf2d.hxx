@@ -113,6 +113,18 @@ namespace tnbLib
 		};
 		constructTnbServerObject(Server_GeoObj_Trsf2d_Values);
 	};
+
+	class Server_GeoObj_Trsf2d_TranslationPart
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(trsf);
+			defineTnbServerParam(vect);
+		};
+		constructTnbServerObject(Server_GeoObj_Trsf2d_TranslationPart);
+	};
 }
 
 #endif

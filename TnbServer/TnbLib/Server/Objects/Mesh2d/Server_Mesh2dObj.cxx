@@ -611,6 +611,7 @@ void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
 		alg->CreateStaticMesh();
 		OFstream myFile("myMesh.plt");
 		alg->GetTriangulation()->ExportToPlt(myFile);
+		//alg->GetTriangulation()->ExportToVtk(myFile);
 		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
 	}
@@ -1864,14 +1865,23 @@ namespace tnbLib
 			};
 		static auto retrieve_inside_points = [](const std::vector<std::shared_ptr<Pnt2d>>& pnts, const Entity2d_Polygon& polygon)
 			{
-				Geo2d_CGALPolygonCache poly(polygon);
 				std::vector<Pnt2d> points;
-				for (const auto& x : pnts)
+				try
 				{
-					if (Geo_Tools::IsPointInsidePolygon(*x, poly))
+					Geo2d_CGALPolygonCache poly(polygon);
+					for (const auto& x : pnts)
 					{
-						points.push_back(*x);
+						if (Geo_Tools::IsPointInsidePolygon(*x, poly))
+						{
+							points.push_back(*x);
+						}
 					}
+				}
+				catch (const std::exception& x)
+				{
+					FatalErrorIn(FunctionSIG) << endl
+						<< x.what() << endl
+						<< abort(FatalError);
 				}
 				return std::move(points);
 			};
@@ -1948,7 +1958,6 @@ namespace tnbLib
 				sources.push_back(std::move(h));
 			}
 		}
-		
 		{// Approximation scope [7/13/2023 Payvand]
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
@@ -1956,7 +1965,6 @@ namespace tnbLib
 			engine.SetMaxUnbalancing(/*AlgInfo()->Unbalancing()*/2);
 			engine.PostBalance();
 		}
-
 		auto [pnts, enginePts] = RetrieveNodes(engine, srcCoords, theDomain, mergCrit);
 		auto tris = std::make_shared<Entity2d_Triangulation>();
 		Debug_Null_Pointer(tris);
@@ -1964,11 +1972,17 @@ namespace tnbLib
 			auto innerPts = retrieve_inside_points(enginePts, *poly);
 			for (const auto& pt : innerPts)
 			{
-				auto h = std::make_shared<hNode>(pt, theSizeFun->Value(pt));
-				sources.push_back(std::move(h));
+				try
+				{
+					auto h = std::make_shared<hNode>(pt, theSizeFun->Value(pt));
+					sources.push_back(std::move(h));
+				}
+				catch (...)
+				{
+					// drop the point, do nothing! 
+				}
 			}
 		}
-
 		double base_size = 0;
 		for (const auto& x: sources)
 		{
@@ -1986,7 +2000,6 @@ namespace tnbLib
 
 		//tris = delTri.Triangulation();
 		tris = delTri.Data();
-
 		auto meshData = std::make_shared<GeoMesh2d_Data>();
 		Debug_Null_Pointer(meshData);
 
@@ -2007,11 +2020,9 @@ namespace tnbLib
 		Debug_Null_Pointer(hvInfo);
 		hvInfo->SetMaxNbIters(max_nb_iters);
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(rate));
-
 		MeshBase_Tools::SetSourcesToMeshNearestPoint
 		(sources, base_size, growth_rate, *bMesh);
 		sources.clear();
-
 		bMesh->HvCorrection(hvInfo);
 		return std::move(bMesh);
 	}
@@ -2141,8 +2152,8 @@ void tnbLib::Server_Mesh2dObj_BndLayer_F1::Construct(const std::string& theValue
 				{
 					compact.erase(b->Edge());
 				}
-				OFstream myfile("bndMesh.plt");
-				bmesh->ExportToPlt(myfile);
+				//OFstream myfile("bndMesh.plt");
+				//bmesh->ExportToPlt(myfile);
 				/*const auto merge_alg = std::make_shared<Merge2d_QuadMesh>();
 				merge_alg->Import(*mesh);
 				merge_alg->Perform();

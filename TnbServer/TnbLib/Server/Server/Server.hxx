@@ -51,6 +51,7 @@ namespace tnbLib
 			trsf_2d_transform_from_s1_to_s2,
 			trsf_2d_transform_to,
 			trsf_2d_translation,
+			trsf_2d_translation_part,
 			trsf_2d_values,
 
 			retrv_compts_pnt_2d,
@@ -254,6 +255,7 @@ namespace tnbLib
 		declareTnbServerFunction(trsf_2d_transform_from_s1_to_s2);
 		declareTnbServerFunction(trsf_2d_transform_to);
 		declareTnbServerFunction(trsf_2d_translation);
+		declareTnbServerFunction(trsf_2d_translation_part);
 		declareTnbServerFunction(trsf_2d_values);
 
 		// cad functions

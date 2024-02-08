@@ -59,6 +59,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 		switchToMakeTnbServerObject(objects::trsf_2d_transform_from_s1_to_s2, trsf_2d_transform_from_s1_to_s2, value, sense)
 		switchToMakeTnbServerObject(objects::trsf_2d_transform_to, trsf_2d_transform_to, value, sense)
 		switchToMakeTnbServerObject(objects::trsf_2d_translation, trsf_2d_translation, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_translation_part, trsf_2d_translation_part, value, sense)
 		switchToMakeTnbServerObject(objects::trsf_2d_values, trsf_2d_values, value, sense)
 		// cad objects
 		switchToMakeTnbServerObject(objects::retv_first_parameter_curve_2d, retv_first_parameter_curve_2d, value, sense)

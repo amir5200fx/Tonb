@@ -47,6 +47,7 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Scale, Server::objects::tr
 defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TrnsFromS1ToS2, Server::objects::trsf_2d_transform_from_s1_to_s2, "trsf_2d_transform_from_s1_to_s2");
 defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TransfTo, Server::objects::trsf_2d_transform_to, "trsf_2d_transform_to");
 defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Translation, Server::objects::trsf_2d_translation, "trsf_2d_translation");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TranslationPart, Server::objects::trsf_2d_translation_part, "trsf_2d_translation_part");
 defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Values, Server::objects::trsf_2d_values, "trsf_2d_values");
 
 #include <Server_Cad2dObj_Discret_Info.hxx>
