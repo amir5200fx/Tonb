@@ -2,6 +2,8 @@
 
 #include <Server_MeshObj.hxx>
 
+#include "Server_GeoObj_Pnt2d.hxx"
+
 using namespace tnbLib;
 
 #include <Server_GlobalObj_Int.hxx>
@@ -26,6 +28,7 @@ createTnbServerObject(make_pnt_2d_list, Server_GeoObj_Pnt2d_List)
 #include <Server_GeoObj_Vec2d_F1.hxx>
 createTnbServerObject(create_vec_2d_f1, Server_GeoObj_Vec2d_F1)
 createTnbServerObject(retv_compts_vec_2d, Server_GeoObj_Vec2d_Cmpts)
+createTnbServerObject(pnt_2d_trsf, Server_GeoObj_Pnt2d_Trsf)
 
 #include <Server_GeoObj_Dir2d_F1.hxx>
 createTnbServerObject(create_dir_2d_f1, Server_GeoObj_Dir2d_F1)
@@ -65,6 +68,18 @@ createTnbServerObject(make_area_2d, Server_Cad2dObj_Area_F1)
 createTnbServerObject(trim_curve_2d, Server_Cad2dObj_Curve_Trim)
 createTnbServerObject(set_name_curve_2d, Server_Cad2dObj_Curve_SetName)
 
+#include <Server_GeoObj_Trsf2d.hxx>
+createTnbServerObject(make_trsf_2d, Server_GeoObj_Trsf2d)
+createTnbServerObject(trsf_2d_mirror_by_pnt, Server_GeoObj_Trsf2d_Mirror_By_Pnt)
+createTnbServerObject(trsf_2d_mirror_by_axis, Server_GeoObj_Trsf2d_Mirror_By_Axis)
+createTnbServerObject(trsf_2d_rotation, Server_GeoObj_Trsf2d_Rotation)
+createTnbServerObject(trsf_2d_scale, Server_GeoObj_Trsf2d_Scale)
+createTnbServerObject(trsf_2d_transform_from_s1_to_s2, Server_GeoObj_Trsf2d_TrnsFromS1ToS2)
+createTnbServerObject(trsf_2d_transform_to, Server_GeoObj_Trsf2d_TransfTo)
+createTnbServerObject(trsf_2d_translation, Server_GeoObj_Trsf2d_Translation)
+createTnbServerObject(trsf_2d_values, Server_GeoObj_Trsf2d_Values)
+createTnbServerObject(trsf_2d_translation_part, Server_GeoObj_Trsf2d_TranslationPart)
+
 createTnbServerObject(retv_area_2d_blocks, Server_Cad2dObj_Area_Manager_Segments)
 createTnbServerObject(retv_area_2d_block_curves, Server_Cad2dObj_Area_Manager_Segments_BlockCurves)
 createTnbServerObject(combine_area_2d_blocks, Server_Cad2dObj_Area_Manager_Segments_CombineBlocks)
@@ -84,6 +99,7 @@ void Server::split_area_2d_block(const std::string& theValue, const std::string&
 }
 createTnbServerObject(rename_area_2d_block, Server_Cad2dObj_Area_Manager_Segments_RenameBlock)
 createTnbServerObject(area_get_curves, Server_Cad2dObj_Area_GetCurves);
+createTnbServerObject(area_2d_trsf, Server_Cad2dObj_Area_Trsf)
 createTnbServerObject(curve_2d_get_iden, Server_Cad2dObj_Curve_GetIdent)
 createTnbServerObject(area_2d_get_outer_poly, Server_Cad2dObj_Area_GetOuterPolygon)
 
@@ -115,6 +131,9 @@ createTnbServerObject(get_bnd_box_2d_p0, Server_Geo2dObj_BndBox_GetP0)
 createTnbServerObject(get_bnd_box_2d_p1, Server_Geo2dObj_BndBox_GetP1)
 createTnbServerObject(get_bnd_box_2d_corners, Server_Geo2dObj_BndBox_GetCorners)
 
+#include <Server_Geo2dObj.hxx>
+createTnbServerObject(vec2d_dot, Server_GeoObj_Vec2d_DotProduct)
+createTnbServerObject(vec2d_cross, Server_GeoObj_Vec2d_CrossProduct)
 
 createTnbServerObject(make_size_map_2d_uniform, Server_Geo2dObj_SizeMap_Uniform)
 createTnbServerObject(make_approx_curve_2d_settings, Server_Geo2dObj_ApproxCrv)

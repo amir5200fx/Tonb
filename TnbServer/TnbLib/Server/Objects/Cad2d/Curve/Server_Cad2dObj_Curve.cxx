@@ -2,7 +2,7 @@
 
 #include <Pln_Edge.hxx>
 #include <Pln_Curve.hxx>
-
+#include <Pln_Tools.hxx>
 #include <json.hpp>
 
 void tnbLib::Server_Cad2dObj_Curve_ExportToPlt::Construct(const std::string& theValue)

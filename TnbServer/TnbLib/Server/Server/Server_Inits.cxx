@@ -8,12 +8,14 @@ using namespace tnbLib;
 #include <Server_GlobalObj_Real.hxx>
 #include <Server_GlobalObj_Bool.hxx>
 #include <Server_GeoObj_Pnt2d_F1.hxx>
+#include <Server_GeoObj_Pnt2d.hxx>
 #include <Server_GeoObj_Pnt2d_Compts.hxx>
 #include <Server_GeoObj_Vec2d_F1.hxx>
 #include <Server_GeoObj_Dir2d_F1.hxx>
 #include <Server_GeoObj_Axis2d_F1.hxx>
 #include <Server_GeoObj_Ray2d.hxx>
 #include <Server_MeshObj.hxx>
+#include <Server_GeoObj_Ray2d.hxx>
 
 // the interger object
 defineAndRegisterTnbServerObject(Server_GlobalObj_Int, Server::objects::make_int, "make_int");
@@ -28,12 +30,25 @@ defineAndRegisterTnbServerObject(Server_GeoObj_Axis2d_F1, Server::objects::make_
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Compts, Server::objects::retrv_compts_pnt_2d, "retrv_compts_pnt_2d");
 defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_Cmpts, Server::objects::retv_compts_vec_2d, "retv_compts_vec_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_Trsf, Server::objects::pnt_2d_trsf, "pnt_2d_trsf");
 
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d, Server::objects::make_ray_2d_f1, "make_ray_2d_f1");
 defineAndRegisterTnbServerObject(Server_GeoObj_Ray2d_Int, Server::objects::calc_ray_2d_int_pnt, "calc_ray_2d_int_pnt");
 
 #include <Server_GeoObj_Pnt2d_List.hxx>
 defineAndRegisterTnbServerObject(Server_GeoObj_Pnt2d_List, Server::objects::make_pnt_2d_list, "make_pnt_2d_list");
+
+#include <Server_GeoObj_Trsf2d.hxx>
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d, Server::objects::make_trsf_2d, "make_trsf_2d");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Mirror_By_Pnt, Server::objects::trsf_2d_mirror_by_pnt, "trsf_2d_mirror_by_pnt");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Mirror_By_Axis, Server::objects::trsf_2d_mirror_by_axis, "trsf_2d_mirror_by_axis");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Rotation, Server::objects::trsf_2d_rotation, "trsf_2d_rotation");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Scale, Server::objects::trsf_2d_scale, "trsf_2d_scale");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TrnsFromS1ToS2, Server::objects::trsf_2d_transform_from_s1_to_s2, "trsf_2d_transform_from_s1_to_s2");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TransfTo, Server::objects::trsf_2d_transform_to, "trsf_2d_transform_to");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Translation, Server::objects::trsf_2d_translation, "trsf_2d_translation");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_TranslationPart, Server::objects::trsf_2d_translation_part, "trsf_2d_translation_part");
+defineAndRegisterTnbServerObject(Server_GeoObj_Trsf2d_Values, Server::objects::trsf_2d_values, "trsf_2d_values");
 
 #include <Server_Cad2dObj_Discret_Info.hxx>
 #include <Server_Cad2dObj_Discret.hxx>
@@ -73,6 +88,7 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_SetName, Server::objects:
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Curve_GetIdent, Server::objects::curve_2d_get_iden, "curve_2d_get_iden");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_F1, Server::objects::make_area_2d, "make_area_2d");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_GetCurves, Server::objects::area_get_curves, "area_get_curves");
+defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Trsf, Server::objects::area_2d_trsf, "area_2d_trsf");
 
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments, Server::objects::retv_area_2d_blocks, "retv_area_2d_blocks");
 defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_Manager_Segments_BlockCurves, Server::objects::retv_area_2d_block_curves, "retv_area_2d_block_curves");
@@ -88,6 +104,8 @@ defineAndRegisterTnbServerObject(Server_Cad2dObj_Area_GetOuterPolygon, Server::o
 
 defineAndRegisterTnbServerObject(Server_Geo2dObj_RevPoly, Server::objects::poly_2d_rev, "poly_2d_rev");
 
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_DotProduct, Server::objects::vec2d_dot, "vec2d_dot");
+defineAndRegisterTnbServerObject(Server_GeoObj_Vec2d_CrossProduct, Server::objects::vec2d_cross, "vec2d_cross");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Create, Server::objects::make_bnd_box_2d, "make_bnd_box_2d");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_PntList, Server::objects::calc_bnd_box_2d_pnt_list, "calc_bnd_box_2d_pnt_list");
 defineAndRegisterTnbServerObject(Server_Geo2dObj_BndBox_Curve, Server::objects::calc_bnd_box_2d_curve, "calc_bnd_box_2d_curve");

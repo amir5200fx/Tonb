@@ -35,6 +35,25 @@ namespace tnbLib
 			make_pnt_3d,
 			make_ray_2d_f1,
 
+			pnt_2d_trsf,
+
+			// vector
+			vec2d_dot,
+			vec2d_cross,
+
+			// trsf2d
+
+			make_trsf_2d,
+			trsf_2d_mirror_by_pnt,
+			trsf_2d_mirror_by_axis,
+			trsf_2d_rotation,
+			trsf_2d_scale,
+			trsf_2d_transform_from_s1_to_s2,
+			trsf_2d_transform_to,
+			trsf_2d_translation,
+			trsf_2d_translation_part,
+			trsf_2d_values,
+
 			retrv_compts_pnt_2d,
 			retv_compts_vec_2d,
 			retrv_compts_dir_2d,
@@ -65,6 +84,7 @@ namespace tnbLib
 			rename_area_2d_block,
 			area_get_curves,
 			area_2d_get_outer_poly,
+			area_2d_trsf,
 
 			make_area_2d,
 
@@ -220,10 +240,23 @@ namespace tnbLib
 		declareTnbServerFunction(retv_compts_pnt_2d);
 		declareTnbServerFunction(retv_compts_vec_2d);
 		declareTnbServerFunction(retv_compts_dir_2d);
+		declareTnbServerFunction(pnt_2d_trsf);
 
 		declareTnbServerFunction(make_ray_2d_f1);
 
 		void make_pnt_2d_list(const std::string&, const std::string&);
+
+		// Transformations
+		declareTnbServerFunction(make_trsf_2d);
+		declareTnbServerFunction(trsf_2d_mirror_by_pnt);
+		declareTnbServerFunction(trsf_2d_mirror_by_axis);
+		declareTnbServerFunction(trsf_2d_rotation);
+		declareTnbServerFunction(trsf_2d_scale);
+		declareTnbServerFunction(trsf_2d_transform_from_s1_to_s2);
+		declareTnbServerFunction(trsf_2d_transform_to);
+		declareTnbServerFunction(trsf_2d_translation);
+		declareTnbServerFunction(trsf_2d_translation_part);
+		declareTnbServerFunction(trsf_2d_values);
 
 		// cad functions
 		void make_segment_2d_f1(const std::string&, const std::string&);
@@ -249,6 +282,7 @@ namespace tnbLib
 		declareTnbServerFunction(rename_area_2d_block);
 		declareTnbServerFunction(area_get_curves);
 		declareTnbServerFunction(area_2d_get_outer_poly);
+		declareTnbServerFunction(area_2d_trsf);
 
 		void make_circle_2d_f1(const std::string&, const std::string&);
 		declareTnbServerFunction(make_ellipse_2d_f1);
@@ -257,6 +291,13 @@ namespace tnbLib
 		void make_interpl_curve_2d(const std::string&, const std::string&);
 
 		// geo lib
+
+		declareTnbServerFunction(make_ray_2d);
+
+		declareTnbServerFunction(vec2d_dot);
+		declareTnbServerFunction(vec2d_cross);
+
+		declareTnbServerFunction(calc_ray_2d_intsect);
 
 		declareTnbServerFunction(make_bnd_box_2d);
 		declareTnbServerFunction(calc_bnd_box_2d_pnt_list);

@@ -18,6 +18,7 @@
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
+#include <Vec2d.hxx>
 
 #include <json.hpp>
 

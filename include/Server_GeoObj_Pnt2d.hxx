@@ -47,7 +47,17 @@ namespace tnbLib
 
 	defineTnbServerObject(Server_GeoObj_Pnt2d_F2);
 
-
+	class Server_GeoObj_Pnt2d_Trsf
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(trsf);
+			defineTnbServerParam(pnt);
+		};
+		constructTnbServerObject(Server_GeoObj_Pnt2d_Trsf);
+	};
 }
 
 #endif

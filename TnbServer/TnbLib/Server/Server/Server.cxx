@@ -42,11 +42,25 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 
 		switchToMakeTnbServerObject(objects::retrv_compts_pnt_2d, retv_compts_pnt_2d, value, sense)
 		switchToMakeTnbServerObject(objects::retv_compts_vec_2d, retv_compts_vec_2d, value, sense)
+		switchToMakeTnbServerObject(objects::pnt_2d_trsf, pnt_2d_trsf, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_pnt_2d_list, make_pnt_2d_list, value, sense)
 
 		switchToMakeTnbServerObject(objects::make_ray_2d_f1, make_ray_2d_f1, value, sense)
 
+
+		// transformatiosn
+
+		switchToMakeTnbServerObject(objects::make_trsf_2d, make_trsf_2d, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_mirror_by_pnt, trsf_2d_mirror_by_pnt, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_mirror_by_axis, trsf_2d_mirror_by_axis, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_rotation, trsf_2d_rotation, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_scale, trsf_2d_scale, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_transform_from_s1_to_s2, trsf_2d_transform_from_s1_to_s2, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_transform_to, trsf_2d_transform_to, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_translation, trsf_2d_translation, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_translation_part, trsf_2d_translation_part, value, sense)
+		switchToMakeTnbServerObject(objects::trsf_2d_values, trsf_2d_values, value, sense)
 		// cad objects
 		switchToMakeTnbServerObject(objects::retv_first_parameter_curve_2d, retv_first_parameter_curve_2d, value, sense)
 		switchToMakeTnbServerObject(objects::retv_last_parameter_curve_2d, retv_last_parameter_curve_2d, value, sense)
@@ -66,10 +80,11 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 			switchToMakeTnbServerObject(objects::retv_area_2d_block_curves, retv_area_2d_block_curves, value, sense)
 			switchToMakeTnbServerObject(objects::combine_area_2d_blocks, combine_area_2d_blocks, value, sense)
 		switchToMakeTnbServerObject(objects::combine_all_area_blocks, combine_all_area_blocks, value, sense)
-		case objects::split_area_2d_block: { split_area_2d_block(value, sense); break; }
+	case objects::split_area_2d_block: { split_area_2d_block(value, sense); break; }
 		switchToMakeTnbServerObject(objects::rename_area_2d_block, rename_area_2d_block, value, sense)
 		switchToMakeTnbServerObject(objects::area_get_curves, area_get_curves, value, sense)
 		switchToMakeTnbServerObject(objects::area_2d_get_outer_poly, area_2d_get_outer_poly, value, sense)
+		switchToMakeTnbServerObject(objects::area_2d_trsf, area_2d_trsf, value, sense)
 
 			switchToMakeTnbServerObject(objects::make_curve_2d_list, make_curve_2d_list, value, sense)
 			switchToMakeTnbServerObject(objects::make_area_2d, make_area_2d, value, sense)
@@ -80,6 +95,11 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 			// geo lib
 
 		switchToMakeTnbServerObject(objects::calc_ray_2d_int_pnt, calc_ray_2d_int_pnt, value, sense)
+
+		switchToMakeTnbServerObject(objects::vec2d_dot, vec2d_dot, value, sense)
+		switchToMakeTnbServerObject(objects::vec2d_cross, vec2d_cross, value, sense)
+
+
 
 			switchToMakeTnbServerObject(objects::make_bnd_box_2d, make_bnd_box_2d, value, sense)
 			switchToMakeTnbServerObject(objects::calc_bnd_box_2d_pnt_list, calc_bnd_box_2d_pnt_list, value, sense)

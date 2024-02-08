@@ -56,3 +56,41 @@ implementTnbServerConstruction(Server_GeoObj_Vec2d_Cmpts)
 		theStream_ << jData1;
 	}
 }
+
+implementTnbServerParam(Server_GeoObj_Vec2d_DotProduct, u0, "u0");
+implementTnbServerParam(Server_GeoObj_Vec2d_DotProduct, u1, "u1");
+
+implementTnbServerConstruction(Server_GeoObj_Vec2d_DotProduct)
+{
+	Vec2d u0, u1;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(u0);
+		}
+		{
+			loadTnbServerObject(u1);
+		}
+		auto value = u0.Dot(u1);
+		streamGoodTnbServerObject(value);
+	}
+}
+
+implementTnbServerParam(Server_GeoObj_Vec2d_CrossProduct, u0, "u0");
+implementTnbServerParam(Server_GeoObj_Vec2d_CrossProduct, u1, "u1");
+
+implementTnbServerConstruction(Server_GeoObj_Vec2d_CrossProduct)
+{
+	Vec2d u0, u1;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(u0);
+		}
+		{
+			loadTnbServerObject(u1);
+		}
+		auto value = u0.Crossed(u1);
+		streamGoodTnbServerObject(value);
+	}
+}

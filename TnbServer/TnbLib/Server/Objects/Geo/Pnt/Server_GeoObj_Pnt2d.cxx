@@ -42,3 +42,23 @@ void tnbLib::Server_GeoObj_Pnt2d_SetY::Construct(const std::string& theValue)
 	point.SetY(value);
 	streamGoodTnbServerObject(point);
 }
+
+implementTnbServerParam(Server_GeoObj_Pnt2d_Trsf, trsf, "trsf");
+implementTnbServerParam(Server_GeoObj_Pnt2d_Trsf, pnt, "pnt");
+
+implementTnbServerConstruction(Server_GeoObj_Pnt2d_Trsf)
+{
+	gp_Trsf2d trsf;
+	Pnt2d pnt;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(trsf);
+		}
+		{
+			loadTnbServerObject(pnt);
+		}
+	}
+	pnt.Transform(trsf);
+	streamGoodTnbServerObject(pnt);
+}

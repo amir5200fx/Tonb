@@ -157,6 +157,9 @@
     <Filter Include="TnbLib\Server\Objects\Geo\Ray">
       <UniqueIdentifier>{2dd132a4-12ce-4154-a3a2-1e1c7dee63cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Trsf">
+      <UniqueIdentifier>{3d88f734-2260-472d-849e-8334e7600030}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -336,6 +339,9 @@
     <ClInclude Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.hxx">
       <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Trsf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -508,6 +514,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.cxx">
       <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Trsf</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
