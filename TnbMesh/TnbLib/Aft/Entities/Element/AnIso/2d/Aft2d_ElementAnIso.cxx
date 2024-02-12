@@ -41,4 +41,15 @@ namespace tnbLib
 		t[2] = A3;
 		return std::move(t);
 	}
+
+	template <>
+	Mesh_Element<Aft2d_ElementAnIsoTraits, Mesh_ElementType_Triangle2D>::connectType
+		Mesh_Element<Aft2d_ElementAnIsoTraits, Mesh_ElementType_Triangle2D>::RetrieveConnectivity() const
+	{
+		connectivity::triple t;
+		t.Value(0) = Node0()->Index();
+		t.Value(1) = Node1()->Index();
+		t.Value(2) = Node2()->Index();
+		return std::move(t);
+	}
 }

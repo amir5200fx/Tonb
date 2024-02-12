@@ -819,6 +819,12 @@ namespace tnbLib
 			);
 
 		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Chain>
+			RetrieveClosedChain
+			(
+				const Entity2d_Polygon& thePoly
+			);
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Chain>
 			RetrieveChain
 			(
 				const Entity2d_Polygon& thePoly

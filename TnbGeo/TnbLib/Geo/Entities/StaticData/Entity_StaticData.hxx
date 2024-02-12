@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <memory>
+#include <sstream>
 
 namespace tnbLib
 {
@@ -170,7 +171,9 @@ namespace tnbLib
 		void ExportToPlt(std::fstream& File) const;
 
 		void ExportToPlt(OFstream& File) const;
+		void StreamToPlt(std::stringstream& theStream) const;
 		void ExportToVtk(OFstream&) const;
+		void ExportToVtk(std::stringstream& theStream) const;
 	};
 
 	template<class Point, class ConnectType>

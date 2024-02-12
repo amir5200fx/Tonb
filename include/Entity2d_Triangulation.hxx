@@ -14,8 +14,13 @@ namespace tnbLib
 
 	template<>
 	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToPlt(OFstream& File) const;
+	template <>
+	TnbGeo_EXPORT void Entity2d_Triangulation::StreamToPlt(std::stringstream& theStream) const;
 	template<>
 	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToVtk(OFstream&) const;
+	template <>
+	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToVtk(std::stringstream& theStream) const;
+
 }
 
 #endif // !_Entity2d_Triangulation_Header

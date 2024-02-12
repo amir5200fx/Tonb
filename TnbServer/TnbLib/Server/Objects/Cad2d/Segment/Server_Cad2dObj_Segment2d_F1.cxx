@@ -6,6 +6,7 @@
 #include <Pnt2d.hxx>
 
 #include <json.hpp>
+#include <Pln_Curve.hxx>
 
 const std::string tnbLib::Server_Cad2dObj_Segment2d_F1::Params::p0 = "p0";
 const std::string tnbLib::Server_Cad2dObj_Segment2d_F1::Params::p1 = "p1";
@@ -32,6 +33,8 @@ void tnbLib::Server_Cad2dObj_Segment2d_F1::Construct(const std::string& theValue
 	{
 		auto geom = Pln_CurveTools::MakeSegment(p0, p1);
 		auto value = Pln_Tools::MakeEdge(geom);
+		value->SetName(name);
+		value->Curve()->SetName(name);
 		streamGoodTnbServerObject(value);
 	}
 	catch (Standard_Failure& x)

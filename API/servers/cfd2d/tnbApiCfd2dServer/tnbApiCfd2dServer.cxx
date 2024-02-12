@@ -41,19 +41,19 @@ int main()
 
 		while (true)
 		{
-			std::cout << "I accepted the connection..." << std::endl;
+			//std::cout << "I accepted the connection..." << std::endl;
 			auto message = tnbLib::Server_Tools::Receive(client);
 
 			//std::cout << "MESSAGE : " << message << std::endl;
 
 			auto [command, flag, sense, value] = tnbLib::Server_Tools::ParseMessage(message);
 
-			std::cout << "\n===========================================\n";
-			std::cout << "command: " << command.stream << "\n";
-			std::cout << "flag: " << flag.stream << "\n";
-			std::cout << "empty? " << sense.stream << "\n";
-			std::cout << "value: " << value.stream << "\n";
-			std::cout << "===========================================\n";
+			//std::cout << "\n===========================================\n";
+			//std::cout << "command: " << command.stream << "\n";
+			//std::cout << "flag: " << flag.stream << "\n";
+			//std::cout << "empty? " << sense.stream << "\n";
+			//std::cout << "value: " << value.stream << "\n";
+			//std::cout << "===========================================\n";
 
 			server->Construct(command, flag, sense, value);
 

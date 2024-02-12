@@ -111,22 +111,13 @@ inline Standard_Real tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::GetTargetSurf
 		{
 			return theValues_->SurfaceSize()->TargetSize();
 		}
-		else
-		{
-			return theValues_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
-		}
+		return theValues_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
 	}
-	else
+	if (theReference_->SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
 	{
-		if (theReference_->SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
-		{
-			return theReference_->SurfaceSize()->TargetSize();
-		}
-		else
-		{
-			return theReference_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
-		}
+		return theReference_->SurfaceSize()->TargetSize();
 	}
+	return theReference_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
 }
 
 template<class BackGroundMesh>

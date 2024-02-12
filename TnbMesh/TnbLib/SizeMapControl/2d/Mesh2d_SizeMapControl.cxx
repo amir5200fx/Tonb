@@ -42,7 +42,6 @@ void tnbLib::Mesh2d_SizeMapControl::Perform()
 	{
 		Debug_Null_Pointer(x.second);
 		const auto& mapTool = x.second;
-
 		//if(NOT mapTool->IsDone())
 		mapTool->Perform();
 	}

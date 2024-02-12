@@ -14,6 +14,10 @@ namespace tnbLib
 	TnbMesh_EXPORT Mesh_Element<Aft2d_ElementTraits, Mesh_ElementType_Triangle2D>::array3
 		Mesh_Element<Aft2d_ElementTraits, Mesh_ElementType_Triangle2D>::InterpWeights(const Pnt2d& theCoord) const;
 
+	template <>
+	TnbMesh_EXPORT Mesh_Element<Aft2d_ElementTraits, Mesh_ElementType_Triangle2D>::connectType
+		Mesh_Element<Aft2d_ElementTraits, Mesh_ElementType_Triangle2D>::RetrieveConnectivity() const;
+
 	template<>
 	template<>
 	TnbMesh_EXPORT void Mesh_Element<Aft2d_ElementTraits, Mesh_ElementType_Triangle2D>::serialize<TNB_iARCH_TYPE>

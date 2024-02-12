@@ -13,8 +13,20 @@ namespace tnbLib
 	}
 }
 
+template <>
+void tnbLib::Entity2d_Triangulation::StreamToPlt(std::stringstream& theStream) const
+{
+	Io::ExportMesh(Points(), Connectivity(), theStream);
+}
+
 template<>
 void tnbLib::Entity2d_Triangulation::ExportToVtk(OFstream& theFile) const
 {
 	vtkLib::WriteMesh(*this, "The triangular mesh", theFile);
+}
+
+template <>
+void tnbLib::Entity2d_Triangulation::ExportToVtk(std::stringstream& theStream) const
+{
+	vtkLib::WriteMesh(*this, "The triangular mesh", theStream);
 }

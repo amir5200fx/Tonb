@@ -935,6 +935,7 @@ namespace tnbLib
 
 		TnbMeshPost_EXPORT void Perform();
 
+		void SetValue(const Standard_Real theValue) { theExtrusion_ = theValue; }
 		void SetMesh2d(const std::shared_ptr<MeshPost2d_OFTopology>& theMesh) { theMesh2d_ = theMesh; }
 		void SetMesh2d(std::shared_ptr<MeshPost2d_OFTopology>&& theMesh) { theMesh2d_ = std::move(theMesh); }
 

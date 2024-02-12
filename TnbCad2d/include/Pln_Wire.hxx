@@ -191,6 +191,9 @@ namespace tnbLib
 		) const;
 
 		TnbCad2d_EXPORT void ExportToPlt(OFstream& File) const;
+		TnbCad2d_EXPORT void ExportToPlt(std::stringstream& theStream) const;
+		TnbCad2d_EXPORT void ExportToVtk(OFstream& theFile) const;
+		TnbCad2d_EXPORT void ExportToVtk(std::stringstream& theStream) const;
 
 		//- Static functions and operators
 

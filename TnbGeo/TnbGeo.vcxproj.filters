@@ -1177,6 +1177,12 @@
     <Filter Include="TnbLib\Geo\Entities\CmpConnet\3d\Brick">
       <UniqueIdentifier>{9e59a10b-eeeb-4f69-a529-44bb1d9a92f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Merge\CmpMesh">
+      <UniqueIdentifier>{c2e87684-0f12-45ca-ac9d-dac8f6e2b857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\CmpMesh\2d">
+      <UniqueIdentifier>{c9968980-18fd-458c-a1c5-98bc9507b5f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2657,6 +2663,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\Prism\Entity3d_CmpConnect_Prism.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\3d\Prism</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.hxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

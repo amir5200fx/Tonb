@@ -145,6 +145,21 @@
     <Filter Include="TnbLib\Server\Objects\Mesh2d">
       <UniqueIdentifier>{697db720-65e4-4768-b9bf-7b8101ff953c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\BndBox">
+      <UniqueIdentifier>{57eab71b-fb5f-4098-afc2-66602f002044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\OpenFOAM">
+      <UniqueIdentifier>{20b83a35-8d32-476a-8395-2586810d4c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d\Ellipse">
+      <UniqueIdentifier>{6bd6dbf7-8ec3-4ea7-8978-9de64e0e61a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Ray">
+      <UniqueIdentifier>{2dd132a4-12ce-4154-a3a2-1e1c7dee63cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo\Trsf">
+      <UniqueIdentifier>{3d88f734-2260-472d-849e-8334e7600030}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -300,6 +315,33 @@
     <ClInclude Include="TnbLib\Server\Objects\Mesh2d\Server_Mesh2dObj.hxx">
       <Filter>TnbLib\Server\Objects\Mesh2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\BndBox\Server_Geo2dObj_BndBox.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\BndBox</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.hxx">
+      <Filter>TnbLib\Server\Objects\Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Mesh\Server_MeshObj.hxx">
+      <Filter>TnbLib\Server\Objects\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.hxx">
+      <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.hxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Ellipse</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.hxx">
+      <Filter>TnbLib\Server\Objects\Geo\Trsf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -445,6 +487,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.cxx">
       <Filter>TnbLib\Server\Objects\Cad2d\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Mesh2d\Server_Mesh2dObj.cxx">
+      <Filter>TnbLib\Server\Objects\Mesh2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\BndBox\Server_Geo2dObj_BndBox.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\BndBox</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.cxx">
+      <Filter>TnbLib\Server\Objects\Geo</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Mesh\Server_MeshObj.cxx">
+      <Filter>TnbLib\Server\Objects\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.cxx">
+      <Filter>TnbLib\Server\Objects\OpenFOAM</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.cxx">
+      <Filter>TnbLib\Server\Objects\Cad2d\Ellipse</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.cxx">
+      <Filter>TnbLib\Server\Objects\Geo\Trsf</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

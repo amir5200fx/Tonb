@@ -1,0 +1,3 @@
+#include <MeshPost2d_QualityMap_Vlrms2Ratio.hxx>
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::MeshPost2d_QualityMap_Vlrms2Ratio);

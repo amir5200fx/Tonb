@@ -80,12 +80,14 @@ std::string tnbLib::Server_Tools::Receive(const std::shared_ptr<Server_Socket>& 
 {
 	int iResult = 0;
 	std::string message;
+	int nb_iters = 0;
 	do
 	{
-		constexpr auto DEFAULT_BUFLEN = 512;
+		constexpr auto DEFAULT_BUFLEN = 512000;
 		char recvbuf[DEFAULT_BUFLEN];
 		constexpr int recvbuflen = DEFAULT_BUFLEN;
-
+		nb_iters++;
+		//std::cout << "reading...\n";
 		iResult = recv(theSocket->Descriptor(), recvbuf, recvbuflen, 0);
 		WaitAMoment();
 

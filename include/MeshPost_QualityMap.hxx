@@ -4,6 +4,7 @@
 
 #include <MeshPost_Module.hxx>
 #include <MeshPost_QualityMapTraits.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 
@@ -19,6 +20,17 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<MetricMap> theMetrics_;
+
+
+		// Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			// empty body
+		}
 
 	public:
 

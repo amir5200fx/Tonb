@@ -98,6 +98,56 @@ void tnbLib::Server_Cad2dObj_Area_Manager_Segments_CombineBlocks::Construct(cons
 	catchTnbServerErrors()
 }
 
+implementTnbServerParam(Server_Cad2dObj_Area_Manager_CombineAll, area, "area");
+implementTnbServerParam(Server_Cad2dObj_Area_Manager_CombineAll, name, "name");
+
+implementTnbServerConstruction(Server_Cad2dObj_Area_Manager_CombineAll)
+{
+	std::shared_ptr<Cad2d_Plane> area;
+	std::string name;
+	{
+		defineTnbServerParser(theValue);
+		{
+			loadTnbServerObject(area);
+		}
+		{
+			loadTnbServerString(name);
+		}
+	}
+	try
+	{
+		if (!area)
+		{
+			throw Server_Error("the area object is null.");
+		}
+		if (area->Segments()->NbBlocks() == 1)
+		{
+			auto manager = area->Segments();
+			auto block = manager->Blocks().begin()->first;
+			auto iter = manager->SelectBlock(block);
+			if (iter == manager->Blocks().end())
+			{
+				std::string msg = "the block isn't found. block's name = " + block;
+				throw Server_Error(msg);
+			}
+			manager->ReNameBlock(iter, name);
+		}
+		else
+		{
+			auto manager = area->Segments();
+			const auto& blocks = manager->Blocks();
+			std::vector<std::map<word, std::shared_ptr<Cad_BlockEntity<Pln_Edge>>>::const_iterator> iters;
+			for (const auto& x: blocks)
+			{
+				iters.emplace_back(manager->SelectBlock(x.first));
+			}
+			manager->CombineBlocks(iters, name);
+		}
+		streamGoodTnbServerObject(area);
+	}
+	catchTnbServerErrors()
+}
+
 const std::string tnbLib::Server_Cad2dObj_Area_Manager_Segments_BlockCurves::Params::block_name("block_name");
 const std::string tnbLib::Server_Cad2dObj_Area_Manager_Segments_BlockCurves::Params::area("area");
 
@@ -198,6 +248,7 @@ void tnbLib::Server_Cad2dObj_Area_Manager_Segments_SplitBlock::Construct(const s
 		{
 			ids.emplace_back(std::stoi(x));
 		}*/
+		//std::cout << "new name: " << new_name << std::endl;
 		auto new_block = block->Split(new_name, curve_ids);
 		manager->Import(new_name, new_block);
 		streamGoodTnbServerObject(area);
