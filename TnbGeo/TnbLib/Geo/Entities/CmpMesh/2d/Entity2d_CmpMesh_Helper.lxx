@@ -1,0 +1,13 @@
+namespace tnbLib
+{
+
+	template<class T>
+	void UpdateIndices(T& theM, const std::vector<Standard_Integer>& theIndices)
+	{
+		for (size_t i = 0; i < static_cast<size_t>(T::nbCmpts); i++)
+		{
+			theM.Value(static_cast<Standard_Integer>(i)) = 
+				theIndices.at(Index_Of(theM.Value(static_cast<Standard_Integer>(i))));
+		}
+	}
+}
