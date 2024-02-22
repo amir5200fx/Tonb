@@ -71,16 +71,25 @@ void tnbLib::MeshBLayer2d_Offset2::CalculateStrip()
 		auto v0 = i - 1;
 		if (v0 < 0)
 		{
-			v0 = static_cast<int>(normals.size()) - 1;
+			//v0 = static_cast<int>(normals.size()) - 2;
+			v0 = 0;
 		}
 		const auto vm = i;
 		const auto v1 = i;
-		const auto& n0 = normals.at(v0);
+		auto n0 = normals.at(v0);
 		const auto& nm = m_normals.at(vm);
-		const auto& n1 = normals.at(v1);
-
+		if (!v0)
+		{
+			n0 = nm;
+		}
+		auto n1 = normals.at(v1);
+		if (i IS_EQUAL m_normals.size() - 1)
+		{
+			n1 = nm;
+		}
 		const auto ang0 = std::abs(CalcAngle(n0, nm));
 		const auto ang1 = std::abs(CalcAngle(nm, n1));
+		
 		const auto& p0 = pnts0.at(i);
 		const auto& p1 = pnts1.at(i);
 		/*const auto d0 = pnts0.at(v0).Distance(pnts1.at(v0));
@@ -235,7 +244,11 @@ void tnbLib::MeshBLayer2d_Offset2::CreateMesh()
 				if (compact.size() NOT_EQUAL 3)
 				{
 					FatalErrorIn(FunctionSIG) << endl
-						<< "Unknown element has been detected." << endl
+						<< "Unknown element has been detected: Check Meging!" << endl
+						<< " - i0: " << i.Value(0) << endl
+						<< " - i1: " << i.Value(1) << endl
+						<< " - i2: " << i.Value(2) << endl
+						<< " - i3: " << i.Value(3) << endl
 						<< abort(FatalError);
 				}
 				auto t = std::make_shared<Entity2d_CmpConnect_Triangle>
