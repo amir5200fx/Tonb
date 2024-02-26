@@ -160,6 +160,9 @@
     <Filter Include="TnbLib\Server\Objects\Geo\Trsf">
       <UniqueIdentifier>{3d88f734-2260-472d-849e-8334e7600030}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad\Surface">
+      <UniqueIdentifier>{15de140c-686f-46ba-ac82-fc0dcf7b8cae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -342,6 +345,9 @@
     <ClInclude Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.hxx">
       <Filter>TnbLib\Server\Objects\Geo\Trsf</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Cad\Surface\Server_CadObj_Surface.hxx">
+      <Filter>TnbLib\Server\Objects\Cad\Surface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -517,6 +523,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.cxx">
       <Filter>TnbLib\Server\Objects\Geo\Trsf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Cad\Surface\Server_CadObj_Surface.cxx">
+      <Filter>TnbLib\Server\Objects\Cad\Surface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
