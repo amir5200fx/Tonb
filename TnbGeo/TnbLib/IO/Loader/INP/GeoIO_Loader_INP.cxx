@@ -3,6 +3,7 @@
 #include <GeoIO_INPElement_B31.hxx>
 #include <GeoIO_INPElement_CPS3.hxx>
 #include <GeoIO_INPPoint.hxx>
+#include <Global_Tools.hxx>
 #include <IStringStream.hxx>
 #include <token.hxx>
 
@@ -129,7 +130,7 @@ tnbLib::GeoIO_Loader_INP::ParseLine(const std::string& theLine)
 	std::string entity;
 
 	while (std::getline(ss, entity, ',')) {
-		entities.push_back(entity);
+		entities.push_back(Global_Tools::ConvertToUpperCase(entity));
 	}
 
 	return entities;
@@ -224,10 +225,6 @@ tnbLib::operator>>(std::istream& is, GeoIO_Loader_INP& inp)
 		std::string line;
 		std::getline(is, line);
 		auto entities = GeoIO_Loader_INP::ParseLine(line);
-		for (const auto& x : entities)
-		{
-			std::cout << x << std::endl;
-		}
 		if (GeoIO_Loader_INP::Trim(entities.at(0)) IS_EQUAL "*NODE")
 		{
 			inp.ReadNodes(is);

@@ -574,6 +574,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\IO\Loader\INP\Element\CPS3\GeoIO_INPElement_CPS3.hxx" />
     <ClInclude Include="TnbLib\IO\Loader\INP\Element\GeoIO_INPElement.hxx" />
     <ClInclude Include="TnbLib\IO\Loader\INP\GeoIO_Loader_INP.hxx" />
+    <ClInclude Include="TnbLib\IO\Loader\INP\GeoIO_Loader_Inp2.hxx" />
     <ClInclude Include="TnbLib\IO\Loader\INP\Point\GeoIO_INPPoint.hxx" />
     <ClInclude Include="TnbLib\IO\Loader\UNV\Element\Beam\GeoIO_UNVElement_Beam.hxx" />
     <ClInclude Include="TnbLib\IO\Loader\UNV\Element\Beam\Linear\GeoIO_UNVElement_LinBeam.hxx" />

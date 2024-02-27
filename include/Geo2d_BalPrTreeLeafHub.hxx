@@ -40,10 +40,10 @@ namespace tnbLib
 
 		~Geo2d_BalPrTreeLeafHub()
 		{
-			theSNeighbors_.empty();
-			theENeighbors_.empty();
-			theNNeighbors_.empty();
-			theWNeighbors_.empty();
+			theSNeighbors_.clear();
+			theENeighbors_.clear();
+			theNNeighbors_.clear();
+			theWNeighbors_.clear();
 		}
 
 		const auto& SNeighbors() const

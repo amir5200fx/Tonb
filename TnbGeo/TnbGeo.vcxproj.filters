@@ -2673,6 +2673,9 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\Loader\INP\GeoIO_Loader_Inp2.hxx">
+      <Filter>TnbLib\IO\Loader\INP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
