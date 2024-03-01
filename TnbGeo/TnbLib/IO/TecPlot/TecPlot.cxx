@@ -153,8 +153,31 @@ void tnbLib::Io::WriteFeTetrahedralZone
 	theFile << endl;
 }
 
+void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	OFstream& theFile)
+{
+	theFile
+		<< "ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	std::stringstream& theStream)
+{
+	theStream
+		<< "ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK\n";
+}
+
 void tnbLib::Io::WriteCellCenteredFeTriangularZone(const Standard_Integer NbNodes, const Standard_Integer NbTris,
-	const Standard_Integer NbVar, std::stringstream& theStream)
+                                                   const Standard_Integer NbVar, std::stringstream& theStream)
 {
 	theStream
 		<< "ZONE N= "
@@ -1028,6 +1051,66 @@ void tnbLib::Io::ExportMesh
 		<< " "
 		<< x.Value(3)
 		<< "\n";
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::octuple>& theElements,
+	OFstream& theFile
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theFile);
+	WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+	                      static_cast<Standard_Integer>(theElements.size()), theFile);
+	for (const auto& x: thePoints)
+	{
+		x.AddToPlt(theFile);
+		theFile << "\n";
+	}
+	for (const auto& i: theElements)
+	{
+		theFile
+			<< i.Value(0) << " "
+			<< i.Value(1) << " "
+			<< i.Value(2) << " "
+			<< i.Value(3) << " "
+			<< i.Value(4) << " "
+			<< i.Value(5) << " "
+			<< i.Value(6) << " "
+			<< i.Value(7) << "\n";
+	}
+}
+
+void tnbLib::Io::ExportMesh(const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+	std::stringstream& theStream)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theStream);
+	WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()), theStream);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theStream);
+		theStream << "\n";
+	}
+	for (const auto& i : theElements)
+	{
+		theStream
+			<< i.Value(0) << " "
+			<< i.Value(1) << " "
+			<< i.Value(2) << " "
+			<< i.Value(3) << " "
+			<< i.Value(4) << " "
+			<< i.Value(5) << " "
+			<< i.Value(6) << " "
+			<< i.Value(7) << "\n";
 	}
 }
 
