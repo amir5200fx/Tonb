@@ -27,6 +27,7 @@
 #include <gp_Pln.hxx>
 #include <Bnd_Box2d.hxx>
 #include <BndLib_Add2dCurve.hxx>
+#include <BSplCLib.hxx>
 #include <Geom_Plane.hxx>
 #include <Geom2d_Line.hxx>
 #include <Geom2d_Circle.hxx>
@@ -736,6 +737,39 @@ tnbLib::Pln_Tools::MakeEdge
 		edge->SetIndex(id);
 		edge->SetName(std::move(name));
 		return std::move(edge);
+	}
+}
+
+Handle(Geom2d_Curve) tnbLib::Pln_Tools::MakeNurbs(const std::vector<Pnt2d>& theQ,
+	const std::vector<Standard_Real>& theWeights, const std::vector<Standard_Real>& theUs,
+	const Standard_Integer theDeg, const Standard_Boolean thePeriodic)
+{
+	const auto nbPoles = static_cast<Standard_Integer>(theQ.size());
+	TColStd_Array1OfReal us(1, theUs.size());
+	TColStd_Array1OfReal knots;
+	TColStd_Array1OfInteger mults;
+	for (Standard_Integer i = 0; i < theUs.size(); i++)
+	{
+		us.SetValue(i + 1, theUs.at(i));
+	}
+	BSplCLib::Knots(us, knots, mults);
+	TColgp_Array1OfPnt2d Points(1, nbPoles);
+	for (Standard_Integer i = 0; i < nbPoles; i++)
+	{
+		Points.SetValue(i + 1, theQ.at(i));
+	}
+	try
+	{
+		auto curve = new Geom2d_BSplineCurve(
+			Points, knots, mults, theDeg, thePeriodic);
+		return curve;
+	}
+	catch (Standard_Failure& x)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< x.GetMessageString() << endl
+			<< abort(FatalError);
+		return 0;
 	}
 }
 

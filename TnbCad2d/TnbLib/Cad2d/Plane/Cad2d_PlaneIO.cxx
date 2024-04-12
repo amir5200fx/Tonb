@@ -76,6 +76,51 @@ void tnbLib::Cad2d_Plane::ExportToPlt
 	}
 }
 
+void tnbLib::Cad2d_Plane::ExportToPlt(std::stringstream& theStream) const
+{
+	Debug_Null_Pointer(OuterWire());
+	OuterWire()->ExportToPlt(theStream);
+
+	if (InnerWires())
+	{
+		for (const auto& x : *InnerWires())
+		{
+			Debug_Null_Pointer(x);
+			x->ExportToPlt(theStream);
+		}
+	}
+}
+
+void tnbLib::Cad2d_Plane::ExportToVtk(OFstream& theFile) const
+{
+	Debug_Null_Pointer(OuterWire());
+	OuterWire()->ExportToVtk(theFile);
+
+	if (InnerWires())
+	{
+		for (const auto& x : *InnerWires())
+		{
+			Debug_Null_Pointer(x);
+			x->ExportToVtk(theFile);
+		}
+	}
+}
+
+void tnbLib::Cad2d_Plane::ExportToVtk(std::stringstream& theStream) const
+{
+	Debug_Null_Pointer(OuterWire());
+	OuterWire()->ExportToVtk(theStream);
+
+	if (InnerWires())
+	{
+		for (const auto& x : *InnerWires())
+		{
+			Debug_Null_Pointer(x);
+			x->ExportToVtk(theStream);
+		}
+	}
+}
+
 TNB_SAVE_IMPLEMENTATION(tnbLib::Cad2d_Plane)
 {
 	ar & boost::serialization::base_object<Pln_Entity>(*this);

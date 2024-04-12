@@ -26,6 +26,16 @@ public:																		\
 	TNB_iARCH_FILE_TYPE ia(stream);											\
 	ia >> ObjectName
 
+#define loadTnbServerString(ObjectName)										\
+	ObjectName = loader.at(Params::ObjectName).get<std::string>()
+
+#define loadNonJSONTnbServer(ObjectName)									\
+	std::stringstream stream;												\
+	stream << theValue;														\
+	TNB_iARCH_FILE_TYPE ia(stream);											\
+	ia >> ObjectName
+	
+
 #define defineTnbServerParser(String)										\
 	nlohmann::json loader = nlohmann::json::parse(String)
 
@@ -55,6 +65,19 @@ public:																		\
 	jData[VALUE] = stream.str();											\
 	theStream_ << jData
 
+#define serializedTnbObject(STR, Obj)										\
+	std::stringstream stream_s;												\
+	TNB_oARCH_FILE_TYPE oa(stream_s);										\
+	oa << (Obj);															\
+	STR = stream_s.str()
+
+#define serializedTnbObjectAtJSON(Obj, ObjName, JSON)						\
+{																			\
+	std::string str;														\
+	serializedTnbObject(str, Obj);											\
+	(JSON)[ObjName] = str;													\
+}
+
 #define initTnbCommands(Object, Command)									\
 	const std::string tnbLib::Object::command_name = Command
 
@@ -75,6 +98,20 @@ void Object##_RunTime_Selection::Run()										\
 {																			\
 	Server::Commands.insert({Object::command_name, Server_ObjType});		\
 }
+
+#define defineTnbServerParam(Par)											\
+	static const std::string Par
+
+#define implementTnbServerParam(Class, Par, ParName)						\
+	const std::string tnbLib::Class::Params::Par(ParName)
+
+#define constructTnbServerObject(Class)										\
+	static const std::string command_name;									\
+	Class() = default;														\
+	void Construct(const std::string& theValue) override
+
+#define implementTnbServerConstruction(Class)								\
+	void tnbLib::Class::Construct(const std::string& theValue)
 
 #define registerRuntimeSelectTnbServerObject(Object)						\
 	static const Object##_RunTime_Selection Object##_run_time_selection_Obj

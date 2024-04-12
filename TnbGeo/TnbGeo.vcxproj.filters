@@ -1177,6 +1177,15 @@
     <Filter Include="TnbLib\Geo\Entities\CmpConnet\3d\Brick">
       <UniqueIdentifier>{9e59a10b-eeeb-4f69-a529-44bb1d9a92f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Merge\CmpMesh">
+      <UniqueIdentifier>{c2e87684-0f12-45ca-ac9d-dac8f6e2b857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\CmpMesh\2d">
+      <UniqueIdentifier>{c9968980-18fd-458c-a1c5-98bc9507b5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpMesh\3d">
+      <UniqueIdentifier>{71e1bb10-4e01-41d9-8947-252c0ba713a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2658,6 +2667,12 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\Prism\Entity3d_CmpConnect_Prism.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\3d\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.hxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3410,6 +3425,12 @@
     <ClCompile Include="TnbLib\Geo\Function\Interpl\Steffen\Geo_SteffenInterplFunction.cxx">
       <Filter>TnbLib\Geo\Function\Interpl\Steffen</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">
@@ -3417,6 +3438,9 @@
     </None>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_RetrievePoints.jxx">
       <Filter>TnbLib\Geo\SamplePoints\2d</Filter>
+    </None>
+    <None Include="TnbLib\Geo\Entities\CmpMesh\2d\Entity2d_CmpMesh_Helper.lxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\2d</Filter>
     </None>
   </ItemGroup>
 </Project>

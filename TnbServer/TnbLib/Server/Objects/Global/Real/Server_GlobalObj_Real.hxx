@@ -8,6 +8,9 @@ namespace tnbLib
 {
 
 	defineTnbServerObject(Server_GlobalObj_Real);
+
+	defineTnbServerObject(Server_GlobalObj_Real_Last);
+	defineTnbServerObject(Server_GlobalObj_Real_First);
 }
 
 #endif

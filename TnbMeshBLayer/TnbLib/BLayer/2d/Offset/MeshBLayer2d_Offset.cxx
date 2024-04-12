@@ -92,7 +92,7 @@ namespace tnbLib
 				reversed.emplace_back(std::move(pt));
 			}
 		}
-		return std::move(std::move(reversed));
+		return std::move(reversed);
 	}
 }
 

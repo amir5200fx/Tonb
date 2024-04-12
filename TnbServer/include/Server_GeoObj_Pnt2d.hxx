@@ -7,29 +7,56 @@
 namespace tnbLib
 {
 
-	class Server_GeoObj_Pnt2d
+	class Server_GeoObj_Pnt2d_SetX
 		: public Server_Object
 	{
-
 	public:
 
 		struct Params
 		{
-			static const std::string x;
-			static const std::string y;
+			static const std::string point;
+			static const std::string value;
 		};
 
-		static TnbServer_EXPORT const std::string command_name;
+		static const std::string command_name;
 
-		// default constructor
+		Server_GeoObj_Pnt2d_SetX() = default;
 
-		Server_GeoObj_Pnt2d()
-			= default;
+		void Construct(const std::string& theValue) override;
+		
+	};
 
-		// Public functions and operators
+	class Server_GeoObj_Pnt2d_SetY
+		: public Server_Object
+	{
+	public:
 
-		TnbServer_EXPORT void Construct(const std::string&) override;
+		struct Params
+		{
+			static const std::string point;
+			static const std::string value;
+		};
 
+		static const std::string command_name;
+
+		Server_GeoObj_Pnt2d_SetY() = default;
+
+		void Construct(const std::string& theValue) override;
+
+	};
+
+	defineTnbServerObject(Server_GeoObj_Pnt2d_F2);
+
+	class Server_GeoObj_Pnt2d_Trsf
+		: public Server_Object
+	{
+	public:
+		struct Params
+		{
+			defineTnbServerParam(trsf);
+			defineTnbServerParam(pnt);
+		};
+		constructTnbServerObject(Server_GeoObj_Pnt2d_Trsf);
 	};
 }
 

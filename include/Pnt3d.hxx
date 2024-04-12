@@ -8,6 +8,8 @@
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>
 
+#include <sstream>
+
 namespace tnbLib
 {
 
@@ -248,6 +250,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Print(std::ostream& os = std::cout) const;
 
 		TnbGeo_EXPORT void AddToPlt(OFstream& theFile) const;
+		TnbGeo_EXPORT void AddToPlt(std::stringstream& theStream) const;
 	};
 }
 

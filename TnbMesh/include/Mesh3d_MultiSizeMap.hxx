@@ -20,6 +20,10 @@ namespace tnbLib
 
 	template<>
 	TnbMesh_EXPORT void Mesh3d_MultiSizeMap::ExportToPlt(OFstream&) const;
+
+	template <>
+	TnbMesh_EXPORT void Mesh3d_MultiSizeMap::ExportToVtk(OFstream& File) const;
+
 }
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh3d_MultiSizeMap);

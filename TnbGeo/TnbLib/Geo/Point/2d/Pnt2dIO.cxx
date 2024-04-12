@@ -17,7 +17,13 @@ void tnbLib::Pnt2d::Print(std::ostream & os) const
 
 void tnbLib::Pnt2d::AddToPlt(OFstream & theFile) const
 {
+	theFile.precision(15);
 	theFile << X() << "  " << Y();
+}
+
+void tnbLib::Pnt2d::AddToPlt(std::stringstream& theStream) const
+{
+	theStream << X() << " " << Y();
 }
 
 namespace tnbLib

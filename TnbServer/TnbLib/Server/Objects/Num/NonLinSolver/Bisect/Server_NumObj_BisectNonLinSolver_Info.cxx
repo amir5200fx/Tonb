@@ -3,9 +3,9 @@
 #include <NumAlg_BisectionSolver_Info.hxx>
 #include <json.hpp>
 
-const std::string tnbLib::Server_NumObj_BisectNonLinSolver_Info::Params::tol = "num_bisect_solver_tol";
-const std::string tnbLib::Server_NumObj_BisectNonLinSolver_Info::Params::delta = "num_bisect_solver_delta";
-const std::string tnbLib::Server_NumObj_BisectNonLinSolver_Info::Params::max_nb_iters = "num_bisect_solver_max_nb_iters";
+const std::string tnbLib::Server_NumObj_BisectNonLinSolver_Info::Params::tol = "tol";
+const std::string tnbLib::Server_NumObj_BisectNonLinSolver_Info::Params::delta = "delta";
+const std::string tnbLib::Server_NumObj_BisectNonLinSolver_Info::Params::max_nb_iters = "max_nb_iters";
 
 void tnbLib::Server_NumObj_BisectNonLinSolver_Info::Construct(const std::string& theValue)
 {

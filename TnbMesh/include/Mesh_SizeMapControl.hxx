@@ -29,6 +29,10 @@ namespace tnbLib
 
 		std::shared_ptr<Mesh_SizeMapControl_Info> theInfo_;
 
+		// Private functions and operators
+
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
 	protected:
 
 		// default constructor [7/18/2022 Amir]

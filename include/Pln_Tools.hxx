@@ -173,6 +173,16 @@ namespace tnbLib
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const std::shared_ptr<Pln_Curve>& theCurve);
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(std::shared_ptr<Pln_Curve>&& theCurve);
 
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeNurbs
+			(
+				const std::vector<Pnt2d>&,
+				const std::vector<Standard_Real>& theWeights,
+				const std::vector<Standard_Real>& theKnots,
+				const Standard_Integer theDeg,
+				const Standard_Boolean thePeriodic = Standard_True
+			);
+
 		static std::shared_ptr<Pln_Wire>
 			MakeWire
 			(

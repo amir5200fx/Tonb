@@ -5,4 +5,6 @@
 #include <MeshPost2d_LaplacianSmoothingSurface_AvgFunFwd.hxx>
 #include <MeshPost_LaplacianSmoothing_AvgFun.hxx>
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::MeshPost2d_LaplacianSmoothingSurface_AvgFun);
+
 #endif // !_MeshPost2d_LaplacianSmoothingSurface_AvgFun_Header

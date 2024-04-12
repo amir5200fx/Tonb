@@ -3,9 +3,9 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <json.hpp>
 
-const std::string tnbLib::Server_NumObj_AdaptInteg_Info::Params::tol = "num_adapt_integ_tol";
-const std::string tnbLib::Server_NumObj_AdaptInteg_Info::Params::max_nb_iters = "num_adapt_integ_max_nb_iters";
-const std::string tnbLib::Server_NumObj_AdaptInteg_Info::Params::min_nb_iters = "num_adapt_integ_min_nb_iters";
+const std::string tnbLib::Server_NumObj_AdaptInteg_Info::Params::tol = "tol";
+const std::string tnbLib::Server_NumObj_AdaptInteg_Info::Params::max_nb_iters = "max_nb_iters";
+const std::string tnbLib::Server_NumObj_AdaptInteg_Info::Params::min_nb_iters = "nb_inits";
 
 void tnbLib::Server_NumObj_AdaptInteg_Info::Construct(const std::string& theValue)
 {
