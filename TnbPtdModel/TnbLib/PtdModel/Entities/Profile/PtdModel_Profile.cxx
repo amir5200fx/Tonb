@@ -24,7 +24,7 @@ tnbLib::PtdModel_Profile::PtdModel_Profile
 tnbLib::PtdModel_Profile::PtdModel_Profile
 (
 	const Handle(Geom2d_Curve)& c,
-	const std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj>& theTrsf
+	const std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj>& theTrsf
 )
 	: theGeometry_(c)
 	, theTrsf_(theTrsf)
@@ -35,7 +35,7 @@ tnbLib::PtdModel_Profile::PtdModel_Profile
 tnbLib::PtdModel_Profile::PtdModel_Profile
 (
 	Handle(Geom2d_Curve) && c,
-	std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj>&& theTrsf
+	std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj>&& theTrsf
 )
 	: theGeometry_(std::move(c))
 	, theTrsf_(std::move(theTrsf))
@@ -124,7 +124,7 @@ tnbLib::PtdModel_Profile::MakeProfile
 		Qs.push_back(thePoles.Value(k));
 	}
 
-	auto trsf = std::make_shared<GeoLib::AffineTrsf_PtsToUnitSq>(Qs);
+	auto trsf = std::make_shared<geoLib::AffineTrsf_PtsToUnitSq>(Qs);
 	Debug_Null_Pointer(trsf);
 
 	trsf->Perform();
@@ -139,7 +139,7 @@ tnbLib::PtdModel_Profile::MakeProfile
 		poles.SetValue(++k, x);
 	}
 
-	auto trsfObj = std::make_shared<GeoLib::AffineTrsf_PtsToUnitSqObj>(trsf->TrsfObj());
+	auto trsfObj = std::make_shared<geoLib::AffineTrsf_PtsToUnitSqObj>(trsf->TrsfObj());
 	Debug_Null_Pointer(trsfObj);
 
 	try
