@@ -228,6 +228,20 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void ExportMesh
 		(
+			const std::vector<Pnt3d>&,
+			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>&,
+			OFstream&
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>&,
+			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>&,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
 			OFstream& File
@@ -265,6 +279,20 @@ namespace tnbLib
 		(
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::quadruple>& theElements,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple_3d>& theElements,
+			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple_3d>& theElements,
 			std::stringstream& theStream
 		);
 
