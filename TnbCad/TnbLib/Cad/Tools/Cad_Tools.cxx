@@ -58,6 +58,7 @@
 #include <Geom_SweptSurface.hxx>
 #include <GeomAPI_ProjectPointOnCurve.hxx>
 #include <GeomAPI_ProjectPointOnSurf.hxx>
+#include <GeomAPI_PointsToBSplineSurface.hxx>
 #include <Poly_PolygonOnTriangulation.hxx>
 #include <Bnd_Box.hxx>
 #include <BRep_Tool.hxx>
@@ -84,6 +85,7 @@
 #include <TColStd_Array1OfInteger.hxx>
 #include <TColStd_Array1OfReal.hxx>
 #include <TopTools_IndexedMapOfShape.hxx>
+#include <StdFail_NotDone.hxx>
 
 Standard_Boolean 
 tnbLib::Cad_Tools::IsBounded
@@ -2588,6 +2590,47 @@ tnbLib::Cad_Tools::ReParameterization
 
 		return copy;
 	}
+}
+
+Handle(Geom_Surface)
+tnbLib::Cad_Tools::Interpolate(const std::vector<std::vector<Pnt3d>>& Qs)
+{
+	try
+	{
+		const auto nbRows = Qs.size();
+		if (nbRows < 2)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Not enough rows has been found." << endl
+				<< abort(FatalError);
+		}
+		const auto nbCols = Qs.at(0).size();
+		if (nbCols < 2)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Not enough columns has been found." << endl
+				<< abort(FatalError);
+		}
+		TColgp_Array2OfPnt Q(1, nbRows, 1, nbCols);
+		forThose(i, 0, nbRows - 1)
+		{
+			forThose(j, 0, nbCols - 1)
+			{
+				Q.SetValue(i + 1, j + 1, Qs.at(i).at(j));
+			}
+		}
+		GeomAPI_PointsToBSplineSurface interpolate;
+		interpolate.Interpolate(Q);
+		Debug_If_Condition_Message(NOT interpolate.IsDone(), "the interpolation is not performed.");
+		return  interpolate.Surface();
+	}
+	catch (const StdFail_NotDone&)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to interpolate the surface!" << endl
+			<< abort(FatalError);
+	}
+	return nullptr;
 }
 
 std::map<Standard_Integer, TopoDS_Face> 

@@ -55,6 +55,19 @@ void tnbLib::vtkLib::WritePoints(const std::vector<Pnt2d>& thePoints, OFstream& 
 	}
 }
 
+void tnbLib::vtkLib::WritePoints(const std::vector<Pnt3d>& thePoints, OFstream& theFile)
+{
+	for (const auto& x: thePoints)
+	{
+		theFile << x.X()
+			<< token::SPACE
+			<< x.Y()
+			<< token::SPACE
+			<< x.Z()
+			<< endl;
+	}
+}
+
 void tnbLib::vtkLib::WriteNbCells(const Standard_Integer theNbCells, const Standard_Integer theNbEntities, OFstream& theFile)
 {
 	theFile << "CELLS"
@@ -116,6 +129,23 @@ void tnbLib::vtkLib::WriteConnectivity(const std::vector<connectivity::dual>& th
 void tnbLib::vtkLib::WriteMesh
 (
 	const Entity2d_Triangulation& theTri, 
+	const std::string& theTitle,
+	OFstream& theFile
+)
+{
+	WriteVersion(theFile);
+	WriteTitle(theTitle, theFile);
+	WriteFileType_ASCII(theFile);
+	WriteUnstructuredGrid(theFile);
+	WriteNbPoints(theTri.NbPoints(), theFile);
+	WritePoints(theTri.Points(), theFile);
+	WriteNbCells(theTri.NbConnectivity(), 4 * theTri.NbConnectivity(), theFile);
+	WriteConnectivity(theTri.Connectivity(), theFile);
+}
+
+void tnbLib::vtkLib::WriteMesh
+(
+	const Entity3d_Triangulation& theTri, 
 	const std::string& theTitle,
 	OFstream& theFile
 )
@@ -206,6 +236,19 @@ void tnbLib::vtkLib::WritePoints(const std::vector<Pnt2d>& thePoints, std::strin
 	}
 }
 
+void tnbLib::vtkLib::WritePoints(const std::vector<Pnt3d>& thePoints, std::stringstream& theFile)
+{
+	for (const auto& x : thePoints)
+	{
+		theFile << x.X()
+			<< token::SPACE
+			<< x.Y()
+			<< token::SPACE
+			<< x.Z()
+			<< endl;
+	}
+}
+
 void tnbLib::vtkLib::WriteNbCells(const Standard_Integer theNbCells, const Standard_Integer theNbEntities, std::stringstream& theFile)
 {
 	theFile << "CELLS"
@@ -267,6 +310,23 @@ void tnbLib::vtkLib::WriteConnectivity(const std::vector<connectivity::dual>& th
 void tnbLib::vtkLib::WriteMesh
 (
 	const Entity2d_Triangulation& theTri,
+	const std::string& theTitle,
+	std::stringstream& theFile
+)
+{
+	WriteVersion(theFile);
+	WriteTitle(theTitle, theFile);
+	WriteFileType_ASCII(theFile);
+	WriteUnstructuredGrid(theFile);
+	WriteNbPoints(theTri.NbPoints(), theFile);
+	WritePoints(theTri.Points(), theFile);
+	WriteNbCells(theTri.NbConnectivity(), 4 * theTri.NbConnectivity(), theFile);
+	WriteConnectivity(theTri.Connectivity(), theFile);
+}
+
+void tnbLib::vtkLib::WriteMesh
+(
+	const Entity3d_Triangulation& theTri, 
 	const std::string& theTitle,
 	std::stringstream& theFile
 )

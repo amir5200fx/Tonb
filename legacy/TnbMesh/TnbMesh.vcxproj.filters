@@ -479,7 +479,7 @@
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor\Aft3d_EdgeAdaptor.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeoemtry.hxx">
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeometry.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_Facet.hxx">

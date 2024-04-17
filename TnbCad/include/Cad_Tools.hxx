@@ -485,6 +485,9 @@ namespace tnbLib
 				const gp_Trsf2d&
 			);
 
+		static TnbCad_EXPORT Handle(Geom_Surface)
+			Interpolate(const std::vector<std::vector<Pnt3d>>&);
+
 		static TnbCad_EXPORT std::map<Standard_Integer, TopoDS_Face> RetrieveFaceMap(const TopoDS_Shape& theShape);
 
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Surface>&);

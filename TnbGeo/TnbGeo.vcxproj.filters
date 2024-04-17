@@ -1186,6 +1186,18 @@
     <Filter Include="TnbLib\Geo\Entities\CmpMesh\3d">
       <UniqueIdentifier>{71e1bb10-4e01-41d9-8947-252c0ba713a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Hexahedralization">
+      <UniqueIdentifier>{a7c37ab3-91ad-4172-a9cc-ca276f5c3b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\QuadMesh\3d">
+      <UniqueIdentifier>{33ea91fc-4d0e-4bb7-bce4-b68a008f3fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpMesh\Surface">
+      <UniqueIdentifier>{346b4695-7577-40c7-bfd0-3b01e6910676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpConnet\2d\Pentagon">
+      <UniqueIdentifier>{7f463e4c-fab1-4675-8abc-f49ced418381}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2673,6 +2685,27 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\Loader\INP\GeoIO_Loader_Inp2.hxx">
+      <Filter>TnbLib\IO\Loader\INP</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_Hexahedralization.hxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_HexahedralizationFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMeshFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpMesh\Surface\Entity3d_CmpMeshSurface.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_Pentagon.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3430,6 +3463,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMeshIO.cxx">
       <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_Hexahedralization.cxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_HexahedralizationIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\Surface\Entity3d_CmpMeshSurface.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\Surface\Entity3d_CmpMeshSurfaceIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_Pentagon.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_PentagonIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

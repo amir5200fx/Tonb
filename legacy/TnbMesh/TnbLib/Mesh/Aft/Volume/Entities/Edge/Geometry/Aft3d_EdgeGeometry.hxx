@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _Aft3d_EdgeGeoemtry_Header
-#define _Aft3d_EdgeGeoemtry_Header
+#ifndef _Aft3d_EdgeGeometry_Header
+#define _Aft3d_EdgeGeometry_Header
 
 #include <Mesh_Module.hxx>
 #include <Pnt3d.hxx>
@@ -11,7 +11,7 @@ namespace tnbLib
 	namespace legLib
 	{
 
-		class Aft3d_EdgeGeoemtry
+		class Aft3d_EdgeGeometry
 		{
 
 			/*Private Data*/
@@ -35,7 +35,7 @@ namespace tnbLib
 
 			// default constructor [2/23/2023 Payvand]
 
-			Aft3d_EdgeGeoemtry()
+			Aft3d_EdgeGeometry()
 			{}
 
 
@@ -61,4 +61,4 @@ namespace tnbLib
 	}
 }
 
-#endif // !_Aft3d_EdgeGeoemtry_Header
+#endif // !_Aft3d_EdgeGeometry_Header

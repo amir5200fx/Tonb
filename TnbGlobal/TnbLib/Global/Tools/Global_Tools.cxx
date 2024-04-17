@@ -136,3 +136,33 @@ bool tnbLib::Global_Tools::IsNumber(const std::string& s)
 	}
 	return true;
 }
+
+std::string tnbLib::Global_Tools::ConvertToUpperCase(const std::string& s)
+{
+	auto str = s;
+	for (auto& ch: str)
+	{
+		// check if the character is a letter
+		if (std::isalpha(ch))
+		{
+			// convert to uppercase
+			ch = std::toupper(ch);
+		}
+	}
+	return std::move(str);
+}
+
+std::string tnbLib::Global_Tools::ConvertToLowerCase(const std::string& s)
+{
+	auto str = s;
+	for (auto& ch: str)
+	{
+		// check if the character is a letter
+		if (std::isalpha(ch))
+		{
+			// convert to lowercase
+			ch = std::tolower(ch);
+		}
+	}
+	return std::move(str);
+}
