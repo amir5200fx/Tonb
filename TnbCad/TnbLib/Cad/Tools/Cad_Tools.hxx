@@ -156,11 +156,20 @@ namespace tnbLib
 				const Handle(Geom_Plane)& thePlane
 			);
 
+		static TnbCad_EXPORT Pnt2d Project(const Pnt3d& thePoint, const Handle(Geom_Surface)&);
+
 		static TnbCad_EXPORT Standard_Real 
 			Project
 			(
 				const Pnt3d& thePoint, 
 				const Handle(Geom_Line)& theLine
+			);
+
+		static TnbCad_EXPORT Standard_Real
+			Project
+			(
+				const Pnt3d& thePoint,
+				const Handle(Geom_Curve)& theCurve
 			);
 
 		static TnbCad_EXPORT Entity_Segment<Pnt2d> 

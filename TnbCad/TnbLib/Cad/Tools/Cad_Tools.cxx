@@ -402,6 +402,31 @@ tnbLib::Cad_Tools::Project
 	return std::move(pt);
 }
 
+tnbLib::Pnt2d
+tnbLib::Cad_Tools::Project
+(
+	const Pnt3d& thePoint,
+	const opencascade::handle<Geom_Surface>& theSurface
+)
+{
+	GeomAPI_ProjectPointOnSurf alg;
+	alg.Init(thePoint, theSurface);
+	alg.Perform(thePoint);
+
+	/*if (alg.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong!" << endl
+			<< " - invalid nb. of projected points has have been detected!" << endl
+			<< abort(FatalError);
+	}*/
+	Standard_Real u, v;
+	alg.LowerDistanceParameters(u, v);
+
+	Pnt2d pt(u, v);
+	return std::move(pt);
+}
+
 Standard_Real
 tnbLib::Cad_Tools::Project
 (
@@ -411,6 +436,26 @@ tnbLib::Cad_Tools::Project
 {
 	GeomAPI_ProjectPointOnCurve alg;
 	alg.Init(thePoint, theLine);
+	alg.Perform(thePoint);
+
+	if (alg.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong: unable to calculate the projected point" << endl
+			<< abort(FatalError);
+	}
+	return alg.LowerDistanceParameter();
+}
+
+Standard_Real
+tnbLib::Cad_Tools::Project
+(
+	const Pnt3d& thePoint,
+	const opencascade::handle<Geom_Curve>& theCurve
+)
+{
+	GeomAPI_ProjectPointOnCurve alg;
+	alg.Init(thePoint, theCurve);
 	alg.Perform(thePoint);
 
 	if (alg.NbPoints() NOT_EQUAL 1)
