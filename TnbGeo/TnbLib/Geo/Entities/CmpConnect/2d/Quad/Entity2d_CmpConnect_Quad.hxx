@@ -69,6 +69,7 @@ namespace tnbLib
 		TnbGeo_EXPORT ElmType ElementType() const override;
 
 		TnbGeo_EXPORT std::vector<Standard_Integer> Components() const override;
+		TnbGeo_EXPORT std::vector<Pnt3d> RetrievePolygon(const std::vector<Pnt3d>&) const override;
 		TnbGeo_EXPORT std::vector<Pnt2d> RetrievePolygon(const std::vector<Pnt2d>&) const override;
 
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Copy() const override;

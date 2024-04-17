@@ -483,6 +483,116 @@ void tnbLib::Io::ExportMesh(const std::vector<Pnt2d>& thePoints, const std::vect
 
 void tnbLib::Io::ExportMesh
 (
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theElements,
+	OFstream& theFile
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theFile);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theFile
+	);
+
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theFile);
+		theFile << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		auto ids = x->Components();
+		if (ids.size() IS_EQUAL 3)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< endl;
+		}
+		else if (ids.size() IS_EQUAL 4)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< endl;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Unspecified type of element has been detected." << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Io::ExportMesh(const std::vector<Pnt3d>& thePoints, const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theElements,
+	std::stringstream& theStream)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theStream);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theStream
+	);
+
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theStream);
+		theStream << "\n";
+	}
+	for (const auto& x : theElements)
+	{
+		auto ids = x->Components();
+		if (ids.size() IS_EQUAL 3)
+		{
+			theStream << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< "\n";
+		}
+		else if (ids.size() IS_EQUAL 4)
+		{
+			theStream << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< "\n";
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Unspecified type of element has been detected." << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
 	const std::vector<Pnt2d>& Points,
 	const std::vector<connectivity::triple>& Triangles,
 	OFstream & File
@@ -789,6 +899,72 @@ void tnbLib::Io::ExportMesh(const std::vector<Pnt2d>& thePoints,
 	if (theElements.empty()) return;
 
 	WriteVariables("X Y", theStream);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theStream
+	);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theStream);
+		theStream << "\n";
+	}
+	for (const auto& x : theElements)
+	{
+		theStream << x.Value(0)
+			<< token::SPACE
+			<< x.Value(1)
+			<< token::SPACE
+			<< x.Value(2)
+			<< token::SPACE
+			<< x.Value(3)
+			<< "\n";
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::quadruple_3d>& theElements,
+	OFstream& File
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", File);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		File
+	);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(File);
+		File << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		File << x.Value(0)
+			<< token::SPACE
+			<< x.Value(1)
+			<< token::SPACE
+			<< x.Value(2)
+			<< token::SPACE
+			<< x.Value(3)
+			<< endl;
+	}
+}
+
+void tnbLib::Io::ExportMesh(const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::quadruple_3d>& theElements, std::stringstream& theStream)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theStream);
 	WriteFeQuadrilateralZone
 	(
 		static_cast<Standard_Integer>(thePoints.size()),

@@ -12,7 +12,7 @@
 namespace tnbLib
 {
 
-	template<int Dim>
+	template<int Dim, int Reduct = 0>
 	class Entity_Connectivity
 	{
 
@@ -59,12 +59,12 @@ namespace tnbLib
 
 		Standard_Boolean IsDegenerated() const;
 
-		template<int Dim>
-		friend Istream& operator>>(Istream& is, Entity_Connectivity<Dim>& theEntity);
+		template<int Dim, int Reduct>
+		friend Istream& operator>>(Istream& is, Entity_Connectivity<Dim, Reduct>& theEntity);
 	};
 
-	template<int Dim>
-	Istream & operator>>(Istream & is, Entity_Connectivity<Dim>& theEntity)
+	template<int Dim, int Reduct>
+	Istream & operator>>(Istream & is, Entity_Connectivity<Dim, Reduct>& theEntity)
 	{
 		string comma;
 		int x[Dim];
@@ -91,6 +91,7 @@ namespace tnbLib
 		typedef Entity_Connectivity<2> dual;
 		typedef Entity_Connectivity<3> triple;
 		typedef Entity_Connectivity<4> quadruple;
+		typedef Entity_Connectivity<4, 1> quadruple_3d;
 		typedef Entity_Connectivity<5> quintuple;
 		typedef Entity_Connectivity<6> sextuple;
 		typedef Entity_Connectivity<7> septuple;
@@ -116,19 +117,25 @@ namespace tnbLib
 	template<>
 	TnbGeo_EXPORT Standard_Boolean connectivity::quadruple::IsDegenerated() const;
 
-	template<int Dim>
-	Standard_Integer MaxID(const std::vector<Entity_Connectivity<Dim>>&);
+	template <>
+	TnbGeo_EXPORT Standard_Boolean connectivity::quadruple_3d::IsDegenerated() const;
 
-	template<int Dim>
-	std::vector<Entity_Connectivity<Dim>>
+	template <>
+	TnbGeo_EXPORT Standard_Boolean connectivity::octuple::IsDegenerated() const;
+
+	template<int Dim, int Reduct>
+	Standard_Integer MaxID(const std::vector<Entity_Connectivity<Dim, Reduct>>&);
+
+	template<int Dim, int Reduct>
+	std::vector<Entity_Connectivity<Dim, Reduct>>
 		CombineConnectivities
 		(
 			const std::vector<Entity_Connectivity<Dim>>& theC0,
 			const std::vector<Entity_Connectivity<Dim>>& theC1
 		);
 
-	template<int Dim>
-	std::vector<Entity_Connectivity<Dim>>
+	template<int Dim, int Reduct>
+	std::vector<Entity_Connectivity<Dim, Reduct>>
 		CombineConnectivities
 		(
 			std::vector<Entity_Connectivity<Dim>>&& theC0,
