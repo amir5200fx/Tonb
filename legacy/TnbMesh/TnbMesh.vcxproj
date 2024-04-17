@@ -116,7 +116,7 @@
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Aft3d_BoundaryEdge.hxx" />
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face\Aft3d_FaceEdge.hxx" />
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment\Aft3d_SegmentEdge.hxx" />
-    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeoemtry.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeometry.hxx" />
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior\Aft3d_InteriorEdge.hxx" />
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor\Aft3d_ElementAdaptor.hxx" />
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_Element.hxx" />
