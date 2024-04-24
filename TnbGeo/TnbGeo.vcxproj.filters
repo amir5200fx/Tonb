@@ -1183,6 +1183,12 @@
     <Filter Include="TnbLib\Geo\Merge\CmpMesh\2d">
       <UniqueIdentifier>{c9968980-18fd-458c-a1c5-98bc9507b5f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\TriShell">
+      <UniqueIdentifier>{15976bf4-6426-41a3-afc5-73d1b88f151d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\TriVolume">
+      <UniqueIdentifier>{b7d61fc6-3bd1-4788-821d-04dbe3e32ddb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2667,6 +2673,12 @@
     <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.hxx">
+      <Filter>TnbLib\Geo\Entities\TriShell</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolume.hxx">
+      <Filter>TnbLib\Geo\Entities\TriVolume</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3418,6 +3430,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Function\Interpl\Steffen\Geo_SteffenInterplFunction.cxx">
       <Filter>TnbLib\Geo\Function\Interpl\Steffen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.cxx">
+      <Filter>TnbLib\Geo\Entities\TriShell</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShellIO.cxx">
+      <Filter>TnbLib\Geo\Entities\TriShell</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolume.cxx">
+      <Filter>TnbLib\Geo\Entities\TriVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolumeIO.cxx">
+      <Filter>TnbLib\Geo\Entities\TriVolume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
