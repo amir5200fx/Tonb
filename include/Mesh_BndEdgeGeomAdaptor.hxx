@@ -11,6 +11,7 @@ namespace tnbLib
 {
 
 	Mesh_EntityToEntityAdaptor(BndEdge, Surface, SurfType);
+	Mesh_EntityToEntityAdaptor(BndEdge, Pair, EdgeType);
 
 	template<class CurveType>
 	class Mesh_BndEdgeGeomAdaptorBase
@@ -52,10 +53,11 @@ namespace tnbLib
 
 	};
 
-	template<class CurveType, class SurfType, Mesh_BndEdge_Position POS = Mesh_BndEdge_Position_Segment>
+	template<class CurveType, class SurfType, class EdgeType, Mesh_BndEdge_Position POS = Mesh_BndEdge_Position_Segment>
 	class Mesh_BndEdgeGeomAdaptor
 		: public Mesh_BndEdgeToSurfaceAdaptor<SurfType>
 		, public Mesh_BndEdgeGeomAdaptorBase<CurveType>
+		, public Mesh_BndEdgeToPairAdaptor<EdgeType>
 	{
 
 		/*Private Data*/
@@ -89,7 +91,7 @@ namespace tnbLib
 	};
 
 	template<class CurveType>
-	class Mesh_BndEdgeGeomAdaptor<CurveType, void, Mesh_BndEdge_Position_Segment>
+	class Mesh_BndEdgeGeomAdaptor<CurveType, void, void, Mesh_BndEdge_Position_Segment>
 		: public Mesh_BndEdgeGeomAdaptorBase<CurveType>
 	{
 
@@ -120,8 +122,41 @@ namespace tnbLib
 
 	};
 
+	template<class CurveType, class EdgeType>
+	class Mesh_BndEdgeGeomAdaptor<CurveType, void, EdgeType, Mesh_BndEdge_Position_Segment>
+		: public Mesh_BndEdgeGeomAdaptorBase<CurveType>
+		, public Mesh_BndEdgeToPairAdaptor<EdgeType>
+	{
+
+		/*Private Data*/
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar& boost::serialization::base_object<Mesh_BndEdgeGeomAdaptorBase<CurveType>>(*this);
+		}
+
+	protected:
+
+		// default constructor
+
+		Mesh_BndEdgeGeomAdaptor()
+		{}
+
+	public:
+
+
+		//- public functions and operators
+
+	};
+
 	template<class SurfType>
-	class Mesh_BndEdgeGeomAdaptor<void, SurfType, Mesh_BndEdge_Position_Facet>
+	class Mesh_BndEdgeGeomAdaptor<void, SurfType, void, Mesh_BndEdge_Position_Facet>
 	{
 
 		/*Private Data*/

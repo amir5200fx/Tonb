@@ -12,17 +12,18 @@ namespace tnbLib
 		class CurveType,
 		class SurfType,
 		class FacetType,
+		class EdgeType,
 		class MetricPrcsr,
 		Mesh_BndEdge_Position POS = Mesh_BndEdge_Position_Segment
 		>
 		class Mesh_BndEdgeAdaptor
-		: public Mesh_BndEdgeGeomAdaptor<CurveType, SurfType, POS>
+		: public Mesh_BndEdgeGeomAdaptor<CurveType, SurfType, EdgeType, POS>
 	{
 
 
 	public:
 
-		typedef Mesh_BndEdgeGeomAdaptor<CurveType, SurfType, POS> base;
+		typedef Mesh_BndEdgeGeomAdaptor<CurveType, SurfType, EdgeType, POS> base;
 
 	private:
 
@@ -56,14 +57,14 @@ namespace tnbLib
 
 	};
 
-	template<class CurveType>
-	class Mesh_BndEdgeAdaptor<CurveType, void, void, void>
-		: public Mesh_BndEdgeGeomAdaptor<CurveType, void, Mesh_BndEdge_Position_Segment>
+	template<class CurveType, class EdgeType>
+	class Mesh_BndEdgeAdaptor<CurveType, void, void, EdgeType, void>
+		: public Mesh_BndEdgeGeomAdaptor<CurveType, void, EdgeType, Mesh_BndEdge_Position_Segment>
 	{
 
 	public:
 
-		typedef Mesh_BndEdgeGeomAdaptor<CurveType, void, Mesh_BndEdge_Position_Segment>
+		typedef Mesh_BndEdgeGeomAdaptor<CurveType, void, EdgeType, Mesh_BndEdge_Position_Segment>
 			base;
 
 	private:
@@ -92,14 +93,14 @@ namespace tnbLib
 
 	};
 
-	template<class CurveType, class MetricPrcsr>
-	class Mesh_BndEdgeAdaptor<CurveType, void, void, MetricPrcsr>
-		: public Mesh_BndEdgeGeomAdaptor<CurveType, void, Mesh_BndEdge_Position_Segment>
+	template<class CurveType, class EdgeType, class MetricPrcsr>
+	class Mesh_BndEdgeAdaptor<CurveType, void, void, EdgeType, MetricPrcsr>
+		: public Mesh_BndEdgeGeomAdaptor<CurveType, void, EdgeType, Mesh_BndEdge_Position_Segment>
 	{
 
 	public:
 
-		typedef Mesh_BndEdgeGeomAdaptor<CurveType, void, Mesh_BndEdge_Position_Segment>
+		typedef Mesh_BndEdgeGeomAdaptor<CurveType, void, EdgeType, Mesh_BndEdge_Position_Segment>
 			base;
 
 	private:
@@ -119,8 +120,9 @@ namespace tnbLib
 
 	public:
 
+		// default constructor
 		Mesh_BndEdgeAdaptor()
-		{}
+			= default;
 
 
 		//- public functions and operators

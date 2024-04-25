@@ -128,8 +128,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::weak_ptr<ElementType> theLeftElement_;
-		std::weak_ptr<ElementType> theRightElement_;
+		std::weak_ptr<ElementType> theUpperElement_;
+		std::weak_ptr<ElementType> theLowerElement_;
 
 
 		//- private functions and operators
@@ -151,13 +151,13 @@ namespace tnbLib
 
 		Standard_Boolean IsOrphan() const
 		{
-			return theLeftElement_.lock() == nullptr && theRightElement_.lock() == nullptr;
+			return theUpperElement_.lock() == nullptr && theLowerElement_.lock() == nullptr;
 		}
 
 		//- Macros
 
-		GLOBAL_ACCESS_SINGLE(std::weak_ptr<ElementType>, LeftElement)
-			GLOBAL_ACCESS_SINGLE(std::weak_ptr<ElementType>, RightElement)
+		GLOBAL_ACCESS_SINGLE(std::weak_ptr<ElementType>, UpperElement)
+			GLOBAL_ACCESS_SINGLE(std::weak_ptr<ElementType>, LowerElement)
 	};
 }
 

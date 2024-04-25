@@ -4,11 +4,11 @@
 namespace tnbLib
 {
 
-	template<class CurveType, class MetricPrcsr>
+	template<class CurveType, class EdgeType, class MetricPrcsr>
 	Standard_Boolean Mesh_BndEdgeAdaptor
 		<
 		CurveType, void,
-		void, MetricPrcsr
+		void, EdgeType, MetricPrcsr
 		>::SingularityContraction
 		(
 			const MetricPrcsr & /*thePrcsr*/

@@ -1059,38 +1059,38 @@ void tnbLib::MeshBase_Tools::ConnectFacetsAndElements
 
 		if (IsSense(x, f0))
 		{
-			f0->SetRightElement(x);
+			f0->SetLowerElement(x);
 		}
 		else
 		{
-			f0->SetLeftElement(x);
+			f0->SetUpperElement(x);
 		}
 
 		if (IsSense(x, f1))
 		{
-			f1->SetRightElement(x);
+			f1->SetLowerElement(x);
 		}
 		else
 		{
-			f1->SetLeftElement(x);
+			f1->SetUpperElement(x);
 		}
 
 		if (IsSense(x, f2))
 		{
-			f2->SetRightElement(x);
+			f2->SetLowerElement(x);
 		}
 		else
 		{
-			f2->SetLeftElement(x);
+			f2->SetUpperElement(x);
 		}
 
 		if (IsSense(x, f3))
 		{
-			f3->SetRightElement(x);
+			f3->SetLowerElement(x);
 		}
 		else
 		{
-			f3->SetLeftElement(x);
+			f3->SetUpperElement(x);
 		}
 	}
 }
@@ -1108,26 +1108,26 @@ void tnbLib::MeshBase_Tools::ConnectElements
 		Debug_Null_Pointer(element.Facet0());
 		const auto& f0 = element.Facet0();
 
-		element.SetNeighbor0(f0->LeftElement());
-		if (f0->LeftElement().lock() IS_EQUAL x) element.SetNeighbor0(f0->RightElement());
+		element.SetNeighbor0(f0->UpperElement());
+		if (f0->UpperElement().lock() IS_EQUAL x) element.SetNeighbor0(f0->LowerElement());
 
 		Debug_Null_Pointer(element.Facet1());
 		const auto& f1 = element.Facet1();
 
-		element.SetNeighbor1(f1->LeftElement());
-		if (f1->LeftElement().lock() IS_EQUAL x) element.SetNeighbor1(f1->RightElement());
+		element.SetNeighbor1(f1->UpperElement());
+		if (f1->UpperElement().lock() IS_EQUAL x) element.SetNeighbor1(f1->LowerElement());
 
 		Debug_Null_Pointer(element.Facet2());
 		const auto& f2 = element.Facet2();
 
-		element.SetNeighbor2(f2->LeftElement());
-		if (f2->LeftElement().lock() IS_EQUAL x) element.SetNeighbor2(f2->RightElement());
+		element.SetNeighbor2(f2->UpperElement());
+		if (f2->UpperElement().lock() IS_EQUAL x) element.SetNeighbor2(f2->LowerElement());
 
 		Debug_Null_Pointer(element.Facet3());
 		const auto& f3 = element.Facet3();
 
-		element.SetNeighbor3(f3->LeftElement());
-		if (f3->LeftElement().lock() IS_EQUAL x) element.SetNeighbor3(f3->RightElement());
+		element.SetNeighbor3(f3->UpperElement());
+		if (f3->UpperElement().lock() IS_EQUAL x) element.SetNeighbor3(f3->LowerElement());
 	}
 }
 

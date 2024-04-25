@@ -454,6 +454,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Merge\QuadMesh\2d\Merge2d_QuadMesh.hxx" />
     <ClInclude Include="TnbLib\Geo\Merge\StaticData\Merge_StaticData.hxx" />
     <ClInclude Include="TnbLib\Geo\Merge\Triangulation\2d\Merge2d_Triangulation.hxx" />
+    <ClInclude Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\module\Geo_Module.hxx" />
     <ClInclude Include="TnbLib\Geo\Naca4Digit\Geo_Naca4Digit.hxx" />
     <ClInclude Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePts.hxx" />
@@ -796,6 +797,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Maker\Propeller\Blade\Geo_PropBladeMaker.cxx" />
     <ClCompile Include="TnbLib\Geo\Merge\Point\Info\Merge_PntInfo.cxx" />
     <ClCompile Include="TnbLib\Geo\Merge\Point\Merge_Pnt.cxx" />
+    <ClCompile Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Naca4Digit\Geo_Naca4Digit.cxx" />
     <ClCompile Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePts.cxx" />
     <ClCompile Include="TnbLib\Geo\NurbsPx\2ndOrder\3Pts\Geo2d_2ndNurbsPx_3Pts.cxx" />

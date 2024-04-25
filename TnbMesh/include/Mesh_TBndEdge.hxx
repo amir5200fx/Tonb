@@ -18,6 +18,7 @@ namespace tnbLib
 		typename TBndEdgeTraits::curveType,
 		typename TBndEdgeTraits::surfType,
 		typename TBndEdgeTraits::bndEdgeTraits::facetType,
+		typename TBndEdgeTraits::bndEdgeTraits::bndEdgeType,
 		typename TBndEdgeTraits::metricPrcsr, POS
 		>
 		, public Mesh_BndEdge<typename TBndEdgeTraits::bndEdgeTraits>
@@ -35,6 +36,7 @@ namespace tnbLib
 			typename TBndEdgeTraits::curveType,
 			typename TBndEdgeTraits::surfType,
 			typename TBndEdgeTraits::bndEdgeTraits::facetType,
+			typename TBndEdgeTraits::bndEdgeTraits::bndEdgeType,
 			typename TBndEdgeTraits::metricPrcsr, POS
 			> edgeAdaptor;
 
