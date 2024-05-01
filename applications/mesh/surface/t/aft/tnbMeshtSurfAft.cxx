@@ -107,6 +107,87 @@ namespace tnbLib
 	static std::shared_ptr<Cad_ApprxMetricInfo> myMetricApproxInfo;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
 	static std::shared_ptr<MeshPost_LaplacianSmoothing_Info> myLaplacianSmoothInfo = std::make_shared<MeshPost_LaplacianSmoothing_Info>();
+	static bool do_smoothing = true;
+	static int smooth_nb_iters = 4;
+	static double smooth_ur = 0.85;
+	class SmoothingRunTime
+	{
+		void setDefaults();
+	public:
+		SmoothingRunTime()
+		{
+			setDefaults();
+		}
+	};
+
+	void SmoothingRunTime::setDefaults()
+	{
+		myLaplacianSmoothInfo->SetNbLevels(smooth_nb_iters);
+		myLaplacianSmoothInfo->SetUnderRelaxation(smooth_ur);
+	}
+	static auto smoothingRunTimeObj = SmoothingRunTime();
+
+	static auto integInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
+	class AdaptIntegRunTime
+	{
+		void setDefaults();
+	public:
+		AdaptIntegRunTime()
+		{
+			setDefaults();
+		}
+	};
+
+	void AdaptIntegRunTime::setDefaults()
+	{
+		integInfo->SetMaxNbIterations(200);
+		integInfo->SetNbInitIterations(4);
+		integInfo->SetTolerance(1.0E-5);
+	}
+	static auto integInfoRunTimeObj = AdaptIntegRunTime();
+
+	auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
+	class IterRunTime
+	{
+		void setDefaults();
+	public:
+		IterRunTime()
+		{
+			setDefaults();
+		}
+	};
+
+	void IterRunTime::setDefaults()
+	{
+		iterInfo->SetIgnoreNonConvergency(Standard_True);
+		iterInfo->SetMaxNbIters(100);  // default: 30 [5/24/2022 Amir]
+		iterInfo->SetTolerance(1.0E-5);  // default: 1.0E-3 [5/24/2022 Amir]
+		iterInfo->SetUnderRelaxation(0.85);  // default: 0.85 [5/24/2022 Amir]
+	}
+
+	static auto iterInfoRunTimeObj = IterRunTime();
+
+	auto metricPrcsrInfo = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
+
+	class MetricsRunTime
+	{
+		void setDefaults();
+	public:
+		MetricsRunTime()
+		{
+			setDefaults();
+		}
+	};
+
+	void MetricsRunTime::setDefaults()
+	{
+		metricPrcsrInfo->SetNbIters(5);  // default: 5 [5/24/2022 Amir]
+		metricPrcsrInfo->SetNbSamples(3);  // default: 3 [5/24/2022 Amir]
+		metricPrcsrInfo->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
+	}
+
+	static auto metricsRunTimeObj = MetricsRunTime();
+	
 
 	static double myDegenCrit = 1.0e-6;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
 
@@ -129,6 +210,10 @@ namespace tnbLib
 	static auto myCoeff = 0.3;
 	static auto myDelta = 0.2;
 
+	//.
+	// Settings
+	//.
+
 	void setVerbose(unsigned int i)
 	{
 		Info << endl;
@@ -143,6 +228,130 @@ namespace tnbLib
 		{
 			Info << endl
 				<< " - the tolerance is set to: " << myTol << endl;
+		}
+	}
+
+	// the metrics settings
+	void setNbIters(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)
+	{
+		info->SetNbIters(n);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the nb. of metrics_iterations is set to: " << info->NbIters() << endl;
+		}
+	}
+
+	void setNbSamples(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)
+	{
+		info->SetNbSamples(n);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the metrics_nb_samples is set to: " << info->NbSamples() << endl;
+		}
+	}
+
+	void setTolerance(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, double x)
+	{
+		info->SetTolerance(x);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the metrics_tolerance is set to: " << info->Tolerance() << endl;
+		}
+	}
+
+	// the iteration settings
+	void ignoreNonConvergency(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info)
+	{
+		info->SetIgnoreNonConvergency(Standard_True);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the correction metric non-convergency is set to: TRUE" << endl;
+		}
+	}
+
+	void setMaxIters(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, int n)
+	{
+		info->SetMaxNbIters(n);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the max. nb. of iterations is set to: " << info->MaxNbIters() << endl;
+		}
+	}
+
+	void setTolerance(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)
+	{
+		info->SetTolerance(x);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the tolerance is set to: " << info->Tolerance() << endl;
+		}
+	}
+
+	void setUnderRelaxation(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)
+	{
+		info->SetUnderRelaxation(x);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the under relaxation is set to: " << info->UnderRelaxation() << endl;
+		}
+	}
+
+	// the integration settings
+	void set_max_iterations(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)
+	{
+		info->SetMaxNbIterations(n);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the integ_mx_nb_iters is set to: " << info->MaxNbIterations() << endl;
+		}
+	}
+
+	void set_nb_initial_iterations(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)
+	{
+		info->SetNbInitIterations(n);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the integ_intial_nb_iterations is set to: " << info->NbInitIterations() << endl;
+		}
+	}
+
+	void set_tolerance(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, double x)
+	{
+		info->SetTolerance(x);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the integ_tol is set to: " << info->Tolerance() << endl;
+		}
+	}
+
+	// the smoothing settings
+	void set_smooth_nb_iters(const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& smoothing, int nb_iters)
+	{
+		smoothing->SetNbLevels(nb_iters);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the smooth_nb_iters is set to: " << smoothing->NbLevels() << endl;
+		}
+	}
+
+	void set_smooth_ur(const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& smoothing, double x)
+	{
+		smoothing->SetUnderRelaxation(x);
+		if (verbose)
+		{
+			Info << endl
+				<< " - the smooth_ur is set to: " << smoothing->UnderRelaxation() << endl;
 		}
 	}
 
@@ -313,7 +522,10 @@ namespace tnbLib
 		smoothingAlg->SetInfo(myLaplacianSmoothInfo);
 		smoothingAlg->SetNodes(nodes);
 
-		smoothingAlg->Perform();
+		if (do_smoothing)
+		{
+			smoothingAlg->Perform();
+		}
 
 		Aft_Tools::CalcCood3d(nodesRef, *theMetricPrcsr->Geometry());
 
@@ -364,7 +576,10 @@ namespace tnbLib
 		smoothingAlg->SetInfo(myLaplacianSmoothInfo);
 		smoothingAlg->SetNodes(nodes);
 
-		smoothingAlg->Perform();
+		if (do_smoothing)
+		{
+			smoothingAlg->Perform();
+		}
 
 		Aft_Tools::CalcCood3d(nodesRef, *theMetricPrcsr->Geometry());
 
@@ -620,8 +835,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		myLaplacianSmoothInfo->SetNbLevels(4);
-		myLaplacianSmoothInfo->SetUnderRelaxation(0.85);
+		//myLaplacianSmoothInfo->SetNbLevels(smooth_nb_iters);
+		//myLaplacianSmoothInfo->SetUnderRelaxation(smooth_ur);
 
 		auto metricCalculator = createMetricCalculator();
 		auto criterion = createCriterion(metricCalculator);
@@ -641,17 +856,6 @@ namespace tnbLib
 		myMetricApproxInfo->OverrideCriterion(criterion);*/
 
 		const auto& sizeFun3d = mySoluData->SizeFun();
-
-		auto integInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
-		integInfo->SetMaxNbIterations(200);
-		integInfo->SetNbInitIterations(4);
-		integInfo->SetTolerance(1.0E-5);
-
-		auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
-		iterInfo->SetIgnoreNonConvergency(Standard_True);
-		iterInfo->SetMaxNbIters(100);  // default: 30 [5/24/2022 Amir]
-		iterInfo->SetTolerance(1.0E-5);  // default: 1.0E-3 [5/24/2022 Amir]
-		iterInfo->SetUnderRelaxation(0.85);  // default: 0.85 [5/24/2022 Amir]
 
 		//auto fracInfo = std::make_shared<Aft_SizeCorr_FractionInfo>();
 
@@ -685,12 +889,7 @@ namespace tnbLib
 		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, iterInfo);
 		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Standard>(iterInfo);
 
-		auto metricPrcsrInfo = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
-		metricPrcsrInfo->SetNbIters(5);  // default: 5 [5/24/2022 Amir]
-		metricPrcsrInfo->SetNbSamples(3);  // default: 3 [5/24/2022 Amir]
-		metricPrcsrInfo->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
 		metricPrcsrInfo->OverrideIntegInfo(integInfo);
-
 		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(150);
 		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetUnderRelaxation(0.85);
 		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetTolerance(0.0005);
@@ -757,30 +956,6 @@ namespace tnbLib
 				continue;
 			}*/
 			//x->ExportPlaneCurvesToPlt(myFile);
-			/*if (x->Index() IS_EQUAL 1)
-			{
-				continue;
-			}*/
-			/*if (x->Index() IS_EQUAL 13)
-			{
-				continue;
-			}
-			if (x->Index() IS_EQUAL 31)
-			{
-				continue;
-			}
-			if (x->Index() IS_EQUAL 32)
-			{
-				continue;
-			}
-			if (x->Index() IS_EQUAL 44)
-			{
-				continue;
-			}*/
-			/*if (x->Index() > 24)
-			{
-				continue;
-			}*/
 
 			const TopoDS_Face& face = x->Face();
 
@@ -870,8 +1045,27 @@ namespace tnbLib
 
 		// settings 
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](bool cond)-> void {do_smoothing = cond; }), "doSmoothing");
+		mod->add(chaiscript::fun([](const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& i, int nb_iters) ->void {set_smooth_nb_iters(i, nb_iters); }), "setNbIterations");
+		mod->add(chaiscript::fun([](const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& i, double x)->void {set_smooth_ur(i, x); }), "setUnderRelaxation");
 
-		// operators 
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)->void {set_max_iterations(info, n); }), "setMaxNbIterations");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)->void {set_nb_initial_iterations(info, n); }), "setNbInitialIterations");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, double x)->void {set_tolerance(info, x); }), "setTolerance");
+
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info)-> void {ignoreNonConvergency(info); }), "ignoreNonConvergency");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, int n)-> void {setMaxIters(info, n); }), "setMaxNbIterations");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)->void {setTolerance(info, x); }), "setTolerance");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)->void {setUnderRelaxation(info, x); }), "setUnderRelaxation");
+
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)->void {setNbIters(info, n); }), "setTolerance");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)->void {setNbSamples(info, n); }), "setNbSamples");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, double x)->void {setTolerance(info, x); }), "setTolerance");
+		// operators
+		mod->add(chaiscript::fun([]()->auto {return myLaplacianSmoothInfo; }), "getSmoothAlg");
+		mod->add(chaiscript::fun([]()->auto {return metricPrcsrInfo; }), "getMetrics");
+		mod->add(chaiscript::fun([]()-> auto {return integInfo; }), "getIntegAlg");
+		mod->add(chaiscript::fun([]()->auto {return iterInfo; }), "getIterAlg");
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 	}
 
@@ -906,7 +1100,7 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to create plane boundary info." << endl << endl;
+			Info << " This application is aimed to mesh the surfaces of a tModel." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -917,9 +1111,32 @@ int main(int argc, char *argv[])
 
 				<< " # Settings: " << endl << endl
 
+				<< " - doSmoothing(bool)" << endl << endl
+
+				<< " - (Smooth).setNbIterations(n)" << endl
+				<< " - (Smooth).setUnderRelaxation(x)" << endl << endl
+
+				<< " - (Integ).setTolerance(x)" << endl
+				<< " - (Integ).setMaxNbIterations(n)" << endl
+				<< " - (Integ).setNbInitialIterations(n)" << endl << endl
+
+				<< " - (Iter).setTolerance(x)" << endl
+				<< " - (Iter).setMaxNbIterations(n)" << endl
+				<< " - (Iter).setUnderRelaxation(x)" << endl
+				<< " - (Iter).ignoreNonConvergency()" << endl << endl
+
+				<< " - (Metrics).setTolerance(x)" << endl
+				<< " - (Metrics).setNbSamples(n)" << endl
+				<< " - (Metrics).setNbIerations(n)" << endl << endl
+
 				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl
+
+				<< " - [Smooth] getSmoothAlg()" << endl
+				<< " - [Metrics] getMetrics()" << endl
+				<< " - [Integ] getIntegAlg()" << endl
+				<< " - [Iter] getIterAlg()" << endl << endl
 
 				<< " - execute()" << endl
 				<< endl;

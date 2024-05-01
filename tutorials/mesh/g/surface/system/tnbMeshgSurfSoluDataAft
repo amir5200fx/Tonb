@@ -1,0 +1,14 @@
+setVerbose(1);
+
+// loading the model
+loadModel("..\\..\\..\\cad\\model\\g\\box\\model");
+// loading the size Function
+loadSizeFunction("sizefun\\sizefun");
+// loading the curve info.
+loadCurveInfo("curve\\curveMeshInfo");
+
+// run the application
+execute();
+
+// export the file
+saveTo("mySolution");

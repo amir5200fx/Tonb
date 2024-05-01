@@ -1,5 +1,8 @@
+#include <Extrema_POnCurv2d.hxx>
 #include <Merge3d_Triangulation.hxx>
 
+#include <Geo3d_BalPrTree.hxx>
+#include <Geo_BoxTools.hxx>
 #include <Pnt3d.hxx>
 #include <Global_Indexed.hxx>
 #include <TnbError.hxx>
@@ -18,11 +21,25 @@ namespace tnbLib
 		{
 			// Forward Declarations
 			class Edge;
+			class Node;
+
+			struct SuperNode
+			{
+				Standard_Integer id;
+				Pnt3d coord;
+
+				std::vector<std::shared_ptr<Node>> nodes;
+
+				Standard_Integer MinId() const;
+
+				typedef Pnt3d ptType;
+			};
 
 			class NodeAdaptor
 			{
 				/*Private Data*/
 				std::map<Standard_Integer, std::weak_ptr<Edge>> theEdges_;
+				std::weak_ptr<SuperNode> theSuperNode_;
 			protected:
 				// default constructor
 				NodeAdaptor() = default;
@@ -30,8 +47,10 @@ namespace tnbLib
 				// Public functions and operators
 				Standard_Integer NbEdges() const { return static_cast<Standard_Integer>(theEdges_.size()); }
 				const auto& Edges() const { return theEdges_; }
+				const auto& Super() const { return theSuperNode_; }
 
 				void InsertToEdges(const Standard_Integer theIndex, const std::weak_ptr<Edge>&);
+				void SetSuper(const std::shared_ptr<SuperNode>& node) { theSuperNode_ = node; }
 			};
 
 			void NodeAdaptor::InsertToEdges(const Standard_Integer theIndex, const std::weak_ptr<Edge>& theEdge)
@@ -52,6 +71,7 @@ namespace tnbLib
 				/*Private Data*/
 				Pnt3d theCoord_;
 			public:
+				typedef Pnt3d ptType;
 				// default constructor
 				Node() = default;
 				// constructors
@@ -68,6 +88,24 @@ namespace tnbLib
 
 				void SetCoord(const Pnt3d& theCoord) { theCoord_ = theCoord; }
 				void SetCoord(Pnt3d&& theCoord) { theCoord_ = std::move(theCoord); }
+			};
+
+			Standard_Integer SuperNode::MinId() const
+			{
+				Standard_Integer min_id = IntegerLast();
+				std::for_each(nodes.begin(), nodes.end(), [&min_id](const std::shared_ptr<Node>& node)
+					{
+						if (node->Index() < min_id)
+						{
+							min_id = node->Index();
+						}
+					});
+				return min_id;
+			}
+
+			auto compare_nodes = [](const std::shared_ptr<Node>& node0, const std::shared_ptr<Node>& node1)
+			{
+				return node0->Index() < node1->Index();
 			};
 
 			class EdgeAdaptor
@@ -161,16 +199,35 @@ namespace tnbLib
 				const auto& Edge1() const { return theEdges_.at(1); }
 				const auto& Edge2() const { return theEdges_.at(2); }
 
+				std::tuple<std::shared_ptr<Node>, std::shared_ptr<Node>, std::shared_ptr<Node>> RetrieveNodes() const;
+
 				void SetEdges(const Array3& theEdges) { theEdges_ = theEdges; }
 				void SetEdges(Array3&& theEdges) { theEdges_ = std::move(theEdges); }
 			};
 
+			std::shared_ptr<Node> Edge::Next(const std::shared_ptr<Node>& node) const
+			{
+				if (node == Node0())
+				{
+					return Node1();
+				}
+				return Node0();
+			}
+
+			std::tuple<std::shared_ptr<Node>, std::shared_ptr<Node>, std::shared_ptr<Node>> Element::
+			RetrieveNodes() const
+			{
+				auto t = std::make_tuple(Edge0()->Node0(), Edge1()->Node0(), Edge2()->Node0());
+				return std::move(t);
+			}
+
 			typedef std::vector<std::shared_ptr<Element>> Mesh;
 
-			auto MakeNodes(const std::vector<Pnt3d>& thePnts, Standard_Integer& nb_nodes)
+			auto MakeNodes(const std::vector<Pnt3d>& thePnts)
 			{
 				std::vector<std::shared_ptr<Node>> nodes;
 				nodes.reserve(thePnts.size());
+				Standard_Integer nb_nodes = 0;
 				for (const auto& x: thePnts)
 				{
 					auto node = std::make_shared<Node>(++nb_nodes, x);
@@ -195,14 +252,8 @@ namespace tnbLib
 					const auto& node2 = nodes.at(v2);
 
 					const auto edge0 = std::make_shared<Edge>(++nb_edges, Edge::Array2{node0, node1});
-					node0->InsertToEdges(edge0->Index(), edge0);
-					node1->InsertToEdges(edge0->Index(), edge0);
 					const auto edge1 = std::make_shared<Edge>(++nb_edges, Edge::Array2{node1, node2});
-					node1->InsertToEdges(edge1->Index(), edge1);
-					node2->InsertToEdges(edge1->Index(), edge1);
 					const auto edge2 = std::make_shared<Edge>(++nb_edges, Edge::Array2{node2, node0});
-					node2->InsertToEdges(edge2->Index(), edge2);
-					node0->InsertToEdges(edge2->Index(), edge2);
 					auto element = std::make_shared<Element>(++nb_elements, Element::Array3{edge0, edge1, edge2});
 					elements.emplace_back(std::move(element));
 				}
@@ -238,7 +289,7 @@ namespace tnbLib
 				}
 				return std::move(edges);
 			}
-			auto ConnectEdges(const std::shared_ptr<Edge>& edge, const std::vector<std::shared_ptr<Edge>>& edges)
+			void ConnectEdges(const std::shared_ptr<Edge>& edge, const std::vector<std::shared_ptr<Edge>>& edges)
 			{
 				for (const auto& e: edges)
 				{
@@ -247,6 +298,20 @@ namespace tnbLib
 						edge->InsertToPairs(e->Index(), e);
 					}
 				}
+			}
+			void ConnectEdgesAndNodes(const std::vector<std::shared_ptr<Edge>>& edges)
+			{
+				std::for_each(edges.begin(), edges.end(), [](const std::shared_ptr<Edge>& edge)
+					{
+						const auto& node0 = edge->Node0();
+						const auto& node1 = edge->Node1();
+						node0->InsertToEdges(edge->Index(), edge);
+						node1->InsertToEdges(edge->Index(), edge);
+					});
+			}
+			void ConnectEdgesAndNodes(const Mesh& mesh)
+			{
+				ConnectEdgesAndNodes(RetrieveEdges(mesh));
 			}
 			auto ConnectEdges(const std::shared_ptr<Edge>& edge)
 			{
@@ -277,10 +342,87 @@ namespace tnbLib
 			}
 			auto MakeMesh(const Entity3d_Triangulation& theTriangulation)
 			{
-				Standard_Integer nb_nodes = 0;
-				auto elements = MakeElements(MakeNodes(theTriangulation.Points(), nb_nodes), theTriangulation.Connectivity());
+				auto elements = MakeElements(MakeNodes(theTriangulation.Points()), theTriangulation.Connectivity());
 				ConnectEdges(elements);
 				return std::move(elements);
+			}
+			auto RetrieveNodes(const Mesh& theMesh)
+			{
+				std::set<std::shared_ptr<Node>, decltype(compare_nodes)> comp(compare_nodes);
+				for (const auto& element: theMesh)
+				{
+					auto [node0, node1, node2] = element->RetrieveNodes();
+					comp.insert(node0);
+					comp.insert(node1);
+					comp.insert(node2);
+				}
+				std::vector<std::shared_ptr<Node>> nodes;
+				std::copy(comp.begin(), comp.end(), std::back_inserter(nodes));
+				return std::move(nodes);
+			}
+			auto RetrieveNodes(const std::vector<std::shared_ptr<Edge>>& edges)
+			{
+				std::set<std::shared_ptr<Node>, decltype(compare_nodes)> comp(compare_nodes);
+				for (const auto& edge: edges)
+				{
+					comp.insert(edge->Node0());
+					comp.insert(edge->Node1());
+				}
+				std::vector<std::shared_ptr<Node>> nodes;
+				std::copy(comp.begin(), comp.end(), std::back_inserter(nodes));
+				return std::move(nodes);
+			}
+			void Renumber(const Mesh& theMesh, Standard_Integer& nb_edges, Standard_Integer& nb_nodes)
+			{
+				// renumbering the nodes
+				const auto nodes = RetrieveNodes(theMesh);
+				for (const auto& node: nodes)
+				{
+					node->SetIndex(++nb_nodes);
+				}
+				// renumbering the edges
+				const auto edges = RetrieveEdges(theMesh);
+				for (const auto& edge: edges)
+				{
+					edge->SetIndex(++nb_edges);
+				}
+			}
+			auto RetrieveBoundaries(const Mesh& theMesh)
+			{
+				std::vector<std::shared_ptr<Edge>> boundaries;
+				for (const auto& edge: RetrieveEdges(theMesh))
+				{
+					if (!edge->NbPairs())
+					{
+						boundaries.emplace_back(edge);
+					}
+				}
+				return std::move(boundaries);
+			}
+			auto RetrieveBoundaryNodes(const Mesh& mesh)
+			{
+				auto nodes = RetrieveNodes(RetrieveBoundaries(mesh));
+				return std::move(nodes);
+			}
+			auto RetrieveGeometries(const std::vector<std::shared_ptr<Node>>& nodes)
+			{
+				std::vector<Pnt3d> coords;
+				coords.reserve(nodes.size());
+				std::for_each(nodes.begin(), nodes.end(), [&coords](const std::shared_ptr<Node>& node)
+					{
+						coords.emplace_back(node->Coord());
+					});
+				return std::move(coords);
+			}
+			auto CalcAvgCoord(const std::vector<std::shared_ptr<Node>>& nodes)
+			{
+				Debug_If_Condition(nodes.empty());
+				auto c = Pnt3d::null;
+				for (const auto& x: nodes)
+				{
+					c += x->Coord();
+				}
+				return c / static_cast<Standard_Real>(nodes.size());
 			}
 		}
 	}
@@ -288,28 +430,121 @@ namespace tnbLib
 
 void tnbLib::Merge3d_Triangulation::Perform()
 {
-	struct Node
-	{
-		Pnt3d coord;
-		Standard_Integer id;
-	};
+	typedef geoLib::mergeTris3d::Node Node;
+	enum class NodeStatus { alive, killed };
+	typedef geoLib::mergeTris3d::SuperNode SuperNode;
+	
 	// making the meshes to retrieve the boundaries
-	std::vector<geoLib::mergeTris3d::Mesh> meshes;
-	for (const auto& tris: theTriangulations_)
+	const auto mesh = geoLib::mergeTris3d::MakeMesh(*Triangulation());
+	// connecting the entities
+	geoLib::mergeTris3d::ConnectEdgesAndNodes(mesh);
+	geoLib::mergeTris3d::ConnectEdges(mesh);
+	// retrieve the boundary nodes
+	const auto nodes = geoLib::mergeTris3d::RetrieveBoundaryNodes(mesh);
+	const auto bnd_box = Geo_BoxTools::GetBox(geoLib::mergeTris3d::RetrieveGeometries(nodes), 0);
+	const auto dim = bnd_box.Diameter();
+	// registering the nodes
+	Geo3d_BalPrTree<std::shared_ptr<SuperNode>> engine;
+	engine.BUCKET_SIZE = 4;
+	engine.SetGeometryCoordFunc([](const std::shared_ptr<SuperNode>& node)-> const Pnt3d& {return node->coord; });
+	engine.SetGeometryRegion(bnd_box.Expanded(bnd_box.Diameter() * 1.0e-4));
+	auto search_region = [&engine](const Pnt3d& theCoord, const Standard_Real radius)
 	{
-		auto mesh = geoLib::mergeTris3d::MakeMesh(*tris);
-		meshes.emplace_back(std::move(mesh));
-	}
-	// register all of the nodes into an array
-	std::vector<std::shared_ptr<Node>> nodes;
-	Standard_Integer nb_nodes = 0;
-	for (const auto& tris: theTriangulations_)
-	{
-		for (const auto& pt: tris->Points())
+		auto sr = Geo_BoxTools::GetBox(theCoord, radius);
+		std::vector<std::shared_ptr<SuperNode>> items;
+		engine.GeometrySearch(sr, items);
+		std::vector<std::shared_ptr<SuperNode>> nodes;
+		for (const auto& i: items)
 		{
-			auto node = std::make_shared<Node>(Node{ pt, ++nb_nodes });
-			nodes.push_back(std::move(node));
+			if (i->coord.Distance(theCoord) <= radius)
+			{
+				nodes.emplace_back(i);
+			}
+		}
+		return std::move(nodes);
+	};
+	const auto radius = Radius();
+	Standard_Integer k = 0;
+	for (const auto& node: nodes)
+	{
+		// search the region
+		auto found = search_region(node->Coord(), radius);
+		if (found.size() > 1)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " something went wrong." << endl
+				<< abort(FatalError);
+		}
+		if (found.empty())
+		{// register the node into the engine
+			auto super_node = std::make_shared<SuperNode>(SuperNode{ ++k, node->Coord(), {node} });
+			engine.InsertToGeometry(super_node);
+		}
+		else
+		{
+			const auto& super_node = found.at(0);
+			super_node->nodes.emplace_back(node);
 		}
 	}
-
+	// Calculate the avg. value to merge the points
+	std::vector<std::shared_ptr<SuperNode>> super_nodes;
+	engine.RetrieveFromGeometryTo(super_nodes);
+	for (const auto& x: super_nodes)
+	{
+		x->coord = geoLib::mergeTris3d::CalcAvgCoord(x->nodes);
+		for (const auto& node: x->nodes)
+		{
+			node->SetCoord(x->coord);
+			node->SetSuper(x);
+		}
+	}
+	Standard_Integer nb_nodes = 0;
+	std::map<Standard_Integer, std::pair<NodeStatus, Standard_Integer>> merged;
+	auto get_new_id = [&merged](const Standard_Integer i)
+	{
+		return merged.at(i).second;
+	};
+	for (const auto& node: geoLib::mergeTris3d::RetrieveNodes(mesh))
+	{
+		if (const auto father = node->Super().lock())
+		{// the boundary node
+			++nb_nodes;
+			if (father->MinId() == node->Index())
+			{
+				merged.insert({ node->Index(), {NodeStatus::alive, ++nb_nodes} });
+			}
+			else
+			{
+				merged.insert({ node->Index(), {NodeStatus::killed, 0} });
+			}
+		}
+		else
+		{
+			merged.insert({ node->Index(), {NodeStatus::alive, ++nb_nodes} });
+		}
+	}
+	// retrieving the compressed points (alive nodes)
+	std::vector<Pnt3d> coords;
+	for (const auto& node: geoLib::mergeTris3d::RetrieveNodes(mesh))
+	{
+		if (merged.at(node->Index()).first == NodeStatus::alive)
+		{
+			coords.emplace_back(node->Coord());
+		}
+	}
+	std::vector<connectivity::triple> ids;
+	ids.reserve(theTriangulation_->NbConnectivity());
+	for (const auto& i: theTriangulation_->Connectivity())
+	{
+		auto v0 = i.Value(0);
+		auto v1 = i.Value(1);
+		auto v2 = i.Value(2);
+		connectivity::triple t;
+		t.Value(0) = get_new_id(v0);
+		t.Value(1) = get_new_id(v1);
+		t.Value(2) = get_new_id(v2);
+		ids.emplace_back(std::move(t));
+	}
+	theMerged_ = std::make_shared<Entity3d_Triangulation>(std::move(coords), std::move(ids));
+	Change_IsDone() = Standard_True;
 }

@@ -30,14 +30,14 @@ namespace tnbLib
 				Debug_Null_Pointer(element->SubEntity<elementType::rank - 1>(i));
 				const auto& entity = *element->SubEntity<elementType::rank - 1>(i);
 
-				auto rightElement = entity.RightElement().lock();
+				auto rightElement = entity.LowerElement().lock();
 				Debug_Null_Pointer(rightElement);
 
 				if (rightElement == element)
 				{
 					if (entity.IsLeftSide(theCoord))
 					{
-						auto leftElement = entity.LeftElement().lock();
+						auto leftElement = entity.UpperElement().lock();
 						neighbor = leftElement;
 						if (!neighbor)
 						{
@@ -50,7 +50,7 @@ namespace tnbLib
 				else
 				{
 #ifdef TriLoc_Debug
-					auto leftElement = entity.LeftElement().lock();
+					auto leftElement = entity.UpperElement().lock();
 					if (NOT leftElement)
 					{
 						FatalErrorIn(FunctionSIG)
@@ -76,7 +76,7 @@ namespace tnbLib
 					}
 				}
 
-				//auto leftElement = entity.LeftElement().lock();
+				//auto leftElement = entity.UpperElement().lock();
 				//if (leftElement == element)
 				//{
 				//	if (entity.IsRightSide(theCoord))

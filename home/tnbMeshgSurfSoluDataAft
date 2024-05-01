@@ -1,5 +1,7 @@
 setVerbose(1);
 
+loadFiles();
+
 execute();
 
 saveTo("mySoluData");

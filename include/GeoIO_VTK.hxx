@@ -3,6 +3,7 @@
 #define _GeoIO_VTK_Header
 
 #include <Entity3d_TetrahedralizationFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
@@ -43,6 +44,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void WriteCellTypes(const Standard_Integer, std::stringstream&);
 
 		TnbGeo_EXPORT void WritePoints(const std::vector<Pnt2d>&, OFstream&);
+		TnbGeo_EXPORT void WritePoints(const std::vector<Pnt3d>&, OFstream&);
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::triple>&, OFstream&);
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::dual>&, OFstream&);
 
@@ -51,6 +53,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::dual>&, std::stringstream&);
 
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Triangulation&, const std::string& theTitle, OFstream&);
+		TnbGeo_EXPORT void WriteMesh(const Entity3d_Triangulation&, const std::string& theTitle, OFstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Chain&, const std::string& theTitle, OFstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Polygon&, const std::string& theTitle, OFstream&);
 

@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadFile("..\\..\\..\\shape\\box\\myBox");
+
+execute();
+
+saveTo("model");

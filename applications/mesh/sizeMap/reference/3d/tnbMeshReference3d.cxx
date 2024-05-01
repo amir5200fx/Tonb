@@ -13,6 +13,7 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 
 	static double myBaseSize = 0.01;
+	static double myDia = 0;
 	static auto myRef = std::make_shared<Mesh3d_ReferenceValues>(myBaseSize, nullptr);
 
 	static const double DEFAULT_MIN_SIZE = 1.0E-6;
@@ -66,6 +67,7 @@ namespace tnbLib
 						<< " the region file is null!" << endl
 						<< abort(FatalError);
 				}
+				myDia = myRegion->Diameter();
 				myRef->SetRegion(myRegion);
 			}
 		}
@@ -79,9 +81,9 @@ namespace tnbLib
 					<< " the region file is null!" << endl
 					<< abort(FatalError);
 			}
+			myDia = myRegion->Diameter();
 			myRef->SetRegion(myRegion);
 		}
-
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
 	}
@@ -96,7 +98,9 @@ namespace tnbLib
 				<< "the region file is null." << endl
 				<< abort(FatalError);
 		}
+		myDia = myRegion->Diameter();
 		myRef->SetRegion(myRegion);
+		loadTag = true;
 	}
 
 	void loadFile()
@@ -305,6 +309,17 @@ namespace tnbLib
 		if (x < DEFAULT_MIN_SIZE) x = DEFAULT_MIN_SIZE;
 		v.SetSpanAngle(x);
 	}
+
+	auto get_diameter()
+	{
+		if (!loadTag)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " no file has been loaded." << endl
+				<< abort(FatalError);
+		}
+		return myDia;
+	}
 }
 
 #ifdef DebugInfo
@@ -324,6 +339,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& file)->void {loadRegion(file); }), "loadFile");
+
+		// functions
+		mod->add(chaiscript::fun([]()-> auto {return get_diameter(); }), "Diameter");
 
 
 		// settings [12/12/2021 Amir]
@@ -381,7 +400,7 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile()" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
@@ -397,9 +416,11 @@ int main(int argc, char *argv[])
 				<< " - setCurvatureType(string);  Types: continum, custom, disable" << endl
 				<< " - setCurvatureSpanAngle(double)" << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
 
-				<< " # Operators:" << endl
+				<< " # Operators:" << endl << endl
+
+				<< " - Diameter()" << endl
 				<< endl;
 			return 0;
 		}

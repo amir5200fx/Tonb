@@ -10,6 +10,8 @@ namespace tnbLib
 {
 	template<>
 	TnbGeo_EXPORT void Entity3d_Triangulation::ExportToPlt(OFstream& File) const;
+	template<>
+	TnbGeo_EXPORT void Entity3d_Triangulation::ExportToVtk(OFstream&) const;
 }
 
 #endif // !_Entity3d_Triangulation_Header

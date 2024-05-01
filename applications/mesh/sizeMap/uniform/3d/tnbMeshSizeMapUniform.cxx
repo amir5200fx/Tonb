@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

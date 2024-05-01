@@ -115,6 +115,7 @@ namespace tnbLib
 				<< " the shape is null." << endl
 				<< abort(FatalError);
 		}
+		loadTag = true;
 	}
 
 	void loadFile()
@@ -128,7 +129,6 @@ namespace tnbLib
 			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
 			loadShape(name);
 		}
-
 		loadTag = true;
 	}
 
