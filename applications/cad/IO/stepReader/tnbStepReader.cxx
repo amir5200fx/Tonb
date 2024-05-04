@@ -13,6 +13,7 @@
 
 #include <TopoDS_Shape.hxx>
 #include <STEPControl_Reader.hxx>
+#include <TopoDS_Iterator.hxx>
 #include <Bnd_Box.hxx>
 #include <BRepBndLib.hxx>
 
@@ -51,25 +52,41 @@ namespace tnbLib
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_s);
 
-			STEPControl_Reader Reader;
-			Reader.ReadFile(fn.c_str());
+			STEPControl_Reader reader;
+			const auto status = reader.ReadFile(fn.c_str());
 
 			if (status == IFSelect_RetDone) {
 				// Transfer the content of the STEP file to a TopoDS_Shape
-				Handle(TColStd_HSequenceOfTransient) myList = reader.GiveList("step-solids");
-				reader.TransferList(myList);
+				//Handle(TColStd_HSequenceOfTransient) myList = reader.GiveList("step-solids");
+				/*if (myList)
+				{
+					std::cout << "nb of shapes = " << myList->Size() << std::endl;
+				}
+				else
+				{
+					std::cout << " the list is empty!" << std::endl;
+				}
+				reader.TransferList(myList);*/
 				reader.TransferRoot();
 			}
 			else {
 				std::cerr << "Error: Unable to read the STEP file." << std::endl;
 			}
-			std::cout << "nb of shapes = " << reader.NbShapes() << std::endl;
+			//std::cout << "nb of shapes = " << reader.NbShapes() << std::endl;
 			myShape = std::make_shared<Cad_Shape>(0, name, reader.OneShape());
+
+			//for (TopoDS_Iterator iter(reader.OneShape()); iter.More(); iter.Next()) {
+
+			//	// get the current sub-shape
+			//	// which in your case will be TopoDS_Solid
+			//	//std::cout << "there's a shape" << std::endl;
+			//	TopoDS_Shape currentShape = iter.Value();
+			//}
 		}
 
 		if (verbose)
 		{
-			Info << "IGES File Imported Successfully in "
+			Info << "STEP File Imported Successfully in "
 				<< global_time_duration << " seconds.";
 		}
 		if (verbose)

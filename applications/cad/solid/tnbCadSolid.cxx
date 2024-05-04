@@ -5,6 +5,9 @@
 #include <Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx>
 #include <Cad_CurveLength_Info.hxx>
 #include <Cad_CurveSplitter_Info.hxx>
+#include <Cad_MultiVolume.hxx>
+#include <Cad_SingleVolume.hxx>
+#include <Cad_Solid.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_TModel.hxx>
 #include <Cad_Tools.hxx>
@@ -31,7 +34,7 @@ namespace tnbLib
 
 	static const auto model_directory = "shape";
 
-	static std::shared_ptr<Cad_TModel> myModel;
+	static std::shared_ptr<Cad_Volume> myModel;
 	static std::shared_ptr<Cad_Shape> myShape;
 	static std::string myFileName;
 
@@ -90,6 +93,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		myFileName = name;
+		loadTag = true;
 	}
 
 	void loadFile()
@@ -121,7 +125,7 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-		file::SaveTo(myModel, name + Cad_TModel::extension, verbose);
+		file::SaveTo(myModel, name + Cad_Volume::extension, verbose);
 	}
 
 	void saveTo()
@@ -155,29 +159,50 @@ namespace tnbLib
 					<< "no solid has been detected." << endl
 					<< abort(FatalError);
 			}
-			if (shapes.size() > 1)
+			if (shapes.size() == 1)
 			{
-				FatalErrorIn(FunctionSIG)
-					<< "there are more than one solids has been detected." << endl
-					<< abort(FatalError);
+				auto solid = Cad_Solid::MakeSolid(shapes.at(0), {
+					                                  myModelMakerInfo, myEdgeMakerInfo, mySurfMakerInfo,
+					                                  myPairCriterion
+				                                  });
+				if (verbose)
+				{
+					Info << endl;
+					Info << " - Number of corners: " << solid->NbCorners() << endl
+						<< " - Number of segments: " << solid->NbSegments() << endl
+						<< " - Number of faces: " << solid->NbFaces() << endl << endl;
+				}
+				myModel = std::make_shared<Cad_SingleVolume>(std::move(solid));
+			}
+			else if (shapes.size() > 1)
+			{
+				size_t k = 0;
+				Info << endl;
+				std::vector<std::shared_ptr<Cad_Solid>> solids;
+				for (const auto& x: shapes)
+				{
+					auto solid = Cad_Solid::MakeSolid(x, {
+													  myModelMakerInfo, myEdgeMakerInfo, mySurfMakerInfo,
+													  myPairCriterion
+						});
+					if (verbose)
+					{
+						
+						Info << " * Shape number " << ++k << ":" << endl;
+						Info << " - Number of corners: " << solid->NbCorners() << endl
+							<< " - Number of segments: " << solid->NbSegments() << endl
+							<< " - Number of faces: " << solid->NbFaces() << endl << endl;
+					}
+					solids.emplace_back(std::move(solid));
+				}
+				myModel = std::make_shared<Cad_MultiVolume>(std::move(solids));
 			}
 			if (verbose > 1)
 			{
 				Cad_tModelMaker::verbose = 1;
 			}
-			auto myMaker =
-				std::make_shared<Cad_tModelMaker>
-				(shapes.at(0), myModelInfo, myPairCriterion);
-			myMaker->MakeSolid();
-			myModel = myMaker->Model();
 		}
-		if (verbose)
-		{
-			Info << endl;
-			Info << " - Number of corners: " << myModel->NbCorners() << endl
-				<< " - Number of segments: " << myModel->NbSegments() << endl
-				<< " - Number of faces: " << myModel->NbFaces() << endl << endl;
-		}
+		
 		exeTag = true;
 		if (verbose)
 		{
