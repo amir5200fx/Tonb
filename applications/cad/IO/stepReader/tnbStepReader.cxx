@@ -54,11 +54,17 @@ namespace tnbLib
 			STEPControl_Reader Reader;
 			Reader.ReadFile(fn.c_str());
 
-			Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("step-faces");
-			Reader.TransferList(myList);
-
-			std::filesystem::path file_path = name;
-			myShape = std::make_shared<Cad_Shape>(0, file_path.filename().string(), Reader.OneShape());
+			if (status == IFSelect_RetDone) {
+				// Transfer the content of the STEP file to a TopoDS_Shape
+				Handle(TColStd_HSequenceOfTransient) myList = reader.GiveList("step-solids");
+				reader.TransferList(myList);
+				reader.TransferRoot();
+			}
+			else {
+				std::cerr << "Error: Unable to read the STEP file." << std::endl;
+			}
+			std::cout << "nb of shapes = " << reader.NbShapes() << std::endl;
+			myShape = std::make_shared<Cad_Shape>(0, name, reader.OneShape());
 		}
 
 		if (verbose)

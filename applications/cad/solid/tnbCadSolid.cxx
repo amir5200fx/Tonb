@@ -161,7 +161,10 @@ namespace tnbLib
 					<< "there are more than one solids has been detected." << endl
 					<< abort(FatalError);
 			}
-			//Cad_tModelMaker::verbose = 1;
+			if (verbose > 1)
+			{
+				Cad_tModelMaker::verbose = 1;
+			}
 			auto myMaker =
 				std::make_shared<Cad_tModelMaker>
 				(shapes.at(0), myModelInfo, myPairCriterion);
@@ -220,7 +223,6 @@ namespace tnbLib
 		// settings [1/31/2022 Amir]
 		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "setTolerance");
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](unsigned short i)-> void {Cad_tModelMaker::verbose = i; }), "setMakerVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -268,8 +270,7 @@ int main(int argc, char* argv[])
 				<< " # Settings: " << endl << endl
 
 				<< " - setTolerance(double)" << endl
-				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl
-				<< " - setMakerVerbose(unsigned int); Levels: 0, 1" << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

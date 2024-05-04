@@ -2775,7 +2775,7 @@ void tnbLib::Cad_Tools::ExportToSTEP
 	STEPControl_Controller::Init();
 
 	STEPControl_Writer Writer;
-	Writer.Transfer(theShape, STEPControl_StepModelType::STEPControl_ShellBasedSurfaceModel);
+	Writer.Transfer(theShape, STEPControl_StepModelType::STEPControl_AsIs);
 
 	Standard_Boolean OK = Writer.Write(name.c_str());
 
