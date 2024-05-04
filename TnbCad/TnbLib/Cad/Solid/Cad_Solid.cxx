@@ -21,7 +21,7 @@ tnbLib::Cad_Solid::Cad_Solid
 	Check();
 }
 
-void tnbLib::Cad_Solid::Check()
+void tnbLib::Cad_Solid::Check() const
 {
 	Cad_Tools::CheckSolid(Shape());
 }
@@ -39,7 +39,7 @@ tnbLib::Cad_Solid::MakeSolid
 	const MakerInfo& theInfo
 )
 {
-	auto myInfo = 
+	const auto myInfo = 
 		std::make_shared<Cad_tModelMaker::MakerInfo>
 		(theInfo.modelInfo, theInfo.edgeInfo, theInfo.surfInfo);
 	Cad_tModelMaker maker{ theShape, myInfo, theInfo.pairCrit };
