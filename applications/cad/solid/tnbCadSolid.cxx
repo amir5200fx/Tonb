@@ -195,7 +195,9 @@ namespace tnbLib
 					}
 					solids.emplace_back(std::move(solid));
 				}
-				myModel = std::make_shared<Cad_MultiVolume>(std::move(solids));
+				const auto model = std::make_shared<Cad_MultiVolume>(std::move(solids));
+				Cad_Tools::RenumberSurfaces(model);
+				myModel = model;
 			}
 			if (verbose > 1)
 			{
