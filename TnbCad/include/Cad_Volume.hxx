@@ -14,6 +14,7 @@ namespace tnbLib
 
 	// Forward Declarations [6/13/2023 Payvand]
 	class Cad_Solid;
+	class TModel_Surface;
 
 	class Cad_Volume
 		: public Global_Named
@@ -59,11 +60,13 @@ namespace tnbLib
 
 		// Public functions and operators [6/13/2023 Payvand]
 
+		virtual Standard_Integer IsPairedSurface(const Standard_Integer theIndex) const = 0;
+
 		virtual Standard_Integer NbVolumes() const = 0;
 		virtual std::shared_ptr<Cad_Solid> Volume(const Standard_Integer theIndex) const = 0;
 
 		virtual std::vector<std::shared_ptr<Cad_Solid>> Volumes() const = 0;
-
+		virtual std::vector<std::shared_ptr<TModel_Surface>> RetrieveSurfaces() const = 0;
 	};
 }
 

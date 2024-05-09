@@ -15,6 +15,8 @@
 //#include <TModel_Ring.hxx>
 #include <TModel_Paired.hxx>
 #include <TModel_Wire.hxx>
+#include <Cad_Solid.hxx>
+#include <Cad_MultiVolume.hxx>
 #include <Cad_TModel.hxx>
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
@@ -2740,6 +2742,22 @@ void tnbLib::Cad_Tools::SetPrecision
 	{
 		Debug_Null_Pointer(x);
 		x->SetPrecision(CalcPrecision(*x));
+	}
+}
+
+void tnbLib::Cad_Tools::RenumberSurfaces
+(
+	const std::shared_ptr<Cad_MultiVolume>& theVolume
+)
+{
+	Standard_Integer nb_surfaces = 0;
+	for (const auto& x: theVolume->Solids())
+	{
+		auto faces = x->RetrieveFaces();
+		for (const auto& f: faces)
+		{
+			f->SetIndex(++nb_surfaces);
+		}
 	}
 }
 

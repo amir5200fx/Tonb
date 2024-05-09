@@ -56,6 +56,8 @@ namespace tnbLib
 
 		const auto& Solid() const { return theSolid_; }
 
+		TnbCad_EXPORT Standard_Integer IsPairedSurface(const Standard_Integer theIndex) const override;
+
 		TnbCad_EXPORT Standard_Integer 
 			NbVolumes() const override;
 		TnbCad_EXPORT std::shared_ptr<Cad_Solid> 
@@ -63,6 +65,8 @@ namespace tnbLib
 
 		TnbCad_EXPORT std::vector<std::shared_ptr<Cad_Solid>>
 			Volumes() const override;
+
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Surface>> RetrieveSurfaces() const override;
 
 	};
 

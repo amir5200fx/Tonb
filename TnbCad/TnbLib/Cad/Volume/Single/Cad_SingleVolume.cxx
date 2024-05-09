@@ -56,10 +56,16 @@ tnbLib::Cad_SingleVolume::Cad_SingleVolume
 	Check();
 }
 
+Standard_Integer
+tnbLib::Cad_SingleVolume::IsPairedSurface(const Standard_Integer theIndex) const
+{
+	return 0; 
+}
+
 Standard_Integer 
 tnbLib::Cad_SingleVolume::NbVolumes() const
 {
-	return Standard_Integer(1);
+	return 1;
 }
 
 std::shared_ptr<tnbLib::Cad_Solid> 
@@ -73,4 +79,10 @@ tnbLib::Cad_SingleVolume::Volumes() const
 {
 	std::vector<std::shared_ptr<Cad_Solid>> solids = { theSolid_ };
 	return std::move(solids);
+}
+
+std::vector<std::shared_ptr<tnbLib::TModel_Surface>>
+tnbLib::Cad_SingleVolume::RetrieveSurfaces() const
+{
+	return theSolid_->RetrieveFaces();
 }
