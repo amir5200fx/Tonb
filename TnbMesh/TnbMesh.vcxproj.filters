@@ -2317,6 +2317,12 @@
     <Filter Include="TnbLib\Aft\Boundary\Volume\Iso">
       <UniqueIdentifier>{a92bd4c7-f102-4857-bb64-f78273099cc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\SolutionData\Volume">
+      <UniqueIdentifier>{8b8d7790-d0ab-4267-b4f0-dad30c7a99e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\SolutionData\Volume\Surface">
+      <UniqueIdentifier>{ace5f57b-8953-49f1-9cfd-e9545460ae10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5616,6 +5622,9 @@
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge\Aft2d_BndEdgeSurfaceFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVol.hxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7384,6 +7393,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge\Aft2d_BndEdgeSurfaceIO.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVol.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVolIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
