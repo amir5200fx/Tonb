@@ -6,6 +6,7 @@
 #include <Geo_SearchTree.hxx>
 #include <Geo_PriorityList.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
 #include <Pnt3d.hxx>
 #include <Global_Done.hxx>
 
@@ -13,6 +14,11 @@
 
 namespace tnbLib
 {
+	// Forward Declarations
+	class Entity3d_TopoTriangulation;
+
+	template<class T>
+	class Geo_AdTree;
 
 	namespace legLib
 	{
@@ -298,14 +304,20 @@ namespace tnbLib
 				std::shared_ptr<std::set<std::shared_ptr<Aft3d_Element>, decltype(cmp_element)>>
 					theElements_;
 
-				Standard_Integer theNbNodes_;
+				Standard_Integer theMaxNodeIdx_;
+				Standard_Integer theMaxEdgeIdx_;
+				Standard_Integer theMaxFacetIdx_;
+				Standard_Integer theMaxElementIdx_;
 
 			public:
 
 				// default constructor [2/27/2023 Payvand]
 
 				meshData()
-					: theNbNodes_(0)
+					: theMaxNodeIdx_(0)
+					, theMaxEdgeIdx_(0)
+					, theMaxFacetIdx_(0)
+					, theMaxElementIdx_(0)
 				{}
 
 				// constructors [2/27/2023 Payvand]
@@ -313,8 +325,14 @@ namespace tnbLib
 
 				// Public functions and operators [2/27/2023 Payvand]
 
-				auto NbNodes() const { return theNbNodes_; }
-				auto& NbNodesRef() { return theNbNodes_; }
+				auto MaxNodeIdx() const { return theMaxNodeIdx_; }
+				auto& MaxNodeIdxRef() { return theMaxNodeIdx_; }
+				auto MaxEdgeIdx() const { return theMaxEdgeIdx_; }
+				auto& MaxEdgeIdxRef() { return theMaxEdgeIdx_; }
+				auto MaxFacetIdx() const { return theMaxFacetIdx_; }
+				auto& MaxFacetIdxRef() { return theMaxFacetIdx_; }
+				auto MaxElementIdx() const { return theMaxElementIdx_; }
+				auto& MaxElementIdxRef() { return theMaxElementIdx_; }
 
 				inline Standard_Integer NbElements() const;
 
@@ -322,6 +340,7 @@ namespace tnbLib
 
 				inline void Insert(const std::shared_ptr<Aft3d_Element>&);
 				inline void Insert(std::shared_ptr<Aft3d_Element>&&);
+				void Insert(const std::vector<std::shared_ptr<Aft3d_Element>>&) const;
 
 				inline void Remove(const std::shared_ptr<Aft3d_Element>&);
 
@@ -373,7 +392,7 @@ namespace tnbLib
 			/*Private Data*/
 
 			std::shared_ptr<Aft3d_GeoPrcsr> theMetricMap_;
-			std::shared_ptr<Geo_SearchTree<std::shared_ptr<Aft3d_Node>>> theEngine_;
+			std::shared_ptr<Geo_AdTree<std::shared_ptr<Aft3d_Node>>> theEngine_;
 			std::shared_ptr<Aft3d_NodeCalculator> theCoordCalculator_;
 
 			Standard_Integer theALLOWED_MAX_LEVEL_;
@@ -516,6 +535,7 @@ namespace tnbLib
 
 			const auto& MetricMap() const { return theMetricMap_; }
 			const auto& Engine() const { return theEngine_; }
+			auto& EngineRef() { return theEngine_; }
 			const auto& CoordCalculator() const { return theCoordCalculator_; }
 
 			void SetCoordCalculator(const std::shared_ptr<Aft3d_NodeCalculator>& theCalculator)
@@ -596,6 +616,7 @@ namespace tnbLib
 			);
 			TnbLegMesh_EXPORT void UpdateFront();
 			void InsertNewFrontsToLevels();
+			void CreateBoundary(const Entity3d_TopoTriangulation&);
 
 		public:
 
@@ -611,6 +632,7 @@ namespace tnbLib
 			// Public functions and operators [3/1/2023 Payvand]
 
 			void Perform();
+			void Import(const Entity3d_Triangulation& theVolume);
 
 
 			//- static functions and operators

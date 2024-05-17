@@ -384,6 +384,9 @@
     <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_ElementGeom.cxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Aft3d_Volume_CreateBoundary.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.hxx">
@@ -479,9 +482,6 @@
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor\Aft3d_EdgeAdaptor.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeoemtry.hxx">
-      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_Facet.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet</Filter>
     </ClInclude>
@@ -553,6 +553,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Tools\Aft3d_ToolsI.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeoemtry.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Aft3d_NodeI.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Aft3d_EdgeI.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_ElementI.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

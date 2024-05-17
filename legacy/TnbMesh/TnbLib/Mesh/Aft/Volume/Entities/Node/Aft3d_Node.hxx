@@ -79,6 +79,8 @@ namespace tnbLib
 	}
 }
 
+#include <Aft3d_NodeI.hxx>
+
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::legLib::Aft3d_Node);
 
 #endif // !_Aft3d_Node_Header

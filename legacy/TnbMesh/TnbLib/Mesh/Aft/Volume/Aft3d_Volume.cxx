@@ -5,7 +5,11 @@
 #include <Aft3d_Facet.hxx>
 #include <Aft3d_Edge.hxx>
 #include <Aft3d_Node.hxx>
+#include <Geo_AdTree.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo_BoxTools.hxx>
+#include <Entity3d_TopoTriangulation.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -653,6 +657,34 @@ void tnbLib::legLib::Aft3d_Volume::UpdateFront()
 	RemoveEntitiesFromGeometry();
 
 	RegisterElement();
+}
+
+void tnbLib::legLib::Aft3d_Volume::Import(const Entity3d_Triangulation& theVolume)
+{
+	auto topo_mesh = std::make_shared<Entity3d_TopoTriangulation>(theVolume);
+	Mesh.MaxNodeIdxRef() = theVolume.NbPoints();
+	Mesh.MaxEdgeIdxRef() = topo_mesh->NbSegments();
+	Mesh.MaxElementIdxRef() = theVolume.NbConnectivity();
+	Mesh.MaxElementIdxRef() = 0;
+
+	// Creating the boundaries
+	CreateBoundary(*topo_mesh);
+
+	// Retrieving the nodes
+	const auto nodes = Aft3d_Tools::RetrieveNodes(*theBoundary_);
+	// Retrieving the edges
+	auto edges = Aft3d_Tools::RetrieveEdges(*theBoundary_);
+	// computing the dimension of the region
+	const auto region = Geo_BoxTools::GetBox(Aft3d_Tools::RetriveGeometries(nodes), 0);
+	// Set searching the region
+	EngineRef() = std::make_shared<Geo_AdTree<std::shared_ptr<Aft3d_Node>>>();
+	Engine()->SetGeometryCoordFunc([](const std::shared_ptr<Aft3d_Node>& node)-> const Pnt3d& {return node->Coord(); });
+	Engine()->SetGeometryRegion(region.Expanded(region.Diameter() * 1.e-3));
+	// registering the nodes
+	Engine()->InsertToGeometry(nodes);
+	// creating the front
+	FrontHandler.InsertToFronts(*theBoundary_);
+	
 }
 
 Standard_Boolean 

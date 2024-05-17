@@ -16,6 +16,14 @@
 
 const Standard_Real tnbLib::legLib::Aft3d_VolumeCore::SIZE_TO_HIGHT_ELEMENT_COEFF = 0.866025404;
 
+void tnbLib::legLib::Aft3d_VolumeCore::meshData::Insert(const std::vector<std::shared_ptr<Aft3d_Element>>& theElements) const
+{
+	for (const auto& elm: theElements)
+	{
+		theElements_->insert(elm);
+	}
+}
+
 Standard_Boolean 
 tnbLib::legLib::Aft3d_VolumeCore::GetCurrent()
 {

@@ -58,6 +58,7 @@ namespace tnbLib
 				RetrieveNodes(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
 			static TnbLegMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Edge>>
 				RetrieveEdges(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
+			static std::vector<Pnt3d> RetriveGeometries(const std::vector<std::shared_ptr<Aft3d_Node>>&);
 		};
 	}
 }

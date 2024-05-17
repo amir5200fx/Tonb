@@ -24,6 +24,7 @@ namespace tnbLib
 		public:
 
 			enum { nbNodes = 2, id0 = 0, id1 = 1 };
+			typedef std::array<std::shared_ptr<Aft3d_Node>, nbNodes> Array2;
 
 		private:
 
@@ -92,6 +93,8 @@ namespace tnbLib
 		};
 	}
 }
+
+#include <Aft3d_EdgeI.hxx>
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::legLib::Aft3d_Edge);
 

@@ -150,6 +150,8 @@ namespace tnbLib
 	}
 }
 
+#include <Aft3d_ElementI.hxx>
+
 BOOST_CLASS_EXPORT_KEY(tnbLib::legLib::Aft3d_Element);
 
 #endif // !_Aft3d_Element_Header

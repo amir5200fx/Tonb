@@ -107,6 +107,27 @@ tnbLib::legLib::Aft3d_Facet::IsLeftSide
 	return Geo_Tools::IsPointLeftFacet_cgal(theCoord, p0, p1, p2);
 }
 
+Standard_Integer
+tnbLib::legLib::Aft3d_Facet::FindNodeId(const std::shared_ptr<Aft3d_Node>& theNode) const
+{
+	if (theNode IS_EQUAL Node0())
+	{
+		return 0;
+	}
+	if (theNode IS_EQUAL Node1())
+	{
+		return 1;
+	}
+	if (theNode IS_EQUAL Node2())
+	{
+		return 2;
+	}
+	FatalErrorIn(FunctionSIG) << endl
+		<< "the node doesn't belong to the facet." << endl
+		<< abort(FatalError);
+	return 0;
+}
+
 tnbLib::Pnt3d 
 tnbLib::legLib::Aft3d_Facet::CalcCentre() const
 {

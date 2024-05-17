@@ -33,6 +33,9 @@ namespace tnbLib
 				id2 = 2
 			};
 
+			typedef std::array<std::shared_ptr<Aft3d_Node>, nbNodes> NodeArray3;
+			typedef std::array<std::shared_ptr<Aft3d_Edge>, nbEdges> EdgeArray3;
+
 		private:
 
 			/*Private Data*/
@@ -117,6 +120,8 @@ namespace tnbLib
 
 			TnbLegMesh_EXPORT Standard_Boolean IsRightSide(const Pnt3d&) const;
 			TnbLegMesh_EXPORT Standard_Boolean IsLeftSide(const Pnt3d&) const;
+
+			TnbLegMesh_EXPORT Standard_Integer FindNodeId(const std::shared_ptr<Aft3d_Node>&) const;
 
 			TnbLegMesh_EXPORT virtual Standard_Boolean IsBoundary() const;
 			TnbLegMesh_EXPORT virtual Standard_Boolean IsInterior() const;
