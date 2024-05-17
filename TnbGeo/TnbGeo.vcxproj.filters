@@ -2685,6 +2685,9 @@
     <ClInclude Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.hxx">
       <Filter>TnbLib\Geo\Merge\Triangulation\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3451,6 +3454,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.cxx">
       <Filter>TnbLib\Geo\Merge\Triangulation\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

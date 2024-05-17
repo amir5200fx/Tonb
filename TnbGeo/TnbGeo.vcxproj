@@ -302,6 +302,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.hxx" />
@@ -750,6 +751,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.cxx" />
