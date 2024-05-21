@@ -616,14 +616,14 @@ namespace tnbLib
 			);
 			TnbLegMesh_EXPORT void UpdateFront();
 			void InsertNewFrontsToLevels();
-			void CreateBoundary(const Entity3d_TopoTriangulation&);
+			TnbLegMesh_EXPORT void CreateBoundary(const Entity3d_TopoTriangulation&);
 
 		public:
 
 			// default constructor [3/1/2023 Payvand]
 
 			Aft3d_Volume()
-			{}
+				= default;
 
 
 			// constructors [3/1/2023 Payvand]
@@ -632,7 +632,7 @@ namespace tnbLib
 			// Public functions and operators [3/1/2023 Payvand]
 
 			void Perform();
-			void Import(const Entity3d_Triangulation& theVolume);
+			TnbLegMesh_EXPORT void Import(const Entity3d_Triangulation& theVolume);
 
 
 			//- static functions and operators

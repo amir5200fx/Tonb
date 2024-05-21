@@ -661,7 +661,7 @@ void tnbLib::legLib::Aft3d_Volume::UpdateFront()
 
 void tnbLib::legLib::Aft3d_Volume::Import(const Entity3d_Triangulation& theVolume)
 {
-	auto topo_mesh = std::make_shared<Entity3d_TopoTriangulation>(theVolume);
+	const auto topo_mesh = std::make_shared<Entity3d_TopoTriangulation>(theVolume);
 	Mesh.MaxNodeIdxRef() = theVolume.NbPoints();
 	Mesh.MaxEdgeIdxRef() = topo_mesh->NbSegments();
 	Mesh.MaxElementIdxRef() = theVolume.NbConnectivity();
@@ -684,7 +684,8 @@ void tnbLib::legLib::Aft3d_Volume::Import(const Entity3d_Triangulation& theVolum
 	Engine()->InsertToGeometry(nodes);
 	// creating the front
 	FrontHandler.InsertToFronts(*theBoundary_);
-	
+	//.
+	// The triangulation has been successfully imported.
 }
 
 Standard_Boolean 
