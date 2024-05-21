@@ -1198,6 +1198,9 @@
     <Filter Include="TnbLib\Geo\Entities\CmpConnet\2d\Pentagon">
       <UniqueIdentifier>{7f463e4c-fab1-4675-8abc-f49ced418381}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\IO\csv">
+      <UniqueIdentifier>{67308bbf-4958-4a05-9282-6e5e304ba0a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2706,6 +2709,9 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_Pentagon.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\csv\Geo2dIO_CSV.hxx">
+      <Filter>TnbLib\IO\csv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3487,6 +3493,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_PentagonIO.cxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\csv\Geo2dIO_CSV.cxx">
+      <Filter>TnbLib\IO\csv</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
