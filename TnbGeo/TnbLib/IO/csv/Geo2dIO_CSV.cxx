@@ -68,7 +68,7 @@ void tnbLib::Geo2dIO_CSV::Write(const std::string& filename, const std::string& 
 
     for (const auto& coord : coordinates)
     {
-        file << coord.X() << "," << coord.Y() << endl;
+        file << coord.X() << "," << coord.Y() << "\n";
     }
 
     file.close();

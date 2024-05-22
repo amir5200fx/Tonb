@@ -2,7 +2,7 @@
 #ifndef _Geo2dIO_CSV_Header
 #define _Geo2dIO_CSV_Header
 
-#include <Pnt2d.hxx>  // Your library
+#include <Pnt2d.hxx>  
 
 #include <vector>
 #include <string>
@@ -46,7 +46,7 @@ namespace tnbLib
          * @param comments A string to store the comments from the file.
          * @param coordinates A vector to store the points from the file.
          */
-        void Read(const std::string& filename, std::string& comments, std::vector<Pnt2d>& coordinates);
+        TnbGeo_EXPORT void Read(const std::string& filename, std::string& comments, std::vector<Pnt2d>& coordinates);
 
         /**
          * @brief Writes points and comments to a CSV file.
@@ -54,7 +54,7 @@ namespace tnbLib
          * @param comments A string containing the comments to write.
          * @param coordinates A vector containing the points to write.
          */
-        void Write(const std::string& filename, const std::string& comments, const std::vector<Pnt2d>& coordinates);
+        TnbGeo_EXPORT void Write(const std::string& filename, const std::string& comments, const std::vector<Pnt2d>& coordinates);
     };
 
 }
