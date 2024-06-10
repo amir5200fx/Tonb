@@ -2200,6 +2200,12 @@ tnbLib::Cad_Tools::RetrieveFaces
 	return std::move(faces);
 }
 
+opencascade::handle<Geom_Surface>
+tnbLib::Cad_Tools::RetrieveGeometry(const TopoDS_Face& theFace)
+{
+	return BRep_Tool::Surface(theFace);
+}
+
 tnbLib::Entity2d_Metric1 
 tnbLib::Cad_Tools::CalcMetric
 (

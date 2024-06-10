@@ -357,6 +357,8 @@ namespace tnbLib
 				const TopoDS_Shape& theShape
 			);
 
+		static TnbCad_EXPORT Handle(Geom_Surface) RetrieveGeometry(const TopoDS_Face&);
+
 		static TnbCad_EXPORT std::vector<TopoDS_Edge>
 			RetrieveEdges
 			(
