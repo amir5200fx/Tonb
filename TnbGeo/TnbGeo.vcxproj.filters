@@ -1201,6 +1201,21 @@
     <Filter Include="TnbLib\IO\csv">
       <UniqueIdentifier>{67308bbf-4958-4a05-9282-6e5e304ba0a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilOffsets\NACA">
+      <UniqueIdentifier>{c7112f50-99e8-4cab-bc6f-588ec6efab72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilCloud">
+      <UniqueIdentifier>{80a0a157-0b5e-41ed-8252-0464fb694f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilCloud\MH">
+      <UniqueIdentifier>{0bb14c29-46fa-4ac8-91c4-9581a2aedcd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilCloud\S">
+      <UniqueIdentifier>{442b9b87-c080-4c8c-bc9e-3d6074fa04fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilCloud\NACA">
+      <UniqueIdentifier>{c278afa4-9101-4705-9705-aa23671b1b53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2712,6 +2727,9 @@
     <ClInclude Include="TnbLib\IO\csv\Geo2dIO_CSV.hxx">
       <Filter>TnbLib\IO\csv</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\AirfoilCloud\NACA\Geo_AirfoilCloud_Naca63618.hxx">
+      <Filter>TnbLib\Geo\AirfoilCloud\NACA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3496,6 +3514,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\IO\csv\Geo2dIO_CSV.cxx">
       <Filter>TnbLib\IO\csv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\AirfoilCloud\NACA\Geo_AirfoilCloud_Naca63618.cxx">
+      <Filter>TnbLib\Geo\AirfoilCloud\NACA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
