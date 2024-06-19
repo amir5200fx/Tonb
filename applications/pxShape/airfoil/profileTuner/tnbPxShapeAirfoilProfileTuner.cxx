@@ -701,7 +701,7 @@ int main(int argc, char* argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadFrame(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl
 				<< " - drawPntsPlt(string)" << endl
 				<< " - drawPolesPlt(string)" << endl << endl
