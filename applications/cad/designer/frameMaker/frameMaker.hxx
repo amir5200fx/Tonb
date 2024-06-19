@@ -125,6 +125,22 @@ namespace tnbLib
 		TnbFrameMaker_EXPORT fieldFun_t createRead_x(const fieldMaker_t& m, const coord_t& pt);
 		TnbFrameMaker_EXPORT fieldFun_t createRead_y(const fieldMaker_t& m, const coord_t& pt);
 		TnbFrameMaker_EXPORT fieldFun_t createLinearForm(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1, const par_t& t);
+		TnbFrameMaker_EXPORT fieldFun_t createAdd(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1);
+		TnbFrameMaker_EXPORT fieldFun_t createSubtract(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1);
+		TnbFrameMaker_EXPORT fieldFun_t createCross(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1);
+		TnbFrameMaker_EXPORT fieldFun_t createSubdivide(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1);
+		TnbFrameMaker_EXPORT fieldFun_t createSin(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createCos(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createTan(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createAsin(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createAcos(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createAtan(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createAbs(const fieldMaker_t& m, const fieldFun_t& f);
+		TnbFrameMaker_EXPORT fieldFun_t createSqrt(const fieldMaker_t& m, const fieldFun_t& f);
+
+		TnbFrameMaker_EXPORT fieldFun_t createMin(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1);
+		TnbFrameMaker_EXPORT fieldFun_t createMax(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1);
+
 		TnbFrameMaker_EXPORT fieldFun_t createExpr(const fieldMaker_t& m, const word& ex);
 
 		/* point maker methods*/

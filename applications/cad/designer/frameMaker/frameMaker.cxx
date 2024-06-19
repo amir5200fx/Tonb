@@ -522,6 +522,91 @@ tnbLib::appl::createLinearForm(const fieldMaker_t & m, const fieldFun_t & f0, co
 	return std::move(tt);
 }
 
+tnbLib::appl::fieldFun_t tnbLib::appl::createAdd(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1)
+{
+	auto t = m->SelectFieldFun(m->CreateAdd(f0, f1));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createSubtract(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1)
+{
+	auto t = m->SelectFieldFun(m->CreateSubtract(f0, f1));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createCross(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1)
+{
+	auto t = m->SelectFieldFun(m->CreateCross(f0, f1));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createSubdivide(const fieldMaker_t& m, const fieldFun_t& f0,
+	const fieldFun_t& f1)
+{
+	auto t = m->SelectFieldFun(m->CreateDivide(f0, f1));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createSin(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateSin(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createCos(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateCos(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createTan(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateTan(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createAsin(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateAsin(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createAcos(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateAcos(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createAtan(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateAtan(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createAbs(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateAbs(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createSqrt(const fieldMaker_t& m, const fieldFun_t& f)
+{
+	auto t = m->SelectFieldFun(m->CreateSqrt(f));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createMin(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1)
+{
+	auto t = m->SelectFieldFun(m->CreateMin(f0, f1));
+	return std::move(t);
+}
+
+tnbLib::appl::fieldFun_t tnbLib::appl::createMax(const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1)
+{
+	auto t = m->SelectFieldFun(m->CreateMax(f0, f1));
+	return std::move(t);
+}
+
 TypeName_APPL fieldFun_t tnbLib::appl::createExpr(const fieldMaker_t & m, const word & ex)
 {
 	auto t = m->SelectFieldFun(m->CreateExpression(ex));
