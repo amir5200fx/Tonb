@@ -478,6 +478,36 @@
     <Filter Include="TnbLib\SectPx\IO\Airfoil">
       <UniqueIdentifier>{0a23a048-6a81-41b4-81c4-6ec4007ba949}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\binaryOps\min">
+      <UniqueIdentifier>{af432706-894a-49eb-a2c6-37606309514d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\binaryOps\max">
+      <UniqueIdentifier>{ec0d15d9-b757-45fd-9ee5-bf480cd19973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\abs">
+      <UniqueIdentifier>{30b599de-04d3-4039-93eb-5bfa0b47af51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\sqrt">
+      <UniqueIdentifier>{df171c5f-da95-4878-b3d3-3f29702302ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\sin">
+      <UniqueIdentifier>{7cb522fe-b7e4-4a65-acab-e92535922b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\cos">
+      <UniqueIdentifier>{d949bad3-3fdc-467f-8eca-eda81cb7bfc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\tan">
+      <UniqueIdentifier>{5d0aba12-94ad-4fd6-935b-a23bc573a63f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\asin">
+      <UniqueIdentifier>{0a17ea04-842f-4110-abfe-27ee8c4e406d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\acos">
+      <UniqueIdentifier>{61bc37a7-39b4-4b6c-a64e-785f8bcb3623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FieldFun\unaryOps\atan">
+      <UniqueIdentifier>{949665cf-e38c-4216-9d74-7e2e895f3279}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -1058,6 +1088,36 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\IO\Airfoil\SectPxIO_Airfoil.hxx">
       <Filter>TnbLib\SectPx\IO\Airfoil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\min\SectPx_BinaryOpFieldFun_Min.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\min</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\max\SectPx_BinaryOpFieldFun_Max.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\max</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\abs\SectPx_UnaryOpFieldFun_Abs.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\abs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\sin\SectPx_UnaryOpFieldFun_Sin.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\sin</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\cos\SectPx_UnaryOpFieldFun_Cos.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\cos</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\tan\SectPx_UnaryOpFieldFun_Tan.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\tan</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\asin\SectPx_UnaryOpFieldFun_Asin.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\asin</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\acos\SectPx_UnaryOpFieldFun_Acos.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\acos</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\atan\SectPx_UnaryOpFieldFun_Atan.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\atan</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\sqrt\SectPx_UnaryOpFieldFun_Sqrt.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\sqrt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1789,6 +1849,66 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\IO\Airfoil\SectPxIO_Airfoil.cxx">
       <Filter>TnbLib\SectPx\IO\Airfoil</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\min\SectPx_BinaryOpFieldFun_Min.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\min</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\min\SectPx_BinaryOpFieldFun_MinIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\min</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\max\SectPx_BinaryOpFieldFun_Max.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\max</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\max\SectPx_BinaryOpFieldFun_MaxIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\max</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\abs\SectPx_UnaryOpFieldFun_Abs.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\abs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\abs\SectPx_UnaryOpFieldFun_AbsIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\abs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\sin\SectPx_UnaryOpFieldFun_Sin.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\sin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\sin\SectPx_UnaryOpFieldFun_SinIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\sin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\cos\SectPx_UnaryOpFieldFun_Cos.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\cos</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\cos\SectPx_UnaryOpFieldFun_CosIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\cos</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\tan\SectPx_UnaryOpFieldFun_Tan.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\tan</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\tan\SectPx_UnaryOpFieldFun_TanIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\tan</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\asin\SectPx_UnaryOpFieldFun_Asin.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\asin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\asin\SectPx_UnaryOpFieldFun_AsinIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\asin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\acos\SectPx_UnaryOpFieldFun_Acos.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\acos</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\acos\SectPx_UnaryOpFieldFun_AcosIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\acos</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\atan\SectPx_UnaryOpFieldFun_Atan.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\atan</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\atan\SectPx_UnaryOpFieldFun_AtanIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\atan</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\sqrt\SectPx_UnaryOpFieldFun_Sqrt.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\sqrt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\sqrt\SectPx_UnaryOpFieldFun_SqrtIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\sqrt</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

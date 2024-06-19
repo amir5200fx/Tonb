@@ -1,10 +1,12 @@
 #include <SectPx_GeoMap_Intersection.hxx>
 
-#include <Geo_Tools.hxx>
 #include <SectPx_Macros.hxx>
 #include <SectPx_Coord.hxx>
 #include <SectPx_ParTools.hxx>
 #include <SectPx_Par.hxx>
+#include <Geo_Tools.hxx>
+#include <Pnt2d.hxx>
+#include <Entity_Line.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -118,16 +120,27 @@ tnbLib::sectPxLib::GeoMap_Intersection::CalcCoord() const
 		const auto p1 = Q1()->Coord();
 
 		const auto pt = MEAN(p0, p1);
+		FatalErrorIn(FunctionSIG) << endl
+			<< "couldn't calculate the intersection point." << endl
+			<< " - the two lines are parallel!" << endl
+			<< abort(FatalError);
 		return std::move(pt);
 	}
 	else
 	{
 		const auto p0 = Q0()->Coord();
 		const auto p1 = Q1()->Coord();
-
+		Entity2d_Line l0(p0, dir0);
+		Entity2d_Line l1(p1, dir1);
 		const auto pt =
-			Geo_Tools::IntersectionTwoLines(p0, dir0, p1, dir1, 1.0e-6);
-		return std::move(pt);
+			Geo_Tools::Intersection_cgal(l0, l1);
+		if (NOT pt->IsPoint())
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "couldn't calculate the intersection point." << endl
+				<< abort(FatalError);
+		}
+		return std::dynamic_pointer_cast<Geo_Tools::PointIntersectEntity2d>(pt)->IntPnt;
 	}
 }
 

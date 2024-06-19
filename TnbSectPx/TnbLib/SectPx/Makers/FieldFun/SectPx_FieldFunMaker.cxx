@@ -228,6 +228,147 @@ tnbLib::maker::FieldFun::CreateLinearForm
 	return id;
 }
 
+Standard_Integer tnbLib::maker::FieldFun::CreateMin(const std::shared_ptr<SectPx_FieldFun>& theField0,
+	const std::shared_ptr<SectPx_FieldFun>& theField1) const
+{
+	const auto field = min(theField0, theField1);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateMax(const std::shared_ptr<SectPx_FieldFun>& theField0,
+	const std::shared_ptr<SectPx_FieldFun>& theField1) const
+{
+	const auto field = max(theField0, theField1);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateAdd(const std::shared_ptr<SectPx_FieldFun>& f0,
+	const std::shared_ptr<SectPx_FieldFun>& f1)
+{
+	const auto field = f0 + f1;
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateSubtract(const std::shared_ptr<SectPx_FieldFun>& f0,
+	const std::shared_ptr<SectPx_FieldFun>& f1)
+{
+	const auto field = f0 - f1;
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateCross(const std::shared_ptr<SectPx_FieldFun>& f0,
+	const std::shared_ptr<SectPx_FieldFun>& f1)
+{
+	const auto field = f0 * f1;
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateDivide(const std::shared_ptr<SectPx_FieldFun>& f0,
+	const std::shared_ptr<SectPx_FieldFun>& f1)
+{
+	if (std::abs(f1->Value()) <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "subdividing to zero has been detected." << endl
+			<< " - Field's name: " << endl
+			<< f1->Name() << endl
+			<< abort(FatalError);
+	}
+	const auto field = f0 / f1;
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateAbs(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = abs(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateSqrt(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = sqrt(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateSin(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = sin(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateCos(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = cos(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateTan(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = tan(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateAsin(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = asin(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateAcos(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = acos(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+Standard_Integer tnbLib::maker::FieldFun::CreateAtan(const std::shared_ptr<SectPx_FieldFun>& f)
+{
+	const auto field = atan(f);
+	Debug_Null_Pointer(field);
+	const auto id = Registry()->Import(field);
+	field->IsRegistered() = Standard_True;
+	return id;
+}
+
+
 std::vector<std::shared_ptr<tnbLib::SectPx_FieldFun>> 
 tnbLib::maker::FieldFun::RetrieveFieldFuns() const
 {

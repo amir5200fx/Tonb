@@ -126,6 +126,21 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_FieldFun>& f0,
 				const std::shared_ptr<SectPx_FieldFun>& f1
 				);
+
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> min(const std::shared_ptr<SectPx_FieldFun>& f0,
+			const std::shared_ptr<SectPx_FieldFun>& f1);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> max(const std::shared_ptr<SectPx_FieldFun>& f1,
+			const std::shared_ptr<SectPx_FieldFun>& f2);
+
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> sqrt(const std::shared_ptr<SectPx_FieldFun>&);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> abs(const std::shared_ptr<SectPx_FieldFun>&);
+
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> sin(const std::shared_ptr<SectPx_FieldFun>&);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> cos(const std::shared_ptr<SectPx_FieldFun>&);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> tan(const std::shared_ptr<SectPx_FieldFun>&);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> asin(const std::shared_ptr<SectPx_FieldFun>&);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> acos(const std::shared_ptr<SectPx_FieldFun>&);
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun> atan(const std::shared_ptr<SectPx_FieldFun>&);
 	};
 }
 
