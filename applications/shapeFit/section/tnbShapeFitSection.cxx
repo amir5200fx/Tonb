@@ -475,7 +475,7 @@ int main(int argc, char* argv[])
 		{
 			Info << endl;
 			Info << " This application is aimed to fit a parametric section to scatters." << endl
-				<< " - files: section, scatterMap" << endl;
+				<< " - files: section, scatters" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
