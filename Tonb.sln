@@ -1945,6 +1945,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stepReader", "stepReader", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbStepReader", "applications\cad\IO\stepReader\tnbStepReader.vcxproj", "{205B4688-45AA-49ED-B228-076AB911F7AB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbShapeFitAirfoilScatterMap", "applications\shapeFit\2d\airfoil\t1\scatterMap\tnbShapeFitAirfoilScatterMap\tnbShapeFitAirfoilScatterMap.vcxproj", "{09E4D1E0-E229-4F12-B0FC-B006B04F7816}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -8229,6 +8231,24 @@ Global
 		{205B4688-45AA-49ED-B228-076AB911F7AB}.Release|x64.Build.0 = Release|x64
 		{205B4688-45AA-49ED-B228-076AB911F7AB}.Release|x86.ActiveCfg = Release|Win32
 		{205B4688-45AA-49ED-B228-076AB911F7AB}.Release|x86.Build.0 = Release|Win32
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Debug|Any CPU.Build.0 = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Debug|x64.ActiveCfg = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Debug|x64.Build.0 = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Debug|x86.ActiveCfg = Debug|Win32
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Debug|x86.Build.0 = Debug|Win32
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.DebugNoCopy|Any CPU.ActiveCfg = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.DebugNoCopy|Any CPU.Build.0 = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.DebugNoCopy|x64.ActiveCfg = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.DebugNoCopy|x64.Build.0 = Debug|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.DebugNoCopy|x86.ActiveCfg = Debug|Win32
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.DebugNoCopy|x86.Build.0 = Debug|Win32
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Release|Any CPU.ActiveCfg = Release|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Release|Any CPU.Build.0 = Release|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Release|x64.ActiveCfg = Release|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Release|x64.Build.0 = Release|x64
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Release|x86.ActiveCfg = Release|Win32
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -9137,6 +9157,7 @@ Global
 		{A10DD97A-131D-4560-BD41-D978BBD50AEA} = {40E40106-446E-4B95-B566-D02CEE75C9B5}
 		{45354863-5845-4DF1-83F8-F0E3D8B0BF19} = {85AE83D7-54DF-4517-8AD9-019CB4ABC884}
 		{205B4688-45AA-49ED-B228-076AB911F7AB} = {45354863-5845-4DF1-83F8-F0E3D8B0BF19}
+		{09E4D1E0-E229-4F12-B0FC-B006B04F7816} = {70DF94E6-CDD4-435A-A42B-8534D3DC5D65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}

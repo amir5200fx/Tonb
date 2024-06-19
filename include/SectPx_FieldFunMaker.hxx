@@ -109,6 +109,26 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Par>& thePar
 				) const;
 
+			TnbSectPx_EXPORT Standard_Integer CreateMin(const std::shared_ptr<SectPx_FieldFun>& theField0,
+				const std::shared_ptr<SectPx_FieldFun>& theField1) const;
+			TnbSectPx_EXPORT Standard_Integer CreateMax(const std::shared_ptr<SectPx_FieldFun>& theField0,
+				const std::shared_ptr<SectPx_FieldFun>& theField1) const;
+
+			TnbSectPx_EXPORT Standard_Integer CreateAdd(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
+			TnbSectPx_EXPORT Standard_Integer CreateSubtract(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
+			TnbSectPx_EXPORT Standard_Integer CreateCross(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
+			TnbSectPx_EXPORT Standard_Integer CreateDivide(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
+
+			TnbSectPx_EXPORT Standard_Integer CreateAbs(const std::shared_ptr<SectPx_FieldFun>&);
+			TnbSectPx_EXPORT Standard_Integer CreateSqrt(const std::shared_ptr<SectPx_FieldFun>&);
+
+			TnbSectPx_EXPORT Standard_Integer CreateSin(const std::shared_ptr<SectPx_FieldFun>&);
+			TnbSectPx_EXPORT Standard_Integer CreateCos(const std::shared_ptr<SectPx_FieldFun>&);
+			TnbSectPx_EXPORT Standard_Integer CreateTan(const std::shared_ptr<SectPx_FieldFun>&);
+			TnbSectPx_EXPORT Standard_Integer CreateAsin(const std::shared_ptr<SectPx_FieldFun>&);
+			TnbSectPx_EXPORT Standard_Integer CreateAcos(const std::shared_ptr<SectPx_FieldFun>&);
+			TnbSectPx_EXPORT Standard_Integer CreateAtan(const std::shared_ptr<SectPx_FieldFun>&);
+
 			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_FieldFun>> RetrieveFieldFuns() const;
 		};
 	}
