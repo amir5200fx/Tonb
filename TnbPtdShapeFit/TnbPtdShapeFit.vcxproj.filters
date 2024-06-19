@@ -136,6 +136,9 @@
     <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1">
       <UniqueIdentifier>{8c15068e-63d5-4e12-bf1b-359a0c5790b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA">
+      <UniqueIdentifier>{3492a6e1-2f26-4f19-a651-aeaaa694f4cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdShapeFit\module\PtdShapeFit_Module.hxx">
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1.hxx">
       <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA\PtdShapeFit2d_AirfoilScatterMap_Naca63618.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +427,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1Shape.cxx">
       <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA\PtdShapeFit2d_AirfoilScatterMap_Naca63618.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA\PtdShapeFit2d_AirfoilScatterMap_Naca63618IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\NACA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
