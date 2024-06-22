@@ -7,14 +7,13 @@
 namespace tnbLib
 {
 
-	static const std::string saveExt = Geo3d_SizeFunction::extension;
-	static const std::string loadExt = Mesh3d_ReferenceValues::extension;
+	static const std::string save_ext = Geo3d_SizeFunction::extension;
 
 	static unsigned short verbose = 0;
 	static bool exeTag = false;
-	static bool loadTag = false;
+	static bool load_tag = false;
 
-	static std::shared_ptr<Mesh3d_ReferenceValues> myRef;
+	static std::shared_ptr<Mesh3d_ReferenceValues> my_ref;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
 
 	static const auto current_directory = "reference";
@@ -29,20 +28,20 @@ namespace tnbLib
 		}
 	}
 
-	void setVerbose(unsigned int i)
+	void set_verbose(unsigned int i)
 	{
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
 	}
 
-	void loadRefFile()
+	void load_ref_file()
 	{
-		myRef = 
+		my_ref = 
 			file::LoadSingleFile<std::shared_ptr<Mesh3d_ReferenceValues>>
 			(current_directory, Mesh3d_ReferenceValues::extension, verbose);
-		loadTag = true;
-		if (NOT myRef)
+		load_tag = true;
+		if (NOT my_ref)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no ref file has been loaded." << endl
@@ -50,25 +49,25 @@ namespace tnbLib
 		}
 	}
 
-	void loadRefFile(const std::string& name)
+	void load_ref_file(const std::string& name)
 	{
 		file::CheckExtension(name);
-		myRef = file::LoadFile<std::shared_ptr<Mesh3d_ReferenceValues>>
+		my_ref = file::LoadFile<std::shared_ptr<Mesh3d_ReferenceValues>>
 			(name + Mesh3d_ReferenceValues::extension, verbose);
-		if (NOT myRef)
+		if (NOT my_ref)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no ref file has been loaded." << endl
 				<< abort(FatalError);
 		}
-		loadTag = true;
+		load_tag = true;
 	}
 
-	void loadFile()
+	void load_file()
 	{
 		if (file::IsDirectory(current_directory))
 		{
-			loadRefFile();
+			load_ref_file();
 		}
 		else
 		{
@@ -78,11 +77,11 @@ namespace tnbLib
 					boost::filesystem::current_path(),
 					Mesh3d_ReferenceValues::extension
 				).string();
-			loadRefFile(name);
+			load_ref_file(name);
 		}
 	}
 
-	void saveTo(const std::string& name)
+	void save_to(const std::string& name)
 	{
 		if (NOT exeTag)
 		{
@@ -92,10 +91,10 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-		file::SaveTo(mySizeFun, name + saveExt, verbose);
+		file::SaveTo(mySizeFun, name + save_ext, verbose);
 	}
 
-	void saveTo()
+	void save_to()
 	{
 		if (NOT exeTag)
 		{
@@ -104,12 +103,12 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		saveTo(mySizeFun->Name());
+		save_to(mySizeFun->Name());
 	}
 
 	void execute(const std::string& name)
 	{
-		if (NOT loadTag)
+		if (NOT load_tag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no file has been loaded!" << endl
@@ -117,7 +116,7 @@ namespace tnbLib
 		}
 
 		mySizeFun = std::make_shared<GeoSizeFun3d_Uniform>
-			(0, name, myRef->BaseSize(), *myRef->Region());
+			(0, name, my_ref->BaseSize(), *my_ref->Region());
 
 		exeTag = true;
 
@@ -147,13 +146,13 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions [12/9/2021 Amir]
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadRefFile(name); }), "loadFile");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {load_file(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {load_ref_file(name); }), "load_file");
+		mod->add(chaiscript::fun([]()-> void {save_to(); }), "save_to");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {save_to(name); }), "save_to");
 
 		// settings [12/9/2021 Amir]
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {set_verbose(i); }), "set_verbose");
 
 		// operators [12/9/2021 Amir]
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
@@ -191,19 +190,20 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << " This application is aimed to create a uniform size map." << endl << endl;
+			Info << " - Requirements: A *." << Mesh3d_ReferenceValues::extension << " file must be loaded." << endl;
 
-			Info << " You can load the reference from 'reference' directory." << endl;
+			Info << " You can load the reference from " << current_directory << " directory." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_file(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+				<< " - set_verbose(unsigned int);               - Levels: 0, 1" << endl << endl
 
 				<< " # Operators:" << endl << endl
 
