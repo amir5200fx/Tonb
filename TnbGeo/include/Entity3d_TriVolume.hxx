@@ -3,6 +3,7 @@
 #define _Entity3d_TriVolume_Header
 
 #include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -22,6 +23,9 @@ namespace tnbLib
 		/*Private Data*/
 		OuterShell theOuter_;
 		InnerShells theInners_;
+
+		// Private functions and operators
+		TNB_SERIALIZATION(TnbGeo_EXPORT);
 	public:
 		// default constructor
 		// Entity3d_TriVolume() = default;

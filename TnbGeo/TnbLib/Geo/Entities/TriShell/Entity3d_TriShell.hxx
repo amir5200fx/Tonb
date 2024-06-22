@@ -15,7 +15,13 @@ namespace tnbLib
 		std::vector<connectivity::triple> theElements_;
 
 		// Private functions and operators
-		
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_veraion*/)
+		{
+			ar& theCoords_;
+			ar& theElements_;
+		}
 	public:
 		// default constructor
 		Entity3d_TriShell() = default;
