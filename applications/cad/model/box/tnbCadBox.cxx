@@ -117,27 +117,27 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
 
 		//- settings
 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 
 
 		//- functions
 
-		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Pnt3d(x, y, z); }), "createPoint");
-		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Dir3d(x, y, z); }), "createDirection");
-		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& N, const Dir3d& Vx)-> auto {return gp_Ax2(pt, N, Vx); }), "createCoordinateSystem");
-		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& V)-> auto {return gp_Ax2(pt, V); }), "createCoordinateSystem");
+		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Pnt3d(x, y, z); }), "make_pnt");
+		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Dir3d(x, y, z); }), "make_dir");
+		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& N, const Dir3d& Vx)-> auto {return gp_Ax2(pt, N, Vx); }), "make_oxy");
+		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& V)-> auto {return gp_Ax2(pt, V); }), "make_oxy");
 
-		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1)-> void {makeBox(p0, p1); }), "makeBox");
-		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1, const std::string& name)-> void {makeBox(p0, p1, name); }), "makeBox");
-		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz)-> void {makeBox(p0, dx, dy, dz); }), "makeBox");
-		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)-> void {makeBox(p0, dx, dy, dz, name); }), "makeBox");
-		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz)-> void {makeBox(ax, dx, dy, dz); }), "makeBox");
-		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)-> void {makeBox(ax, dx, dy, dz, name); }), "makeBox");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1)-> void {makeBox(p0, p1); }), "make_box");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1, const std::string& name)-> void {makeBox(p0, p1, name); }), "make_box");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz)-> void {makeBox(p0, dx, dy, dz); }), "make_box");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)-> void {makeBox(p0, dx, dy, dz, name); }), "make_box");
+		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz)-> void {makeBox(ax, dx, dy, dz); }), "make_box");
+		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)-> void {makeBox(ax, dx, dy, dz, name); }), "make_box");
 	}
 
 	std::string getString(char* argv)
@@ -171,25 +171,25 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create a box." << endl;
+			Info << " This application is aimed to make a box." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # I/O functions: " << endl << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
-				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+				<< " - set_verbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
 				<< " # functions: " << endl << endl
-				<< " - [Point] createPoint(double, double, double)" << endl
-				<< " - [Direction] createDirection(double, double, double)" << endl
-				<< " - [Ax] createCoordinateSystem(Point, main Direction, x-Direction)" << endl
-				<< " - [Ax] createCoordinateSystem(Point, main Direction);     - x- and y-direction are defined automatically." << endl
+				<< " - [Point] make_pnt(double, double, double)" << endl
+				<< " - [Direction] make_dir(double, double, double)" << endl
+				<< " - [OXY] make_oxy(Point, main Direction, x-Direction)" << endl
+				<< " - [OXY] make_oxy(Point, main Direction);     - x- and y-direction are defined automatically." << endl
 				<< endl
-				<< " - makeBox(Point, Point, name [optional])" << endl
-				<< " - makeBox(Point, dx, dy, dz, name [optional])" << endl
-				<< " - makeBox(Ax, dx, dy, dz, name [optional])" << endl
+				<< " - make_box(Pnt, Pnt, name [optional])" << endl
+				<< " - make_box(Pnt, dx, dy, dz, name [optional])" << endl
+				<< " - make_box(OXY, dx, dy, dz, name [optional])" << endl
 				<< endl;
 			return 0;
 		}
