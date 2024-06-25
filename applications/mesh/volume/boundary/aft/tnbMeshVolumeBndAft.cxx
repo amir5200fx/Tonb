@@ -62,12 +62,10 @@ namespace tnbLib
 	static bool loadTag = false;
 	static bool exeTag = false;
 
-	static auto my_curve_approx_info = std::make_shared<Geo_ApprxCurve_Info>();
+	// Loading objects
+	static std::shared_ptr<Mesh_Curve_Info> my_curve_info;
+	static std::shared_ptr<Aft_MetricPrcsrAnIso_Info> my_metric_info;
 	static std::shared_ptr<Geo3d_SizeFunction> my_size_fun;
-	static auto my_laplacian_smooth_info = std::make_shared<MeshPost_LaplacianSmoothing_Info>();
-	static bool do_smoothing = true;
-	static int smooth_nb_iters = 4;
-	static double smooth_ur = 0.85;
 
 	static double my_tol = 1.0e-5;
 	static double my_coeff = 0.3;
@@ -98,166 +96,422 @@ namespace tnbLib
 				<< " - the tolerance is set to: " << my_tol << endl;
 		}
 	}
-
+	//==========================================================================================
+	// Smoothing settings
+	//==========================================================================================
+	static auto my_laplacian_smooth_info = std::make_shared<MeshPost_LaplacianSmoothing_Info>();
 	RunTimeConfigs(Smoothing);
+	static const int SMOOTH_DEFAULT_NB_ITERS = 4;
+	static const double SMOOTH_DEFAULT_UR = 0.85;
+	static const bool SMOOTH_DEFAULT_APPLY = true;
 	SetRunTimeConfigs(Smoothing)
 	{
-		my_laplacian_smooth_info->SetNbLevels(smooth_nb_iters);
-		my_laplacian_smooth_info->SetUnderRelaxation(smooth_ur);
+		my_laplacian_smooth_info->SetNbLevels(SMOOTH_DEFAULT_NB_ITERS);
+		my_laplacian_smooth_info->SetUnderRelaxation(SMOOTH_DEFAULT_UR);
+	}
+	struct SmoothConfig
+	{
+		std::shared_ptr<MeshPost_LaplacianSmoothing_Info> config;
+		bool apply = SMOOTH_DEFAULT_APPLY;
+	};
+	static const auto my_smoothing_config = std::make_shared<SmoothConfig>(SmoothConfig{ my_laplacian_smooth_info, SMOOTH_DEFAULT_APPLY });
+	auto get_smooth_config()
+	{
+		return *my_smoothing_config;
+	}
+	//
+	void set_nb_iters(const SmoothConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - SmoothConfig.NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetNbLevels(n);
 	}
 
-	static auto integ_info = std::make_shared<NumAlg_AdaptiveInteg_Info>();
-	RunTimeConfigs(AdaptInteg);
-	SetRunTimeConfigs(AdaptInteg)
+	void set_ur(const SmoothConfig& config, double ur)
 	{
-		integ_info->SetMaxNbIterations(200);
-		integ_info->SetNbInitIterations(4);
-		integ_info->SetTolerance(1.0e-5);
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - SmoothConfig.UR is set to: " << ur << "\n";
+		}
+		config.config->SetUnderRelaxation(ur);
 	}
 
-	static auto iter_info = std::make_shared<Aft_SizeCorr_IterativeInfo>();
-	RunTimeConfigs(Iter);
-	SetRunTimeConfigs(Iter)
+	void set_apply(const SmoothConfig& config, bool apply)
 	{
-		iter_info->SetIgnoreNonConvergency(Standard_True);
-		iter_info->SetMaxNbIters(100);  // default: 30 [5/24/2022 Amir]
-		iter_info->SetTolerance(1.0E-5);  // default: 1.0E-3 [5/24/2022 Amir]
-		iter_info->SetUnderRelaxation(0.85);  // default: 0.85 [5/24/2022 Amir]
-	}
-
-	auto metric_prcsr_info = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
-	RunTimeConfigs(Metrics);
-	SetRunTimeConfigs(Metrics)
-	{
-		metric_prcsr_info->SetNbIters(5);  // default: 5 [5/24/2022 Amir]
-		metric_prcsr_info->SetNbSamples(3);  // default: 3 [5/24/2022 Amir]
-		metric_prcsr_info->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - SmoothConfig.APPLY is set to: " << (apply ? "TRUE" : "FALSE") << "\n";
+		}
 	}
 
 	static double my_degen_crit = 1.0e-6;
+	// ========================================================
+	// the edges mesh configs
+	// ========================================================
+	static double EDGE_MESH_CONFIG_MERG_TOL = 1.0E-6;
+	struct EdgeMeshConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info> config;
+		double tol = EDGE_MESH_CONFIG_MERG_TOL;
+	};
+
+	static auto my_edge_mesh_config = std::make_shared<EdgeMeshConfig>(EdgeMeshConfig{my_curve_info, EDGE_MESH_CONFIG_MERG_TOL});
+
+	auto get_edge_config()
+	{
+		return *my_edge_mesh_config;
+	}
+
+	//.
+	//* The curve overall length calculation settings
+	//.
+	struct EdgeMeshOverallLenConfig
+	{
+		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+	};
+	//- getting the curve overall length calculation settings
+	auto get_edge_mesh_overall_len_config()
+	{
+		return EdgeMeshOverallLenConfig{ my_edge_mesh_config->config->OverallLengthIntgInfo() };
+	}
+	//.
+	//* The integral settings of the curve discretization algorithm
+	//.
+	struct EdgeMeshIntegConfig
+	{
+		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+	};
+	//- getting the integral settings of the curve discretization algorithm
+	auto get_edge_mesh_integ_config()
+	{
+		return EdgeMeshIntegConfig{ my_edge_mesh_config->config->NewtonIntgInfo() };
+	}
+	//.
+	//* The iteration settings of the curve discretization algorithm
+	//.
+	struct EdgeMeshIterConfig
+	{
+		std::shared_ptr<NumAlg_NewtonSolver_Info> config;
+	};
+	//- getting the iteration settings of the curve discretization algorithm
+	auto get_edge_mesh_iter_config()
+	{
+		return EdgeMeshIterConfig{ my_edge_mesh_config->config->NewtonIterInfo() };
+	}
+	//.
+	//* The correction settings of the curve discretization algorithm
+	//.
+	struct EdgeMeshCorrConfig
+	{
+		std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info> config;
+	};
+	//- getting the corrections settings of the curve discretization algorithm
+	auto get_edge_mesh_corr_config()
+	{
+		return EdgeMeshCorrConfig{ my_edge_mesh_config->config->CorrAlgInfo() };
+	}
+
+	void set_max_nb_iters(const EdgeMeshOverallLenConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.OverallLen.MAX_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetMaxNbIterations(n);
+	}
+
+	void set_init_nb_iters(const EdgeMeshOverallLenConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.OverallLen.INIT_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetNbInitIterations(n);
+	}
+
+	void set_tol(const EdgeMeshOverallLenConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.OverallLen.TOL is set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	void set_max_nb_iters(const EdgeMeshIntegConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Integ.MAX_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetMaxNbIterations(n);
+	}
+
+	void set_init_nb_iters(const EdgeMeshIntegConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Integ.INIT_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetNbInitIterations(n);
+	}
+
+	void set_tol(const EdgeMeshIntegConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Integ.TOL is set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	void set_max_nb_iters(const EdgeMeshIterConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Iter.MAX_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetMaxIterations(n);
+	}
+
+	void set_small(const EdgeMeshIterConfig& config, double x)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Iter.SMALL is set to: " << x << "\n";
+		}
+		config.config->SetSmall(x);
+	}
+
+	void set_zero(const EdgeMeshIterConfig& config, double x)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Iter.ZERO is set to: " << x << "\n";
+		}
+		config.config->SetZero(x);
+	}
+
+	void set_tol(const EdgeMeshIterConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Iter.TOL is set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	void set_ur(const EdgeMeshIterConfig& config, double ur)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Iter.UR is set to: " << ur << "\n";
+		}
+		config.config->SetUnderRelaxation(ur);
+	}
+
+	void set_max_lev(const EdgeMeshCorrConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Corr.MAX_LEV is set to: " << n << "\n";
+		}
+		config.config->SetMaxLevel(n);
+	}
+
+	void set_tol(const EdgeMeshCorrConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Corr.TOL is set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	void set_ur(const EdgeMeshCorrConfig& config, double ur)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Corr.UR is set to: " << ur << "\n";
+		}
+		config.config->SetUnderRelaxation(ur);
+	}
+	// =================================================================================
+	// Metric config
+	// =================================================================================
+	//
+	//.
+	// The metric settings
+	struct MetricConfig
+	{
+		std::shared_ptr<Aft_MetricPrcsrAnIso_Info> config;
+	};
+	static std::shared_ptr<Aft_MetricPrcsrAnIso_Info> my_metric_config;
+	//- getting the metric settings
+	auto get_metric_config()
+	{
+		return MetricConfig{ my_metric_config };
+	}
+	// The metric integration settings
+	struct MetricIntegConfig
+	{
+		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+	};
+	// getting the metric integration settings
+	auto get_metric_integ_config()
+	{
+		return MetricIntegConfig{ my_metric_config->IntegInfo() };
+	}
 
 	// the metrics settings
-	void setNbIters(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)
+	void set_tol(const MetricConfig& config, double tol)
 	{
-		info->SetNbIters(n);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the nb. of metrics_iterations is set to: " << info->NbIters() << endl;
+			Info << "\n"
+				<< " - MetricConfig.TOL is set to: " << tol << "\n";
 		}
+		config.config->SetTolerance(tol);
 	}
 
-	void setNbSamples(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)
+	void set_nb_iters(const MetricConfig& config, int n)
 	{
-		info->SetNbSamples(n);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the metrics_nb_samples is set to: " << info->NbSamples() << endl;
+			Info << "\n"
+				<< " - MetricConfig.NB_ITERS is set to: " << n << "\n";
 		}
+		config.config->SetNbIters(n);
 	}
 
-	void setTolerance(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, double x)
+	void set_nb_samples(const MetricConfig& config, int n)
 	{
-		info->SetTolerance(x);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the metrics_tolerance is set to: " << info->Tolerance() << endl;
+			Info << "\n"
+				<< " - MetricConfig.NB_SAMPLES is set to: " << n << "\n";
 		}
+		config.config->SetNbSamples(n);
 	}
 
+	void set_max_nb_iters(const MetricIntegConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - MetricConfig.Integ.MAX_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetMaxNbIterations(n);
+	}
+
+	void set_tol(const MetricIntegConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - MetricConfig.Integ.TOL is set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	void set_init_nb_iters(const MetricIntegConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - MetricConfig.Integ.INIT_NB_ITERS is set to: " << n << "\n";
+		}
+		config.config->SetNbInitIterations(n);
+	}
+
+	//.
+	// ===================================================================
+	// The node calculator algorithm
+	// ===================================================================
+	//.
+	static auto my_size_corr = std::make_shared<Aft_SizeCorr_IterativeInfo>();
+	RunTimeConfigs(Iter);
+	static const bool SIZE_CORR_DEFAULT_IGNORE_CONV = true;
+	static const int SIZE_CORR_DEFAULT_MAX_NB_ITERS = 100;
+	static const double SIZE_CORR_DEFAULT_TOL = 1.E-5;
+	static const double SIZE_CORR_DEFAULT_UR = 0.85;
+	SetRunTimeConfigs(Iter)
+	{
+		my_size_corr->SetIgnoreNonConvergency(SIZE_CORR_DEFAULT_IGNORE_CONV);
+		my_size_corr->SetMaxNbIters(SIZE_CORR_DEFAULT_MAX_NB_ITERS);  // default: 30 [5/24/2022 Amir]
+		my_size_corr->SetTolerance(SIZE_CORR_DEFAULT_TOL);  // default: 1.0E-3 [5/24/2022 Amir]
+		my_size_corr->SetUnderRelaxation(SIZE_CORR_DEFAULT_UR);  // default: 0.85 [5/24/2022 Amir]
+	}
+	//* the optimum node generator
+	static const int OPT_NODE_GEN_DEFAULT_MAX_SUB_LEV = 5;
+	struct OptNodeGenConfig
+	{
+		std::shared_ptr<Aft_SizeCorr_IterativeInfo> config;
+		int max_sub_lev = OPT_NODE_GEN_DEFAULT_MAX_SUB_LEV;
+	};
+	static const auto my_node_gen_config = std::make_shared<OptNodeGenConfig>(OptNodeGenConfig{ my_size_corr, OPT_NODE_GEN_DEFAULT_MAX_SUB_LEV });
+	auto get_node_gen_config()
+	{
+		return *my_node_gen_config;
+	}
 	// the iteration settings
-	void ignoreNonConvergency(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info)
+	void set_conv_condition(const OptNodeGenConfig& config, bool condition)
 	{
-		info->SetIgnoreNonConvergency(Standard_True);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the correction metric non-convergency is set to: TRUE" << endl;
+			Info << "\n"
+				<< " - NodeGenConfig.CONV is set to: " << condition << "\n";
 		}
+		config.config->SetIgnoreNonConvergency(condition);
 	}
 
-	void setMaxIters(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, int n)
+	void set_max_nb_iters(const OptNodeGenConfig& config, int n)
 	{
-		info->SetMaxNbIters(n);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the max. nb. of iterations is set to: " << info->MaxNbIters() << endl;
+			Info << "\n"
+				<< " - NodeGenConfig.MAX_NB_ITERS is set to: " << n << "\n";
 		}
+		config.config->SetMaxNbIters(n);
 	}
 
-	void setTolerance(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)
+	void set_tol(const OptNodeGenConfig& config, double tol)
 	{
-		info->SetTolerance(x);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the tolerance is set to: " << info->Tolerance() << endl;
+			Info << "\n"
+				<< " - NodeGenConfig.TOL is set to: " << tol << "\n";
 		}
+		config.config->SetTolerance(tol);
 	}
 
-	void setUnderRelaxation(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)
+	void set_ur(const OptNodeGenConfig& config, double ur)
 	{
-		info->SetUnderRelaxation(x);
 		if (verbose)
 		{
-			Info << endl
-				<< " - the under relaxation is set to: " << info->UnderRelaxation() << endl;
+			Info << "\n"
+				<< " - NodeGenConfig.UR is set to: " << ur << "\n";
 		}
-	}
-
-	// the integration settings
-	void set_max_iterations(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)
-	{
-		info->SetMaxNbIterations(n);
-		if (verbose)
-		{
-			Info << endl
-				<< " - the integ_mx_nb_iters is set to: " << info->MaxNbIterations() << endl;
-		}
-	}
-
-	void set_nb_initial_iterations(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)
-	{
-		info->SetNbInitIterations(n);
-		if (verbose)
-		{
-			Info << endl
-				<< " - the integ_intial_nb_iterations is set to: " << info->NbInitIterations() << endl;
-		}
-	}
-
-	void set_tolerance(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, double x)
-	{
-		info->SetTolerance(x);
-		if (verbose)
-		{
-			Info << endl
-				<< " - the integ_tol is set to: " << info->Tolerance() << endl;
-		}
-	}
-
-	// the smoothing settings
-	void set_smooth_nb_iters(const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& smoothing, int nb_iters)
-	{
-		smoothing->SetNbLevels(nb_iters);
-		if (verbose)
-		{
-			Info << endl
-				<< " - the smooth_nb_iters is set to: " << smoothing->NbLevels() << endl;
-		}
-	}
-
-	void set_smooth_ur(const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& smoothing, double x)
-	{
-		smoothing->SetUnderRelaxation(x);
-		if (verbose)
-		{
-			Info << endl
-				<< " - the smooth_ur is set to: " << smoothing->UnderRelaxation() << endl;
-		}
+		config.config->SetUnderRelaxation(ur);
 	}
 
 	void loadFile(const std::string& name)
@@ -392,7 +646,7 @@ namespace tnbLib
 		smoothing_alg->SetInfo(my_laplacian_smooth_info);
 		smoothing_alg->SetNodes(nodes);
 
-		if (do_smoothing)
+		if (my_smoothing_config->apply)
 		{
 			smoothing_alg->Perform();
 		}
@@ -446,7 +700,7 @@ namespace tnbLib
 		smoothing_alg->SetInfo(my_laplacian_smooth_info);
 		smoothing_alg->SetNodes(nodes);
 
-		if (do_smoothing)
+		if (my_smoothing_config->apply)
 		{
 			smoothing_alg->Perform();
 		}
@@ -781,15 +1035,14 @@ namespace tnbLib
 		bisectInfo->SetMaxIterations(20);*/
 
 		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_SubTri>();
-		anIsoOptNode_altrAlg->SetSizeCorrInfo(iter_info);
+		anIsoOptNode_altrAlg->SetSizeCorrInfo(my_size_corr);
 		anIsoOptNode_altrAlg->SetNealderMeadInfo(nelderInfo);
-		anIsoOptNode_altrAlg->SetMaxLev(3);
+		anIsoOptNode_altrAlg->SetMaxLev(my_node_gen_config->max_sub_lev);
 
-		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, iter_info);
+		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, my_size_corr);
 		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Standard>(iterInfo);
 
-		metric_prcsr_info->OverrideIntegInfo(integ_info);
-		my_solu_data->CurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
+		//my_solu_data->CurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
 
 		/*const auto& overallLenInfo = mySoluData->GlobalCurveInfo()->OverallLengthIntgInfo();
 		overallLenInfo->SetTolerance(1.0E-8);
@@ -804,7 +1057,7 @@ namespace tnbLib
 		bndInfo->SetOverrideInfo(Standard_False);
 		bndInfo->OverrideGlobalCurve(my_solu_data->CurveInfo());
 		bndInfo->SetMergeTolerance(1.0E-6);
-		bndInfo->OverrideGlobalMetricPrcsr(metric_prcsr_info);
+		bndInfo->OverrideGlobalMetricPrcsr(my_solu_data->MetricProcessorInfo());
 
 		my_solu_data->TrisRef().clear();
 
@@ -869,7 +1122,7 @@ namespace tnbLib
 
 			try
 			{
-				auto [plnMesh, bMesh] = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metric_prcsr_info);
+				auto [plnMesh, bMesh] = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, my_solu_data->MetricProcessorInfo());
 
 				/*for (const auto& ibMesh : bMesh)
 				{
@@ -948,34 +1201,57 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "load_file");
 
-		// settings 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](bool cond)-> void {do_smoothing = cond; }), "doSmoothing");
-		mod->add(chaiscript::fun([](const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& i, int nb_iters) ->void {set_smooth_nb_iters(i, nb_iters); }), "setNbIterations");
-		mod->add(chaiscript::fun([](const std::shared_ptr<MeshPost_LaplacianSmoothing_Info>& i, double x)->void {set_smooth_ur(i, x); }), "setUnderRelaxation");
+		// settings
 
-		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)->void {set_max_iterations(info, n); }), "setMaxNbIterations");
-		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, int n)->void {set_nb_initial_iterations(info, n); }), "setNbInitialIterations");
-		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& info, double x)->void {set_tolerance(info, x); }), "setTolerance");
+		// The smoothing algorithm's settings
+		mod->add(chaiscript::fun([](const SmoothConfig& config, int n)-> void {set_nb_iters(config, n); }), "set_nb_iters");
+		mod->add(chaiscript::fun([](const SmoothConfig& config, double ur)->void {set_ur(config, ur); }), "set_ur");
+		mod->add(chaiscript::fun([](const SmoothConfig& config, bool apply)->void {set_apply(config, apply); }), "set_apply");
 
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info)-> void {ignoreNonConvergency(info); }), "ignoreNonConvergency");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, int n)-> void {setMaxIters(info, n); }), "setMaxNbIterations");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)->void {setTolerance(info, x); }), "setTolerance");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& info, double x)->void {setUnderRelaxation(info, x); }), "setUnderRelaxation");
+		// The edge mesh algorithm's settings
+		mod->add(chaiscript::fun([](const EdgeMeshOverallLenConfig& config, int n)->void {set_max_nb_iters(config, n); }), "set_max_nb_iters");
+		mod->add(chaiscript::fun([](const EdgeMeshOverallLenConfig& config, int n)-> void {set_init_nb_iters(config, n); }), "set_init_nb_iters");
+		mod->add(chaiscript::fun([](const EdgeMeshOverallLenConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
 
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)->void {setNbIters(info, n); }), "setTolerance");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, int n)->void {setNbSamples(info, n); }), "setNbSamples");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& info, double x)->void {setTolerance(info, x); }), "setTolerance");
+		mod->add(chaiscript::fun([](const EdgeMeshIntegConfig& config, int n)->void {set_max_nb_iters(config, n); }), "set_max_nb_iters");
+		mod->add(chaiscript::fun([](const EdgeMeshIntegConfig& config, int n)->void {set_init_nb_iters(config, n); }), "set_init_nb_iters");
+		mod->add(chaiscript::fun([](const EdgeMeshIntegConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+
+		mod->add(chaiscript::fun([](const EdgeMeshIterConfig& config, int n)->void {set_max_nb_iters(config, n); }), "set_max_nb_iters");
+		mod->add(chaiscript::fun([](const EdgeMeshIterConfig& config, double small)->void {set_small(config, small); }), "set_small");
+		mod->add(chaiscript::fun([](const EdgeMeshIterConfig& config, double zero)->void {set_zero(config, zero); }), "set_zero");
+		mod->add(chaiscript::fun([](const EdgeMeshIterConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+		mod->add(chaiscript::fun([](const EdgeMeshIterConfig& config, double ur)->void {set_ur(config, ur); }), "set_ur");
+
+		mod->add(chaiscript::fun([](const EdgeMeshCorrConfig& config, int n)->void {set_max_lev(config, n); }), "set_max_lev");
+		mod->add(chaiscript::fun([](const EdgeMeshCorrConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+		mod->add(chaiscript::fun([](const EdgeMeshCorrConfig& config, double ur)->void {set_ur(config, ur); }), "set_ur");
+
+		// The metric settings
+		mod->add(chaiscript::fun([](const MetricConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+		mod->add(chaiscript::fun([](const MetricConfig& config, int n)->void {set_nb_iters(config, n); }), "set_nb_iters");
+		mod->add(chaiscript::fun([](const MetricConfig& config, int n)->void {set_nb_samples(config, n); }), "set_nb_samples");
+		mod->add(chaiscript::fun([](const MetricIntegConfig& config, int n)->void {set_max_nb_iters(config, n); }), "set_max_nb_iters");
+		mod->add(chaiscript::fun([](const MetricIntegConfig& config, int n)->void {set_init_nb_iters(config, n); }), "set_init_nb_iters");
+		mod->add(chaiscript::fun([](const MetricIntegConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+
+		// The optimum node generator settings
+		mod->add(chaiscript::fun([](const OptNodeGenConfig& config, bool condition)->void {set_conv_condition(config, condition); }), "set_conv_conditon");
+		mod->add(chaiscript::fun([](const OptNodeGenConfig& config, int n)->void {set_max_nb_iters(config, n); }), "set_max_nb_iters");
+		mod->add(chaiscript::fun([](const OptNodeGenConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+		mod->add(chaiscript::fun([](const OptNodeGenConfig& config, double ur)->void {set_ur(config, ur); }), "set_ur");
+
 		// operators
-		mod->add(chaiscript::fun([]()->auto {return my_laplacian_smooth_info; }), "getSmoothAlg");
-		mod->add(chaiscript::fun([]()->auto {return metric_prcsr_info; }), "getMetrics");
-		mod->add(chaiscript::fun([]()-> auto {return integ_info; }), "getIntegAlg");
-		mod->add(chaiscript::fun([]()->auto {return iter_info; }), "getIterAlg");
+		mod->add(chaiscript::fun([]()->auto {return get_smooth_config(); }), "get_smooth_config");
+		mod->add(chaiscript::fun([]()->auto {return get_edge_config(); }), "get_edge_mesh_config");
+		mod->add(chaiscript::fun([]()->auto {return get_metric_config(); }), "get_metric_config");
+		mod->add(chaiscript::fun([]()->auto {return get_node_gen_config(); }), "get_node_gen_config");
+		
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 	}
 
