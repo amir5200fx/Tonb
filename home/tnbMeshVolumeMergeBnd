@@ -1,6 +1,7 @@
 set_verbose(1);
-//.
-// Load the file from the current directory
+
+set_tol(1.0e-6);
+
 load_file();
 
 execute();
