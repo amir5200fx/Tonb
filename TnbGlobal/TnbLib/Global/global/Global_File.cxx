@@ -233,6 +233,18 @@ tnbLib::file::GetSingleFile
 	return file.stem();
 }
 
+std::string tnbLib::file::Extension(const std::string& e)
+{
+	boost::filesystem::path p(e);
+	return p.extension().string();
+}
+
+std::string tnbLib::file::FileName(const std::string& e)
+{
+	boost::filesystem::path filePath(e);
+	return filePath.filename().string();
+}
+
 void tnbLib::file::CheckExtension(const std::string& e)
 {
 	boost::filesystem::path p(e);
