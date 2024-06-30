@@ -20,12 +20,12 @@ namespace tnbLib
 
 	class Mesh_Curve_Info
 	{
-
+	public:
 		typedef NumAlg_AdaptiveInteg_Info intgInfo;
 		typedef NumAlg_NewtonSolver_Info iterInfo;
 		typedef Mesh_CurveOptmPoint_Correction_Info corrInfo;
 		typedef NumAlg_BisectionSolver_Info bisectInfo;
-
+	private:
 		/*Private Data*/
 
 		Standard_Integer theLengthCalcMaxLevel_;
