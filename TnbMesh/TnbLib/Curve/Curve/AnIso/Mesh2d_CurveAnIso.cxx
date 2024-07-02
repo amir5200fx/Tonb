@@ -63,6 +63,51 @@ tnbLib::Mesh2d_CurveAnIso::Perform()
 	return curveLength;
 }
 
+template <>
+Standard_Real tnbLib::Mesh2d_CurveAnIso::NextParameter(const Standard_Real u0)
+{
+	if (NOT Geometry())
+	{
+		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+			<< "No curve has been loaded" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT MetricMap())
+	{
+		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+			<< "No sizeMap has been loaded" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Info())
+	{
+		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+			<< "No sizeMap has been loaded" << endl
+			<< abort(FatalError);
+	}
+	const auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
+	try
+	{
+		return CalcNextParameter(curveLength, u0);
+	}
+	catch (const meshLib::LengthCurveError& x)
+	{
+		try
+		{
+			return CalcNextParameter(x.length, u0);
+		}
+		catch (const meshLib::LengthCurveError&)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Cannot calculate the actual curve length: unexpected results have been came up!" << endl
+				<< abort(FatalError);
+			return 0.;
+		}
+	}
+	return 0;
+}
+
 template<>
 Standard_Real 
 tnbLib::Mesh2d_CurveAnIso::CalcNextParameter
