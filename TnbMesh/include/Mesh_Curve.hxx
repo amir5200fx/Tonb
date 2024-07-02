@@ -19,9 +19,9 @@ namespace tnbLib
 
 	class Mesh_Curve_Base
 	{
-
+	public:
 		typedef Mesh_Curve_Info info;
-
+	private:
 		/*Private Data*/
 
 		Standard_Real theFirstParameter_;
@@ -83,7 +83,7 @@ namespace tnbLib
 		: public Global_Done
 		, public Mesh_Curve_Base
 	{
-
+	public:
 		typedef typename meshCurveTraits::point_type<gCurveType, SavePars>::Point Point;
 		//typedef typename cascadeLib::pt_type_from_curve<gCurveType>::ptType Point;
 
@@ -92,7 +92,7 @@ namespace tnbLib
 		typedef Entity_Polygon<Point> chain;
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
 
-
+	private:
 		/*Private Data*/
 
 		Handle(gCurveType) theCurve_;
