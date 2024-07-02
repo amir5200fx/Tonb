@@ -108,6 +108,8 @@ namespace tnbLib
 		void MakeChain(const std::vector<Standard_Real>& theParameters);
 		void Discretize(const Standard_Real theLength);
 
+		Standard_Real CalcNextParameter(const Standard_Real theLength, const Standard_Real U0) const;
+
 		static Standard_Real
 			CalcNextParameter
 			(
@@ -187,6 +189,7 @@ namespace tnbLib
 
 		// return the curve length [7/14/2021 Amir]
 		Standard_Real Perform();
+		Standard_Real NextParameter(const Standard_Real u0);
 
 
 		Standard_Real 
