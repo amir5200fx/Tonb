@@ -4,6 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <GC_MakeSegment.hxx>
 #include <GeomAPI_Interpolate.hxx>
 #include <TColgp_HArray1OfPnt.hxx>
 #include <StdFail_NotDone.hxx>
@@ -45,6 +46,21 @@ tnbLib::Cad_CurveTools::Interpolation
 		FatalErrorIn(FunctionSIG)
 			<< "catch an exception in 'GeomAPI_Interpolate' algorithm" << endl
 			<< " message: " << f.GetMessageString() << endl;
+		return nullptr;
+	}
+}
+
+opencascade::handle<Geom_Curve>
+tnbLib::Cad_CurveTools::MakeSegment(const Pnt3d& theP0, const Pnt3d& theP1)
+{
+	GC_MakeSegment maker(theP0, theP1);
+	if (maker.IsDone())
+	{
+		const auto& geom = maker.Value();
+		return std::move(geom);
+	}
+	else
+	{
 		return nullptr;
 	}
 }
