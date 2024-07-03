@@ -5625,6 +5625,9 @@
     <ClInclude Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVol.hxx">
       <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\Volume\Aft3d_SolutionData.hxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7399,6 +7402,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVolIO.cxx">
       <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Aft3d_SolutionData.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Aft3d_SolutionDataIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
