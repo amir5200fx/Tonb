@@ -190,6 +190,15 @@
     <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior">
       <UniqueIdentifier>{0560957e-6c09-4452-a012-d7c3496642c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\SizeFun">
+      <UniqueIdentifier>{5401dea4-a2a4-4c0d-b9af-265502e2de0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\SizeFun\Uniform">
+      <UniqueIdentifier>{79c19492-40dc-46ad-8f79-784fd588bc77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\IO">
+      <UniqueIdentifier>{d1ae6f71-02db-4ee4-8f10-947fa5e1b051}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.cxx">
@@ -387,6 +396,27 @@
     <ClCompile Include="TnbLib\Mesh\Aft\Volume\Aft3d_Volume_CreateBoundary.cxx">
       <Filter>TnbLib\Mesh\Aft\Volume</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\SizeFun\Aft3d_SizeFun.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\SizeFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\SizeFun\Aft3d_SizeFunIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\SizeFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\SizeFun\Uniform\Aft3d_SizeFun_Uniform.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\SizeFun\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\SizeFun\Uniform\Aft3d_SizeFun_UniformIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\SizeFun\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\GeoPrcsr\Aft3d_GeoPrcsr.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\GeoPrcsr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\IO\Aft3d_SolutionData.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\IO\Aft3d_SolutionDataIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.hxx">
@@ -565,6 +595,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_ElementI.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\SizeFun\Aft3d_SizeFun.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\SizeFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\SizeFun\Uniform\Aft3d_SizeFun_Uniform.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\SizeFun\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\IO\Aft3d_SolutionData.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

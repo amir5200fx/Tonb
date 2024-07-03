@@ -21,46 +21,46 @@ tnbLib::legLib::Aft3d_Tools::CalcNormal
 	return std::move(n);
 }
 
-Standard_Boolean 
-tnbLib::legLib::Aft3d_Tools::IsForwardEdge
-(
-	const std::shared_ptr<Aft3d_Edge>& theEdge, 
-	const std::shared_ptr<Aft3d_Facet>& theFace
-)
-{
-	std::shared_ptr<Aft3d_Edge> e;
-	for (const auto& x : theFace->GetEdges())
-	{
-		if (theEdge IS_EQUAL x)
-		{
-			e = x;
-			break;
-		}
-	}
-	if (NOT e)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the edge doesn't belong to the face." << endl
-			<< abort(FatalError);
-	}
+//Standard_Boolean 
+//tnbLib::legLib::Aft3d_Tools::IsForwardEdge
+//(
+//	const std::shared_ptr<Aft3d_Edge>& theEdge, 
+//	const std::shared_ptr<Aft3d_Facet>& theFace
+//)
+//{
+//	std::shared_ptr<Aft3d_Edge> e;
+//	for (const auto& x : theFace->GetEdges())
+//	{
+//		if (theEdge IS_EQUAL x)
+//		{
+//			e = x;
+//			break;
+//		}
+//	}
+//	if (NOT e)
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the edge doesn't belong to the face." << endl
+//			<< abort(FatalError);
+//	}
+//
+//}
 
-}
-
-Standard_Real 
-tnbLib::legLib::Aft3d_Tools::CalcCommonEdgeAngle
-(
-	const Aft3d_Facet& theFace0, 
-	const Aft3d_Facet& theFace1
-)
-{
-	auto n0 = CalcNormal(theFace0).Normalized();
-	auto n1 = CalcNormal(theFace1).Normalized();
-
-	auto edge = CommonEdge(theFace0, theFace1);
-	Debug_Null_Pointer(edge);
-
-
-}
+//Standard_Real 
+//tnbLib::legLib::Aft3d_Tools::CalcCommonEdgeAngle
+//(
+//	const Aft3d_Facet& theFace0, 
+//	const Aft3d_Facet& theFace1
+//)
+//{
+//	auto n0 = CalcNormal(theFace0).Normalized();
+//	auto n1 = CalcNormal(theFace1).Normalized();
+//
+//	auto edge = CommonEdge(theFace0, theFace1);
+//	Debug_Null_Pointer(edge);
+//
+//
+//}
 
 tnbLib::Pnt3d 
 tnbLib::legLib::Aft3d_Tools::CalcTetrahedronVertex
@@ -140,4 +140,16 @@ tnbLib::legLib::Aft3d_Tools::RetrieveEdges
 	std::vector<std::shared_ptr<Aft3d_Edge>> edges;
 	std::copy(compact.begin(), compact.end(), std::back_inserter(edges));
 	return std::move(edges);
+}
+
+std::vector<tnbLib::Pnt3d> tnbLib::legLib::Aft3d_Tools::RetriveGeometries(
+	const std::vector<std::shared_ptr<Aft3d_Node>>& theNodes)
+{
+	std::vector<Pnt3d> coords;
+	coords.reserve(theNodes.size());
+	std::for_each(theNodes.begin(), theNodes.end(), [&coords](const std::shared_ptr<Aft3d_Node>& node)
+		{
+			coords.emplace_back(node->Coord());
+		});
+	return std::move(coords);
 }
