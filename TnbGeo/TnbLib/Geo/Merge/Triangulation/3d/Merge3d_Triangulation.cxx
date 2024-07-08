@@ -508,7 +508,7 @@ void tnbLib::Merge3d_Triangulation::Perform()
 	{
 		if (const auto father = node->Super().lock())
 		{// the boundary node
-			++nb_nodes;
+			//++nb_nodes;
 			if (father->MinId() == node->Index())
 			{
 				merged.insert({ node->Index(), {NodeStatus::alive, ++nb_nodes} });

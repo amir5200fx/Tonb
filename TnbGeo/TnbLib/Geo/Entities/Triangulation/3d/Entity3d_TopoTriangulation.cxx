@@ -204,12 +204,15 @@ namespace tnbLib
 			Standard_Integer nb_edges = 0;
 			Standard_Integer nb_elements = 0;
 			std::vector<std::shared_ptr<Element>> elements;
+			std::cout << "nodes' size: " << nodes.size() << std::endl;
+			int k = 0;
 			for (const auto& i: ids)
 			{
+				std::cout << "i = " << k++ << std::endl;
 				const auto v0 = Index_Of(i.Value(0));
 				const auto v1 = Index_Of(i.Value(1));
 				const auto v2 = Index_Of(i.Value(2));
-
+				std::cout << "v0 = " << v0 << ", v1 = " << v1 << ", v2 = " << v2 << "\n";
 				const auto& node0 = nodes.at(v0);
 				const auto& node1 = nodes.at(v1);
 				const auto& node2 = nodes.at(v2);
@@ -226,6 +229,7 @@ namespace tnbLib
 
 				elements.emplace_back(std::move(element));
 			}
+			std::cout << "finished\n";
 			return std::move(elements);
 		}
 
@@ -288,10 +292,15 @@ namespace tnbLib
 
 void tnbLib::Entity3d_TopoTriangulation::Construct(const Entity3d_Triangulation& theTriangulations)
 {
+	std::cout << "nodes\n";
 	const auto nodes = tnbLib::topoTriangulation::make_nodes(theTriangulations.Points());
+	std::cout << "elements\n";
 	const auto elements = topoTriangulation::make_elements(nodes, theTriangulations.Connectivity());
+	std::cout << "edges\n";
 	const auto edges = topoTriangulation::retrieve_edges(elements);
+	std::cout << "segments\n";
 	theSegments_ = topoTriangulation::make_segments(edges);
+	std::cout << "tas..\n";
 	theTAS_ = topoTriangulation::make_TAS(edges);
 }
 
