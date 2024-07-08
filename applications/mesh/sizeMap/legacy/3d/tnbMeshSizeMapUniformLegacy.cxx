@@ -1,68 +1,83 @@
-#include <Aft3d_Volume.hxx>
-#include <Aft3d_SolutionData.hxx>
+#include <Aft3d_SizeFun_Uniform.hxx>
+#include <Entity3d_Triangulation.hxx>
+#include <Geo_BoxTools.hxx>
+#include <Entity3d_Box.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
 {
+	static std::shared_ptr<legLib::Aft3d_SizeFun> my_size_fun;
+	static std::shared_ptr<Entity3d_Triangulation> my_model;
 	static unsigned int verbose = 0;
-	static bool exe_tag = false;
-	static std::string my_file_name;
-	static std::shared_ptr<legLib::Aft3d_SolutionData> my_solu_data;
-	static std::string extension = legLib::Aft3d_SolutionData::extension;
+	static double my_value = 0;
 
 	void set_verbose(unsigned int i)
 	{
 		Info << "\n"
-			<< " - The verbosity level has been set to: " << i << "\n";
+			<< " - VERBOSITY has been set to: " << i << "\n";
 		verbose = i;
 	}
 
-	void load_file(const std::string& name)
+	void set_value(double x)
 	{
-		file::CheckExtension(name);
-		my_solu_data = file::LoadFile<std::shared_ptr<legLib::Aft3d_SolutionData>>(name + extension, verbose);
-		my_file_name = name;
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - VALUE has been set to: " << x << "\n";
+		}
+		my_value = x;
 	}
 
-	void load_file()
+	void load_model(const std::string& name)
 	{
-		const auto name = file::GetSingleFile(boost::filesystem::current_path(), extension).string();
-		load_file(name);
+		file::CheckExtension(name);
+		my_model = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
+		if (NOT my_model)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " The model file contains no data." << endl
+				<< abort(FatalError);
+		}
 	}
 
 	void save_to(const std::string& name)
 	{
-		if (!exe_tag)
+		if (NOT my_size_fun)
 		{
 			FatalErrorIn(FunctionSIG) << endl
-				<< " The application has not been performed." << endl
+				<< " The application has been performed." << endl
 				<< abort(FatalError);
 		}
 		file::CheckExtension(name);
-		file::SaveTo(my_solu_data, name + extension, verbose);
-	}
-
-	void save_to()
-	{
-		save_to(my_file_name);
+		file::SaveTo(my_size_fun, name + legLib::Aft3d_SizeFun_Uniform::extension, verbose);
 	}
 
 	void execute()
 	{
-		if (!my_solu_data)
+		if (NOT my_model)
 		{
-			FatalErrorIn(FunctionSIG) << "\n"
-				<< "no solution data file has been loaded." << "\n"
+			FatalErrorIn(FunctionSIG) << endl
+				<< " No model has been loaded." << endl
 				<< abort(FatalError);
 		}
-		legLib::Aft3d_Volume::verbose = verbose - 1;
-		const auto bnd_mesh = my_solu_data->Surface();
-		auto alg = std::make_shared<legLib::Aft3d_Volume>();
-		alg->Import(*bnd_mesh);
-		
+		if (NOT my_value)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " No value has been assigned." << endl
+				<< abort(FatalError);
+		}
+		auto b = Geo_BoxTools::GetBox(my_model->Points(), 0);
+		b.Expand(b.Diameter() * 1.e-3);
+		my_size_fun = std::make_shared<legLib::Aft3d_SizeFun_Uniform>(std::make_shared<Entity3d_Box>(b), my_value);
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - The application has been successfully performed." << "\n";
+		}
 	}
+
 }
 
 #ifdef DebugInfo
@@ -78,13 +93,12 @@ namespace tnbLib
 	void set_functions(const module_t& mod)
 	{
 		// io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {load_file(name); }), "load_file");
-		mod->add(chaiscript::fun([]()->void {load_file(); }), "load_file");
-		mod->add(chaiscript::fun([](const std::string& name) ->void {save_to(name); }), "save_to");
-		mod->add(chaiscript::fun([]()->void {save_to(); }), "save_to");
+		mod->add(chaiscript::fun([](const std::string& name)->void {load_model(name); }), "load_model");
+		mod->add(chaiscript::fun([](const std::string& name)->void {save_to(name); }), "save_to");
 
 		// settings
 		mod->add(chaiscript::fun([](unsigned int i)->void {set_verbose(i); }), "set_verbose");
+		mod->add(chaiscript::fun([](double x)->void {set_value(x); }), "set_value");
 
 		// operators
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
@@ -121,18 +135,19 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to discrete a volume." << endl
+			Info << " This application is aimed to create a size function." << endl
 				<< endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - load_file(file_name);" << endl
+				<< " - load_model(file_name);          - surface mesh" << endl
 				<< " - save_to(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
+				<< " - set_value(x)" << endl
 				<< " - set_verbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
 				<< " # operators: " << endl << endl
@@ -154,7 +169,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName theFileName(file::GetSystemFile("tnbMeshVolumeAftLegacy"));
+				fileName theFileName(file::GetSystemFile("tnbMeshSizeMapUniformLegacy"));
 
 				chai.eval_file(theFileName);
 				return 0;

@@ -1,85 +1,62 @@
-#include <Entity3d_Triangulation.hxx> 
+#include <Entity3d_Triangulation.hxx>
 #include <Entity3d_Box.hxx>
-#include <TnbError.hxx>
 #include <Global_File.hxx>
-#include <OFstream.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
-
-#include <boost/filesystem.hpp>
 
 namespace tnbLib
 {
-
-	typedef std::shared_ptr<Entity3d_Triangulation> mesh_t;
-
+	static std::shared_ptr<Entity3d_Triangulation> my_tris;
 	static const std::string extension = Entity3d_Triangulation::extension;
+	static unsigned short verbose = 0;
+	static std::string my_file_name;
 
-	static unsigned short verbose(0);
-	static mesh_t myMesh;
-	static std::string myFileName;
-
-	static bool loadTag = false;
-
-	void setVerbose(unsigned int i)
+	void set_verbose(unsigned short i)
 	{
-		Info << endl;
-		Info << " - the verbosity level is set to: " << i << endl;
+		Info << "\n"
+			<< " - VERBOSE has been set to: " << i << "\n";
 		verbose = i;
 	}
 
-	void loadModel(const std::string& name)
+	void load_file(const std::string& name)
 	{
 		file::CheckExtension(name);
-
-		myMesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + extension, verbose);
-		if (NOT myMesh)
+		my_tris = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + extension, verbose);
+		if (NOT my_tris)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< " the loaded model is null" << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< " the loaded file contains no data!" << endl
 				<< abort(FatalError);
 		}
-
-		loadTag = true;
 	}
 
-	void loadModel()
+	void load_file()
 	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), extension);
-		myFileName = name.string();
-		loadModel(myFileName);
+		const auto name = file::GetSingleFile(boost::filesystem::current_path(), extension).string();
+		my_file_name = name;
+		load_file(my_file_name);
 	}
 
-	void exportTo(const std::string& name)
+	void save_to(const std::string& name)
 	{
-		if (NOT loadTag)
+		if (NOT my_tris)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no mesh has been loaded!" << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< "No mesh file has been loaded." << endl
 				<< abort(FatalError);
 		}
-
-		fileName fn(name + ".plt");
-		OFstream myFile(fn);
-
-		myMesh->ExportToPlt(myFile);
-
+		OFstream my_file(name + ".vtk");
+		my_tris->ExportToVtk(my_file);
 		if (verbose)
 		{
-			Info << endl
-				<< "- the file is saved in " << fn << ", successfully!" << endl;
+			Info << "\n"
+				<< " - The file is successfully saved as " << name << "\n";
 		}
 	}
 
-	void exportTo()
+	void save_to()
 	{
-		if (NOT loadTag)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no mesh has been loaded!" << endl
-				<< abort(FatalError);
-		}
-
-		exportTo(myFileName);
+		save_to(my_file_name);
 	}
 }
 
@@ -91,21 +68,17 @@ namespace tnbLib
 
 namespace tnbLib
 {
-
 	typedef std::shared_ptr<chaiscript::Module> module_t;
-
-	void setFunctions(const module_t& mod)
+	void set_functions(const module_t mod)
 	{
-		//- io functions
+		// io functions
+		mod->add(chaiscript::fun([](const std::string& name)->void {load_file(name); }), "load_file");
+		mod->add(chaiscript::fun([]()->void {load_file(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)->void {save_to(name); }), "save_to");
+		mod->add(chaiscript::fun([]()->void {save_to(); }), "save_to");
 
-		
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "load_file");
-		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "load_file");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "save_to");
-		mod->add(chaiscript::fun([]()-> void {exportTo(); }), "save_to");
-
-		//- settings
-		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "set_verbose");
+		// Settings
+		mod->add(chaiscript::fun([](unsigned short i)->void {set_verbose(i); }), "set_verbose");
 	}
 
 	std::string getString(char* argv)
@@ -119,12 +92,11 @@ namespace tnbLib
 		auto argument = getString(argv);
 		return argument IS_EQUAL command;
 	}
-
 }
 
 using namespace tnbLib;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	//sysLib::init_gl_marine_integration_info();
 	//FatalError.throwExceptions();
@@ -141,7 +113,7 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << "This application is aimed to convert the mesh to *.plt file format." << endl;
+			Info << "This application is aimed to convert the mesh to *.vtk file format." << endl;
 			Info << endl;
 			Info << " Function list:" << endl << endl
 
@@ -160,14 +132,14 @@ int main(int argc, char *argv[])
 
 			auto mod = std::make_shared<chaiscript::Module>();
 
-			setFunctions(mod);
+			set_functions(mod);
 
 			chai.add(mod);
 
 			try
 			{
 				//std::string address = ".\\system\\tnbShapeMeshToPlt";
-				fileName myFileName(file::GetSystemFile("tnbShapeMeshToPlt"));
+				fileName myFileName(file::GetSystemFile("tnbShapeMeshToVtk"));
 
 				chai.eval_file(myFileName);
 			}

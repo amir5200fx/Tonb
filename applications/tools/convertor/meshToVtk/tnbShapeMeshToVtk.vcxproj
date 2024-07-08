@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7907036b-6941-474f-80ac-a2c8b2cba85f}</ProjectGuid>
-    <RootNamespace>tnbMeshVolumeBndViewer</RootNamespace>
+    <ProjectGuid>{b1174511-d509-4e50-8e9d-541ff6b04f71}</ProjectGuid>
+    <RootNamespace>tnbShapeMeshToVtk</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,7 +115,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -146,17 +146,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="tnbMeshVolumeBndViewer.cxx" />
+    <ClCompile Include="tnbShapeMeshToVtk.cxx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">
+    <ProjectReference Include="..\..\..\..\TnbGeo\TnbGeo.vcxproj">
       <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+    <ProjectReference Include="..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\TnbMesh\TnbMesh.vcxproj">
-      <Project>{00cf3b69-2a41-4038-8e73-fde99df1478a}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

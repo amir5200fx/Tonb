@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7907036b-6941-474f-80ac-a2c8b2cba85f}</ProjectGuid>
-    <RootNamespace>tnbMeshVolumeBndViewer</RootNamespace>
+    <ProjectGuid>{6a5377be-6dd4-4886-b408-755182be16ee}</ProjectGuid>
+    <RootNamespace>tnbMeshVolumeMergedBndViewer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,13 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)d</TargetName>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -116,8 +114,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,8 +132,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,7 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="tnbMeshVolumeBndViewer.cxx" />
+    <ClCompile Include="tnbMeshVolumeMergedBndViewer.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">

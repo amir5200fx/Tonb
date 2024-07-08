@@ -8,96 +8,74 @@
 namespace tnbLib
 {
 	static unsigned short verbose = 0;
-	static bool loadTag = false;
-	static bool exeTag = false;
+	static std::string my_file_name;
 
-	static std::shared_ptr<Aft3d_SolutionData_SurfVol> mySoluData;
-	static std::string myFileName;
+	static std::shared_ptr<Aft3d_SolutionData_SurfVol> my_solu_data;
+	static const auto load_extension = Aft3d_SolutionData_SurfVol::extension;
+	static const auto save_extension = Entity3d_Triangulation::extension;
 
-	static const std::string loadExt = Aft3d_SolutionData_SurfVol::extension;
-	static const std::string saveExt = Entity3d_Triangulation::extension + "list";
+	static std::shared_ptr<Entity3d_Triangulation> my_mesh;
 
-	static std::vector<std::shared_ptr<Entity3d_Triangulation>> myTris;
-
-	void set_verbose(unsigned int i)
+	void set_verbose(unsigned short i)
 	{
-		Info << endl;
-		Info << " - the verbosity level is set to: " << i << endl;
+		Info << "\n"
+			<< " - VERBOSE has been set to: " << i << "\n";
 		verbose = i;
 	}
 
 	void load_file(const std::string& name)
 	{
 		file::CheckExtension(name);
-
-		mySoluData = file::LoadFile<std::shared_ptr<Aft3d_SolutionData_SurfVol>>(name + loadExt, verbose);
-		myFileName = name;
-		if (NOT mySoluData)
+		my_solu_data = file::LoadFile<std::shared_ptr<Aft3d_SolutionData_SurfVol>>(name + load_extension, verbose);
+		if (NOT my_solu_data)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "the data solution file is null!" << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< " The loading file contains no data!" << endl
 				<< abort(FatalError);
 		}
-
-		loadTag = true;
+		my_file_name = name;
 	}
 
 	void load_file()
 	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();
+		const auto name = file::GetSingleFile(boost::filesystem::current_path(), load_extension).string();
 		load_file(name);
 	}
 
 	void save_to(const std::string& name)
 	{
-		if (NOT exeTag)
+		if (NOT my_mesh)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "the application is not performed!" << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< " The application hasn't performed." << endl
 				<< abort(FatalError);
 		}
-
 		file::CheckExtension(name);
-
-		file::SaveTo(myTris, name + saveExt, verbose);
+		file::SaveTo(my_mesh, name + save_extension, verbose);
 	}
 
 	void save_to()
 	{
-		if (NOT exeTag)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the application is not performed!" << endl
-				<< abort(FatalError);
-		}
-		save_to(myFileName);
+		save_to(my_file_name);
 	}
 
 	void execute()
 	{
-		if (NOT loadTag)
+		if (NOT my_solu_data)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no file has been loaded!" << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< " No solution data has been loaded." << endl
 				<< abort(FatalError);
 		}
-
-		const auto& tris = mySoluData->Tris();
-		myTris.reserve(tris.size());
-		for (const auto& x : tris)
-		{
-			myTris.push_back(x.second);
-		}
-
-		exeTag = true;
-
+		my_mesh = my_solu_data->Merged();
 		if (verbose)
 		{
-			Info << endl
-				<< " The application is performed, successfully!" << endl;
+			Info << "\n"
+				<< " - The application has been successfully performed.\n";
 		}
 	}
 }
+
 
 #ifdef DebugInfo
 #undef DebugInfo
@@ -186,7 +164,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbMeshVolumeBndViewer"));
+				fileName myFileName(file::GetSystemFile("tnbMeshVolumeMergedBndViewer"));
 
 				chai.eval_file(myFileName);
 				return 0;
