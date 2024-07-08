@@ -136,3 +136,19 @@ bool tnbLib::Global_Tools::IsNumber(const std::string& s)
 	}
 	return true;
 }
+
+void tnbLib::Global_Tools::PrintHeaderFunc(const std::string& func_name)
+{
+	std::string border(50, '=');
+	Info << " " << border << "\n";
+	Info << " Entering Function: " << func_name << "\n";
+	Info << " " << border << "\n";
+}
+
+void tnbLib::Global_Tools::PrintFooterFunc(const std::string& func_name)
+{
+	std::string border(50, '=');
+	Info << " " << border << "\n";
+	Info << " Leaving Function: " << func_name << "\n";
+	Info << " " << border << "\n";
+}

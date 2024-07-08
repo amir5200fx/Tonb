@@ -141,6 +141,9 @@ namespace tnbLib
 		static std::vector<T> RetrieveValuesToList(const std::map<Key, T>&);
 
 		static TnbGlobal_EXPORT bool IsNumber(const std::string& s);
+
+		static TnbGlobal_EXPORT void PrintHeaderFunc(const std::string& func_name);
+		static TnbGlobal_EXPORT void PrintFooterFunc(const std::string& func_name);
 	};
 }
 
