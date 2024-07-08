@@ -1,6 +1,6 @@
 #include <Aft3d_SolutionData.hxx>
 
-const std::string tnbLib::legLib::Aft3d_SolutionData::extension = ".aft3dsoludata";
+const std::string tnbLib::legLib::Aft3d_SolutionData::extension = ".aft3dsoldata";
 
 void tnbLib::legLib::Aft3d_SolutionData::SetSurface(std::shared_ptr<Entity3d_Triangulation> theSurface)
 {

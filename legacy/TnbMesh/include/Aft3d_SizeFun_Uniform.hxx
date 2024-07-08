@@ -27,10 +27,10 @@ namespace tnbLib
 		public:
 			//.
 			// constructors
-			Aft3d_SizeFun_Uniform(std::shared_ptr<Domain> theDomain, Standard_Real theValue);
+			TnbLegMesh_EXPORT Aft3d_SizeFun_Uniform(std::shared_ptr<Domain> theDomain, Standard_Real theValue);
 			//
 			// Public functions and operators
-			Standard_Real Value(const Pnt3d&) const override;
+			TnbLegMesh_EXPORT Standard_Real Value(const Pnt3d&) const override;
 		};
 	}
 }

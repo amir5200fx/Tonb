@@ -13,6 +13,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+unsigned short tnbLib::legLib::Aft3d_Volume::verbose = 0;
+
 Standard_Real tnbLib::legLib::Aft3d_VolumeConstants::DEFAULT_LOCALFRONT_FACTOR = 1.15;
 
 Standard_Boolean 
@@ -657,31 +659,70 @@ void tnbLib::legLib::Aft3d_Volume::UpdateFront()
 
 void tnbLib::legLib::Aft3d_Volume::Import(const Entity3d_Triangulation& theVolume)
 {
+	if (verbose)
+	{
+		Info << "\n";
+		Global_Tools::PrintFooterFunc("Aft3d_Volume::Import(Triangulation)");
+		Info << "\n";
+	}
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Make topology...\n";
+	}
 	const auto topo_mesh = std::make_shared<Entity3d_TopoTriangulation>(theVolume);
 	Mesh.MaxNodeIdxRef() = theVolume.NbPoints();
 	Mesh.MaxEdgeIdxRef() = topo_mesh->NbSegments();
 	Mesh.MaxElementIdxRef() = theVolume.NbConnectivity();
 	Mesh.MaxElementIdxRef() = 0;
-
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Create the boundaries...\n";
+	}
 	// Creating the boundaries
 	CreateBoundary(*topo_mesh);
-
+	if (verbose)
+	{
+		Info << " \n"
+			<< " - Import the nodes...\n";
+	}
 	// Retrieving the nodes
 	const auto nodes = Aft3d_Tools::RetrieveNodes(*theBoundary_);
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Import the edges...\n";
+	}
 	// Retrieving the edges
 	auto edges = Aft3d_Tools::RetrieveEdges(*theBoundary_);
 	// computing the dimension of the region
 	const auto region = Geo_BoxTools::GetBox(Aft3d_Tools::RetriveGeometries(nodes), 0);
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Register the nodes...\n";
+	}
 	// Set searching the region
 	EngineRef() = std::make_shared<Geo_AdTree<std::shared_ptr<Aft3d_Node>>>();
 	Engine()->SetGeometryCoordFunc([](const std::shared_ptr<Aft3d_Node>& node)-> const Pnt3d& {return node->Coord(); });
 	Engine()->SetGeometryRegion(region.Expanded(region.Diameter() * 1.e-3));
 	// registering the nodes
 	Engine()->InsertToGeometry(nodes);
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Make the front...\n";
+	}
 	// creating the front
 	FrontHandler.InsertToFronts(*theBoundary_);
 	//.
 	// The triangulation has been successfully imported.
+	if (verbose)
+	{
+		Info << "\n";
+		Global_Tools::PrintFooterFunc("Aft3d_Volume::Import(Triangulation)");
+	}
 }
 
 Standard_Boolean 

@@ -26,6 +26,7 @@ namespace tnbLib
 			// constructors
 			Aft3d_SizeFun(std::shared_ptr<Domain> theDomain);
 		public:
+			static TnbLegMesh_EXPORT const std::string extension;
 			//.
 			// Public functions and operators
 			const auto& GetDomain() const { return theDomain_; }

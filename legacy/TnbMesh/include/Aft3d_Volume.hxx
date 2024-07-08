@@ -420,18 +420,18 @@ namespace tnbLib
 			void CheckBoundaries();
 
 			inline Standard_Boolean IsNewNode() const;
-			TnbLegMesh_EXPORT Standard_Boolean GetCurrent();
-			TnbLegMesh_EXPORT Standard_Boolean IsBelongToFront() const;
-			TnbLegMesh_EXPORT Standard_Boolean IsNewNodeValid
+			Standard_Boolean GetCurrent();
+			Standard_Boolean IsBelongToFront() const;
+			Standard_Boolean IsNewNodeValid
 			(const std::vector<std::shared_ptr<Aft3d_Facet>>&) const;
-			TnbLegMesh_EXPORT Standard_Boolean IsNewEdgeValid
+			Standard_Boolean IsNewEdgeValid
 			(
 				const Pnt3d&, const Pnt3d&,
 				const std::vector<std::shared_ptr<Aft3d_Edge>>&
 			) const;
-			TnbLegMesh_EXPORT Standard_Boolean IsSameLevelSupplied();
-			TnbLegMesh_EXPORT Standard_Boolean IsNextLevelSupplied();
-			TnbLegMesh_EXPORT Standard_Boolean IsCavityRemoverSupplied();
+			Standard_Boolean IsSameLevelSupplied();
+			Standard_Boolean IsNextLevelSupplied();
+			Standard_Boolean IsCavityRemoverSupplied();
 
 			//Entity3d_Box CalcSearchingRegion() const;
 
@@ -440,55 +440,55 @@ namespace tnbLib
 			const auto& Current() const { return CycleInfo.Current(); }
 			const auto& ValidNode() const { return CycleInfo.ValidNode(); }
 
-			TnbLegMesh_EXPORT void RetrieveEarlyNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
-			TnbLegMesh_EXPORT void RetrieveLocalFrontNodes
+			void RetrieveEarlyNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
+			void RetrieveLocalFrontNodes
 			(
 				std::vector<std::shared_ptr<Aft3d_Node>>& theLocals,
 				std::vector<std::shared_ptr<Aft3d_Node>>& theSearching
 			);
-			TnbLegMesh_EXPORT void RetrieveLocalFrontEntities
+			void RetrieveLocalFrontEntities
 			(
 				const std::vector<std::shared_ptr<Aft3d_Node>>&,
 				std::vector<std::shared_ptr<Aft3d_Facet>>&
 			) const;
 
-			TnbLegMesh_EXPORT void RetrieveEffectiveFronts
+			void RetrieveEffectiveFronts
 			(
 				const std::vector<std::shared_ptr<Aft3d_Facet>>&,
 				std::vector<std::shared_ptr<Aft3d_Facet>>&
 			) const;
 
-			TnbLegMesh_EXPORT void SortNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
+			void SortNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
 
-			TnbLegMesh_EXPORT void AddOptimumNodeTo(std::vector<std::shared_ptr<Aft3d_Node>>&);
+			void AddOptimumNodeTo(std::vector<std::shared_ptr<Aft3d_Node>>&);
 
 			//void SetCurrent(const std::shared_ptr<Aft3d_Facet>&);
-			TnbLegMesh_EXPORT void CalcLocalFrontRadius();
-			TnbLegMesh_EXPORT void ModifyLocalFront(const Standard_Real theFactor);
+			void CalcLocalFrontRadius();
+			void ModifyLocalFront(const Standard_Real theFactor);
 
-			TnbLegMesh_EXPORT void RemoveEntitiesFromGeometry();
-			TnbLegMesh_EXPORT void RemoveCurrentFromFront();
-			TnbLegMesh_EXPORT void CalcElementSize();
-			TnbLegMesh_EXPORT void CalcOptimumCoord();
-			TnbLegMesh_EXPORT void SetSearchingDepth();
+			void RemoveEntitiesFromGeometry();
+			void RemoveCurrentFromFront();
+			void CalcElementSize();
+			void CalcOptimumCoord();
+			void SetSearchingDepth();
 
-			TnbLegMesh_EXPORT void SetPairedEdges();
-			TnbLegMesh_EXPORT void SetPairedFacets();
-			TnbLegMesh_EXPORT void SetPairs();
+			void SetPairedEdges();
+			void SetPairedFacets();
+			void SetPairs();
 
-			TnbLegMesh_EXPORT void CalcGeometries(const std::shared_ptr<Aft3d_Facet>&);
-			TnbLegMesh_EXPORT void CalcGeometries(const std::shared_ptr<Aft3d_Edge>&);
+			void CalcGeometries(const std::shared_ptr<Aft3d_Facet>&);
+			void CalcGeometries(const std::shared_ptr<Aft3d_Edge>&);
 
-			TnbLegMesh_EXPORT void UpdateEdges();
-			TnbLegMesh_EXPORT void UpdateFacets();
-			TnbLegMesh_EXPORT void UpdatePairs();
+			void UpdateEdges();
+			void UpdateFacets();
+			void UpdatePairs();
 
-			TnbLegMesh_EXPORT void UpdateElement();
+			void UpdateElement();
 
-			TnbLegMesh_EXPORT void CreateElement();
-			TnbLegMesh_EXPORT void RegisterElement();
+			void CreateElement();
+			void RegisterElement();
 
-			static TnbLegMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Node>>
+			static std::vector<std::shared_ptr<Aft3d_Node>>
 				NodesInRadius
 				(
 					const Standard_Real theRadius,
@@ -496,9 +496,9 @@ namespace tnbLib
 					const Aft3d_GeoPrcsr& theMetricMap,
 					const std::vector<std::shared_ptr<Aft3d_Node>>&
 				);
-			static TnbLegMesh_EXPORT void Update_Pmin_Pmax
+			static void Update_Pmin_Pmax
 			(const Pnt3d&, Pnt3d& theP0, Pnt3d& theP1);
-			static TnbLegMesh_EXPORT Standard_Boolean 
+			static Standard_Boolean 
 				IsIntersect
 				(
 					const Pnt3d& Q0,
@@ -506,7 +506,7 @@ namespace tnbLib
 					const Pnt3d& Pmin,
 					const Pnt3d& Pmax
 				);
-			static TnbLegMesh_EXPORT Standard_Boolean 
+			static Standard_Boolean 
 				IsIntersect
 				(
 					const Aft3d_Facet& theFacet,
@@ -619,7 +619,7 @@ namespace tnbLib
 			TnbLegMesh_EXPORT void CreateBoundary(const Entity3d_TopoTriangulation&);
 
 		public:
-
+			static TnbLegMesh_EXPORT unsigned short verbose;
 			// default constructor [3/1/2023 Payvand]
 
 			Aft3d_Volume()
