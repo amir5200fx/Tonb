@@ -442,6 +442,7 @@ void tnbLib::Merge3d_Triangulation::Perform()
 	geoLib::mergeTris3d::ConnectEdges(mesh);
 	// retrieve the boundary nodes
 	const auto nodes = geoLib::mergeTris3d::RetrieveBoundaryNodes(mesh);
+	std::cout << "nb. of boundary nodes = " << nodes.size() << std::endl;
 	const auto bnd_box = Geo_BoxTools::GetBox(geoLib::mergeTris3d::RetrieveGeometries(nodes), 0);
 	const auto dim = bnd_box.Diameter();
 	// registering the nodes
@@ -464,6 +465,9 @@ void tnbLib::Merge3d_Triangulation::Perform()
 		}
 		return std::move(nodes);
 	};
+	//.
+	//* Create a search engine to track super nodes
+	//.
 	const auto radius = Radius();
 	Standard_Integer k = 0;
 	for (const auto& node: nodes)
@@ -503,6 +507,10 @@ void tnbLib::Merge3d_Triangulation::Perform()
 	std::map<Standard_Integer, std::pair<NodeStatus, Standard_Integer>> merged;
 	auto get_new_id = [&merged](const Standard_Integer i)
 	{
+		if (merged.at(i).first IS_EQUAL NodeStatus::killed)
+		{// The node is already killed.
+			return merged.at(merged.at(i).second).second;
+		}// The node is alive!
 		return merged.at(i).second;
 	};
 	for (const auto& node: geoLib::mergeTris3d::RetrieveNodes(mesh))
@@ -516,7 +524,7 @@ void tnbLib::Merge3d_Triangulation::Perform()
 			}
 			else
 			{
-				merged.insert({ node->Index(), {NodeStatus::killed, 0} });
+				merged.insert({ node->Index(), {NodeStatus::killed, father->MinId()} });
 			}
 		}
 		else
@@ -542,8 +550,26 @@ void tnbLib::Merge3d_Triangulation::Perform()
 		auto v2 = i.Value(2);
 		connectivity::triple t;
 		t.Value(0) = get_new_id(v0);
+		if (NOT t.Value(0))
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " - Invalid index has been detected." << endl
+				<< abort(FatalError);
+		}
 		t.Value(1) = get_new_id(v1);
+		if (NOT t.Value(1))
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " - Invalid index has been detected." << endl
+				<< abort(FatalError);
+		}
 		t.Value(2) = get_new_id(v2);
+		if (NOT t.Value(2))
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " - Invalid index has been detected." << endl
+				<< abort(FatalError);
+		}
 		ids.emplace_back(std::move(t));
 	}
 	theMerged_ = std::make_shared<Entity3d_Triangulation>(std::move(coords), std::move(ids));
