@@ -3,6 +3,7 @@
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <Cad_Volume.hxx>
+#include <Cad_SingleVolume.hxx>
 #include <Geo_SizeFunction.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
@@ -10,6 +11,7 @@
 
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 
 namespace tnbLib
 {
@@ -23,6 +25,26 @@ namespace tnbLib
 
 	static auto my_curve_info = std::make_shared<Mesh_Curve_Info>();
 	static auto my_metric_info = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
+
+	struct EdgeMeshConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info> config;
+	};
+
+	auto get_edge_mesh_config()
+	{
+		return EdgeMeshConfig{ my_curve_info };
+	}
+
+	struct MetricConfig
+	{
+		std::shared_ptr<Aft_MetricPrcsrAnIso_Info> config;
+	};
+
+	auto get_metric_config()
+	{
+		return MetricConfig{ my_metric_info };
+	}
 
 	static int CURVE_CONFIG_OVERALL_LEN_MAX_NB_ITERS = 500;
 	static int CURVE_CONFIG_OVERALL_LEN_NB_INIT_ITERS = 10;
@@ -42,6 +64,9 @@ namespace tnbLib
 	static double CURVE_CONFIG_CORR_TOL = 1.E-3;
 	static double CURVE_CONFIG_CORR_UR = 0.85;
 
+	static int CURVE_CONFIG_BISECT_MAX_NB_ITERS = 10;
+	static double CURVE_CONFIG_BISECT_TOL = 1.e-6;
+	static double CURVE_COFNIG_BISECT_DELTA = 1.e-6;
 
 	static double METRIC_CONFIG_TOL = 0.005;
 	static int METRIC_CONFIG_NB_ITERS = 4;
@@ -56,10 +81,16 @@ namespace tnbLib
 	SetRunTimeConfigs(Mesh_Curve_Info)
 	{
 		const auto& obj = my_curve_info;
+		obj->OverrideOverallLengthIntgInfo(std::make_shared<Mesh_Curve_Info::intgInfo>());
 		const auto& overall_len = obj->OverallLengthIntgInfo();
+		obj->OverrideNewtonIntgInfo(std::make_shared<Mesh_Curve_Info::intgInfo>());
 		const auto& integ = obj->NewtonIntgInfo();
+		obj->OverrideNewtonIterInfo(std::make_shared<Mesh_Curve_Info::iterInfo>());
 		const auto& iter = obj->NewtonIterInfo();
+		obj->OverrideCorrAlgInfo(std::make_shared<Mesh_Curve_Info::corrInfo>());
 		const auto& corr = obj->CorrAlgInfo();
+		obj->OverrideBisectAlgInfo(std::make_shared<Mesh_Curve_Info::bisectInfo>());
+		const auto& bisect = obj->BisectAlgInfo();
 
 		overall_len->SetMaxNbIterations(CURVE_CONFIG_OVERALL_LEN_MAX_NB_ITERS);
 		overall_len->SetNbInitIterations(CURVE_CONFIG_OVERALL_LEN_NB_INIT_ITERS);
@@ -78,6 +109,10 @@ namespace tnbLib
 		corr->SetMaxLevel(CURVE_CONFIG_CORR_MAX_LEV);
 		corr->SetTolerance(CURVE_CONFIG_CORR_TOL);
 		corr->SetUnderRelaxation(CURVE_CONFIG_CORR_UR);
+
+		bisect->SetDelta(CURVE_COFNIG_BISECT_DELTA);
+		bisect->SetMaxIterations(CURVE_CONFIG_BISECT_MAX_NB_ITERS);
+		bisect->SetTolerance(CURVE_CONFIG_BISECT_TOL);
 	}
 
 	RunTimeConfigs(MetricPrcsrAnIso_Info);
@@ -95,54 +130,14 @@ namespace tnbLib
 		integ->SetNbInitIterations(METRIC_CONFIG_INTEG_INIT_ITERS);
 	}
 
-	auto get_curve_info()
-	{
-		return my_curve_info;
-	}
-
 	struct OverallLenCalcConfig
 	{
-		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+		std::shared_ptr<Mesh_Curve_Info::intgInfo> config;
 	};
 
-	struct IntegConfig
+	auto get_overall_len_config(const EdgeMeshConfig& config)
 	{
-		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
-	};
-
-	struct IterConfig
-	{
-		std::shared_ptr<NumAlg_NewtonSolver_Info> config;
-	};
-
-	struct MetricConfig
-	{
-		std::shared_ptr<Aft_MetricPrcsrAnIso_Info> config;
-	};
-
-	struct CorrConfig
-	{
-		std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info> config;
-	};
-
-	struct MetricIntegConfig
-	{
-		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
-	};
-
-	auto get_metric_info()
-	{
-		return MetricConfig{ my_metric_info };
-	}
-
-	auto get_overall_len(const std::shared_ptr<Mesh_Curve_Info>& info)
-	{
-		return OverallLenCalcConfig{ info->OverallLengthIntgInfo() };
-	}
-
-	auto get_integ_config(const MetricConfig& config)
-	{
-		return MetricIntegConfig{ config.config->IntegInfo() };
+		return OverallLenCalcConfig{ config.config->OverallLengthIntgInfo() };
 	}
 
 	void set_max_nb_iterations(const OverallLenCalcConfig& config, int n)
@@ -172,6 +167,16 @@ namespace tnbLib
 		config.config->SetTolerance(tol);
 	}
 
+	struct IntegConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info::intgInfo> config;
+	};
+
+	auto get_integ_config(const EdgeMeshConfig& config)
+	{
+		return IntegConfig{ config.config->NewtonIntgInfo() };
+	}
+
 	void set_max_nb_iterations(const IntegConfig& config, int n)
 	{
 		if (verbose)
@@ -197,6 +202,16 @@ namespace tnbLib
 			Info << " - IntegConfig.TOL is set to: " << tol << "\n";
 		}
 		config.config->SetTolerance(tol);
+	}
+
+	struct IterConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info::iterInfo> config;
+	};
+
+	auto get_iter_config(const EdgeMeshConfig& config)
+	{
+		return IterConfig{ config.config->NewtonIterInfo() };
 	}
 
 	void set_max_nb_iterations(const IterConfig& config, int n)
@@ -244,6 +259,16 @@ namespace tnbLib
 		config.config->SetUnderRelaxation(value);
 	}
 
+	struct CorrConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info::corrInfo> config;
+	};
+
+	auto get_corr_config(const EdgeMeshConfig& config)
+	{
+		return CorrConfig{ config.config->CorrAlgInfo() };
+	}
+
 	void set_max_level(const CorrConfig& config, int n)
 	{
 		if (verbose)
@@ -269,6 +294,56 @@ namespace tnbLib
 			Info << " - CorrConfig.UR is set to: " << value << "\n";
 		}
 		config.config->SetUnderRelaxation(value);
+	}
+
+	struct BisectConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info::bisectInfo> config;
+	};
+
+	auto get_bisect_config(const EdgeMeshConfig& config)
+	{
+		return BisectConfig{ config.config->BisectAlgInfo() };
+	}
+
+	void set_max_iters(const BisectConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Bisect.MAX_ITERS has been set to: " << n << "\n";
+		}
+		config.config->SetMaxIterations(n);
+	}
+
+	void set_delta(const BisectConfig& config, double d)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Bisect.DELTA has been set to: " << d << "\n";
+		}
+		config.config->SetDelta(d);
+	}
+
+	void set_tol(const BisectConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Bisect.TOL has been set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	struct MetricIntegConfig
+	{
+		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+	};
+
+	auto get_integ_config(const MetricConfig& config)
+	{
+		return MetricIntegConfig{ config.config->IntegInfo() };
 	}
 
 	void set_max_nb_iters(const MetricIntegConfig& config, int n)
@@ -324,23 +399,6 @@ namespace tnbLib
 		}
 		config.config->SetNbSamples(n);
 	}
-
-	auto get_integ_config(const std::shared_ptr<Mesh_Curve_Info>& info)
-	{
-		return IntegConfig{ info->NewtonIntgInfo() };
-	}
-
-	auto get_iter_config(const std::shared_ptr<Mesh_Curve_Info>& info)
-	{
-		return IterConfig{ info->NewtonIterInfo() };
-	}
-
-	auto get_corr_config(const std::shared_ptr<Mesh_Curve_Info>& info)
-	{
-		return CorrConfig{ info->CorrAlgInfo() };
-	}
-
-
 
 	RunTimeConfigs(Aft_MetricPrcsrAnIso_Info);
 	SetRunTimeConfigs(Aft_MetricPrcsrAnIso_Info)
@@ -433,7 +491,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {load_size_fun(name); }), "load_size_func");
 
 		// settings [12/5/2021 Amir]
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 
 		mod->add(chaiscript::fun([](const OverallLenCalcConfig& config, int n)->void {set_max_nb_iterations(config, n); }), "set_max_nb_iters");
 		mod->add(chaiscript::fun([](const OverallLenCalcConfig& config, int n)->void {set_nb_init_iters(config, n); }), "set_nb_init_iters");
@@ -453,6 +511,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const CorrConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
 		mod->add(chaiscript::fun([](const CorrConfig& config, double ur)->void {set_ur(config, ur); }), "set_ur");
 
+		mod->add(chaiscript::fun([](const BisectConfig& config, int n)->void {set_max_iters(config, n); }), "set_max_nb_iters");
+		mod->add(chaiscript::fun([](const BisectConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+		mod->add(chaiscript::fun([](const BisectConfig& config, double d)->void {set_delta(config, d); }), "set_delta");
+
 		//- metric configs
 		mod->add(chaiscript::fun([](const MetricConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
 		mod->add(chaiscript::fun([](const MetricConfig& config, int n)->void {set_nb_iters(config, n); }), "set_nb_iters");
@@ -465,14 +527,16 @@ namespace tnbLib
 		// operators [12/5/2021 Amir]
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 
-		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Curve_Info>& info)->auto {return get_overall_len(info); }), "get_overall_len_config");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Curve_Info>& info)->auto {return get_integ_config(info); }), "get_integ_config");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Curve_Info>& info)->auto {return get_iter_config(info); }), "get_iter_config");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Curve_Info>& info)->auto {return get_corr_config(info); }), "get_corr_config");
+		mod->add(chaiscript::fun([]()->auto {return get_edge_mesh_config(); }), "get_edge_mesh_config");
+		mod->add(chaiscript::fun([]()->auto {return get_metric_config(); }), "get_metric_config");
 
-		mod->add(chaiscript::fun([]()->auto {return get_curve_info(); }), "get_curve_config");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_overall_len_config(config); }), "get_overall_len");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_integ_config(config); }), "get_integ");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_iter_config(config); }), "get_iter");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_corr_config(config); }), "get_corr");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_bisect_config(config); }), "get_bisect");
 
-		mod->add(chaiscript::fun([]()->auto {return get_metric_info(); }), "get_metric_config");
+		mod->add(chaiscript::fun([](const MetricConfig& config)->auto {return get_integ_config(config); }), "get_integ");
 	}
 
 	std::string getString(char* argv)
@@ -518,43 +582,51 @@ int main(int argc, char* argv[])
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+				<< " - set_verbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
-				<< " - (CurveConfig.OverallLen).set_max_nb_iters(n); default = " << CURVE_CONFIG_OVERALL_LEN_MAX_NB_ITERS << endl
-				<< " - (CurveConfig.OverallLen).set_nb_init_iters(n); default = " << CURVE_CONFIG_OVERALL_LEN_NB_INIT_ITERS << endl
-				<< " - (CurveConfig.OverallLen).set_tol(x); default = " << CURVE_CONFIG_OVERALL_LEN_TOL << endl << endl
+				<< " - (EdgeMeshConfig.Len).set_max_nb_iters(n);           default = " << CURVE_CONFIG_OVERALL_LEN_MAX_NB_ITERS << endl
+				<< " - (EdgeMeshConfig.Len).set_nb_init_iters(n);          default = " << CURVE_CONFIG_OVERALL_LEN_NB_INIT_ITERS << endl
+				<< " - (EdgeMeshConfig.Len).set_tol(x);                    default = " << CURVE_CONFIG_OVERALL_LEN_TOL << endl << endl
 
-				<< " - (CurveConfig.Integ).set_max_nb_iters(n); default = " << CURVE_CONFIG_ITER_MAX_NB_ITERS << endl
-				<< " - (CurveConfig.Integ).set_nb_init_iters(n); default = " << CURVE_CONFIG_INTEG_NB_INIT << endl
-				<< " - (CurveConfig.Integ).set_tol(x); default = " << CURVE_CONFIG_INTEG_TOL << endl << endl
+				<< " - (EdgeMeshConfig.Integ).set_max_nb_iters(n);         default = " << CURVE_CONFIG_ITER_MAX_NB_ITERS << endl
+				<< " - (EdgeMeshConfig.Integ).set_nb_init_iters(n);        default = " << CURVE_CONFIG_INTEG_NB_INIT << endl
+				<< " - (EdgeMeshConfig.Integ).set_tol(x);                  default = " << CURVE_CONFIG_INTEG_TOL << endl << endl
 
-				<< " - (CurveConfig.Iter).set_max_nb_iters(n); default = " << CURVE_CONFIG_ITER_MAX_NB_ITERS << endl
-				<< " - (CurveConfig.Iter).set_small(x); default = " << CURVE_CONFIG_ITER_SMALL << endl
-				<< " - (CurveConfig.Iter).set_zero(x); default = " << CURVE_CONFIG_ITER_ZERO << endl
-				<< " - (CurveConfig.Iter).set_tol(x); default = " << CURVE_CONFIG_ITER_TOL << endl
-				<< " - (CurveConfig.Iter).set_ur(x); default = " << CURVE_CONFIG_ITER_UR << endl << endl
+				<< " - (EdgeMeshConfig.Iter).set_max_nb_iters(n);          default = " << CURVE_CONFIG_ITER_MAX_NB_ITERS << endl
+				<< " - (EdgeMeshConfig.Iter).set_small(x);                 default = " << CURVE_CONFIG_ITER_SMALL << endl
+				<< " - (EdgeMeshConfig.Iter).set_zero(x);                  default = " << CURVE_CONFIG_ITER_ZERO << endl
+				<< " - (EdgeMeshConfig.Iter).set_tol(x);                   default = " << CURVE_CONFIG_ITER_TOL << endl
+				<< " - (EdgeMeshConfgi.Iter).set_ur(x);                    default = " << CURVE_CONFIG_ITER_UR << endl << endl
 
-				<< " - (CurveConfig.Corr).set_max_level(n); default = " << CURVE_CONFIG_CORR_MAX_LEV << endl
-				<< " - (CurveConfig.Corr).set_tol(x); default = " << CURVE_CONFIG_CORR_TOL << endl
-				<< " - (CurveConfig.Corr).set_ur(x); default = " << CURVE_CONFIG_CORR_UR << endl << endl
+				<< " - (EdgeMeshConfig.Corr).set_max_level(n);             default = " << CURVE_CONFIG_CORR_MAX_LEV << endl
+				<< " - (EdgeMeshConfig.Corr).set_tol(x);                   default = " << CURVE_CONFIG_CORR_TOL << endl
+				<< " - (EdgeMeshConfig.Corr).set_ur(x);                    default = " << CURVE_CONFIG_CORR_UR << endl << endl
 
-				<< " - (MetricConfig).set_tol(x); default = " << METRIC_CONFIG_TOL << endl
-				<< " - (MetricConfig).set_nb_iters(n); default = " << METRIC_CONFIG_NB_ITERS << endl
-				<< " - (MetricConfig).set_nb_samples(n); default = " << METRIC_CONFIG_NB_SAMPLES << endl << endl
+				<< " - (EdgeMeshConfig.Bisect).set_tol(x);                 default = " << CURVE_CONFIG_BISECT_TOL << endl
+				<< " - (EdgeMeshConfig.Bisect).set_delta(x);               default = "<< CURVE_COFNIG_BISECT_DELTA<<endl
+				<< " - (EdgeMeshConfig.Bisect).set_max_nb_iters(n);        default = "<<CURVE_CONFIG_BISECT_MAX_NB_ITERS<<endl << endl
 
-				<< " - (MetricConfig.Integ).set_max_nb_iters(n); default = " << METRIC_CONFIG_INTEG_MAX_NB_ITERS << endl
-				<< " - (MetricConfig.Integ).set_nb_init_iters(n); default = " << METRIC_CONFIG_INTEG_INIT_ITERS << endl
-				<< " - (MetricConfig.Integ).set_tol(x); default = " << METRIC_CONFIG_INTEG_TOL << endl << endl
+				<< " - (MetricConfig).set_tol(x);                          default = " << METRIC_CONFIG_TOL << endl
+				<< " - (MetricConfig).set_nb_iters(n);                     default = " << METRIC_CONFIG_NB_ITERS << endl
+				<< " - (MetricConfig).set_nb_samples(n);                   default = " << METRIC_CONFIG_NB_SAMPLES << endl << endl
+
+				<< " - (MetricConfig.Integ).set_max_nb_iters(n);           default = " << METRIC_CONFIG_INTEG_MAX_NB_ITERS << endl
+				<< " - (MetricConfig.Integ).set_nb_init_iters(n);          default = " << METRIC_CONFIG_INTEG_INIT_ITERS << endl
+				<< " - (MetricConfig.Integ).set_tol(x);                    default = " << METRIC_CONFIG_INTEG_TOL << endl << endl
 
 				<< " # operators: " << endl << endl
 
-				<< " - [CurveConfig] get_curve_config()" << endl
+				<< " - [EdgeMeshConfig] get_edge_mesh_config()" << endl
 				<< " - [MetricConfig] get_metric_config()" << endl << endl
 
-				<< " - [OverallLen] (CurveConfig).get_overall_len_config()" << endl
-				<< " - [Integ] (CurveConfig).get_integ_config()" << endl
-				<< " - [Iter] (CurveConfig).get_iter_config()" << endl
-				<< " - [Corr] (CurveConfig).get_corr_config()" << endl
+				<< " - [EdgeMeshConfig.Len] (EdgeMeshConfig).get_len()" << endl
+				<< " - [EdgeMeshConfig.Integ] (EdgeMeshConfig).get_integ_config()" << endl
+				<< " - [EdgeMeshConfig.Iter] (EdgeMeshConfig).get_iter_config()" << endl
+				<< " - [EdgeMeshConfig.Corr] (EdgeMeshConfig).get_corr()" << endl
+				<< " - [EdgeMeshConfig.Bisect] (EdgeMeshConfig).get_bisect()" << endl << endl
+
+				
+				<< " - [MetricConfig.Integ] (MetricConfig).get_integ()" << endl << endl
 
 				<< " - execute()" << endl
 				<< endl;

@@ -19,14 +19,14 @@ namespace tnbLib
 
 	static std::vector<std::shared_ptr<Entity3d_Triangulation>> myTris;
 
-	void setVerbose(unsigned int i)
+	void set_verbose(unsigned int i)
 	{
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
 	}
 
-	void loadFile(const std::string& name)
+	void load_file(const std::string& name)
 	{
 		file::CheckExtension(name);
 
@@ -42,13 +42,13 @@ namespace tnbLib
 		loadTag = true;
 	}
 
-	void loadFile()
+	void load_file()
 	{
 		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();
-		loadFile(name);
+		load_file(name);
 	}
 
-	void saveTo(const std::string& name)
+	void save_to(const std::string& name)
 	{
 		if (NOT exeTag)
 		{
@@ -62,7 +62,7 @@ namespace tnbLib
 		file::SaveTo(myTris, name + saveExt, verbose);
 	}
 
-	void saveTo()
+	void save_to()
 	{
 		if (NOT exeTag)
 		{
@@ -70,7 +70,7 @@ namespace tnbLib
 				<< "the application is not performed!" << endl
 				<< abort(FatalError);
 		}
-		saveTo(myFileName);
+		save_to(myFileName);
 	}
 
 	void execute()
@@ -94,7 +94,7 @@ namespace tnbLib
 		if (verbose)
 		{
 			Info << endl
-				<< " The application is performed, successfully!" << endl;
+				<< " The application is successfully performed!" << endl;
 		}
 	}
 }
@@ -113,13 +113,13 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {save_to(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {save_to(); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {load_file(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {load_file(name); }), "load_file");
 
 		// settings 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {set_verbose(i); }), "set_verbose");
 
 		// operators 
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");

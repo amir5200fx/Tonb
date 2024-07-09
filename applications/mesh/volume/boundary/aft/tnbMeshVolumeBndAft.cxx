@@ -68,8 +68,6 @@ namespace tnbLib
 	static std::shared_ptr<Geo3d_SizeFunction> my_size_fun;
 
 	static double my_tol = 1.0e-5;
-	static double my_coeff = 0.3;
-	static double my_delta = 0.2;
 
 	static auto my_smaple_type = Geo2d_SamplePoints::Type::five_points;
 	static auto my_metric_approx_tol = Cad_ApprxMetricCriterion::DEFAULT_TOLERANCE;
@@ -80,14 +78,14 @@ namespace tnbLib
 	// Settings
 	//.
 
-	void setVerbose(unsigned int i)
+	void set_verbose(unsigned int i)
 	{
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
 	}
 
-	void setTolerance(double x)
+	void set_tol(double x)
 	{
 		my_tol = x;
 		if (verbose)
@@ -114,7 +112,9 @@ namespace tnbLib
 		std::shared_ptr<MeshPost_LaplacianSmoothing_Info> config;
 		bool apply = SMOOTH_DEFAULT_APPLY;
 	};
-	static const auto my_smoothing_config = std::make_shared<SmoothConfig>(SmoothConfig{ my_laplacian_smooth_info, SMOOTH_DEFAULT_APPLY });
+	static const auto my_smoothing_config = std::make_shared<SmoothConfig>(SmoothConfig{
+		my_laplacian_smooth_info, SMOOTH_DEFAULT_APPLY
+	});
 	auto get_smooth_config()
 	{
 		return *my_smoothing_config;
@@ -160,7 +160,9 @@ namespace tnbLib
 		double tol = EDGE_MESH_CONFIG_MERG_TOL;
 	};
 
-	static auto my_edge_mesh_config = std::make_shared<EdgeMeshConfig>(EdgeMeshConfig{my_curve_info, EDGE_MESH_CONFIG_MERG_TOL});
+	static auto my_edge_mesh_config = std::make_shared<EdgeMeshConfig>(EdgeMeshConfig{
+		my_curve_info, EDGE_MESH_CONFIG_MERG_TOL
+	});
 
 	auto get_edge_config()
 	{
@@ -172,48 +174,90 @@ namespace tnbLib
 	//.
 	struct EdgeMeshOverallLenConfig
 	{
-		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+		std::shared_ptr<Mesh_Curve_Info::intgInfo> config;
 	};
 	//- getting the curve overall length calculation settings
-	auto get_edge_mesh_overall_len_config()
+	auto get_overall_len_config(const EdgeMeshConfig& config)
 	{
-		return EdgeMeshOverallLenConfig{ my_edge_mesh_config->config->OverallLengthIntgInfo() };
+		return EdgeMeshOverallLenConfig{ config.config->OverallLengthIntgInfo() };
 	}
 	//.
 	//* The integral settings of the curve discretization algorithm
 	//.
 	struct EdgeMeshIntegConfig
 	{
-		std::shared_ptr<NumAlg_AdaptiveInteg_Info> config;
+		std::shared_ptr<Mesh_Curve_Info::intgInfo> config;
 	};
 	//- getting the integral settings of the curve discretization algorithm
-	auto get_edge_mesh_integ_config()
+	auto get_integ_config(const EdgeMeshConfig& config)
 	{
-		return EdgeMeshIntegConfig{ my_edge_mesh_config->config->NewtonIntgInfo() };
+		return EdgeMeshIntegConfig{ config.config->NewtonIntgInfo() };
 	}
 	//.
 	//* The iteration settings of the curve discretization algorithm
 	//.
 	struct EdgeMeshIterConfig
 	{
-		std::shared_ptr<NumAlg_NewtonSolver_Info> config;
+		std::shared_ptr<Mesh_Curve_Info::iterInfo> config;
 	};
 	//- getting the iteration settings of the curve discretization algorithm
-	auto get_edge_mesh_iter_config()
+	auto get_iter_config(const EdgeMeshConfig& config)
 	{
-		return EdgeMeshIterConfig{ my_edge_mesh_config->config->NewtonIterInfo() };
+		return EdgeMeshIterConfig{ config.config->NewtonIterInfo() };
 	}
 	//.
 	//* The correction settings of the curve discretization algorithm
 	//.
 	struct EdgeMeshCorrConfig
 	{
-		std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info> config;
+		std::shared_ptr<Mesh_Curve_Info::corrInfo> config;
 	};
 	//- getting the corrections settings of the curve discretization algorithm
-	auto get_edge_mesh_corr_config()
+	auto get_corr_config(const EdgeMeshConfig& config)
 	{
-		return EdgeMeshCorrConfig{ my_edge_mesh_config->config->CorrAlgInfo() };
+		return EdgeMeshCorrConfig{ config.config->CorrAlgInfo() };
+	}
+	//.
+	//* The bisection settings of the curve discretization algorithm
+	//.
+	struct EdgeMeshBisectConfig
+	{
+		std::shared_ptr<Mesh_Curve_Info::bisectInfo> config;
+	};
+	//- getting the bisection settings of the curve discretization algorithm
+	auto get_bisect(const EdgeMeshConfig& config)
+	{
+		return EdgeMeshBisectConfig{ config.config->BisectAlgInfo() };
+	}
+
+	void set_tol(const EdgeMeshBisectConfig& config, double tol)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Bisect.TOL has been set to: " << tol << "\n";
+		}
+		config.config->SetTolerance(tol);
+	}
+
+	void set_delta(const EdgeMeshBisectConfig& config, double d)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Bisect.DELTA has been set to: " << d << "\n";
+		}
+		config.config->SetDelta(d);
+	}
+
+	void set_max_iters(const EdgeMeshBisectConfig& config, int n)
+	{
+		if (verbose)
+		{
+			Info << "\n"
+				<< " - EdgeMeshConfig.Bisect.MAX_ITERS has been set to: " << n << "\n";
+		}
+		config.config->SetMaxIterations(n);
 	}
 
 	void set_max_nb_iters(const EdgeMeshOverallLenConfig& config, int n)
@@ -468,7 +512,9 @@ namespace tnbLib
 		std::shared_ptr<Aft_SizeCorr_IterativeInfo> config;
 		int max_sub_lev = OPT_NODE_GEN_DEFAULT_MAX_SUB_LEV;
 	};
-	static const auto my_node_gen_config = std::make_shared<OptNodeGenConfig>(OptNodeGenConfig{ my_size_corr, OPT_NODE_GEN_DEFAULT_MAX_SUB_LEV });
+	static const auto my_node_gen_config = std::make_shared<OptNodeGenConfig>(OptNodeGenConfig{
+		my_size_corr, OPT_NODE_GEN_DEFAULT_MAX_SUB_LEV
+	});
 	auto get_node_gen_config()
 	{
 		return *my_node_gen_config;
@@ -514,7 +560,7 @@ namespace tnbLib
 		config.config->SetUnderRelaxation(ur);
 	}
 
-	void loadFile(const std::string& name)
+	void load_file(const std::string& name)
 	{
 		file::CheckExtension(name);
 
@@ -547,14 +593,14 @@ namespace tnbLib
 		loadTag = true;
 	}
 
-	void loadFile()
+	void load_file()
 	{
 		auto name = file::GetSingleFile(boost::filesystem::current_path(), extension).string();
 		my_file_name = name;
-		loadFile(name);
+		load_file(name);
 	}
 
-	void saveTo(const std::string& name)
+	void save_to(const std::string& name)
 	{
 		if (NOT exeTag)
 		{
@@ -566,7 +612,7 @@ namespace tnbLib
 		file::SaveTo(my_solu_data, name + extension, verbose);
 	}
 
-	void saveTo()
+	void save_to()
 	{
 		if (NOT exeTag)
 		{
@@ -574,7 +620,7 @@ namespace tnbLib
 				<< "the application is not performed!" << endl
 				<< abort(FatalError);
 		}
-		saveTo(my_file_name);
+		save_to(my_file_name);
 	}
 
 	auto calcSize(const Pnt3d& pt)
@@ -1201,12 +1247,13 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {save_to(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {save_to(); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {load_file(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {load_file(name); }), "load_file");
 
 		// settings
+		mod->add(chaiscript::fun([](unsigned int i)->void {set_verbose(i); }), "set_verbose");
 
 		// The smoothing algorithm's settings
 		mod->add(chaiscript::fun([](const SmoothConfig& config, int n)-> void {set_nb_iters(config, n); }), "set_nb_iters");
@@ -1232,6 +1279,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const EdgeMeshCorrConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
 		mod->add(chaiscript::fun([](const EdgeMeshCorrConfig& config, double ur)->void {set_ur(config, ur); }), "set_ur");
 
+		mod->add(chaiscript::fun([](const EdgeMeshBisectConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
+		mod->add(chaiscript::fun([](const EdgeMeshBisectConfig& config, double d)->void {set_delta(config, d); }), "set_delta");
+		mod->add(chaiscript::fun([](const EdgeMeshBisectConfig& config, int n)->void {set_max_iters(config, n); }), "set_max_nb_iters");
+
 		// The metric settings
 		mod->add(chaiscript::fun([](const MetricConfig& config, double tol)->void {set_tol(config, tol); }), "set_tol");
 		mod->add(chaiscript::fun([](const MetricConfig& config, int n)->void {set_nb_iters(config, n); }), "set_nb_iters");
@@ -1249,6 +1300,11 @@ namespace tnbLib
 		// operators
 		mod->add(chaiscript::fun([]()->auto {return get_smooth_config(); }), "get_smooth_config");
 		mod->add(chaiscript::fun([]()->auto {return get_edge_config(); }), "get_edge_mesh_config");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_overall_len_config(config); }), "overallLen");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_integ_config(config); }), "integ");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_iter_config(config); }), "iter");
+		mod->add(chaiscript::fun([](const EdgeMeshConfig& config)->auto {return get_corr_config(config); }), "corr");
+
 		mod->add(chaiscript::fun([]()->auto {return get_metric_config(); }), "get_metric_config");
 		mod->add(chaiscript::fun([]()->auto {return get_node_gen_config(); }), "get_node_gen_config");
 		
@@ -1286,42 +1342,70 @@ int main(int argc, char* argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to mesh the surfaces of a tModel." << endl << endl;
+			Info << " This application is aimed to mesh the boundaries of a volume." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_file(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - doSmoothing(bool)" << endl << endl
+				<< " - set_verbose(i)" << endl
+				<< " - (SmoothConfig).set_apply(bool)" << endl
+				<< " - (SmoothConfig).set_nb_iters(n)" << endl
+				<< " - (SmoothConfig).set_ur(x)" << endl << endl
 
-				<< " - (Smooth).setNbIterations(n)" << endl
-				<< " - (Smooth).setUnderRelaxation(x)" << endl << endl
+				<< " # The edge mesh's settings:" << endl << endl
 
-				<< " - (Integ).setTolerance(x)" << endl
-				<< " - (Integ).setMaxNbIterations(n)" << endl
-				<< " - (Integ).setNbInitialIterations(n)" << endl << endl
+				<< " - (EdgeMeshConfig.OveralLen).set_max_nb_iters(n)" << endl
+				<< " - (EdgeMeshConfig.OveralLen).set_init_nb_iters(n)" << endl
+				<< " - (EdgeMeshConfig.OveralLen).set_tol(x)" << endl << endl
 
-				<< " - (Iter).setTolerance(x)" << endl
-				<< " - (Iter).setMaxNbIterations(n)" << endl
-				<< " - (Iter).setUnderRelaxation(x)" << endl
-				<< " - (Iter).ignoreNonConvergency()" << endl << endl
+				<< " - (EdgeMeshConfig.Iter).set_max_nb_iters(n)" << endl
+				<< " - (EdgeMeshConfig.Iter).set_small(x)" << endl
+				<< " - (EdgeMeshConfig.Iter).set_zero(x)" << endl
+				<< " - (EdgeMeshConfig.Iter).tol(x)" << endl
+				<< " - (EdgeMeshConfig.Iter).set_ur(x)" << endl << endl
 
-				<< " - (Metrics).setTolerance(x)" << endl
-				<< " - (Metrics).setNbSamples(n)" << endl
-				<< " - (Metrics).setNbIerations(n)" << endl << endl
+				<< " - (EdgeMeshConfig.Integ).set_max_nb_iters(n)" << endl
+				<< " - (EdgeMeshConfig.Integ).set_init_nb_iters(n)" << endl
+				<< " - (EdgeMeshConfig.Integ).set_tol(n)" << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - (EdgeMeshConfig.Corr).set_max_lev(n)" << endl
+				<< " - (EdgeMeshConfig.Corr).set_tol(x)" << endl
+				<< " - (EdgeMeshConfig.Corr).set_ur(x)" << endl << endl
+
+				<< " - (EdgeMeshConfig.Bisect).set_tol(x)" << endl
+				<< " - (EdgeMeshConfig.Bisect).set_max_iters(n)" << endl
+				<< " - (EdgeMeshConfig.Bisect).set_delta(x)" << endl << endl
+
+				<< " # The metric computation's settings: " << endl << endl
+
+				<< " - (MetricConfig).set_tol(x)" << endl
+				<< " - (MetricConfig).set_nb_iters(n)" << endl
+				<< " - (MetricConfig).set_nb_samples(n)" << endl << endl
+
+				<< " - (MetricConfig.Integ).set_max_nb_iters(n)" << endl
+				<< " - (MetricConfig.Integ).set_init_nb_iters(n)" << endl
+				<< " - (MetricConfig.Integ).set_tol(x)" << endl << endl
+
+				<< " # The optimum node calculation's settings: "<< endl << endl
+
+				<< " - (NodeGenConfig).set_conv_condition(bool)" << endl
+				<< " - (NodeGenConfig).set_max_nb_iters(n)" << endl
+				<< " - (NodeGenConfig).set_tol(x)" << endl
+				<< " _ (NodeGenConfig).set_ur(x)" << endl
+
+				<< " - set_verbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl
 
-				<< " - [Smooth] getSmoothAlg()" << endl
-				<< " - [Metrics] getMetrics()" << endl
-				<< " - [Integ] getIntegAlg()" << endl
+				<< " - [SmoothConfig] get_smooth_config()" << endl
+				<< " - [MetricConfig] get_metric_config()" << endl
+				<< " - [Integ] ()" << endl
 				<< " - [Iter] getIterAlg()" << endl << endl
 
 				<< " - execute()" << endl
@@ -1340,7 +1424,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbMeshtSurfAft"));
+				fileName myFileName(file::GetSystemFile("tnbMeshVolumeBndAft"));
 
 				chai.eval_file(myFileName);
 				return 0;
