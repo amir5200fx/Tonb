@@ -128,14 +128,14 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "load_file");
 
 		// settings 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](double x)-> void {setTolerance(x); }), "setTolerance");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
+		mod->add(chaiscript::fun([](double x)-> void {setTolerance(x); }), "set_tol");
 
 		// operators 
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
