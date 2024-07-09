@@ -94,7 +94,7 @@ namespace tnbLib
 		if (verbose)
 		{
 			Info << endl
-				<< " The application is performed, successfully!" << endl;
+				<< " The application is successfully performed!" << endl;
 		}
 	}
 }

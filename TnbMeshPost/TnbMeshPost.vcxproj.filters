@@ -211,6 +211,15 @@
     <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator\Calculator">
       <UniqueIdentifier>{c8f3afa5-ccdb-4574-b04c-40350a189701}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\Optimization">
+      <UniqueIdentifier>{c2a588e8-697d-44d1-a243-1c30e3fbb84e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Stellar">
+      <UniqueIdentifier>{2909d133-9006-4d07-9f02-3ae02999f8dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Stellar\lib">
+      <UniqueIdentifier>{fb3218eb-5cf4-4a9c-b90a-6255806f6b1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -435,6 +444,66 @@
     <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\MeshPost2d_AFBLayerMesh.hxx">
       <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\Starbase.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\top.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\vector.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\quality.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\anisotropy.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\quadric.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\size.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\topological.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\journal.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\arraypoolstack.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\print.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\smoothing.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\classify.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\improve.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\insertion.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\output.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\interact.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\Stellar.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\lib\showme.h">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Stellar\MeshPost3d_StellarOpt.hxx">
+      <Filter>TnbLib\Post\Stellar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx">
@@ -517,6 +586,60 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio\MeshPost2d_QualityMap_Vlrms2RatioIO.cxx">
       <Filter>TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\anisotropy.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\arraypoolstack.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\classify.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\improve.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\insertion.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\interact.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\journal.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\output.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\print.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\quadric.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\quality.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\showme.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\size.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\smoothing.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\topological.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\Starbase.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\lib\top.cxx">
+      <Filter>TnbLib\Post\Stellar\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Stellar\MeshPost3d_StellarOpt.cxx">
+      <Filter>TnbLib\Post\Stellar</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

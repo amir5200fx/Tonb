@@ -238,18 +238,18 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		// io functions [1/31/2022 Amir]
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadShapeFile(name); }), "loadFile");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadShapeFile(name); }), "load_file");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
 
 		// operators [1/31/2022 Amir]
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {execute(name); }), "execute");
 
 		// settings [1/31/2022 Amir]
-		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "setTolerance");
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "set_tol");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 	}
 
 	std::string getString(char* argv)
@@ -291,13 +291,13 @@ int main(int argc, char* argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadFile(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_file(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setTolerance(double)" << endl
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - set_tol(double)" << endl
+				<< " - set_verbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

@@ -1,3 +1,4 @@
+#include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <Cad_tModelMaker.hxx>
 #include <Cad_tModelMakerInfo_Absolute.hxx>
 #include <Cad_tEdgeMakerInfo_Absolute.hxx>
@@ -15,15 +16,13 @@
 #include <Geo_Tools.hxx>
 #include <Entity3d_Box.hxx>
 #include <Entity2d_Chain.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
+#include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
-#include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-#include "../../../include/NumAlg_AdaptiveInteg_Info.hxx"
-#include "../../../TnbNumAlg/include/NumAlg_NewtonSolver_Info.hxx"
-#include "../../../TnbNumAlg/TnbLib/NumAlg/NonLinearSolver/Bisection/Info/NumAlg_BisectionSolver_Info.hxx"
 
 namespace tnbLib
 {
@@ -40,7 +39,8 @@ namespace tnbLib
 
 	static auto my_curve_len_config = std::make_shared<Cad_CurveLength_Info>();
 	static auto my_curve_splitter_config = std::make_shared<Cad_CurveSplitter_Info>();
-	static auto my_edge_pair_config = std::make_shared<cadLib::tModelMaker_OnePtDistPairCrvCriterion>(my_curve_len_config, my_curve_splitter_config);
+	static auto my_edge_pair_config = std::make_shared<cadLib::tModelMaker_OnePtDistPairCrvCriterion>(
+		my_curve_len_config, my_curve_splitter_config);
 	static double my_tol = 1.0E-6;
 
 	struct EdgeMatchConfig
@@ -49,7 +49,9 @@ namespace tnbLib
 		std::shared_ptr<Cad_CurveSplitter_Info> splitter_config;
 		double tol = my_tol;
 	};
-	static const auto my_edge_match_maker_config = std::make_shared<EdgeMatchConfig>(EdgeMatchConfig{ my_curve_len_config, my_curve_splitter_config, my_tol });
+	static const auto my_edge_match_maker_config = std::make_shared<EdgeMatchConfig>(EdgeMatchConfig{
+		my_curve_len_config, my_curve_splitter_config, my_tol
+	});
 
 	auto get_edge_match_maker_config()
 	{
@@ -434,7 +436,7 @@ namespace tnbLib
 
 	void load_file()
 	{
-		const auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_TModel::extension).string();
+		const auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
 		myFileName = name;
 		load_file(name);
 	}

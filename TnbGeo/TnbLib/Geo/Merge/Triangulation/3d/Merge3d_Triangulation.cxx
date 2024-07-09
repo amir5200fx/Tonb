@@ -338,6 +338,7 @@ namespace tnbLib
 					{
 						comp.erase(edge);
 					}
+					comp.erase(current);
 				}
 			}
 			auto MakeMesh(const Entity3d_Triangulation& theTriangulation)

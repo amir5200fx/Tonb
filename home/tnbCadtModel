@@ -1,8 +1,8 @@
-setVerbose(1);
-setMakerVerbose(1);
-
-loadFile();
+set_verbose(1);
+//.
+// Load the file from the current directory
+load_file();
 
 execute();
 
-saveTo();
+save_to();
