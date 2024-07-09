@@ -166,7 +166,6 @@ std::string tnbLib::Global_Tools::ConvertToLowerCase(const std::string& s)
 	}
 	return std::move(str);
 }
-}
 
 void tnbLib::Global_Tools::PrintHeaderFunc(const std::string& func_name)
 {
