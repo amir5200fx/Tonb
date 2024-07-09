@@ -442,7 +442,6 @@ void tnbLib::Merge3d_Triangulation::Perform()
 	geoLib::mergeTris3d::ConnectEdges(mesh);
 	// retrieve the boundary nodes
 	const auto nodes = geoLib::mergeTris3d::RetrieveBoundaryNodes(mesh);
-	std::cout << "nb. of boundary nodes = " << nodes.size() << std::endl;
 	const auto bnd_box = Geo_BoxTools::GetBox(geoLib::mergeTris3d::RetrieveGeometries(nodes), 0);
 	const auto dim = bnd_box.Diameter();
 	// registering the nodes
