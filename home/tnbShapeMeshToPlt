@@ -1,5 +1,5 @@
-setVerbose(1);
+set_verbose(1);
 
-loadModel();
+load_file();
 
-saveTo();
+save_to();
