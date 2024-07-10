@@ -2684,6 +2684,7 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Direct\2d\Dir2dI.hxx">
       <Filter>TnbLib\Geo\Entities\Direct\2d</Filter>
+	</ClInclude>
     <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
     </ClInclude>
