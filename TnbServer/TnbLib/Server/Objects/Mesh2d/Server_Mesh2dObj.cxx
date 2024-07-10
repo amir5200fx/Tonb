@@ -609,8 +609,8 @@ void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
 		}
 		/**/
 		alg->CreateStaticMesh();
-		OFstream myFile("myMesh.plt");
-		alg->GetTriangulation()->ExportToPlt(myFile);
+		//OFstream myFile("myMesh.plt");
+		//alg->GetTriangulation()->ExportToPlt(myFile);
 		//alg->GetTriangulation()->ExportToVtk(myFile);
 		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
