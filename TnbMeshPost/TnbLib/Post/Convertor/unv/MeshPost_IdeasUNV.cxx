@@ -48,62 +48,116 @@ static const tnbLib::UNV_ElementGeomType_RunTime myUNV_ElementGeomType_RunTimeOb
 
 void tnbLib::MeshPost_IdeasUNV::WriteHeader(std::fstream& theFile) const
 {
-	theFile << std::setw(6) << -1 << std::endl
-		<< std::setw(6) << 164 << std::endl
+	theFile << std::setw(6) << -1 << "\n"
+		<< std::setw(6) << 164 << "\n"
 		<< std::setw(10) << (unsigned short)GetSystem()
 		<< std::setw(20) << system_type[(unsigned short)GetSystem()] 
-		<< std::setw(10) << 2 << std::endl;
+		<< std::setw(10) << 2 << "\n";
 	theFile << std::setw(25) << std::scientific << std::setprecision(16) << 1.0
 		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0
-		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << std::endl;
-	theFile << std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << std::endl;
-	theFile << std::setw(6) << -1 << std::endl;
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << "\n";
+	theFile << std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << "\n";
+	theFile << std::setw(6) << -1 << "\n";
 
-	theFile << std::setw(6) << -1 << std::endl;
-	theFile << std::setw(6) << 2420 << std::endl;
-	theFile << std::setw(6) << 1 << std::endl;
-	theFile << "SMESH_MESH" << std::endl
-		<< std::setw(10) << 1 << std::setw(10) << 0 << std::setw(10) << 0 << std::endl
-		<< "Global Cartesian Coordinate System" << std::endl
+	theFile << std::setw(6) << -1 << "\n";
+	theFile << std::setw(6) << 2420 << "\n";
+	theFile << std::setw(6) << 1 << "\n";
+	theFile << "SMESH_MESH" << "\n"
+		<< std::setw(10) << 1 << std::setw(10) << 0 << std::setw(10) << 0 << "\n"
+		<< "Global Cartesian Coordinate System" << "\n"
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 1.0 
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 
-		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 << std::endl
+		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 << "\n"
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 1.0 
-		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 << std::endl
+		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 << "\n"
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 
-		<< std::setw(25) << std::scientific<< std::setprecision(16) << 1.0 << std::endl
+		<< std::setw(25) << std::scientific<< std::setprecision(16) << 1.0 << "\n"
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 
 		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 
-		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 << std::endl;
+		<< std::setw(25) << std::scientific<< std::setprecision(16) << 0.0 << "\n";
 		
-	theFile << std::setw(6) << -1 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
+}
+
+void tnbLib::MeshPost_IdeasUNV::WriteHeader(std::stringstream& theStream) const
+{
+	theStream << std::setw(6) << -1 << "\n"
+		<< std::setw(6) << 164 << "\n"
+		<< std::setw(10) << (unsigned short)GetSystem()
+		<< std::setw(20) << system_type[(unsigned short)GetSystem()]
+		<< std::setw(10) << 2 << "\n";
+	theStream << std::setw(25) << std::scientific << std::setprecision(16) << 1.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << "\n";
+	theStream << std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << "\n";
+	theStream << std::setw(6) << -1 << "\n";
+
+	theStream << std::setw(6) << -1 << "\n";
+	theStream << std::setw(6) << 2420 << "\n";
+	theStream << std::setw(6) << 1 << "\n";
+	theStream << "SMESH_MESH" << "\n"
+		<< std::setw(10) << 1 << std::setw(10) << 0 << std::setw(10) << 0 << "\n"
+		<< "Global Cartesian Coordinate System" << "\n"
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0 << "\n"
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0 << "\n"
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 1.0 << "\n"
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0
+		<< std::setw(25) << std::scientific << std::setprecision(16) << 0.0 << "\n";
+
+	theStream << std::setw(6) << -1 << "\n";
 }
 
 void tnbLib::MeshPost_IdeasUNV::WriteCoordinates(std::fstream& theFile) const
 {
-	theFile << std::setw(6) << -1 << std::endl;
-	theFile << std::setw(6) << 2411 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
+	theFile << std::setw(6) << 2411 << "\n";
 	Standard_Integer k = 0;
 	for (const auto& p : Mesh()->Coordinates())
 	{
 		theFile << std::setw(10) << ++k
 			<< std::setw(10) << 1
 			<< std::setw(10) << 1
-			<< std::setw(10) << 11 << std::endl;
+			<< std::setw(10) << 11 << "\n";
 		auto [x, y, z] = p.Components();
 		theFile << std::setw(25) << std::scientific << std::setprecision(16) << x
 			<< std::setw(25) << std::scientific << std::setprecision(16) << y
-			<< std::setw(25) << std::scientific << std::setprecision(16) << z << std::endl;
+			<< std::setw(25) << std::scientific << std::setprecision(16) << z << "\n";
 	}
-	theFile << std::setw(6) << -1 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
+}
+
+void tnbLib::MeshPost_IdeasUNV::WriteCoordinates(std::stringstream& theStream) const
+{
+	theStream << std::setw(6) << -1 << "\n";
+	theStream << std::setw(6) << 2411 << "\n";
+	Standard_Integer k = 0;
+	for (const auto& p : Mesh()->Coordinates())
+	{
+		theStream << std::setw(10) << ++k
+			<< std::setw(10) << 1
+			<< std::setw(10) << 1
+			<< std::setw(10) << 11 << "\n";
+		auto [x, y, z] = p.Components();
+		theStream << std::setw(25) << std::scientific << std::setprecision(16) << x
+			<< std::setw(25) << std::scientific << std::setprecision(16) << y
+			<< std::setw(25) << std::scientific << std::setprecision(16) << z << "\n";
+	}
+	theStream << std::setw(6) << -1 << "\n";
 }
 
 void tnbLib::MeshPost_IdeasUNV::WriteElements(std::fstream& theFile) const
 {
-	theFile << std::setw(6) << -1 << std::endl;
-	theFile << std::setw(6) << 2412 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
+	theFile << std::setw(6) << 2412 << "\n";
 	std::map<std::shared_ptr<Geo_ElemGeom>, int> elements_to_id;
 	Standard_Integer k = 0;
 	for (const auto& bnd : Mesh()->Boundaries())
@@ -121,10 +175,10 @@ void tnbLib::MeshPost_IdeasUNV::WriteElements(std::fstream& theFile) const
 		theFile << std::setw(10) << k;
 		WriteElement(elm, theFile);
 	}
-	theFile << std::setw(6) << -1 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
 
-	theFile << std::setw(6) << -1 << std::endl;
-	theFile << std::setw(6) << 2467 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
+	theFile << std::setw(6) << 2467 << "\n";
 	Standard_Integer groupNb = 0;
 	for (const auto& bnd : Mesh()->Boundaries())
 	{
@@ -135,8 +189,8 @@ void tnbLib::MeshPost_IdeasUNV::WriteElements(std::fstream& theFile) const
 			<< std::setw(10) << 0
 			<< std::setw(10) << 0
 			<< std::setw(10) << 0
-			<< std::setw(10) << bnd->Elements().size() << std::endl;
-		theFile << bnd->Name() << std::endl;
+			<< std::setw(10) << bnd->Elements().size() << "\n";
+		theFile << bnd->Name() << "\n";
 		size_t flag = 1;
 		for (const auto& x : bnd->Elements())
 		{
@@ -147,13 +201,69 @@ void tnbLib::MeshPost_IdeasUNV::WriteElements(std::fstream& theFile) const
 			if (flag % 2 == 0)
 			{
 				//flag = 1;
-				theFile << std::endl;
+				theFile << "\n";
 			}
 			++flag;
 		}
-		if (flag % 2 == 0) theFile << std::endl;
+		if (flag % 2 == 0) theFile << "\n";
 	}
-	theFile << std::setw(6) << -1 << std::endl;
+	theFile << std::setw(6) << -1 << "\n";
+}
+
+void tnbLib::MeshPost_IdeasUNV::WriteElements(std::stringstream& theStream) const
+{
+	theStream << std::setw(6) << -1 << "\n";
+	theStream << std::setw(6) << 2412 << "\n";
+	std::map<std::shared_ptr<Geo_ElemGeom>, int> elements_to_id;
+	Standard_Integer k = 0;
+	for (const auto& bnd : Mesh()->Boundaries())
+	{
+		for (const auto& elm : bnd->Elements())
+		{
+			elements_to_id.insert({ elm,++k });
+			theStream << std::setw(10) << k;
+			WriteElement(elm, theStream);
+		}
+	}
+	for (const auto& elm : Mesh()->Elements())
+	{
+		elements_to_id.insert({ elm,++k });
+		theStream << std::setw(10) << k;
+		WriteElement(elm, theStream);
+	}
+	theStream << std::setw(6) << -1 << "\n";
+
+	theStream << std::setw(6) << -1 << "\n";
+	theStream << std::setw(6) << 2467 << "\n";
+	Standard_Integer groupNb = 0;
+	for (const auto& bnd : Mesh()->Boundaries())
+	{
+		theStream << std::setw(10) << ++groupNb
+			<< std::setw(10) << 0
+			<< std::setw(10) << 0
+			<< std::setw(10) << 0
+			<< std::setw(10) << 0
+			<< std::setw(10) << 0
+			<< std::setw(10) << 0
+			<< std::setw(10) << bnd->Elements().size() << "\n";
+		theStream << bnd->Name() << "\n";
+		size_t flag = 1;
+		for (const auto& x : bnd->Elements())
+		{
+			theStream << std::setw(10) << 8
+				<< std::setw(10) << elements_to_id.at(x)
+				<< std::setw(10) << 0
+				<< std::setw(10) << 0;
+			if (flag % 2 == 0)
+			{
+				//flag = 1;
+				theStream << "\n";
+			}
+			++flag;
+		}
+		if (flag % 2 == 0) theStream << "\n";
+	}
+	theStream << std::setw(6) << -1 << "\n";
 }
 
 void tnbLib::MeshPost_IdeasUNV::WriteElement(const std::shared_ptr<Geo_ElemGeom>& theElement, std::fstream& theFile) const
@@ -164,12 +274,36 @@ void tnbLib::MeshPost_IdeasUNV::WriteElement(const std::shared_ptr<Geo_ElemGeom>
 			<< std::setw(10) << 2
 			<< std::setw(10) << 1
 			<< std::setw(10) << 7
-			<< std::setw(10) << theElement->Size() << std::endl;
+			<< std::setw(10) << theElement->Size() << "\n";
 		for (auto x : theElement->IndexList())
 		{
 			theFile << std::setw(10) << x;
 		}
-		theFile << std::endl;
+		theFile << "\n";
+	}
+	catch (...)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Unspeified type of element: " << endl
+			<< " - typename: " << theElement->ElementType() << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::MeshPost_IdeasUNV::WriteElement(const std::shared_ptr<Geo_ElemGeom>& theElement, std::stringstream& theStream) const
+{
+	try
+	{
+		theStream << std::setw(10) << unv_element_geom_type.at(theElement->ElementType())
+			<< std::setw(10) << 2
+			<< std::setw(10) << 1
+			<< std::setw(10) << 7
+			<< std::setw(10) << theElement->Size() << "\n";
+		for (auto x : theElement->IndexList())
+		{
+			theStream << std::setw(10) << x;
+		}
+		theStream << "\n";
 	}
 	catch (...)
 	{
@@ -188,4 +322,11 @@ void tnbLib::MeshPost_IdeasUNV::Perform(const std::string& theName)
 	WriteCoordinates(myFile);
 	WriteElements(myFile);
 	myFile.close();
+}
+
+void tnbLib::MeshPost_IdeasUNV::Perform(std::stringstream& theStream)
+{
+	WriteHeader(theStream);
+	WriteCoordinates(theStream);
+	WriteElements(theStream);
 }

@@ -58,6 +58,7 @@
 #include <Geom_SweptSurface.hxx>
 #include <GeomAPI_ProjectPointOnCurve.hxx>
 #include <GeomAPI_ProjectPointOnSurf.hxx>
+#include <GeomAPI_PointsToBSplineSurface.hxx>
 #include <Poly_PolygonOnTriangulation.hxx>
 #include <Bnd_Box.hxx>
 #include <BRep_Tool.hxx>
@@ -84,6 +85,7 @@
 #include <TColStd_Array1OfInteger.hxx>
 #include <TColStd_Array1OfReal.hxx>
 #include <TopTools_IndexedMapOfShape.hxx>
+#include <StdFail_NotDone.hxx>
 
 Standard_Boolean 
 tnbLib::Cad_Tools::IsBounded
@@ -402,6 +404,31 @@ tnbLib::Cad_Tools::Project
 	return std::move(pt);
 }
 
+tnbLib::Pnt2d
+tnbLib::Cad_Tools::Project
+(
+	const Pnt3d& thePoint,
+	const opencascade::handle<Geom_Surface>& theSurface
+)
+{
+	GeomAPI_ProjectPointOnSurf alg;
+	alg.Init(thePoint, theSurface);
+	alg.Perform(thePoint);
+
+	/*if (alg.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong!" << endl
+			<< " - invalid nb. of projected points has have been detected!" << endl
+			<< abort(FatalError);
+	}*/
+	Standard_Real u, v;
+	alg.LowerDistanceParameters(u, v);
+
+	Pnt2d pt(u, v);
+	return std::move(pt);
+}
+
 Standard_Real
 tnbLib::Cad_Tools::Project
 (
@@ -411,6 +438,26 @@ tnbLib::Cad_Tools::Project
 {
 	GeomAPI_ProjectPointOnCurve alg;
 	alg.Init(thePoint, theLine);
+	alg.Perform(thePoint);
+
+	if (alg.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong: unable to calculate the projected point" << endl
+			<< abort(FatalError);
+	}
+	return alg.LowerDistanceParameter();
+}
+
+Standard_Real
+tnbLib::Cad_Tools::Project
+(
+	const Pnt3d& thePoint,
+	const opencascade::handle<Geom_Curve>& theCurve
+)
+{
+	GeomAPI_ProjectPointOnCurve alg;
+	alg.Init(thePoint, theCurve);
 	alg.Perform(thePoint);
 
 	if (alg.NbPoints() NOT_EQUAL 1)
@@ -2153,6 +2200,12 @@ tnbLib::Cad_Tools::RetrieveFaces
 	return std::move(faces);
 }
 
+opencascade::handle<Geom_Surface>
+tnbLib::Cad_Tools::RetrieveGeometry(const TopoDS_Face& theFace)
+{
+	return BRep_Tool::Surface(theFace);
+}
+
 tnbLib::Entity2d_Metric1 
 tnbLib::Cad_Tools::CalcMetric
 (
@@ -2545,6 +2598,47 @@ tnbLib::Cad_Tools::ReParameterization
 	}
 }
 
+Handle(Geom_Surface)
+tnbLib::Cad_Tools::Interpolate(const std::vector<std::vector<Pnt3d>>& Qs)
+{
+	try
+	{
+		const auto nbRows = Qs.size();
+		if (nbRows < 2)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Not enough rows has been found." << endl
+				<< abort(FatalError);
+		}
+		const auto nbCols = Qs.at(0).size();
+		if (nbCols < 2)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Not enough columns has been found." << endl
+				<< abort(FatalError);
+		}
+		TColgp_Array2OfPnt Q(1, nbRows, 1, nbCols);
+		forThose(i, 0, nbRows - 1)
+		{
+			forThose(j, 0, nbCols - 1)
+			{
+				Q.SetValue(i + 1, j + 1, Qs.at(i).at(j));
+			}
+		}
+		GeomAPI_PointsToBSplineSurface interpolate;
+		interpolate.Interpolate(Q);
+		Debug_If_Condition_Message(NOT interpolate.IsDone(), "the interpolation is not performed.");
+		return  interpolate.Surface();
+	}
+	catch (const StdFail_NotDone&)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to interpolate the surface!" << endl
+			<< abort(FatalError);
+	}
+	return nullptr;
+}
+
 std::map<Standard_Integer, TopoDS_Face> 
 tnbLib::Cad_Tools::RetrieveFaceMap
 (
@@ -2775,7 +2869,7 @@ void tnbLib::Cad_Tools::ExportToSTEP
 	STEPControl_Controller::Init();
 
 	STEPControl_Writer Writer;
-	Writer.Transfer(theShape, STEPControl_StepModelType::STEPControl_ShellBasedSurfaceModel);
+	Writer.Transfer(theShape, STEPControl_StepModelType::STEPControl_AsIs);
 
 	Standard_Boolean OK = Writer.Write(name.c_str());
 

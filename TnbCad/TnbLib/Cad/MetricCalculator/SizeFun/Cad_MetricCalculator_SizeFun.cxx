@@ -14,7 +14,7 @@ tnbLib::cadLib::MetricCalculator_SizeFun::CalcMetric
 {
 	Debug_Null_Pointer(theGeometry);
 	Debug_Null_Pointer(SizeFunction);
-	auto m = Cad_Tools::CalcMetric(theCoord, theGeometry, SizeFunction);
+	auto m = Cad_Tools::CalcMetric(theCoord, theGeometry, theSizeFunction_.target<Standard_Real(const Pnt3d&)>());
 	return std::move(m);
 }
 
@@ -28,6 +28,6 @@ tnbLib::cadLib::MetricCalculator_SizeFun::CalcMetric
 {
 	Debug_Null_Pointer(theGeometry);
 	Debug_Null_Pointer(SizeFunction);
-	auto m = Cad_Tools::CalcMetric(u, v, theGeometry, SizeFunction);
+	auto m = Cad_Tools::CalcMetric(u, v, theGeometry, theSizeFunction_.target<Standard_Real(const Pnt3d&)>());
 	return std::move(m);
 }

@@ -156,11 +156,20 @@ namespace tnbLib
 				const Handle(Geom_Plane)& thePlane
 			);
 
+		static TnbCad_EXPORT Pnt2d Project(const Pnt3d& thePoint, const Handle(Geom_Surface)&);
+
 		static TnbCad_EXPORT Standard_Real 
 			Project
 			(
 				const Pnt3d& thePoint, 
 				const Handle(Geom_Line)& theLine
+			);
+
+		static TnbCad_EXPORT Standard_Real
+			Project
+			(
+				const Pnt3d& thePoint,
+				const Handle(Geom_Curve)& theCurve
 			);
 
 		static TnbCad_EXPORT Entity_Segment<Pnt2d> 
@@ -348,6 +357,8 @@ namespace tnbLib
 				const TopoDS_Shape& theShape
 			);
 
+		static TnbCad_EXPORT Handle(Geom_Surface) RetrieveGeometry(const TopoDS_Face&);
+
 		static TnbCad_EXPORT std::vector<TopoDS_Edge>
 			RetrieveEdges
 			(
@@ -475,6 +486,9 @@ namespace tnbLib
 				const Geom_BSplineSurface& theSurface, 
 				const gp_Trsf2d&
 			);
+
+		static TnbCad_EXPORT Handle(Geom_Surface)
+			Interpolate(const std::vector<std::vector<Pnt3d>>&);
 
 		static TnbCad_EXPORT std::map<Standard_Integer, TopoDS_Face> RetrieveFaceMap(const TopoDS_Shape& theShape);
 

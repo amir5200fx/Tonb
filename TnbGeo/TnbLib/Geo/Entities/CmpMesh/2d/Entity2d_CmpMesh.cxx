@@ -10,6 +10,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include "Entity2d_CmpMesh_Helper.lxx"
+
 #include "Entity_StaticData.hxx"
 #include "Geo_Tools.hxx"
 
@@ -47,19 +49,6 @@ tnbLib::Entity2d_CmpMesh::operator=(const Entity2d_CmpMesh& theMesh)
 	return *this;
 }
 
-namespace tnbLib
-{
-
-	template<class T>
-	void UpdateIndices(T& theM, const std::vector<Standard_Integer>& theIndices)
-	{
-		for (size_t i = 0; i < static_cast<size_t>(T::nbCmpts); i++)
-		{
-			theM.Value(static_cast<Standard_Integer>(i)) = 
-				theIndices.at(Index_Of(theM.Value(static_cast<Standard_Integer>(i))));
-		}
-	}
-}
 
 Standard_Integer
 tnbLib::Entity2d_CmpMesh::NbElements() const

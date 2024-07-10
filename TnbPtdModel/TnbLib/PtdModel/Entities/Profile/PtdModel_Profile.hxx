@@ -29,7 +29,7 @@ namespace tnbLib
 
 		Handle(Geom2d_Curve) theGeometry_;
 
-		std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj> theTrsf_;
+		std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj> theTrsf_;
 
 		//- private functions and operators
 
@@ -50,17 +50,17 @@ namespace tnbLib
 			const word& theName
 		);
 
-		TnbPtdModel_EXPORT PtdModel_Profile(const Handle(Geom2d_Curve)&, const std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj>& theTrsf);
+		TnbPtdModel_EXPORT PtdModel_Profile(const Handle(Geom2d_Curve)&, const std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj>& theTrsf);
 
-		TnbPtdModel_EXPORT PtdModel_Profile(Handle(Geom2d_Curve) &&, std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj>&&);
+		TnbPtdModel_EXPORT PtdModel_Profile(Handle(Geom2d_Curve) &&, std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj>&&);
 
 
 		//- public functions and operators
 
 		inline void SetGeometry(const Handle(Geom2d_Curve)&);
 		inline void SetGeometry(Handle(Geom2d_Curve) && );
-		inline void SetTrsf(const std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj>&);
-		inline void SetTrsf(std::shared_ptr<GeoLib::AffineTrsf_PtsToUnitSqObj>&&);
+		inline void SetTrsf(const std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj>&);
+		inline void SetTrsf(std::shared_ptr<geoLib::AffineTrsf_PtsToUnitSqObj>&&);
 
 		const auto& Geometry() const
 		{

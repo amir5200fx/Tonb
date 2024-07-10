@@ -6,6 +6,7 @@
 #include <Geo2d_SizeFunction.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_QuadMesh.hxx>
+#include <Entity2d_CmpMesh.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Box.hxx>
 

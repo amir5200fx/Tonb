@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{a470da7f-1116-4033-a5d4-d77397414192}</ProjectGuid>
+    <RootNamespace>TnbServer</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(GSL_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(GSL_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbServer_EXPORT_DEFINE</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete\Shape;$(ProjectDir)TnbLib\Server\Objects\Tools\Discret;$(ProjectDir)TnbLib\Server\Objects\Tools;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Newton;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Bisect;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver;$(ProjectDir)TnbLib\Server\Objects\Num\Integration\Adapt;$(ProjectDir)TnbLib\Server\Objects\Num\Integration;$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\OpenFOAM;$(ProjectDir)TnbLib\Server\Objects\Mesh2d;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad\Surface;$(ProjectDir)TnbLib\Server\Objects\Cad\Tools;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Boolean;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Interpl;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Discret;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\RevCrv;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\SplitCrv;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\CalcLength;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Ellipse;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Circle;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Rectangular;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Segment;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Area;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Curve;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\BndBox;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo\Trsf;$(ProjectDir)TnbLib\Server\Objects\Geo\Ray;$(ProjectDir)TnbLib\Server\Objects\Geo\Trsf;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global\Bool;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Tools;$(ProjectDir)TnbLib\Server\Error;$(ProjectDir)TnbLib\Server\Ws2;$(ProjectDir)TnbLib\Server\Socket\TCP;$(ProjectDir)TnbLib\Server\Socket;$(ProjectDir)TnbLib\Server\Server;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbMeshPost\include;$(SolutionDir)TnbMeshBLayer\include;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;zlibstatd.lib;dld.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbServer_EXPORT_DEFINE</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Tools\Discrete\Shape;$(ProjectDir)TnbLib\Server\Objects\Tools\Discret;$(ProjectDir)TnbLib\Server\Objects\Tools;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Newton;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver\Bisect;$(ProjectDir)TnbLib\Server\Objects\Num\NonLinSolver;$(ProjectDir)TnbLib\Server\Objects\Num\Integration\Adapt;$(ProjectDir)TnbLib\Server\Objects\Num\Integration;$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\OpenFOAM;$(ProjectDir)TnbLib\Server\Objects\Mesh2d;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad\Surface;$(ProjectDir)TnbLib\Server\Objects\Cad\Tools;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Boolean;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Interpl;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\Discret;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\RevCrv;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\SplitCrv;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools\CalcLength;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Tools;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Ellipse;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Circle;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Rectangular;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Segment;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Area;$(ProjectDir)TnbLib\Server\Objects\Cad2d\Curve;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\BndBox;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo\Trsf;$(ProjectDir)TnbLib\Server\Objects\Geo\Ray;$(ProjectDir)TnbLib\Server\Objects\Geo\Trsf;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global\Bool;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Tools;$(ProjectDir)TnbLib\Server\Error;$(ProjectDir)TnbLib\Server\Ws2;$(ProjectDir)TnbLib\Server\Socket\TCP;$(ProjectDir)TnbLib\Server\Socket;$(ProjectDir)TnbLib\Server\Server;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbMeshPost\include;$(SolutionDir)TnbMeshBLayer\include;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;zlibstatd.lib;dld.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Server\Error\Server_Error.hxx" />
+    <ClInclude Include="TnbLib\Server\Macros\Server_Macros.hxx" />
+    <ClInclude Include="TnbLib\Server\module\Server_Module.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_CalcPntOnCurve.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve_List.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_FirstParCurve.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_LastParCurve.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Rectangular\Server_Cad2dObj_Rectangular_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean\Server_Cad2dObj_Boolean_Subtract_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength_Info.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret_Info.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv_GetParam.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv\Server_Cad2dObj_RevCrv.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv\Server_Cad2dObj_SplitCrv.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Cad\Surface\Server_CadObj_Surface.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\BndBox\Server_Geo2dObj_BndBox.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_Compts.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d_F1.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Mesh2d\Server_Mesh2dObj.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Mesh\Server_MeshObj.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg_Info.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver_Info.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver_Info.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Tools\Discrete\Shape\Server_ToolsObj_DiscrtShape2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Server\Server.hxx" />
+    <ClInclude Include="TnbLib\Server\Socket\Server_SockAddr.hxx" />
+    <ClInclude Include="TnbLib\Server\Socket\Server_Socket.hxx" />
+    <ClInclude Include="TnbLib\Server\Socket\TCP\Server_SockAddr_TCP.hxx" />
+    <ClInclude Include="TnbLib\Server\Tools\Server_Tools.hxx" />
+    <ClInclude Include="TnbLib\Server\Ws2\Server_Ws2.hxx" />
+    <ClInclude Include="TnbLib\Server\Ws2\Server_WsaStartup.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Area\Server_Cad2dObj_Area_Manager.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Circle\Server_Cad2dObj_Circle_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_CalcPntOnCurve.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_Curve_List.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_FirstParCurve.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Curve\Server_Cad2dObj_LastParCurve.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Ellipse\Server_Cad2dObj_Ellipse_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Rectangular\Server_Cad2dObj_Rectangular_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Segment\Server_Cad2dObj_Segment2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Boolean\Server_Cad2dObj_Boolean_Subtract_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\CalcLength\Server_Cad2dObj_CalcCrvLength_Info.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Discret\Server_Cad2dObj_Discret_Info.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\Interpl\Server_Cad2dObj_Interpl_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\PrjPntCrv\Server_Cad2dObj_PrjPntCrv_GetParam.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\RevCrv\Server_Cad2dObj_RevCrv.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad2d\Tools\SplitCrv\Server_Cad2dObj_SplitCrv.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Cad\Surface\Server_CadObj_Surface.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Axis\Server_GeoObj_Axis2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\BndBox\Server_Geo2dObj_BndBox.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_Compts.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d_List.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Ray\Server_GeoObj_Ray2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Server_Geo2dObj.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Trsf\Server_GeoObj_Trsf2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d_F1.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Bool\Server_GlobalObj_Bool.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Mesh2d\Server_Mesh2dObj.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Mesh\Server_MeshObj.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Num\Integration\Adapt\Server_NumObj_AdaptInteg_Info.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Bisect\Server_NumObj_BisectNonLinSolver_Info.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Num\NonLinSolver\Newton\Server_NumObj_NewtonNonLinSolver_Info.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\OpenFOAM\Server_FoamObj.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Tools\Discrete\Shape\Server_ToolsObj_DiscrtShape2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Server\Server.cxx" />
+    <ClCompile Include="TnbLib\Server\Server\Server_Functs.cxx" />
+    <ClCompile Include="TnbLib\Server\Server\Server_Inits.cxx" />
+    <ClCompile Include="TnbLib\Server\Socket\Server_SockAddr.cxx" />
+    <ClCompile Include="TnbLib\Server\Socket\Server_Socket.cxx" />
+    <ClCompile Include="TnbLib\Server\Socket\TCP\Server_SockAddr_TCP.cxx" />
+    <ClCompile Include="TnbLib\Server\Tools\Server_Tools.cxx" />
+    <ClCompile Include="TnbLib\Server\Ws2\Server_WsaStartup.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
+      <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbCad\TnbCad.vcxproj">
+      <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbMeshBLayer\TnbMeshBLayer.vcxproj">
+      <Project>{18a866bf-3e6f-4187-b0eb-6c8235b0587f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbMeshPost\TnbMeshPost.vcxproj">
+      <Project>{f6a0cee5-4eae-4894-8342-4b86b2a97480}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbMesh\TnbMesh.vcxproj">
+      <Project>{00cf3b69-2a41-4038-8e73-fde99df1478a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbNumAlg\TnbNumAlg.vcxproj">
+      <Project>{9d2ace52-928f-4b06-aecd-3a7cef4f63bb}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

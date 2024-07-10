@@ -49,12 +49,17 @@ namespace tnbLib
 		// Private functions and operators [8/17/2023 aamir]
 
 		TnbMeshPost_EXPORT void WriteHeader(std::fstream&) const;
+		TnbMeshPost_EXPORT void WriteHeader(std::stringstream&) const;
 		TnbMeshPost_EXPORT void WriteCoordinates(std::fstream&) const;
+		TnbMeshPost_EXPORT void WriteCoordinates(std::stringstream&) const;
 		TnbMeshPost_EXPORT void WriteElements(std::fstream&) const;
+		TnbMeshPost_EXPORT void WriteElements(std::stringstream&) const;
 		//void WriteGroups(OFstream&) const;
 		//void WriteBoundaries(OFstream&) const;
 
 		TnbMeshPost_EXPORT void WriteElement(const std::shared_ptr<Geo_ElemGeom>&, std::fstream&) const;
+		TnbMeshPost_EXPORT void WriteElement(const std::shared_ptr<Geo_ElemGeom>&, std::stringstream&) const;
+
 
 	public:
 
@@ -73,6 +78,7 @@ namespace tnbLib
 		const auto& Mesh() const { return theMesh_; }
 
 		TnbMeshPost_EXPORT void Perform(const std::string& theName);
+		TnbMeshPost_EXPORT void Perform(std::stringstream& theStream);
 
 		void SetMesh(const std::shared_ptr<Geo3d_FVMesh>& theMesh) { theMesh_ = theMesh; }
 		void SetMesh(std::shared_ptr<Geo3d_FVMesh>&& theMesh) { theMesh_ = std::move(theMesh); }

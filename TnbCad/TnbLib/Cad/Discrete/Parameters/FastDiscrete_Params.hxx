@@ -2,6 +2,8 @@
 #ifndef _FastDiscrete_Params_Header
 #define _FastDiscrete_Params_Header
 
+#include <Global_Serialization.hxx>
+
 #include <Standard_TypeDef.hxx>
 #include <Precision.hxx>
 
@@ -42,6 +44,22 @@ namespace tnbLib
 		//! Parameter to check the deviation of triangulation and interior of
 		//! the face
 		Standard_Boolean  ControlSurfaceDeflection;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned short verbose)
+		{
+			ar& Angle;
+			ar& Deflection;
+			ar& MinSize;
+			ar& InParallel;
+			ar& Relative;
+			ar& AdaptiveMin;
+			ar& InternalVerticesMode;
+			ar& ControlSurfaceDeflection;
+		}
 
 	public:
 

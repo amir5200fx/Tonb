@@ -278,7 +278,7 @@ namespace tnbLib
 			if (k >= DEFAULT_MAX_CYCLES)
 			{
 				FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const;")
-					<< "It's look like the algorithm trapped in an infinite loop" << endl
+					<< "It looks like the algorithm trapped in an infinite loop" << endl
 					<< " - Unable to find the triangle which encompassed the point" << endl
 					<< abort(FatalError);
 			}

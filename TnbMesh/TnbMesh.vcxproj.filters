@@ -2284,6 +2284,24 @@
     <Filter Include="TnbLib\BndLayer\Info">
       <UniqueIdentifier>{c42d46ab-9ff7-41ee-a53e-f58181686e03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Volume">
+      <UniqueIdentifier>{31d88ac2-5db1-4ae3-a268-7818e658f846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Volume\2d">
+      <UniqueIdentifier>{1c48388d-897b-400e-a236-e7184ef276fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon">
+      <UniqueIdentifier>{97ef5b70-336a-429c-9981-45208fdd7afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Shape">
+      <UniqueIdentifier>{f67c9f28-ad2a-4848-bd5d-df67a4866480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Volume\3d">
+      <UniqueIdentifier>{dfc7d269-8025-484a-8875-f4106c1a6afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\MultiFun">
+      <UniqueIdentifier>{f1738a28-c646-4abd-9396-a59ba96c99c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5553,6 +5571,18 @@
     <ClInclude Include="TnbLib\BndLayer\Info\Mesh_BndLayer_Info.hxx">
       <Filter>TnbLib\BndLayer\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Mesh2d_SizeMapVolume.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Shape\Mesh2d_SizeMapShape.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon\Mesh2d_SizeMapPolygon.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_Multi.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7285,6 +7315,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\BndLayer\Info\Mesh_BndLayer_Info.cxx">
       <Filter>TnbLib\BndLayer\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Mesh_SizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Mesh2d_SizeMapVolume.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Shape\Mesh2d_SizeMapShape.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon\Mesh2d_SizeMapPolygon.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Mesh2d_SizeMapVolumeIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Shape\Mesh2d_SizeMapShapeIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon\Mesh2d_SizeMapPolygonIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Volume\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_Multi.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_MultiIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

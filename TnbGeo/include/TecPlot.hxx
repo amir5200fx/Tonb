@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <array>
+#include <sstream>
 
 namespace tnbLib
 {
@@ -20,6 +21,11 @@ namespace tnbLib
 
 	namespace Io
 	{
+		TnbGeo_EXPORT void WriteVariables
+		(
+			const word& theVariables,
+			std::stringstream& theStream
+		);
 
 		TnbGeo_EXPORT void WriteVariables
 		(
@@ -30,7 +36,20 @@ namespace tnbLib
 		TnbGeo_EXPORT void WritePointsVariables
 		(
 			const std::vector<Pnt2d>& thePoints,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void WritePointsVariables
+		(
+			const std::vector<Pnt2d>& thePoints,
 			OFstream& File
+		);
+
+		TnbGeo_EXPORT void WriteFeTriangleZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTriangles,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void WriteFeTriangleZone
@@ -44,6 +63,13 @@ namespace tnbLib
 		(
 			const Standard_Integer NbNodes,
 			const Standard_Integer NbTriangles,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void WriteFeQuadrilateralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTriangles,
 			OFstream& theFile
 		);
 
@@ -51,7 +77,25 @@ namespace tnbLib
 		(
 			const Standard_Integer NbNodes,
 			const Standard_Integer NbTets,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void WriteFeTetrahedralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTets,
 			OFstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements, OFstream& theFile);
+		TnbGeo_EXPORT void WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements, std::stringstream& theStream);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeTriangularZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTris,
+			const Standard_Integer NbVar,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void WriteCellCenteredFeTriangularZone
@@ -67,7 +111,23 @@ namespace tnbLib
 			const Standard_Integer NbNodes,
 			const Standard_Integer NbTris,
 			const Standard_Integer NbVar,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeTriangular3DZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTris,
+			const Standard_Integer NbVar,
 			OFstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeTetrahedralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTets,
+			const Standard_Integer NbVar,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void WriteCellCenteredFeTetrahedralZone
@@ -82,7 +142,20 @@ namespace tnbLib
 		(
 			const Standard_Integer NbNodes,
 			const Standard_Integer NbBricks,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void WriteFeBrickZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbBricks,
 			OFstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteIorderedZone
+		(
+			const Standard_Integer NbNodes,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void WriteIorderedZone
@@ -103,8 +176,24 @@ namespace tnbLib
 		void WriteFiled
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt2d>& thePoints,
+			std::stringstream& theStream
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteFiled
+		(
+			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints,
 			OFstream& File
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteFiled
+		(
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			std::stringstream& theStream
 		);
 
 		template<class Type, size_t nbVAR>
@@ -113,6 +202,14 @@ namespace tnbLib
 			const std::vector<connectivity::triple>& Triangles,
 			const std::vector<std::array<Type, nbVAR>>& var,
 			OFstream& File
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::triple>& Triangles,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void ExportMesh
@@ -124,6 +221,27 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void ExportMesh
 		(
+			const std::vector<Pnt2d>&,
+			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>&,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>&,
+			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>&,
+			OFstream&
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>&,
+			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>&,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
 			OFstream& File
@@ -131,9 +249,23 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void ExportMesh
 		(
+			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::triple>& Triangles,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
 			const std::vector<Pnt3d>&,
 			std::vector<std::shared_ptr<Entity3d_CmpConnect>>&,
 			OFstream&
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>&,
+			std::vector<std::shared_ptr<Entity3d_CmpConnect>>&,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void ExportMesh
@@ -146,8 +278,36 @@ namespace tnbLib
 		TnbGeo_EXPORT void ExportMesh
 		(
 			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::quadruple>& theElements,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple_3d>& theElements,
+			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple_3d>& theElements,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::dual>& Triangles,
 			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::dual>& Triangles,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void ExportMesh
@@ -160,8 +320,22 @@ namespace tnbLib
 		TnbGeo_EXPORT void ExportMesh
 		(
 			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::triple>& Triangles,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
 			const std::vector<connectivity::dual>& Triangles,
 			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::dual>& Triangles,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void ExportMesh
@@ -171,6 +345,18 @@ namespace tnbLib
 			OFstream&
 		);
 
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple>& theTets,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportMesh(const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>&,
+		                              OFstream&);
+		TnbGeo_EXPORT void ExportMesh(const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>&,
+		                              std::stringstream&);
+
 		TnbGeo_EXPORT void ExportCurve
 		(
 			const std::vector<Pnt3d>& Points,
@@ -179,8 +365,20 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void ExportCurve
 		(
+			const std::vector<Pnt3d>& Points,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportCurve
+		(
 			const std::vector<Pnt2d>& Points,
 			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportCurve
+		(
+			const std::vector<Pnt2d>& Points,
+			std::stringstream& theStream
 		);
 
 		TnbGeo_EXPORT void ExportPoints
@@ -191,8 +389,20 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void ExportPoints
 		(
+			const std::vector<Pnt3d>& Points,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void ExportPoints
+		(
 			const std::vector<Pnt2d>& Points,
 			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportPoints
+		(
+			const std::vector<Pnt2d>& Points,
+			std::stringstream& theStream
 		);
 
 		template<class Type, size_t nbVAR>
@@ -210,6 +420,16 @@ namespace tnbLib
 		(
 			const word& theVarNames,
 			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::triple>& Triangles,
+			std::stringstream& theStream
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
 			OFstream& File
@@ -221,8 +441,28 @@ namespace tnbLib
 			const word& theVarNames,
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::triple>& Triangles,
+			std::stringstream& theStream
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
 			const std::vector<connectivity::quadruple>& theTets,
 			OFstream& File
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple>& theTets,
+			std::stringstream& theStream
 		);
 
 		template<class Type, size_t nbVAR>
@@ -233,6 +473,16 @@ namespace tnbLib
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
 			OFstream& File
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::triple>& Triangles,
+			std::stringstream& theStream
 		);
 	}
 }

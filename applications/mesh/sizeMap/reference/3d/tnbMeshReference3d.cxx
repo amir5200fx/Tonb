@@ -376,6 +376,9 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << " This application is aimed to create a reference values for mesh3d algorithm." << endl << endl;
+			Info << " - Requirements: 'region' directory." << endl;
+			Info << "   The region is a bounding box of the model. So you just need to put the bounding box of " << endl
+				<< "   the region (model) in the sub directory or the path of it." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

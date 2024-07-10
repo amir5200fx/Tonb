@@ -398,7 +398,6 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	auto intersection = std::make_shared<Cad2d_PlanePlaneIntersection>();
 	Debug_Null_Pointer(intersection);
-
 	auto plane1 = 
 		Cad2d_Plane::MakePlane(thePlane1->OuterWire(), nullptr, thePlane1->System());
 	Debug_Null_Pointer(plane1);
@@ -411,24 +410,34 @@ tnbLib::Cad2d_Boolean::Subtract
 	intersection->Perform();
 	Debug_If_Condition_Message(NOT intersection->IsDone(), "the algorithm is not performed!");
 
-	auto subdivide = std::make_shared<Cad2d_Subdivide>();
-	Debug_Null_Pointer(subdivide);
-
-	subdivide->LoadIntersectionAlgorithm(intersection);
-
-	subdivide->Perform();
-
-	Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");
-
-	/*std::cout << "nb of entities: " << intersection->NbEntities() << std::endl;
-	if (NOT intersection->NbEntities())
+	
+	std::shared_ptr<Cad2d_Plane> sub0;
+	std::shared_ptr<Cad2d_Plane> sub1;
+	if (intersection->NbEntities())
 	{
-		return std::vector<std::shared_ptr<Cad2d_Plane>>();
-	}*/
+		auto subdivide = std::make_shared<Cad2d_Subdivide>();
+		Debug_Null_Pointer(subdivide);
+		
+		//std::cout << "nb of entities: " << intersection->NbEntities() << std::endl;
+		subdivide->LoadIntersectionAlgorithm(intersection);
 
-	const auto& sub0 = subdivide->ModifiedPlane0();
-	const auto& sub1 = subdivide->ModifiedPlane1();
+		subdivide->Perform();
+		Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");
 
+		/*std::cout << "nb of entities: " << intersection->NbEntities() << std::endl;
+		if (NOT intersection->NbEntities())
+		{
+			return std::vector<std::shared_ptr<Cad2d_Plane>>();
+		}*/
+
+		sub0 = subdivide->ModifiedPlane0();
+		sub1 = subdivide->ModifiedPlane1();
+	}
+	else
+	{
+		sub0 = thePlane0;
+		sub1 = thePlane1;
+	}
 	Debug_Null_Pointer(sub0);
 	Debug_Null_Pointer(sub1);
 
@@ -468,7 +477,6 @@ tnbLib::Cad2d_Boolean::Subtract
 	{
 		return std::vector<std::shared_ptr<Cad2d_Plane>>();
 	}
-
 	Standard_Integer k1 = 0;
 	for (const auto& x : edges1)
 	{
@@ -539,7 +547,6 @@ tnbLib::Cad2d_Boolean::Subtract
 		Pln_Tools::PlaceVertices(x);
 		Pln_Tools::SetPrecision(x);
 	}
-
 	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
 	return std::move(planes);
 

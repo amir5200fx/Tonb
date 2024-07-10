@@ -267,7 +267,20 @@ tnbLib::Geo_Tools::IsPointInsidePolygon
 	const Geo2d_CGALPolygonCache& thePolygon
 )
 {
-	return thePolygon.Polygon().oriented_side(get_cgalPoint(theCoord)) IS_EQUAL CGAL::ON_POSITIVE_SIDE;
+	const auto& poly = thePolygon.Polygon();
+	CGAL::Bounded_side side = CGAL::bounded_side_2(poly.begin(), poly.end(), get_cgalPoint(theCoord));
+	if (side == CGAL::ON_BOUNDED_SIDE) {
+		return Standard_True;
+	}
+	else if (side == CGAL::ON_BOUNDARY) {
+		// Point is on the boundary of the polygon.;
+		return Standard_False;
+	}
+	else {
+		// Point is outside the polygon;
+		return Standard_False;
+	}
+	//return thePolygon.Polygon().oriented_side(get_cgalPoint(theCoord)) IS_EQUAL CGAL::ON_POSITIVE_SIDE;
 }
 
 Standard_Boolean 

@@ -18,7 +18,7 @@ namespace tnbLib
 	class Entity_Polygon
 	{
 
-		typename typedef entity_coord<Point>::coord coord;
+		using coord = typename entity_coord<Point>::coord;
 		typedef std::vector<Point> pointList;
 
 		/*Private Data*/
@@ -148,7 +148,9 @@ namespace tnbLib
 
 		void ExportToPlt(std::fstream& File) const;
 		void ExportToPlt(OFstream& File) const;
+		void ExportToPlt(std::stringstream&) const;
 		void ExportToVtk(OFstream&) const;
+		void ExportToVtk(std::stringstream&) const;
 
 		static void Check(const Entity_Polygon<Point>&);
 	};

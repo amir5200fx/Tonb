@@ -13,4 +13,12 @@ void tnbLib::GeoMesh2d_SingleMetricBackground::ExportToPlt(OFstream& File) const
 		<< abort(FatalError);
 }
 
+template <>
+void tnbLib::GeoMesh2d_SingleMetricBackground::ExportToVtk(OFstream& File) const
+{
+	FatalErrorIn(FunctionSIG) <<
+		"Not supposed to be called this function." << endl
+		<< abort(FatalError);
+}
+
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::GeoMesh2d_SingleMetricBackground);

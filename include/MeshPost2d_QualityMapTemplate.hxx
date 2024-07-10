@@ -7,6 +7,7 @@
 #include <memory>
 
 #include <Standard_TypeDef.hxx>
+#include <boost/serialization/serialization.hpp>
 
 namespace tnbLib
 {
@@ -21,6 +22,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<MetricMap> theMetrics_;
+
+		// Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			// empty body
+		}
 
 	public:
 
