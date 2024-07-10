@@ -403,10 +403,30 @@ tnbLib::Voyage_Tools::CalcLength
 		const auto& p0 = points.at(i - 1);
 		const auto& p1 = points.at(i);
 
-		auto dist = theMetric.CalcDistance(p0, p1);
+		const auto dist = theMetric.CalcDistance(p0, p1);
 		tot_dist += dist;
 	}
 	return tot_dist;
+}
+
+Standard_Real tnbLib::Voyage_Tools::CalcDistance(const Pnt2d& theP0, const Pnt2d& theP1)
+{
+	constexpr auto radioTerrestre = 6372797.56085;
+
+	const auto latitude1 = Geo_Tools::DegToRadian(theP0.X());
+	const auto longitude1 = Geo_Tools::DegToRadian(theP0.Y());
+
+	const auto latitude2 = Geo_Tools::DegToRadian(theP1.X());
+	const auto longitude2 = Geo_Tools::DegToRadian(theP1.Y());
+
+	const auto haversine =
+		std::pow(std::sin((1.0 / 2.0) * (latitude2 - latitude1)), 2) +
+		std::cos(latitude1) * std::cos(latitude2) * std::pow(std::sin(1.0 / 2.0 * (longitude2 - longitude1)), 2);
+
+	const auto temp = 2.0 * std::asin(std::min(1.0, std::sqrt(haversine)));
+	const auto distancia_puntos = radioTerrestre * temp;
+
+	return distancia_puntos;
 }
 
 std::vector<Standard_Real> 
@@ -539,6 +559,16 @@ tnbLib::Voyage_Tools::ConvertToVoyageSystem
 	return std::move(tri);
 }
 
+tnbLib::Pnt2d
+tnbLib::Voyage_Tools::ConvertVoyageToGlobal(const Pnt2d& xy)
+{
+	const double signLat = xy.X() >= 0 ? 1.0 : -1.0;
+	const double signLon = xy.Y() >= 0 ? 1.0 : -1.0;
+	const auto dx = CalcDistance({ 0,0 }, { xy.X(), 0 });
+	const auto dy = CalcDistance({ 0,0 }, { 0, xy.Y() });
+	return { signLat * dx, signLon * dy };
+}
+
 Standard_Real 
 tnbLib::Voyage_Tools::KtsToKmh(const Standard_Real x)
 {
@@ -615,7 +645,7 @@ void tnbLib::Voyage_Tools::CalcCoord3d
 	const VoyageGeo_Earth& theEarth
 )
 {
-	auto surface = theEarth.Surface();
+	const auto surface = theEarth.Surface();
 	Debug_Null_Pointer(surface);
 	CalcCoord3d(theNodes, *surface);
 }
@@ -628,24 +658,57 @@ tnbLib::Voyage_Tools::CalcTurningAngle
 	const Pnt2d& theP2
 )
 {
-	const Dir2d dir(theP0, theP1);
-	gp_Trsf2d trsf;
-	trsf.SetTransformation(gp::OX2d(), gp_Ax2d(theP0, dir));
-	const auto p0 = theP0.Transformed(trsf);
-	const auto p1 = theP1.Transformed(trsf);
-	const auto p2 = theP2.Transformed(trsf);
-	const auto dx = p2.X() - p1.X();
-	const auto dy = p2.Y() - p1.Y();
-	// if the angle < 0 it means that the turning diretion would be toward starboard. [9/11/2023 Payvand]
-	const auto angle = std::atan(dy / dx);
+	
+	const Vec2d v0(theP0, theP1);
+	const Vec2d v1(theP1, theP2);
+	const auto angle = v0.Angle(v1);
 	if (angle < 0)
-	{
-		return PI + angle;
+	{// turns right
+		return angle + PI;
 	}
 	else
-	{
-		return PI + angle;
+	{// turns left
+		return angle - PI;
 	}
+	//const auto n = v0.Crossed(v1);
+	//if (std::abs(n) <= 1.0E-6)
+	//{
+	//	return 0;
+	//}
+	//const auto angle = v0.Angle(v1);
+	//if (n < 0)
+	//{// turns right
+	//	std::cout << "turning right = " << angle << std::endl;
+	//	return PI - angle;
+	//}
+	//else
+	//{// turns left
+	//	std::cout << "turning left = " << angle << std::endl;
+	//	return PI + angle;
+	//}
+	//const Dir2d dir(theP0, theP1);
+	//gp_Trsf2d trsf;
+	//trsf.SetTransformation(gp::OX2d(), gp_Ax2d(theP0, dir));
+	//const auto p0 = theP0.Transformed(trsf);
+	//const auto p1 = theP1.Transformed(trsf);
+	//const auto p2 = theP2.Transformed(trsf);
+	//std::cout << "#######################" << std::endl;
+	//std::cout << "p0 = " << p0 << std::endl;
+	//std::cout << "p1 = " << p1 << std::endl;
+	//std::cout << "p2 = " << p2 << std::endl;
+	//std::cout << "#######################" << std::endl;
+	//const auto dx = p2.X() - p1.X();
+	//const auto dy = p2.Y() - p1.Y();
+	//// if the angle < 0 it means that the turning diretion would be toward starboard. [9/11/2023 Payvand]
+	//const auto angle = std::atan(dy / dx);
+	//if (angle < 0)
+	//{
+	//	return PI + angle;
+	//}
+	//else
+	//{
+	//	return PI + angle;
+	//}
 }
 
 void tnbLib::Voyage_Tools::ConvertToVoyageSystem

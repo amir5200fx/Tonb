@@ -27,7 +27,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Entity2d_Polygon> theOffsets_;
+		std::vector<std::shared_ptr<Entity2d_Polygon>> theOffsets_;
 		std::shared_ptr<VoyageGeo_Earth> theEarth_;
 
 		Standard_Integer theNbSamples_;
@@ -50,7 +50,7 @@ namespace tnbLib
 
 		VoyageGeo_PathGeneration
 		(
-			const std::shared_ptr<Entity2d_Polygon>& theOffsets, 
+			const std::vector<std::shared_ptr<Entity2d_Polygon>>& theOffsets,
 			const std::shared_ptr<VoyageGeo_Earth>& theEarth
 		)
 			: theOffsets_(theOffsets)
@@ -70,8 +70,8 @@ namespace tnbLib
 
 		TnbVoyage_EXPORT void Perform();
 
-		void SetOffsets(const std::shared_ptr<Entity2d_Polygon>& theOffsets) { theOffsets_ = theOffsets; }
-		void SetOffsets(std::shared_ptr<Entity2d_Polygon>&& theOffsets) { theOffsets_ = std::move(theOffsets); }
+		void SetOffsets(const std::vector<std::shared_ptr<Entity2d_Polygon>>& theOffsets) { theOffsets_ = theOffsets; }
+		void SetOffsets(std::vector<std::shared_ptr<Entity2d_Polygon>>&& theOffsets) { theOffsets_ = std::move(theOffsets); }
 		void SetEarth(const std::shared_ptr<VoyageGeo_Earth>& theEarth) { theEarth_ = theEarth; }
 	
 		void SetNbSamples(const Standard_Integer theNbSamples) { theNbSamples_ = theNbSamples; }

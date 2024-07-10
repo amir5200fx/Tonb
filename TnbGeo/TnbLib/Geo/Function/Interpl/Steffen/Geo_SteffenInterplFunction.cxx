@@ -23,6 +23,7 @@ Standard_Real tnbLib::Geo_SteffenInterplFunction::Value(const Standard_Real x) c
 			<< "the application is not performed." << endl
 			<< abort(FatalError);
 	}
+	//std::cout << "x = " << x << ", steffan = " << gsl_spline_eval(spline_steffen_, x, acc_) << std::endl;
 	return gsl_spline_eval(spline_steffen_, x, acc_);
 }
 

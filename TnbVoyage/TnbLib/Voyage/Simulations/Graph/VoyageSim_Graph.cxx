@@ -92,6 +92,20 @@ tnbLib::VoyageSim_Graph::RetrieveNodes() const
 	return std::move(nodes);
 }
 
+std::vector<std::pair<tnbLib::VoyageSim_Graph::Position, tnbLib::VoyageSim_Graph::Time>> tnbLib::VoyageSim_Graph::
+RetrieveTempPositions() const
+{
+	auto nodes = RetrieveNodes();
+	std::vector<std::pair<Position, Time>> points;
+	for (const auto& x: nodes)
+	{
+		Debug_Null_Pointer(x);
+		auto pt = std::make_pair(Position{ x->Coord() }, Time{ x->Time() });
+		points.emplace_back(std::move(pt));
+	}
+	return std::move(points);
+}
+
 void tnbLib::VoyageSim_Graph::ExportToPlt(OFstream& theFile) const
 {
 	const auto nodes = RetrieveNodes();
@@ -124,4 +138,12 @@ void tnbLib::VoyageSim_Graph::ExportToPlt(OFstream& theFile) const
 		ids.emplace_back(std::move(id));
 	}
 	Io::ExportMesh(coords, ids, theFile);
+}
+
+tnbLib::Pnt3d
+tnbLib::VoyageSim_Graph::ConvertToPnt3d(const std::pair<Position, Time>& thePaired)
+{
+	auto [pos, time] = thePaired;
+	Pnt3d pt{ pos.value.X(),pos.value.Y(),time.value };
+	return std::move(pt);
 }

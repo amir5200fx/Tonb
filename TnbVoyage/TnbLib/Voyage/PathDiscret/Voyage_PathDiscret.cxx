@@ -60,7 +60,7 @@ void tnbLib::Voyage_PathDiscret::Perform()
 	{
 		const auto& curve = x->Curve();
 		const auto& geom = curve->Geometry();
-		auto alg = 
+		const auto alg = 
 			std::make_shared<Mesh2d_CurveAnIso>
 			(
 				geom, 

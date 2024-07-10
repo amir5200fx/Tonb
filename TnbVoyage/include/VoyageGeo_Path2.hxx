@@ -68,6 +68,8 @@ namespace tnbLib
 		void SetEarth(const std::shared_ptr<VoyageGeo_Earth>& theEarth) { theEarth_ = theEarth; }
 		void SetEarth(std::shared_ptr<VoyageGeo_Earth>&& theEarth) { theEarth_ = std::move(theEarth); }
 
+		TnbVoyage_EXPORT void SetMesh(const std::vector<std::shared_ptr<Entity2d_Polygon>>&) const;
+
 	};
 }
 
