@@ -44,6 +44,7 @@ namespace tnbLib
 
 void tnbLib::legLib::Aft3d_Volume::CreateBoundary(const Entity3d_TopoTriangulation& theTriangulation)
 {
+	std::cout << "creating the nodes...\n";
 	// Creating the nodes
 	std::vector<std::shared_ptr<Aft3d_FaceNode>> nodes;
 	nodes.reserve(theTriangulation.NbPoints());
@@ -53,6 +54,8 @@ void tnbLib::legLib::Aft3d_Volume::CreateBoundary(const Entity3d_TopoTriangulati
 		auto node = std::make_shared<Aft3d_FaceNode>(++nb_nodes, pt);
 		nodes.emplace_back(std::move(node));
 	}
+	std::cout << "nb of nodes = " << nodes.size() << "\n";
+	std::cout << "creating the edges...\n";
 	// Creating the edges
 	std::vector<std::shared_ptr<Aft3d_FaceEdge>> edges;
 	edges.reserve(theTriangulation.NbSegments());
@@ -64,12 +67,15 @@ void tnbLib::legLib::Aft3d_Volume::CreateBoundary(const Entity3d_TopoTriangulati
 		const auto& node0 = nodes.at(Index_Of(v0));
 		const auto& node1 = nodes.at(Index_Of(v1));
 		auto edge = std::make_shared<Aft3d_FaceEdge>(++nb_edges, Aft3d_FaceEdge::Array2{node0, node1});
-		edges.emplace_back(std::move(edge));
-
 		// connecting the nodes and the edge
+		Debug_Null_Pointer(node0);
 		node0->InsertEdge(edge);
+		Debug_Null_Pointer(node1);
 		node1->InsertEdge(edge);
+		// Putting the edge into the array
+		edges.emplace_back(std::move(edge));
 	}
+	std::cout << "creating the facets...\n";
 	// Creating the facets
 	std::vector<std::shared_ptr<Aft3d_Facet>> facets;
 	facets.reserve(theTriangulation.NbConnectivity());
@@ -83,16 +89,41 @@ void tnbLib::legLib::Aft3d_Volume::CreateBoundary(const Entity3d_TopoTriangulati
 		const auto& n1 = nodes.at(Index_Of(v1));
 		const auto& n2 = nodes.at(Index_Of(v2));
 		auto facet = std::make_shared<Aft3d_BoundaryFacet>(++nb_facets, Aft3d_Facet::NodeArray3{n0, n1, n2});
-		facets.emplace_back(std::move(facet));
-
 		// connecting the nodes and the face
 		n0->InsertFacet(facet);
 		n1->InsertFacet(facet);
 		n2->InsertFacet(facet);
+		// Putting the facet into the array
+		facets.emplace_back(std::move(facet));
 	}
+	std::cout << "connecting the edges and the facets...\n";
 	// connecting the edges to the facets
+	const auto& tas = theTriangulation.TAS();
 	const auto& segments = theTriangulation.Segments();
-	for (const auto& edge: edges)
+	for (size_t i = 0; i < tas.size(); i++)
+	{
+		const auto e0 = tas.at(i).Value(0);
+		const auto e1 = tas.at(i).Value(1);
+		std::cout << "e0 = " << e0 << ", e1 = " << e1 << "\n";
+		const auto& edge = edges.at(i);
+		if (e0)
+		{
+			const auto& facet = facets.at(Index_Of(e0));
+			auto apex = createBoundary::find_apex(edge, facet);
+			
+			facet->SetEdge(facet->FindNodeId(apex), edge);
+			edge->InsertFacet(facet);
+		}
+		if (e1)
+		{
+			const auto& facet = facets.at(Index_Of(e1));
+			auto apex = createBoundary::find_apex(edge, facet);
+
+			facet->SetEdge(facet->FindNodeId(apex), edge);
+			edge->InsertFacet(facet);
+		}
+	}
+	/*for (const auto& edge: edges)
 	{
 		const auto id = edge->Index();
 		const auto& seg = segments.at(Index_Of(id));
@@ -124,7 +155,7 @@ void tnbLib::legLib::Aft3d_Volume::CreateBoundary(const Entity3d_TopoTriangulati
 			facet->SetEdge(facet->FindNodeId(apex), edge);
 			edge->InsertFacet(facet);
 		}
-	}
+	}*/
 	theBoundary_ = 
 		std::make_shared<std::vector<std::shared_ptr<Aft3d_Facet>>>
 	(std::move(facets));

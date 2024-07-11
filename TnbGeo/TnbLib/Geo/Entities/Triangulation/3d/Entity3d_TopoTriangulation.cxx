@@ -220,7 +220,7 @@ namespace tnbLib
 				const auto edge0 = make_edge(node0, node1, nb_edges);
 				const auto edge1 = make_edge(node1, node2, nb_edges);
 				const auto edge2 = make_edge(node2, node0, nb_edges);
-
+				std::cout << "edge0 = " << edge0.first->Index() << ", edge1 = " << edge1.first->Index() << ", edge2 = " << edge2.first->Index() << "\n";
 				auto element = std::make_shared<Element>(++nb_elements, Element::Array3{edge0.first, edge1.first, edge2.first});
 
 				edge0.second ? edge0.first->SetLeft(element) : edge0.first->SetRight(element);
