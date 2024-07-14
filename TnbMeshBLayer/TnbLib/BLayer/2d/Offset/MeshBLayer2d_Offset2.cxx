@@ -110,7 +110,7 @@ void tnbLib::MeshBLayer2d_Offset2::CalculateStrip()
 				const auto da = i * du * ang0;
 				auto u1 = u.Rotated(-da);
 				//auto di = d0 + i * dd;
-				auto pt = p0 + d * u1;
+				auto pt = p0 + u1 * d;
 				auto node = std::make_shared<LeftNode>(pt);
 				node->paired = node0;
 				lefts.emplace_back(node);
@@ -129,7 +129,7 @@ void tnbLib::MeshBLayer2d_Offset2::CalculateStrip()
 			{
 				const auto da = i * du * ang1;
 				auto u1 = u.Rotated(-da);
-				auto pt = p0 + d * u1;
+				auto pt = p0 + u1 * d;
 				auto node = std::make_shared<RightNode>(pt);
 				node->paired = node0;
 				rights.emplace_back(node);
