@@ -168,6 +168,7 @@ namespace tnbLib
 			}
 			return std::move(coords);
 		}
+
 	}
 }
 
@@ -210,7 +211,7 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 
 	const auto expB = *Domain();
 
-	const auto mergCrit = 1.0E-5 * expB.Diameter();
+	const auto mergCrit = 1.0E-5 /** expB.Diameter()*/;
 
 	ApproxInfo()->ApproxInfo()->SetApprox(2.0 * elemSize);
 	ApproxInfo()->ApproxInfo()->SetMinSize(1.9 * elemSize);
@@ -254,10 +255,13 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 			//approx.LoadCurve(adaptor, curve->FirstParameter(), curve->LastParameter(), ApproxInfo());
 			approx.Perform();
 			Debug_If_Condition_Message(NOT approx.IsDone(), "the application is not performed.");
-
-			const auto& poly = approx.Mesh();
-			//std::cout << "nb of points: " << poly->NbPoints() << std::endl;
-			for (const auto& p : poly->Points())
+			auto us = Mesh_ApproxCurve<Handle(Geom2d_Curve)>::Tessellate(*approx.Mesh(), 100);
+			std::vector<Pnt2d> poly;
+			for (auto u: us)
+			{
+				poly.emplace_back(curve->Value(u));
+			}
+			for (const auto& p : poly)
 			{
 				auto b = Geo_BoxTools::GetBox<Pnt2d>(p, mergCrit);
 
@@ -319,7 +323,7 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			engine.SetMaxUnbalancing(8);
+			engine.SetMaxUnbalancing(4);
 			engine.PostBalance();
 		}
 
@@ -409,8 +413,8 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
 
-	OFstream my_file("srf.plt");
-	bMesh->ExportToPlt(my_file);
+	/*OFstream my_file("srf.plt");
+	bMesh->ExportToPlt(my_file);*/
 
 	ChangeBackMesh() = std::move(bMesh);
 	Change_IsDone() = Standard_True;
