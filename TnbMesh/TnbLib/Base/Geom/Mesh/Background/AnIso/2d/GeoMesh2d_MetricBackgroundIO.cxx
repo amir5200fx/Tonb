@@ -21,4 +21,11 @@ void tnbLib::GeoMesh2d_SingleMetricBackground::ExportToVtk(OFstream& File) const
 		<< abort(FatalError);
 }
 
+template <>
+void tnbLib::GeoMesh2d_SingleMetricBackground::ExportToVtk(std::ostream& stream) const
+{
+	NotImplemented;
+}
+
+
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::GeoMesh2d_SingleMetricBackground);
