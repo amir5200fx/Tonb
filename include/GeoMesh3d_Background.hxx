@@ -25,7 +25,8 @@ namespace tnbLib
 	TnbMesh_EXPORT void GeoMesh3d_SingleBackground::ExportToPlt(OFstream & File) const;
 	template <>
 	TnbMesh_EXPORT void GeoMesh3d_SingleBackground::ExportToVtk(OFstream& File) const;
-
+	template<>
+	TnbMesh_EXPORT void GeoMesh3d_SingleBackground::ExportToVtk(std::ostream&) const;
 }
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::GeoMesh3d_Background);

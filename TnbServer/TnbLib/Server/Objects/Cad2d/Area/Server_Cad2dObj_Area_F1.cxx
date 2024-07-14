@@ -49,11 +49,12 @@ void tnbLib::Server_Cad2dObj_Area_F1::Construct(const std::string& theValue)
 	}
 	const auto modeler = std::make_shared<Cad2d_Modeler>();
 	modeler->Import(curve_list);
-
+	modeler->SetMaxRadius(1.e-6); // this should be available through settings
 	try
 	{
 		Cad2d_Modeler::selctList l;
 		modeler->SelectAll(l);
+		//Cad2d_Modeler::verbose = 1;
 		modeler->MakePlanes(l);
 
 		if (modeler->NbPlanes() > 1)
@@ -125,7 +126,11 @@ void tnbLib::Server_Cad2dObj_Area_GetCurves::Construct(const std::string& theVal
 		}
 		std::vector<std::shared_ptr<Pln_Entity>> entities;
 		area->RetrieveSegmentsTo(entities);
-		std::sort(entities.begin(), entities.end(), [](const std::shared_ptr<Pln_Entity>& e0, const std::shared_ptr<Pln_Entity>& e1) {return e0->Index() < e1->Index(); });
+		std::sort(entities.begin(), entities.end(),
+		          [](const std::shared_ptr<Pln_Entity>& e0, const std::shared_ptr<Pln_Entity>& e1)
+		          {
+			          return e0->Index() < e1->Index();
+		          });
 		std::vector<std::string> edges;
 		for (const auto& ent: entities)
 		{

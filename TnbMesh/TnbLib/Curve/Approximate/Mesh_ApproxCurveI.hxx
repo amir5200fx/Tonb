@@ -2,6 +2,27 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <algorithm>
+template <class CurveType>
+tnbLib::Mesh_ApproxCurve<CurveType>::Mesh_ApproxCurve()
+	: theCurve_(0)
+	, theU0_(0)
+	, theU1_(0)
+{
+	// empty body
+}
+
+template <class CurveType>
+tnbLib::Mesh_ApproxCurve<CurveType>::Mesh_ApproxCurve(CurveType theCurve, Standard_Real theU0, Standard_Real theU1,
+                                                      std::shared_ptr<Mesh_ApproxCurveInfo> theInfo)
+	: theCurve_(std::move(theCurve))
+	, theU0_(theU0)
+	, theU1_(theU1)
+	, theInfo_(std::move(theInfo))
+{
+	// empty body
+}
+
+
 namespace tnbLib
 {
 
@@ -181,20 +202,43 @@ inline void tnbLib::Mesh_ApproxCurve<CurveType>::Perform()
 	std::vector<Segment> segments;
 	Subdivide(segments);
 
-	std::sort(segments.begin(), segments.end(), [](const Segment& s0, const Segment& s1) {return s0.Mean() < s1.Mean(); });
+	// Sort the parameters
+	std::sort(segments.begin(), segments.end(), [](const Segment& s0, const Segment& s1)
+		{
+			return s0.Mean() < s1.Mean();
+		});
 
 	theMesh_ = std::make_shared<chain>();
-	auto& pts = theMesh_->Points();
-
-	pts.reserve(segments.size() + 1);
-
-	const auto& curve = *Curve();
-	pts.push_back(curve.Value(U0()));
-
-	for (const auto& seg : segments)
-	{
-		auto p = curve.Value(seg.X1);
-		pts.push_back(std::move(p));
-	}
+	auto& us = *theMesh_;
+	us.reserve(segments.size() + 1);
+	us.emplace_back(U0());
+	std::for_each(segments.begin(), segments.end(), [&us](const Segment& s)
+		{
+			us.emplace_back(s.X1);
+		});
 	Change_IsDone() = Standard_True;
+}
+
+template <class CurveType>
+void tnbLib::Mesh_ApproxCurve<CurveType>::SetCurve(CurveType theCurve)
+{
+	theCurve_ = std::move(theCurve);
+}
+
+template <class CurveType>
+void tnbLib::Mesh_ApproxCurve<CurveType>::SetU0(Standard_Real theU0)
+{
+	theU0_ = theU0;
+}
+
+template <class CurveType>
+void tnbLib::Mesh_ApproxCurve<CurveType>::SetU1(Standard_Real theU1)
+{
+	theU1_ = theU1;
+}
+
+template <class CurveType>
+void tnbLib::Mesh_ApproxCurve<CurveType>::SetInfo(std::shared_ptr<Mesh_ApproxCurveInfo> theInfo)
+{
+	theInfo_ = std::move(theInfo);
 }

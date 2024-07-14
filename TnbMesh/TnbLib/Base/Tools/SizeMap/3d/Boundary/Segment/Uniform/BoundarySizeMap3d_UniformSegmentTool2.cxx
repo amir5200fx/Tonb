@@ -348,7 +348,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 
 	const auto expB = *Domain();
 
-	const auto mergCrit = 1.0E-5*expB.Diameter();
+	const auto mergCrit = 1.0E-5/**expB.Diameter()*/;
 
 	ApproxInfo()->SetApprox(2.0*elemSize);
 	ApproxInfo()->SetMinSize(1.9*elemSize);
@@ -407,10 +407,14 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			//approx.LoadCurve(adaptor, curve->FirstParameter(), curve->LastParameter(), ApproxInfo());
 			approx.Perform();
 			Debug_If_Condition_Message(NOT approx.IsDone(), "the application is not performed.");
-
-			const auto& poly = approx.Mesh();
+			auto us = Mesh_ApproxCurve<Handle(Geom2d_Curve)>::Tessellate(*approx.Mesh(), 100);
+			std::vector<Pnt3d> poly;
+			for (auto u : us)
+			{
+				poly.emplace_back(curve->Value(u));
+			}
 			//std::cout << "nb of points: " << poly->NbPoints() << std::endl;
-			for (const auto& p : poly->Points())
+			for (const auto& p : poly)
 			{
 				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
 

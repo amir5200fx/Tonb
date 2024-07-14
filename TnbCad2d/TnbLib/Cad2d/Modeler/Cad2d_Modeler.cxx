@@ -1090,28 +1090,25 @@ tnbLib::Cad2d_Modeler::MakePlanes
 	}
 
 	const auto tol = Radius();
-
 	if (verbose) Info << " - making the corners..." << endl;
 	//- retrieve the corners
-	auto corners = cad2dLib::Modeler_Tools::MakeCorners(items, tol);
+	const auto corners = cad2dLib::Modeler_Tools::MakeCorners(items, tol);
 
 	if (verbose) Info << " - constructing the merged edges..." << endl;
-	auto mergedEdges = cad2dLib::Modeler_Tools::ConstructMergedEdges(corners);
-
+	const auto mergedEdges = cad2dLib::Modeler_Tools::ConstructMergedEdges(corners);
 	if (verbose)
 	{
 		Info << " - retrieving wires from the items..." << endl;
 	}
 
-	auto wires = Pln_Tools::RetrieveWiresNonManifold(mergedEdges);
-
+	const auto wires = Pln_Tools::RetrieveWiresNonManifold(mergedEdges);
 	if (verbose)
 	{
 		Info << " - " << wires.size() << " nb. of wires have been detected." << endl;
 		Info << " - retrieving the planes..." << endl;
 	}
 
-	if (NOT wires.size())
+	if (wires.empty())
 	{
 		if (verbose)
 		{
