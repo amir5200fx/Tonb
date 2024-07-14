@@ -92,7 +92,7 @@ tnbLib::Pln_Tools::IsManifold
 	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 )
 {
-	auto nodes = RetrieveVertices(theEdges);
+	const auto nodes = RetrieveVertices(theEdges);
 	for (const auto& x : nodes)
 	{
 		Debug_Null_Pointer(x);
@@ -1001,27 +1001,20 @@ tnbLib::Pln_Tools::RetrieveVertices
 	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 )
 {
-	Adt_AvlTree<std::shared_ptr<Pln_Vertex>> compact;
-	compact.SetComparableFunction(&Pln_Vertex::IsLess);
-
-	for (const auto& x : theEdges)
+	auto comp_node = [](const std::shared_ptr<Pln_Vertex>& v0, const std::shared_ptr<Pln_Vertex>& v1)
 	{
-		Debug_Null_Pointer(x);
-		compact.InsertIgnoreDup(x->Vertex(Pln_Edge::edgePoint::first));
-		compact.InsertIgnoreDup(x->Vertex(Pln_Edge::edgePoint::last));
-	}
-
-	if (compact.Size() < theEdges.size())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "duplicate data has been detected!" << endl
-			<< abort(FatalError);
-	}
-
-	std::vector<std::shared_ptr<Pln_Vertex>> list;
-	compact.RetrieveTo(list);
-
-	return std::move(list);
+		return Pln_Vertex::IsLess(v0, v1);
+	};
+	std::set<std::shared_ptr<Pln_Vertex>, decltype(comp_node)> comp(comp_node);
+	std::for_each(theEdges.begin(), theEdges.end(), [&comp](const std::shared_ptr<Pln_Edge>& edge)
+		{
+			Debug_Null_Pointer(edge);
+			comp.insert(edge->FirstVtx());
+			comp.insert(edge->LastVtx());
+		});
+	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
+	std::copy(comp.begin(), comp.end(), std::back_inserter(vertices));
+	return std::move(vertices);
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Segment>> 
