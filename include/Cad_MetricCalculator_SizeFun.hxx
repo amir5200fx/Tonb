@@ -4,6 +4,9 @@
 
 #include <Cad_MetricCalculator.hxx>
 
+#include <functional>
+#include <Pnt3d.hxx>
+
 namespace tnbLib
 {
 
@@ -18,9 +21,13 @@ namespace tnbLib
 			: public Cad_MetricCalculator
 		{
 
+		public:
+
+			typedef std::function<Standard_Real(const Pnt3d&)> SizeFunction;
+
 			/*Private Data*/
 
-			Standard_Real(*SizeFunction)(const Pnt3d&);
+			SizeFunction theSizeFunction_;
 
 		public:
 
@@ -32,15 +39,15 @@ namespace tnbLib
 
 			// constructors [1/1/2022 Amir]
 
-			explicit MetricCalculator_SizeFun(Standard_Real(*sizeFun)(const Pnt3d&))
-				: SizeFunction(sizeFun)
+			explicit MetricCalculator_SizeFun(const SizeFunction& theSizeFunction)
+				: theSizeFunction_(theSizeFunction)
 			{}
 
 			// public functions and operators [1/1/2022 Amir]
 
-			void SetSizeFunction(Standard_Real(*sizeFun)(const Pnt3d&))
+			void SetSizeFunction(const SizeFunction& theSizeFunction)
 			{
-				SizeFunction = sizeFun;
+				theSizeFunction_ = theSizeFunction;
 			}
 
 			// override functions and operators [1/1/2022 Amir]

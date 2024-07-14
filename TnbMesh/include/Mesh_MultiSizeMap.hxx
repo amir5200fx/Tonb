@@ -74,6 +74,8 @@ namespace tnbLib
 
 		void ConnectTopology() override;
 		void ExportToPlt(OFstream& File) const override;
+		void ExportToVtk(OFstream& File) const override;
+		void ExportToVtk(std::ostream&) const override;
 
 		void SetSizeMaps(const std::vector<std::shared_ptr<BackMeshData>>& theMaps)
 		{

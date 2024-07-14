@@ -1,6 +1,8 @@
 ﻿#include <Aft_MetricPrcsr.hxx>
 #include <VoyageFun_CostFunction_Resistane.hxx>
 #include <VoyageFun_ProfiledCalmResist.hxx>
+#include <VoyageSim_MinTime.hxx>
+#include <VoyageSim_MinTime_Cost.hxx>
 #include <Voyage_Profile.hxx>
 #include <Voyage_RepairNet.hxx>
 #include <VoyageSim_MinFuel.hxx>
@@ -17,6 +19,9 @@
 #include <Voyage_PathOnEarth.hxx>
 #include <Voyage_SizeMap.hxx>
 #include <Voyage_Waypoints.hxx>
+#include <Voyage_RefPath.hxx>
+#include <Voyage_AdaptPath.hxx>
+#include <Voyage_AdaptPath_Info.hxx>
 #include <VoyageMesh_SizeMap.hxx>
 #include <VoyageMesh_BaseSize.hxx>
 #include <VoyageMesh_BaseSizeInfo.hxx>
@@ -49,6 +54,7 @@
 #include <Entity2d_Box.hxx>
 #include <Pnt2d.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
@@ -104,7 +110,7 @@ auto loadData(const std::string& fileName)
 int main()
 {
 	{// settings
-		//VoyageMesh_BaseSize::verbose = 2;
+		VoyageMesh_BaseSize::verbose = 2;
 	}
 
 	auto earth = std::make_shared<VoyageGeo_Earth>();
@@ -135,28 +141,34 @@ int main()
 		//tri->ExportToPlt(myFile);
 	}
 
-	auto offsets = std::make_shared<Entity2d_Polygon>();
+	std::vector<std::shared_ptr<Entity2d_Polygon>> offsets;
 	{
-		auto& pts = offsets->Points();
+		//auto& pts = offsets->Points();
 
 		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.0, 1.0 })); // yaghubi example
 		//pts.push_back(Voyage_Tools::ConvertToUV({ 2.0, 2.0 }));
 
 		//pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
-		pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
+		/*pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 26.4, 56.4 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 8.0, 77.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 5.8, 80.1 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 6.7, 94.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 7.0, 97.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
-		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));*/
+
+		IFstream ref_path_file("PathBandarAbbasToSingapore.txt");
+		auto ref_path = std::make_shared<Voyage_RefPath>();
+		ref_path->Load(ref_path_file);
+
+		offsets = ref_path->Path();
 
 		//Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
 		//std::exit(1);
 	}
 
-	
+	//std::exit(1);
 
 	auto metricInfo = std::make_shared<Voyage_MetricInfo>();
 	std::shared_ptr<VoyageGeo_Path2> path;
@@ -170,8 +182,9 @@ int main()
 		std::cout << " The path is successfully generated." << std::endl;
 	}
 
-	Standard_Real dist = 0;
-	{// Calculate the distance [8/27/2023 Payvand]
+	{
+		Standard_Real dist = 0;
+		// Calculate the distance [8/27/2023 Payvand]
 		auto alg = std::make_shared<Voyage_Distance>(path, metricInfo);
 		alg->Perform();
 
@@ -183,19 +196,37 @@ int main()
 	}
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
-	Standard_Real hour = 5.0;
+	Standard_Real hour = 38;
 	auto h = vel * hour;
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
 	std::cout << std::endl;
-	auto voyagePath = std::make_shared<Entity2d_Chain>();
-	{// approximate the path [8/27/2023 Payvand]
+	{
+		auto voyagePath = std::make_shared<Entity2d_Chain>();
+		// approximate the path [8/27/2023 Payvand]
 		auto alg = std::make_shared<Voyage_PathDiscret>(path, metricInfo, h);
 		alg->Perform();
 
-		for (const auto& x : alg->Path()->Curves())
+		auto alg_info = std::make_shared<Voyage_AdaptPath_Info>();
+		alg_info->SetNbSamples(2);
+		alg_info->SetNbLevels(1);
+		
+		std::vector<std::shared_ptr<Entity2d_Polygon>> subs;
+		for (const auto& x: alg->Path()->Curves())
 		{
-			auto chain = Geo_Tools::RetrieveChain(*x->Mesh());
+			subs.emplace_back(x->Mesh());
+		}
+		{
+			auto alg = std::make_shared<Voyage_AdaptPath>(subs, alg_info);
+			alg->Perform();
+			subs = alg->Refined();
+		}
+
+		path->SetMesh(subs);
+		
+		for (const auto& x : subs)
+		{
+			auto chain = Geo_Tools::RetrieveChain(*x);
 			voyagePath->Add(*chain);
 		}
 
@@ -208,11 +239,11 @@ int main()
 		auto alg = std::make_shared<Voyage_PathOnEarth>(earth, path);
 		alg->Perform();
 
-		//OFstream planeFile("polygons.plt");
+		OFstream planeFile("polygons.plt");
 		for (const auto& x : alg->Path()->Curves())
 		{
 			const auto& mesh = x->Mesh();
-			//mesh->ExportToPlt(planeFile);
+			mesh->ExportToPlt(planeFile);
 		}
 
 		for (const auto& x : alg->Path3D())
@@ -224,7 +255,7 @@ int main()
 		std::cout << " The three-dimensional path is successfully discretized." << std::endl;
 	}
 
-	OFstream myVoyagePath("voyage.txt");
+	/*OFstream myVoyagePath("voyage.txt");
 	const auto& pts = voyagePath->Points();
 	for (const auto& x : voyagePath->Connectivity())
 	{
@@ -234,21 +265,25 @@ int main()
 			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i0))) 
 			<< "  " 
 			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i1))) << endl;
-	}
+	}*/
 
 	// creating the size maps [9/3/2023 Payvand]
 	Voyage_SizeMap::verbose = 1;
+	auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
 	auto sizeMap = std::make_shared<Voyage_SizeMap>();
 	sizeMap->SetPath(path);
 	sizeMap->SetInfo(metricInfo);
+	sizeMap->SetSizeDistb(algInfo);
 	sizeMap->Perform();
 	//return 1;
 	Voyage_Waypoints::verbose = 1;
 	auto wayPoints = std::make_shared<Voyage_Waypoints>();
 	wayPoints->SetPath(path);
 	wayPoints->SetInfo(metricInfo);
-	wayPoints->SetPortSizeFunction(sizeMap->Port());
-	wayPoints->SetStarboardSizeFunction(sizeMap->Startboard());
+	// WARNING: For somne reason the size maps of the port and the starboard are reversed!
+	// I will investigate this in future.
+	wayPoints->SetPortSizeFunction(sizeMap->Startboard());
+	wayPoints->SetStarboardSizeFunction(sizeMap->Port());
 	wayPoints->SetSize(h);
 	// assign the state function (dry & wet function)
 	wayPoints->SetStateFun([](const Pnt2d&) {return true; });
@@ -272,7 +307,9 @@ int main()
 		//mesh->ExportToVtk(triFile1);
 		//wayPoints->PortMesh()->ExportToPlt(triFile1);
 	}
+	//std::exit(1);
 	//PAUSE;
+	
 	const auto grid = wayPoints->Grid();
 	{
 		const auto alg = std::make_shared<VoyageWP_Connect2>();
@@ -286,14 +323,14 @@ int main()
 		auto alg = std::make_shared<Voyage_RepairNet>(grid);
 		alg->Perform();
 	}
-
-	OFstream refPathFile("ref.plt");
-	offsets->ExportToPlt(refPathFile);
+	
+	//OFstream refPathFile("ref.plt");
+	//offsets->ExportToPlt(refPathFile);
 
 	OFstream gridFile("grid.plt");
 	
 	grid->ExportToPlt(gridFile);
-
+	//std::exit(1);
 	std::cout << std::endl;
 	std::cout << " # Simulating the Fuel consumption..." << std::endl;
 	
@@ -354,14 +391,117 @@ int main()
 	double min_vel = 0.5 * avg_vel;
 	double max_vel = 1.2 * avg_vel;
 
-	double maxDay = 3;
-	
-	auto cost_fun = 
-		std::make_shared<VoyageFun_CostFunction_Resistane>
-	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,(maxDay+0.5)*24));
+	auto prcsr =
+		Voyage_Tools::MakeMetricPrcsr
+		(Voyage_Tools::MakeUniformSizeMap(*earth), *earth, *metricInfo);
+	auto my_dist_fun = [prcsr](const Pnt2d& theP0, const Pnt2d& theP1)
+		{
+			return prcsr->CalcDistance(theP0, theP1);
+		};
+
+	auto ocean_fun = [](const Pnt2d& coord, const double time)->std::pair<double, double>
+		{
+			return { 1.0,2.0 };
+		};
+
+	constexpr auto nb_of_samples = 5;
+	auto avg_ocean_vel = [ocean_fun, nb_of_samples](const Pnt2d& p0, const double t0, const Pnt2d& p1, const double t1)->std::pair<double, double>
+		{
+			double su = 0, sv = 0;
+			const auto du = 1.0 / static_cast<double>(nb_of_samples - 1);
+			for (int i = 0; i <= nb_of_samples - 1; i++)
+			{
+				const auto p = p0 + i * du * (p1 - p0);
+				const auto t = t0 + i * du * (t1 - t0);
+				auto [u, v] = ocean_fun(p, t);
+				su += u;
+				sv += v;
+			}
+			su /= (nb_of_samples);
+			sv /= (nb_of_samples);
+			return { su, sv };
+		};
 
 	
-	VoyageSim_MinFuel::verbose = 1;
+	auto resist_profile =
+		[avg_ocean_vel, profile](const voyageLib::variable::Path& path, const voyageLib::variable::Distance& dist)->voyageLib::variable::Resistance
+		{
+			const auto& s0 = path.start;
+			const auto& s1 = path.end;
+
+			const auto time0 = s0.time.value;
+			const auto time1 = s1.time.value;
+			const auto dt = time1 - time0;
+			if (dt <= 1.e-6)
+			{
+				return { 0 };
+			}
+			const auto& p0 = s0.coord;
+			const auto& p1 = s1.coord;
+
+			const auto d = dist.value;
+			const auto sog = d / dt * 0.278; // kmph to mps
+			const auto ship_dir = 
+				Vec2d(
+					Voyage_Tools::ConvertVoyageToGlobal(p1),
+					Voyage_Tools::ConvertToVoyageSystem(p0)
+				).Normalized();
+			const auto [u, v] = avg_ocean_vel(p0, time0, p1, time1);
+			if (std::sqrt(u * u + v * v) <= 10E-12)
+			{
+				return { profile->Value(sog) };
+			}
+			const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
+			if (flow_vel < 0)
+			{// if the ocean flow is against the velocity vector of the ship
+				const auto U = std::abs(flow_vel) + sog;
+				if (NOT INSIDE(U, profile->Lower(), profile->Upper()))
+				{
+					return { std::numeric_limits<float>::max() };
+				}
+				return { profile->Value(U) };
+			}
+			else
+			{
+				auto U = sog - std::abs(flow_vel);
+				if (U < profile->Lower())
+				{
+					return { 0 };
+				}
+				return { profile->Value(U) };
+			}
+		};
+
+	double maxDay = 3;
+	
+	auto bisect_info = std::make_shared<NumAlg_BisectionSolver_Info>();
+
+	auto cost_fun = std::make_shared<VoyageSim_MinTime_Cost>();
+	cost_fun->resistFunc = resist_profile;
+	cost_fun->SetInfo(bisect_info);
+	cost_fun->SetVelRange({ {min_vel}, {max_vel} });
+
+	auto sim = std::make_shared<VoyageSim_MinTime>();
+	sim->SetNet(grid);
+	sim->SetPower({ 500.0 });
+	sim->SetDistFunc(my_dist_fun);
+	sim->SetResistFunc([cost_fun](
+		const var::State& s0, 
+		const Pnt2d& p1,
+		const var::Distance& dist,
+		const var::Power& power)-> var::Time
+	{
+			return cost_fun->CalcTime(s0, p1, power, dist);
+	});
+
+	sim->Perform();
+	
+	/*auto cost_fun = 
+		std::make_shared<VoyageFun_CostFunction_Resistane>
+	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,(maxDay+0.5)*24));*/
+
+	
+	/*VoyageSim_MinFuel::verbose = 1;
 	auto sim = std::make_shared<VoyageSim_MinFuel>();
 
 	sim->SetMinVel(min_vel);
@@ -375,13 +515,7 @@ int main()
 	sim->SetBaseTime(0);
 	sim->SetMaxDay(maxDay);
 	{
-		auto prcsr = 
-			Voyage_Tools::MakeMetricPrcsr
-		(Voyage_Tools::MakeUniformSizeMap(*earth), *earth, *metricInfo);
-		auto my_dist_fun = [prcsr](const Pnt2d& theP0, const Pnt2d& theP1)
-		{
-			return prcsr->CalcDistance(theP0, theP1);
-		};
+		
 		sim->SetDistFunc(my_dist_fun);
 
 		auto weather_fun = 
@@ -406,18 +540,19 @@ int main()
 
 		sim->Init();
 		sim->Perform(grid->Departure()->Index());
-	}
+	}*/
 
 	//auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
-	auto best_path = sim->RetrievePath(sim->LowestCostNode());
+	auto best_path = sim->RetrievePath(sim->Arrival());
 
 	std::cout << " path size = " << best_path.size() << std::endl;
 
-	for (const auto& [loc, time, vel, power] : best_path)
+	for (const auto& [loc, time, vel] : best_path)
 	{
 		std::cout << " - coord: (" << loc.value << ")"
 			<< ", time: " << time.value
 			<< ", velocity: " << vel.value
+			<< ", power: " << vel.value
 			<< std::endl;
 	}
 

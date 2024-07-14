@@ -6,6 +6,7 @@
 #include <Geo2d_GraphNodeFwd.hxx>
 #include <Geo2d_GraphEdgeFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Entity_Connectivity.hxx>
 #include <Geo_Module.hxx>
 
@@ -43,11 +44,24 @@ namespace tnbLib
 				const std::vector<connectivity::triple>& theIds
 			);
 
+		static TnbGeo_EXPORT std::vector<std::shared_ptr<Geo2d_GraphEdge>>
+			GetEdges
+			(
+				const std::vector<std::shared_ptr<Geo2d_GraphNode>>&,
+				const std::vector<connectivity::dual>& theIds
+			);
+
 		static TnbGeo_EXPORT std::shared_ptr<Geo2d_Graph> 
 			GetGraph
 			(
 				const Entity2d_Triangulation&
 			);
+
+		static TnbGeo_EXPORT std::shared_ptr<Geo2d_Graph>
+		GetGraph
+		(
+			const Entity2d_Polygon&
+		);
 
 		static TnbGeo_EXPORT std::vector<std::shared_ptr<Geo2d_GraphNode>> 
 			RetrieveNodes

@@ -42,17 +42,14 @@ namespace tnbLib
 
 		Debug_If_Condition(h <= gp::Resolution());
 		const auto invH = 1.0 / h;
-		//std::cout << "h = " << h << ", inv h = " << invH << std::endl;
-		//std::cout << "tol = " << tol << std::endl;
-		Standard_Real d0, d1;
 		do
 		{
-			//std::cout << "do..." << std::endl;
-			d0 = map.CalcUnitDistance(theV0, P) * invH;
-			d1 = map.CalcUnitDistance(theV1, P) * invH;
+			const Standard_Real d0 = map.CalcUnitDistance(theV0, P)/* * invH*/;
+			const Standard_Real d1 = map.CalcUnitDistance(theV1, P) /** invH*/;
+
 			Debug_If_Condition(d0 <= gp::Resolution());
 			Debug_If_Condition(d1 <= gp::Resolution());
-			//std::cout << "d0: " << d0 << ", d1: " << d1 << std::endl;
+			
 			auto Pa = theV0 + (P - theV0) / d0;
 			auto Pb = theV1 + (P - theV1) / d1;
 
@@ -73,13 +70,70 @@ namespace tnbLib
 				P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
 			}
 		} while (++Iter <= info.MaxNbIters());
-		//PAUSE;
+
 		if (NOT domain.IsInside(P))
 		{
 			P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
 		}
 
-		theP0 = std::move(P);
+		theP0 = P;
+		return cond;
+	}
+
+	// Returns TRUE if the algorithm doesn't get converged
+	auto CorrectSegment
+	(
+		const Geo2d_MetricPrcsrAnIso& theMap, 
+		const Pnt2d& theP0,
+		Pnt2d& theP1,
+		const Standard_Real h,
+		const Aft_SizeCorr_IterativeInfo& theInfo
+	)
+	{
+		auto P = theP1;
+
+		const auto& map = theMap;
+		const auto& info = theInfo;
+
+		const auto omega = info.UnderRelaxation();
+		const auto tol = info.Tolerance();
+
+		const auto& domain = map.BoundingBox();
+		if (NOT domain.IsInside(P))
+		{
+			P = MeshBase_Tools::CorrectCoord(theP0, P, domain);
+		}
+		Standard_Boolean cond = Standard_True;
+		Standard_Integer Iter = 0;
+
+		Debug_If_Condition(h <= gp::Resolution());
+		const auto invH = 1.0 / h;
+		do
+		{
+			const auto dis = map.CalcUnitDistance(theP0, P) * invH;
+			Debug_If_Condition(dis <= gp::Resolution());
+			auto Pn = theP0 + (P - theP0) / dis;
+			auto dP = Pn - P;
+
+			P += omega * dP;
+
+			if (ABS(1.0 - dis) <= tol)
+			{
+				cond = Standard_False;
+				break;
+			}
+
+			if (NOT domain.IsInside(P))
+			{
+				P = MeshBase_Tools::CorrectCoord(theP0, P, domain);
+			}
+		}
+		while (++Iter <= info.MaxNbIters());
+		if (NOT domain.IsInside(P))
+		{
+			P = MeshBase_Tools::CorrectCoord(theP0, P, domain);
+		}
+		theP1 = P;
 		return cond;
 	}
 
@@ -91,16 +145,24 @@ namespace tnbLib
 		const Aft_SizeCorr_IterativeInfo& theInfo
 	)
 	{
+		constexpr auto half = 0.5;
 		const auto& edge = theEdge;
 		Debug_Null_Pointer(edge.Node0());
 		Debug_Null_Pointer(edge.Node1());
 
+		const auto centre = theEdge.Centre();
+		auto v0 = theEdge.Node0()->Coord();
+		auto v1 = theEdge.Node1()->Coord();
+		
+		CorrectSegment(theMap, centre, v0, half, theInfo);
+		CorrectSegment(theMap, centre, v1, half, theInfo);
+
 		return CorrectOptNode_1
 		(
 			theMap,
-			edge.Node0()->Coord(),
-			edge.Node1()->Coord(),
-			edge.Centre(), theP0, 0.866, theInfo
+			v0,
+			v1,
+			centre, theP0, 1.0, theInfo
 		);
 	}
 
@@ -178,7 +240,7 @@ void tnbLib::VoyageMesh_CorrOptNode_Iterative::Perform
 			P,
 			*Front(), theInfo
 		);*/
-	auto cond = Correct_1(*MetricMap(), P, *Front(), theInfo);
+	const auto cond = Correct_1(*MetricMap(), P, *Front(), theInfo);
 	if (cond AND NOT theInfo.IgnoreNonConvergency())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -192,6 +254,6 @@ void tnbLib::VoyageMesh_CorrOptNode_Iterative::Perform
 	}
 
 	IsConverged_ = !cond;
-	CoordRef() = std::move(P);
+	CoordRef() = P;
 	Change_IsDone() = Standard_True;
 }

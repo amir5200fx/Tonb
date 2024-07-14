@@ -935,7 +935,7 @@ int main(int argc, char* argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile(name [optional])" << endl
+				<< " - loadFiles()" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl

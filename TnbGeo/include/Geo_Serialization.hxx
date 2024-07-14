@@ -19,6 +19,8 @@
 #include <gp_Mat.hxx>
 #include <gp_Vec.hxx>
 #include <gp_Vec2d.hxx>
+#include <gp_Trsf2d.hxx>
+#include <gp_Trsf.hxx>
 
 #include <TColgp_Array1OfPnt.hxx>
 #include <TColgp_Array1OfPnt2d.hxx>
@@ -277,6 +279,33 @@ namespace boost
 			gp_XYZ xyz;
 			ar & xyz;
 			g = gp_Vec(xyz);
+		}
+
+		template<class Archive>
+		void save(Archive & ar, const gp_Trsf2d & g, const unsigned int)
+		{
+			ar& g.ScaleFactor();
+			ar& g.Form();
+			ar& g.HVectorialPart();
+			ar& g.TranslationPart();
+		}
+
+		template<class Archive>
+		void load(Archive & ar, gp_Trsf2d & g, const unsigned int /*version*/)
+		{
+			Standard_Real scale;
+			ar& scale;
+			gp_TrsfForm shape;
+			ar& shape;
+			gp_Mat2d matrix;
+			ar& matrix;
+			gp_XY loc;
+			ar& loc;
+
+			g.ScaleRef() = scale;
+			g.ShapeRef() = shape;
+			g.MatrixRef() = matrix;
+			g.LocRef() = loc;
 		}
 
 		template<class Archive>
@@ -549,6 +578,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(gp_Ax2)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Ax2d)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Mat2d)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Mat)
+BOOST_SERIALIZATION_SPLIT_FREE(gp_Trsf2d)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Vec2d)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Vec)
 BOOST_SERIALIZATION_SPLIT_FREE(Poly_Triangle)

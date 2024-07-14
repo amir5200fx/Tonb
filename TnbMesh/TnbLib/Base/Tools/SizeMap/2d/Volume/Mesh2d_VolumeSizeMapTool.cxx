@@ -2,6 +2,8 @@
 
 #include <MeshBase_Tools.hxx>
 #include <Mesh2d_VolumeSizeMapTool_Info.hxx>
+#include <Mesh2d_SizeMapPolygon.hxx>
+#include <Mesh2d_SizeMapShape.hxx>
 #include <Mesh_SetSourcesNode.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <GeoMesh2d_Background.hxx>
@@ -14,6 +16,10 @@
 #include <Geo2d_DelTri.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo2d_BalPrTree.hxx>
+#include <Geo2d_Graph.hxx>
+#include <Geo2d_SegmentGraphEdge.hxx>
+#include <Geo2d_GraphNode.hxx>
+#include <Geo_GraphTools.hxx>
 #include <Geo_AdTree.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Polygon.hxx>
@@ -183,9 +189,8 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 			<< abort(FatalError);
 	}
 
-	const auto& shapes = Shapes();
+	const auto& shapes = Volumes();
 	if (shapes.empty()) return;
-
 	const auto elemSize = this->GetTargetSurfaceSize();
 	if (verbose)
 	{
@@ -198,23 +203,22 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	for (const auto& x : shapes)
 	{
 		Debug_Null_Pointer(x.second);
-		expB = Geo_BoxTools::Union(expB, x.second->BoundingBox(0));
+		expB = Geo_BoxTools::Union(expB, x.second->CalcBoundingBox());
 	}
 
 	const auto mergCrit = 1.0E-5 * expB.Diameter();
+	//auto discretCrvInfo = std::make_shared<Discret_CurveInfo>();
+	//discretCrvInfo->SetMaxSubdivide(10);
+	//discretCrvInfo->SetMinSubdivide(4);
 
-	auto discretCrvInfo = std::make_shared<Discret_CurveInfo>();
-	discretCrvInfo->SetMaxSubdivide(10);
-	discretCrvInfo->SetMinSubdivide(4);
+	//auto samplesPoints = std::make_shared<Discret_Curve_UniformSamples>();
+	//samplesPoints->SetNbSamples(AlgInfo()->NbSamples());
 
-	auto samplesPoints = std::make_shared<Discret_Curve_UniformSamples>();
-	samplesPoints->SetNbSamples(AlgInfo()->NbSamples());
+	//auto elemSize1 = 2 * elemSize;
 
-	auto elemSize1 = 2 * elemSize;
-
-	auto discretFun = std::make_shared<Discret2d_PlnCurve_UniLengthFun>();
-	discretFun->SetSamples(samplesPoints);
-	discretFun->SetSize(elemSize1);
+	//auto discretFun = std::make_shared<Discret2d_PlnCurve_UniLengthFun>();
+	//discretFun->SetSamples(samplesPoints);
+	//discretFun->SetSize(elemSize1);
 
 	Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
 	engine.SetMaxUnbalancing(AlgInfo()->Unbalancing());
@@ -223,7 +227,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	engine.BUCKET_SIZE = AlgInfo()->BucketSize();
 
 	Standard_Integer nbSources = 0;
-
 	std::vector<Pnt2d> srcCoords;
 	std::vector<std::shared_ptr<hNode>> sources;
 	std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
@@ -236,17 +239,14 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 			const auto& shape = x.second;
 			Debug_Null_Pointer(x);
 
-			const auto& wire = shape->OuterWire();
-
-			auto alg = std::make_shared<Discret2d_Wire>();
-			alg->SetWire(wire);
-			alg->SetInfo(discretCrvInfo);
-			alg->SetFunction(discretFun);
-
-			alg->Perform();
-			Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed!");
-
-			const auto& poly = alg->Polygon();
+			if (auto vol = std::dynamic_pointer_cast<Mesh2d_SizeMapShape>(shape))
+			{
+				vol->SetNbSamples(AlgInfo()->NbSamples());
+				vol->SetSize(2 * elemSize);
+			}
+			shape->Perform();
+			Debug_If_Condition_Message(NOT shape->IsDone(), "the application is not performed.");
+			const auto& poly = shape->Boundary();
 			polygons.push_back(poly);
 			for (const auto& pt : poly->Points())
 			{
@@ -302,7 +302,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 			}
 		}
 	}
-
 	if (verbose)
 	{
 		Info << endl
@@ -326,7 +325,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 				<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
 		}
 	}
-	
 	auto tris = std::make_shared<Entity2d_Triangulation>();
 	Debug_Null_Pointer(tris);
 	{// Triangulation [7/13/2023 Payvand]
@@ -334,13 +332,46 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 		timer.SetInfo(Global_TimerInfo_ms);
 
 		auto [pnts, enginePts] = plnTools::RetrieveNodes(engine, srcCoords, expB, mergCrit);
-		for (const auto& pol : polygons)
+		if (AdaptiveFlag())
 		{
-			auto innerPts = RetrieveInsidePoints(enginePts, *pol);
-			for (const auto& pt : innerPts)
+			static auto calc_length = [](const Geo2d_SegmentGraphEdge& e)
+				{
+					const auto& n0 = e.Node0();
+					const auto& n1 = e.Node1();
+					return n0->Coord().Distance(n1->Coord());
+				};
+			for (const auto& pol: polygons)
 			{
-				auto h = std::make_shared<hNode>(pt, elemSize);
-				sources.push_back(std::move(h));
+				auto graph = Geo_GraphTools::GetGraph(*pol);
+				for (const auto& edge: graph->Edges())
+				{
+					if (auto seg = std::dynamic_pointer_cast<Geo2d_SegmentGraphEdge>(edge.second))
+					{
+						const auto& node = seg->Node0();
+						const auto& neighbors = node->Edges();
+						Standard_Real sum = 0;
+						for (const auto& n: neighbors)
+						{
+							auto neighbor = std::dynamic_pointer_cast<Geo2d_SegmentGraphEdge>(n.second.lock());
+							Debug_Null_Pointer(neighbor);
+							sum += calc_length(*neighbor);
+						}
+						auto h = std::make_shared<hNode>(node->Coord(), sum /static_cast<Standard_Real>(neighbors.size()));
+						sources.push_back(std::move(h));
+					}
+				}
+			}
+		}
+		else
+		{
+			for (const auto& pol : polygons)
+			{
+				auto innerPts = RetrieveInsidePoints(enginePts, *pol);
+				for (const auto& pt : innerPts)
+				{
+					auto h = std::make_shared<hNode>(pt, elemSize);
+					sources.push_back(std::move(h));
+				}
 			}
 		}
 
@@ -353,7 +384,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 		//tris = delTri.Triangulation();
 		tris = delTri.Data();
 	}
-
 	if (verbose)
 	{
 		Info << endl
@@ -384,7 +414,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	bMesh->InitiateCurrentElement();
 	bMesh->SetBoundingBox(std::move(expB));
 	bMesh->Sources().resize(tris->NbPoints(), ReferenceValues()->BaseSize());
-
 	if (verbose)
 	{
 		Info << " Setting the sources into the background mesh..." << endl;
@@ -424,27 +453,27 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	Change_IsDone() = Standard_True;
 }
 
-void tnbLib::Mesh2d_VolumeSizeMapTool::ImportShape
+void tnbLib::Mesh2d_VolumeSizeMapTool::ImportVolume
 (
 	const Standard_Integer theIndex,
-	const std::shared_ptr<Cad2d_Plane>& theShape
+	const std::shared_ptr<Mesh2d_SizeMapVolume>& theShape
 )
 {
-	Global_Tools::Insert(theIndex, theShape, theShapes_);
+	Global_Tools::Insert(theIndex, theShape, theVolumes_);
 }
 
-void tnbLib::Mesh2d_VolumeSizeMapTool::RemoveShape
+void tnbLib::Mesh2d_VolumeSizeMapTool::RemoveVolume
 (
 	const Standard_Integer theIndex
 )
 {
-	auto iter = theShapes_.find(theIndex);
-	if (iter IS_EQUAL theShapes_.end())
+	auto iter = theVolumes_.find(theIndex);
+	if (iter IS_EQUAL theVolumes_.end())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< " the item is not found." << endl
 			<< " - id: " << theIndex << endl
 			<< abort(FatalError);
 	}
-	theShapes_.erase(iter);
+	theVolumes_.erase(iter);
 }

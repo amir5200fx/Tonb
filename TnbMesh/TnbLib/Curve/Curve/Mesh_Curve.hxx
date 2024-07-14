@@ -19,9 +19,9 @@ namespace tnbLib
 
 	class Mesh_Curve_Base
 	{
-
+	public:
 		typedef Mesh_Curve_Info info;
-
+	private:
 		/*Private Data*/
 
 		Standard_Real theFirstParameter_;
@@ -83,7 +83,7 @@ namespace tnbLib
 		: public Global_Done
 		, public Mesh_Curve_Base
 	{
-
+	public:
 		typedef typename meshCurveTraits::point_type<gCurveType, SavePars>::Point Point;
 		//typedef typename cascadeLib::pt_type_from_curve<gCurveType>::ptType Point;
 
@@ -92,7 +92,7 @@ namespace tnbLib
 		typedef Entity_Polygon<Point> chain;
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
 
-
+	private:
 		/*Private Data*/
 
 		Handle(gCurveType) theCurve_;
@@ -107,6 +107,8 @@ namespace tnbLib
 
 		void MakeChain(const std::vector<Standard_Real>& theParameters);
 		void Discretize(const Standard_Real theLength);
+
+		Standard_Real CalcNextParameter(const Standard_Real theLength, const Standard_Real U0) const;
 
 		static Standard_Real
 			CalcNextParameter
@@ -187,6 +189,7 @@ namespace tnbLib
 
 		// return the curve length [7/14/2021 Amir]
 		Standard_Real Perform();
+		Standard_Real NextParameter(const Standard_Real u0);
 
 
 		Standard_Real 

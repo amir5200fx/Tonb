@@ -653,6 +653,30 @@ tnbLib::Geo_Tools::RetrieveTriangulation
 	return std::move(t);
 }
 
+std::shared_ptr<tnbLib::Entity2d_Chain>
+tnbLib::Geo_Tools::RetrieveClosedChain(const Entity2d_Polygon& thePoly)
+{
+	if (NOT thePoly.IsClosed())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "the polygon is not closed!" << endl
+			<< abort(FatalError);
+	}
+	auto chain = std::make_shared<Entity2d_Chain>();
+	Debug_Null_Pointer(chain);
+	std::vector<Pnt2d> pnts;
+	const auto& points = thePoly.Points();
+	for (size_t i = 0; i < points.size() - 1; i++)
+	{
+		pnts.emplace_back(points.at(i));
+	}
+	chain->Points() = std::move(pnts);
+	chain->Connectivity() = 
+		dualConnectivityList_Chain
+	(thePoly.NbPoints() - 2, Standard_True);
+	return std::move(chain);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Chain> 
 tnbLib::Geo_Tools::RetrieveChain
 (

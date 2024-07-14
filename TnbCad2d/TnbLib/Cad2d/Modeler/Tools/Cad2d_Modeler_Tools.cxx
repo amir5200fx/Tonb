@@ -151,10 +151,9 @@ tnbLib::cad2dLib::Modeler_Tools::MakeSegment
 	const Standard_Real theLength
 )
 {
-	const auto V = theLength* gp_Dir2d(cos(theAngle), sin(theAngle));
-	Pnt2d P1(theP0.X() + V.X(), theP0.Y() + V.Y());
-
-	auto edge = MakeSegment(theP0, P1);
+	/*const auto V = theLength* gp_Dir2d(cos(theAngle), sin(theAngle));
+	Pnt2d P1(theP0.X() + V.X(), theP0.Y() + V.Y());*/
+	auto edge = MakeSegment(theP0, /*P1*/theP0 + theLength * Dir2d(cos(theAngle), sin(theAngle)));
 	return std::move(edge);
 }
 

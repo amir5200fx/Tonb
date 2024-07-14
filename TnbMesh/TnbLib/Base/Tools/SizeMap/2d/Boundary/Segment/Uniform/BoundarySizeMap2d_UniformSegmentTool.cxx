@@ -14,6 +14,7 @@
 #include <Geo2d_BasicApprxCurve.hxx>
 #include <Geo2d_BasicApprxCurveAdaptor.hxx>
 #include <Geo2d_BalPrTree.hxx>
+#include <Geo2d_DelTri.hxx>
 #include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Triangulation.hxx>
@@ -167,6 +168,7 @@ namespace tnbLib
 			}
 			return std::move(coords);
 		}
+
 	}
 }
 
@@ -209,7 +211,7 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 
 	const auto expB = *Domain();
 
-	const auto mergCrit = 1.0E-5 * expB.Diameter();
+	const auto mergCrit = 1.0E-5 /** expB.Diameter()*/;
 
 	ApproxInfo()->ApproxInfo()->SetApprox(2.0 * elemSize);
 	ApproxInfo()->ApproxInfo()->SetMinSize(1.9 * elemSize);
@@ -253,10 +255,13 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 			//approx.LoadCurve(adaptor, curve->FirstParameter(), curve->LastParameter(), ApproxInfo());
 			approx.Perform();
 			Debug_If_Condition_Message(NOT approx.IsDone(), "the application is not performed.");
-
-			const auto& poly = approx.Mesh();
-			//std::cout << "nb of points: " << poly->NbPoints() << std::endl;
-			for (const auto& p : poly->Points())
+			auto us = Mesh_ApproxCurve<Handle(Geom2d_Curve)>::Tessellate(*approx.Mesh(), 100);
+			std::vector<Pnt2d> poly;
+			for (auto u: us)
+			{
+				poly.emplace_back(curve->Value(u));
+			}
+			for (const auto& p : poly)
 			{
 				auto b = Geo_BoxTools::GetBox<Pnt2d>(p, mergCrit);
 
@@ -318,7 +323,7 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			engine.SetMaxUnbalancing(8);
+			engine.SetMaxUnbalancing(4);
 			engine.PostBalance();
 		}
 
@@ -338,10 +343,14 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 		timer.SetInfo(Global_TimerInfo_ms);
 
 		auto pnts = segmentTools::RetrieveNodes(engine, srcCoords, expB, mergCrit);
-		cgalLib::Geo2d_DelTri delTri(pnts);
-		delTri.Perform();
+		//cgalLib::Geo2d_DelTri delTri(pnts);
+		//delTri.Perform();
+		Geo2d_DelTri delTri(pnts);
+		delTri.Triangulate();
+		Debug_If_Condition_Message(NOT delTri.IsDone(), "the application is not performed.");
 
-		myTris = delTri.Triangulation();
+		//myTris = delTri.Triangulation();
+		myTris = delTri.Data();
 	}
 	if (verbose)
 	{
@@ -403,6 +412,9 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
+
+	/*OFstream my_file("srf.plt");
+	bMesh->ExportToPlt(my_file);*/
 
 	ChangeBackMesh() = std::move(bMesh);
 	Change_IsDone() = Standard_True;

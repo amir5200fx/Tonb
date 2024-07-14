@@ -14,6 +14,30 @@ void tnbLib::Pln_Edge::ExportToPlt
 	}
 }
 
+void tnbLib::Pln_Edge::ExportToPlt(std::stringstream& theStream) const
+{
+	if (Mesh())
+	{
+		Mesh()->ExportToPlt(theStream);
+	}
+}
+
+void tnbLib::Pln_Edge::ExportToVtk(OFstream& theFile) const
+{
+	if (Mesh())
+	{
+		Mesh()->ExportToVtk(theFile);
+	}
+}
+
+void tnbLib::Pln_Edge::ExportToVtk(std::stringstream& theStream) const
+{
+	if (Mesh())
+	{
+		Mesh()->ExportToVtk(theStream);
+	}
+}
+
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Edge)
 {
 	ar& boost::serialization::base_object<Pln_Entity>(*this);

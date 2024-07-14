@@ -15,6 +15,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class Pnt3d;
 	class Pnt2d;
 
 	class Entity2d_CmpConnect
@@ -43,7 +44,8 @@ namespace tnbLib
 		enum class ElmType
 		{
 			triangle,
-			quadrilateral
+			quadrilateral,
+			pentagon
 		};
 
 
@@ -51,11 +53,13 @@ namespace tnbLib
 
 		virtual Standard_Boolean IsTriangle() const { return Standard_False; }
 		virtual Standard_Boolean IsQuadrilateral() const { return Standard_False; }
+		virtual Standard_Boolean IsPentagon() const { return Standard_False; }
 
 		virtual Standard_Integer NbCmpts() const = 0;
 		virtual ElmType ElementType() const = 0;
 
 		virtual std::vector<Standard_Integer> Components() const = 0;
+		virtual std::vector<Pnt3d> RetrievePolygon(const std::vector<Pnt3d>&) const = 0;
 		virtual std::vector<Pnt2d> RetrievePolygon(const std::vector<Pnt2d>&) const = 0;
 
 		virtual std::shared_ptr<Entity2d_CmpConnect> Copy() const = 0;

@@ -25,4 +25,10 @@ void tnbLib::VoyageGeo_SingleVelocityBackground::ExportToPlt(OFstream& File) con
 	Io::ExportField("Velocity", hs, mesh->Points(), mesh->Connectivity(), File);
 }
 
+template<>
+void tnbLib::VoyageGeo_SingleVelocityBackground::ExportToVtk(OFstream& File) const
+{
+	NotImplemented;
+}
+
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::VoyageGeo_SingleVelocityBackground);

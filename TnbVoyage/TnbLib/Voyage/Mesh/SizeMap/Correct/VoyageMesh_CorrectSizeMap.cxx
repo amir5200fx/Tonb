@@ -22,6 +22,7 @@
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Ray.hxx>
 #include <Dir2d.hxx>
+#include <Vec2d.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -116,7 +117,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectAngles() const
 std::vector<std::shared_ptr<tnbLib::VoyageMesh_CorrectSizeMap::Chain>> 
 tnbLib::VoyageMesh_CorrectSizeMap::CalcEdges() const
 {
-	auto polygons = RetrievePolygons();
+	const auto polygons = RetrievePolygons();
 	std::vector<std::shared_ptr<Chain>> chains;
 	chains.reserve(polygons.size());
 	for (const auto& x : polygons)
@@ -204,10 +205,13 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcAngle
 	const std::shared_ptr<Chain>& thePoly1
 )
 {
-	auto edge0 = LastEdge(*thePoly0);
-	auto edge1 = LastEdge(*thePoly1);
+	const auto edge0 = LastEdge(*thePoly0);
+	const auto edge1 = FirstItem(thePoly1->Edges());
 	Standard_Real angle;
 	auto ray = CalcBisectRay(*edge0, *edge1, angle);
+	/*std::cout << "ANGLE = " << angle << std::endl;
+	std::cout << "centre = " << ray->Coord() << ", dir: " << ray->Direction() << std::endl << std::endl;
+	std::cout << "P2 = " << ray->Coord() + d*ray->Direction() << std::endl;*/
 	auto t = std::make_shared<AngleBisect>(ray, thePoly0, thePoly1);
 	t->SetAngle(angle);
 	return std::move(t);
@@ -258,7 +262,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::RetrieveNodes
 	return std::move(nodes);
 }
 
-std::pair<Standard_Real, Standard_Boolean> 
+std::tuple<Standard_Real, tnbLib::Pnt2d, Standard_Boolean> 
 tnbLib::VoyageMesh_CorrectSizeMap::CalcDistance
 (
 	const Edge& theEdge, 
@@ -274,11 +278,11 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcDistance
 	auto [intPoint, intsect] = Geo_Tools::CalcIntersectionPoint_cgal(theRay, normal_ray);
 	if (intsect)
 	{
-		return { theMetrics.CalcDistance(intPoint, centre),Standard_True };
+		return { theMetrics.CalcDistance(intPoint, centre), std::move(intPoint), Standard_True };
 	}
 	else
 	{
-		return { RealLast(),Standard_False };
+		return { RealLast(), Pnt2d::null, Standard_False };
 	}
 }
 
@@ -602,8 +606,9 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			{
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
-				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				dist *= 0.25;
+				auto [dist, intCoord, insct] = 
+					CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
+				//dist *= 0.25;
 				if (insct)
 				{
 					//std::cout << "it intersected. (right)" << std::endl;
@@ -616,6 +621,8 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 						sources.push_back(std::move(source1));
 						auto source2 = std::make_shared<hNode>(edge->Node1()->Coord(), dist);
 						sources.push_back(std::move(source2));
+						//auto source3 = std::make_shared<hNode>(intCoord, dist);
+						//sources.push_back(std::move(source3));
 					}
 				}
 				else
@@ -627,8 +634,9 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			{
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
-				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				dist *= 0.25;
+				auto [dist, intCoord, insct] = 
+					CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
+				//dist *= 0.25;
 				if (insct)
 				{
 					//std::cout << "it intersected. (left)" << std::endl;
@@ -641,6 +649,8 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 						sources.push_back(std::move(source1));
 						auto source2 = std::make_shared<hNode>(edge->Node1()->Coord(), dist);
 						sources.push_back(std::move(source2));
+						//auto source3 = std::make_shared<hNode>(intCoord, dist);
+						//sources.push_back(std::move(source3));
 					}
 				}
 				else
@@ -663,7 +673,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 		Info << " - Max. nb. of iterations: " << hvInfo->MaxNbIters() << endl;
 		Info << endl;
 	}
-	for (auto& x : bMesh->Sources())
+	/*for (auto& x : bMesh->Sources())
 	{
 		x = 1.0 / x;
 	}
@@ -671,7 +681,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	for (auto& x : bMesh->Sources())
 	{
 		x = 1.0 / x;
-	}
+	}*/
 	//bMesh->ExportToPlt(myFile);
 	//std::exit(1);
 	if (verbose)

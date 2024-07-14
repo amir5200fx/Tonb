@@ -22,7 +22,7 @@ namespace tnbLib
 	static bool loadTag = false;
 	static bool exeTag = false;
 
-	static std::shared_ptr<Cad_GeomSurface> mySurface;
+	static std::shared_ptr<Cad_GeomSurface> my_surface;
 	static std::shared_ptr<Pln_Edge> myCurve;
 
 	static std::shared_ptr<Entity3d_Triangulation> myMesh;
@@ -92,10 +92,10 @@ namespace tnbLib
 				Global_Timer timer;
 				timer.SetInfo(Global_TimerInfo_ms);
 
-				ar >> mySurface;
+				ar >> my_surface;
 			}
 
-			if (NOT mySurface)
+			if (NOT my_surface)
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "the surface is null!" << endl
@@ -105,7 +105,7 @@ namespace tnbLib
 			if (verbose)
 			{
 				Info << " The surface has been loaded from: " << address << ", successfully in " << global_time_duration << " ms." << endl;
-				Info << " - surface name: " << mySurface->Name() << endl;
+				Info << " - surface name: " << my_surface->Name() << endl;
 			}
 		}
 
@@ -215,7 +215,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		const auto domain = mySurface->ParametricBoundingBox();
+		const auto domain = my_surface->ParametricBoundingBox();
 
 		auto chain = std::make_shared<Entity3d_Chain>();
 		auto& points = chain->Points();
@@ -225,7 +225,7 @@ namespace tnbLib
 		{
 			checkBounds(x, domain);
 
-			auto pt = calcPoint(x, *mySurface->Geometry());
+			auto pt = calcPoint(x, *my_surface->Geometry());
 			points.push_back(std::move(pt));
 		}
 		

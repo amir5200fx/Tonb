@@ -202,6 +202,9 @@ namespace tnbLib
 			const Point& thePoint,
 			const vcType& theVector
 		) const;
+
+		void SetSizeFunction(const std::shared_ptr<SizeFun>& theFun) { theSizeFunction_ = theFun; }
+		void SetMetricFunction(const std::shared_ptr<MetricFun>& theFun) { theMetricFunction_ = theFun; }
 	};
 
 
@@ -358,6 +361,8 @@ namespace tnbLib
 			const Point& thePoint,
 			const vcType& theVector
 		) const;
+
+		void SetSizeFunction(const std::shared_ptr<SizeFun>& theFun) { theSizeFunction_ = theFun; }
 	};
 }
 

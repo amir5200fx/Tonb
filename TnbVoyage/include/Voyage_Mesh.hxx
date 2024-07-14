@@ -49,7 +49,6 @@ namespace tnbLib
 		TnbVoyage_EXPORT void Mesh();
 
 		TnbVoyage_EXPORT void InsertNewFrontsToLevels();
-		TnbVoyage_EXPORT void CheckPath(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&) const;
 		TnbVoyage_EXPORT void CheckSelfIntersection() const;
 
 		TnbVoyage_EXPORT void Import
@@ -58,10 +57,11 @@ namespace tnbLib
 			const std::shared_ptr<VoyageMesh_MetricPrcsr>& theMetrics
 		);
 
-		TnbVoyage_EXPORT void InitFronts();
+		TnbVoyage_EXPORT void InitFronts() const;
 
 		static TnbVoyage_EXPORT void ActiveFronts
 		(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);
+		static TnbVoyage_EXPORT void CheckPath(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);
 
 	public:
 

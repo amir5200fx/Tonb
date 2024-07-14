@@ -106,7 +106,10 @@ tnbLib::VoyageFun_CostFunction_Resistane::Value
 		}
 		else
 		{
-			
+			if (ShipVel() - std::abs(flow_vel) < 0.1 * ShipVel())
+			{
+				return std::numeric_limits<float>::max();
+			}
 			return theResist_->Value(std::max(ShipVel() - std::abs(flow_vel), 0.1 * ShipVel())) * Distance();
 		}
 	}

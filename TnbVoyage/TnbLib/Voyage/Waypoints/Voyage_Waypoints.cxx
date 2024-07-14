@@ -387,8 +387,9 @@ void tnbLib::Voyage_Waypoints::Perform()
 		Info << endl
 			<< " - The reference edges are created." << endl;
 	}
-	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_star;
-	{// Starboard region [9/2/2023 Payvand]
+	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_star; // Must be outside of the inner scope
+	{
+		// Starboard region [9/2/2023 Payvand]
 
 		optNode->SetMetricMap(starboard_metricPrcsr);
 
@@ -406,11 +407,11 @@ void tnbLib::Voyage_Waypoints::Perform()
 		if (verbose)
 		{
 			Info << endl
-				<< " - The starboard side is successfully meshed, in " 
+				<< " - The starboard side is successfully meshed, in "
 				<< global_time_duration << " ms." << endl;
 		}
 		const auto& elemMap = alg->RetrieveElements();
-		
+
 		elements_star.reserve(elemMap.size());
 		for (const auto& x : elemMap)
 		{
@@ -419,8 +420,14 @@ void tnbLib::Voyage_Waypoints::Perform()
 		std::sort(elements_star.begin(), elements_star.end(), cmp);
 		theStarMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements_star);
 	}
-	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_port;
-	{// Port region [9/2/2023 Payvand]
+	//OFstream star_mesh_file("starMesh.plt");
+	//theStarMesh_->ExportToPlt(star_mesh_file);
+	//std::cout << "exit here: " << FunctionSIG << std::endl;
+	//std::exit(1);
+
+	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_port; // Must be outside of the inner scope
+	{
+		// Port region [9/2/2023 Payvand]
 
 		optNode->SetMetricMap(port_metricPrcsr);
 
@@ -438,10 +445,10 @@ void tnbLib::Voyage_Waypoints::Perform()
 		if (verbose)
 		{
 			Info << endl
-				<< " - The port side is successfully meshed, in " 
+				<< " - The port side is successfully meshed, in "
 				<< global_time_duration << " ms." << endl;
 		}
-		const auto& elemMap = alg->RetrieveElements();	
+		const auto& elemMap = alg->RetrieveElements();
 		elements_port.reserve(elemMap.size());
 		for (const auto& x : elemMap)
 		{
@@ -450,6 +457,9 @@ void tnbLib::Voyage_Waypoints::Perform()
 		std::sort(elements_port.begin(), elements_port.end(), cmp);
 		thePortMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements_port);
 	}
+	//OFstream port_mesh_file("portMesh.plt");
+	//thePortMesh_->ExportToPlt(port_mesh_file);
+	//std::exit(1);
 	//return;
 	//Change_IsDone() = Standard_True;
 	if (verbose)

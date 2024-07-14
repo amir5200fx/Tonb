@@ -29,6 +29,7 @@ namespace tnbLib
 				const Standard_Real theTol = 1.0E-6
 			);
 
+		static TnbCad_EXPORT Handle(Geom_Curve) MakeSegment(const Pnt3d& theP0, const Pnt3d& theP1);
 	};
 
 }

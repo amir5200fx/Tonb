@@ -46,17 +46,16 @@ void tnbLib::VoyageMesh_IterOptNode_Calculator::Perform()
 			<< abort(FatalError);
 	}
 	//std::cout << "calculato's size elem: " << Size() << std::endl;
-	auto m = MetricMap()->CalcMetric(Front()->Centre());
+	const auto m = MetricMap()->CalcMetric(Front()->Centre());
 
 	const auto& v0 = Front()->Node0()->Coord();
 	const auto& v1 = Front()->Node1()->Coord();
-	const auto len = /*MetricMap()->CalcUnitDistance(v0, v1) / 2.0*/0.5;
+	constexpr auto len = /*MetricMap()->CalcUnitDistance(v0, v1) / 2.0*/0.5;
 
 	VoyageMesh_OptNode_Analytical alg(Size(), len, m, *Front());
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
-
-	auto corrector =
+	const auto corrector =
 		std::make_shared<VoyageMesh_CorrOptNode_Iterative>
 		(
 			MetricMap(),
@@ -70,6 +69,5 @@ void tnbLib::VoyageMesh_IterOptNode_Calculator::Perform()
 
 	ChangeCoord() = corrector->Coord();
 	Change_IsConverged() = corrector->IsConverged();
-
 	Change_IsDone() = Standard_True;
 }

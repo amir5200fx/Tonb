@@ -29,14 +29,19 @@ namespace tnbLib
 			Standard_Real X0;
 			Standard_Real X1;
 
+			// default constructor
 			Segment()
+				: X0(0)
+				, X1(0)
 			{}
 
+			// constructors
 			Segment(const Standard_Real x0, const Standard_Real x1)
 				: X0(x0)
 				, X1(x1)
 			{}
 
+			// Public functions and operators
 			Segment Left() const
 			{
 				return Segment(X0, MEAN(X0, X1));
@@ -71,6 +76,9 @@ namespace tnbLib
 	public:
 
 		// public functions and operators [11/4/2022 Amir]
+
+		static TnbMesh_EXPORT std::vector<Standard_Real> Tessellate(const std::vector<Standard_Real>& us,
+		                                                            Standard_Integer theMinSamples);
 	};
 
 	template<class CurveType>
@@ -84,10 +92,7 @@ namespace tnbLib
 		typedef typename remove_pointer<CurveType>::type CurveTypeR;
 		typedef typename cascadeLib::pt_type_from_curve<CurveTypeR>::ptType Point;
 
-		typedef Entity_Polygon<Point> chain;
-
-
-		
+		typedef std::vector<Standard_Real> chain;
 
 	private:
 
@@ -110,67 +115,30 @@ namespace tnbLib
 		void Subdivide(std::vector<Segment>&) const;
 
 	public:
-
-		
-
 		// default constructor [11/4/2022 Amir]
-
-		Mesh_ApproxCurve()
-			: theCurve_(0)
-		{}
+		Mesh_ApproxCurve();
 
 
 		// constructors [11/4/2022 Amir]
-
+		Mesh_ApproxCurve(CurveType theCurve, Standard_Real theU0, Standard_Real theU1,
+			std::shared_ptr<Mesh_ApproxCurveInfo> theInfo);
 
 		// public functions and operators [11/4/2022 Amir]
 
-		const auto& Curve() const
-		{
-			return theCurve_;
-		}
-
-		auto U0() const
-		{
-			return theU0_;
-		}
-
-		auto U1() const
-		{
-			return theU1_;
-		}
-
-		const auto& AlgInfo() const
-		{
-			return theInfo_;
-		}
-
-		const auto& Mesh() const
-		{
-			return theMesh_;
-		}
+		const auto& Curve() const { return theCurve_; }
+		auto U0() const { return theU0_; }
+		auto U1() const { return theU1_; }
+		const auto& AlgInfo() const { return theInfo_; }
 
 		void Perform();
 
-		void SetU0(const Standard_Real theU)
-		{
-			theU0_ = theU;
-		}
+		const auto& Mesh() const { return theMesh_; }
 
-		void SetU1(const Standard_Real theU)
-		{
-			theU1_ = theU;
-		}
+		void SetCurve(CurveType theCurve);
+		void SetU0(Standard_Real);
+		void SetU1(Standard_Real);
+		void SetInfo(std::shared_ptr<Mesh_ApproxCurveInfo> theInfo);
 
-		void SetCurve(const CurveType& theCurve)
-		{
-			theCurve_ = theCurve;
-		}
-
-		void SetInfo(const std::shared_ptr<Mesh_ApproxCurveInfo>& theInfo)
-		{
-			theInfo_ = theInfo;
-		}
 	};
 }
 

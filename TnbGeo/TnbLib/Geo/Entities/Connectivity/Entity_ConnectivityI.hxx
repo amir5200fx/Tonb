@@ -4,11 +4,11 @@
 namespace tnbLib
 {
 
-	template<int Dim>
+	template<int Dim, int Reduct>
 	Standard_Integer 
 		MaxID
 		(
-			const std::vector<Entity_Connectivity<Dim>>& theC
+			const std::vector<Entity_Connectivity<Dim, Reduct>>& theC
 		)
 	{
 		auto maxIndex0 = IntegerFirst();
@@ -24,16 +24,16 @@ namespace tnbLib
 		return maxIndex0;
 	}
 
-	template<int Dim>
-	std::vector<Entity_Connectivity<Dim>>
+	template<int Dim, int Reduct>
+	std::vector<Entity_Connectivity<Dim, Reduct>>
 		CombineConnectivities
 		(
-			const std::vector<Entity_Connectivity<Dim>>& theC0,
-			const std::vector<Entity_Connectivity<Dim>>& theC1
+			const std::vector<Entity_Connectivity<Dim, Reduct>>& theC0,
+			const std::vector<Entity_Connectivity<Dim, Reduct>>& theC1
 		)
 	{
 		const auto maxId = MaxID(theC0);
-		std::vector<Entity_Connectivity<Dim>> connectivities;
+		std::vector<Entity_Connectivity<Dim, Reduct>> connectivities;
 		connectivities.reserve(theC0.size() + theC1.size());
 
 		for (const auto& x : theC0)
@@ -53,19 +53,19 @@ namespace tnbLib
 		return std::move(connectivities);
 	}
 
-	template<int Dim>
-	std::vector<Entity_Connectivity<Dim>> 
+	template<int Dim, int Reduct>
+	std::vector<Entity_Connectivity<Dim, Reduct>> 
 		CombineConnectivities
 		(
-			std::vector<Entity_Connectivity<Dim>>&& theC0,
-			std::vector<Entity_Connectivity<Dim>>&& theC1
+			std::vector<Entity_Connectivity<Dim, Reduct>>&& theC0,
+			std::vector<Entity_Connectivity<Dim, Reduct>>&& theC1
 		)
 	{
 		auto c0 = std::move(theC0);
 		auto c1 = std::move(theC1);
 
 		const auto maxId = MaxID(c0);
-		std::vector<Entity_Connectivity<Dim>> connectivities;
+		std::vector<Entity_Connectivity<Dim, Reduct>> connectivities;
 		connectivities.reserve(c0.size() + c1.size());
 
 		for (auto& x : c0)
