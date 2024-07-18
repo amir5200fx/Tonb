@@ -181,6 +181,9 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Aft3d_Facet>>&
 			);
 
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_Edge>>
+			RetrieveEdges(const std::vector<std::shared_ptr<Aft2d_Element>>&);
+
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Edge>> 
 			RetrieveEdges
 			(
