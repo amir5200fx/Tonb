@@ -337,6 +337,27 @@ tnbLib::Aft_Tools::RetrieveNodes
 	return std::move(nodes);
 }
 
+std::vector<std::shared_ptr<tnbLib::Aft2d_Edge>> tnbLib::Aft_Tools::RetrieveEdges(
+	const std::vector<std::shared_ptr<Aft2d_Element>>& elements)
+{
+	static auto fun = [](const std::shared_ptr<Aft2d_Edge>& e0, const std::shared_ptr<Aft2d_Edge>& e1)
+	{
+		Debug_Null_Pointer(e0);
+		Debug_Null_Pointer(e1);
+		return e0->Index() < e1->Index();
+	};
+	std::set<std::shared_ptr<Aft2d_Edge>, decltype(fun)> comp(fun);
+	std::for_each(elements.begin(), elements.end(), [&comp](const std::shared_ptr<Aft2d_Element>& elm)
+		{
+			comp.insert(elm->Edge0());
+			comp.insert(elm->Edge1());
+			comp.insert(elm->Edge2());
+		});
+	std::vector<std::shared_ptr<Aft2d_Edge>> edges;
+	std::copy(comp.begin(), comp.end(), std::back_inserter(edges));
+	return std::move(edges);
+}
+
 std::vector<std::shared_ptr<tnbLib::Aft3d_Edge>> 
 tnbLib::Aft_Tools::RetrieveEdges
 (
