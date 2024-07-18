@@ -161,6 +161,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Timer.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Verbose.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Version.hxx" />
     <ClInclude Include="TnbLib\Global\global\UnitSystem.hxx" />
     <ClInclude Include="TnbLib\Global\module\Global_Module.hxx" />
     <ClInclude Include="TnbLib\Global\serialization\dimensionSet_Serialization.hxx" />
@@ -178,6 +179,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Global\global\Global_File.cxx" />
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx" />
     <ClCompile Include="TnbLib\Global\global\Global_Timer.cxx" />
+    <ClCompile Include="TnbLib\Global\global\Global_Version.cxx" />
     <ClCompile Include="TnbLib\Global\global\UnitSystem.cxx" />
     <ClCompile Include="TnbLib\Global\serialization\dimensionSet_Serialization.cxx" />
     <ClCompile Include="TnbLib\Global\serialization\OpenCascade_Serialization.cxx" />

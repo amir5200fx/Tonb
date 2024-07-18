@@ -156,6 +156,9 @@
     <ClInclude Include="TnbLib\Global\global\Global_Null.hxx">
       <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Version.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Global\Table\Entity\Global_EntityTable.cxx">
       <Filter>TnbLib\Global\Table\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\global\Global_Version.cxx">
+      <Filter>TnbLib\Global\global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
