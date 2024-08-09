@@ -1,5 +1,6 @@
 #include <Aft2d_CoreBaseSurfaceUniMetric.hxx>
 
+#include <Standard_Transient.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Aft2d_OptNodeSurfaceUniMetric_Calculator.hxx>
 #include <Aft2d_MetricPrcsrSurfaceUniMetric.hxx>

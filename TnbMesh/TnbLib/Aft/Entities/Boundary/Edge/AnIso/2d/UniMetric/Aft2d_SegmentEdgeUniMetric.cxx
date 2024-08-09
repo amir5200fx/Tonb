@@ -10,6 +10,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Standard_Transient.hxx>
+#include <Standard_Type.hxx>
+
 template<>
 std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdgeUniMetric>>
 tnbLib::Aft2d_SegmentEdgeUniMetric::GetTopology
