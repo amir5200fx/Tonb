@@ -1,5 +1,6 @@
 #include <Aft2d_tPlnWireSurfaceUniMetric.hxx>
 
+#include <Standard_Transient.hxx>
 #include <Aft2d_tPlnCurveSurfaceUniMetric.hxx>
 
 namespace tnbLib
