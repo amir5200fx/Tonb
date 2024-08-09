@@ -1,5 +1,6 @@
 #include <Aft2d_tPlnCurveSurfaceUniMetric.hxx>
 
+#include <Standard_Transient.hxx>
 #include <Aft2d_tSegmentEdgeUniMetric.hxx>
 #include <Geo2d_MetricPrcsrUniMetric.hxx>
 #include <Mesh2d_CurveUniMetric.hxx>

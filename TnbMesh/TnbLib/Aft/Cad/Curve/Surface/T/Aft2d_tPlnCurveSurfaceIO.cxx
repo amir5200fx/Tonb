@@ -1,5 +1,6 @@
 #include <Aft2d_tPlnCurveSurface.hxx>
 
+#include <Standard_Transient.hxx>
 #include <TModel_ParaCurve.hxx>
 #include <Entity2d_Polygon.hxx>
 

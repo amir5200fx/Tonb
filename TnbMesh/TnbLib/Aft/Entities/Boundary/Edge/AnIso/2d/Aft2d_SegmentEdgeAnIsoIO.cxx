@@ -1,5 +1,7 @@
 #include <Aft2d_SegmentEdgeAnIso.hxx>
 
+#include <Standard_Transient.hxx>
+#include <Standard_Type.hxx>
 #include <Aft2d_PlnCurveAnIso.hxx>
 #include <Aft2d_ElementAnIso.hxx>
 
