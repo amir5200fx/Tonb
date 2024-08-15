@@ -3509,6 +3509,9 @@
     <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL_cgal.cxx">
       <Filter>TnbLib\IO\Loader\stl</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.cxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">

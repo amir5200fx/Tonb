@@ -25,8 +25,8 @@ namespace tnbLib
 			// Public functions and operators
 			const auto& Mesh() const { return theMesh_; }
 
-			TnbGeo_EXPORT void PerformBinary(const std::string& file_name);
-			void PerformASCII(const std::string& file_name);
+			TnbGeo_EXPORT void Perform(const std::string& file_name);
+
 		};
 
 	}
