@@ -1201,6 +1201,9 @@
     <Filter Include="TnbLib\IO\csv">
       <UniqueIdentifier>{67308bbf-4958-4a05-9282-6e5e304ba0a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\IO\Loader\stl">
+      <UniqueIdentifier>{a74f90e7-c7c5-49c4-9dc0-a707feb0350c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2684,7 +2687,7 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Direct\2d\Dir2dI.hxx">
       <Filter>TnbLib\Geo\Entities\Direct\2d</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
     </ClInclude>
@@ -2714,6 +2717,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\IO\csv\Geo2dIO_CSV.hxx">
       <Filter>TnbLib\IO\csv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.hxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3499,6 +3505,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\IO\csv\Geo2dIO_CSV.cxx">
       <Filter>TnbLib\IO\csv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL_cgal.cxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.cxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
