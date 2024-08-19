@@ -16,24 +16,13 @@ namespace tnbLib
 
 	TNB_SET_VERBOSE_FUN;
 
-	void load_file_binary(const std::string& file_name)
+	void load_file(const std::string& file_name)
 	{
 		file::CheckExtension(file_name);
 		my_file_name = file_name;
 
 		auto loader = std::make_shared<ioLib::Loader_STL>();
 		loader->Perform(my_file_name + extension);
-		my_mesh = loader->Mesh();
-		loadTag = true;
-	}
-
-	void load_file_ascii(const std::string& file_name)
-	{
-		file::CheckExtension(file_name);
-		my_file_name = file_name;
-
-		auto loader = std::make_shared<ioLib::Loader_STL>();
-		loader->Perform(file_name + extension);
 		my_mesh = loader->Mesh();
 		loadTag = true;
 	}
@@ -77,8 +66,7 @@ namespace tnbLib
 		// io functions [12/21/2021 Amir]
 		mod->add(chaiscript::fun([](const std::string& name)-> void {save_to(name); }), "save_to");
 		mod->add(chaiscript::fun([]()-> void {save_to(); }), "save_to");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {load_file_binary(name); }), "load_binary_file");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {load_file_ascii(name); }), "load_ascii_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {load_file(name); }), "load_file");
 
 		// settings [12/21/2021 Amir]
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
@@ -122,8 +110,7 @@ int main(int argc, char* argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - load_binary_file(name)" << endl
-				<< " - load_ascii_file(name)" << endl
+				<< " - load_file(name)" << endl
 				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
