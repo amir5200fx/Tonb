@@ -26,12 +26,24 @@ void tnbLib::CadIO_STEP::ReadFile
 		timer.SetInfo(Global_TimerInfo_s);
 
 		STEPControl_Reader Reader;
+		Standard_Integer status = Reader.ReadFile(theName.c_str());
 
-		Reader.ReadFile(theName.c_str());
+		if (status == IFSelect_RetDone)
+		{
+			Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("step-faces");
+			Reader.TransferList(myList);
+			Reader.TransferRoot();
 
-		Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
-		SetNbFaces(myList->Length());
+			SetNbFaces(myList->Length());
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " Unable to read the STEP file." << endl
+				<< abort(FatalError);
+		}
 
+		//Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
 		SetShape(Reader.OneShape());
 		SetFileName(theName);
 
