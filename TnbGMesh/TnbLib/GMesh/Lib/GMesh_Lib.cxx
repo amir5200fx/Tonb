@@ -270,6 +270,12 @@ void tnbLib::GMesh_Lib::ImportIGES
 	gmsh::model::occ::importShapes(name, theOutDimTags, true, "iges");
 }
 
+void tnbLib::GMesh_Lib::ImportSTL(const std::string& name,
+	std::vector<std::pair<Standard_Integer, Standard_Integer>>& theOutDimTags)
+{
+	gmsh::model::occ::importShapes(name, theOutDimTags, true, "stl");
+}
+
 void tnbLib::GMesh_Lib::SetSizeMap(const Geo3d_SizeFunction& theSizeMap)
 {
 	auto meshSize = [&theSizeMap](int /*dim*/, int /*tag*/, double x, double y, double z,
