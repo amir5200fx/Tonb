@@ -158,6 +158,10 @@ namespace tnbLib
 			std::vector<std::pair<Standard_Integer, Standard_Integer>>& theOutDimTags
 		);
 
+		static TnbGMesh_EXPORT void ImportSTL(const std::string& name,
+		                                      std::vector<std::pair<Standard_Integer, Standard_Integer>>&
+		                                      theOutDimTags);
+
 		static TnbGMesh_EXPORT void SetSizeMap(const Geo3d_SizeFunction&);
 
 		static TnbGMesh_EXPORT void SetSize(const std::vector<std::pair<Standard_Integer, Standard_Integer>>&, const Standard_Real theSize);
