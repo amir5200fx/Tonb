@@ -5,6 +5,7 @@
 #include <gp_Vec2d.hxx>
 #include <Pnt2d.hxx>
 #include <Geo_Serialization.hxx>
+#include <Global_ChaiscriptFwd.hxx>
 
 namespace tnbLib
 {
@@ -18,6 +19,11 @@ namespace tnbLib
 
 	TnbGeo_EXPORT Ostream& operator<<(Ostream& os, const Vec2d&);
 	TnbGeo_EXPORT Istream& operator>>(Istream& is, Vec2d&);
+
+	namespace chai
+	{
+		TnbGeo_EXPORT void add_vec_2d(const module_t&);
+	}
 
 	class Vec2d
 		: public gp_Vec2d

@@ -20,14 +20,14 @@ namespace tnbLib
 
 	static std::shared_ptr<Cad_Shape> myShape;
 
-	void setVerbose(unsigned short i)
+	void set_verbose(unsigned short i)
 	{
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
 	}
 
-	void saveTo(const std::string& name)
+	void save_to(const std::string& name)
 	{
 		if (NOT myShape)
 		{
@@ -41,7 +41,7 @@ namespace tnbLib
 		file::SaveTo(myShape, name + extension, verbose);
 	}
 
-	void saveTo()
+	void save_to()
 	{
 		if (NOT myShape)
 		{
@@ -50,10 +50,10 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		saveTo(myShape->Name());
+		save_to(myShape->Name());
 	}
 
-	void makeBox(const Pnt3d& p0, const Pnt3d& p1)
+	void make_box(const Pnt3d& p0, const Pnt3d& p1)
 	{
 		auto shape = std::make_shared<Cad_Shape>(Cad_ShapeTools::Box(p0, p1));
 		shape->SetIndex(0);
@@ -61,7 +61,7 @@ namespace tnbLib
 		myShape = shape;
 	}
 
-	void makeBox(const Pnt3d& p0, const Pnt3d& p1, const std::string& name)
+	void make_box(const Pnt3d& p0, const Pnt3d& p1, const std::string& name)
 	{
 		auto shape = std::make_shared<Cad_Shape>(Cad_ShapeTools::Box(p0, p1));
 		shape->SetIndex(0);
@@ -69,7 +69,7 @@ namespace tnbLib
 		myShape = shape;
 	}
 
-	void makeBox(const Pnt3d& p0, double dx, double dy, double dz)
+	void make_box(const Pnt3d& p0, double dx, double dy, double dz)
 	{
 		auto shape = std::make_shared<Cad_Shape>(Cad_ShapeTools::Box(p0, dx, dy, dz));
 		shape->SetIndex(0);
@@ -77,7 +77,7 @@ namespace tnbLib
 		myShape = shape;
 	}
 
-	void makeBox(const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)
+	void make_box(const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)
 	{
 		auto shape = std::make_shared<Cad_Shape>(Cad_ShapeTools::Box(p0, dx, dy, dz));
 		shape->SetIndex(0);
@@ -85,7 +85,7 @@ namespace tnbLib
 		myShape = shape;
 	}
 
-	void makeBox(const gp_Ax2& ax, double dx, double dy, double dz)
+	void make_box(const gp_Ax2& ax, double dx, double dy, double dz)
 	{
 		auto shape = std::make_shared<Cad_Shape>(Cad_ShapeTools::Box(ax, dx, dy, dz));
 		shape->SetIndex(0);
@@ -93,7 +93,7 @@ namespace tnbLib
 		myShape = shape;
 	}
 
-	void makeBox(const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)
+	void make_box(const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)
 	{
 		auto shape = std::make_shared<Cad_Shape>(Cad_ShapeTools::Box(ax, dx, dy, dz));
 		shape->SetIndex(0);
@@ -117,27 +117,27 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {save_to(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {save_to(); }), "save_to");
 
 		//- settings
 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {set_verbose(i); }), "set_verbose");
 
 
 		//- functions
 
-		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Pnt3d(x, y, z); }), "createPoint");
-		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Dir3d(x, y, z); }), "createDirection");
-		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& N, const Dir3d& Vx)-> auto {return gp_Ax2(pt, N, Vx); }), "createCoordinateSystem");
-		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& V)-> auto {return gp_Ax2(pt, V); }), "createCoordinateSystem");
+		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Pnt3d(x, y, z); }), "make_pnt");
+		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return Dir3d(x, y, z); }), "make_dir");
+		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& N, const Dir3d& Vx)-> auto {return gp_Ax2(pt, N, Vx); }), "make_sys");
+		mod->add(chaiscript::fun([](const Pnt3d& pt, const Dir3d& V)-> auto {return gp_Ax2(pt, V); }), "make_sys");
 
-		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1)-> void {makeBox(p0, p1); }), "makeBox");
-		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1, const std::string& name)-> void {makeBox(p0, p1, name); }), "makeBox");
-		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz)-> void {makeBox(p0, dx, dy, dz); }), "makeBox");
-		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)-> void {makeBox(p0, dx, dy, dz, name); }), "makeBox");
-		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz)-> void {makeBox(ax, dx, dy, dz); }), "makeBox");
-		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)-> void {makeBox(ax, dx, dy, dz, name); }), "makeBox");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1)-> void {make_box(p0, p1); }), "make_box");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, const Pnt3d& p1, const std::string& name)-> void {make_box(p0, p1, name); }), "make_box");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz)-> void {make_box(p0, dx, dy, dz); }), "make_box");
+		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)-> void {make_box(p0, dx, dy, dz, name); }), "make_box");
+		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz)-> void {make_box(ax, dx, dy, dz); }), "make_box");
+		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)-> void {make_box(ax, dx, dy, dz, name); }), "make_box");
 	}
 
 	std::string getString(char* argv)

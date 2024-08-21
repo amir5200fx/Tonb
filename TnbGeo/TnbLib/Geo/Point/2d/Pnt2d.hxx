@@ -6,6 +6,7 @@
 #include <IOstream.hxx>
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>
+#include <Global_ChaiscriptFwd.hxx>
 
 #include <sstream>
 
@@ -24,6 +25,11 @@ namespace tnbLib
 	TnbGeo_EXPORT Istream& operator>>(Istream& is, Pnt2d&);
 
 	TnbGeo_EXPORT Pnt2d operator-(const Pnt2d& P1, const Pnt2d& P2);
+
+	namespace chai
+	{
+		TnbGeo_EXPORT void add_pnt_2d(const module_t&);
+	}
 
 	class Pnt2d
 		: public gp_Pnt2d
