@@ -5,5 +5,5 @@
 
 gp_Ax2d tnbLib::make_ax2d(const Pnt2d& theCoord, const Dir2d& theDir)
 {
-	return gp_Ax2d(theCoord, theDir);
+	return { theCoord, theDir };
 }

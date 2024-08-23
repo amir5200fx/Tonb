@@ -6,7 +6,6 @@
 #include <Vec3d.hxx>
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>
-#include <Global_ChaiscriptFwd.hxx>
 
 namespace tnbLib
 {
@@ -20,11 +19,6 @@ namespace tnbLib
 
 	TnbGeo_EXPORT Ostream& operator<<(Ostream& os, const Dir3d&);
 	TnbGeo_EXPORT Istream& operator>>(Istream& is, Dir3d&);
-
-	namespace chai
-	{
-		TnbGeo_EXPORT void add_dir_3d(const module_t&);
-	}
 
 	class Dir3d
 		: public gp_Dir
