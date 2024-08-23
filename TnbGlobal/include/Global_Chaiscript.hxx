@@ -1,6 +1,7 @@
 #pragma once
 #ifndef _Global_Chaiscript_Header
 #define _Global_Chaiscript_Header
+#include <Global_Module.hxx>
 #include <memory>
 namespace chaiscript
 {
@@ -13,7 +14,7 @@ namespace tnbLib
 	using module_t = std::shared_ptr<chaiscript::Module>;
 	namespace chai
 	{
-		extern chaiscript::ChaiScript obj;
+		extern TnbGlobal_EXPORT chaiscript::ChaiScript obj;
 	}
 }
 #endif

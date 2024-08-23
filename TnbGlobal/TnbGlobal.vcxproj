@@ -79,7 +79,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\verbose;$(ProjectDir)TnbLib\Global\version;$(ProjectDir)TnbLib\Global\chaiscript;$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -102,7 +102,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\verbose;$(ProjectDir)TnbLib\Global\version;$(ProjectDir)TnbLib\Global\chaiscript;$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -125,7 +125,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\verbose;$(ProjectDir)TnbLib\Global\version;$(ProjectDir)TnbLib\Global\chaiscript;$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -167,7 +167,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_Null.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Timer.hxx" />
-    <ClInclude Include="TnbLib\Global\global\Global_Verbose.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Verbose1.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Version.hxx" />
     <ClInclude Include="TnbLib\Global\global\UnitSystem.hxx" />
     <ClInclude Include="TnbLib\Global\module\Global_Module.hxx" />

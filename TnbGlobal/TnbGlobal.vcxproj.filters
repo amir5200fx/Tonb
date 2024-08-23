@@ -108,7 +108,7 @@
     <ClInclude Include="TnbLib\Global\global\Global_Timer.hxx">
       <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Global\global\Global_Verbose.hxx">
+    <ClInclude Include="TnbLib\Global\global\Global_Verbose1.hxx">
       <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Global\error\TnbError.hxx">
@@ -218,11 +218,11 @@
     <ClCompile Include="TnbLib\Global\chaiscript\Global_Chaiscript.cxx">
       <Filter>TnbLib\Global\chaiscript</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Global\version\Global_Version.cxx">
-      <Filter>TnbLib\Global\version</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Global\verbose\Global_Verbose.cxx">
       <Filter>TnbLib\Global\verbose</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\version\Global_Version.cxx">
+      <Filter>TnbLib\Global\version</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
