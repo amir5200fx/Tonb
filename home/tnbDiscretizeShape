@@ -1,14 +1,14 @@
-setVerbose(1);
+set_verbose(1);
 
-setAngle(5.0);
-setDeflection(0.001);
-setMinSize(1.0E-4);
+set_angle(5.0);
+set_deflection(0.001);
+set_min_size(1.0E-4);
 
-setParallelMode(true);
+set_parallel_mode(true);
 
-loadModel();
+load_file();
 
 execute();
 
-saveTo();
+save_to();
 
