@@ -100,6 +100,11 @@ namespace tnbLib
 		shape->SetName(name);
 		myShape = shape;
 	}
+
+	void export_to_step(const std::string& file_name)
+	{
+		Cad_Tools::ExportToSTEP(myShape->Shape(), file_name+".step");
+	}
 }
 
 #ifdef DebugInfo
@@ -138,6 +143,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const Pnt3d& p0, double dx, double dy, double dz, const std::string& name)-> void {make_box(p0, dx, dy, dz, name); }), "make_box");
 		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz)-> void {make_box(ax, dx, dy, dz); }), "make_box");
 		mod->add(chaiscript::fun([](const gp_Ax2& ax, double dx, double dy, double dz, const std::string& name)-> void {make_box(ax, dx, dy, dz, name); }), "make_box");
+
+		mod->add(chaiscript::fun([](const std::string& file_name)-> void {export_to_step(file_name); }), "export_to_step");
 	}
 
 	std::string getString(char* argv)

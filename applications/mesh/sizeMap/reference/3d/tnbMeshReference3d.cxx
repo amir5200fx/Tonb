@@ -321,27 +321,27 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions [12/12/2021 Amir]
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
 
 
 		// settings [12/12/2021 Amir]
 
-		mod->add(chaiscript::fun([](double x)-> void {setBaseSize(x); }), "setBaseSize");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {setGrowthRate(name); }), "setDefaultGrowthRate");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {setBoundaryGrowthRate(name); }), "setBoundaryGrowthRate");
+		mod->add(chaiscript::fun([](double x)-> void {setBaseSize(x); }), "set_base_size");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setGrowthRate(name); }), "set_default_growth_rate");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setBoundaryGrowthRate(name); }), "set_boundary_growth_rate");
 
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {setValueMethod(getSurfaceSizeValues(), name); }), "setSurfSizeValueType");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {setMethod(getSurfaceSizeValues(), name); }), "setSurfSizeMethod");
-		mod->add(chaiscript::fun([](double x)-> void {setMinSize(getSurfaceSizeValues(), x); }), "setSurfMinSize");
-		mod->add(chaiscript::fun([](double x)->void {setTargetSize(getSurfaceSizeValues(), x); }), "setSurfTargetSize");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setValueMethod(getSurfaceSizeValues(), name); }), "set_surf_size_value_type");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setMethod(getSurfaceSizeValues(), name); }), "set_surf_size_method");
+		mod->add(chaiscript::fun([](double x)-> void {setMinSize(getSurfaceSizeValues(), x); }), "set_surf_min_size");
+		mod->add(chaiscript::fun([](double x)->void {setTargetSize(getSurfaceSizeValues(), x); }), "set_surf_target_size");
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {setCurvatureInfo(getCurvatureValues(), name); }), "setCurvatureType");
-		mod->add(chaiscript::fun([](double x)-> void {setSpanAngle(getCurvatureValues(), x); }), "setCurvatureSpanAngle");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setCurvatureInfo(getCurvatureValues(), name); }), "set_curvature_type");
+		mod->add(chaiscript::fun([](double x)-> void {setSpanAngle(getCurvatureValues(), x); }), "set_curvature_span_angle");
 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 
 	}
 
@@ -384,23 +384,23 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile()" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_file()" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
-				<< " - setBaseSize(double)" << endl
-				<< " - setDefaultGrowthRate(string);         Types: verySlow, slow, moderate, fast, costum" << endl
-				<< " - setBoundaryGrowthRate(string);        Types: verySlow, slow, moderate, fast, costum" << endl << endl
+				<< " - set_base_size(double)" << endl
+				<< " - set_default_growth_rate(string);         Types: verySlow, slow, moderate, fast, costum" << endl
+				<< " - set_boundary_growth_rate(string);        Types: verySlow, slow, moderate, fast, costum" << endl << endl
 
-				<< " - setSurfSizeValueType(string);  Types: relativeToBase, absolute" << endl
-				<< " - setSurfSizeMethod(string);     Types: minOnly, minAndTarget" << endl
-				<< " - setSurfMinSize(double)" << endl
-				<< " - setSurfTargetSize(double)" << endl << endl
+				<< " - set_surf_size_value_type(string);  Types: relativeToBase, absolute" << endl
+				<< " - set_surf_size_method(string);     Types: minOnly, minAndTarget" << endl
+				<< " - set_surf_min_size(double)" << endl
+				<< " - set_surf_target_size(double)" << endl << endl
 
-				<< " - setCurvatureType(string);  Types: continum, custom, disable" << endl
-				<< " - setCurvatureSpanAngle(double)" << endl
+				<< " - set_curvature_type(string);  Types: continum, custom, disable" << endl
+				<< " - set_curvature_span_angle(double)" << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - set_verbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl
 				<< endl;
