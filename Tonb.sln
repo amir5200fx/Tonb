@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tonb", "Tonb\Tonb.vcxproj", "{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbNumAlg", "TnbNumAlg\TnbNumAlg.vcxproj", "{9D2ACE52-928F-4B06-AECD-3A7CEF4F63BB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B919C408-474A-458B-9B08-459DF6598B56} = {B919C408-474A-458B-9B08-459DF6598B56}
