@@ -1,4 +1,5 @@
 #include <Global_Chaiscript.hxx>
+#include <messageStream.hxx>
 
 #ifdef DebugInfo
 #undef DebugInfo
@@ -8,32 +9,15 @@
 
 chaiscript::ChaiScript tnbLib::chai::obj;
 
-namespace tnbLib
-{
-	class RegisterChaiFunctions
-	{
-		/*Private Data*/
-		static void add_functions();
-	public:
-		// default constructors
 
-		// constructors
-		RegisterChaiFunctions()
-		{
-			add_functions();
-		}
-	};
-}
-
-const tnbLib::RegisterChaiFunctions RegisterChaiFunctionsObj;
 
 #include <Global_Verbose.hxx>
 
-void tnbLib::RegisterChaiFunctions::add_functions()
+void tnbLib::chai::app::functions(const module_t& mod)
 {
-	auto mod = std::make_shared<chaiscript::Module>();
+	mod->add(chaiscript::user_type<App>(), "App");
+	mod->add(chaiscript::constructor<App()>(), "App");
 
-	chai::add_verbose(mod);
-
-	chai::obj.add(mod);
+	add_verbose(mod);
+	mod->add(chaiscript::fun([](const App&, const std::string& str)-> void {Info << str.c_str(); }), "message");
 }

@@ -14,7 +14,14 @@ namespace tnbLib
 	using module_t = std::shared_ptr<chaiscript::Module>;
 	namespace chai
 	{
+		struct App{};
+
 		extern TnbGlobal_EXPORT chaiscript::ChaiScript obj;
+
+		namespace app
+		{
+			TnbGlobal_EXPORT void functions(const module_t&);
+		}
 	}
 }
 #endif

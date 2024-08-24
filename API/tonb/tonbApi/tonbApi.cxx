@@ -27,6 +27,7 @@ namespace tnbLib
 
 	void activate(const module_t mod)
 	{
+		chai::app::functions(mod);
 		chai::geo::functions(mod);
 		chai::cad::functions(mod);
 	}
