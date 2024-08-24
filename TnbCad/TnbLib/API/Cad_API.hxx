@@ -50,6 +50,8 @@ namespace tnbLib
 
 			// for loading the file no extension should be used. The file extension is automatically added to the file name.
 			TnbCad_EXPORT Shape load_shape(const std::string& file_name, unsigned short verbose);
+			TnbCad_EXPORT Shape load_iges(const std::string& file_name, unsigned short verbose);
+			TnbCad_EXPORT Shape load_step(const std::string& file_name, unsigned short verbose);
 
 			TnbCad_EXPORT void export_to_step(const Shape&, const std::string& name);
 			TnbCad_EXPORT void export_to_iges(const Shape&, const std::string& name, const std::string& unit);
