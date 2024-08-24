@@ -303,25 +303,25 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		//- io functions
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadModel");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "load_file");
+		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
 
-		mod->add(chaiscript::fun([]()-> void {printDefaults(); }), "printDefaults");
+		mod->add(chaiscript::fun([]()-> void {printDefaults(); }), "print_defaults");
 
 		//- settings
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "set_verbose");
 
-		mod->add(chaiscript::fun([](double x)-> void {setAngle(x); }), "setAngle");
-		mod->add(chaiscript::fun([](double x)-> void {setDeflection(x); }), "setDeflection");
-		mod->add(chaiscript::fun([](double x)-> void {setMinSize(x); }), "setMinSize");
-		mod->add(chaiscript::fun([](bool c)-> void {setParallelMode(c); }), "setParallelMode");
-		mod->add(chaiscript::fun([](bool c)-> void {setRelativeMode(c); }), "setRelativeMode");
-		mod->add(chaiscript::fun([](bool c)-> void {setAdaptiveMin(c); }), "setAdaptiveMinMode");
-		mod->add(chaiscript::fun([](bool c)-> void {setInternalVertices(c); }), "setInternalVerticesMode");
-		mod->add(chaiscript::fun([](bool c)-> void {setControlSurfaceDeflection(c); }), "setControlSurfaceDeflectionMode");
+		mod->add(chaiscript::fun([](double x)-> void {setAngle(x); }), "set_angle");
+		mod->add(chaiscript::fun([](double x)-> void {setDeflection(x); }), "set_deflection");
+		mod->add(chaiscript::fun([](double x)-> void {setMinSize(x); }), "set_min_size");
+		mod->add(chaiscript::fun([](bool c)-> void {setParallelMode(c); }), "set_parallel_mode");
+		mod->add(chaiscript::fun([](bool c)-> void {setRelativeMode(c); }), "set_relative_mode");
+		mod->add(chaiscript::fun([](bool c)-> void {setAdaptiveMin(c); }), "set_adaptive_min_mode");
+		mod->add(chaiscript::fun([](bool c)-> void {setInternalVertices(c); }), "set_internal_vertices_mode");
+		mod->add(chaiscript::fun([](bool c)-> void {setControlSurfaceDeflection(c); }), "set_control_surface_deflection_mode");
 	}
 
 	std::string getString(char* argv)
@@ -363,19 +363,19 @@ int main(int argc, char *argv[])
 				
 				<< " # IO functions: " << endl << endl
 
-				<< " - printDefaults()" << endl
-				<< " - loadModel(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - print_defaults()" << endl
+				<< " - load_model(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl
-				<< " - setAngle(double)" << endl
-				<< " - setDeflection(double)" << endl
-				<< " - setMinSize(double)" << endl
-				<< " - setParallelMode(bool)" << endl
-				<< " - setAdaptiveMinMode(bool)" << endl
-				<< " - setInternalVerticesMode(bool)" << endl
-				<< " - setControlSurfaceDeflectionMode(bool)" << endl << endl
+				<< " - set_verbose(unsigned int); Levels: 0, 1, 2" << endl
+				<< " - set_angle(double)" << endl
+				<< " - set_deflection(double)" << endl
+				<< " - set_min_size(double)" << endl
+				<< " - set_parallel_mode(bool)" << endl
+				<< " - set_adaptive_min_mode(bool)" << endl
+				<< " - set_internal_vertices_mode(bool)" << endl
+				<< " - set_control_surface_deflection_mode(bool)" << endl << endl
 
 				<< " - execute()" << endl;
 			return 0;

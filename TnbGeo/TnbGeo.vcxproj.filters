@@ -1204,6 +1204,18 @@
     <Filter Include="TnbLib\IO\Loader\stl">
       <UniqueIdentifier>{a74f90e7-c7c5-49c4-9dc0-a707feb0350c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Axis">
+      <UniqueIdentifier>{cb39ae46-7c5f-48b0-8e68-86986984fc1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Axis\2d">
+      <UniqueIdentifier>{ce3c5ff7-801e-44bb-a4d1-d7d4e9054155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Axis\3d">
+      <UniqueIdentifier>{a346bd33-7d12-4dc5-8ddf-82ad88ca5bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\API">
+      <UniqueIdentifier>{07331edd-3c16-41af-9ded-f0537766723d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2721,6 +2733,15 @@
     <ClInclude Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.hxx">
       <Filter>TnbLib\IO\Loader\stl</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Axis\2d\Entity2d_Axis.hxx">
+      <Filter>TnbLib\Geo\Entities\Axis\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Axis\3d\Entity3d_Axis.hxx">
+      <Filter>TnbLib\Geo\Entities\Axis\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\API\Geo_API.hxx">
+      <Filter>TnbLib\API</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3511,6 +3532,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.cxx">
       <Filter>TnbLib\IO\Loader\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\2d\Entity2d_Axis_chaiscript.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\2d\Entity2d_Axis.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\3d\Entity3d_Axis.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\3d\Entity3d_Axis_chaiscript.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\API\Geo_API.cxx">
+      <Filter>TnbLib\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\API\Geo_API_chaiscript.cxx">
+      <Filter>TnbLib\API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

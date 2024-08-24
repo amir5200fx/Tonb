@@ -262,13 +262,13 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([]()-> void {loadFiles(); }), "loadFiles");
+		mod->add(chaiscript::fun([]()-> void {loadFiles(); }), "load_files");
 		//mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		//mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
 		//- settings
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "set_verbose");
 
 		// Operators [2/11/2023 Payvand]
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
@@ -312,12 +312,12 @@ int main(int argc, char* argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFiles()" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_files()" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+				<< " - set_verbose(unsigned int); Levels: 0, 1" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

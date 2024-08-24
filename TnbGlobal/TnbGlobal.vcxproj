@@ -56,19 +56,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)d</TargetName>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)d</TargetName>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\Debug\</OutDir>
     <IntDir>$(Platform)\Debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -77,10 +77,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\verbose;$(ProjectDir)TnbLib\Global\version;$(ProjectDir)TnbLib\Global\chaiscript;$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,10 +100,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\verbose;$(ProjectDir)TnbLib\Global\version;$(ProjectDir)TnbLib\Global\chaiscript;$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,10 +123,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\verbose;$(ProjectDir)TnbLib\Global\version;$(ProjectDir)TnbLib\Global\chaiscript;$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,6 +137,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\Global\chaiscript\Global_Chaiscript.hxx" />
+    <ClInclude Include="TnbLib\Global\chaiscript\Global_ChaiscriptFwd.hxx" />
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx" />
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1dI.hxx" />
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary2d\Adt_Ary2d.hxx" />
@@ -148,6 +153,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_Done.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_File.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_FileI.hxx" />
+    <ClInclude Include="TnbLib\Global\verbose\Global_Verbose.hxx" />
+    <ClInclude Include="TnbLib\Global\version\Global_Version.hxx" />
     <None Include="TnbLib\Global\global\Global_FileM.hxx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -160,7 +167,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_Null.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Timer.hxx" />
-    <ClInclude Include="TnbLib\Global\global\Global_Verbose.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Verbose1.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Version.hxx" />
     <ClInclude Include="TnbLib\Global\global\UnitSystem.hxx" />
     <ClInclude Include="TnbLib\Global\module\Global_Module.hxx" />
@@ -175,6 +182,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\Traits\Traits.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\Global\chaiscript\Global_Chaiscript.cxx" />
     <ClCompile Include="TnbLib\Global\error\TnbError.cxx" />
     <ClCompile Include="TnbLib\Global\global\Global_File.cxx" />
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx" />
@@ -186,6 +194,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Global\Table\Entity\Global_EntityTable.cxx" />
     <ClCompile Include="TnbLib\Global\Table\Global_Table.cxx" />
     <ClCompile Include="TnbLib\Global\Tools\Global_Tools.cxx" />
+    <ClCompile Include="TnbLib\Global\verbose\Global_Verbose.cxx" />
+    <ClCompile Include="TnbLib\Global\version\Global_Version.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

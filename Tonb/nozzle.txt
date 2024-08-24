@@ -1,7 +1,0 @@
-var modelModule = newCadModelModule();
-
-var profile = modelModule.newLegModelNozzleNo1();
-profile.perform();
-
-var cad2dModule = newCad2dModule();
-cad2dModule.exportToPlt(profile.getProfile(), 300, "nozzle.plt");

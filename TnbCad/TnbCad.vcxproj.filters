@@ -532,6 +532,9 @@
     <Filter Include="TnbLib\Cad\Volume\Multi">
       <UniqueIdentifier>{45166a9d-9103-4bc6-b0d8-08abf99df9a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\API">
+      <UniqueIdentifier>{73c1b1d8-4d6b-47ce-9d51-3cf8c43b89c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -1077,6 +1080,9 @@
     <ClInclude Include="TnbLib\Cad\Volume\Multi\Cad_MultiVolume.hxx">
       <Filter>TnbLib\Cad\Volume\Multi</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\API\Cad_API.hxx">
+      <Filter>TnbLib\API</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -1588,6 +1594,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Volume\Multi\Cad_MultiVolumeIO.cxx">
       <Filter>TnbLib\Cad\Volume\Multi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\API\Cad_API.cxx">
+      <Filter>TnbLib\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\API\Cad_API_chaiscript.cxx">
+      <Filter>TnbLib\API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,8 @@
 #include <BRepBndLib.hxx>
 #include <Cad_Tools.hxx>
 
+unsigned short tnbLib::CadIO_STEP::verbose(0);
+
 void tnbLib::CadIO_STEP::ReadFile
 (
 	const fileName & theName
@@ -52,7 +54,7 @@ void tnbLib::CadIO_STEP::ReadFile
 
 		SetBoundingBox(Cad_Tools::BoundingBox(box));
 
-		if (Verbose())
+		if (verbose)
 		{
 			GET_MESSAGE << "IGES File Imported Successfully in "
 				<< global_time_duration << " seconds.";

@@ -166,14 +166,14 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadShape(name); }), "loadFile");
-		mod->add(chaiscript::fun([]()->void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadShape(name); }), "load_file");
+		mod->add(chaiscript::fun([]()->void {loadFile(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "save_to");
 
 		//- settings
 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 	}
 
 	std::string getString(char* argv)
