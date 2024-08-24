@@ -156,6 +156,24 @@ tnbLib::api::cad::Shape tnbLib::api::cad::make_sphere(const gp_Ax2& ax, double r
 	return {std::move(shape)};
 }
 
+tnbLib::api::cad::Shape tnbLib::api::cad::load_shape(const std::string& file_name, unsigned short verbose)
+{
+	// Check if the file name has an extension.
+	file::CheckExtension(file_name);
+	auto shape = file::LoadFile<std::shared_ptr<Cad_Shape>>(file_name + Cad_Shape::extension, verbose);
+	if (NOT shape)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " the loaded shape is null." << endl
+			<< abort(FatalError);
+	}
+	if (verbose)
+	{
+		Info << " - shape's name: " << shape->Name() << endl;
+	}
+	return { std::move(shape) };
+}
+
 void tnbLib::api::cad::export_to_step(const Shape& shape, const std::string& name)
 {
 	Cad_Tools::ExportToSTEP(shape.shape->Shape(), name);

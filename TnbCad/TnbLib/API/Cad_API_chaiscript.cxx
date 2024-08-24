@@ -79,6 +79,11 @@ namespace tnbLib
 				mod->add(chaiscript::fun([](const api::cad::Shape& shape, const std::string& name, const std::string& unit)-> void {api::cad::export_to_iges(shape, name, unit); }), "export_to_iges");
 				mod->add(chaiscript::fun([](const api::cad::Shape& shape, const std::string& name)-> void {api::cad::export_to_step(shape, name); }), "export_to_step");
 				mod->add(chaiscript::fun([](const api::cad::Shape& shape, const std::string& name, unsigned short verbose)-> void {api::cad::save_to(shape, name, verbose); }), "save_to");
+				mod->add(chaiscript::fun([](const api::cad::Shape& shape, const std::string& name)-> void {api::cad::save_to(shape, name, 0); }), "save_to");
+
+				// loading a shape file
+				mod->add(chaiscript::fun([](const Cad&, const std::string& file_name)->auto {return api::cad::load_shape(file_name, 0); }), "read_shape");
+				mod->add(chaiscript::fun([](const Cad&, const std::string& file_name, unsigned short i)-> auto {return api::cad::load_shape(file_name, i); }), "read_shape");
 			}
 		}
 	}

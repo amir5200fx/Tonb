@@ -48,6 +48,9 @@ namespace tnbLib
 			TnbCad_EXPORT Shape make_sphere(const gp_Ax2& ax, double r, double angle1, double angle2, double angle3);
 			TnbCad_EXPORT Shape make_sphere(const gp_Ax2& ax, double r, double angle1, double angle2, double angle3, const std::string& name);
 
+			// for loading the file no extension should be used. The file extension is automatically added to the file name.
+			TnbCad_EXPORT Shape load_shape(const std::string& file_name, unsigned short verbose);
+
 			TnbCad_EXPORT void export_to_step(const Shape&, const std::string& name);
 			TnbCad_EXPORT void export_to_iges(const Shape&, const std::string& name, const std::string& unit);
 			TnbCad_EXPORT void save_to(const Shape&, const std::string& name, unsigned short verbose);
