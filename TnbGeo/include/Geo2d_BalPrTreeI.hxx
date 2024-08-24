@@ -1070,7 +1070,10 @@ inline void tnbLib::Geo2d_BalPrTree<T>::PostSubdivide
 template<class T>
 inline void tnbLib::Geo2d_BalPrTree<T>::Clear()
 {
-	Clear(theRoot_);
+	if (theRoot_)
+	{
+		Clear(theRoot_);
+	}
 }
 
 template<class T>

@@ -147,13 +147,13 @@ namespace tnbLib
 	void setFuns(const module_t& mod)
 	{
 		// io functions [12/9/2021 Amir]
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadRefFile(name); }), "loadFile");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadRefFile(name); }), "load_file");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
 
 		// settings [12/9/2021 Amir]
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 
 		// operators [12/9/2021 Amir]
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
@@ -198,12 +198,12 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_file(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - set_verbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

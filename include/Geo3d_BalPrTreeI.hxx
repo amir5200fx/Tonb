@@ -1705,7 +1705,10 @@ template<class T>
 inline void tnbLib::Geo3d_BalPrTree<T>::Clear()
 {
 	//std::cout << "clearing..." << std::endl;
-	Clear(theRoot_);
+	if (theRoot_)
+	{
+		Clear(theRoot_);
+	}
 	//std::cout << "cleared." << std::endl;
 }
 
