@@ -155,5 +155,5 @@ void tnbLib::chai::cad::functions(const module_t& mod)
 
 	add_tools(mod);
 
-	obj.add(mod);
+	//obj.add(mod);
 }

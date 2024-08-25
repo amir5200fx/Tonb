@@ -1,9 +1,60 @@
 #include <Cad_API.hxx>
 #include <Geo_API.hxx>
+#include <Geo_Tools.hxx>
 #include <Global_Chaiscript.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+namespace tnbLib
+{
+	static api::cad::Tessellation my_tessellation;
+
+	class TessellationRunTime
+	{
+		/*Private Data*/
+		static void configs();
+	public:
+		static const double default_angle;
+		static const double default_deflection;
+		static const double default_min_size;
+		static const bool default_relative_mode;
+		static const bool default_parallel_mode;
+		static const bool default_adaptive_min_mode;
+		static const bool default_internal_vertices_mode;
+		static const bool default_control_surf_deflection;
+
+		// constructor
+		TessellationRunTime()
+		{
+			configs();
+		}
+	};
+}
+
+const double tnbLib::TessellationRunTime::default_angle = tnbLib::Geo_Tools::DegToRadian(5.0);
+const double tnbLib::TessellationRunTime::default_deflection = 1.e-3;
+const double tnbLib::TessellationRunTime::default_min_size = 1.e-5;
+const bool tnbLib::TessellationRunTime::default_parallel_mode = false;
+const bool tnbLib::TessellationRunTime::default_relative_mode = true;
+const bool tnbLib::TessellationRunTime::default_adaptive_min_mode = false;
+const bool tnbLib::TessellationRunTime::default_internal_vertices_mode = true;
+const bool tnbLib::TessellationRunTime::default_control_surf_deflection = true;
+
+
+static const tnbLib::TessellationRunTime TessellationRunTimeObj;
+
+void tnbLib::TessellationRunTime::configs()
+{
+	api::cad::set_angle(my_tessellation, default_angle);
+	api::cad::set_deflection(my_tessellation, default_deflection);
+	api::cad::set_min_size(my_tessellation, default_min_size);
+	api::cad::set_relative_mode(my_tessellation, default_relative_mode);
+	api::cad::set_parallel_mode(my_tessellation, default_parallel_mode);
+	api::cad::set_adaptive_min(my_tessellation, default_adaptive_min_mode);
+	api::cad::set_internal_vertices_mode(my_tessellation, default_internal_vertices_mode);
+	api::cad::set_control_surf_deflection(my_tessellation, default_control_surf_deflection);
+}
 
 #ifdef DebugInfo
 #undef DebugInfo
@@ -30,6 +81,12 @@ namespace tnbLib
 		chai::app::functions(mod);
 		chai::geo::functions(mod);
 		chai::cad::functions(mod);
+	}
+
+	void set_general_functions(const module_t& mod)
+	{
+		mod->add(chaiscript::fun([](const api::cad::Shape& shape)->void {api::cad::tessellate(shape, my_tessellation, 0); }), "tessellate");
+		mod->add(chaiscript::fun([](const api::cad::Shape& shape, unsigned short i)->void {api::cad::tessellate(shape, my_tessellation, i); }), "tessellate");
 	}
 }
 
@@ -84,8 +141,9 @@ int main(int argc, char* argv[])
 			{
 				auto mod = std::make_shared<chaiscript::Module>();
 				activate(mod);
+				set_general_functions(mod);
 
-				//chai::obj.add(mod);
+				chai::obj.add(mod);
 
 				chai::obj.eval_file(myFileName);
 				return 0;

@@ -35,6 +35,7 @@ namespace tnbLib
 			struct Tessellation
 			{
 				TnbCad_EXPORT Tessellation(const chai::Cad&);
+				TnbCad_EXPORT Tessellation();
 				std::shared_ptr<FastDiscrete_Params> obj;
 			};
 			using Box = geo::threedim::Box;
@@ -65,6 +66,15 @@ namespace tnbLib
 			// tools
 			TnbCad_EXPORT Box calc_bounding_box(const Shape&);
 			TnbCad_EXPORT void tessellate(const Shape&, const Tessellation&, unsigned short verbose);
+
+			TnbCad_EXPORT void set_angle(const Tessellation& t, double x);
+			TnbCad_EXPORT void set_deflection(const Tessellation& t, double x);
+			TnbCad_EXPORT void set_min_size(const Tessellation& t, double x);
+			TnbCad_EXPORT void set_relative_mode(const Tessellation& t, bool status);
+			TnbCad_EXPORT void set_parallel_mode(const Tessellation& t, bool status);
+			TnbCad_EXPORT void set_adaptive_min(const Tessellation& t, bool status);
+			TnbCad_EXPORT void set_internal_vertices_mode(const Tessellation& t, bool status);
+			TnbCad_EXPORT void set_control_surf_deflection(const Tessellation& t, bool status);
 
 			// for loading the file no extension should be used. The file extension is automatically added to the file name.
 			TnbCad_EXPORT Shape load_shape(const std::string& file_name, unsigned short verbose);

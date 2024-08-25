@@ -28,6 +28,19 @@ tnbLib::api::cad::Tessellation::Tessellation(const chai::Cad&)
 	obj->ControlSurfaceDeflection = true;
 }
 
+tnbLib::api::cad::Tessellation::Tessellation()
+	: obj{ std::make_shared<FastDiscrete_Params>() }
+{
+	obj->Angle = Geo_Tools::DegToRadian(5.0);
+	obj->Deflection = 1.e-3;
+	obj->MinSize = 1.e-5;
+	obj->InParallel = false;
+	obj->Relative = true;
+	obj->AdaptiveMin = false;
+	obj->InternalVerticesMode = true;
+	obj->ControlSurfaceDeflection = true;
+}
+
 
 void tnbLib::api::cad::tessellate(const Shape& shape, const Tessellation& tessellation, unsigned short verbose)
 {
@@ -60,4 +73,44 @@ void tnbLib::api::cad::tessellate(const Shape& shape, const Tessellation& tessel
 		Info << " - Total nb. of triangles: " << nbTris << "\n";
 		Info << "\n";
 	}
+}
+
+void tnbLib::api::cad::set_angle(const Tessellation& t, double x)
+{
+	t.obj->Angle = x;
+}
+
+void tnbLib::api::cad::set_deflection(const Tessellation& t, double x)
+{
+	t.obj->Deflection = x;
+}
+
+void tnbLib::api::cad::set_min_size(const Tessellation& t, double x)
+{
+	t.obj->MinSize = x;
+}
+
+void tnbLib::api::cad::set_relative_mode(const Tessellation& t, bool status)
+{
+	t.obj->Relative = status;
+}
+
+void tnbLib::api::cad::set_parallel_mode(const Tessellation& t, bool status)
+{
+	t.obj->InParallel = status;
+}
+
+void tnbLib::api::cad::set_adaptive_min(const Tessellation& t, bool status)
+{
+	t.obj->AdaptiveMin = status;
+}
+
+void tnbLib::api::cad::set_internal_vertices_mode(const Tessellation& t, bool status)
+{
+	t.obj->InternalVerticesMode = status;
+}
+
+void tnbLib::api::cad::set_control_surf_deflection(const Tessellation& t, bool status)
+{
+	t.obj->ControlSurfaceDeflection = status;
 }
