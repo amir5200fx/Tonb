@@ -156,6 +156,11 @@ tnbLib::api::cad::Shape tnbLib::api::cad::make_sphere(const gp_Ax2& ax, double r
 	return {std::move(shape)};
 }
 
+tnbLib::api::cad::Box tnbLib::api::cad::calc_bounding_box(const Shape& shape)
+{
+	return { shape.shape->BoundingBox() };
+}
+
 tnbLib::api::cad::Shape tnbLib::api::cad::load_shape(const std::string& file_name, unsigned short verbose)
 {
 	// Check if the file name has an extension.

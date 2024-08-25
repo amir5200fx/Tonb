@@ -74,6 +74,12 @@ namespace tnbLib
 				mod->add(chaiscript::fun([](const Cad&, const gp_Ax2& ax, double r, double angle1, double angle2, double angle3, const std::string& name)-> auto {return api::cad::make_sphere(ax, r, angle1, angle2, angle3, name); }), "make_sphere");
 			}
 
+			void add_tools(const module_t& mod)
+			{
+				using Shape = api::cad::Shape;
+				mod->add(chaiscript::fun([](const Shape& shape)-> auto {return api::cad::calc_bounding_box(shape); }), "calc_bounding_box");
+			}
+
 			void add_io(const module_t& mod)
 			{
 				mod->add(chaiscript::fun([](const api::cad::Shape& shape, const std::string& name, const std::string& unit)-> void {api::cad::export_to_iges(shape, name, unit); }), "export_to_iges");
@@ -115,6 +121,8 @@ void tnbLib::chai::cad::functions(const module_t& mod)
 	add_cylinder(mod);
 	add_sphere(mod);
 	add_io(mod);
+
+	add_tools(mod);
 
 	obj.add(mod);
 }
