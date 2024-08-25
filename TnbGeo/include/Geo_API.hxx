@@ -26,6 +26,15 @@ namespace tnbLib
 	{
 		namespace geo
 		{
+			namespace twodim
+			{
+				struct Box { std::shared_ptr<Entity2d_Box> obj; };
+			}
+
+			namespace threedim
+			{
+				struct Box { std::shared_ptr<Entity3d_Box> obj; };
+			}
 			TnbGeo_EXPORT Pnt2d make_pnt_2d(double x, double y);
 			TnbGeo_EXPORT Pnt3d make_pnt_3d(double x, double y, double z);
 
@@ -40,15 +49,16 @@ namespace tnbLib
 
 			TnbGeo_EXPORT gp_Ax2d make_ax_2d(const Pnt2d& c, const Dir2d& v);
 
-			TnbGeo_EXPORT std::shared_ptr<Entity3d_Box> make_box_3d(const Pnt3d& p0, const Pnt3d& p1);
-			TnbGeo_EXPORT std::shared_ptr<Entity2d_Box> make_box_2d(const Pnt2d& p0, const Pnt2d& p1);
+			TnbGeo_EXPORT threedim::Box make_box_3d(const Pnt3d& p0, const Pnt3d& p1);
+			TnbGeo_EXPORT twodim::Box make_box_2d(const Pnt2d& p0, const Pnt2d& p1);
 
 		}
 	}
 
 	namespace chai
 	{
-		struct Geo {};
+		struct Geo2d {};
+		struct Geo3d {};
 
 		namespace geo
 		{
