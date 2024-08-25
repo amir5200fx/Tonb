@@ -36,6 +36,8 @@
 
 #include <Global_Chaiscript.hxx>
 
+#include "FastDiscrete_Params.hxx"
+
 namespace tnbLib
 {
 	namespace chai
@@ -76,8 +78,34 @@ namespace tnbLib
 
 			void add_tools(const module_t& mod)
 			{
+				using Tessellation = api::cad::Tessellation;
 				using Shape = api::cad::Shape;
 				mod->add(chaiscript::fun([](const Shape& shape)-> auto {return api::cad::calc_bounding_box(shape); }), "calc_bounding_box");
+
+				static const auto& get_obj = [](const Tessellation& t)
+					{
+						return t.obj;
+					};
+				mod->add(chaiscript::fun([](const Tessellation& t, double x)-> void {get_obj(t)->Angle = x; }), "set_angle");
+				mod->add(chaiscript::fun([](const Tessellation& t, double x)-> void {get_obj(t)->Deflection = x; }), "set_deflection");
+				mod->add(chaiscript::fun([](const Tessellation& t, double x)-> void {get_obj(t)->MinSize = x; }), "set_min_size");
+				mod->add(chaiscript::fun([](const Tessellation& t, bool rm)-> void {get_obj(t)->Relative = rm; }), "set_relative_mode");
+				mod->add(chaiscript::fun([](const Tessellation& t, bool pm)-> void {get_obj(t)->InParallel = pm; }), "set_parallel_mode");
+				mod->add(chaiscript::fun([](const Tessellation& t, bool am)-> void {get_obj(t)->AdaptiveMin = am; }), "set_adaptive_min");
+				mod->add(chaiscript::fun([](const Tessellation& t, bool iv)-> void {get_obj(t)->InternalVerticesMode = iv; }), "set_internal_vertices_mode");
+				mod->add(chaiscript::fun([](const Tessellation& t, bool csd)-> void {get_obj(t)->ControlSurfaceDeflection = csd; }), "set_control_surf_deflection");
+
+				mod->add(chaiscript::fun([](const Tessellation& t)-> auto {return get_obj(t)->Angle; }), "angle");
+				mod->add(chaiscript::fun([](const Tessellation& t)-> auto {return get_obj(t)->Deflection; }), "deflection");
+				mod->add(chaiscript::fun([](const Tessellation& t)->auto {return get_obj(t)->MinSize; }), "min_size");
+				mod->add(chaiscript::fun([](const Tessellation& t)-> auto {return get_obj(t)->InParallel; }), "parallel");
+				mod->add(chaiscript::fun([](const Tessellation& t)-> auto {return get_obj(t)->Relative; }), "relative");
+				mod->add(chaiscript::fun([](const Tessellation& t)-> auto {return get_obj(t)->AdaptiveMin; }), "adaptive_min");
+				mod->add(chaiscript::fun([](const Tessellation& t)-> auto {return get_obj(t)->InternalVerticesMode; }), "internal_vertices");
+				mod->add(chaiscript::fun([](const Tessellation& t)->auto {return get_obj(t)->ControlSurfaceDeflection; }), "control_surf_deflection");
+
+				mod->add(chaiscript::fun([](const Shape& shape, const Tessellation& t)->void {api::cad::tessellate(shape, t, 0); }), "tessellate");
+				mod->add(chaiscript::fun([](const Shape& shape, const Tessellation& t, unsigned short i)-> void {api::cad::tessellate(shape, t, i); }), "tessellate");
 			}
 
 			void add_io(const module_t& mod)
@@ -117,6 +145,9 @@ void tnbLib::chai::cad::functions(const module_t& mod)
 	mod->add(chaiscript::user_type<Cad>(), "Cad");
 	mod->add(chaiscript::constructor<Cad()>(), "Cad");
 
+	mod->add(chaiscript::user_type<api::cad::Tessellation>(), "Tessellation");
+	mod->add(chaiscript::constructor<api::cad::Tessellation(const Cad&)>(), "Tessellation");
+
 	add_box(mod);
 	add_cylinder(mod);
 	add_sphere(mod);
@@ -124,5 +155,5 @@ void tnbLib::chai::cad::functions(const module_t& mod)
 
 	add_tools(mod);
 
-	obj.add(mod);
+	//obj.add(mod);
 }

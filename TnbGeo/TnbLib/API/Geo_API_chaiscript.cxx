@@ -148,5 +148,5 @@ void tnbLib::chai::geo::functions(const module_t& mod)
 	add_box_2d(mod);
 	add_box_3d(mod);
 
-	obj.add(mod);
+	//obj.add(mod);
 }

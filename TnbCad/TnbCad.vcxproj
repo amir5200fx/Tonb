@@ -215,6 +215,7 @@
     <ClCompile Include="TnbLib\API\Cad_API_chaiscript.cxx" />
     <ClCompile Include="TnbLib\API\Cad_API_LoadIGES.cxx" />
     <ClCompile Include="TnbLib\API\Cad_API_LoadSTEP.cxx" />
+    <ClCompile Include="TnbLib\API\Cad_API_tessellation.cxx" />
     <ClCompile Include="TnbLib\Cad\Analyzer\GModel\Surface\GModel_MetricAnalyzer.cxx" />
     <ClCompile Include="TnbLib\Cad\Analyzer\GModel\Surface\GModel_MetricAnalyzerIO.cxx" />
     <ClCompile Include="TnbLib\Cad\ApproxMetric\Cad_ApprxMetric.cxx" />
