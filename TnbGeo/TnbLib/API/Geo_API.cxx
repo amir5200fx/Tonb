@@ -58,12 +58,12 @@ gp_Ax2d tnbLib::api::geo::make_ax_2d(const Pnt2d& c, const Dir2d& v)
 #include <Entity3d_Box.hxx>
 #include <Entity2d_Box.hxx>
 
-std::shared_ptr<tnbLib::Entity3d_Box> tnbLib::api::geo::make_box_3d(const Pnt3d& p0, const Pnt3d& p1)
+tnbLib::api::geo::threedim::Box tnbLib::api::geo::make_box_3d(const Pnt3d& p0, const Pnt3d& p1)
 {
-	return std::make_shared<Entity3d_Box>(p0, p1);
+	return { std::make_shared<Entity3d_Box>(p0, p1) };
 }
 
-std::shared_ptr<tnbLib::Entity2d_Box> tnbLib::api::geo::make_box_2d(const Pnt2d& p0, const Pnt2d& p1)
+tnbLib::api::geo::twodim::Box tnbLib::api::geo::make_box_2d(const Pnt2d& p0, const Pnt2d& p1)
 {
-	return std::make_shared<Entity2d_Box>(p0, p1);
+	return { std::make_shared<Entity2d_Box>(p0, p1) };
 }

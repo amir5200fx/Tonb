@@ -2,6 +2,7 @@
 #ifndef _TnbCad_API_Header
 #define _TnbCad_API_Header
 #include <Cad_Module.hxx>
+#include <Geo_API.hxx>
 #include <Global_ChaiscriptFwd.hxx>
 #include <memory>
 #include <string>
@@ -24,6 +25,7 @@ namespace tnbLib
 			{
 				std::shared_ptr<Cad_Shape> shape;
 			};
+			using Box = geo::threedim::Box;
 
 			TnbCad_EXPORT Shape make_box(const Pnt3d& p0, const Pnt3d& p1);
 			TnbCad_EXPORT Shape make_box(const Pnt3d& p0, const Pnt3d& p1, const std::string& name);
@@ -47,6 +49,8 @@ namespace tnbLib
 			TnbCad_EXPORT Shape make_sphere(const gp_Ax2& ax, double r, double angle1, double angle2, const std::string& name);
 			TnbCad_EXPORT Shape make_sphere(const gp_Ax2& ax, double r, double angle1, double angle2, double angle3);
 			TnbCad_EXPORT Shape make_sphere(const gp_Ax2& ax, double r, double angle1, double angle2, double angle3, const std::string& name);
+
+			TnbCad_EXPORT Box calc_bounding_box(const Shape&);
 
 			// for loading the file no extension should be used. The file extension is automatically added to the file name.
 			TnbCad_EXPORT Shape load_shape(const std::string& file_name, unsigned short verbose);
