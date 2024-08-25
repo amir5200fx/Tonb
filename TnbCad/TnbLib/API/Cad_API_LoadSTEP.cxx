@@ -40,7 +40,7 @@ tnbLib::api::cad::Shape tnbLib::api::cad::load_step(const std::string& file_name
 		else {
 			std::cerr << "Error: Unable to read the STEP file." << std::endl;
 		}
-		shape = std::make_shared<Cad_Shape>(0, name, reader.OneShape());
+		shape = std::make_shared<Cad_Shape>(0, file_name, reader.OneShape());
 	}
 	if (verbose)
 	{

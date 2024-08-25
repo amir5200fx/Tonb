@@ -9,8 +9,10 @@
 #undef DebugInfo
 #endif // DebugInfo
 
+#include <TopoDS_Shape.hxx>
 #include <IGESControl_Reader.hxx>
 #include <Bnd_Box.hxx>
+#include <BRepBndLib.hxx>
 
 tnbLib::api::cad::Shape tnbLib::api::cad::load_iges(const std::string& file_name, unsigned short verbose)
 {
@@ -30,8 +32,7 @@ tnbLib::api::cad::Shape tnbLib::api::cad::load_iges(const std::string& file_name
 
 		Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
 		Reader.TransferList(myList);
-
-		shape = std::make_shared<Cad_Shape>(0, name, Reader.OneShape());
+		shape = std::make_shared<Cad_Shape>(0, file_name, Reader.OneShape());
 	}
 	if (verbose)
 	{
