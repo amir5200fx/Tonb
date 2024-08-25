@@ -20,4 +20,7 @@ void tnbLib::chai::app::functions(const module_t& mod)
 
 	add_verbose(mod);
 	mod->add(chaiscript::fun([](const App&, const std::string& str)-> void {Info << str.c_str(); }), "message");
+	mod->add(chaiscript::fun([](double x)->auto {return std::to_string(x); }), "to_string");
+	mod->add(chaiscript::fun([](int n)->auto {return std::to_string(n); }), "to_string");
+	mod->add(chaiscript::fun([](unsigned int i)-> auto {return std::to_string(i); }), "to_string");
 }
