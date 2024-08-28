@@ -16,7 +16,7 @@ namespace tnbLib
 	{
 		struct App{};
 
-		extern TnbGlobal_EXPORT chaiscript::ChaiScript obj;
+		//extern TnbGlobal_EXPORT chaiscript::ChaiScript obj;
 
 		namespace app
 		{
