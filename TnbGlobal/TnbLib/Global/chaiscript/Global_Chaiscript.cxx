@@ -7,7 +7,7 @@
 
 #include <chaiscript/chaiscript.hpp>
 
-chaiscript::ChaiScript tnbLib::chai::obj;
+//chaiscript::ChaiScript tnbLib::chai::obj;
 
 
 

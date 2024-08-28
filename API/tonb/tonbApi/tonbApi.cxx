@@ -143,9 +143,10 @@ int main(int argc, char* argv[])
 				activate(mod);
 				set_general_functions(mod);
 
-				chai::obj.add(mod);
+				chaiscript::ChaiScript obj;
+				obj.add(mod);
 
-				chai::obj.eval_file(myFileName);
+				obj.eval_file(myFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
