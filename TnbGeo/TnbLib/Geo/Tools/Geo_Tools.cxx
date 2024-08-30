@@ -182,6 +182,24 @@ tnbLib::Geo_Tools::CalcLength
 	return d;
 }
 
+Standard_Real
+tnbLib::Geo_Tools::CalcLength
+(
+	const Entity3d_Polygon& thePoly
+)
+{
+	const auto& pts = thePoly.Points();
+	Standard_Real d = 0;
+	for (size_t i = 1; i < pts.size(); i++)
+	{
+		const auto& p0 = pts[i - 1];
+		const auto& p1 = pts[i];
+
+		d += p0.Distance(p1);
+	}
+	return d;
+}
+
 Standard_Real 
 tnbLib::Geo_Tools::CalcSquareDistancePointFromSegment
 (
