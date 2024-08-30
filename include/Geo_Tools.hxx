@@ -219,6 +219,8 @@ namespace tnbLib
 				const Entity2d_Polygon&
 			);
 
+		static TnbGeo_EXPORT Standard_Real CalcLength(const Entity3d_Polygon&);
+
 		static inline Standard_Real 
 			CalcSquareDistancePointFromSegment
 			(
