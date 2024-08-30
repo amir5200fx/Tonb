@@ -5583,6 +5583,21 @@
     <ClInclude Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_Multi.hxx">
       <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_Curve.hxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_CurveFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_CurveI.hxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh2d_CurveFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Entity\Iso\Mesh3d_CurveEntity.hxx">
+      <Filter>TnbLib\Curve\Entity\Iso</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7345,6 +7360,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_MultiIO.cxx">
       <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\Iso\Mesh3d_Curve.cxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
