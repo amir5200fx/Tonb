@@ -1267,7 +1267,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetricFwd.hxx" />
     <ClInclude Include="TnbLib\Curve\Curve\Info\Mesh_Curve_Info.hxx" />
     <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh2d_Curve.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh2d_CurveFwd.hxx" />
     <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh2d_CurveI.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_Curve.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_CurveFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_CurveI.hxx" />
     <ClInclude Include="TnbLib\Curve\Curve\Mesh_Curve.hxx" />
     <ClInclude Include="TnbLib\Curve\Curve\Mesh_CurveI.hxx" />
     <ClInclude Include="TnbLib\Curve\Curve\Traits\Mesh_CurveTraits.hxx" />
@@ -1276,6 +1280,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Curve\Entity\AnIso\UniMetric\Mesh2d_CurveEntityUniMetric.hxx" />
     <ClInclude Include="TnbLib\Curve\Entity\AnIso\UniMetric\Mesh2d_CurveEntityUniMetricFwd.hxx" />
     <ClInclude Include="TnbLib\Curve\Entity\Iso\Mesh2d_CurveEntity.hxx" />
+    <ClInclude Include="TnbLib\Curve\Entity\Iso\Mesh3d_CurveEntity.hxx" />
     <ClInclude Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemesh.hxx" />
     <ClInclude Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemeshFwd.hxx" />
     <ClInclude Include="TnbLib\Curve\ReMesh\Mesh_CurveRemesh.hxx" />
@@ -1880,6 +1885,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Curve\Curve\Info\Mesh_Curve_Info.cxx" />
     <ClCompile Include="TnbLib\Curve\Curve\Info\Mesh_Curve_InfoIO.cxx" />
     <ClCompile Include="TnbLib\Curve\Curve\Iso\Mesh2d_Curve.cxx" />
+    <ClCompile Include="TnbLib\Curve\Curve\Iso\Mesh3d_Curve.cxx" />
     <ClCompile Include="TnbLib\Curve\Curve\Mesh_Curve.cxx" />
     <ClCompile Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemesh.cxx" />
     <ClCompile Include="TnbLib\Region\Mesh_Region.cxx" />

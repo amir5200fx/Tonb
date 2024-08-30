@@ -2,15 +2,12 @@
 #ifndef _Mesh2d_Curve_Header
 #define _Mesh2d_Curve_Header
 
+#include <Mesh2d_CurveFwd.hxx>
 #include <Mesh_Curve.hxx>
 #include <Mesh2d_CurveEntity.hxx>
 
 namespace tnbLib
 {
-	typedef Mesh_Curve<Geom2d_Curve, Geo2d_MetricPrcsr>
-		Mesh2d_Curve;
-
-
 	template<>
 	inline const Pnt2d& Entity_Polygon<std::pair<Pnt2d, Standard_Real>>::Coord(const Standard_Integer) const;
 	template<>
