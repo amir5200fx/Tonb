@@ -5,6 +5,7 @@
 #include <GMesh_Module.hxx>
 #include <Geo3d_SizeFunctionFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Entity3d_BoxFwd.hxx>
 #include <Entity_Triangle.hxx>
 #include <Pnt3d.hxx>
 #include <Vec3d.hxx>
@@ -102,6 +103,9 @@ namespace tnbLib
 				const Standard_Integer theTag, 
 				const word& theName
 			);
+
+		static TnbGMesh_EXPORT std::shared_ptr<Entity3d_Box> GetBoundingBox(
+			const Standard_Integer theDim, const Standard_Integer tag);
 
 		static TnbGMesh_EXPORT void Translate
 		(
