@@ -516,6 +516,8 @@ namespace tnbLib
 		);
 
 		static TnbCad_EXPORT void CheckSolid(const TopoDS_Shape&);
+		static TnbCad_EXPORT void CleanTriangulation(const TopoDS_Shape&);
+		static TnbCad_EXPORT void CleanTriangulation(const TopoDS_Face&);
 	};
 }
 

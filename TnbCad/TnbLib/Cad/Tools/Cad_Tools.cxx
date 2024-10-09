@@ -2890,3 +2890,23 @@ void tnbLib::Cad_Tools::CheckSolid(const TopoDS_Shape& theSolid)
 			<< abort(FatalError);
 	}
 }
+
+void tnbLib::Cad_Tools::CleanTriangulation(const TopoDS_Shape& shape)
+{
+	TopExp_Explorer explorer(shape, TopAbs_FACE);
+	for (; explorer.More(); explorer.Next())
+	{
+		TopoDS_Face face = TopoDS::Face(explorer.Current());
+		CleanTriangulation(face);
+	}
+}
+
+void tnbLib::Cad_Tools::CleanTriangulation(const TopoDS_Face& face)
+{
+	TopLoc_Location loc;
+	auto triangulation = BRep_Tool::Triangulation(face, loc);
+	if (!triangulation.IsNull())
+	{
+		BRepTools::Clean(face);
+	}
+}
