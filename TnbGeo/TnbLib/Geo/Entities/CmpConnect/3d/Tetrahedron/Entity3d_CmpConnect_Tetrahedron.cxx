@@ -37,7 +37,18 @@ tnbLib::Entity3d_CmpConnect_Tetrahedron::RetrievePolygon(const std::vector<Pnt3d
 	{
 		coords.emplace_back(theCoords.at(Index_Of(i)));
 	}
-	return std::move(coords);
+	return coords;
+}
+
+std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_Tetrahedron::CalcFaces() const
+{
+	std::vector<Face> faces;
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(1), theCmpts_.at(3)} });
+	faces.emplace_back(Face{ {theCmpts_.at(1), theCmpts_.at(2), theCmpts_.at(3)} });
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(0), theCmpts_.at(3)} });
+
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(1), theCmpts_.at(0)} });
+	return faces;
 }
 
 std::shared_ptr<tnbLib::Entity3d_CmpConnect>

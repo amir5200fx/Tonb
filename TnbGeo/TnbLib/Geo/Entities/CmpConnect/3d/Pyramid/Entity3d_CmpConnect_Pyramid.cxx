@@ -40,6 +40,18 @@ tnbLib::Entity3d_CmpConnect_Pyramid::RetrievePolygon(const std::vector<Pnt3d>& t
 	return std::move(coords);
 }
 
+std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_Pyramid::CalcFaces() const
+{
+	std::vector<Face> faces;
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(1), theCmpts_.at(4)} });
+	faces.emplace_back(Face{ {theCmpts_.at(1), theCmpts_.at(2), theCmpts_.at(4)} });
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(3), theCmpts_.at(4)} });
+	faces.emplace_back(Face{ {theCmpts_.at(3), theCmpts_.at(0), theCmpts_.at(4)} });
+
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(1), theCmpts_.at(2), theCmpts_.at(3)} });
+	return faces;
+}
+
 std::shared_ptr<tnbLib::Entity3d_CmpConnect>
 tnbLib::Entity3d_CmpConnect_Pyramid::Copy() const
 {

@@ -33,6 +33,38 @@ std::vector<tnbLib::Pnt3d> tnbLib::Entity3d_CmpConnect_ExtrudedPolygon::Retrieve
 	return coords;
 }
 
+std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_ExtrudedPolygon::CalcFaces() const
+{
+	std::vector<Face> faces;
+	const auto n = NbCmpts() / 2;
+	for (Standard_Integer i = 0; i < n; i++)
+	{
+		const auto i0 = i;
+		const auto i1 = (i + 1) % n;
+		const auto i2 = i0 + n;
+		const auto i3 = i1 + n;
+		faces.emplace_back(Face{ {theCmpts_.at(i0), theCmpts_.at(i1), theCmpts_.at(i2), theCmpts_.at(i3)} });
+	}
+	{// the lower face
+		std::vector<Standard_Integer> ids;
+		for (Standard_Integer i = 0; i < n; i++)
+		{
+			ids.emplace_back(theCmpts_.at(i));
+		}
+		std::reverse(ids.begin(), ids.end());
+		faces.emplace_back(Face{ std::move(ids) });
+	}
+	{// the upper face
+		std::vector<Standard_Integer> ids;
+		for (Standard_Integer i = 0; i < n; i++)
+		{
+			ids.emplace_back(theCmpts_.at(i + n));
+		}
+		faces.emplace_back(Face{ std::move(ids) });
+	}
+	return faces;
+}
+
 std::shared_ptr<tnbLib::Entity3d_CmpConnect> tnbLib::Entity3d_CmpConnect_ExtrudedPolygon::Copy() const
 {
 	return std::make_shared<Entity3d_CmpConnect_ExtrudedPolygon>(this->Array());
