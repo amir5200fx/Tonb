@@ -59,7 +59,7 @@ namespace tnbLib
 		void Import(const Entity3d_CmpMeshSurface&);
 
 		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
-		void ExportToVtk(OFstream&) const;
+		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;
 
 	};
 }

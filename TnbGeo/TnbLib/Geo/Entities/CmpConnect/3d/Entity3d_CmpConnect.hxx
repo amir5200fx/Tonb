@@ -39,13 +39,15 @@ namespace tnbLib
 		{}
 
 	public:
+		virtual ~Entity3d_CmpConnect() = default;
 
 		enum class ElmType
 		{
 			brick,
 			prism,
 			pyramid,
-			tetrahedron
+			tetrahedron,
+			extruded_polygon
 		};
 
 
@@ -55,6 +57,7 @@ namespace tnbLib
 		virtual Standard_Boolean IsPrism() const { return Standard_False; }
 		virtual Standard_Boolean IsPyramid() const { return Standard_False; }
 		virtual Standard_Boolean IsTetrahedron() const { return Standard_False; }
+		virtual Standard_Boolean IsExtrudedPolygon() const { return Standard_False; }
 
 		virtual Standard_Integer NbCmpts() const = 0;
 		virtual ElmType ElementType() const = 0;

@@ -28,7 +28,7 @@ tnbLib::Entity3d_CmpConnect_Brick::Components() const
 {
 	std::vector<Standard_Integer> indices;
 	std::copy(theCmpts_.begin(), theCmpts_.end(), std::back_inserter(indices));
-	return std::move(indices);
+	return indices;
 }
 
 std::vector<tnbLib::Pnt3d>
@@ -40,11 +40,10 @@ tnbLib::Entity3d_CmpConnect_Brick::RetrievePolygon(const std::vector<Pnt3d>& the
 	{
 		coords.emplace_back(theCoords.at(Index_Of(i)));
 	}
-	return std::move(coords);
+	return coords;
 }
 
 std::shared_ptr<tnbLib::Entity3d_CmpConnect> tnbLib::Entity3d_CmpConnect_Brick::Copy() const
 {
-	auto t = std::make_shared<Entity3d_CmpConnect_Brick>(this->Array());
-	return std::move(t);
+	return std::make_shared<Entity3d_CmpConnect_Brick>(this->Array());
 }
