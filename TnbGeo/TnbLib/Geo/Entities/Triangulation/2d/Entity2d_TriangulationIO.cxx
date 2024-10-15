@@ -30,3 +30,9 @@ void tnbLib::Entity2d_Triangulation::ExportToVtk(std::stringstream& theStream) c
 {
 	vtkLib::WriteMesh(*this, "The triangular mesh", theStream);
 }
+
+template <>
+void tnbLib::Entity2d_Triangulation::ExportToVtk(std::fstream& file) const
+{
+	vtkLib::WriteMesh(*this, "the triangular mesh", file);
+}

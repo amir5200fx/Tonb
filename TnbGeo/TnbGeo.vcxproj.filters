@@ -1216,6 +1216,12 @@
     <Filter Include="TnbLib\API">
       <UniqueIdentifier>{07331edd-3c16-41af-9ded-f0537766723d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\PolyhedralMesh">
+      <UniqueIdentifier>{eaf69705-33df-4989-86a9-b1423d947ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon">
+      <UniqueIdentifier>{2c0f1eb7-1af7-4bd7-8b3f-2b49ad140351}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2742,6 +2748,12 @@
     <ClInclude Include="TnbLib\API\Geo_API.hxx">
       <Filter>TnbLib\API</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\PolyhedralMesh\Entity3d_PolyhedralMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\PolyhedralMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygon.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3550,6 +3562,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\API\Geo_API_chaiscript.cxx">
       <Filter>TnbLib\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\PolyhedralMesh\Entity3d_PolyhedralMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\PolyhedralMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\PolyhedralMesh\Entity3d_PolyhedralMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\PolyhedralMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygon.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygonIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

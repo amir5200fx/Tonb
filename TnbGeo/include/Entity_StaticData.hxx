@@ -174,6 +174,7 @@ namespace tnbLib
 		void StreamToPlt(std::stringstream& theStream) const;
 		void ExportToVtk(OFstream&) const;
 		void ExportToVtk(std::stringstream& theStream) const;
+		void ExportToVtk(std::fstream&) const;
 	};
 
 	template<class Point, class ConnectType>

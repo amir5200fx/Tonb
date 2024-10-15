@@ -18,7 +18,10 @@ namespace tnbLib
 
 	template<>
 	TnbGeo_EXPORT void Entity3d_Polygon::ExportToPlt(std::fstream& File) const;
-
+	template <>
+	TnbGeo_EXPORT void Entity3d_Polygon::ExportToVtk(std::fstream&) const;
+	template<>
+	TnbGeo_EXPORT void Entity3d_Polygon::ExportToVtk(std::stringstream&) const;
 	template<>
 	TnbGeo_EXPORT void Entity3d_Polygon::ExportToPlt(OFstream& File) const;
 }

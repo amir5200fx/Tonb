@@ -28,7 +28,7 @@ void tnbLib::Entity3d_PolyhedralMesh::ExportToVtk(std::fstream& file) const
             faces->InsertNextId(f.NbIndices());
             for (const auto i : f.Indices())
             {
-                faces->InsertNextId(i);
+                faces->InsertNextId(i - 1);
             }
         }
         vtkSmartPointer<vtkIdList> pointIds = vtkSmartPointer<vtkIdList>::New();
@@ -45,5 +45,8 @@ void tnbLib::Entity3d_PolyhedralMesh::ExportToVtk(std::fstream& file) const
     vtkSmartPointer<vtkUnstructuredGridWriter> legacyWriter = vtkSmartPointer<vtkUnstructuredGridWriter>::New();
     legacyWriter->SetFileName("polyhedron_mesh.vtk");
     legacyWriter->SetInputData(unstructuredGrid);
+    legacyWriter->SetWriteToOutputString(1);
     legacyWriter->Write();
+
+    file << legacyWriter->GetOutputStdString();
 }

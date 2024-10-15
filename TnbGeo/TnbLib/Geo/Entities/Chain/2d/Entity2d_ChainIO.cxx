@@ -18,3 +18,9 @@ void tnbLib::Entity2d_Chain::ExportToVtk(OFstream& File) const
 {
 	vtkLib::WriteMesh(*this, "the Chain", File);
 }
+
+template<>
+void tnbLib::Entity2d_Chain::ExportToVtk(std::fstream& file) const
+{
+	vtkLib::WriteMesh(*this, "the chain", file);
+}

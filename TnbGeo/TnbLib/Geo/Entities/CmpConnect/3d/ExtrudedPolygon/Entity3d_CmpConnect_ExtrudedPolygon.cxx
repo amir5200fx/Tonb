@@ -41,8 +41,8 @@ std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_Extru
 	{
 		const auto i0 = i;
 		const auto i1 = (i + 1) % n;
-		const auto i2 = i0 + n;
-		const auto i3 = i1 + n;
+		const auto i2 = i1 + n;
+		const auto i3 = i0 + n;
 		faces.emplace_back(Face{ {theCmpts_.at(i0), theCmpts_.at(i1), theCmpts_.at(i2), theCmpts_.at(i3)} });
 	}
 	{// the lower face

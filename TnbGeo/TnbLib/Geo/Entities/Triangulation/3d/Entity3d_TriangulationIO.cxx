@@ -16,4 +16,10 @@ namespace tnbLib
 	{
 		vtkLib::WriteMesh(*this, "myMesh", theFile);
 	}
+	template <>
+	void Entity3d_Triangulation::ExportToVtk(std::fstream& file) const
+	{
+		vtkLib::WriteMesh(*this, "my mesh", file);
+	}
+
 }
