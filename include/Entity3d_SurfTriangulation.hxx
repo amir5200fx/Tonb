@@ -13,6 +13,8 @@ namespace tnbLib
 
 	template<>
 	TnbGeo_EXPORT void Entity3d_SurfTriangulation::ExportToPlt(OFstream& File) const;
+	template<>
+	TnbGeo_EXPORT void Entity3d_Triangulation::ExportToVtk(std::fstream& file) const;
 
 	TnbGeo_EXPORT std::vector<Pnt3d> RetrieveCoords(const std::vector<Entity3d_SPnt>&);
 	TnbGeo_EXPORT std::vector<Pnt2d> RetrieveParaCoords(const std::vector<Entity3d_SPnt>&);

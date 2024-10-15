@@ -86,6 +86,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Import(const Entity2d_QuadMesh&);
 
 		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
+		void ExportToVtk(std::fstream&) const;
 
 		// Static functions
 		

@@ -20,6 +20,8 @@ namespace tnbLib
 	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToVtk(OFstream&) const;
 	template <>
 	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToVtk(std::stringstream& theStream) const;
+	template<>
+	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToVtk(std::fstream&) const;
 
 }
 

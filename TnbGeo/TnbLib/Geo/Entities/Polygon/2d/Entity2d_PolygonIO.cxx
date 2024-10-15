@@ -20,6 +20,12 @@ void tnbLib::Entity2d_Polygon::ExportToVtk(OFstream& file) const
 }
 
 template <>
+void tnbLib::Entity2d_Polygon::ExportToVtk(std::fstream& file) const
+{
+	vtkLib::WriteMesh(*this, "the polygon", file);
+}
+
+template <>
 void tnbLib::Entity2d_Polygon::ExportToPlt(std::stringstream& theStream) const
 {
 	Io::ExportCurve(thePoints_, theStream);

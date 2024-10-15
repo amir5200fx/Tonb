@@ -1,34 +1,19 @@
 #pragma once
-#ifndef _Entity3d_CmpConnect_Tetrahedron_Header
-#define _Entity3d_CmpConnect_Tetrahedron_Header
+#ifndef _Entity3d_CmpConnect_ExtrudedPolygon_Header
+#define _Entity3d_CmpConnect_ExtrudedPolygon_Header
 
 #include <Entity3d_CmpConnect.hxx>
 #include <Entity_Connectivity.hxx>
 
 namespace tnbLib
 {
-
-	class Entity3d_CmpConnect_Tetrahedron
+	class Entity3d_CmpConnect_ExtrudedPolygon
 		: public Entity3d_CmpConnect
 	{
-
-	public:
-
-		enum
-		{
-			nbCmpts = 4
-		};
-
-		typedef std::array<Standard_Integer, nbCmpts> Array4;
-
-	private:
-
 		/*Private Data*/
-
-		Array4 theCmpts_;
+		std::vector<Standard_Integer> theCmpts_;
 
 		// Private functions and operators
-
 		friend class boost::serialization::access;
 
 		template<class Archive>
@@ -41,24 +26,18 @@ namespace tnbLib
 	public:
 
 		// default constructor
-
-		Entity3d_CmpConnect_Tetrahedron() : theCmpts_({ 0,0,0,0 }) {}
+		Entity3d_CmpConnect_ExtrudedPolygon() = default;
 
 		// constructors
-
-		Entity3d_CmpConnect_Tetrahedron(const Array4& theCmpts)
+		Entity3d_CmpConnect_ExtrudedPolygon(const std::vector<Standard_Integer>& theCmpts)
 			: theCmpts_(theCmpts)
 		{}
-
-		Entity3d_CmpConnect_Tetrahedron(Array4&& theCmpts)
+		Entity3d_CmpConnect_ExtrudedPolygon(std::vector<Standard_Integer>&& theCmpts)
 			: theCmpts_(std::move(theCmpts))
 		{}
 
-		TnbGeo_EXPORT Entity3d_CmpConnect_Tetrahedron(const connectivity::quadruple& theQuad);
-
 		// Public functions and operators
-
-		TnbGeo_EXPORT Standard_Boolean IsTetrahedron() const override;
+		TnbGeo_EXPORT Standard_Boolean IsExtrudedPolygon() const override;
 
 		const auto& Array() const { return theCmpts_; }
 
@@ -73,10 +52,9 @@ namespace tnbLib
 		TnbGeo_EXPORT std::vector<Face> CalcFaces() const override;
 
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpConnect> Copy() const override;
-
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Entity3d_CmpConnect_Tetrahedron);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Entity3d_CmpConnect_ExtrudedPolygon);
 
-#endif
+#endif // !_Entity3d_CmpConnect_ExtrudedPolygon_Header

@@ -28,7 +28,7 @@ tnbLib::Entity3d_CmpConnect_Brick::Components() const
 {
 	std::vector<Standard_Integer> indices;
 	std::copy(theCmpts_.begin(), theCmpts_.end(), std::back_inserter(indices));
-	return std::move(indices);
+	return indices;
 }
 
 std::vector<tnbLib::Pnt3d>
@@ -40,11 +40,23 @@ tnbLib::Entity3d_CmpConnect_Brick::RetrievePolygon(const std::vector<Pnt3d>& the
 	{
 		coords.emplace_back(theCoords.at(Index_Of(i)));
 	}
-	return std::move(coords);
+	return coords;
+}
+
+std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_Brick::CalcFaces() const
+{
+	std::vector<Face> faces;
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(1), theCmpts_.at(5), theCmpts_.at(4)} });
+	faces.emplace_back(Face{ {theCmpts_.at(1), theCmpts_.at(2), theCmpts_.at(6), theCmpts_.at(5)} });
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(3), theCmpts_.at(7), theCmpts_.at(6)} });
+	faces.emplace_back(Face{ {theCmpts_.at(3), theCmpts_.at(0), theCmpts_.at(4), theCmpts_.at(7)} });
+
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(3), theCmpts_.at(2), theCmpts_.at(1)} });
+	faces.emplace_back(Face{ {theCmpts_.at(4), theCmpts_.at(5), theCmpts_.at(6), theCmpts_.at(7)} });
+	return faces;
 }
 
 std::shared_ptr<tnbLib::Entity3d_CmpConnect> tnbLib::Entity3d_CmpConnect_Brick::Copy() const
 {
-	auto t = std::make_shared<Entity3d_CmpConnect_Brick>(this->Array());
-	return std::move(t);
+	return std::make_shared<Entity3d_CmpConnect_Brick>(this->Array());
 }

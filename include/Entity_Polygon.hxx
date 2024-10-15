@@ -150,6 +150,7 @@ namespace tnbLib
 		void ExportToPlt(OFstream& File) const;
 		void ExportToPlt(std::stringstream&) const;
 		void ExportToVtk(OFstream&) const;
+		void ExportToVtk(std::fstream&) const;
 		void ExportToVtk(std::stringstream&) const;
 
 		static void Check(const Entity_Polygon<Point>&);

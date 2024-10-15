@@ -80,8 +80,9 @@ namespace tnbLib
 		void Import(const Entity3d_Tetrahedralization&);
 
 		TnbGeo_EXPORT void ExprotToPlt(OFstream&) const;
+		void ExportToPlt(std::fstream&) const;
 		void ExportToVtk(OFstream&) const;
-
+		void ExportToVtk(std::fstream&) const;
 
 		// Static functions
 		static TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpMesh> Convert(const Entity3d_Tetrahedralization&);
