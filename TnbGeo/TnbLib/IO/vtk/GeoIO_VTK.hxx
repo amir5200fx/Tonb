@@ -6,6 +6,8 @@
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_SurfTriangulationFwd.hxx>
+#include <Entity3d_QuadMeshFwd.hxx>
+#include <Entity2d_QuadMeshFwd.hxx>
 #include <Entity3d_ChainFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
@@ -62,6 +64,8 @@ namespace tnbLib
 		TnbGeo_EXPORT void WritePoints(const std::vector<Entity3d_SPnt>&, std::fstream&);
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::triple>&, OFstream&);
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::triple>&, std::fstream&);
+		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::quadruple_3d>&, std::fstream&);
+		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::quadruple>&, std::fstream&);
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::dual>&, OFstream&);
 		TnbGeo_EXPORT void WriteConnectivity(const std::vector<connectivity::dual>&, std::fstream&);
 
@@ -84,6 +88,8 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Triangulation&, const std::string& theTitle, std::stringstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity3d_Triangulation&, const std::string& theTitle, std::stringstream&);
+		TnbGeo_EXPORT void WriteMesh(const Entity3d_QuadMesh&, const std::string& theTitle, std::fstream&);
+		TnbGeo_EXPORT void WriteMesh(const Entity2d_QuadMesh&, const std::string& theTitle, std::fstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Chain&, const std::string& theTitle, std::stringstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity3d_Chain&, const std::string& theTitle, std::stringstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_Polygon&, const std::string& theTitle, std::stringstream&);

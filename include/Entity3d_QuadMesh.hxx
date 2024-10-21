@@ -10,6 +10,9 @@ namespace tnbLib
 {
 	template <>
 	TnbGeo_EXPORT void Entity3d_QuadMesh::ExportToPlt(OFstream& File) const;
+	template <>
+	TnbGeo_EXPORT void Entity3d_QuadMesh::ExportToVtk(std::fstream&) const;
+
 
 }
 

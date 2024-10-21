@@ -227,6 +227,50 @@ void tnbLib::vtkLib::WriteConnectivity(const std::vector<connectivity::triple>& 
 	}
 }
 
+void tnbLib::vtkLib::WriteConnectivity(const std::vector<connectivity::quadruple_3d>& theIds, std::fstream& theFile)
+{
+	for (const auto& x : theIds)
+	{
+		theFile << 4
+			<< token::SPACE
+			<< x.Value(0) - 1
+			<< token::SPACE
+			<< x.Value(1) - 1
+			<< token::SPACE
+			<< x.Value(2) - 1
+			<< token::SPACE
+			<< x.Value(3) - 1
+			<< "\n";
+	}
+	WriteCellTypes(static_cast<Standard_Integer>(theIds.size()), theFile);
+	for (const auto& x : theIds)
+	{
+		theFile << 9 << "\n";
+	}
+}
+
+void tnbLib::vtkLib::WriteConnectivity(const std::vector<connectivity::quadruple>& theIds, std::fstream& theFile)
+{
+	for (const auto& x : theIds)
+	{
+		theFile << 4
+			<< token::SPACE
+			<< x.Value(0) - 1
+			<< token::SPACE
+			<< x.Value(1) - 1
+			<< token::SPACE
+			<< x.Value(2) - 1
+			<< token::SPACE
+			<< x.Value(3) - 1
+			<< "\n";
+	}
+	WriteCellTypes(static_cast<Standard_Integer>(theIds.size()), theFile);
+	for (const auto& x : theIds)
+	{
+		theFile << 9 << "\n";
+	}
+}
+
 void tnbLib::vtkLib::WriteConnectivity(const std::vector<connectivity::dual>& theIds, OFstream& theFile)
 {
 	for (const auto& x : theIds)
@@ -555,6 +599,30 @@ void tnbLib::vtkLib::WriteMesh
 	WritePoints(theTri.Points(), theFile);
 	WriteNbCells(theTri.NbConnectivity(), 4 * theTri.NbConnectivity(), theFile);
 	WriteConnectivity(theTri.Connectivity(), theFile);
+}
+
+void tnbLib::vtkLib::WriteMesh(const Entity3d_QuadMesh& theMesh, const std::string& theTitle, std::fstream& theFile)
+{
+	WriteVersion(theFile);
+	WriteTitle(theTitle, theFile);
+	WriteFileType_ASCII(theFile);
+	WriteUnstructuredGrid(theFile);
+	WriteNbPoints(theMesh.NbPoints(), theFile);
+	WritePoints(theMesh.Points(), theFile);
+	WriteNbCells(theMesh.NbConnectivity(), 5 * theMesh.NbConnectivity(), theFile);
+	WriteConnectivity(theMesh.Connectivity(), theFile);
+}
+
+void tnbLib::vtkLib::WriteMesh(const Entity2d_QuadMesh& theMesh, const std::string& theTitle, std::fstream& theFile)
+{
+	WriteVersion(theFile);
+	WriteTitle(theTitle, theFile);
+	WriteFileType_ASCII(theFile);
+	WriteUnstructuredGrid(theFile);
+	WriteNbPoints(theMesh.NbPoints(), theFile);
+	WritePoints(theMesh.Points(), theFile);
+	WriteNbCells(theMesh.NbConnectivity(), 5 * theMesh.NbConnectivity(), theFile);
+	WriteConnectivity(theMesh.Connectivity(), theFile);
 }
 
 void tnbLib::vtkLib::WriteMesh
