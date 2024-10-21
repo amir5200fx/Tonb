@@ -1222,6 +1222,9 @@
     <Filter Include="TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon">
       <UniqueIdentifier>{2c0f1eb7-1af7-4bd7-8b3f-2b49ad140351}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpConnet\2d\Polygon">
+      <UniqueIdentifier>{d5d08012-de2a-48f7-9086-ca924c0e083b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2754,6 +2757,9 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygon.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_Polygon.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3574,6 +3580,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygonIO.cxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_Polygon.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_PolygonIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
