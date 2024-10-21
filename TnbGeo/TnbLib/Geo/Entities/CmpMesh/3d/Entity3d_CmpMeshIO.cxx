@@ -1,5 +1,6 @@
 #include <Entity3d_CmpMesh.hxx>
 
+#include <Entity3d_PolyhedralMesh.hxx>
 #include <Entity3d_CmpConnect_Brick.hxx>
 #include <Entity3d_CmpConnect_Prism.hxx>
 #include <Entity3d_CmpConnect_Tetrahedron.hxx>
@@ -85,8 +86,16 @@ void tnbLib::Entity3d_CmpMesh::ExprotToPlt(OFstream& theFile) const
 	}
 	else
 	{
-		FatalErrorIn(FunctionSIG) << endl
-			<< "Unspecified type of element has been detected." << endl
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Unspecified type of element has been detected." << "\n"
+			<< " - Size: " << max_size << "\n"
 			<< abort(FatalError);
 	}
+}
+
+void tnbLib::Entity3d_CmpMesh::ExportToVtk(std::fstream& outfile) const
+{
+	Entity3d_PolyhedralMesh polyhedral;
+	polyhedral.Import(*this);
+	polyhedral.ExportToVtk(outfile);
 }

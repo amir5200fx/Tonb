@@ -76,18 +76,18 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void Add(const Entity3d_CmpMesh&);
 		TnbGeo_EXPORT void Add(const Entity3d_Tetrahedralization&);
-		void Import(const Entity3d_CmpMesh&);
-		void Import(const Entity3d_Tetrahedralization&);
+		TnbGeo_EXPORT void Import(const Entity3d_CmpMesh&);
+		TnbGeo_EXPORT void Import(const Entity3d_Tetrahedralization&);
 
 		TnbGeo_EXPORT void ExprotToPlt(OFstream&) const;
-		void ExportToPlt(std::fstream&) const;
-		void ExportToVtk(OFstream&) const;
-		void ExportToVtk(std::fstream&) const;
+		TnbGeo_EXPORT void ExportToPlt(std::fstream&) const;
+		TnbGeo_EXPORT void ExportToVtk(OFstream&) const;
+		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;
 
 		// Static functions
 		static TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpMesh> Convert(const Entity3d_Tetrahedralization&);
 		static TnbGeo_EXPORT void Merge(Entity3d_CmpMesh&, const Standard_Real theTot = 1.e-6);
-		static void CheckInverseElements(const Entity3d_CmpMesh&);
+		static TnbGeo_EXPORT void CheckInverseElements(const Entity3d_CmpMesh&);
 	};
 }
 

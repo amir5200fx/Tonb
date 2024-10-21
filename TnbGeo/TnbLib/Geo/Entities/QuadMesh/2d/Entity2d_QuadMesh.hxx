@@ -11,6 +11,9 @@ namespace tnbLib
 	template <>
 	TnbGeo_EXPORT void Entity2d_QuadMesh::ExportToPlt(OFstream& File) const;
 
+	template <>
+	TnbGeo_EXPORT void Entity2d_QuadMesh::ExportToVtk(std::fstream&) const;
+
 }
 
 #endif // _Entity2d_QuadMesh_Header

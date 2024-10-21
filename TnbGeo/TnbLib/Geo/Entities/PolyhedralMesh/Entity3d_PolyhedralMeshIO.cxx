@@ -50,3 +50,45 @@ void tnbLib::Entity3d_PolyhedralMesh::ExportToVtk(std::fstream& file) const
 
     file << legacyWriter->GetOutputStdString();
 }
+
+void tnbLib::Entity3d_PolyhedralMesh::ExportToPlt(std::fstream& outfile) const
+{
+    outfile << "VARIABLES=\"X\",\"Y\",\"Z\"\n";
+    // Write zone header for BLOCK data packing
+    outfile << "ZONE N=" << theCoords_.size() << ", E=" << theElements_.size()
+        << ", DATAPACKING=BLOCK, ZONETYPE=FEPOLYHEDRON\n";
+
+    // Write BLOCK data for X, Y, Z coordinates
+    // First, write all X coordinates
+    for (const auto& node : theCoords_) {
+        outfile << node.X() << "\n";
+    }
+    //outfile << "\n";
+
+    // Then, write all Y coordinates
+    for (const auto& node : theCoords_) {
+        outfile << node.Y() << "\n";
+    }
+    //outfile << "\n";
+
+    // Finally, write all Z coordinates
+    for (const auto& node : theCoords_) {
+        outfile << node.Z() << "\n";
+    }
+    //outfile << "\n";
+    // Write the cell data
+    // First, write number of faces for each cell and the node indices forming each face
+    for (const auto& cell: theElements_)
+    {
+        outfile << cell.NbFaces() << "\n";
+        for (auto f: cell.Faces())
+        {
+	        for (const auto i: f.Indices())
+	        {
+                outfile << " " << i;
+	        }
+            outfile << "\n";
+        }
+    }
+
+}
