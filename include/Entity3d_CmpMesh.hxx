@@ -64,7 +64,11 @@ namespace tnbLib
 		TnbGeo_EXPORT Entity3d_CmpMesh& operator=(const Entity3d_CmpMesh&);
 
 		const auto& Coords() const { return theCoords_; }
+		const auto& Points() const { return theCoords_; }
+		auto& Points() { return theCoords_; }
 		const auto& Indices() const { return theIndices_; }
+		const auto& Connectivity() const { return theIndices_; }
+		auto& Connectivity() { return theIndices_; }
 
 		auto& CoordsRef() { return theCoords_; }
 		auto& IndicesRef() { return theIndices_; }

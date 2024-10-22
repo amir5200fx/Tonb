@@ -58,3 +58,11 @@ tnbLib::Entity3d_CmpConnect_Pyramid::Copy() const
 	auto t = std::make_shared<Entity3d_CmpConnect_Pyramid>(this->Array());
 	return std::move(t);
 }
+
+void tnbLib::Entity3d_CmpConnect_Pyramid::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
+}

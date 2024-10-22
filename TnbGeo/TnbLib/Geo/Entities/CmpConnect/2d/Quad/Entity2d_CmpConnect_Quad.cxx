@@ -67,3 +67,11 @@ tnbLib::Entity2d_CmpConnect_Quad::Copy() const
 	auto t = std::make_shared<Entity2d_CmpConnect_Quad>(this->Array());
 	return std::move(t);
 }
+
+void tnbLib::Entity2d_CmpConnect_Quad::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
+}

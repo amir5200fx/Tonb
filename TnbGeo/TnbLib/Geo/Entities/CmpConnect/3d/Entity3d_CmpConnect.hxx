@@ -72,6 +72,8 @@ namespace tnbLib
 		virtual std::vector<Face> CalcFaces() const = 0;
 
 		virtual std::shared_ptr<Entity3d_CmpConnect> Copy() const = 0;
+
+		virtual void Update(const std::vector<Standard_Integer>&) = 0;
 		
 	};
 }

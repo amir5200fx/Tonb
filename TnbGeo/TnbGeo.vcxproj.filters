@@ -1225,6 +1225,9 @@
     <Filter Include="TnbLib\Geo\Entities\CmpConnet\2d\Polygon">
       <UniqueIdentifier>{d5d08012-de2a-48f7-9086-ca924c0e083b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Merge\CmpMesh\3d">
+      <UniqueIdentifier>{07d49859-409c-451b-8d24-5b06c8c2172e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2760,6 +2763,9 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_Polygon.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\3d\Merge3d_CmpMesh.hxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3586,6 +3592,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_PolygonIO.cxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\CmpMesh\3d\Merge3d_CmpMesh.cxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.cxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

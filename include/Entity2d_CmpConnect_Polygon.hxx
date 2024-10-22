@@ -49,6 +49,8 @@ namespace tnbLib
 		TnbGeo_EXPORT std::vector<Pnt3d> RetrievePolygon(const std::vector<Pnt3d>&) const override;
 
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Copy() const override;
+
+		TnbGeo_EXPORT void Update(const std::vector<Standard_Integer>&) override;
 	};
 }
 BOOST_CLASS_EXPORT_KEY(tnbLib::Entity2d_CmpConnect_Polygon);

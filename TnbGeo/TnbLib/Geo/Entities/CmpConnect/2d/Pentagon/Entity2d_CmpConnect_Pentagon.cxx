@@ -66,4 +66,10 @@ tnbLib::Entity2d_CmpConnect_Pentagon::Copy() const
 	return std::move(t);
 }
 
-
+void tnbLib::Entity2d_CmpConnect_Pentagon::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
+}

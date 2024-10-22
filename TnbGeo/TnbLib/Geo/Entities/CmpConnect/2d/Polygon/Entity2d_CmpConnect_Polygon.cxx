@@ -49,3 +49,11 @@ std::shared_ptr<tnbLib::Entity2d_CmpConnect> tnbLib::Entity2d_CmpConnect_Polygon
 {
 	return std::make_shared<Entity2d_CmpConnect_Polygon>(Components());
 }
+
+void tnbLib::Entity2d_CmpConnect_Polygon::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < NbCmpts(); i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
+}
