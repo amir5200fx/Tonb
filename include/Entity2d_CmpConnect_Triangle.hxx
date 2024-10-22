@@ -74,6 +74,8 @@ namespace tnbLib
 		TnbGeo_EXPORT std::vector<Pnt2d> RetrievePolygon(const std::vector<Pnt2d>&) const override;
 
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Copy() const override;
+
+		TnbGeo_EXPORT void Update(const std::vector<Standard_Integer>&) override;
 		
 	};
 }

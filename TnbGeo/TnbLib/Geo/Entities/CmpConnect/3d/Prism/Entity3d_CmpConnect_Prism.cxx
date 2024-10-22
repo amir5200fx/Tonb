@@ -59,3 +59,11 @@ tnbLib::Entity3d_CmpConnect_Prism::Copy() const
 	auto t = std::make_shared<Entity3d_CmpConnect_Prism>(this->Array());
 	return std::move(t);
 }
+
+void tnbLib::Entity3d_CmpConnect_Prism::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
+}

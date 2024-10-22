@@ -60,3 +60,11 @@ std::shared_ptr<tnbLib::Entity3d_CmpConnect> tnbLib::Entity3d_CmpConnect_Brick::
 {
 	return std::make_shared<Entity3d_CmpConnect_Brick>(this->Array());
 }
+
+void tnbLib::Entity3d_CmpConnect_Brick::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
+}

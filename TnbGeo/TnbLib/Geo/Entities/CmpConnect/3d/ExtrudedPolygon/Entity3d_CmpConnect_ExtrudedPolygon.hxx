@@ -52,6 +52,8 @@ namespace tnbLib
 		TnbGeo_EXPORT std::vector<Face> CalcFaces() const override;
 
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpConnect> Copy() const override;
+
+		TnbGeo_EXPORT void Update(const std::vector<Standard_Integer>&) override;
 	};
 }
 
