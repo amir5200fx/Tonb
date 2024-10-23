@@ -41,6 +41,9 @@
 #define MaxIndexOf(Object)  \
   (Object).Size() - 1
 
+#define StlMaxIndexOf(Object) \
+    (Object).size() - 1
+
 #define Index_Of(INDEX) \
   INDEX - 1
 

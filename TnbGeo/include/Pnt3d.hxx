@@ -250,6 +250,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Print(std::ostream& os = std::cout) const;
 
 		TnbGeo_EXPORT void AddToPlt(OFstream& theFile) const;
+		TnbGeo_EXPORT void AddToPlt(std::fstream& file) const;
 		TnbGeo_EXPORT void AddToPlt(std::stringstream& theStream) const;
 	};
 }

@@ -72,8 +72,118 @@ void tnbLib::Io::WritePointsVariables
 	File << endl;
 }
 
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt2d>& thePoints, std::fstream& file)
+{
+	std::vector<Standard_Real> X, Y;
+	X.reserve(thePoints.size());
+	Y.reserve(thePoints.size());
+
+	for (const auto& x : thePoints)
+	{
+		X.push_back(x.X());
+		Y.push_back(x.Y());
+	}
+
+	for (const auto& x : X)
+		file << x << "  ";
+	file << "\n";
+	for (const auto& x : Y)
+		file << x << "  ";
+	file << "\n";
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt3d>& thePoints, OFstream& file)
+{
+	std::vector<Standard_Real> xs, ys, zs;
+	xs.reserve(thePoints.size());
+	ys.reserve(thePoints.size());
+	zs.reserve(thePoints.size());
+
+	for (const auto& p: thePoints)
+	{
+		xs.emplace_back(p.X());
+		ys.emplace_back(p.Y());
+		zs.emplace_back(p.Z());
+	}
+	for (const auto x: xs)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+	for (const auto x: ys)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+	for (const auto x: zs)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt3d>& thePoints, std::stringstream& file)
+{
+	std::vector<Standard_Real> xs, ys, zs;
+	xs.reserve(thePoints.size());
+	ys.reserve(thePoints.size());
+	zs.reserve(thePoints.size());
+
+	for (const auto& p : thePoints)
+	{
+		xs.emplace_back(p.X());
+		ys.emplace_back(p.Y());
+		zs.emplace_back(p.Z());
+	}
+	for (const auto x : xs)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+	for (const auto x : ys)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+	for (const auto x : zs)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt3d>& thePoints, std::fstream& file)
+{
+	std::vector<Standard_Real> xs, ys, zs;
+	xs.reserve(thePoints.size());
+	ys.reserve(thePoints.size());
+	zs.reserve(thePoints.size());
+
+	for (const auto& p : thePoints)
+	{
+		xs.emplace_back(p.X());
+		ys.emplace_back(p.Y());
+		zs.emplace_back(p.Z());
+	}
+	for (const auto x : xs)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+	for (const auto x : ys)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+	for (const auto x : zs)
+	{
+		file << x << " ";
+	}
+	file << "\n";
+}
+
 void tnbLib::Io::WriteFeTriangleZone(const Standard_Integer NbNodes, const Standard_Integer NbTriangles,
-	std::stringstream& theStream)
+                                     std::stringstream& theStream)
 {
 	theStream
 		<< " ZONE N = "
@@ -166,7 +276,19 @@ void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Sta
 }
 
 void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
-	std::stringstream& theStream)
+	std::fstream& theFile)
+{
+	theFile
+		<< "ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+                                       std::stringstream& theStream)
 {
 	theStream
 		<< "ZONE N = "
@@ -317,8 +439,71 @@ void tnbLib::Io::WriteCellCenteredFeTetrahedralZone
 	theFile << endl;
 }
 
+void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	const Standard_Integer NbVars, OFstream& theFile)
+{
+	theFile
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEBLOCK, VARLOCATION=([1,2,3]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		theFile << 4 + K;
+		++K;
+		if (K >= NbVars) break;
+		theFile << "  ";
+	}
+	theFile << "]=CELLCENTERED)\n";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteCellCenteredFeHexadedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	const Standard_Integer NbVars, std::stringstream& file)
+{
+	file
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEBLOCK, VARLOCATION=([1,2,3]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		file << 4 + K;
+		++K;
+		if (K >= NbVars) break;
+		file << "  ";
+	}
+	file << "]=CELLCENTERED)\n";
+	file << endl;
+}
+
+void tnbLib::Io::WriteCellCenteredFeHexadedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	const Standard_Integer NbVars, std::fstream& file)
+{
+	file
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEBLOCK, VARLOCATION=([1,2,3]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		file << 4 + K;
+		++K;
+		if (K >= NbVars) break;
+		file << "  ";
+	}
+	file << "]=CELLCENTERED)\n";
+	file << endl;
+}
+
 void tnbLib::Io::WriteFeBrickZone(const Standard_Integer NbNodes, const Standard_Integer NbBricks,
-	std::stringstream& theStream)
+                                  std::stringstream& theStream)
 {
 	theStream
 		<< "ZONE N= "
