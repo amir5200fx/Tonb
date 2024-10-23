@@ -45,6 +45,30 @@ namespace tnbLib
 			OFstream& File
 		);
 
+		TnbGeo_EXPORT void WritePointsVariables
+		(
+			const std::vector<Pnt2d>& thePoints,
+			std::fstream&
+		);
+
+		TnbGeo_EXPORT void WritePointsVariables
+		(
+			const std::vector<Pnt3d>& thePoints,
+			OFstream&
+		);
+
+		TnbGeo_EXPORT void WritePointsVariables
+		(
+			const std::vector<Pnt3d>& thePoints,
+			std::stringstream&
+		);
+
+		TnbGeo_EXPORT void WritePointsVariables
+		(
+			const std::vector<Pnt3d>& thePoints,
+			std::fstream&
+		);
+
 		TnbGeo_EXPORT void WriteFeTriangleZone
 		(
 			const Standard_Integer NbNodes,
@@ -87,8 +111,26 @@ namespace tnbLib
 			OFstream& theFile
 		);
 
-		TnbGeo_EXPORT void WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements, OFstream& theFile);
-		TnbGeo_EXPORT void WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements, std::stringstream& theStream);
+		TnbGeo_EXPORT void WriteFeHexahedralZone
+		(
+			const Standard_Integer NbNodes, 
+			const Standard_Integer NbElements, 
+			OFstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteFeHexahedralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbElements, 
+			std::fstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteFeHexahedralZone
+		(
+			const Standard_Integer NbNodes, 
+			const Standard_Integer NbElements, 
+			std::stringstream& theStream
+		);
 
 		TnbGeo_EXPORT void WriteCellCenteredFeTriangularZone
 		(
@@ -104,6 +146,14 @@ namespace tnbLib
 			const Standard_Integer NbTris,
 			const Standard_Integer NbVar,
 			OFstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeTriangularZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTris, 
+			const Standard_Integer NbVars,
+			std::fstream& file
 		);
 
 		TnbGeo_EXPORT void WriteCellCenteredFeTriangular3DZone
@@ -138,6 +188,30 @@ namespace tnbLib
 			OFstream& theFile
 		);
 
+		TnbGeo_EXPORT void WriteCellCenteredFeHexahedralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbElements,
+			const Standard_Integer NbVars, 
+			OFstream& file
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeHexadedralZone
+		(
+			const Standard_Integer NbNodes, 
+			const Standard_Integer NbElements,
+			const Standard_Integer NbVars,
+			std::stringstream& file
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeHexadedralZone
+		(
+			const Standard_Integer NbNodes, 
+			const Standard_Integer NbElements,
+			const Standard_Integer NbVars,
+			std::fstream& file
+		);
+
 		TnbGeo_EXPORT void WriteFeBrickZone
 		(
 			const Standard_Integer NbNodes,
@@ -165,7 +239,7 @@ namespace tnbLib
 		);
 
 		template<class Type, size_t nbVAR>
-		void WriteFiled
+		void WriteField
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt2d>& thePoints,
@@ -173,7 +247,7 @@ namespace tnbLib
 		);
 
 		template<class Type, size_t nbVAR>
-		void WriteFiled
+		void WriteField
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt2d>& thePoints,
@@ -181,7 +255,15 @@ namespace tnbLib
 		);
 
 		template<class Type, size_t nbVAR>
-		void WriteFiled
+		void WriteField
+		(
+			const std::vector<std::array<Type, nbVAR>>& var, 
+			const std::vector<Pnt2d>& thePoints,
+			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteField
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints,
@@ -189,11 +271,19 @@ namespace tnbLib
 		);
 
 		template<class Type, size_t nbVAR>
-		void WriteFiled
+		void WriteField
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints,
 			std::stringstream& theStream
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteField
+		(
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, 
+			std::fstream& file
 		);
 
 		template<class Type, size_t nbVAR>
@@ -210,6 +300,38 @@ namespace tnbLib
 			const std::vector<connectivity::triple>& Triangles,
 			const std::vector<std::array<Type, nbVAR>>& var,
 			std::stringstream& theStream
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::triple>& Triangles,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::quadruple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			OFstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::quadruple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			std::stringstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::quadruple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, 
+			std::fstream& file
 		);
 
 		TnbGeo_EXPORT void ExportMesh
@@ -466,6 +588,36 @@ namespace tnbLib
 		);
 
 		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, 
+			const std::vector<connectivity::octuple>& theElements, 
+			OFstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::octuple>& theElements,
+			std::stringstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var, 
+			const std::vector<Pnt3d>& thePoints, 
+			const std::vector<connectivity::octuple>& theElements, 
+			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
 		void ExportCellCenteredField
 		(
 			const word& theVarNames,
@@ -483,6 +635,76 @@ namespace tnbLib
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
 			std::stringstream& theStream
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var, 
+			const std::vector<Pnt2d>& thePoints, 
+			const std::vector<connectivity::triple>& Triangles, 
+			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple>& theElements,
+			OFstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple>& theElements,
+			std::stringstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, 
+			const std::vector<connectivity::quadruple>& theElements,
+			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, 
+			const std::vector<connectivity::octuple>& theElements,
+			OFstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::octuple>& theElements,
+			std::stringstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames, 
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::octuple>& theElements,
+			std::fstream& file
 		);
 	}
 }
