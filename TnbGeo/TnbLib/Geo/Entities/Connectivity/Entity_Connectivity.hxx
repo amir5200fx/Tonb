@@ -137,9 +137,9 @@ namespace tnbLib
 	TnbGeo_EXPORT std::vector<connectivity::dual> dualConnectivityList_Chain(
 		const Standard_Integer theNbEdges, const Standard_Boolean IsClosed = Standard_False);
 
-	TnbGeo_EXPORT connectivity::triple rise(const connectivity::dual&);
-	TnbGeo_EXPORT connectivity::quadruple rise(const connectivity::triple&);
-	TnbGeo_EXPORT connectivity::octuple rise(const connectivity::sextuple&);
+	TnbGeo_EXPORT connectivity::triple raise(const connectivity::dual&);
+	TnbGeo_EXPORT connectivity::quadruple raise(const connectivity::triple&);
+	TnbGeo_EXPORT connectivity::octuple raise(const connectivity::sextuple&);
 }
 
 #include <Entity_ConnectivityI.hxx>
