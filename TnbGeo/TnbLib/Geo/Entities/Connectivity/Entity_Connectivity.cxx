@@ -82,6 +82,11 @@ tnbLib::connectivity::quadruple tnbLib::raise(const connectivity::triple& t)
 	return { {t.Value(0), t.Value(1), t.Value(2), t.Value(0)} };
 }
 
+tnbLib::connectivity::sextuple tnbLib::raise(const connectivity::quadruple& q)
+{
+	return { {q.Value(0), q.Value(1), q.Value(2), q.Value(3), q.Value(3), q.Value(3)} };
+}
+
 tnbLib::connectivity::octuple tnbLib::raise(const connectivity::sextuple& s)
 {
 	return { {s.Value(0), s.Value(1), s.Value(2), s.Value(2), s.Value(3), s.Value(4), s.Value(5), s.Value(5)} };

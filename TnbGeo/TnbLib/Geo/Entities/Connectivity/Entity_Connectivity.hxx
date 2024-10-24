@@ -139,6 +139,7 @@ namespace tnbLib
 
 	TnbGeo_EXPORT connectivity::triple raise(const connectivity::dual&);
 	TnbGeo_EXPORT connectivity::quadruple raise(const connectivity::triple&);
+	TnbGeo_EXPORT connectivity::sextuple raise(const connectivity::quadruple&);
 	TnbGeo_EXPORT connectivity::octuple raise(const connectivity::sextuple&);
 }
 
