@@ -34,7 +34,7 @@ namespace tnbLib
 	public:
 
 		typedef Pnt2d ptType;
-		typedef  Entity2d_CmpConnect connectType;
+		typedef  std::shared_ptr<Entity2d_CmpConnect> connectType;
 
 		static TnbGeo_EXPORT const std::string extension;
 
@@ -69,7 +69,9 @@ namespace tnbLib
 		TnbGeo_EXPORT Entity2d_CmpMesh& operator=(const Entity2d_CmpMesh&);
 
 		[[nodiscard]] const auto& Coords() const { return theCoords_; }
+		[[nodiscard]] const auto& Points() const { return theCoords_; }
 		[[nodiscard]] const auto& Indices() const { return theIndices_; }
+		[[nodiscard]] const auto& Connectivity() const { return theIndices_; }
 
 		auto& CoordsRef() { return theCoords_; }
 		auto& IndicesRef() { return theIndices_; }
@@ -86,7 +88,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Import(const Entity2d_QuadMesh&);
 
 		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
-		void ExportToVtk(std::fstream&) const;
+		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;
 
 		// Static functions
 		

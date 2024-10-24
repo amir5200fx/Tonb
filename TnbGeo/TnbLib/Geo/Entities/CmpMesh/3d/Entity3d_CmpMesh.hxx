@@ -29,7 +29,7 @@ namespace tnbLib
 	public:
 
 		typedef Pnt3d ptType;
-		typedef Entity3d_CmpConnect connectType;
+		typedef std::shared_ptr<Entity3d_CmpConnect> connectType;
 
 		static TnbGeo_EXPORT const std::string extension;
 
