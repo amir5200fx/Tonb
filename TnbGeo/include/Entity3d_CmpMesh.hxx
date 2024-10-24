@@ -29,7 +29,7 @@ namespace tnbLib
 	public:
 
 		typedef Pnt3d ptType;
-		typedef Entity3d_CmpConnect connectType;
+		typedef std::shared_ptr<Entity3d_CmpConnect> connectType;
 
 		static TnbGeo_EXPORT const std::string extension;
 
@@ -79,7 +79,12 @@ namespace tnbLib
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_Box> CalcBoundingBox() const;
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpMesh> Copy() const;
 
+		// Warning: You may consider the fact that if the mesh has elements other than tetrahedron it's
+		// going to throw an exception
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_Tetrahedralization> ExportAsTetrahedral() const;
+		// Warning: It doesn't support Pyramid shape elements. For other type of elements other than hexahedron
+		// it produces degenerated hexahedrons.
+		// This function is usually used for displaying purposes not as a computational tasks.
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_Hexahedralization> ExportAsHexahedral() const;
 
 		TnbGeo_EXPORT void Add(const Entity3d_CmpMesh&);

@@ -107,4 +107,6 @@
 #define SetRunTimeConfigs(ObjectName)       \
     void ObjectName##RunTime::SetConfigs()
 
+#define SetItDone Change_IsDone() = Standard_True;
+
 #endif // !_Global_Macros_Header

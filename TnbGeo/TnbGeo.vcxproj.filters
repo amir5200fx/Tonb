@@ -1228,6 +1228,18 @@
     <Filter Include="TnbLib\Geo\Merge\CmpMesh\3d">
       <UniqueIdentifier>{07d49859-409c-451b-8d24-5b06c8c2172e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh">
+      <UniqueIdentifier>{6fcb309f-d03a-42b2-82a9-3c6e80ac03ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh\Cmpt">
+      <UniqueIdentifier>{3f7c31d1-3f6e-4623-9eef-f009f6e67fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh\Cmpt\2d">
+      <UniqueIdentifier>{98d60742-b5d3-41f4-9f88-a2c1d7ef838c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh\Cmpt\3d">
+      <UniqueIdentifier>{e2760bb3-bbbb-43f1-919d-56a49878c6ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2766,6 +2778,24 @@
     <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\3d\Merge3d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Merge\CmpMesh\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Geo_CompressMesh.hxx">
+      <Filter>TnbLib\Geo\CompressMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Geo_CompressMeshI.hxx">
+      <Filter>TnbLib\Geo\CompressMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\3d\Geo3d_CompressMesh_Composite.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\3d\Geo3d_CompressMesh_CompositeFwd.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_Composite.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_CompositeFwd.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3598,6 +3628,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.cxx">
       <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\CompressMesh\Geo_CompressMesh.cxx">
+      <Filter>TnbLib\Geo\CompressMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\CompressMesh\Cmpt\3d\Geo3d_CompressMesh_Composite.cxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_Composite.cxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
