@@ -2,6 +2,7 @@
 #ifndef _Entity3d_CmpMesh_Header
 #define _Entity3d_CmpMesh_Header
 
+#include <Entity3d_HexahedralizationFwd.hxx>
 #include <Entity3d_TetrahedralizationFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Pnt3d.hxx>
@@ -78,12 +79,16 @@ namespace tnbLib
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_Box> CalcBoundingBox() const;
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpMesh> Copy() const;
 
+		TnbGeo_EXPORT std::shared_ptr<Entity3d_Tetrahedralization> ExportAsTetrahedral() const;
+		TnbGeo_EXPORT std::shared_ptr<Entity3d_Hexahedralization> ExportAsHexahedral() const;
+
 		TnbGeo_EXPORT void Add(const Entity3d_CmpMesh&);
 		TnbGeo_EXPORT void Add(const Entity3d_Tetrahedralization&);
+		// It's going to erase the old data
 		TnbGeo_EXPORT void Import(const Entity3d_CmpMesh&);
 		TnbGeo_EXPORT void Import(const Entity3d_Tetrahedralization&);
 
-		TnbGeo_EXPORT void ExprotToPlt(OFstream&) const;
+		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
 		TnbGeo_EXPORT void ExportToPlt(std::fstream&) const;
 		TnbGeo_EXPORT void ExportToVtk(OFstream&) const;
 		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;

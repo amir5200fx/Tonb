@@ -2,6 +2,7 @@
 #ifndef _Entity3d_CmpMesh_Header
 #define _Entity3d_CmpMesh_Header
 
+#include <Entity3d_HexahedralizationFwd.hxx>
 #include <Entity3d_TetrahedralizationFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Pnt3d.hxx>
@@ -78,12 +79,21 @@ namespace tnbLib
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_Box> CalcBoundingBox() const;
 		TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpMesh> Copy() const;
 
+		// Warning: You may consider the fact that if the mesh has elements other than tetrahedron it's
+		// going to throw an exception
+		TnbGeo_EXPORT std::shared_ptr<Entity3d_Tetrahedralization> ExportAsTetrahedral() const;
+		// Warning: It doesn't support Pyramid shape elements. For other type of elements other than hexahedron
+		// it produces degenerated hexahedrons.
+		// This function is usually used for displaying purposes not as a computational tasks.
+		TnbGeo_EXPORT std::shared_ptr<Entity3d_Hexahedralization> ExportAsHexahedral() const;
+
 		TnbGeo_EXPORT void Add(const Entity3d_CmpMesh&);
 		TnbGeo_EXPORT void Add(const Entity3d_Tetrahedralization&);
+		// It's going to erase the old data
 		TnbGeo_EXPORT void Import(const Entity3d_CmpMesh&);
 		TnbGeo_EXPORT void Import(const Entity3d_Tetrahedralization&);
 
-		TnbGeo_EXPORT void ExprotToPlt(OFstream&) const;
+		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
 		TnbGeo_EXPORT void ExportToPlt(std::fstream&) const;
 		TnbGeo_EXPORT void ExportToVtk(OFstream&) const;
 		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;

@@ -1,13 +1,14 @@
+// ReSharper disable CppClangTidyClangDiagnosticLanguageExtensionToken
 #include <Entity3d_CmpMesh.hxx>
 
 #include <Merge3d_Pnt.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Entity3d_Hexahedralization.hxx>
 #include <Entity3d_Tetrahedralization.hxx>
 #include <Entity3d_CmpConnect_Brick.hxx>
 #include <Entity3d_CmpConnect_Prism.hxx>
 #include <Entity3d_CmpConnect_Pyramid.hxx>
 #include <Entity3d_CmpConnect_Tetrahedron.hxx>
-#include <Entity3d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -57,15 +58,12 @@ std::vector<tnbLib::Pnt3d>
 tnbLib::Entity3d_CmpMesh::GetElement(const Standard_Integer theIndex) const
 {
 	const auto& elm = theIndices_.at(theIndex);
-	auto poly = elm->RetrievePolygon(Coords());
-	return std::move(poly);
+	return elm->RetrievePolygon(Coords());
 }
 
 std::shared_ptr<tnbLib::Entity3d_Box> tnbLib::Entity3d_CmpMesh::CalcBoundingBox() const
 {
-	auto b = Geo_BoxTools::GetBox(Coords(), 0);
-	auto t = std::make_shared<Entity3d_Box>(std::move(b));
-	return std::move(t);
+	return std::make_shared<Entity3d_Box>(Geo_BoxTools::GetBox(Coords(), 0));
 }
 
 std::shared_ptr<tnbLib::Entity3d_CmpMesh>
@@ -79,8 +77,68 @@ tnbLib::Entity3d_CmpMesh::Copy() const
 		auto copy = x->Copy();
 		ids.emplace_back(std::move(copy));
 	}
-	auto mesh = std::make_shared<Entity3d_CmpMesh>(std::move(coords), std::move(ids));
-	return std::move(mesh);
+	return std::make_shared<Entity3d_CmpMesh>(std::move(coords), std::move(ids));
+}
+
+std::shared_ptr<tnbLib::Entity3d_Tetrahedralization> tnbLib::Entity3d_CmpMesh::ExportAsTetrahedral() const
+{
+	std::vector<connectivity::quadruple> ids;
+	for (const auto& t: Connectivity())
+	{
+		if (NOT t->IsTetrahedron())
+		{
+			FatalErrorIn(FunctionSIG) << "\n"
+				<< "Couldn't export the mesh as tetrahedral elements.\n"
+				<< " - Please make sure all the elements are tetrahedral.\n"
+				<< abort(FatalError);
+		}
+		const auto cmpts = t->Components();
+		ids.push_back({ {cmpts.at(0), cmpts.at(1), cmpts.at(2), cmpts.at(3)} });
+	}
+	auto coords = theCoords_;
+	return std::make_shared<Entity3d_Tetrahedralization>(std::move(coords), std::move(ids));
+}
+
+std::shared_ptr<tnbLib::Entity3d_Hexahedralization> tnbLib::Entity3d_CmpMesh::ExportAsHexahedral() const
+{
+	std::vector<connectivity::octuple> ids;
+	for (const auto& t: Connectivity())
+	{
+		if (t->IsTetrahedron())
+		{
+			const auto cmpts = t->Components();
+			ids.emplace_back(raise(raise(connectivity::quadruple{ { cmpts.at(0), cmpts.at(1), cmpts.at(2), cmpts.at(3) } })));
+		}
+		else if (t->IsPrism())
+		{
+			const auto cmpts = t->Components();
+			ids.emplace_back(raise(connectivity::sextuple{
+				{cmpts.at(0), cmpts.at(1), cmpts.at(2), cmpts.at(3), cmpts.at(4), cmpts.at(5)}
+			}));
+		}
+		else if (t->IsPyramid())
+		{
+			FatalErrorIn(FunctionSIG) << "\n"
+				<< " Unsupported type of element has been detected: Pyramid.\n"
+				<< abort(FatalError);
+		}
+		else if (t->IsBrick())
+		{
+			const auto cmpts = t->Components();
+			ids.push_back({
+				{cmpts.at(0), cmpts.at(1), cmpts.at(2), cmpts.at(3), cmpts.at(4), cmpts.at(5), cmpts.at(6), cmpts.at(7)}
+			});
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG) << "\n"
+				<< "Couldn't export the mesh as hexahedral mesh.\n"
+				<< " - Please make sure all the elements are lower order than hexahedral elements.\n"
+				<< abort(FatalError);
+		}
+	}
+	auto coords = theCoords_;
+	return std::make_shared<Entity3d_Hexahedralization>(std::move(coords), std::move(ids));
 }
 
 namespace tnbLib
@@ -162,7 +220,7 @@ namespace tnbLib
 			}
 			ids_tot.emplace_back(std::move(copy));
 		}
-		return std::move(ids_tot);
+		return ids_tot;
 	}
 }
 
@@ -182,6 +240,20 @@ void tnbLib::Entity3d_CmpMesh::Add(const Entity3d_Tetrahedralization& theMesh)
 	Add(*mesh);
 }
 
+void tnbLib::Entity3d_CmpMesh::Import(const Entity3d_CmpMesh& theMesh)
+{
+	theCoords_.clear();
+	theIndices_.clear();
+	Add(theMesh);
+}
+
+void tnbLib::Entity3d_CmpMesh::Import(const Entity3d_Tetrahedralization& theMesh)
+{
+	theCoords_.clear();
+	theIndices_.clear();
+	Add(theMesh);
+}
+
 std::shared_ptr<tnbLib::Entity3d_CmpMesh>
 tnbLib::Entity3d_CmpMesh::Convert(const Entity3d_Tetrahedralization& theMesh)
 {
@@ -193,8 +265,7 @@ tnbLib::Entity3d_CmpMesh::Convert(const Entity3d_Tetrahedralization& theMesh)
 		auto ids = std::make_shared<Entity3d_CmpConnect_Tetrahedron>(x);
 		indices.emplace_back(std::move(ids));
 	}
-	auto mesh = std::make_shared<Entity3d_CmpMesh>(std::move(coords), std::move(indices));
-	return std::move(mesh);
+	return std::make_shared<Entity3d_CmpMesh>(std::move(coords), std::move(indices));
 }
 
 

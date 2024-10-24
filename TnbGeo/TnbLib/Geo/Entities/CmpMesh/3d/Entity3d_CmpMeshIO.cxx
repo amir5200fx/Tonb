@@ -8,7 +8,7 @@
 #include <Entity3d_Tetrahedralization.hxx>
 #include <Entity3d_Hexahedralization.hxx>
 
-void tnbLib::Entity3d_CmpMesh::ExprotToPlt(OFstream& theFile) const
+void tnbLib::Entity3d_CmpMesh::ExportToPlt(OFstream& theFile) const
 {
 	auto coords = theCoords_;
 	Standard_Integer max_size = 0;
