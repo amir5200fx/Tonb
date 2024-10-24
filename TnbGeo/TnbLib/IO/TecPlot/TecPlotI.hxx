@@ -324,6 +324,126 @@ namespace tnbLib
 			}
 		}
 
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, OFstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i: ids)
+			{
+				file <<
+					i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< " "
+					<< i.Value(4)
+					<< " "
+					<< i.Value(5)
+					<< " "
+					<< i.Value(6)
+					<< " "
+					<< i.Value(7)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, std::stringstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i : ids)
+			{
+				file <<
+					i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< " "
+					<< i.Value(4)
+					<< " "
+					<< i.Value(5)
+					<< " "
+					<< i.Value(6)
+					<< " "
+					<< i.Value(7)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, std::fstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i : ids)
+			{
+				file <<
+					i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< " "
+					<< i.Value(4)
+					<< " "
+					<< i.Value(5)
+					<< " "
+					<< i.Value(6)
+					<< " "
+					<< i.Value(7)
+					<< "\n";
+			}
+		}
+
 		template<class Type, size_t nbVAR>
 		void ExportField
 		(
@@ -732,7 +852,7 @@ namespace tnbLib
 
 			WriteCellCenteredFeTetrahedralZone(static_cast<Standard_Integer>(thePoints.size()),
 			                                  static_cast<Standard_Integer>(theElements.size()),
-			                                  static_cast<Standard_Integer>(var.size()), file);
+			                                  static_cast<Standard_Integer>(nbVAR), file);
 
 			WritePointsVariables(thePoints, file);
 
@@ -746,9 +866,9 @@ namespace tnbLib
 			word Variables = "VARIABLES = X Y Z " + theVarNames;
 			file << Variables << "\n";
 
-			WriteCellCenteredFeHexadedralZone(static_cast<Standard_Integer>(thePoints.size()),
+			WriteCellCenteredFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
 				static_cast<Standard_Integer>(theElements.size()),
-				static_cast<Standard_Integer>(var.size()), file);
+				static_cast<Standard_Integer>(nbVAR), file);
 
 			WritePointsVariables(thePoints, file);
 
@@ -763,9 +883,9 @@ namespace tnbLib
 			word Variables = "VARIABLES = X Y Z " + theVarNames;
 			file << Variables << "\n";
 
-			WriteCellCenteredFeHexadedralZone(static_cast<Standard_Integer>(thePoints.size()),
+			WriteCellCenteredFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
 				static_cast<Standard_Integer>(theElements.size()),
-				static_cast<Standard_Integer>(var.size()), file);
+				static_cast<Standard_Integer>(nbVAR), file);
 
 			WritePointsVariables(thePoints, file);
 
@@ -780,9 +900,9 @@ namespace tnbLib
 			word Variables = "VARIABLES = X Y Z " + theVarNames;
 			file << Variables << "\n";
 
-			WriteCellCenteredFeHexadedralZone(static_cast<Standard_Integer>(thePoints.size()),
+			WriteCellCenteredFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
 				static_cast<Standard_Integer>(theElements.size()),
-				static_cast<Standard_Integer>(var.size()), file);
+				static_cast<Standard_Integer>(nbVAR), file);
 
 			WritePointsVariables(thePoints, file);
 

@@ -196,7 +196,7 @@ namespace tnbLib
 			OFstream& file
 		);
 
-		TnbGeo_EXPORT void WriteCellCenteredFeHexadedralZone
+		TnbGeo_EXPORT void WriteCellCenteredFeHexahedralZone
 		(
 			const Standard_Integer NbNodes, 
 			const Standard_Integer NbElements,
@@ -204,7 +204,7 @@ namespace tnbLib
 			std::stringstream& file
 		);
 
-		TnbGeo_EXPORT void WriteCellCenteredFeHexadedralZone
+		TnbGeo_EXPORT void WriteCellCenteredFeHexahedralZone
 		(
 			const Standard_Integer NbNodes, 
 			const Standard_Integer NbElements,
@@ -332,6 +332,30 @@ namespace tnbLib
 			const std::vector<connectivity::quadruple>& ids,
 			const std::vector<std::array<Type, nbVAR>>& var, 
 			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::octuple>& ids, 
+			const std::vector<std::array<Type, nbVAR>>& var,
+			OFstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::octuple>& ids, 
+			const std::vector<std::array<Type, nbVAR>>& var, 
+			std::stringstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField
+		(
+			const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, 
+			std::fstream&
 		);
 
 		TnbGeo_EXPORT void ExportMesh
