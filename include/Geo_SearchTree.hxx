@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <list>
+#include <functional>
 
 namespace tnbLib
 {
@@ -31,9 +32,15 @@ namespace tnbLib
 
 	protected:
 
+		// default constructor
+
 		Geo_SearchTree_Base()
 			: theNbItems_(0)
 		{}
+
+		// constructors
+
+		// Protected functions and operators
 
 		auto& ChangeNbItems()
 		{
@@ -51,6 +58,8 @@ namespace tnbLib
 		}
 
 	public:
+
+		// Public functions and operators
 
 		auto NbItems() const
 		{
@@ -87,20 +96,25 @@ namespace tnbLib
 
 	protected:
 
-		const Point& (*CoordinateOf)(const T&);
+		std::function<const Point& (const T&)> CoordinateOf;
 
-		Geo_SearchTree()
-		{}
+		// default constructor
 
-		Geo_SearchTree
+		Geo_SearchTree() = default;
+
+		// constructors
+
+		explicit Geo_SearchTree
 		(
-			const Entity_Box<Point>& theRegion
+			Entity_Box<Point> theRegion
 		)
-			: theRegion_(theRegion)
+			: theRegion_(std::move(theRegion))
 		{}
 	
 
 	public:
+
+		// Public functions and operators
 
 		virtual void Clear() = 0;
 

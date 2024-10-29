@@ -32,24 +32,29 @@ namespace tnbLib
 
 		// default constructor [4/30/2023 Payvand]
 
-		Entity_Ray()
-		{}
-
+		Entity_Ray() = default;
+		Entity_Ray(const Entity_Ray&) = default;
 
 		// constructors [4/30/2023 Payvand]
 
-		Entity_Ray(const Point& thePoint, const Dir& theDir)
-			: thePoint_(thePoint)
-			, theDirection_(theDir)
-		{}
-
-		Entity_Ray(Point&& thePoint, Dir2d&& theDir)
+		Entity_Ray(Point thePoint, Dir theDir)
 			: thePoint_(std::move(thePoint))
 			, theDirection_(std::move(theDir))
 		{}
 
 
 		// Public functions and operators [4/30/2023 Payvand]
+
+		Entity_Ray& operator=(Entity_Ray&& other) noexcept
+		{
+			if (this != &other)
+			{
+				thePoint_ = std::move(other.thePoint_);
+				theDirection_ = std::move(other.theDirection_);
+			}
+			return *this;
+		}
+		Entity_Ray& operator=(const Entity_Ray&) = default;
 
 		const auto& Coord() const
 		{
@@ -71,10 +76,8 @@ namespace tnbLib
 			return theDirection_;
 		}
 
-		void SetPoint(const Point& thePoint) { thePoint_ = thePoint; }
-		void SetPoint(Point&& thePoint) { thePoint_ = std::move(thePoint); }
-		void SetDirection(const Dir2d& theDir) { theDirection_ = theDir; }
-		void SetDirection(Dir2d&& theDir) { theDirection_ = std::move(theDir); }
+		void SetPoint(Point thePoint) { thePoint_ = std::move(thePoint); }
+		void SetDirection(Dir2d theDir) { theDirection_ = std::move(theDir); }
 
 	};
 }

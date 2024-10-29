@@ -301,7 +301,6 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Entities\Ray\2d\Entity2d_RayI.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Ray\Entity_Ray.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Segment\Entity_Segment.hxx" />
-    <ClInclude Include="TnbLib\Geo\Entities\Segment\Entity_SegmentIO.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\SPoint\Entity3d_SPnt.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\StaticData\Entity_StaticData.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\StaticData\Entity_StaticDataI.hxx" />

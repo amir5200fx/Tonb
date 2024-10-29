@@ -41,8 +41,7 @@ namespace tnbLib
 
 		//- default constructor
 
-		Vec2d()
-		{}
+		Vec2d() = default;
 
 
 		//- constructors
@@ -79,8 +78,20 @@ namespace tnbLib
 			: gp_Vec2d(theP0, theP1)
 		{}
 
+		Vec2d(Vec2d&& other) noexcept
+			: gp_Vec2d(std::move(other))
+		{}
+
 		//- public functions and operators
 
+		Vec2d& operator=(Vec2d&& other) noexcept
+		{
+			if (this != &other)
+			{
+				gp_Vec2d::operator=(other);
+			}
+			return *this;
+		}
 
 	};
 }

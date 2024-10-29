@@ -60,7 +60,7 @@ namespace tnbLib
 		//- default constructor
 
 		Entity_Box() = default;
-
+		Entity_Box(const Entity_Box&) = default;
 
 		//- constructors
 
@@ -69,9 +69,24 @@ namespace tnbLib
 			, theP1_(std::move(theP1))
 		{}
 
+		Entity_Box(Entity_Box&& other) noexcept
+			: theP0_(std::move(other.theP0_))
+			, theP1_(std::move(other.theP1_))
+		{}
 
 		//- public functions and operators
 
+		Entity_Box& operator=(Entity_Box&& other) noexcept
+		{
+			if (this != &other)
+			{
+				theP0_ = std::move(other.theP0_);
+				theP1_ = std::move(other.theP1_);
+			}
+			return *this;
+		}
+		Entity_Box& operator=(const Entity_Box&) = default;
+ 
 		Standard_Real Diameter() const
 		{
 			return Distance(P0(), P1());

@@ -1602,9 +1602,6 @@
     <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\IndexedItemIO.hxx">
       <Filter>TnbLib\Geo\Entities\IndexedItem</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Entities\Segment\Entity_SegmentIO.hxx">
-      <Filter>TnbLib\Geo\Entities\Segment</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Serialization\Geo_Serialization.hxx">
       <Filter>TnbLib\Geo\Serialization</Filter>
     </ClInclude>

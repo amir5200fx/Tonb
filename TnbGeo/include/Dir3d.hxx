@@ -39,8 +39,13 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT const Dir3d null;
 
-		Dir3d()
-		{}
+		// default constructor
+
+		Dir3d() = default;
+		Dir3d(const Dir3d&) = default;
+		Dir3d& operator=(const Dir3d&) = default;
+
+		// constructors
 
 		Dir3d(const gp_Dir& d)
 			: gp_Dir(d)
@@ -62,6 +67,21 @@ namespace tnbLib
 		)
 			: gp_Dir(x, y, z)
 		{}
+
+		Dir3d(Dir3d&& other) noexcept
+			: gp_Dir(std::move(other))
+		{}
+
+		// Public functions and operators
+
+		Dir3d& operator=(Dir3d&& other) noexcept
+		{
+			if (this != &other)
+			{
+				gp_Dir::operator=(other);
+			}
+			return *this;
+		}
 
 		TnbGeo_EXPORT Dir3d(const Pnt3d& theP0, const Pnt3d& theP1);
 

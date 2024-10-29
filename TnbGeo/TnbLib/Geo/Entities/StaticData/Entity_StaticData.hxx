@@ -64,7 +64,7 @@ namespace tnbLib
 		//- default constructor
 
 		Entity_StaticData() = default;
-
+		Entity_StaticData(const Entity_StaticData&) = default;
 
 		//- constructors
 
@@ -91,6 +91,7 @@ namespace tnbLib
 			}
 			return *this;
 		}
+		Entity_StaticData& operator=(const Entity_StaticData&) = default;
 
 		const pointList& Points() const
 		{
@@ -160,12 +161,7 @@ namespace tnbLib
 
 		void Clear();
 
-		void SetBoundingBox(const std::shared_ptr<box>& theBox)
-		{
-			theBoundingBox_ = theBox;
-		}
-
-		void SetBoundingBox(std::shared_ptr<box>&& theBox)
+		void SetBoundingBox(std::shared_ptr<box> theBox)
 		{
 			theBoundingBox_ = std::move(theBox);
 		}
@@ -213,6 +209,7 @@ namespace tnbLib
 		//- default constructor
 
 		Entity_StaticData() = default;
+		Entity_StaticData(const Entity_StaticData&) = default;
 
 
 		//- constructors
@@ -238,6 +235,7 @@ namespace tnbLib
 			theNeighbors_ = std::move(other.theNeighbors_);
 			return *this;
 		}
+		Entity_StaticData& operator=(const Entity_StaticData&) = default;
 
 		const connectList& Neighbors() const
 		{

@@ -60,7 +60,7 @@ namespace tnbLib
 		//- default constructor
 
 		Entity_Box() = default;
-
+		Entity_Box(const Entity_Box&) = default;
 
 		//- constructors
 
@@ -85,7 +85,8 @@ namespace tnbLib
 			}
 			return *this;
 		}
-
+		Entity_Box& operator=(const Entity_Box&) = default;
+ 
 		Standard_Real Diameter() const
 		{
 			return Distance(P0(), P1());
