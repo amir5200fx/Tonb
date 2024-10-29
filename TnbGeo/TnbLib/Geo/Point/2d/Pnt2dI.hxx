@@ -1,10 +1,8 @@
 #pragma once
-#include <Global_Macros.hxx>
 inline std::tuple<Standard_Real, Standard_Real> 
 tnbLib::Pnt2d::Components() const
 {
-	auto t = std::make_tuple(X(), Y());
-	return std::move(t);
+	return { X(), Y() };
 }
 
 namespace tnbLib
@@ -14,56 +12,56 @@ namespace tnbLib
 	{
 		Pnt2d Temp = P1;
 		Temp += P2;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator-(const Pnt2d& P1, const Pnt2d& P2)
 	{
-		Pnt2d Temp = P1;
+		auto Temp = P1;
 		Temp -= P2;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator+(const Pnt2d& P1, const Standard_Real Scalar)
 	{
 		Pnt2d Temp = P1;
 		Temp += Scalar;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator+(const Standard_Real Scalar, const Pnt2d& P1)
 	{
 		Pnt2d Temp = P1;
 		Temp += Scalar;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator-(const Pnt2d& P1, const Standard_Real Scalar)
 	{
 		Pnt2d Temp = P1;
 		Temp -= Scalar;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator*(const Pnt2d& P1, const Standard_Real Scalar)
 	{
 		Pnt2d Temp = P1;
 		Temp *= Scalar;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator*(const Standard_Real Scalar, const Pnt2d& P1)
 	{
 		Pnt2d Temp = P1;
 		Temp *= Scalar;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Pnt2d operator/(const Pnt2d& P1, const Standard_Real Scalar)
 	{
 		Pnt2d Temp = P1;
 		Temp /= Scalar;
-		MOVE(Temp);
+		return Temp;
 	}
 
 	inline Standard_Real Distance(const Pnt2d& P1, const Pnt2d& P2)

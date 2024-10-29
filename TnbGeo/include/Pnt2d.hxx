@@ -55,11 +55,10 @@ namespace tnbLib
 			dim = 2
 		};
 
+		// default constructor
+		Pnt2d() = default;
+
 		// constructors
-
-		Pnt2d()
-		{}
-
 		Pnt2d
 		(
 			const Standard_Real theX,
@@ -72,16 +71,21 @@ namespace tnbLib
 			: gp_Pnt2d(theOther)
 		{}
 
-		Pnt2d(const gp_XY& XY)
+		explicit Pnt2d(const gp_XY& XY)
 			: gp_Pnt2d(XY)
 		{}
 
-		Pnt2d(std::istream& is)
+		Pnt2d(Pnt2d&& other) noexcept
+			: gp_Pnt2d(std::move(other))
+		{}
+		Pnt2d(const Pnt2d& other) = default;
+
+		explicit Pnt2d(std::istream& is)
 		{
 			is >> *this;
 		}
 
-		Pnt2d(Istream& is)
+		explicit Pnt2d(Istream& is)
 		{
 			is >> *this;
 		}
@@ -150,12 +154,23 @@ namespace tnbLib
 			return *this;
 		}
 
+		Pnt2d& operator=(Pnt2d&& other) noexcept
+		{
+			if (this != &other)
+			{
+				gp_Pnt2d::operator=(other);
+			}
+			return *this;
+		}
+
+		Pnt2d& operator=(const Pnt2d& other) = default;
+
 		Pnt2d& operator+()
 		{
 			return *this;
 		}
 
-		Pnt2d operator-()
+		Pnt2d operator-() const
 		{
 			return Pnt2d() - (*this);
 		}
