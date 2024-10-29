@@ -8,7 +8,7 @@ tnbLib::Entity_Box<Point>::Expanded
 {
 	auto copy = *this;
 	copy.Expand(theOffset);
-	return std::move(copy);
+	return copy;
 }
 
 template<class Point>
@@ -50,8 +50,7 @@ namespace tnbLib
 		list.push_back(theBox1.P0());
 		list.push_back(theBox1.P1());
 
-		auto box = BoundingBoxOf(list);
-		return std::move(box);
+		return BoundingBoxOf(list);
 	}
 
 	template<class Point>
@@ -68,9 +67,7 @@ namespace tnbLib
 			for (int i = 1; i <= Point::dim; i++)
 				Pmax.SetCoord(i, MAX(Pmax.Coord(i), x.Coord(i)));
 		}
-
-		Entity_Box<Point> box(Pmin, Pmax);
-		return std::move(box);
+		return { std::move(Pmin), std::move(Pmax)};
 	}
 
 	template<class Point>
@@ -87,9 +84,7 @@ namespace tnbLib
 		Point Pmax;
 		for (int i = 1; i <= Point::dim; i++)
 			Pmax.SetCoord(i, MAX(P0.Coord(i), P1.Coord(i)));
-
-		Entity_Box<Point> box(Pmin, Pmax);
-		return std::move(box);
+		return { std::move(Pmin), std::move(Pmax) };
 	}
 
 	template<class Point>
