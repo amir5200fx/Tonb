@@ -14,6 +14,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <array>
 
 namespace tnbLib
 {
@@ -33,14 +34,16 @@ namespace tnbLib
 	template<class Point>
 	class Entity_Box
 	{
+	public:
+		typedef  std::array<Point, 2> Array2;
 
 		template< bool cond, typename U >
 		using resolvedType = typename std::enable_if< cond, U >::type;
 
+	private:
 		/*Private Data*/
 
-		Point theP0_;
-		Point theP1_;
+		Array2 thePoints_;
 
 
 		/*Private functions and operators*/
@@ -59,39 +62,43 @@ namespace tnbLib
 
 		//- default constructor
 
-		Entity_Box()
-		{}
-
+		Entity_Box() = default;
+		Entity_Box(const Entity_Box&) = default;
 
 		//- constructors
 
-		Entity_Box
-		(
-			const Point& theP0,
-			const Point& theP1
-		)
-			: theP0_(theP0)
-			, theP1_(theP1)
+		Entity_Box(Point theP0, Point theP1)
+			: thePoints_({std::move(theP0), std::move(theP1)})
 		{}
 
-		Entity_Box
-		(
-			Point&& theP0,
-			Point&& theP1
-		)
-			: theP0_(std::move(theP0))
-			, theP1_(std::move(theP1))
+		Entity_Box(Array2 thePnts)
+			: thePoints_(std::move(thePnts))
 		{}
 
+		Entity_Box(Entity_Box&& other) noexcept
+			: thePoints_(std::move(other.thePoints_))
+		{}
 
 		//- public functions and operators
 
-		Standard_Real Diameter() const
+		Entity_Box& operator=(Entity_Box&& other) noexcept
+		{
+			if (this != &other)
+			{
+				thePoints_ = std::move(other.thePoints_);
+			}
+			return *this;
+		}
+		Entity_Box& operator=(const Entity_Box&) = default;
+
+		const auto& Points() const { return thePoints_; }
+ 
+		auto Diameter() const
 		{
 			return Distance(P0(), P1());
 		}
 
-		Standard_Real SquareDiameter() const
+		auto SquareDiameter() const
 		{
 			return SquareDistance(P0(), P1());
 		}
@@ -121,29 +128,29 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		const Point& P0() const
+		const auto& P0() const
 		{
-			return theP0_;
+			return std::get<0>(thePoints_);
 		}
 
-		Point& P0()
+		auto& P0()
 		{
-			return theP0_;
+			return std::get<0>(thePoints_);
 		}
 
-		const Point& P1() const
+		const auto& P1() const
 		{
-			return theP1_;
+			return std::get<1>(thePoints_);
 		}
 
-		Point& P1()
+		auto& P1()
 		{
-			return theP1_;
+			return std::get<1>(thePoints_);
 		}
 
-		Point CalcCentre() const
+		auto CalcCentre() const
 		{
-			return (Standard_Real)0.5*(P0() + P1());
+			return 0.5*(P0() + P1());
 		}
 
 		Entity_Box OffSet(const Standard_Real theTol) const
@@ -154,7 +161,7 @@ namespace tnbLib
 		Entity_Box Expanded(const Standard_Real theOffset) const;
 
 		template<class U = Entity_Box>
-		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
 			Expanded
 			(
 				const Standard_Real dx, 
@@ -167,7 +174,7 @@ namespace tnbLib
 		}
 
 		template<class U = Entity_Box>
-		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
 			Expanded
 			(
 				const Standard_Real dx,
@@ -181,7 +188,7 @@ namespace tnbLib
 		}
 
 		template<class SubAlg>
-		TnbGeo_EXPORT Entity_Box SubDivide(const SubAlg theAlgorithm) const;
+		Entity_Box SubDivide(const SubAlg theAlgorithm) const;
 
 		template<class SubAlg>
 		Entity_Box Half
@@ -211,10 +218,10 @@ namespace tnbLib
 		}
 
 		template<class PickAlg>
-		TnbGeo_EXPORT Point Corner(const PickAlg theAlgorithm) const;
+		Point Corner(const PickAlg theAlgorithm) const;
 
 		template<class U = std::tuple<Standard_Real, Standard_Real>>
-		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
 			Length() const
 		{
 			Standard_Real dx, dy;
@@ -223,7 +230,7 @@ namespace tnbLib
 		}
 
 		template<class U = std::tuple<Standard_Real, Standard_Real, Standard_Real>>
-		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
 			Length() const
 		{
 			Standard_Real dx, dy, dz;
@@ -234,7 +241,7 @@ namespace tnbLib
 		void Expand(const Standard_Real theOffset);
 
 		template<class U = void>
-		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
 			Expand
 			(
 				const Standard_Real dx,
@@ -252,7 +259,7 @@ namespace tnbLib
 		}
 
 		template<class U = void>
-		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
 			Expand
 			(
 				const Standard_Real dx,
@@ -305,7 +312,7 @@ namespace tnbLib
 		}
 
 		template<class U = void>
-		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
 			Length
 			(
 				Standard_Real& dx, 
@@ -317,7 +324,7 @@ namespace tnbLib
 		}
 
 		template<class U = void>
-		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+		resolvedType<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
 			Length
 			(
 				Standard_Real& dx,
@@ -330,34 +337,29 @@ namespace tnbLib
 			dz = P1().Z() - P0().Z();
 		}
 
-		void SetP0(const Point& theP0)
+		void SetP0(Point theP0)
 		{
-			P0() = theP0;
+			P0() = std::move(theP0);
 		}
 
-		void SetP0(Point&& theP)
+		void SetP1(Point theP1)
 		{
-			P0() = std::move(theP);
-		}
-
-		void SetP1(const Point& theP1)
-		{
-			P1() = theP1;
-		}
-
-		void SetP1(Point&& theP)
-		{
-			P1() = std::move(theP);
+			P1() = std::move(theP1);
 		}
 
 		void Init
 		(
-			const Point& theP0,
-			const Point& theP1
+			Point theP0,
+			Point theP1
 		)
 		{
-			P0() = theP0;
-			P1() = theP1;
+			P0() = std::move(theP0);
+			P1() = std::move(theP1);
+		}
+
+		void Init(Array2 thePnts)
+		{
+			thePoints_ = std::move(thePnts);
 		}
 
 		void Print(std::ostream& os) const
@@ -377,16 +379,13 @@ namespace tnbLib
 		}
 
 		static Entity_Box Union(const Entity_Box& theBox0, const Entity_Box& theBox1);
-
 		static Entity_Box BoundingBoxOf(const std::vector<Point>& thePts);
-
 		static Entity_Box BoundingBoxOf(const Point& P0, const Point& P1);
-
 		static Standard_Boolean IsInside(const Entity_Box& theInner, const Entity_Box& theBox);
 
 		// IO functions and operators
 
-		TnbGeo_EXPORT void ExportToPlt(OFstream& theFile) const;
+		void ExportToPlt(OFstream& theFile) const;
 	};
 }
 

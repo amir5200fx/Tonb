@@ -41,28 +41,21 @@ namespace tnbLib
 
 		Entity3d_CmpMesh
 		(
-			const std::vector<Pnt3d>& theCoords,
-			const std::vector<std::shared_ptr<Entity3d_CmpConnect>>& theIds
-		)
-			: theCoords_(theCoords)
-			, theIndices_(theIds)
-		{}
-
-		Entity3d_CmpMesh
-		(
-			std::vector<Pnt3d>&& theCoords,
-			std::vector<std::shared_ptr<Entity3d_CmpConnect>>&& theIds
+			std::vector<Pnt3d> theCoords,
+			std::vector<std::shared_ptr<Entity3d_CmpConnect>> theIds
 		)
 			: theCoords_(std::move(theCoords))
 			, theIndices_(std::move(theIds))
 		{}
 
 		TnbGeo_EXPORT Entity3d_CmpMesh(const Entity3d_CmpMesh& theMesh);
+		TnbGeo_EXPORT Entity3d_CmpMesh(Entity3d_CmpMesh&& other) noexcept;
 
 
 		// Public functions and operators
 
 		TnbGeo_EXPORT Entity3d_CmpMesh& operator=(const Entity3d_CmpMesh&);
+		TnbGeo_EXPORT Entity3d_CmpMesh& operator=(Entity3d_CmpMesh&& other) noexcept;
 
 		const auto& Coords() const { return theCoords_; }
 		const auto& Points() const { return theCoords_; }

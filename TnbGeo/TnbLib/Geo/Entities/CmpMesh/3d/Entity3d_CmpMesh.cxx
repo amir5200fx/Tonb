@@ -30,6 +30,13 @@ tnbLib::Entity3d_CmpMesh::Entity3d_CmpMesh(const Entity3d_CmpMesh& theMesh)
 	theIndices_ = std::move(ids);
 }
 
+tnbLib::Entity3d_CmpMesh::Entity3d_CmpMesh(Entity3d_CmpMesh&& other) noexcept
+	: theCoords_(std::move(other.theCoords_))
+	, theIndices_(std::move(other.theIndices_))
+{
+	// empty body
+}
+
 tnbLib::Entity3d_CmpMesh& 
 tnbLib::Entity3d_CmpMesh::operator=(const Entity3d_CmpMesh& theMesh)
 {
@@ -44,6 +51,16 @@ tnbLib::Entity3d_CmpMesh::operator=(const Entity3d_CmpMesh& theMesh)
 			ids.emplace_back(std::move(copy));
 		}
 		theIndices_ = std::move(ids);
+	}
+	return *this;
+}
+
+tnbLib::Entity3d_CmpMesh& tnbLib::Entity3d_CmpMesh::operator=(Entity3d_CmpMesh&& other) noexcept
+{
+	if (this NOT_EQUAL &other)
+	{
+		theCoords_ = std::move(other.theCoords_);
+		theIndices_ = std::move(other.theIndices_);
 	}
 	return *this;
 }

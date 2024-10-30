@@ -1,6 +1,6 @@
+// ReSharper disable CppClangTidyClangDiagnosticLanguageExtensionToken
 #include <Entity2d_CmpMesh.hxx>
 
-#include <Global_Tools.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_QuadMesh.hxx>
 #include <Entity2d_Triangulation.hxx>
@@ -17,7 +17,6 @@
 
 const std::string tnbLib::Entity2d_CmpMesh::extension = ".gmesh2d";
 
-tnbLib::Entity2d_CmpMesh::Entity2d_CmpMesh() = default;
 tnbLib::Entity2d_CmpMesh::Entity2d_CmpMesh(const Entity2d_CmpMesh& theMesh)
 	: theCoords_(theMesh.Coords())
 {
@@ -29,6 +28,13 @@ tnbLib::Entity2d_CmpMesh::Entity2d_CmpMesh(const Entity2d_CmpMesh& theMesh)
 		ids.emplace_back(std::move(copy));
 	}
 	theIndices_ = std::move(ids);
+}
+
+tnbLib::Entity2d_CmpMesh::Entity2d_CmpMesh(Entity2d_CmpMesh&& other) noexcept
+	: theCoords_(std::move(other.theCoords_))
+	  , theIndices_(std::move(other.theIndices_))
+{
+	// empty body
 }
 
 tnbLib::Entity2d_CmpMesh& 
@@ -49,6 +55,15 @@ tnbLib::Entity2d_CmpMesh::operator=(const Entity2d_CmpMesh& theMesh)
 	return *this;
 }
 
+tnbLib::Entity2d_CmpMesh& tnbLib::Entity2d_CmpMesh::operator=(Entity2d_CmpMesh&& other) noexcept
+{
+	if (this != &other)
+	{
+		theCoords_ = std::move(other.theCoords_);
+		theIndices_ = std::move(other.theIndices_);
+	}
+	return *this;
+}
 
 Standard_Integer
 tnbLib::Entity2d_CmpMesh::NbElements() const
@@ -60,16 +75,13 @@ std::vector<tnbLib::Pnt2d>
 tnbLib::Entity2d_CmpMesh::GetElement(const Standard_Integer theIndex) const
 {
 	const auto& elm = theIndices_.at(theIndex);
-	auto poly = elm->RetrievePolygon(Coords());
-	return std::move(poly);
+	return elm->RetrievePolygon(Coords());
 }
 
 std::shared_ptr<tnbLib::Entity2d_Box>
 tnbLib::Entity2d_CmpMesh::CalcBoundingBox() const
 {
-	auto b = Geo_BoxTools::GetBox(Coords(), 0);
-	auto t = std::make_shared<Entity2d_Box>(std::move(b));
-	return std::move(t);
+	return std::make_shared<Entity2d_Box>(Geo_BoxTools::GetBox(Coords(), 0));
 }
 
 std::shared_ptr<tnbLib::Entity2d_CmpMesh>
@@ -83,8 +95,7 @@ tnbLib::Entity2d_CmpMesh::Copy() const
 		auto copy = x->Copy();
 		ids.emplace_back(std::move(copy));
 	}
-	auto mesh = std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(ids));
-	return std::move(mesh);
+	return std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(ids));
 }
 
 namespace tnbLib
@@ -137,13 +148,13 @@ namespace tnbLib
 			}
 			else
 			{
-				FatalErrorIn(FunctionSIG)
-					<< "Unable to identify the type of the element." << endl
+				FatalErrorIn(FunctionSIG) << "\n"
+					<< "Unable to identify the type of the element.\n"
 					<< abort(FatalError);
 			}
 			ids_tot.emplace_back(std::move(copy));
 		}
-		return std::move(ids_tot);
+		return ids_tot;
 	}
 }
 
@@ -190,8 +201,7 @@ tnbLib::Entity2d_CmpMesh::Convert(const Entity2d_Triangulation& theMesh)
 		auto ids = std::make_shared<Entity2d_CmpConnect_Triangle>(x);
 		indices.emplace_back(std::move(ids));
 	}
-	auto mesh = std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(indices));
-	return std::move(mesh);
+	return std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(indices));
 }
 
 std::shared_ptr<tnbLib::Entity2d_CmpMesh>
@@ -205,8 +215,7 @@ tnbLib::Entity2d_CmpMesh::Convert(const Entity2d_QuadMesh& theMesh)
 		auto ids = std::make_shared<Entity2d_CmpConnect_Quad>(x);
 		indices.emplace_back(std::move(ids));
 	}
-	auto mesh = std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(indices));
-	return std::move(mesh);
+	return std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(indices));
 }
 
 void tnbLib::Entity2d_CmpMesh::Merge
