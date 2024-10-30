@@ -325,7 +325,7 @@ tnbLib::Pln_Tools::MergeApproxWire
 			inner++;
 			while (inner NOT_EQUAL(*iter)->Points().end())
 			{
-				pts.push_back(inner->Coord());
+				pts.emplace_back(Pnt2d{ inner->Coord() });
 				inner++;
 			}
 		}
@@ -338,8 +338,7 @@ tnbLib::Pln_Tools::MergeApproxWire
 		}
 		iter++;
 	}
-	auto poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
-	return std::move(poly);
+	return std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
 }
 
 namespace tnbLib

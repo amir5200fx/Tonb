@@ -219,7 +219,7 @@ namespace tnbLib
 			theEngine.RetrieveFromGeometryTo(sNodes);
 			for (const auto& x : sNodes)
 			{
-				auto pt = x->Coord();
+				auto pt = Pnt3d{ x->Coord() };
 				InsertToEngine(std::move(pt), theTol, engine);
 			}
 
