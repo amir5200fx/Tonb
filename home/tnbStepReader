@@ -1,5 +1,5 @@
 setVerbose(1);
 
-loadFile();
+loadModel();
 
 saveTo();
