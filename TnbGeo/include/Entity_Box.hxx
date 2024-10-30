@@ -14,6 +14,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <array>
 
 namespace tnbLib
 {
@@ -33,14 +34,16 @@ namespace tnbLib
 	template<class Point>
 	class Entity_Box
 	{
+	public:
+		typedef  std::array<Point, 2> Array2;
 
 		template< bool cond, typename U >
 		using resolvedType = typename std::enable_if< cond, U >::type;
 
+	private:
 		/*Private Data*/
 
-		Point theP0_;
-		Point theP1_;
+		Array2 thePoints_;
 
 
 		/*Private functions and operators*/
@@ -65,13 +68,15 @@ namespace tnbLib
 		//- constructors
 
 		Entity_Box(Point theP0, Point theP1)
-			: theP0_(std::move(theP0))
-			, theP1_(std::move(theP1))
+			: thePoints_({std::move(theP0), std::move(theP1)})
+		{}
+
+		Entity_Box(Array2 thePnts)
+			: thePoints_(std::move(thePnts))
 		{}
 
 		Entity_Box(Entity_Box&& other) noexcept
-			: theP0_(std::move(other.theP0_))
-			, theP1_(std::move(other.theP1_))
+			: thePoints_(std::move(other.thePoints_))
 		{}
 
 		//- public functions and operators
@@ -80,19 +85,20 @@ namespace tnbLib
 		{
 			if (this != &other)
 			{
-				theP0_ = std::move(other.theP0_);
-				theP1_ = std::move(other.theP1_);
+				thePoints_ = std::move(other.thePoints_);
 			}
 			return *this;
 		}
 		Entity_Box& operator=(const Entity_Box&) = default;
+
+		const auto& Points() const { return thePoints_; }
  
-		Standard_Real Diameter() const
+		auto Diameter() const
 		{
 			return Distance(P0(), P1());
 		}
 
-		Standard_Real SquareDiameter() const
+		auto SquareDiameter() const
 		{
 			return SquareDistance(P0(), P1());
 		}
@@ -122,29 +128,29 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		const Point& P0() const
+		const auto& P0() const
 		{
-			return theP0_;
+			return std::get<0>(thePoints_);
 		}
 
-		Point& P0()
+		auto& P0()
 		{
-			return theP0_;
+			return std::get<0>(thePoints_);
 		}
 
-		const Point& P1() const
+		const auto& P1() const
 		{
-			return theP1_;
+			return std::get<1>(thePoints_);
 		}
 
-		Point& P1()
+		auto& P1()
 		{
-			return theP1_;
+			return std::get<1>(thePoints_);
 		}
 
-		Point CalcCentre() const
+		auto CalcCentre() const
 		{
-			return (Standard_Real)0.5*(P0() + P1());
+			return 0.5*(P0() + P1());
 		}
 
 		Entity_Box OffSet(const Standard_Real theTol) const
@@ -349,6 +355,11 @@ namespace tnbLib
 		{
 			P0() = std::move(theP0);
 			P1() = std::move(theP1);
+		}
+
+		void Init(Array2 thePnts)
+		{
+			thePoints_ = std::move(thePnts);
 		}
 
 		void Print(std::ostream& os) const

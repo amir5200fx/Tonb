@@ -42,6 +42,7 @@ namespace tnbLib
 		//- default constructor
 
 		Vec2d() = default;
+		Vec2d(const Vec2d&) = default;
 
 
 		//- constructors
@@ -92,6 +93,7 @@ namespace tnbLib
 			}
 			return *this;
 		}
+		Vec2d& operator=(const Vec2d&) = default;
 
 	};
 }
