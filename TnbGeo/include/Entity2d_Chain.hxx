@@ -37,6 +37,8 @@ namespace tnbLib
 	TnbGeo_EXPORT void Entity2d_Chain::ExportToPlt(OFstream& File) const;
 	template<>
 	TnbGeo_EXPORT void Entity2d_Chain::ExportToVtk(OFstream&) const;
+	template<>
+	TnbGeo_EXPORT void Entity2d_Chain::ExportToVtk(std::fstream& file) const;
 }
 
 #endif // !_Entity2d_Chain_Header

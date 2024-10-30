@@ -41,4 +41,20 @@ void tnbLib::GeoMesh3d_SingleBackground::ExportToVtk(OFstream& File) const
 	File << stream.str();
 }
 
+template <>
+void tnbLib::GeoMesh3d_SingleBackground::ExportToVtk(std::ostream& os) const
+{
+	if (NOT this->Mesh())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no mesh data has been found." << endl
+			<< abort(FatalError);
+	}
+	const auto mesh = this->Mesh()->StaticData();
+	std::stringstream stream;
+	vtkLib::ExportField(*mesh, this->Sources(), stream);
+	os << stream.str();
+}
+
+
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::GeoMesh3d_SingleBackground);

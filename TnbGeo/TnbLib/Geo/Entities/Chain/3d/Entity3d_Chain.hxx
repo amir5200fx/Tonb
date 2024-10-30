@@ -2,16 +2,14 @@
 #ifndef _Entity3d_Chain_Header
 #define _Entity3d_Chain_Header
 
-#include <Pnt3d.hxx>
+#include <Entity3d_ChainFwd.hxx>
 #include <Entity_Connectivity.hxx>
+#include <Pnt3d.hxx>
 #include <Entity_StaticData.hxx>
 #include <Entity3d_BoxFwd.hxx>
 
 namespace tnbLib
 {
-
-	typedef Entity_StaticData<Pnt3d, connectivity::dual> Entity3d_Chain;
-
 	template<>
 	TnbGeo_EXPORT void Entity3d_Chain::CalcBoundingBox();
 
@@ -32,6 +30,8 @@ namespace tnbLib
 
 	template<>
 	TnbGeo_EXPORT void Entity3d_Chain::ExportToPlt(OFstream& File) const;
+	template<>
+	TnbGeo_EXPORT void Entity3d_Chain::ExportToVtk(std::fstream& file) const;
 }
 
 #endif // !_Entity3d_Chain_Header

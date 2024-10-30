@@ -2,6 +2,8 @@
 
 #include <Aft2d_Edge.hxx>
 
+#include "Aft_Tools.hxx"
+
 unsigned short tnbLib::Aft2d_Model::verbose(0);
 
 template<>
@@ -95,13 +97,11 @@ void tnbLib::Aft2d_Model::MeshingOneLevel()
 
 		if (NOT IsBelongToFront())
 			continue;
-
+		
 		// Remove the Current from front
 		RemoveCurrentFromFront();
-
 		// get desired element size from back-ground mesh
 		CalcElementSize();
-
 		// Calculate optimum coordinate of new point
 		CalcOptimumCoord();
 
@@ -127,6 +127,14 @@ void tnbLib::Aft2d_Model::MeshingOneLevel()
 
 		Update();
 	}
+	// Activate this part of code for debugging purposes
+	/*std::vector<std::shared_ptr<Aft2d_Element>> elements;
+	for (const auto& x: this->RetrieveElements())
+	{
+		elements.emplace_back(x.second);
+	}
+	OFstream my_file("my_mesh.vtk");
+	Aft_Tools::RetrieveTriangleMesh(elements)->ExportToVtk(my_file);*/
 }
 #endif // AFT_MODEL_DEBUG
 

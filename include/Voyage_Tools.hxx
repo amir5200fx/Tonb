@@ -138,6 +138,10 @@ namespace tnbLib
 				const Geo2d_MetricPrcsrAnIso&
 			);
 
+		// the coordinates points are in longitude and latitude system
+		// the result is in meters
+		static TnbVoyage_EXPORT Standard_Real CalcDistance(const Pnt2d& theP0, const Pnt2d& theP1);
+
 		static TnbVoyage_EXPORT std::vector<Standard_Real>
 			CalcParameters
 			(
@@ -175,6 +179,8 @@ namespace tnbLib
 			(
 				const Entity2d_Triangulation&
 			);
+
+		static TnbVoyage_EXPORT Pnt2d ConvertVoyageToGlobal(const Pnt2d&);
 
 		static TnbVoyage_EXPORT Standard_Real KtsToKmh(const Standard_Real);
 

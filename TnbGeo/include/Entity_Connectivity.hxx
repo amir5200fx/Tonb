@@ -8,63 +8,56 @@
 #include <Istream.hxx>
 
 #include <vector>
+#include <array>
 
 namespace tnbLib
 {
 
-	template<int Dim>
+	template<int Dim, int Reduct = 0>
 	class Entity_Connectivity
 	{
-
+	public:
+		typedef std::array<Standard_Integer, Dim> Array;
+	private:
 		/*Private Data*/
-
-		Standard_Integer theV_[Dim];
-
+		Array theCmpts_;
 
 		/*private functions and operators*/
-
 		friend class boost::serialization::access;
 
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
-			for (size_t i = 0; i < (size_t)Dim; i++)
-			{
-				ar & theV_[i];
-			}
+			ar& theCmpts_;
 		}
 
 	public:
 
 		static const Standard_Integer nbCmpts = Dim;
 
-		Entity_Connectivity()
+		// default constructor
+		Entity_Connectivity() = default;
+
+		// constructors
+		Entity_Connectivity(Array cmpts)
+			: theCmpts_(std::move(cmpts))
 		{}
 
-		Standard_Integer Value
-		(
-			const Standard_Integer theIndex
-		) const
-		{
-			return theV_[theIndex];
-		}
+		// Public functions and operators
+		auto Value(const Standard_Integer theIndex) const { return theCmpts_.at(theIndex); }
+		auto& Value(const Standard_Integer theIndex) { return theCmpts_.at(theIndex); }
 
-		Standard_Integer& Value
-		(
-			const Standard_Integer theIndex
-		)
-		{
-			return theV_[theIndex];
-		}
+		const auto& Cmpts() const { return theCmpts_; }
+		auto& CmptsRef() { return theCmpts_; }
 
 		Standard_Boolean IsDegenerated() const;
 
-		template<int Dim>
-		friend Istream& operator>>(Istream& is, Entity_Connectivity<Dim>& theEntity);
+		template<int Dim, int Reduct>
+		friend Istream& operator>>(Istream& is, Entity_Connectivity<Dim, Reduct>& theEntity);
 	};
 
-	template<int Dim>
-	Istream & operator>>(Istream & is, Entity_Connectivity<Dim>& theEntity)
+	template<int Dim, int Reduct>
+	Istream & operator>>(Istream & is, Entity_Connectivity<Dim, Reduct>& theEntity)
 	{
 		string comma;
 		int x[Dim];
@@ -91,6 +84,7 @@ namespace tnbLib
 		typedef Entity_Connectivity<2> dual;
 		typedef Entity_Connectivity<3> triple;
 		typedef Entity_Connectivity<4> quadruple;
+		typedef Entity_Connectivity<4, 1> quadruple_3d;
 		typedef Entity_Connectivity<5> quintuple;
 		typedef Entity_Connectivity<6> sextuple;
 		typedef Entity_Connectivity<7> septuple;
@@ -115,20 +109,24 @@ namespace tnbLib
 
 	template<>
 	TnbGeo_EXPORT Standard_Boolean connectivity::quadruple::IsDegenerated() const;
+	template <>
+	TnbGeo_EXPORT Standard_Boolean connectivity::quadruple_3d::IsDegenerated() const;
+	template <>
+	TnbGeo_EXPORT Standard_Boolean connectivity::octuple::IsDegenerated() const;
 
-	template<int Dim>
-	Standard_Integer MaxID(const std::vector<Entity_Connectivity<Dim>>&);
+	template<int Dim, int Reduct>
+	Standard_Integer MaxID(const std::vector<Entity_Connectivity<Dim, Reduct>>&);
 
-	template<int Dim>
-	std::vector<Entity_Connectivity<Dim>>
+	template<int Dim, int Reduct>
+	std::vector<Entity_Connectivity<Dim, Reduct>>
 		CombineConnectivities
 		(
 			const std::vector<Entity_Connectivity<Dim>>& theC0,
 			const std::vector<Entity_Connectivity<Dim>>& theC1
 		);
 
-	template<int Dim>
-	std::vector<Entity_Connectivity<Dim>>
+	template<int Dim, int Reduct>
+	std::vector<Entity_Connectivity<Dim, Reduct>>
 		CombineConnectivities
 		(
 			std::vector<Entity_Connectivity<Dim>>&& theC0,
@@ -136,9 +134,13 @@ namespace tnbLib
 		);
 
 	TnbGeo_EXPORT std::vector<connectivity::dual> dualConnectivityList(const Standard_Integer theNbEdges);
+	TnbGeo_EXPORT std::vector<connectivity::dual> dualConnectivityList_Chain(
+		const Standard_Integer theNbEdges, const Standard_Boolean IsClosed = Standard_False);
 
-	TnbGeo_EXPORT std::vector<connectivity::dual> dualConnectivityList_Chain(const Standard_Integer theNbEdges, const Standard_Boolean IsClosed = Standard_False);
-
+	TnbGeo_EXPORT connectivity::triple raise(const connectivity::dual&);
+	TnbGeo_EXPORT connectivity::quadruple raise(const connectivity::triple&);
+	TnbGeo_EXPORT connectivity::sextuple raise(const connectivity::quadruple&);
+	TnbGeo_EXPORT connectivity::octuple raise(const connectivity::sextuple&);
 }
 
 #include <Entity_ConnectivityI.hxx>

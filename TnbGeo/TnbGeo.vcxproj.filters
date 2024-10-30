@@ -1183,6 +1183,63 @@
     <Filter Include="TnbLib\Geo\Merge\CmpMesh\2d">
       <UniqueIdentifier>{c9968980-18fd-458c-a1c5-98bc9507b5f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpMesh\3d">
+      <UniqueIdentifier>{71e1bb10-4e01-41d9-8947-252c0ba713a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Hexahedralization">
+      <UniqueIdentifier>{a7c37ab3-91ad-4172-a9cc-ca276f5c3b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\QuadMesh\3d">
+      <UniqueIdentifier>{33ea91fc-4d0e-4bb7-bce4-b68a008f3fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpMesh\Surface">
+      <UniqueIdentifier>{346b4695-7577-40c7-bfd0-3b01e6910676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpConnet\2d\Pentagon">
+      <UniqueIdentifier>{7f463e4c-fab1-4675-8abc-f49ced418381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\IO\csv">
+      <UniqueIdentifier>{67308bbf-4958-4a05-9282-6e5e304ba0a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\IO\Loader\stl">
+      <UniqueIdentifier>{a74f90e7-c7c5-49c4-9dc0-a707feb0350c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Axis">
+      <UniqueIdentifier>{cb39ae46-7c5f-48b0-8e68-86986984fc1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Axis\2d">
+      <UniqueIdentifier>{ce3c5ff7-801e-44bb-a4d1-d7d4e9054155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Axis\3d">
+      <UniqueIdentifier>{a346bd33-7d12-4dc5-8ddf-82ad88ca5bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\API">
+      <UniqueIdentifier>{07331edd-3c16-41af-9ded-f0537766723d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\PolyhedralMesh">
+      <UniqueIdentifier>{eaf69705-33df-4989-86a9-b1423d947ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon">
+      <UniqueIdentifier>{2c0f1eb7-1af7-4bd7-8b3f-2b49ad140351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\CmpConnet\2d\Polygon">
+      <UniqueIdentifier>{d5d08012-de2a-48f7-9086-ca924c0e083b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\CmpMesh\3d">
+      <UniqueIdentifier>{07d49859-409c-451b-8d24-5b06c8c2172e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh">
+      <UniqueIdentifier>{6fcb309f-d03a-42b2-82a9-3c6e80ac03ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh\Cmpt">
+      <UniqueIdentifier>{3f7c31d1-3f6e-4623-9eef-f009f6e67fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh\Cmpt\2d">
+      <UniqueIdentifier>{98d60742-b5d3-41f4-9f88-a2c1d7ef838c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\CompressMesh\Cmpt\3d">
+      <UniqueIdentifier>{e2760bb3-bbbb-43f1-919d-56a49878c6ec}</UniqueIdentifier>
+    </Filter>
     <Filter Include="TnbLib\Geo\Entities\TriShell">
       <UniqueIdentifier>{15976bf4-6426-41a3-afc5-73d1b88f151d}</UniqueIdentifier>
     </Filter>
@@ -1565,9 +1622,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\IndexedItemIO.hxx">
       <Filter>TnbLib\Geo\Entities\IndexedItem</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Entities\Segment\Entity_SegmentIO.hxx">
-      <Filter>TnbLib\Geo\Entities\Segment</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Serialization\Geo_Serialization.hxx">
       <Filter>TnbLib\Geo\Serialization</Filter>
@@ -2685,8 +2739,80 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\Prism\Entity3d_CmpConnect_Prism.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\3d\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Direct\2d\Dir2dI.hxx">
+      <Filter>TnbLib\Geo\Entities\Direct\2d</Filter>
+    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.hxx">
       <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\IO\Loader\INP\GeoIO_Loader_Inp2.hxx">
+      <Filter>TnbLib\IO\Loader\INP</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_Hexahedralization.hxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_HexahedralizationFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMeshFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpMesh\Surface\Entity3d_CmpMeshSurface.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_Pentagon.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\IO\csv\Geo2dIO_CSV.hxx">
+      <Filter>TnbLib\IO\csv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.hxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Axis\2d\Entity2d_Axis.hxx">
+      <Filter>TnbLib\Geo\Entities\Axis\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Axis\3d\Entity3d_Axis.hxx">
+      <Filter>TnbLib\Geo\Entities\Axis\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\API\Geo_API.hxx">
+      <Filter>TnbLib\API</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\PolyhedralMesh\Entity3d_PolyhedralMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\PolyhedralMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygon.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_Polygon.hxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\CmpMesh\3d\Merge3d_CmpMesh.hxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Geo_CompressMesh.hxx">
+      <Filter>TnbLib\Geo\CompressMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Geo_CompressMeshI.hxx">
+      <Filter>TnbLib\Geo\CompressMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\3d\Geo3d_CompressMesh_Composite.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\3d\Geo3d_CompressMesh_CompositeFwd.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_Composite.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_CompositeFwd.hxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.hxx">
       <Filter>TnbLib\Geo\Entities\TriShell</Filter>
@@ -3452,6 +3578,96 @@
     <ClCompile Include="TnbLib\Geo\Function\Interpl\Steffen\Geo_SteffenInterplFunction.cxx">
       <Filter>TnbLib\Geo\Function\Interpl\Steffen</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_Hexahedralization.cxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Hexahedralization\Entity3d_HexahedralizationIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Hexahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\QuadMesh\3d\Entity3d_QuadMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\Surface\Entity3d_CmpMeshSurface.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\Surface\Entity3d_CmpMeshSurfaceIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_Pentagon.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Pentagon\Entity2d_CmpConnect_PentagonIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Pentagon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\csv\Geo2dIO_CSV.cxx">
+      <Filter>TnbLib\IO\csv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL_cgal.cxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\Loader\stl\GeoIO_Loader_STL.cxx">
+      <Filter>TnbLib\IO\Loader\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\2d\Entity2d_Axis_chaiscript.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\2d\Entity2d_Axis.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\3d\Entity3d_Axis.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Axis\3d\Entity3d_Axis_chaiscript.cxx">
+      <Filter>TnbLib\Geo\Entities\Axis\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\API\Geo_API.cxx">
+      <Filter>TnbLib\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\API\Geo_API_chaiscript.cxx">
+      <Filter>TnbLib\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\PolyhedralMesh\Entity3d_PolyhedralMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\PolyhedralMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\PolyhedralMesh\Entity3d_PolyhedralMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\PolyhedralMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygon.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\ExtrudedPolygon\Entity3d_CmpConnect_ExtrudedPolygonIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\3d\ExtrudedPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_Polygon.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\2d\Polygon\Entity2d_CmpConnect_PolygonIO.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\CmpMesh\3d\Merge3d_CmpMesh.cxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\CmpMesh\2d\Merge2d_CmpMesh.cxx">
+      <Filter>TnbLib\Geo\Merge\CmpMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\CompressMesh\Geo_CompressMesh.cxx">
+      <Filter>TnbLib\Geo\CompressMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\CompressMesh\Cmpt\3d\Geo3d_CompressMesh_Composite.cxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_Composite.cxx">
+      <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
+    </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.cxx">
       <Filter>TnbLib\Geo\Entities\TriShell</Filter>
     </ClCompile>
@@ -3477,6 +3693,9 @@
     </None>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_RetrievePoints.jxx">
       <Filter>TnbLib\Geo\SamplePoints\2d</Filter>
+    </None>
+    <None Include="TnbLib\Geo\Entities\CmpMesh\2d\Entity2d_CmpMesh_Helper.lxx">
+      <Filter>TnbLib\Geo\Entities\CmpMesh\2d</Filter>
     </None>
   </ItemGroup>
 </Project>

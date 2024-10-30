@@ -11,10 +11,15 @@ namespace tnbLib
 	{
 		Io::ExportMesh(Points(), Connectivity(), File);
 	}
-}
+	template <>
+	void Entity3d_Triangulation::ExportToVtk(OFstream& theFile) const
+	{
+		vtkLib::WriteMesh(*this, "myMesh", theFile);
+	}
+	template <>
+	void Entity3d_Triangulation::ExportToVtk(std::fstream& file) const
+	{
+		vtkLib::WriteMesh(*this, "my mesh", file);
+	}
 
-template<>
-void tnbLib::Entity3d_Triangulation::ExportToVtk(OFstream& theFile) const
-{
-	vtkLib::WriteMesh(*this, "The triangular mesh", theFile);
 }

@@ -1,5 +1,6 @@
 #include <Entity2d_CmpConnect_Quad.hxx>
 
+#include <Pnt3d.hxx>
 #include <Pnt2d.hxx>
 
 tnbLib::Entity2d_CmpConnect_Quad::Entity2d_CmpConnect_Quad(const connectivity::quadruple& theQaud)
@@ -33,6 +34,18 @@ tnbLib::Entity2d_CmpConnect_Quad::Components() const
 	return std::move(indices);
 }
 
+std::vector<tnbLib::Pnt3d>
+tnbLib::Entity2d_CmpConnect_Quad::RetrievePolygon(const std::vector<Pnt3d>& theCoords) const
+{
+	std::vector<Pnt3d> coords;
+	coords.reserve(nbCmpts);
+	for (const auto i : theCmpts_)
+	{
+		coords.emplace_back(theCoords.at(Index_Of(i)));
+	}
+	return std::move(coords);
+}
+
 std::vector<tnbLib::Pnt2d>
 tnbLib::Entity2d_CmpConnect_Quad::RetrievePolygon
 (
@@ -53,4 +66,12 @@ tnbLib::Entity2d_CmpConnect_Quad::Copy() const
 {
 	auto t = std::make_shared<Entity2d_CmpConnect_Quad>(this->Array());
 	return std::move(t);
+}
+
+void tnbLib::Entity2d_CmpConnect_Quad::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
 }

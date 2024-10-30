@@ -41,9 +41,29 @@ tnbLib::Entity3d_CmpConnect_Prism::RetrievePolygon(const std::vector<Pnt3d>& the
 	return std::move(coords);
 }
 
+std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_Prism::CalcFaces() const
+{
+	std::vector<Face> faces;
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(1), theCmpts_.at(4), theCmpts_.at(3)} });
+	faces.emplace_back(Face{ {theCmpts_.at(1), theCmpts_.at(2), theCmpts_.at(5), theCmpts_.at(4)} });
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(0), theCmpts_.at(3), theCmpts_.at(5)} });
+
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(2), theCmpts_.at(1)} });
+	faces.emplace_back(Face{ {theCmpts_.at(3), theCmpts_.at(4), theCmpts_.at(5)} });
+	return faces;
+}
+
 std::shared_ptr<tnbLib::Entity3d_CmpConnect>
 tnbLib::Entity3d_CmpConnect_Prism::Copy() const
 {
 	auto t = std::make_shared<Entity3d_CmpConnect_Prism>(this->Array());
 	return std::move(t);
+}
+
+void tnbLib::Entity3d_CmpConnect_Prism::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
 }

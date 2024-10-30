@@ -16,6 +16,8 @@
 #include <BRepBndLib.hxx>
 #include <Cad_Tools.hxx>
 
+unsigned short tnbLib::CadIO_STEP::verbose(0);
+
 void tnbLib::CadIO_STEP::ReadFile
 (
 	const fileName & theName
@@ -26,12 +28,24 @@ void tnbLib::CadIO_STEP::ReadFile
 		timer.SetInfo(Global_TimerInfo_s);
 
 		STEPControl_Reader Reader;
+		Standard_Integer status = Reader.ReadFile(theName.c_str());
 
-		Reader.ReadFile(theName.c_str());
+		if (status == IFSelect_RetDone)
+		{
+			Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("step-faces");
+			Reader.TransferList(myList);
+			Reader.TransferRoot();
 
-		Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
-		SetNbFaces(myList->Length());
+			SetNbFaces(myList->Length());
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " Unable to read the STEP file." << endl
+				<< abort(FatalError);
+		}
 
+		//Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
 		SetShape(Reader.OneShape());
 		SetFileName(theName);
 
@@ -40,7 +54,7 @@ void tnbLib::CadIO_STEP::ReadFile
 
 		SetBoundingBox(Cad_Tools::BoundingBox(box));
 
-		if (Verbose())
+		if (verbose)
 		{
 			GET_MESSAGE << "IGES File Imported Successfully in "
 				<< global_time_duration << " seconds.";

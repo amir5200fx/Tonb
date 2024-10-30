@@ -1,26 +1,18 @@
-set_verbose(1);
-//.
-//* loading the file
-load_file("./file_name");
-//.
-//* setting the base size
-set_base_size(0.02);
-set_default_growth_rate("moderate");  //- verySlow, slow, moderate, fast, custom
-set_boundary_growth_rate("moderate"); //- verySlow, slow, moderate, fast, custom
-//.
-//* getting surface configuration
-var surf_config = surf_config();
-//.
-// getting surface configuration values
-var values = surf_config.values();
-values.set_type("relativeToBase"); //- relativeToBase, absolute
-values.set_method("minAndTarget");      //- minOnly, minAndTarget
-values.set_min(0.02);
-values.set_target(1.0);
-//.
-// getting surface configuration curvature
-var curvature = surf_config.curvature();
-curvature.set_type("continum");  //- continum, custom, disableExternalCapture
-curvature.set_span_ngle(0.5);
+setVerbose(1);
+
+loadFile();
+
+setBaseSize(0.02);
+setDefaultGrowthRate("moderate");  //- verySlow, slow, moderate, fast, custom
+setBoundaryGrowthRate("moderate"); //- verySlow, slow, moderate, fast, custom
+
+setSurfSizeValueType("relativeToBase"); //- relativeToBase, absolute
+setSurfSizeMethod("minAndTarget");      //- minOnly, minAndTarget
+setSurfMinSize(0.02);
+setSurfTargetSize(1.0);
+
+
+setCurvatureType("continum");  //- continum, custom, disableExternalCapture
+setCurvatureSpanAngle(0.5);
 
 save_to("meshReference");

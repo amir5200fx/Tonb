@@ -26,6 +26,9 @@ namespace tnbLib
 	TnbMesh_EXPORT void Mesh2d_MultiSizeMap::ExportToPlt(OFstream& File) const;
 	template<>
 	TnbMesh_EXPORT void Mesh2d_MultiSizeMap::ExportToVtk(OFstream& File) const;
+	template <>
+	TnbMesh_EXPORT void Mesh2d_MultiSizeMap::ExportToVtk(std::ostream&) const;
+
 }
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh2d_MultiSizeMap);

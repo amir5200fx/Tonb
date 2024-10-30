@@ -34,14 +34,14 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 		auto& node = *ptr;
 		const auto& pt = node.Coord();
 		auto fronts = node.RetrieveFrontEdges();
-		Debug_If_Condition(NOT fronts.size());
+		Debug_If_Condition(fronts.empty());
 
 		//- Retrieve max_length attached to the current node
-		Standard_Real maxLength = (Standard_Real)0.;
+		auto maxLength = (Standard_Real)0.;
 		for (auto& w_entity : fronts)
 		{
 			Debug_Null_Pointer(w_entity.second.lock());
-			auto entity = w_entity.second.lock();
+			const auto entity = w_entity.second.lock();
 
 			if (entity->CharLength() > maxLength)
 				maxLength = entity->CharLength();
@@ -158,7 +158,7 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 		//std::cout <<" elm no. "<< this->NbElements() + 1 << ", element size: " << this->ElementSize() << std::endl;
 		//std::cout << "v0 = " << CurrentFront()->Node0()->Coord() << std::endl;
 		//std::cout << "v1 = " << CurrentFront()->Node1()->Coord() << std::endl;
-		
+		//std::cout << "state: " << (int)this->AlgCondition() << std::endl;
 		
 		// Calculate optimum coordinate of new point
 		CalcOptimumCoord();
@@ -193,8 +193,8 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 		SortNodes(CandidateNodes);
 
 		auto is_valid = IsNewPointCandidate(/*Effectives*/Local);
-		/*std::cout << " is valid = " << (is_valid ? "TRUE" : "FALSE") << std::endl;
-		if (NOT is_valid)
+		//std::cout << " is valid = " << (is_valid ? "TRUE" : "FALSE") << std::endl;
+		/*if (NOT is_valid)
 		{
 			PAUSE;
 		}*/
@@ -236,10 +236,10 @@ void tnbLib::Voyage_Mesh::FindValidNode
 	const auto& vrtx0 = *current.Node0();
 	const auto& vrtx1 = *current.Node1();
 
-	auto v0 = vrtx0.Index();
-	auto v1 = vrtx1.Index();
+	const auto v0 = vrtx0.Index();
+	const auto v1 = vrtx1.Index();
 
-	auto nodes = RetrieveNodesFrom(theEdges);
+	const auto nodes = RetrieveNodesFrom(theEdges);
 
 	Standard_Boolean is_newNode_Valid = Standard_True;
 	{
@@ -315,6 +315,10 @@ void tnbLib::Voyage_Mesh::FindValidNode
 		// test 1: is it the new point on the left side of iEDG
 		if (Geo_Tools::Oriented_cgal(node.Coord(), vrtx0.Coord(), vrtx1.Coord()) <= 0.0)
 		{
+			/*std::cout << "ORIENTED ISSUE" << std::endl;
+			std::cout << (x IS_EQUAL newNode ? "IS NEW NODE" : "IS NOT NEW") << std::endl;
+			std::cout << "COORD: " << x->Coord() << std::endl;
+			std::cout << std::endl;*/
 			continue;
 		}
 
@@ -353,9 +357,11 @@ void tnbLib::Voyage_Mesh::FindValidNode
 		for (const auto& eff_node : nodes)
 		{
 			Debug_Null_Pointer(eff_node);
-			const auto eff_index = eff_node->Index();
 
-			if ((eff_index NOT_EQUAL nodeIndex) AND(eff_index NOT_EQUAL v0) AND(eff_index NOT_EQUAL v1))
+			if (
+				const auto eff_index = eff_node->Index();
+				(eff_index NOT_EQUAL nodeIndex) AND(eff_index NOT_EQUAL v0) AND(eff_index NOT_EQUAL v1)
+				)
 			{
 				if (Geo_Tools::IsPointInsideTriangle_cgal(eff_node->Coord(), vrtx0.Coord(), vrtx1.Coord(), node.Coord()))
 				{
@@ -367,7 +373,7 @@ void tnbLib::Voyage_Mesh::FindValidNode
 
 		if (flag) continue;
 
-		if ((x NOT_EQUAL newNode))
+		if (x NOT_EQUAL newNode)
 		{
 			if (is_newNode_Valid)
 			{
@@ -429,8 +435,7 @@ void tnbLib::Voyage_Mesh::Mesh()
 
 void tnbLib::Voyage_Mesh::InsertNewFrontsToLevels()
 {
-	const auto& edge0 = CreatedEdge0();
-	if (edge0)
+	if (const auto& edge0 = CreatedEdge0())
 	{
 		const auto& n0 = edge0->Node0();
 		const auto& n1 = edge0->Node1();
@@ -448,8 +453,7 @@ void tnbLib::Voyage_Mesh::InsertNewFrontsToLevels()
 		}
 	}
 
-	const auto& edge1 = CreatedEdge1();
-	if (edge1)
+	if (const auto& edge1 = CreatedEdge1())
 	{
 		const auto& n0 = edge1->Node0();
 		const auto& n1 = edge1->Node1();
@@ -471,15 +475,15 @@ void tnbLib::Voyage_Mesh::InsertNewFrontsToLevels()
 void tnbLib::Voyage_Mesh::CheckPath
 (
 	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
-) const
+)
 {
 	for (const auto& x : theEdges)
 	{
 		Debug_Null_Pointer(x->Node0());
 		Debug_Null_Pointer(x->Node1());
 
-		auto n0 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node0());
-		auto n1 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node1());
+		const auto n0 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node0());
+		const auto n1 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node1());
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
 		if (n0->IsArrival() OR n0->IsDeparture())
@@ -528,7 +532,7 @@ void tnbLib::Voyage_Mesh::CheckSelfIntersection() const
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
 
-		auto radius = 1.05 * std::max(n0->CalcMaxParaAdjLength(), n1->CalcMaxParaAdjLength());
+		const auto radius = 1.05 * std::max(n0->CalcMaxParaAdjLength(), n1->CalcMaxParaAdjLength());
 		const auto& c = x->Centre();
 
 		auto b = Geo_BoxTools::GetBox(c, radius);
@@ -553,7 +557,7 @@ void tnbLib::Voyage_Mesh::CheckSelfIntersection() const
 	}
 }
 
-void tnbLib::Voyage_Mesh::InitFronts()
+void tnbLib::Voyage_Mesh::InitFronts() const
 {
 	Debug_Null_Pointer(MetricMap());
 	const auto& sizeMap = *MetricMap();
@@ -569,7 +573,7 @@ void tnbLib::Voyage_Mesh::InitFronts()
 		x->SetCharLength(sizeMap.CalcDistance(n0->Coord(), n1->Coord()));
 		//x->SetCharLength(MetricMap()->CalcElementSize(x->Centre()));
 	}
-	auto nodes = RetrieveNodesFrom(edges);
+	const auto nodes = RetrieveNodesFrom(edges);
 	for (const auto& x : nodes)
 	{
 		Debug_Null_Pointer(x);
@@ -577,7 +581,7 @@ void tnbLib::Voyage_Mesh::InitFronts()
 		auto Iter = bnds.begin();
 		Debug_Null_Pointer(Iter->second.lock());
 		auto M = Iter->second.lock()->EffectiveMetric();
-		Iter++;
+		++Iter;
 
 		while (Iter NOT_EQUAL bnds.end())
 		{
@@ -591,7 +595,7 @@ void tnbLib::Voyage_Mesh::InitFronts()
 			{
 				M = Entity2d_Metric1::UnionSR(Mi, M);
 			}
-			Iter++;
+			++Iter;
 		}
 
 		x->SetMetric(M);
@@ -679,15 +683,15 @@ void tnbLib::Voyage_Mesh::Import
 	const std::shared_ptr<VoyageMesh_MetricPrcsr>& theMetrics
 )
 {
-	NodeCounter() = (Standard_Integer)(thePath.size() + 1);
+	NodeCounter() = static_cast<Standard_Integer>(thePath.size() + 1);
 	ElementCounter() = 0;
-	EdgeCounter() = (Standard_Integer)thePath.size();
+	EdgeCounter() = static_cast<Standard_Integer>(thePath.size());
 
 	CheckPath(RefPath());
 
 	const auto nodes = RetrieveNodesFrom(RefPath());
 
-	auto d = RetrieveBoundingBox(nodes);
+	const auto d = RetrieveBoundingBox(nodes);
 
 	// Set Searching Region
 	SetGeometryRegion(d.OffSet(0.01 * d.Diameter()));
@@ -723,14 +727,14 @@ tnbLib::Voyage_Mesh::RetrieveNodesFrom
 		Debug_Null_Pointer(x->Node0());
 		Debug_Null_Pointer(x->Node1());
 		{
-			auto insert = compct.insert(x->Node0());
+			const auto insert = compct.insert(x->Node0());
 			if (NOT insert.second)
 			{
 				// do nothing [8/22/2023 aamir]
 			}
 		}
 		{
-			auto insert = compct.insert(x->Node1());
+			const auto insert = compct.insert(x->Node1());
 			if (NOT insert.second)
 			{
 				// do nothing [8/22/2023 aamir]

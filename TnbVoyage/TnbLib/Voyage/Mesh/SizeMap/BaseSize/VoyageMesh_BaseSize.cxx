@@ -98,6 +98,7 @@ void tnbLib::VoyageMesh_BaseSize::Perform()
 	{
 		Debug_Null_Pointer(x);
 		auto len = Voyage_Tools::CalcLength(*x, *Metrics());
+		//std::cout << "Len = " << len << std::endl;
 		length.push_back(len);
 		tot_len += len;
 	}

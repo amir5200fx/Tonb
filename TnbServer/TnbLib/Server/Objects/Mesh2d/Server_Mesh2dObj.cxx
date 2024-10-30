@@ -609,8 +609,8 @@ void tnbLib::Server_Mesh2dObj_Mesh::Construct(const std::string& theValue)
 		}
 		/**/
 		alg->CreateStaticMesh();
-		OFstream myFile("myMesh.plt");
-		alg->GetTriangulation()->ExportToPlt(myFile);
+		//OFstream myFile("myMesh.plt");
+		//alg->GetTriangulation()->ExportToPlt(myFile);
 		//alg->GetTriangulation()->ExportToVtk(myFile);
 		solu_data->SetElements(std::move(elements));
 		streamGoodTnbServerObject(solu_data);
@@ -641,6 +641,8 @@ const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::qual_fun("qual_
 const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::solu_data("solu_data");
 const std::string tnbLib::Server_Mesh2dObj_LaplacSmooth::Params::ur("ur");
 
+#include <MeshPost2d_LaplacianSmoothing_AdjEdges.hxx>
+
 void tnbLib::Server_Mesh2dObj_LaplacSmooth::Construct(const std::string& theValue)
 {
 	std::shared_ptr<Aft2d_SolutionData> solu_data;
@@ -668,10 +670,14 @@ void tnbLib::Server_Mesh2dObj_LaplacSmooth::Construct(const std::string& theValu
 	}
 	try
 	{
+		//auto avg_fun = std::make_shared<MeshPost2d_LaplacianSmoothing_AdjEdges>();
 		if (!solu_data)
 		{
 			throw Server_Error("the solution data is null.");
 		}
+		const auto edges = Aft_Tools::RetrieveEdges(solu_data->Elements());
+		Aft_Tools::Connect(edges);
+
 		const auto& elements = solu_data->Elements();
 		auto nodes_ref = Aft_Tools::RetrieveNodes(elements);
 		auto nodes = std::make_shared<std::vector<std::shared_ptr<Aft2d_Node>>>(std::move(nodes_ref));
@@ -690,6 +696,7 @@ void tnbLib::Server_Mesh2dObj_LaplacSmooth::Construct(const std::string& theValu
 		info->SetNbLevels(nb_iters);
 		info->SetUnderRelaxation(ur);
 
+		MeshPost2d_LaplacianSmoothing::verbose = 1;
 		auto smooth_alg = std::make_shared<MeshPost2d_LaplacianSmoothing>();
 		smooth_alg->SetAvgFun(avg_fun);
 		smooth_alg->SetQualityFun(qual_fun);

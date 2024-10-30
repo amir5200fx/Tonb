@@ -41,11 +41,9 @@ void tnbLib::Io::WritePointsVariables
 	}
 
 	for (const auto& x : X)
-		theStream << std::setw(15) << x << "  ";
-	theStream << "\n";
+		theStream << std::setw(15) << x << "\n";
 	for (const auto& x : Y)
-		theStream << std::setw(15) << x << "  ";
-	theStream << "\n";
+		theStream << std::setw(15) << x << "\n";
 }
 
 void tnbLib::Io::WritePointsVariables
@@ -65,15 +63,112 @@ void tnbLib::Io::WritePointsVariables
 	}
 
 	for (const auto& x : X)
-		File << x << "  ";
-	File << endl;
+		File << x << "\n";
 	for (const auto& x : Y)
-		File << x << "  ";
-	File << endl;
+		File << x << "\n";
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt2d>& thePoints, std::fstream& file)
+{
+	std::vector<Standard_Real> X, Y;
+	X.reserve(thePoints.size());
+	Y.reserve(thePoints.size());
+
+	for (const auto& x : thePoints)
+	{
+		X.push_back(x.X());
+		Y.push_back(x.Y());
+	}
+
+	for (const auto& x : X)
+		file << x << "\n";
+	for (const auto& x : Y)
+		file << x << "\n";
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt3d>& thePoints, OFstream& file)
+{
+	std::vector<Standard_Real> xs, ys, zs;
+	xs.reserve(thePoints.size());
+	ys.reserve(thePoints.size());
+	zs.reserve(thePoints.size());
+
+	for (const auto& p: thePoints)
+	{
+		xs.emplace_back(p.X());
+		ys.emplace_back(p.Y());
+		zs.emplace_back(p.Z());
+	}
+	for (const auto x : xs)
+	{
+		file << x << "\n";
+	}
+	for (const auto x : ys)
+	{
+		file << x << "\n";
+	}
+	for (const auto x : zs)
+	{
+		file << x << "\n";
+	}
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt3d>& thePoints, std::stringstream& file)
+{
+	std::vector<Standard_Real> xs, ys, zs;
+	xs.reserve(thePoints.size());
+	ys.reserve(thePoints.size());
+	zs.reserve(thePoints.size());
+
+	for (const auto& p : thePoints)
+	{
+		xs.emplace_back(p.X());
+		ys.emplace_back(p.Y());
+		zs.emplace_back(p.Z());
+	}
+	for (const auto x : xs)
+	{
+		file << x << "\n";
+	}
+	for (const auto x : ys)
+	{
+		file << x << "\n";
+	}
+	for (const auto x : zs)
+	{
+		file << x << "\n";
+	}
+}
+
+void tnbLib::Io::WritePointsVariables(const std::vector<Pnt3d>& thePoints, std::fstream& file)
+{
+	std::vector<Standard_Real> xs, ys, zs;
+	xs.reserve(thePoints.size());
+	ys.reserve(thePoints.size());
+	zs.reserve(thePoints.size());
+
+	for (const auto& p : thePoints)
+	{
+		xs.emplace_back(p.X());
+		ys.emplace_back(p.Y());
+		zs.emplace_back(p.Z());
+	}
+	for (const auto x : xs)
+	{
+		file << x << "\n";
+	}
+	for (const auto x : ys)
+	{
+		file << x << "\n";
+	}
+	for (const auto x : zs)
+	{
+		file << x << "\n";
+	}
 }
 
 void tnbLib::Io::WriteFeTriangleZone(const Standard_Integer NbNodes, const Standard_Integer NbTriangles,
-	std::stringstream& theStream)
+                                     std::stringstream& theStream)
 {
 	theStream
 		<< " ZONE N = "
@@ -153,8 +248,43 @@ void tnbLib::Io::WriteFeTetrahedralZone
 	theFile << endl;
 }
 
+void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	OFstream& theFile)
+{
+	theFile
+		<< "ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	std::fstream& theFile)
+{
+	theFile
+		<< "ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+                                       std::stringstream& theStream)
+{
+	theStream
+		<< "ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK\n";
+}
+
 void tnbLib::Io::WriteCellCenteredFeTriangularZone(const Standard_Integer NbNodes, const Standard_Integer NbTris,
-	const Standard_Integer NbVar, std::stringstream& theStream)
+                                                   const Standard_Integer NbVar, std::stringstream& theStream)
 {
 	theStream
 		<< "ZONE N= "
@@ -294,8 +424,71 @@ void tnbLib::Io::WriteCellCenteredFeTetrahedralZone
 	theFile << endl;
 }
 
+void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	const Standard_Integer NbVars, OFstream& theFile)
+{
+	theFile
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEBRICK, VARLOCATION=([1,2,3]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		theFile << 4 + K;
+		++K;
+		if (K >= NbVars) break;
+		theFile << "  ";
+	}
+	theFile << "]=CELLCENTERED)\n";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	const Standard_Integer NbVars, std::stringstream& file)
+{
+	file
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEBRICK, VARLOCATION=([1,2,3]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		file << 4 + K;
+		++K;
+		if (K >= NbVars) break;
+		file << "  ";
+	}
+	file << "]=CELLCENTERED)\n";
+	file << endl;
+}
+
+void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
+	const Standard_Integer NbVars, std::fstream& file)
+{
+	file
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E = "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEBRICK, VARLOCATION=([1,2,3]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		file << 4 + K;
+		++K;
+		if (K >= NbVars) break;
+		file << "  ";
+	}
+	file << "]=CELLCENTERED)\n";
+	file << endl;
+}
+
 void tnbLib::Io::WriteFeBrickZone(const Standard_Integer NbNodes, const Standard_Integer NbBricks,
-	std::stringstream& theStream)
+                                  std::stringstream& theStream)
 {
 	theStream
 		<< "ZONE N= "
@@ -412,6 +605,116 @@ void tnbLib::Io::ExportMesh(const std::vector<Pnt2d>& thePoints, const std::vect
 	if (theElements.empty()) return;
 
 	WriteVariables("X Y", theStream);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theStream
+	);
+
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theStream);
+		theStream << "\n";
+	}
+	for (const auto& x : theElements)
+	{
+		auto ids = x->Components();
+		if (ids.size() IS_EQUAL 3)
+		{
+			theStream << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< "\n";
+		}
+		else if (ids.size() IS_EQUAL 4)
+		{
+			theStream << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< "\n";
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Unspecified type of element has been detected." << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theElements,
+	OFstream& theFile
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theFile);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theFile
+	);
+
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theFile);
+		theFile << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		auto ids = x->Components();
+		if (ids.size() IS_EQUAL 3)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< endl;
+		}
+		else if (ids.size() IS_EQUAL 4)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< endl;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Unspecified type of element has been detected." << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Io::ExportMesh(const std::vector<Pnt3d>& thePoints, const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theElements,
+	std::stringstream& theStream)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theStream);
 	WriteFeQuadrilateralZone
 	(
 		static_cast<Standard_Integer>(thePoints.size()),
@@ -792,6 +1095,72 @@ void tnbLib::Io::ExportMesh(const std::vector<Pnt2d>& thePoints,
 
 void tnbLib::Io::ExportMesh
 (
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::quadruple_3d>& theElements,
+	OFstream& File
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", File);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		File
+	);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(File);
+		File << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		File << x.Value(0)
+			<< token::SPACE
+			<< x.Value(1)
+			<< token::SPACE
+			<< x.Value(2)
+			<< token::SPACE
+			<< x.Value(3)
+			<< endl;
+	}
+}
+
+void tnbLib::Io::ExportMesh(const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::quadruple_3d>& theElements, std::stringstream& theStream)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theStream);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theStream
+	);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theStream);
+		theStream << "\n";
+	}
+	for (const auto& x : theElements)
+	{
+		theStream << x.Value(0)
+			<< token::SPACE
+			<< x.Value(1)
+			<< token::SPACE
+			<< x.Value(2)
+			<< token::SPACE
+			<< x.Value(3)
+			<< "\n";
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
 	const std::vector<Pnt2d>& Points,
 	const std::vector<connectivity::dual>& Triangles,
 	OFstream & File
@@ -1028,6 +1397,66 @@ void tnbLib::Io::ExportMesh
 		<< " "
 		<< x.Value(3)
 		<< "\n";
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::octuple>& theElements,
+	OFstream& theFile
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theFile);
+	WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+	                      static_cast<Standard_Integer>(theElements.size()), theFile);
+	for (const auto& x: thePoints)
+	{
+		x.AddToPlt(theFile);
+		theFile << "\n";
+	}
+	for (const auto& i: theElements)
+	{
+		theFile
+			<< i.Value(0) << " "
+			<< i.Value(1) << " "
+			<< i.Value(2) << " "
+			<< i.Value(3) << " "
+			<< i.Value(4) << " "
+			<< i.Value(5) << " "
+			<< i.Value(6) << " "
+			<< i.Value(7) << "\n";
+	}
+}
+
+void tnbLib::Io::ExportMesh(const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+	std::stringstream& theStream)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theStream);
+	WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()), theStream);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theStream);
+		theStream << "\n";
+	}
+	for (const auto& i : theElements)
+	{
+		theStream
+			<< i.Value(0) << " "
+			<< i.Value(1) << " "
+			<< i.Value(2) << " "
+			<< i.Value(3) << " "
+			<< i.Value(4) << " "
+			<< i.Value(5) << " "
+			<< i.Value(6) << " "
+			<< i.Value(7) << "\n";
 	}
 }
 

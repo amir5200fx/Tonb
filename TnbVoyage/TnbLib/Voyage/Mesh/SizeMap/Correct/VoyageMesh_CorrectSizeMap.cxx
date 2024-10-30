@@ -22,6 +22,7 @@
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Ray.hxx>
 #include <Dir2d.hxx>
+#include <Vec2d.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -116,7 +117,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectAngles() const
 std::vector<std::shared_ptr<tnbLib::VoyageMesh_CorrectSizeMap::Chain>> 
 tnbLib::VoyageMesh_CorrectSizeMap::CalcEdges() const
 {
-	auto polygons = RetrievePolygons();
+	const auto polygons = RetrievePolygons();
 	std::vector<std::shared_ptr<Chain>> chains;
 	chains.reserve(polygons.size());
 	for (const auto& x : polygons)
@@ -204,10 +205,13 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcAngle
 	const std::shared_ptr<Chain>& thePoly1
 )
 {
-	auto edge0 = LastEdge(*thePoly0);
-	auto edge1 = LastEdge(*thePoly1);
+	const auto edge0 = LastEdge(*thePoly0);
+	const auto edge1 = FirstItem(thePoly1->Edges());
 	Standard_Real angle;
 	auto ray = CalcBisectRay(*edge0, *edge1, angle);
+	/*std::cout << "ANGLE = " << angle << std::endl;
+	std::cout << "centre = " << ray->Coord() << ", dir: " << ray->Direction() << std::endl << std::endl;
+	std::cout << "P2 = " << ray->Coord() + d*ray->Direction() << std::endl;*/
 	auto t = std::make_shared<AngleBisect>(ray, thePoly0, thePoly1);
 	t->SetAngle(angle);
 	return std::move(t);

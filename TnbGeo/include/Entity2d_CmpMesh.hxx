@@ -34,42 +34,37 @@ namespace tnbLib
 	public:
 
 		typedef Pnt2d ptType;
-		typedef  Entity2d_CmpConnect connectType;
+		typedef  std::shared_ptr<Entity2d_CmpConnect> connectType;
 
 		static TnbGeo_EXPORT const std::string extension;
 
 		// default constructor
 
-		TnbGeo_EXPORT Entity2d_CmpMesh();
+		Entity2d_CmpMesh() = default;
 
 		// Constructors
 
 		Entity2d_CmpMesh
 		(
-			const std::vector<Pnt2d>& theCoords,
-			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theIds
-		)
-			: theCoords_(theCoords)
-			, theIndices_(theIds)
-		{}
-
-		Entity2d_CmpMesh
-		(
-			std::vector<Pnt2d>&& theCoords,
-			std::vector<std::shared_ptr<Entity2d_CmpConnect>>&& theIds
+			std::vector<Pnt2d> theCoords,
+			std::vector<std::shared_ptr<Entity2d_CmpConnect>> theIds
 		)
 			: theCoords_(std::move(theCoords))
 			, theIndices_(std::move(theIds))
 		{}
 
 		TnbGeo_EXPORT Entity2d_CmpMesh(const Entity2d_CmpMesh& theMesh);
+		TnbGeo_EXPORT Entity2d_CmpMesh(Entity2d_CmpMesh&& theMesh) noexcept;
 
 		// Public functions and operators
 
 		TnbGeo_EXPORT Entity2d_CmpMesh& operator=(const Entity2d_CmpMesh&);
+		TnbGeo_EXPORT Entity2d_CmpMesh& operator=(Entity2d_CmpMesh&& other) noexcept;
 
 		[[nodiscard]] const auto& Coords() const { return theCoords_; }
+		[[nodiscard]] const auto& Points() const { return theCoords_; }
 		[[nodiscard]] const auto& Indices() const { return theIndices_; }
+		[[nodiscard]] const auto& Connectivity() const { return theIndices_; }
 
 		auto& CoordsRef() { return theCoords_; }
 		auto& IndicesRef() { return theIndices_; }
@@ -86,6 +81,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Import(const Entity2d_QuadMesh&);
 
 		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
+		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;
 
 		// Static functions
 		

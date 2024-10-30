@@ -20,7 +20,12 @@ namespace tnbLib
 	class Entity3d_CmpConnect
 		: public std::enable_shared_from_this<Entity3d_CmpConnect>
 	{
-
+	public:
+		struct Face
+		{
+			std::vector<Standard_Integer> ids;
+		};
+	private:
 		/*Private Data*/
 
 		friend class boost::serialization::access;
@@ -39,13 +44,15 @@ namespace tnbLib
 		{}
 
 	public:
+		virtual ~Entity3d_CmpConnect() = default;
 
 		enum class ElmType
 		{
 			brick,
 			prism,
 			pyramid,
-			tetrahedron
+			tetrahedron,
+			extruded_polygon
 		};
 
 
@@ -55,14 +62,18 @@ namespace tnbLib
 		virtual Standard_Boolean IsPrism() const { return Standard_False; }
 		virtual Standard_Boolean IsPyramid() const { return Standard_False; }
 		virtual Standard_Boolean IsTetrahedron() const { return Standard_False; }
+		virtual Standard_Boolean IsExtrudedPolygon() const { return Standard_False; }
 
 		virtual Standard_Integer NbCmpts() const = 0;
 		virtual ElmType ElementType() const = 0;
 
 		virtual std::vector<Standard_Integer> Components() const = 0;
 		virtual std::vector<Pnt3d> RetrievePolygon(const std::vector<Pnt3d>&) const = 0;
+		virtual std::vector<Face> CalcFaces() const = 0;
 
 		virtual std::shared_ptr<Entity3d_CmpConnect> Copy() const = 0;
+
+		virtual void Update(const std::vector<Standard_Integer>&) = 0;
 		
 	};
 }

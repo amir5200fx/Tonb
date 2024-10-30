@@ -372,6 +372,7 @@ namespace tnbLib
 		Change_IsDone() = Standard_True;
 	}
 
+
 	template<class gCurveType, class MetricPrcsrType, bool SavePars>
 	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::Perform()
 	{
@@ -423,6 +424,58 @@ namespace tnbLib
 			}
 		}
 		return curveLength;
+	}
+
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::NextParameter(const Standard_Real u0)
+	{
+		if (NOT Geometry())
+		{
+			FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+				<< "No curve has been loaded" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT MetricMap())
+		{
+			FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+				<< "No sizeMap has been loaded" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT Info())
+		{
+			FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+				<< "No sizeMap has been loaded" << endl
+				<< abort(FatalError);
+		}
+
+		// Determine the Length of the curve under the current space function
+		/*auto curveLength =
+			CalcLength
+			(
+				Integrand, Info()->LengthCalcMaxLevel(),
+				*Info()->OverallLengthIntgInfo());*/
+		const auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
+		try
+		{
+			return CalcNextParameter(curveLength, u0);
+		}
+		catch (const meshLib::LengthCurveError& x)
+		{
+			try
+			{
+				return CalcNextParameter(x.length, u0);
+			}
+			catch (const meshLib::LengthCurveError&)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "Cannot calculate the actual curve length: unexpected results have been came up!" << endl
+					<< abort(FatalError);
+				return 0.;
+			}
+		}
+		return 0;
 	}
 
 	template<class gCurveType, class MetricPrcsrType, bool SavePars>
@@ -546,4 +599,46 @@ namespace tnbLib
 			Integrand, Info()->LengthCalcMaxLevel(),
 			*Info()->OverallLengthIntgInfo());
 	}
+}
+
+template <class gCurveType, class MetricPrcsrType, bool SavePars>
+Standard_Real tnbLib::Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcNextParameter(
+	const Standard_Real theLength, const Standard_Real U0) const
+{
+	Mesh_CurveEntity<gCurveType, MetricPrcsrType>
+		Integrand(*Geometry(), *MetricMap(), FirstParameter(), LastParameter());
+
+	// uniform nb. of segment under the current space function
+	auto NbSegments =
+		MAX
+		(
+			Geo_Tools::Round(theLength * (1.0 + EPS6)),
+			Geo_Tools::Round(theLength * (1.0 - EPS6)));
+
+	// There must be at least one segment
+	if (NbSegments < 1) NbSegments = 1;
+	Debug_If_Condition(NbSegments < 1);
+
+	const auto Ds = theLength / (Standard_Real)NbSegments;
+	const auto dt = 1.0 / theLength;
+	Standard_Real U1, Guess;
+
+	Guess = U0 + dt;  // Debug: 4/14/2018
+
+	if (Guess < FirstParameter()) Guess = FirstParameter();
+	if (Guess > LastParameter()) Guess = LastParameter();
+	try
+	{
+		U1 = CalcNextParameter
+		(
+			U0, Guess, Ds,
+			LastParameter(), Integrand, *Info());
+		//std::cout << "- iter: " << U1 << std::endl;
+	}
+	catch (const error&)
+	{
+		auto len = this->CalcCurveLength(U0, LastParameter());
+		throw meshLib::LengthCurveError(len);
+	}
+	return U1;
 }

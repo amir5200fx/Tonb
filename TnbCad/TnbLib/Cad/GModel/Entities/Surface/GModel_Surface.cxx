@@ -81,3 +81,30 @@ tnbLib::GModel_Surface::HasHole() const
 	return NbHoles();
 }
 
+std::vector<std::shared_ptr<tnbLib::GModel_Edge>>
+tnbLib::GModel_Surface::RetrieveEdges() const
+{
+	if (NOT theOuter_)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Invalid surface." << endl
+			<< abort(FatalError);
+	}
+	std::vector<std::shared_ptr<GModel_Edge>> edges;
+	for (const auto& e: *theOuter_->Edges())
+	{
+		edges.emplace_back(e);
+	}
+	if (theInner_)
+	{
+		for (const auto& wire: *theInner_)
+		{
+			for (const auto& e: *wire->Edges())
+			{
+				edges.emplace_back(e);
+			}
+		}
+	}
+	return std::move(edges);
+}
+

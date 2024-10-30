@@ -41,6 +41,9 @@
 #define MaxIndexOf(Object)  \
   (Object).Size() - 1
 
+#define StlMaxIndexOf(Object) \
+    (Object).size() - 1
+
 #define Index_Of(INDEX) \
   INDEX - 1
 
@@ -103,5 +106,7 @@
 
 #define SetRunTimeConfigs(ObjectName)       \
     void ObjectName##RunTime::SetConfigs()
+
+#define SetItDone Change_IsDone() = Standard_True;
 
 #endif // !_Global_Macros_Header

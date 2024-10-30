@@ -64,3 +64,33 @@ tnbLib::Pln_CascadeTools::CreateParabola
 	gp_Parab2d p(theMirrorAxis, theFocus);
 	return std::move(p);
 }
+
+#include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <gp_Pnt2d.hxx>
+#include <Geom2d_Curve.hxx>
+#include <Geom2d_Curve.hxx>
+#include <TColgp_Array1OfPnt2d.hxx>
+
+
+std::pair<tnbLib::Pnt2d, Standard_Real>
+tnbLib::Pln_CascadeTools::Project(const Pnt2d& thePnt, const opencascade::handle<Geom2d_Curve>& theGeom)
+{
+	// Project the point onto the curve
+	Geom2dAPI_ProjectPointOnCurve projector;
+	projector.Init(thePnt, theGeom);
+	if (projector.NbPoints() > 0)
+	{
+		// Get the projected point
+		auto pt = projector.NearestPoint();
+		// Get the parameter on the curve
+		auto p = projector.LowerDistanceParameter();
+		return { pt, p };
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " couldn't calculate the projected point!" << endl
+			<< abort(FatalError);
+	}
+	return { Pnt2d::null, 0 };
+}

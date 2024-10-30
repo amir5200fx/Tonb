@@ -39,8 +39,13 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT const Dir2d null;
 
-		Dir2d()
-		{}
+		// default constructor
+
+		Dir2d() = default;
+		Dir2d(const Dir2d&) = default;
+		Dir2d& operator=(const Dir2d&) = default;
+
+		// constructors
 
 		Dir2d(const gp_Dir2d& d)
 			: gp_Dir2d(d)
@@ -68,6 +73,22 @@ namespace tnbLib
 			: gp_Dir2d(Xv, Yv)
 		{}
 
+		Dir2d(Dir2d&& other) noexcept
+			: gp_Dir2d(std::move(other))
+		{}
+
+
+		// Public functions and operators
+
+		Dir2d& operator=(Dir2d&& other) noexcept
+		{
+			if (this != &other)
+			{
+				gp_Dir2d::operator=(other);
+			}
+			return *this;
+		}
+
 		TnbGeo_EXPORT Dir2d
 		(
 			const Pnt2d& theP0,
@@ -75,5 +96,7 @@ namespace tnbLib
 		);
 	};
 }
+
+#include <Dir2dI.hxx>
 
 #endif // !_Dir2d_Header

@@ -23,7 +23,7 @@ namespace tnbLib
 		(const Pnt2d& theCoord, Standard_Boolean& Sense) const;
 
 	template<>
-	void VoyageGeo_SingleVelocityBackground::HvCorrection
+	TnbVoyage_EXPORT void VoyageGeo_SingleVelocityBackground::HvCorrection
 	(
 		const std::vector<std::shared_ptr<Mesh2d_Node>>& nodes, 
 		const Standard_Real Factor,
@@ -32,6 +32,8 @@ namespace tnbLib
 
 	template<>
 	TnbVoyage_EXPORT void VoyageGeo_SingleVelocityBackground::ExportToPlt(OFstream& File) const;
+	template<>
+	TnbVoyage_EXPORT void VoyageGeo_SingleVelocityBackground::ExportToVtk(OFstream& File) const;
 }
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::VoyageGeo_VelocityBackground);

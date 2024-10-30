@@ -696,7 +696,9 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	}
 	Debug_Null_Pointer(current_state);
 	theGraph_ = std::make_shared<VoyageSim_Graph>();
+	thePosGraph_ = std::make_shared<VoyageSim_Graph>();
 	auto graph = theGraph_;
+	auto pos_graph = thePosGraph_;
 	const auto dpt = Net()->Departure();
 	Debug_Null_Pointer(dpt);
 	const auto arv = Net()->Arrival();
@@ -848,8 +850,10 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	const auto velocities = CalcVelocities();
 	std::set<std::shared_ptr<VoyageWP_Net::Node>, decltype(cmp_pos)> pos_seeds(cmp_pos);
 	pos_seeds.insert(start_point);
-	auto& edges = graph->EdgesRef(); 
+	auto& edges = graph->EdgesRef();
+	auto& pos_edges = pos_graph->EdgesRef();
 	Standard_Integer nb_edges = 0;
+	Standard_Integer nb_pos_edges = 0;
 	auto current_time = this->BaseTime();
 	while (!pos_seeds.empty())
 	{
@@ -897,6 +901,17 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			const auto dist = theDist_(p0, next_pos->Coord());
 			next_dist.push_back(dist);
 			pos_seeds.insert(next_pos);
+		}
+		if (!next_poses.empty())
+		{
+			auto pos_node_0 = current_nodes.at(0);
+			auto pos_node_1 = next_poses.begin()->second;
+			auto edge =
+				std::make_shared<VoyageSim_Graph::Edge>
+				(++nb_pos_edges, VoyageSim_Graph::Edge::Array2{ pos_node_0, nodes_map.at(next_poses.begin()->first).at(0) });
+			Debug_Null_Pointer(edge);
+			edge->SetDist(theDist_(edge->Node0()->Coord(), edge->Node1()->Coord()));
+			pos_edges.insert({ edge->Index(), edge });
 		}
 		for (const auto& current_node:current_nodes)
 		{
@@ -1031,6 +1046,12 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 							{ next->Coord(), next->Time() },
 							edge->Dist(), NbSamples()
 						);
+					if (resist < 0)
+					{
+						FatalErrorIn(FunctionSIG) << endl
+							<< "Invalid value for resistance function has been detected." << endl
+							<< abort(FatalError);
+					}
 					auto [val, prev] = table.at(next->Index());
 					auto prev_node = prev.lock();
 					if (table.find(next->Index()) IS_EQUAL table.end())

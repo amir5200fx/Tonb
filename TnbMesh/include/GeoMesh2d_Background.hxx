@@ -26,6 +26,8 @@ namespace tnbLib
 
 	template <>
 	TnbMesh_EXPORT void GeoMesh2d_SingleBackground::ExportToVtk(OFstream& File) const;
+	template<>
+	TnbMesh_EXPORT void GeoMesh2d_SingleBackground::ExportToVtk(std::ostream& stream) const;
 
 }
 

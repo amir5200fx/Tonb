@@ -300,7 +300,7 @@ namespace tnbLib
 
 			myCloud = std::make_shared<Geo3d_PatchCloud_InternalSamples>(myEdgeSamples, myTrisSamples);
 		}
-		myBoundarySizeMaps->CreateSizeMap(name, model, myCloud, myFaceSizeMapInfo);
+		myBoundarySizeMaps->CreateSizeMap(name, model, myFaceSizeMapInfo);
 		return myBoundarySizeMaps->SelectMap(name);
 	}
 

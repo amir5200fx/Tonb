@@ -25,7 +25,7 @@ namespace tnbLib
 
 		pointList thePoints_;
 
-		Standard_Real theDeflection_;
+		Standard_Real theDeflection_ = 0;
 
 
 		/*private functions and operators*/
@@ -49,39 +49,41 @@ namespace tnbLib
 
 		// default constructor [7/14/2021 Amir]
 
-		Entity_Polygon()
-			: theDeflection_(0)
-		{}
+		Entity_Polygon() = default;
+		Entity_Polygon(const Entity_Polygon&) = default;
 
 
 		// constructors [7/14/2021 Amir]
 
-		Entity_Polygon
-		(
-			const pointList& thePoints,
-			const Standard_Real theDeflection
-		)
-			: thePoints_(thePoints)
+		Entity_Polygon(pointList thePoints, const Standard_Real theDeflection)
+			: thePoints_(std::move(thePoints))
 			, theDeflection_(theDeflection)
 		{}
 
-		Entity_Polygon
-		(
-			pointList&& thePoints,
-			const Standard_Real theDeflection
-		)
-			: thePoints_(std::move(thePoints))
-			, theDeflection_(theDeflection)
+		Entity_Polygon(Entity_Polygon&& other) noexcept
+			: thePoints_(std::move(other.thePoints_))
+			  , theDeflection_(std::move(other.theDeflection_))
 		{}
 
 
 		// public functions and operators [7/14/2021 Amir]
 
+		Entity_Polygon& operator=(Entity_Polygon&& other) noexcept
+		{
+			if (this != &other)
+			{
+				thePoints_ = std::move(other.thePoints_);
+				theDeflection_ = std::move(other.theDeflection_);
+			}
+			return *this;
+		}
+		Entity_Polygon& operator=(const Entity_Polygon&) = default;
+
 		Entity_Polygon Reversed() const
 		{
 			Entity_Polygon copy = *this;
 			copy.Reverse();
-			return std::move(copy);
+			return copy;
 		}
 
 		const pointList& Points() const
@@ -106,13 +108,13 @@ namespace tnbLib
 
 		Standard_Integer NbPoints() const
 		{
-			return (Standard_Integer)thePoints_.size();
+			return static_cast<Standard_Integer>(thePoints_.size());
 		}
 
 		Standard_Boolean IsClosed() const
 		{
 			const auto& p0 = Coord(0);
-			const auto& p1 = Coord((Standard_Integer)thePoints_.size() - 1);
+			const auto& p1 = Coord(static_cast<Standard_Integer>(thePoints_.size()) - 1);
 
 			return p0.Distance(p1) <= gp::Resolution();
 		}
@@ -150,6 +152,7 @@ namespace tnbLib
 		void ExportToPlt(OFstream& File) const;
 		void ExportToPlt(std::stringstream&) const;
 		void ExportToVtk(OFstream&) const;
+		void ExportToVtk(std::fstream&) const;
 		void ExportToVtk(std::stringstream&) const;
 
 		static void Check(const Entity_Polygon<Point>&);

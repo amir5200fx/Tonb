@@ -400,6 +400,24 @@
     <Filter Include="TnbLib\Voyage\Function\Cost\Resistance">
       <UniqueIdentifier>{aae11ef7-3586-41e7-8740-cab4ad3f0e68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\GetTimeline">
+      <UniqueIdentifier>{9b6abb1d-19c7-4d53-8ea3-b943215aa63b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\GetGraphNode">
+      <UniqueIdentifier>{dc972d47-596c-4fe4-b49b-5479cb3b5b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\RefPath">
+      <UniqueIdentifier>{1a00ebeb-5c0e-42b9-b713-3109ff11b127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\PathDisret\Adapt">
+      <UniqueIdentifier>{78e3b3e9-a49e-49bc-a7c2-c2182975b8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\MinTime">
+      <UniqueIdentifier>{0da2c43b-a4ff-4379-9f85-ca2822d08a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\MinTime\Cost">
+      <UniqueIdentifier>{7309dc59-6cb0-4c95-9e05-8c10037d43b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -753,6 +771,33 @@
     <ClInclude Include="TnbLib\Voyage\Function\Cost\Resistance\VoyageFun_CostFunction_Resistane.hxx">
       <Filter>TnbLib\Voyage\Function\Cost\Resistance</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.hxx">
+      <Filter>TnbLib\Voyage\Simulations\GetTimeline</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.hxx">
+      <Filter>TnbLib\Voyage\Simulations\GetGraphNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\RefPath\Voyage_RefPath.hxx">
+      <Filter>TnbLib\Voyage\RefPath</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath.hxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath_Info.hxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel2.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_Variables.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinTime\VoyageSim_MinTime.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\MinTime\Cost\VoyageSim_MinTime_Cost.hxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime\Cost</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -943,6 +988,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Function\Cost\Resistance\VoyageFun_CostFunction_Resistane.cxx">
       <Filter>TnbLib\Voyage\Function\Cost\Resistance</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.cxx">
+      <Filter>TnbLib\Voyage\Simulations\GetTimeline</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.cxx">
+      <Filter>TnbLib\Voyage\Simulations\GetGraphNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\RefPath\Voyage_RefPath.cxx">
+      <Filter>TnbLib\Voyage\RefPath</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath_Info.cxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathDiscret\Adapt\Voyage_AdaptPath.cxx">
+      <Filter>TnbLib\Voyage\PathDisret\Adapt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel2.cxx">
+      <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\MinTime\VoyageSim_MinTime.cxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\MinTime\Cost\VoyageSim_MinTime_Cost.cxx">
+      <Filter>TnbLib\Voyage\Simulations\MinTime\Cost</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

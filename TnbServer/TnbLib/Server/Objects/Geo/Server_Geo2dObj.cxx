@@ -674,7 +674,7 @@ implementTnbServerConstruction(Server_Geo2dObj_SizeMap_Adapt_Perform)
 	}
 	try
 	{
-		Mesh2d_VolumeSizeMapTool::verbose = 1;
+		//Mesh2d_VolumeSizeMapTool::verbose = 1;
 		if (!size_map)
 		{
 			throw Server_Error("the adaptive size map object is null");

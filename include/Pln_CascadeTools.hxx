@@ -3,6 +3,7 @@
 #define _Pln_CascadeTools_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Standard_Handle.hxx>
 #include <Cad2d_Module.hxx>
 
 class gp_Ax2d;
@@ -10,6 +11,8 @@ class gp_Circ2d;
 class gp_Elips2d;
 class gp_Hypr2d;
 class gp_Parab2d;
+
+class Geom2d_Curve;
 
 
 namespace tnbLib
@@ -58,6 +61,13 @@ namespace tnbLib
 			(
 				const gp_Ax2d& theMirrorAxis,
 				const Pnt2d& theFocus
+			);
+
+		static TnbCad2d_EXPORT std::pair<Pnt2d, Standard_Real>
+			Project
+			(
+				const Pnt2d& thePnt,
+				const Handle(Geom2d_Curve)&
 			);
 	};
 }

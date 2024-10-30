@@ -17,3 +17,15 @@ tnbLib::VoyageGeo_Path2::RetrieveOffsets() const
 	}
 	return std::move(polygons);
 }
+
+void tnbLib::VoyageGeo_Path2::SetMesh
+(
+	const std::vector<std::shared_ptr<Entity2d_Polygon>>& thePolygons
+) const
+{
+	for (Standard_Integer i = 0; i < thePolygons.size(); i++)
+	{
+		Curves().at(i)->Mesh() = thePolygons.at(i);
+	}
+}
+

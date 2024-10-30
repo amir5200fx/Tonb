@@ -8,8 +8,6 @@
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>
 
-#include <sstream>
-
 namespace tnbLib
 {
 
@@ -55,11 +53,10 @@ namespace tnbLib
 			dim = 3
 		};
 
+		// default constructor
+		Pnt3d() = default;
+
 		// constructors
-
-		Pnt3d()
-		{}
-
 		Pnt3d
 		(
 			const Standard_Real theX,
@@ -69,7 +66,7 @@ namespace tnbLib
 			: gp_Pnt(theX, theY, theZ)
 		{}
 
-		Pnt3d(const gp_XYZ& XYZ)
+		explicit Pnt3d(const gp_XYZ& XYZ)
 			: gp_Pnt(XYZ)
 		{}
 
@@ -77,15 +74,22 @@ namespace tnbLib
 			: gp_Pnt(Pt)
 		{}
 
-		Pnt3d(std::istream& is)
+		Pnt3d(Pnt3d&& other) noexcept
+			: gp_Pnt(std::move(other))
+		{}
+		Pnt3d(const Pnt3d& other) = default;
+
+		explicit Pnt3d(std::istream& is)
 		{
 			is >> *this;
 		}
 
-		Pnt3d(Istream& is)
+		explicit Pnt3d(Istream& is)
 		{
 			is >> *this;
 		}
+
+		// Public functions and operators
 
 		Standard_Real X() const
 		{
@@ -199,12 +203,23 @@ namespace tnbLib
 			return *this;
 		}
 
+		Pnt3d& operator=(Pnt3d&& other) noexcept
+		{
+			if (this != &other)
+			{
+				gp_Pnt::operator=(other);
+			}
+			return *this;
+		}
+
+		Pnt3d& operator=(const Pnt3d&) = default;
+
 		Pnt3d& operator+()
 		{
 			return *this;
 		}
 
-		Pnt3d operator-()
+		Pnt3d operator-() const
 		{
 			return Pnt3d() - *this;
 		}
@@ -213,7 +228,7 @@ namespace tnbLib
 		{
 			auto Copy = *this;
 			Copy.Normalize();
-			return std::move(Copy);
+			return Copy;
 		}
 
 		inline std::tuple<Standard_Real, Standard_Real, Standard_Real>
@@ -250,6 +265,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Print(std::ostream& os = std::cout) const;
 
 		TnbGeo_EXPORT void AddToPlt(OFstream& theFile) const;
+		TnbGeo_EXPORT void AddToPlt(std::fstream& file) const;
 		TnbGeo_EXPORT void AddToPlt(std::stringstream& theStream) const;
 	};
 }

@@ -17,8 +17,13 @@ void tnbLib::Pnt2d::Print(std::ostream & os) const
 
 void tnbLib::Pnt2d::AddToPlt(OFstream & theFile) const
 {
-	theFile.precision(15);
+	//theFile.precision(15);
 	theFile << X() << "  " << Y();
+}
+
+void tnbLib::Pnt2d::AddToPlt(std::fstream& theFile) const
+{
+	theFile << X() << " " << Y();
 }
 
 void tnbLib::Pnt2d::AddToPlt(std::stringstream& theStream) const
@@ -82,10 +87,11 @@ namespace tnbLib
 	TnbGeo_EXPORT Istream & operator>>(Istream & is, Pnt2d & P)
 	{
 		Standard_Real x, y;
-		string comma;
 
 		is.readBegin("Istream & operator>>(Istream & is, Pnt2d & P)");
-		is >> x >> comma >> y;
+		is >> x;
+		token delimiter(is);
+		is >> y;
 		is.readEnd("Istream & operator>>(Istream & is, Pnt2d & P)");
 
 		P.X() = x;

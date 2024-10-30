@@ -63,32 +63,35 @@ namespace tnbLib
 
 		//- default constructor
 
-		Entity_StaticData()
-		{}
-
+		Entity_StaticData() = default;
+		Entity_StaticData(const Entity_StaticData&) = default;
 
 		//- constructors
 
-		Entity_StaticData
-		(
-			const pointList& thePoints,
-			const connectList& theConnectivity
-		)
-			: thePoints_(thePoints)
-			, theConnectivity_(theConnectivity)
-		{}
-
-		Entity_StaticData
-		(
-			pointList&& thePoints,
-			connectList&& theConnectivity
-		)
+		Entity_StaticData(pointList thePoints, connectList theConnectivity)
 			: thePoints_(std::move(thePoints))
 			, theConnectivity_(std::move(theConnectivity))
 		{}
 
+		Entity_StaticData(Entity_StaticData&& other) noexcept
+			: thePoints_(std::move(other.thePoints_))
+			, theConnectivity_(std::move(other.theConnectivity_))
+		{}
+
 
 		//- public functions and operators
+
+		Entity_StaticData& operator = (Entity_StaticData&& other) noexcept
+		{
+			if (this != &other)
+			{
+				thePoints_ = std::move(other.thePoints_);
+				theConnectivity_ = std::move(other.theConnectivity_);
+				theBoundingBox_ = std::move(other.theBoundingBox_);
+			}
+			return *this;
+		}
+		Entity_StaticData& operator=(const Entity_StaticData&) = default;
 
 		const pointList& Points() const
 		{
@@ -112,12 +115,12 @@ namespace tnbLib
 
 		Standard_Integer NbPoints() const
 		{
-			return (Standard_Integer)thePoints_.size();
+			return static_cast<Standard_Integer>(thePoints_.size());
 		}
 
 		Standard_Integer NbConnectivity() const
 		{
-			return (Standard_Integer)theConnectivity_.size();
+			return static_cast<Standard_Integer>(theConnectivity_.size());
 		}
 
 		void CalcBoundingBox();
@@ -158,12 +161,7 @@ namespace tnbLib
 
 		void Clear();
 
-		void SetBoundingBox(const std::shared_ptr<box>& theBox)
-		{
-			theBoundingBox_ = theBox;
-		}
-
-		void SetBoundingBox(std::shared_ptr<box>&& theBox)
+		void SetBoundingBox(std::shared_ptr<box> theBox)
 		{
 			theBoundingBox_ = std::move(theBox);
 		}
@@ -174,6 +172,7 @@ namespace tnbLib
 		void StreamToPlt(std::stringstream& theStream) const;
 		void ExportToVtk(OFstream&) const;
 		void ExportToVtk(std::stringstream& theStream) const;
+		void ExportToVtk(std::fstream&) const;
 	};
 
 	template<class Point, class ConnectType>
@@ -209,34 +208,34 @@ namespace tnbLib
 
 		//- default constructor
 
-		Entity_StaticData()
-		{}
+		Entity_StaticData() = default;
+		Entity_StaticData(const Entity_StaticData&) = default;
 
 
 		//- constructors
 
-		Entity_StaticData
-		(
-			const pointList& thePoints,
-			const connectList& theConnectivity,
-			const connectList& theNeighbors
-		)
-			: Entity_StaticData<Point, ConnectType, false>(thePoints, theConnectivity)
-			, theNeighbors_(theNeighbors)
-		{}
-
-		Entity_StaticData
-		(
-			pointList&& thePoints,
-			connectList&& theConnectivity,
-			connectList&& theNeighbors
-		)
+		Entity_StaticData(pointList thePoints, connectList theConnectivity, connectList theNeighbors)
 			: Entity_StaticData<Point, ConnectType, false>(std::move(thePoints), std::move(theConnectivity))
 			, theNeighbors_(std::move(theNeighbors))
 		{}
 
+		Entity_StaticData(Entity_StaticData&& other) noexcept
+			: Entity_StaticData<Point, ConnectType, false>(std::move(other))
+			, theNeighbors_(std::move(other.theNeighbors_))
+		{}
 
 		//- public functions and operators
+
+		Entity_StaticData& operator=(Entity_StaticData&& other) noexcept
+		{
+			if (this != &other)
+			{
+				base::operator=(std::move(other));
+			}
+			theNeighbors_ = std::move(other.theNeighbors_);
+			return *this;
+		}
+		Entity_StaticData& operator=(const Entity_StaticData&) = default;
 
 		const connectList& Neighbors() const
 		{

@@ -23,8 +23,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Point theP_;
-		Direct theDir_;
+		Point theP_ = Point::null;
+		Direct theDir_ = Direct::null;
 
 
 		friend class boost::serialization::access;
@@ -34,18 +34,20 @@ namespace tnbLib
 		
 	public:
 
-		Entity_Line()
-			: theP_(Point::null)
-			, theDir_(Direct::null)
-		{}
+		// default constructor
+
+		Entity_Line() = default;
+		Entity_Line(const Entity_Line&) = default;
+
+		// constructors
 
 		Entity_Line
 		(
-			const Point& theP, 
-			const Direct& theV
+			Point theP, 
+			Direct theV
 		)
-			: theP_(theP)
-			, theDir_(theV)
+			: theP_(std::move(theP))
+			, theDir_(std::move(theV))
 		{}
 
 		Entity_Line
@@ -57,14 +59,23 @@ namespace tnbLib
 			, theDir_(theP0, theP1)
 		{}
 
-		Entity_Line
-		(
-			Point&& theP,
-			Direct&& theV
-		)
-			: theP_(std::move(theP))
-			, theDir_(std::move(theV))
+		Entity_Line(Entity_Line&& other) noexcept
+			: theP_(std::move(other.theP_))
+			, theDir_(std::move(other.theDir_))
 		{}
+
+		// Public functions and operators
+
+		Entity_Line& operator=(Entity_Line&& other) noexcept
+		{
+			if (this != &other)
+			{
+				theP_ = std::move(other.theP_);
+				theDir_ = std::move(other.theDir_);
+			}
+			return *this;
+		}
+		Entity_Line& operator=(const Entity_Line&) = default;
 
 		const Point& P() const
 		{
@@ -101,6 +112,10 @@ namespace tnbLib
 
 	public:
 
+		// default constructor
+
+		// constructors
+
 		Entity_Line
 		(
 			const Pnt2d& theP,
@@ -110,14 +125,7 @@ namespace tnbLib
 			, theDir_(theV)
 		{}
 
-		Entity_Line
-		(
-			Pnt2d&& theP,
-			Dir2d&& theV
-		)
-			: theP_(std::move(theP))
-			, theDir_(std::move(theV))
-		{}
+		// Public functions and operators
 
 		const auto& P() const
 		{

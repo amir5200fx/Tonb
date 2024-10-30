@@ -3,13 +3,16 @@
 #include <Pnt3d.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#include "TecPlot.hxx"
+
 namespace tnbLib
 {
 	namespace Io
 	{
 
 		template<class Type, size_t nbVAR>
-		void WriteFiled
+		void WriteField
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt2d>& thePoints,
@@ -18,8 +21,8 @@ namespace tnbLib
 		{
 			if (var.size() != thePoints.size())
 			{
-				FatalErrorIn("void WriteFiled()")
-					<< "Filed size and Points size not equal"
+				FatalErrorIn("void WriteField()") << "\n"
+					<< "the Field's size and the Points' size aren't equal.\n"
 					<< abort(FatalError);
 			}
 
@@ -35,13 +38,13 @@ namespace tnbLib
 		}
 
 		template <class Type, size_t nbVAR>
-		void WriteFiled(const std::vector<std::array<Type, nbVAR>>& var, const std::vector<Pnt2d>& thePoints,
+		void WriteField(const std::vector<std::array<Type, nbVAR>>& var, const std::vector<Pnt2d>& thePoints,
 			std::stringstream& theStream)
 		{
 			if (var.size() != thePoints.size())
 			{
-				FatalErrorIn("void WriteFiled()")
-					<< "Filed size and Points size not equal"
+				FatalErrorIn("void WriteField()") << "\n"
+					<< "the Field's size and the Points' size aren't equal.\n"
 					<< abort(FatalError);
 			}
 
@@ -57,7 +60,29 @@ namespace tnbLib
 		}
 
 		template<class Type, size_t nbVAR>
-		void WriteFiled
+		void WriteField(const std::vector<std::array<Type, nbVAR>>& var, const std::vector<Pnt2d>& thePoints,
+		                std::fstream& file)
+		{
+			if (var.size() != thePoints.size())
+			{
+				FatalErrorIn("void WriteField()") << "\n"
+					<< "the Field's size and the Points' size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			forThose(Index, 0, StlMaxIndexOf(thePoints))
+			{
+				thePoints.at(Index).AddToPlt(file);
+				file << " ";
+				forThose(I, 0, nbVAR - 1)
+				{
+					file << var.at(Index).at(I) << " ";
+				}
+				file << "\n";
+			}
+		}
+
+		template<class Type, size_t nbVAR>
+		void WriteField
 		(
 			const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints,
@@ -66,8 +91,8 @@ namespace tnbLib
 		{
 			if (var.size() != thePoints.size())
 			{
-				FatalErrorIn("void WriteFiled()")
-					<< "Filed size and Points size not equal"
+				FatalErrorIn("void WriteField()") << "\n"
+					<< "the Field's size and the Points' size aren't equal.\n"
 					<< abort(FatalError);
 			}
 
@@ -83,13 +108,13 @@ namespace tnbLib
 		}
 
 		template <class Type, size_t nbVAR>
-		void WriteFiled(const std::vector<std::array<Type, nbVAR>>& var, const std::vector<Pnt3d>& thePoints,
+		void WriteField(const std::vector<std::array<Type, nbVAR>>& var, const std::vector<Pnt3d>& thePoints,
 			std::stringstream& theStream)
 		{
 			if (var.size() != thePoints.size())
 			{
-				FatalErrorIn("void WriteFiled()")
-					<< "Filed size and Points size not equal"
+				FatalErrorIn("void WriteField()") << "\n"
+					<< "the Field's size and the Points' size aren't equal.\n"
 					<< abort(FatalError);
 			}
 
@@ -101,6 +126,28 @@ namespace tnbLib
 				forThose(I, 0, nbVAR - 1)
 					theStream << x[I] << "  ";
 				theStream << "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteField(const std::vector<std::array<Type, nbVAR>>& var, const std::vector<Pnt3d>& thePoints,
+			std::fstream& file)
+		{
+			if (var.size() != thePoints.size())
+			{
+				FatalErrorIn("void WriteField()") << "\n"
+					<< "the Field's size and the Points' size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			forThose(Index, 0, StlMaxIndexOf(thePoints))
+			{
+				thePoints.at(Index).AddToPlt(file);
+				file << " ";
+				forThose(I, 0, nbVAR - 1)
+				{
+					file << var.at(Index).at(I) << " ";
+				}
+				file << "\n";
 			}
 		}
 
@@ -114,8 +161,8 @@ namespace tnbLib
 		{
 			if (var.size() != Triangles.size())
 			{
-				FatalErrorIn("void WriteCellCenteredField()")
-					<< "Filed size and Triangles size not equal"
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
 					<< abort(FatalError);
 			}
 
@@ -138,8 +185,8 @@ namespace tnbLib
 		{
 			if (var.size() != Triangles.size())
 			{
-				FatalErrorIn("void WriteCellCenteredField()")
-					<< "Filed size and Triangles size not equal"
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
 					<< abort(FatalError);
 			}
 
@@ -153,6 +200,247 @@ namespace tnbLib
 			for (const auto& x : Triangles)
 			{
 				theStream << x.Value(0) << "  " << x.Value(1) << "  " << x.Value(2) << "\n";
+			}
+		}
+
+		template<class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::triple>& Triangles, const std::vector<std::array<Type, nbVAR>>& var, std::fstream& file)
+		{
+			if (var.size() != Triangles.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v: var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& t: Triangles)
+			{
+				file << t.Value(0)
+					<< " "
+					<< t.Value(1)
+					<< " "
+					<< t.Value(2)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::quadruple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, OFstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i: ids)
+			{
+				file << i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::quadruple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, std::stringstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i : ids)
+			{
+				file << i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::quadruple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, std::fstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i : ids)
+			{
+				file << i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, OFstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i: ids)
+			{
+				file <<
+					i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< " "
+					<< i.Value(4)
+					<< " "
+					<< i.Value(5)
+					<< " "
+					<< i.Value(6)
+					<< " "
+					<< i.Value(7)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, std::stringstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i : ids)
+			{
+				file <<
+					i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< " "
+					<< i.Value(4)
+					<< " "
+					<< i.Value(5)
+					<< " "
+					<< i.Value(6)
+					<< " "
+					<< i.Value(7)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void WriteCellCenteredField(const std::vector<connectivity::octuple>& ids,
+			const std::vector<std::array<Type, nbVAR>>& var, std::fstream& file)
+		{
+			if (ids.size() != var.size())
+			{
+				FatalErrorIn("void WriteCellCenteredField()") << "\n"
+					<< "The Field's size and the Connectivity list's size aren't equal.\n"
+					<< abort(FatalError);
+			}
+			for (const auto& v : var)
+			{
+				forThose(Index, 0, nbVAR - 1)
+				{
+					file << v.at(Index) << " ";
+				}
+				file << "\n";
+			}
+			for (const auto& i : ids)
+			{
+				file <<
+					i.Value(0)
+					<< " "
+					<< i.Value(1)
+					<< " "
+					<< i.Value(2)
+					<< " "
+					<< i.Value(3)
+					<< " "
+					<< i.Value(4)
+					<< " "
+					<< i.Value(5)
+					<< " "
+					<< i.Value(6)
+					<< " "
+					<< i.Value(7)
+					<< "\n";
 			}
 		}
 
@@ -171,12 +459,12 @@ namespace tnbLib
 
 			WriteFeTriangleZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)Triangles.size(),
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
 				File
 			);
 
-			WriteFiled
+			WriteField
 			(
 				var,
 				thePoints,
@@ -199,12 +487,12 @@ namespace tnbLib
 
 			WriteFeTriangleZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)Triangles.size(),
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
 				theStream
 			);
 
-			WriteFiled
+			WriteField
 			(
 				var,
 				thePoints,
@@ -238,12 +526,12 @@ namespace tnbLib
 
 			WriteFeTriangleZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)Triangles.size(),
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
 				File
 			);
 
-			WriteFiled
+			WriteField
 			(
 				var,
 				thePoints,
@@ -266,12 +554,12 @@ namespace tnbLib
 
 			WriteFeTriangleZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)Triangles.size(),
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
 				theStream
 			);
 
-			WriteFiled
+			WriteField
 			(
 				var,
 				thePoints,
@@ -305,12 +593,12 @@ namespace tnbLib
 
 			WriteFeTetrahedralZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)theTets.size(),
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theTets.size()),
 				File
 			);
 
-			WriteFiled
+			WriteField
 			(
 				var,
 				thePoints,
@@ -333,12 +621,12 @@ namespace tnbLib
 
 			WriteFeTetrahedralZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)theTets.size(),
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theTets.size()),
 				theStream
 			);
 
-			WriteFiled
+			WriteField
 			(
 				var,
 				thePoints,
@@ -360,6 +648,105 @@ namespace tnbLib
 		}
 
 		template<class Type, size_t nbVAR>
+		void ExportField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+		                 const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+		                 OFstream& file)
+		{
+			file << "VARIABLES = X Y Z" + theVarNames << "\n";
+			WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+			                      static_cast<Standard_Integer>(theElements.size()), file);
+
+			WriteField(var, thePoints, file);
+
+			for (const auto& x: theElements)
+			{
+				file
+					<< x.Value(0)
+					<< " "
+					<< x.Value(1)
+					<< " "
+					<< x.Value(2)
+					<< " "
+					<< x.Value(3)
+					<< " "
+					<< x.Value(4)
+					<< " "
+					<< x.Value(5)
+					<< " "
+					<< x.Value(6)
+					<< " "
+					<< x.Value(7)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+			std::stringstream& file)
+		{
+			file << "VARIABLES = X Y Z" + theVarNames << "\n";
+			WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theElements.size()), file);
+
+			WriteField(var, thePoints, file);
+
+			for (const auto& x : theElements)
+			{
+				file
+					<< x.Value(0)
+					<< " "
+					<< x.Value(1)
+					<< " "
+					<< x.Value(2)
+					<< " "
+					<< x.Value(3)
+					<< " "
+					<< x.Value(4)
+					<< " "
+					<< x.Value(5)
+					<< " "
+					<< x.Value(6)
+					<< " "
+					<< x.Value(7)
+					<< "\n";
+			}
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+			std::fstream& file)
+		{
+			file << "VARIABLES = X Y Z" + theVarNames << "\n";
+			WriteFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theElements.size()), file);
+
+			WriteField(var, thePoints, file);
+
+			for (const auto& x : theElements)
+			{
+				file
+					<< x.Value(0)
+					<< " "
+					<< x.Value(1)
+					<< " "
+					<< x.Value(2)
+					<< " "
+					<< x.Value(3)
+					<< " "
+					<< x.Value(4)
+					<< " "
+					<< x.Value(5)
+					<< " "
+					<< x.Value(6)
+					<< " "
+					<< x.Value(7)
+					<< "\n";
+			}
+		}
+
+		template<class Type, size_t nbVAR>
 		void ExportCellCenteredField
 		(
 			const word & theVarNames,
@@ -374,9 +761,9 @@ namespace tnbLib
 
 			WriteCellCenteredFeTriangularZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)Triangles.size(),
-				(Standard_Integer)nbVAR, File);
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
+				static_cast<Standard_Integer>(nbVAR), File);
 
 			WritePointsVariables(thePoints, File);
 
@@ -393,13 +780,133 @@ namespace tnbLib
 
 			WriteCellCenteredFeTriangularZone
 			(
-				(Standard_Integer)thePoints.size(),
-				(Standard_Integer)Triangles.size(),
-				(Standard_Integer)nbVAR, theStream);
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
+				static_cast<Standard_Integer>(nbVAR), theStream);
 
 			WritePointsVariables(thePoints, theStream);
 
 			WriteCellCenteredField(Triangles, var, theStream);
+		}
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+		                             const std::vector<Pnt2d>& thePoints,
+		                             const std::vector<connectivity::triple>& Triangles, std::fstream& file)
+		{
+			word Variables = "VARIABLES = X Y " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeTriangularZone
+			(
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Triangles.size()),
+				static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(Triangles, var, file);
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::quadruple>& theElements,
+			OFstream& file)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeTetrahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+			                                   static_cast<Standard_Integer>(theElements.size()),
+			                                   static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(theElements, var, file);
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::quadruple>& theElements,
+			std::stringstream& file)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeTetrahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theElements.size()),
+				static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(theElements, var, file);
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::quadruple>& theElements,
+			std::fstream& file)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeTetrahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+			                                  static_cast<Standard_Integer>(theElements.size()),
+			                                  static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(theElements, var, file);
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements, OFstream& file)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theElements.size()),
+				static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(theElements, var, file);
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+			std::stringstream& file)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theElements.size()),
+				static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(theElements, var, file);
+		}
+
+		template <class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::octuple>& theElements,
+			std::fstream& file)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeHexahedralZone(static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(theElements.size()),
+				static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(theElements, var, file);
 		}
 	}
 }

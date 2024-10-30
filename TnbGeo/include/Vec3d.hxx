@@ -41,8 +41,8 @@ namespace tnbLib
 
 		//- default constructor
 
-		Vec3d()
-		{}
+		Vec3d() = default;
+		Vec3d(const Vec3d&) = default;
 
 		//- constructors
 
@@ -64,9 +64,21 @@ namespace tnbLib
 			: gp_Vec(theP0, theP1)
 		{}
 
+		Vec3d(Vec3d&& other) noexcept
+			: gp_Vec(std::move(other))
+		{}
 
 		//- public functions and operators
 
+		auto& operator=(Vec3d&& other) noexcept
+		{
+			if (this != &other)
+			{
+				gp_Vec::operator=(other);
+			}
+			return *this;
+		}
+		Vec3d& operator=(const Vec3d& other) = default;
 	};
 }
 

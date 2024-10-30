@@ -168,6 +168,14 @@ tnbLib::GMesh_Lib::AddPhysicalGroup
 	return gmsh::model::addPhysicalGroup(theDim, theTags, theTag, theName);
 }
 
+std::shared_ptr<tnbLib::Entity3d_Box> tnbLib::GMesh_Lib::GetBoundingBox(const Standard_Integer theDim,
+                                                                        const Standard_Integer tag)
+{
+	Standard_Real xmin, ymin, zmin, xmax, ymax, zmax;
+	gmsh::model::getBoundingBox(theDim, tag, xmin, ymin, zmin, xmax, ymax, zmax);
+	return std::make_shared<Entity3d_Box>(Pnt3d{ xmin, ymin, zmin }, Pnt3d{ xmax, ymax, zmax });
+}
+
 void tnbLib::GMesh_Lib::Translate
 (
 	const std::vector<std::pair<Standard_Integer, Standard_Integer>>& theDimTags,
@@ -268,6 +276,12 @@ void tnbLib::GMesh_Lib::ImportIGES
 )
 {
 	gmsh::model::occ::importShapes(name, theOutDimTags, true, "iges");
+}
+
+void tnbLib::GMesh_Lib::ImportSTL(const std::string& name,
+	std::vector<std::pair<Standard_Integer, Standard_Integer>>& theOutDimTags)
+{
+	gmsh::model::occ::importShapes(name, theOutDimTags, true, "stl");
 }
 
 void tnbLib::GMesh_Lib::SetSizeMap(const Geo3d_SizeFunction& theSizeMap)

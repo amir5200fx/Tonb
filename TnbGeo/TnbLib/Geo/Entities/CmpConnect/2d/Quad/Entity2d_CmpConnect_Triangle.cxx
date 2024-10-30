@@ -1,5 +1,6 @@
 #include <Entity2d_CmpConnect_Triangle.hxx>
 
+#include <Pnt3d.hxx>
 #include <Pnt2d.hxx>
 
 tnbLib::Entity2d_CmpConnect_Triangle::Entity2d_CmpConnect_Triangle(const connectivity::triple& theTri)
@@ -31,6 +32,18 @@ tnbLib::Entity2d_CmpConnect_Triangle::Components() const
 	return std::move(indices);
 }
 
+std::vector<tnbLib::Pnt3d>
+tnbLib::Entity2d_CmpConnect_Triangle::RetrievePolygon(const std::vector<Pnt3d>& theCoords) const
+{
+	std::vector<Pnt3d> coords;
+	coords.reserve(nbCmpts);
+	for (const auto i : theCmpts_)
+	{
+		coords.emplace_back(theCoords.at(Index_Of(i)));
+	}
+	return std::move(coords);
+}
+
 std::vector<tnbLib::Pnt2d>
 tnbLib::Entity2d_CmpConnect_Triangle::RetrievePolygon
 (
@@ -51,4 +64,12 @@ tnbLib::Entity2d_CmpConnect_Triangle::Copy() const
 {
 	auto t = std::make_shared<Entity2d_CmpConnect_Triangle>(this->Array());
 	return std::move(t);
+}
+
+void tnbLib::Entity2d_CmpConnect_Triangle::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
 }

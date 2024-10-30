@@ -2,9 +2,7 @@
 #ifndef _Entity_Segment_Header
 #define _Entity_Segment_Header
 
-#include <Traits.hxx>
 #include <Global_Serialization.hxx>
-#include <OFstream.hxx>
 
 namespace tnbLib
 {
@@ -34,28 +32,39 @@ namespace tnbLib
 
 	public:
 
+		// default constructor
+
 		Entity_Segment()
 			: theP0_(Point::null)
 			, theP1_(Point::null)
 		{}
 
-		Entity_Segment
-		(
-			const Point& theP0,
-			const Point& theP1
-		)
-			: theP0_(theP0)
-			, theP1_(theP1)
-		{}
+		// constructors
 
-		Entity_Segment
-		(
-			Point&& theP0,
-			Point&& theP1
-		)
+		Entity_Segment(Point theP0, Point theP1)
 			: theP0_(std::move(theP0))
 			, theP1_(std::move(theP1))
 		{}
+
+		Entity_Segment(Entity_Segment&& other) noexcept
+			: theP0_(std::move(other.theP0_))
+			, theP1_(std::move(other.theP1_))
+		{}
+
+		Entity_Segment(const Entity_Segment&) = default;
+
+		// Public functions and operators
+
+		Entity_Segment& operator=(Entity_Segment&& other) noexcept
+		{
+			if (this != &other)
+			{
+				theP0_ = std::move(other.theP0_);
+				theP1_ = std::move(other.theP1_);
+			}
+			return *this;
+		}
+		Entity_Segment& operator=(const Entity_Segment& other) = default;
 
 		const auto& P0() const
 		{
@@ -93,6 +102,10 @@ namespace tnbLib
 
 	public:
 
+		// default constructor
+
+		// constructors
+
 		Entity_Segment
 		(
 			const Pnt2d& theP0,
@@ -101,6 +114,8 @@ namespace tnbLib
 			: theP0_(theP0)
 			, theP1_(theP1)
 		{}
+
+		// Public functions and operators
 
 		const auto& P0() const
 		{
@@ -124,6 +139,10 @@ namespace tnbLib
 
 	public:
 
+		// default constructor
+
+		// constructors
+
 		Entity_Segment
 		(
 			const Pnt3d& theP0,
@@ -132,6 +151,8 @@ namespace tnbLib
 			: theP0_(theP0)
 			, theP1_(theP1)
 		{}
+
+		// Public functions and operators
 
 		const auto& P0() const
 		{
@@ -150,7 +171,5 @@ namespace tnbLib
 	typedef Entity_Segment<const Pnt2d&> Entity2d_SegmentRef;
 	typedef Entity_Segment<const Pnt3d&> Entity3d_SegmentRef;
 }
-
-#include <Entity_SegmentIO.hxx>
 
 #endif // !_Entity_Segment_Header

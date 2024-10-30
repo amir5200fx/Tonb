@@ -37,7 +37,18 @@ tnbLib::Entity3d_CmpConnect_Tetrahedron::RetrievePolygon(const std::vector<Pnt3d
 	{
 		coords.emplace_back(theCoords.at(Index_Of(i)));
 	}
-	return std::move(coords);
+	return coords;
+}
+
+std::vector<tnbLib::Entity3d_CmpConnect::Face> tnbLib::Entity3d_CmpConnect_Tetrahedron::CalcFaces() const
+{
+	std::vector<Face> faces;
+	faces.emplace_back(Face{ {theCmpts_.at(0), theCmpts_.at(1), theCmpts_.at(3)} });
+	faces.emplace_back(Face{ {theCmpts_.at(1), theCmpts_.at(2), theCmpts_.at(3)} });
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(0), theCmpts_.at(3)} });
+
+	faces.emplace_back(Face{ {theCmpts_.at(2), theCmpts_.at(1), theCmpts_.at(0)} });
+	return faces;
 }
 
 std::shared_ptr<tnbLib::Entity3d_CmpConnect>
@@ -45,4 +56,12 @@ tnbLib::Entity3d_CmpConnect_Tetrahedron::Copy() const
 {
 	auto t = std::make_shared<Entity3d_CmpConnect_Tetrahedron>(this->Array());
 	return std::move(t);
+}
+
+void tnbLib::Entity3d_CmpConnect_Tetrahedron::Update(const std::vector<Standard_Integer>& indices)
+{
+	for (int i = 0; i < nbCmpts; i++)
+	{
+		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+	}
 }

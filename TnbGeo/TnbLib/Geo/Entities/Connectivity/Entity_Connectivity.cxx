@@ -1,16 +1,32 @@
 #include <Entity_Connectivity.hxx>
 
-#include <iostream>
-
 template<>
 Standard_Boolean tnbLib::connectivity::quadruple::IsDegenerated() const
 {
 	if (Value(0) == Value(1)) return Standard_True;
-	else if (Value(0) == Value(2)) return Standard_True;
-	else if (Value(0) == Value(3)) return Standard_True;
-	else if (Value(1) == Value(2)) return Standard_True;
-	else if (Value(2) == Value(3)) return Standard_True;
+	if (Value(0) == Value(2)) return Standard_True;
+	if (Value(0) == Value(3)) return Standard_True;
+	if (Value(1) == Value(2)) return Standard_True;
+	if (Value(2) == Value(3)) return Standard_True;
 	return Standard_False;
+}
+
+template<>
+Standard_Boolean tnbLib::connectivity::quadruple_3d::IsDegenerated() const
+{
+	if (Value(0) == Value(1)) return Standard_True;
+	if (Value(0) == Value(2)) return Standard_True;
+	if (Value(0) == Value(3)) return Standard_True;
+	if (Value(1) == Value(2)) return Standard_True;
+	if (Value(2) == Value(3)) return Standard_True;
+	return Standard_False;
+}
+
+template <>
+Standard_Boolean tnbLib::connectivity::octuple::IsDegenerated() const
+{
+	NotImplemented
+	return Standard_True;
 }
 
 std::vector<tnbLib::connectivity::dual>
@@ -20,15 +36,15 @@ tnbLib::dualConnectivityList
 )
 {
 	std::vector<connectivity::dual> Edges(theNbEdges);
-	Standard_Integer K = 0;
+	Standard_Integer k = 0;
 	for (auto& x : Edges)
 	{
-		x.Value(0) = K * 2 + 1;
-		x.Value(1) = K * 2 + 2;
+		x.Value(0) = k * 2 + 1;
+		x.Value(1) = k * 2 + 2;
 
-		++K;
+		++k;
 	}
-	return std::move(Edges);
+	return Edges;
 }
 
 std::vector<tnbLib::connectivity::dual>
@@ -39,13 +55,13 @@ tnbLib::dualConnectivityList_Chain
 )
 {
 	std::vector<connectivity::dual> Edges(theNbEdges);
-	Standard_Integer K = 0;
+	Standard_Integer k = 0;
 	for (auto& x : Edges)
 	{
-		x.Value(0) = K + 1;
-		x.Value(1) = K + 2;
+		x.Value(0) = k + 1;
+		x.Value(1) = k + 2;
 
-		++K;
+		++k;
 	}
 
 	if (IsClosed)
@@ -53,5 +69,25 @@ tnbLib::dualConnectivityList_Chain
 		Edges[Edges.size() - 1].Value(1) = 1;
 	}
 
-	return std::move(Edges);
+	return Edges;
+}
+
+tnbLib::connectivity::triple tnbLib::raise(const connectivity::dual& dual)
+{
+	return { { dual.Value(0), dual.Value(1), dual.Value(0) } };
+}
+
+tnbLib::connectivity::quadruple tnbLib::raise(const connectivity::triple& t)
+{
+	return { {t.Value(0), t.Value(1), t.Value(2), t.Value(0)} };
+}
+
+tnbLib::connectivity::sextuple tnbLib::raise(const connectivity::quadruple& q)
+{
+	return { {q.Value(0), q.Value(1), q.Value(2), q.Value(3), q.Value(3), q.Value(3)} };
+}
+
+tnbLib::connectivity::octuple tnbLib::raise(const connectivity::sextuple& s)
+{
+	return { {s.Value(0), s.Value(1), s.Value(2), s.Value(2), s.Value(3), s.Value(4), s.Value(5), s.Value(5)} };
 }

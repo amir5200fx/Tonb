@@ -78,6 +78,7 @@ namespace tnbLib
 		virtual void ConnectTopology() = 0;
 		virtual void ExportToPlt(OFstream& File) const = 0;
 		virtual void ExportToVtk(OFstream& File) const = 0;
+		virtual void ExportToVtk(std::ostream& stream) const = 0;
 
 		void SetBoundingBox(const Entity_Box<Point>& theBox)
 		{
@@ -295,6 +296,7 @@ namespace tnbLib
 
 		void ExportToPlt(OFstream & File) const override;
 		void ExportToVtk(OFstream& FIle) const override;
+		void ExportToVtk(std::ostream& stream) const override;
 
 		void ReadBackMeshFrom(IFstream& File);
 
