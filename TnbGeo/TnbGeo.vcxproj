@@ -321,8 +321,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolume.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Vector\2d\Vec2d.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Vector\2d\Vec2dI.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Vector\3d\Vec3d.hxx" />
@@ -472,6 +475,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Merge\QuadMesh\2d\Merge2d_QuadMesh.hxx" />
     <ClInclude Include="TnbLib\Geo\Merge\StaticData\Merge_StaticData.hxx" />
     <ClInclude Include="TnbLib\Geo\Merge\Triangulation\2d\Merge2d_Triangulation.hxx" />
+    <ClInclude Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.hxx" />
     <ClInclude Include="TnbLib\Geo\module\Geo_Module.hxx" />
     <ClInclude Include="TnbLib\Geo\Naca4Digit\Geo_Naca4Digit.hxx" />
     <ClInclude Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePts.hxx" />
@@ -795,8 +799,13 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShellIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolume.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolumeIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2d.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2dIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\3d\Vec3d.cxx" />
@@ -840,6 +849,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Merge\CmpMesh\3d\Merge3d_CmpMesh.cxx" />
     <ClCompile Include="TnbLib\Geo\Merge\Point\Info\Merge_PntInfo.cxx" />
     <ClCompile Include="TnbLib\Geo\Merge\Point\Merge_Pnt.cxx" />
+    <ClCompile Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Naca4Digit\Geo_Naca4Digit.cxx" />
     <ClCompile Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePts.cxx" />
     <ClCompile Include="TnbLib\Geo\NurbsPx\2ndOrder\3Pts\Geo2d_2ndNurbsPx_3Pts.cxx" />

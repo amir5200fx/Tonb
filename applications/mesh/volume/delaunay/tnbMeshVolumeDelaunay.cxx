@@ -13,222 +13,71 @@ namespace tnbLib
 {
 
 	static unsigned short verbose = 0;
-	static auto loadTag = false;
-	static auto exeTag = false;
 
-	static std::string myShapeName;
+	static std::string my_file_name;
 
-	static std::shared_ptr<Cad_Shape> myShape;
-	static std::shared_ptr<Geo3d_SizeFunction> mySizeMap;
+	static std::shared_ptr<Cad_Shape> my_shape;
+	static std::shared_ptr<Geo3d_SizeFunction> my_size_map;
 
-	void setVerbose(unsigned int i)
+	void set_verbose(unsigned int i)
 	{
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
 	}
 
-	void checkFolder(const std::string& name)
-	{
-		if (NOT boost::filesystem::is_directory(name))
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no {" << name << "} directory has been found!" << endl
-				<< abort(FatalError);
-		}
-	}
-
-	void loadModel()
-	{
-		checkFolder("model");
-
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [2/6/2023 Payvand]
-		boost::filesystem::current_path(currentPath.string() + R"(\model)");
-
-		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
-		{
-			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
-			myShapeName = name;
-			fileName fn(name + ".PATH");
-
-			std::ifstream myFile;
-			myFile.open(fn);
-
-			if (myFile.is_open())
-			{
-				std::string address;
-				std::getline(myFile, address);
-
-				// change the current path [2/6/2023 Payvand]
-				boost::filesystem::current_path(address);
-
-				{
-					auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
-
-					myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
-					if (NOT myShape)
-					{
-						FatalErrorIn(FunctionSIG)
-							<< " the model is null." << endl
-							<< abort(FatalError);
-					}
-				}
-			}
-			else
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "the file is not open: " << name + ".PATH" << endl;
-			}
-		}
-		else
-		{
-			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
-			myShapeName = name;
-			myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
-			if (NOT myShape)
-			{
-				FatalErrorIn(FunctionSIG)
-					<< " the model is null." << endl
-					<< abort(FatalError);
-			}
-		}
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
-	}
-
-	void loadSizeMap()
-	{
-		checkFolder("sizeMap");
-
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [2/6/2023 Payvand]
-		boost::filesystem::current_path(currentPath.string() + R"(\sizeMap)");
-
-		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
-		{
-			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
-			fileName fn(name + ".PATH");
-
-			std::ifstream myFile;
-			myFile.open(fn);
-
-			if (myFile.is_open())
-			{
-				std::string address;
-				std::getline(myFile, address);
-
-				// change the current path [2/6/2023 Payvand]
-				boost::filesystem::current_path(address);
-
-				{
-					auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo3d_SizeFunction::extension).string();
-
-					mySizeMap = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
-					if (NOT mySizeMap)
-					{
-						FatalErrorIn(FunctionSIG)
-							<< " the sizeMap is null." << endl
-							<< abort(FatalError);
-					}
-				}
-			}
-			else
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "the file is not open: " << name + ".PATH" << endl;
-			}
-		}
-		else
-		{
-			auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo3d_SizeFunction::extension).string();
-
-			mySizeMap = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
-			if (NOT mySizeMap)
-			{
-				FatalErrorIn(FunctionSIG)
-					<< " the sizeMap is null." << endl
-					<< abort(FatalError);
-			}
-		}
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
-	}
-
-	void loadModel(const std::string& name)
+	void load_model(const std::string& name)
 	{
 		file::CheckExtension(name);
-		myShapeName = name;
-		myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
-		if (NOT myShape)
+		my_file_name = name;
+		my_shape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
+		if (NOT my_shape)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the shape is null." << endl
+				<< " the shape file contains null object." << endl
 				<< abort(FatalError);
 		}
 	}
 
-	void loadSizeMap(const std::string& name)
+	void load_size_map(const std::string& name)
 	{
 		file::CheckExtension(name);
-		mySizeMap = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
-		if (NOT mySizeMap)
+		my_size_map = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
+		if (NOT my_size_map)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the shape is null." << endl
+				<< " the size map contains null object." << endl
 				<< abort(FatalError);
 		}
-	}
-
-	void loadFiles()
-	{
-		if (boost::filesystem::is_directory("model"))
-		{
-			loadModel();
-		}
-		else
-		{
-			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
-			loadModel(name);
-		}
-
-		if (boost::filesystem::is_directory("sizeMap"))
-		{
-			loadSizeMap();
-		}
-		else
-		{
-			auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo3d_SizeFunction::extension).string();
-			loadSizeMap(name);
-		}
-
-		loadTag = true;
 	}
 
 	void execute()
 	{
-		if (NOT loadTag)
+		if (NOT my_shape)
 		{
-			Info << endl
-				<< " no file has been loaded." << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< " - No geometric model has been loaded." << endl
 				<< abort(FatalError);
 		}
-
+		if (NOT my_size_map)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " No size map function has been loaded." << endl
+				<< abort(FatalError);
+		}
 		GMesh_Lib::Initialize();
 
 		GMesh_Lib::AddModel("myModel");
 
-		Cad_Tools::ExportToIGES("mm", myShape->Shape(), myShapeName + ".iges");
+		Cad_Tools::ExportToIGES("mm", my_shape->Shape(), my_file_name + ".iges");
 
 		std::vector<std::pair<int, int>> v;
-		GMesh_Lib::ImportIGES(myShapeName + ".iges", v);
+		GMesh_Lib::ImportIGES(my_file_name + ".iges", v);
 
 		
 		//GMesh_Lib::ImportShape(myShape->Shape(), v);
 
-		GMesh_Lib::SetSizeMap(*mySizeMap);
+		GMesh_Lib::SetSizeMap(*my_size_map);
 
 		GMesh_Lib::SynchronizeShape();
 
@@ -243,7 +92,6 @@ namespace tnbLib
 			Info << endl
 				<< " - the application is performed, successfully!" << endl;
 		}
-		exeTag = true;
 	}
 }
 
@@ -262,9 +110,8 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([]()-> void {loadFiles(); }), "load_files");
-		//mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		//mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)->void {load_model(name); }), "load_model");
+		mod->add(chaiscript::fun([](const std::string& name)->void {load_size_map(name); }), "load_size_map");
 
 		//- settings
 
@@ -312,8 +159,8 @@ int main(int argc, char* argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - load_files()" << endl
-				<< " - save_to(name [optional])" << endl << endl
+				<< " - load_model(name)" << endl
+				<< " - load_size_map(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl
 

@@ -191,7 +191,7 @@ void tnbLib::legLib::Aft3d_NodeAdaptor::RemoveFrontFacet
 )
 {
 	Debug_Null_Pointer(theFacet);
-	auto iter = theFrontFacets_.find(theFacet->Index());
+	const auto iter = theFrontFacets_.find(theFacet->Index());
 	if (iter IS_EQUAL theFrontFacets_.end())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -207,8 +207,7 @@ void tnbLib::legLib::Aft3d_NodeAdaptor::InsertEdge
 )
 {
 	Debug_Null_Pointer(theEdge);
-	auto paired = std::make_pair(theEdge->Index(), theEdge);
-	auto insert = theEdges_.insert(std::move(paired));
+	const auto insert = theEdges_.insert({theEdge->Index(), theEdge});
 	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -224,8 +223,7 @@ void tnbLib::legLib::Aft3d_NodeAdaptor::InsertFacet
 )
 {
 	Debug_Null_Pointer(theFacet);
-	auto paired = std::make_pair(theFacet->Index(), theFacet);
-	auto insert = theFacets_.insert(std::move(paired));
+	const auto insert = theFacets_.insert({theFacet->Index(), theFacet});
 	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -241,8 +239,7 @@ void tnbLib::legLib::Aft3d_NodeAdaptor::InsertElement
 )
 {
 	Debug_Null_Pointer(theElement);
-	auto paired = std::make_pair(theElement->Index(), theElement);
-	auto insert = theElements_.insert(std::move(paired));
+	const auto insert = theElements_.insert({theElement->Index(), theElement});
 	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -258,8 +255,7 @@ void tnbLib::legLib::Aft3d_NodeAdaptor::InsertFrontEdge
 )
 {
 	Debug_Null_Pointer(theEdge);
-	auto paired = std::make_pair(theEdge->Index(), theEdge);
-	auto insert = theFrontEdges_.insert(std::move(paired));
+	const auto insert = theFrontEdges_.insert({theEdge->Index(), theEdge});
 	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -275,8 +271,7 @@ void tnbLib::legLib::Aft3d_NodeAdaptor::InsertFrontFacet
 )
 {
 	Debug_Null_Pointer(theFacet);
-	auto paired = std::make_pair(theFacet->Index(), theFacet);
-	auto insert = theFrontFacets_.insert(std::move(paired));
+	const auto insert = theFrontFacets_.insert({theFacet->Index(), theFacet});
 	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)

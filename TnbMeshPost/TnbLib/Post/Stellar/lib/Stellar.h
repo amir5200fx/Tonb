@@ -1,0 +1,20 @@
+#pragma once
+#ifndef _Stellar_header
+#define _Stellar_header
+#include "top.h"
+#include "interact.h"
+#include "vector.h"
+#include "anisotropy.h"
+#include "quality.h"
+#include "arraypoolstack.h"
+#include "journal.h"
+#include "print.h"
+#include "classify.h"
+#include "quadric.h"
+#include "smoothing.h"
+#include "topological.h"
+#include "output.h"
+#include "insertion.h"
+#include "size.h"
+#include "improve.h"
+#endif

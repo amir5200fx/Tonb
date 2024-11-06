@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadFile("domain");
+
+setBaseSize(0.05);
+
+saveTo("references");

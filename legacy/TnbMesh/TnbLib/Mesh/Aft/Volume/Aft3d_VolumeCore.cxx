@@ -9,12 +9,28 @@
 #include <Aft3d_InteriorNode.hxx>
 #include <Aft3d_Tools.hxx>
 #include <Entity3d_Box.hxx>
+#include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 const Standard_Real tnbLib::legLib::Aft3d_VolumeCore::SIZE_TO_HIGHT_ELEMENT_COEFF = 0.866025404;
+
+tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::cavityFronts()
+	: theUncertainty_(cmp_facet)
+	, theCertainty_(cmp_facet)
+{
+	// Empty body
+}
+
+void tnbLib::legLib::Aft3d_VolumeCore::meshData::Insert(const std::vector<std::shared_ptr<Aft3d_Element>>& theElements) const
+{
+	for (const auto& elm: theElements)
+	{
+		theElements_->insert(elm);
+	}
+}
 
 Standard_Boolean 
 tnbLib::legLib::Aft3d_VolumeCore::GetCurrent()
@@ -167,7 +183,7 @@ tnbLib::legLib::Aft3d_VolumeCore::IsNextLevelSupplied()
 	}
 	FrontHandler.InsertToFronts(faces);
 	FrontHandler.ClearNext();
-	FrontHandler.SetMaxLevel(Mesh.NbNodes());
+	FrontHandler.SetMaxLevel(Mesh.MaxNodeIdx());
 	return Standard_True;
 }
 

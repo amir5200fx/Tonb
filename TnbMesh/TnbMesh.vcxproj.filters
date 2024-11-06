@@ -382,20 +382,11 @@
     <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\3d">
       <UniqueIdentifier>{24af19a7-0617-491e-bdfe-ab710b265c26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode">
-      <UniqueIdentifier>{838cee8c-576d-4bb6-bdc3-a783f81a5bd2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\2d">
       <UniqueIdentifier>{434e33ef-8db7-4b8b-a83c-2be8e962ebad}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\3d">
       <UniqueIdentifier>{c4fe7c80-2d40-4062-982f-64ebdd666b1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode">
-      <UniqueIdentifier>{dca586a8-07ce-4e59-9b10-e11b53096bad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode">
-      <UniqueIdentifier>{a78090f8-c5f4-4f91-ab5e-51dba7e32757}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\T">
       <UniqueIdentifier>{37b4b983-5e5f-417f-866c-c5a237eef915}</UniqueIdentifier>
@@ -2302,6 +2293,36 @@
     <Filter Include="TnbLib\Base\Geom\Function\Size\MultiFun">
       <UniqueIdentifier>{f1738a28-c646-4abd-9396-a59ba96c99c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Facet\Iso">
+      <UniqueIdentifier>{749c7530-77ee-4ffe-8b79-906f22e5d906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Facet\AnIso">
+      <UniqueIdentifier>{38090d40-1618-475f-a1fa-7f57e60107d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Entities\Boundary\Facet\Adaptor">
+      <UniqueIdentifier>{5d0cf9f2-199a-4da6-a72a-86b660c6071b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge">
+      <UniqueIdentifier>{dca586a8-07ce-4e59-9b10-e11b53096bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge">
+      <UniqueIdentifier>{838cee8c-576d-4bb6-bdc3-a783f81a5bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge">
+      <UniqueIdentifier>{a78090f8-c5f4-4f91-ab5e-51dba7e32757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Boundary\Volume">
+      <UniqueIdentifier>{d142e270-5100-43f8-afc8-03baa49ea853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Boundary\Volume\Iso">
+      <UniqueIdentifier>{a92bd4c7-f102-4857-bb64-f78273099cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\SolutionData\Volume">
+      <UniqueIdentifier>{8b8d7790-d0ab-4267-b4f0-dad30c7a99e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\SolutionData\Volume\Surface">
+      <UniqueIdentifier>{ace5f57b-8953-49f1-9cfd-e9545460ae10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2832,26 +2853,11 @@
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\3d\Aft3d_SegmentEdgeAnIsoFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\3d</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode\Aft2d_BndEdgeAnIsoFwd.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode\Aft3d_BndEdgeAnIsoFwd.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\2d\Aft2d_SegmentEdgeFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\2d</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\3d\Aft3d_SegmentEdgeFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode\Aft2d_BndEdgeFwd.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode\Aft3d_BndEdgeFwd.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode\Aft2d_BndEdgeSurfaceFwd.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\Aft2d_gSegmentEdgeFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\G</Filter>
@@ -3230,12 +3236,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Traits\Aft2d_BndEdgeAnIsoTraits.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Traits</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode\Aft2d_BndEdge.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode\Aft2d_BndEdgeAnIso.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Entities\Node\Iso\2d\Aft2d_CornerNode.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Node\Iso\2d</Filter>
@@ -3689,9 +3689,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tSegmentNode.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\T</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode\Aft2d_BndEdgeSurface.hxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Cad\Curve\Surface\G\Aft2d_gPlnCurveSurface.hxx">
       <Filter>TnbLib\Aft\Cad\Curve\Surface\G</Filter>
@@ -5583,6 +5580,54 @@
     <ClInclude Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_Multi.hxx">
       <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\Traits\Aft3d_TBNodeTraits.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Iso\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Traits\Aft3d_BndNodeTraits.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Facet\Iso\Aft3d_FaceFacet.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Facet\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Facet\Iso\Aft3d_FaceFacetFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Facet\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Facet\Mesh_BndFacet.hxx">
+      <Filter>TnbLib\Base\Entities\Boundary\Facet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Facet\Mesh_BndFacetI.hxx">
+      <Filter>TnbLib\Base\Entities\Boundary\Facet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge\Aft2d_BndEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge\Aft2d_BndEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge\Aft3d_BndEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge\Aft2d_BndEdgeAnIso.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge\Aft2d_BndEdgeAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge\Aft3d_BndEdgeAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge\Aft2d_BndEdgeSurface.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge\Aft2d_BndEdgeSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVol.hxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\Volume\Aft3d_SolutionData.hxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume</Filter>
+    </ClInclude>
     <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh3d_Curve.hxx">
       <Filter>TnbLib\Curve\Curve\Iso</Filter>
     </ClInclude>
@@ -5794,12 +5839,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\bNode\Aft2d_BndNodeAnIsoIO.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Node\AnIso\bNode</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode\Aft2d_BndEdgeIO.cxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode\Aft2d_BndEdgeAnIsoIO.cxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Node\Iso\2d\Aft2d_CornerNodeIO.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Node\Iso\2d</Filter>
@@ -6100,9 +6139,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tSegmentNodeIO.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\T</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode\Aft2d_BndEdgeSurfaceIO.cxx">
-      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Cad\Curve\Surface\G\Aft2d_gPlnCurveSurface.cxx">
       <Filter>TnbLib\Aft\Cad\Curve\Surface\G</Filter>
@@ -7360,6 +7396,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\Function\Size\MultiFun\GeoSizeFun2d_MultiIO.cxx">
       <Filter>TnbLib\Base\Geom\Function\Size\MultiFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Facet\Iso\Aft3d_FaceFacet.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Facet\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Facet\Iso\Aft3d_FaceFacetIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Facet\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge\Aft2d_BndEdgeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Iso\bEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge\Aft2d_BndEdgeAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\AnIso\bEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge\Aft2d_BndEdgeSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVol.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Surface\Aft3d_SolutionData_SurfVolIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Aft3d_SolutionData.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Volume\Aft3d_SolutionDataIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Volume</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Curve\Curve\Iso\Mesh3d_Curve.cxx">
       <Filter>TnbLib\Curve\Curve\Iso</Filter>

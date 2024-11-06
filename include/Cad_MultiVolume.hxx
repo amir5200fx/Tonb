@@ -4,6 +4,7 @@
 
 #include <Cad_Volume.hxx>
 
+#include <map>
 #include <vector>
 #include <memory>
 
@@ -18,10 +19,29 @@ namespace tnbLib
 		: public Cad_Volume
 	{
 
+	public:
+
+		struct PairedEntity
+		{
+			Standard_Integer surf0;
+			Standard_Integer surf1;
+
+			friend class boost::serialization::access;
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar& surf0;
+				ar& surf1;
+			}
+		};
+
+	private:
+
 		/*Private Data*/
 
 		std::vector<std::shared_ptr<Cad_Solid>> theSolids_;
 
+		std::map<Standard_Integer, Standard_Integer> thePairs_;
 
 		// Private functions and operators [6/13/2023 Payvand]
 
@@ -66,18 +86,28 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Cad_Solid>>&& theSolids
 		);
 
+		// Public functions and operators
 
 		const auto& Solids() const
 		{
 			return theSolids_;
 		}
 
+		TnbCad_EXPORT Standard_Integer IsPairedSurface(const Standard_Integer theIndex) const override;
+		TnbCad_EXPORT Standard_Integer NbPairs() const;
+		const auto& Pairs() const { return thePairs_; }
+
+		// It registers the two surfaces as a paired entity; the order of surfaces doesn't matter
+		TnbCad_EXPORT void SetPairs(const PairedEntity& theSurfaces);
+
+		// Override virtual functions
+
 		TnbCad_EXPORT Standard_Integer NbVolumes() const override;
 		TnbCad_EXPORT std::shared_ptr<Cad_Solid>
 			Volume(const Standard_Integer theIndex) const override;
 
 		TnbCad_EXPORT std::vector<std::shared_ptr<Cad_Solid>> Volumes() const override;
-
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Surface>> RetrieveSurfaces() const override;
 	};
 }
 

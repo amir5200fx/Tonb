@@ -43,6 +43,9 @@ namespace tnbLib
 		TnbGlobal_EXPORT boost::filesystem::path 
 			GetSingleFile(const boost::filesystem::path&, const std::string& extension);
 
+		TnbGlobal_EXPORT std::string Extension(const std::string&);
+		TnbGlobal_EXPORT std::string FileName(const std::string&);
+
 		TnbGlobal_EXPORT void CheckExtension(const std::string&);
 		TnbGlobal_EXPORT void SetCurrentPath(const std::string&);
 

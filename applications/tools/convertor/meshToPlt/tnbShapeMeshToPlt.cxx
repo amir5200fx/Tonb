@@ -99,13 +99,13 @@ namespace tnbLib
 		//- io functions
 
 		
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadModel");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {exportTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "load_file");
+		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {exportTo(); }), "save_to");
 
 		//- settings
-		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "set_verbose");
 	}
 
 	std::string getString(char* argv)
@@ -143,10 +143,16 @@ int main(int argc, char *argv[])
 			Info << endl;
 			Info << "This application is aimed to convert the mesh to *.plt file format." << endl;
 			Info << endl;
-			Info << " Function list:" << endl
-				<< " - setVerbose(unsigned short)" << endl
-				<< " - loadMesh(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl;
+			Info << " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - load_file(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - set_verbose(unsigned short)" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{

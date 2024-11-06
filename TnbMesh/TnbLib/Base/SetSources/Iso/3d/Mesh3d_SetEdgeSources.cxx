@@ -218,8 +218,8 @@ namespace tnbLib
 			auto t = GetTriangle(*x);
 			if (Geo_Tools::IsIntersect_cgal(seg, t))
 			{
-				auto left = x->LeftElement().lock();
-				auto right = x->RightElement().lock();
+				auto left = x->UpperElement().lock();
+				auto right = x->LowerElement().lock();
 				Debug_If_Condition(NOT left AND NOT right);
 				elements.insert(left);
 				elements.insert(right);

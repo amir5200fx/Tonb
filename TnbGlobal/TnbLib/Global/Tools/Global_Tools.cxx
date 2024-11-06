@@ -140,7 +140,7 @@ bool tnbLib::Global_Tools::IsNumber(const std::string& s)
 std::string tnbLib::Global_Tools::ConvertToUpperCase(const std::string& s)
 {
 	auto str = s;
-	for (auto& ch: str)
+	for (auto& ch : str)
 	{
 		// check if the character is a letter
 		if (std::isalpha(ch))
@@ -155,7 +155,7 @@ std::string tnbLib::Global_Tools::ConvertToUpperCase(const std::string& s)
 std::string tnbLib::Global_Tools::ConvertToLowerCase(const std::string& s)
 {
 	auto str = s;
-	for (auto& ch: str)
+	for (auto& ch : str)
 	{
 		// check if the character is a letter
 		if (std::isalpha(ch))
@@ -165,4 +165,20 @@ std::string tnbLib::Global_Tools::ConvertToLowerCase(const std::string& s)
 		}
 	}
 	return std::move(str);
+}
+
+void tnbLib::Global_Tools::PrintHeaderFunc(const std::string& func_name)
+{
+	std::string border(50, '=');
+	Info << " " << border << "\n";
+	Info << " Entering Function: " << func_name << "\n";
+	Info << " " << border << "\n";
+}
+
+void tnbLib::Global_Tools::PrintFooterFunc(const std::string& func_name)
+{
+	std::string border(50, '=');
+	Info << " " << border << "\n";
+	Info << " Leaving Function: " << func_name << "\n";
+	Info << " " << border << "\n";
 }

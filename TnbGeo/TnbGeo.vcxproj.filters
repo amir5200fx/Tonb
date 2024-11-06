@@ -1240,6 +1240,27 @@
     <Filter Include="TnbLib\Geo\CompressMesh\Cmpt\3d">
       <UniqueIdentifier>{e2760bb3-bbbb-43f1-919d-56a49878c6ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\TriShell">
+      <UniqueIdentifier>{15976bf4-6426-41a3-afc5-73d1b88f151d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\TriVolume">
+      <UniqueIdentifier>{b7d61fc6-3bd1-4788-821d-04dbe3e32ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Triangulation\3d">
+      <UniqueIdentifier>{267e2865-0b2d-4fd0-9c32-5ca1e97198c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Mesh">
+      <UniqueIdentifier>{b28833b0-1594-4fd4-9629-224420657777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Mesh\InsertPoint">
+      <UniqueIdentifier>{2d8dcfaf-1446-4426-8bf2-bdb6f336ccfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Mesh\InsertPoint\2d">
+      <UniqueIdentifier>{c69e1294-0811-47b8-8514-45443c8c6b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Mesh\InsertPoint\3d">
+      <UniqueIdentifier>{f82c1aa2-2254-4aee-ab12-ba2e4e0fa69e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2793,6 +2814,18 @@
     <ClInclude Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_CompositeFwd.hxx">
       <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.hxx">
+      <Filter>TnbLib\Geo\Entities\TriShell</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolume.hxx">
+      <Filter>TnbLib\Geo\Entities\TriVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.hxx">
+      <Filter>TnbLib\Geo\Merge\Triangulation\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3634,6 +3667,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\CompressMesh\Cmpt\2d\Geo2d_CompressMesh_Composite.cxx">
       <Filter>TnbLib\Geo\CompressMesh\Cmpt\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShell.cxx">
+      <Filter>TnbLib\Geo\Entities\TriShell</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriShell\Entity3d_TriShellIO.cxx">
+      <Filter>TnbLib\Geo\Entities\TriShell</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolume.cxx">
+      <Filter>TnbLib\Geo\Entities\TriVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\TriVolume\Entity3d_TriVolumeIO.cxx">
+      <Filter>TnbLib\Geo\Entities\TriVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\Triangulation\3d\Merge3d_Triangulation.cxx">
+      <Filter>TnbLib\Geo\Merge\Triangulation\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

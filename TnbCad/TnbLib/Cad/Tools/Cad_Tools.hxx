@@ -48,6 +48,7 @@ namespace tnbLib
 	class Cad_GeomSurface;
 	class Cad_TModel;
 	class Cad_CurveLength_Info;
+	class Cad_MultiVolume;
 	class TModel_Surface;
 	class TModel_Wire;
 	class TModel_Paired;
@@ -501,6 +502,8 @@ namespace tnbLib
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<Cad_TModel>&);
 
 		static TnbCad_EXPORT void SetPrecision(const std::shared_ptr<Cad_TModel>& theSolid);
+
+		static TnbCad_EXPORT void RenumberSurfaces(const std::shared_ptr<Cad_MultiVolume>&);
 
 		static TnbCad_EXPORT void ExportToIGES
 		(

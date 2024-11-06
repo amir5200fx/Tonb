@@ -11,7 +11,7 @@ namespace tnbLib
 {
 
 	template<>
-	static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>>
+	TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>>
 		Aft2d_gSegmentEdgeUniMetric::GetTopology
 		(
 			const Entity2d_Polygon& theChain, 
@@ -19,7 +19,7 @@ namespace tnbLib
 		);
 
 	template<>
-	static TnbMesh_EXPORT void Aft2d_gSegmentEdgeUniMetric::MergeDangles
+	TnbMesh_EXPORT void Aft2d_gSegmentEdgeUniMetric::MergeDangles
 	(
 		const std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>>& theWire, 
 		const Standard_Real theTol

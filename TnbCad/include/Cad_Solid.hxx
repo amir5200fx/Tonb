@@ -37,7 +37,7 @@ namespace tnbLib
 		/*Private Data*/
 
 
-		TnbCad_EXPORT void Check();
+		TnbCad_EXPORT void Check() const;
 
 
 		// Private functions and operators [6/13/2023 Payvand]

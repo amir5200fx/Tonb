@@ -47,7 +47,7 @@ namespace tnbLib
 		//- default constructors
 
 		Mesh_BndEdge()
-		{}
+			= default;
 
 
 		//- constructors

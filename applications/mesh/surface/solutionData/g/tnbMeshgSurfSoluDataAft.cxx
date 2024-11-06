@@ -20,6 +20,10 @@ namespace tnbLib
 
 	static double myTol = 1.0E-6;
 
+	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
+	static std::shared_ptr<Mesh_Curve_Info> myCurveInfo;
+	static std::shared_ptr<Cad_GModel> myModel;
+
 	static std::shared_ptr<Aft2d_gSolutionDataSurface> mySolutionData;
 
 	void checkFolder(const std::string& name)
@@ -62,7 +66,7 @@ namespace tnbLib
 		return true;
 	}
 
-	auto loadModelFile()
+	void loadModelFile()
 	{
 		checkFolder("model");
 
@@ -73,7 +77,7 @@ namespace tnbLib
 
 		auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_GModel::extension).string();
 
-		auto myModel = file::LoadFile<std::shared_ptr<Cad_GModel>>(name + Cad_GModel::extension, verbose);
+		myModel = file::LoadFile<std::shared_ptr<Cad_GModel>>(name + Cad_GModel::extension, verbose);
 		if (NOT myModel)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -83,8 +87,18 @@ namespace tnbLib
 
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
+	}
 
-		return std::move(myModel);
+	void loadModelFile(const std::string& name)
+	{
+		file::CheckExtension(name);
+		myModel = file::LoadFile<std::shared_ptr<Cad_GModel>>(name + Cad_GModel::extension, verbose);
+		if (NOT myModel)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the model file is null!" << endl
+				<< abort(FatalError);
+		}
 	}
 
 	auto loadCurveInfo()
@@ -106,69 +120,82 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		std::map<int, std::shared_ptr<Mesh_Curve_Info>> curveInfoMap;
-		{
-			const auto subCurrentPath = boost::filesystem::current_path();
+		//std::map<int, std::shared_ptr<Mesh_Curve_Info>> curveInfoMap;
+		//{
+		//	const auto subCurrentPath = boost::filesystem::current_path();
 
-			// load subdirectories [12/4/2021 Amir]
-			for
-				(
-					boost::filesystem::directory_iterator iter(subCurrentPath);
-					iter != boost::filesystem::directory_iterator();
-					iter++
-					)
-			{
-				auto fname = iter->path().string();
-				if (isNumber(fname))
-				{
-					auto curveNb = std::stoi(fname);
+		//	// load subdirectories [12/4/2021 Amir]
+		//	for
+		//		(
+		//			boost::filesystem::directory_iterator iter(subCurrentPath);
+		//			iter != boost::filesystem::directory_iterator();
+		//			iter++
+		//			)
+		//	{
+		//		auto fname = iter->path().string();
+		//		if (isNumber(fname))
+		//		{
+		//			auto curveNb = std::stoi(fname);
 
-					// Change the current path [12/2/2021 Amir]
-					boost::filesystem::current_path(subCurrentPath.string() + R"(\)" + fname);
+		//			// Change the current path [12/2/2021 Amir]
+		//			boost::filesystem::current_path(subCurrentPath.string() + R"(\)" + fname);
 
-					try
-					{
-						auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh_Curve_Info::extension).string();
-						auto curveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
-						if (NOT curveInfo)
-						{
-							FatalErrorIn(FunctionSIG)
-								<< " the info curve file is null!" << endl
-								<< abort(FatalError);
-						}
+		//			try
+		//			{
+		//				auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh_Curve_Info::extension).string();
+		//				auto curveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
+		//				if (NOT curveInfo)
+		//				{
+		//					FatalErrorIn(FunctionSIG)
+		//						<< " the info curve file is null!" << endl
+		//						<< abort(FatalError);
+		//				}
 
-						auto paired = std::make_pair(curveNb, std::move(curveInfo));
-						auto insert = curveInfoMap.insert(std::move(paired));
-						if (NOT insert.second)
-						{
-							FatalErrorIn(FunctionSIG)
-								<< "unable to insert the curve info into the map!" << endl
-								<< " Duplicate data maybe?!" << endl
-								<< abort(FatalError);
-						}
+		//				auto paired = std::make_pair(curveNb, std::move(curveInfo));
+		//				auto insert = curveInfoMap.insert(std::move(paired));
+		//				if (NOT insert.second)
+		//				{
+		//					FatalErrorIn(FunctionSIG)
+		//						<< "unable to insert the curve info into the map!" << endl
+		//						<< " Duplicate data maybe?!" << endl
+		//						<< abort(FatalError);
+		//				}
 
-						if (verbose)
-						{
-							Info << " - the curve info, " << curveNb << ", has been loaded, successfully!" << endl;
-						}
-					}
-					catch (const error& x)
-					{
-						Info << " - Couldn't load the curve info: " << endl;
-						Info << x.message() << endl;
-					}
-				}
-			}
-		}
+		//				if (verbose)
+		//				{
+		//					Info << " - the curve info, " << curveNb << ", has been loaded, successfully!" << endl;
+		//				}
+		//			}
+		//			catch (const error& x)
+		//			{
+		//				Info << " - Couldn't load the curve info: " << endl;
+		//				Info << x.message() << endl;
+		//			}
+		//		}
+		//	}
+		//}
 
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
 
-		auto t = std::make_tuple(std::move(glCurveInfo), std::move(curveInfoMap));
-		return std::move(t);
+		//auto t = std::make_tuple(std::move(glCurveInfo), std::move(curveInfoMap));
+		return std::move(glCurveInfo);
 	}
 
-	auto loadSizeFunction()
+	void loadCurveInfo(const std::string& name)
+	{
+		file::CheckExtension(name);
+
+		myCurveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
+		if (NOT myCurveInfo)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the global curve info file is null" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void loadSizeFunction()
 	{
 		checkFolder("sizeMap");
 
@@ -179,8 +206,8 @@ namespace tnbLib
 
 		auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo3d_SizeFunction::extension).string();
 
-		auto sizeFun = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
-		if (NOT sizeFun)
+		mySizeFun = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
+		if (NOT mySizeFun)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< " the size function file is null" << endl
@@ -189,8 +216,19 @@ namespace tnbLib
 
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
+	}
 
-		return std::move(sizeFun);
+	void loadSizeFunction(const std::string& name)
+	{
+		file::CheckExtension(name);
+
+		mySizeFun = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
+		if (NOT mySizeFun)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the size function file is null" << endl
+				<< abort(FatalError);
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -225,24 +263,43 @@ namespace tnbLib
 		}
 	}*/
 
+	void loadFiles()
+	{
+		loadModelFile();
+		loadCurveInfo();
+		loadSizeFunction();
+	}
+
 	void execute()
 	{
-		auto myModel = loadModelFile();
+		//loadModelFile();
 		if (NOT myModel)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "the geometrical model is null!" << endl
+			FatalErrorIn(FunctionSIG) << endl
+				<< "the geometrical model is not loaded." << endl
+				<< abort(FatalError);
+		}
+		if (NOT mySizeFun)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " the size function is not loaded." << endl
+				<< abort(FatalError);
+		}
+		if (NOT myCurveInfo)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " the curve info. is not loaded." << endl
 				<< abort(FatalError);
 		}
 
-		auto sizeFun = loadSizeFunction();
-		auto[glCrvInfo, crvInfos] = loadCurveInfo();
+		//loadSizeFunction();
+		//loadCurveInfo();
 
 		auto soluData = std::make_shared<Aft2d_gSolutionDataSurface>();
 
-		soluData->SetGeometry(std::move(myModel));	
-		soluData->SetSizeFun(std::move(sizeFun));
-		soluData->SetGlobalCurveInfo(std::move(glCrvInfo));
+		soluData->SetGeometry(myModel);	
+		soluData->SetSizeFun(mySizeFun);
+		soluData->SetGlobalCurveInfo(myCurveInfo);
 
 		mySolutionData = std::move(soluData);
 
@@ -271,6 +328,13 @@ namespace tnbLib
 	{
 		// io functions [2/23/2022 Amir]
 		//mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModelFile(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModelFile(); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurveInfo(name); }), "loadCurveInfo");
+		mod->add(chaiscript::fun([]()-> void {loadCurveInfo(); }), "loadCurveInfo");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadSizeFunction(name); }), "loadSizeFunction");
+		mod->add(chaiscript::fun([]()->void {loadSizeFunction(); }), "loadSizeFunction");
+		mod->add(chaiscript::fun([]()->void {loadFiles(); }), "loadFiles");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
 		// settings [2/23/2022 Amir]
@@ -318,6 +382,10 @@ int main(int argc, char *argv[])
 				<< " # IO functions: " << endl << endl
 
 				/*<< " - loadFile()" << endl*/
+				<< " - loadModel(name [optional])" << endl
+				<< " - loadCurveInfo(name [optional])" << endl
+				<< " - loadSizeFunction(name [optional])" << endl
+				<< " - loadFiles()" << endl
 				<< " - saveTo(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl

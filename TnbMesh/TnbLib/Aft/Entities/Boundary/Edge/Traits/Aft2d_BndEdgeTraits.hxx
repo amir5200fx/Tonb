@@ -12,6 +12,7 @@ namespace tnbLib
 	{
 		typedef Aft2d_BndNode nodeType;
 		typedef Aft2d_Edge edgeType;
+		typedef void bndEdgeType;
 		typedef void facetType;
 	};
 }

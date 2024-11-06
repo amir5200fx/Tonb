@@ -5,6 +5,9 @@
 #include <Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx>
 #include <Cad_CurveLength_Info.hxx>
 #include <Cad_CurveSplitter_Info.hxx>
+#include <Cad_MultiVolume.hxx>
+#include <Cad_SingleVolume.hxx>
+#include <Cad_Solid.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_TModel.hxx>
 #include <Cad_Tools.hxx>
@@ -31,7 +34,7 @@ namespace tnbLib
 
 	static const auto model_directory = "shape";
 
-	static std::shared_ptr<Cad_TModel> myModel;
+	static std::shared_ptr<Cad_Volume> myModel;
 	static std::shared_ptr<Cad_Shape> myShape;
 	static std::string myFileName;
 
@@ -90,6 +93,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		myFileName = name;
+		loadTag = true;
 	}
 
 	void loadFile()
@@ -121,7 +125,7 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-		file::SaveTo(myModel, name + Cad_TModel::extension, verbose);
+		file::SaveTo(myModel, name + Cad_Volume::extension, verbose);
 	}
 
 	void saveTo()
@@ -155,26 +159,52 @@ namespace tnbLib
 					<< "no solid has been detected." << endl
 					<< abort(FatalError);
 			}
-			if (shapes.size() > 1)
+			if (shapes.size() == 1)
 			{
-				FatalErrorIn(FunctionSIG)
-					<< "there are more than one solids has been detected." << endl
-					<< abort(FatalError);
+				auto solid = Cad_Solid::MakeSolid(shapes.at(0), {
+					                                  myModelMakerInfo, myEdgeMakerInfo, mySurfMakerInfo,
+					                                  myPairCriterion
+				                                  });
+				if (verbose)
+				{
+					Info << endl;
+					Info << " - Number of corners: " << solid->NbCorners() << endl
+						<< " - Number of segments: " << solid->NbSegments() << endl
+						<< " - Number of faces: " << solid->NbFaces() << endl << endl;
+				}
+				myModel = std::make_shared<Cad_SingleVolume>(std::move(solid));
 			}
-			//Cad_tModelMaker::verbose = 1;
-			auto myMaker =
-				std::make_shared<Cad_tModelMaker>
-				(shapes.at(0), myModelInfo, myPairCriterion);
-			myMaker->MakeSolid();
-			myModel = myMaker->Model();
+			else if (shapes.size() > 1)
+			{
+				size_t k = 0;
+				Info << endl;
+				std::vector<std::shared_ptr<Cad_Solid>> solids;
+				for (const auto& x: shapes)
+				{
+					auto solid = Cad_Solid::MakeSolid(x, {
+													  myModelMakerInfo, myEdgeMakerInfo, mySurfMakerInfo,
+													  myPairCriterion
+						});
+					if (verbose)
+					{
+						
+						Info << " * Shape number " << ++k << ":" << endl;
+						Info << " - Number of corners: " << solid->NbCorners() << endl
+							<< " - Number of segments: " << solid->NbSegments() << endl
+							<< " - Number of faces: " << solid->NbFaces() << endl << endl;
+					}
+					solids.emplace_back(std::move(solid));
+				}
+				const auto model = std::make_shared<Cad_MultiVolume>(std::move(solids));
+				Cad_Tools::RenumberSurfaces(model);
+				myModel = model;
+			}
+			if (verbose > 1)
+			{
+				Cad_tModelMaker::verbose = 1;
+			}
 		}
-		if (verbose)
-		{
-			Info << endl;
-			Info << " - Number of corners: " << myModel->NbCorners() << endl
-				<< " - Number of segments: " << myModel->NbSegments() << endl
-				<< " - Number of faces: " << myModel->NbFaces() << endl << endl;
-		}
+		
 		exeTag = true;
 		if (verbose)
 		{
@@ -208,19 +238,18 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		// io functions [1/31/2022 Amir]
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadShapeFile(name); }), "loadFile");
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadShapeFile(name); }), "load_file");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "load_file");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "save_to");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "save_to");
 
 		// operators [1/31/2022 Amir]
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {execute(name); }), "execute");
 
 		// settings [1/31/2022 Amir]
-		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "setTolerance");
-		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](unsigned short i)-> void {Cad_tModelMaker::verbose = i; }), "setMakerVerbose");
+		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "set_tol");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "set_verbose");
 	}
 
 	std::string getString(char* argv)
@@ -262,14 +291,13 @@ int main(int argc, char* argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadFile(name [optional])" << endl
-				<< " - saveTo(name [optional])" << endl << endl
+				<< " - load_file(name [optional])" << endl
+				<< " - save_to(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setTolerance(double)" << endl
-				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl
-				<< " - setMakerVerbose(unsigned int); Levels: 0, 1" << endl << endl
+				<< " - set_tol(double)" << endl
+				<< " - set_verbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

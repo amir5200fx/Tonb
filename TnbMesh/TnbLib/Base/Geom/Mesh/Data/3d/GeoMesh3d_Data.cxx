@@ -237,7 +237,7 @@ namespace tnbLib
 							exist = Standard_True;
 							current_facet = facet_p;
 							//std::cout << "left element is detected." << std::endl;
-							current_facet->SetLeftElement(element);
+							current_facet->SetUpperElement(element);
 
 							break;
 						}
@@ -259,7 +259,7 @@ namespace tnbLib
 					current_facet = std::make_shared<Mesh3d_Facet>(++nbFacets, node1, node2, node3);
 					Debug_Null_Pointer(current_facet);
 
-					current_facet->SetRightElement(element);
+					current_facet->SetLowerElement(element);
 
 					node1->InsertToFacets(current_facet->Index(), current_facet);
 					node2->InsertToFacets(current_facet->Index(), current_facet);
@@ -318,26 +318,26 @@ namespace tnbLib
 			Debug_Null_Pointer(element.Facet0());
 			const auto& face0 = element.Facet0();
 
-			element.SetNeighbor0(face0->LeftElement());
-			if (face0->LeftElement().lock() IS_EQUAL x) element.SetNeighbor0(face0->RightElement());
+			element.SetNeighbor0(face0->UpperElement());
+			if (face0->UpperElement().lock() IS_EQUAL x) element.SetNeighbor0(face0->LowerElement());
 
 			Debug_Null_Pointer(element.Facet1());
 			const auto& face1 = element.Facet1();
 
-			element.SetNeighbor1(face1->LeftElement());
-			if (face1->LeftElement().lock() IS_EQUAL x) element.SetNeighbor1(face1->RightElement());
+			element.SetNeighbor1(face1->UpperElement());
+			if (face1->UpperElement().lock() IS_EQUAL x) element.SetNeighbor1(face1->LowerElement());
 
 			Debug_Null_Pointer(element.Facet2());
 			const auto& face2 = element.Facet2();
 
-			element.SetNeighbor2(face2->LeftElement());
-			if (face2->LeftElement().lock() IS_EQUAL x) element.SetNeighbor2(face2->RightElement());
+			element.SetNeighbor2(face2->UpperElement());
+			if (face2->UpperElement().lock() IS_EQUAL x) element.SetNeighbor2(face2->LowerElement());
 
 			Debug_Null_Pointer(element.Facet3());
 			const auto& face3 = element.Facet3();
 
-			element.SetNeighbor3(face3->LeftElement());
-			if (face3->LeftElement().lock() IS_EQUAL x) element.SetNeighbor3(face3->RightElement());
+			element.SetNeighbor3(face3->UpperElement());
+			if (face3->UpperElement().lock() IS_EQUAL x) element.SetNeighbor3(face3->LowerElement());
 		}
 #ifdef GeoMesh3d_Data_Construct_Debug
 		std::cout << "the neighbors are created." << std::endl;
@@ -351,14 +351,14 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			auto[f0, f1, f2, f3] = x->Facets();
 			{
-				auto leftElement = f0->LeftElement().lock();
+				auto leftElement = f0->UpperElement().lock();
 				/*if (NOT leftElement)
 				{
 					std::cout << " - boundary facet: " << f0->Index() << std::endl;
 				}*/
 				if (leftElement NOT_EQUAL x)
 				{
-					auto rightElement = f0->RightElement().lock();
+					auto rightElement = f0->LowerElement().lock();
 					if (rightElement NOT_EQUAL x)
 					{
 						FatalErrorIn(FunctionSIG)
@@ -371,14 +371,14 @@ namespace tnbLib
 				}
 			}
 			{
-				auto leftElement = f1->LeftElement().lock();
+				auto leftElement = f1->UpperElement().lock();
 				/*if (NOT leftElement)
 				{
 					std::cout << " - boundary facet: " << f1->Index() << std::endl;
 				}*/
 				if (leftElement NOT_EQUAL x)
 				{
-					auto rightElement = f1->RightElement().lock();
+					auto rightElement = f1->LowerElement().lock();
 					if (rightElement NOT_EQUAL x)
 					{
 						FatalErrorIn(FunctionSIG)
@@ -391,14 +391,14 @@ namespace tnbLib
 				}
 			}
 			{
-				auto leftElement = f2->LeftElement().lock();
+				auto leftElement = f2->UpperElement().lock();
 				/*if (NOT leftElement)
 				{
 					std::cout << " - boundary facet: " << f2->Index() << std::endl;
 				}*/
 				if (leftElement NOT_EQUAL x)
 				{
-					auto rightElement = f2->RightElement().lock();
+					auto rightElement = f2->LowerElement().lock();
 					if (rightElement NOT_EQUAL x)
 					{
 						FatalErrorIn(FunctionSIG)
@@ -411,14 +411,14 @@ namespace tnbLib
 				}
 			}
 			{
-				auto leftElement = f3->LeftElement().lock();
+				auto leftElement = f3->UpperElement().lock();
 				/*if (NOT leftElement)
 				{
 					std::cout << " - boundary facet: " << f3->Index() << std::endl;
 				}*/
 				if (leftElement NOT_EQUAL x)
 				{
-					auto rightElement = f3->RightElement().lock();
+					auto rightElement = f3->LowerElement().lock();
 					if (rightElement NOT_EQUAL x)
 					{
 						FatalErrorIn(FunctionSIG)
@@ -467,14 +467,14 @@ tnbLib::GeoMesh3d_Data::TriangleLocation
 		{
 			const auto& entity = *element->Facet(i);
 
-			auto rightElement = entity.RightElement().lock();
+			auto rightElement = entity.LowerElement().lock();
 			Debug_Null_Pointer(rightElement);
 
 			if (rightElement == element)
 			{
 				if (entity.IsLeftSide(theCoord))
 				{
-					auto leftElement = entity.LeftElement().lock();
+					auto leftElement = entity.UpperElement().lock();
 					neighbor = leftElement;
 					if (!neighbor)
 					{
@@ -486,7 +486,7 @@ tnbLib::GeoMesh3d_Data::TriangleLocation
 			}
 			else
 			{
-				auto leftElement = entity.LeftElement().lock();
+				auto leftElement = entity.UpperElement().lock();
 				if (NOT leftElement)
 				{
 					FatalErrorIn(FunctionSIG)

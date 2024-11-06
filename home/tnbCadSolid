@@ -1,9 +1,11 @@
-setVerbose(1);
+set_verbose(1);
 
-setTolerance(1.0E-4);
-
-loadFile();
+set_tol(1.0E-4);
+//.
+// Loading the file from the current directory
+load_file();
 
 execute();
-
-saveTo();
+//.
+// Saving the file with using the loaded file's name
+save_to();

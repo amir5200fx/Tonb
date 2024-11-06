@@ -5,9 +5,17 @@
 #include <Aft3d_Facet.hxx>
 #include <Aft3d_Edge.hxx>
 #include <Aft3d_Node.hxx>
+#include <Geo_AdTree.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo_BoxTools.hxx>
+#include <Entity3d_TopoTriangulation.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+unsigned short tnbLib::legLib::Aft3d_Volume::verbose = 0;
+
+Standard_Real tnbLib::legLib::Aft3d_VolumeConstants::DEFAULT_LOCALFRONT_FACTOR = 1.15;
 
 Standard_Boolean 
 tnbLib::legLib::Aft3d_VolumeCore::frontHandler::IsOnCurrentLevel
@@ -285,23 +293,23 @@ tnbLib::legLib::Aft3d_Volume::Meshing()
 	}
 
 	base::FrontHandler.SetCurrentLev(0);
-	base::FrontHandler.SetMaxLevel(base::Mesh.NbNodes());
+	base::FrontHandler.SetMaxLevel(Mesh.MaxNodeIdx());
 
-	base::CycleInfo.SetCycleMode(cycleMode::generation);
+	CycleInfo.SetCycleMode(cycleMode::generation);
 
 	while (NOT base::FrontHandler.Fronts().IsPriorityEmpty())
 	{
 		MeshOneLevel();
 
-		if (base::IsSameLevelSupplied())
+		if (IsSameLevelSupplied())
 		{
-			base::CycleInfo.SetCycleMode(cycleMode::generation);
+			CycleInfo.SetCycleMode(cycleMode::generation);
 			continue;
 		}
 
-		if (base::IsCavityRemoverSupplied())
+		if (IsCavityRemoverSupplied())
 		{
-			base::CycleInfo.SetCycleMode(cycleMode::repair);
+			CycleInfo.SetCycleMode(cycleMode::repair);
 		}
 
 		base::FrontHandler.SetCurrentLev(base::FrontHandler.LevelNumber() + 1);
@@ -311,9 +319,9 @@ tnbLib::legLib::Aft3d_Volume::Meshing()
 			return 1;
 		}
 
-		if (base::IsNextLevelSupplied())
+		if (IsNextLevelSupplied())
 		{
-			base::CycleInfo.SetCycleMode(cycleMode::generation);
+			CycleInfo.SetCycleMode(cycleMode::generation);
 		}
 	}
 	return 0;
@@ -337,30 +345,30 @@ void tnbLib::legLib::Aft3d_Volume::MeshOneLevel()
 		}
 
 		// remove the current from the front [3/1/2023 Payvand]
-		base::RemoveCurrentFromFront();
+		RemoveCurrentFromFront();
 
 		// get desired element size from back-ground mesh
-		base::CalcElementSize();
+		CalcElementSize();
 
 		// Calculate optimum coordinate of new point
-		base::CalcOptimumCoord();
+		CalcOptimumCoord();
 
-		base::CalcLocalFrontRadius();
+		CalcLocalFrontRadius();
 
 		// Set depth of searching radius
-		base::SetSearchingDepth();
+		SetSearchingDepth();
 
-		base::RetrieveLocalFrontNodes(localNodes, candidates);
+		RetrieveLocalFrontNodes(localNodes, candidates);
 
-		base::RetrieveLocalFrontEntities(localNodes, locals);
+		RetrieveLocalFrontEntities(localNodes, locals);
 
-		base::RetrieveEffectiveFronts(locals, effectives);
+		RetrieveEffectiveFronts(locals, effectives);
 
-		base::SortNodes(candidates);
+		SortNodes(candidates);
 
-		if (base::IsNewNodeValid(effectives))
+		if (IsNewNodeValid(effectives))
 		{
-			base::AddOptimumNodeTo(candidates);
+			AddOptimumNodeTo(candidates);
 		}
 
 		FindValidNode(candidates, effectives);
@@ -375,7 +383,7 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 	const std::vector<std::shared_ptr<Aft3d_Facet>>& theEffectives
 )
 {
-	static const Standard_Real AngleCriterion = 1.0 * PI / 180.0;
+	static constexpr Standard_Real AngleCriterion = 1.0 * PI / 180.0;
 	Debug_Null_Pointer(CycleInfo.Current());
 	Debug_Null_Pointer(CycleInfo.TempNode());
 	Debug_Null_Pointer(MetricMap());
@@ -405,10 +413,10 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 	const auto minDisFactorSq = minDisFactor * minDisFactor;
 
 	// Retrieve the effective nodes [1/17/2023 Payvand]
-	auto nodes =
+	const auto nodes =
 		Aft3d_Tools::RetrieveNodes(theEffectives);
 
-	auto segments = Aft3d_Tools::RetrieveEdges(theEffectives);
+	const auto segments = Aft3d_Tools::RetrieveEdges(theEffectives);
 
 #ifdef FindValidNode_DEBUG
 	std::vector<std::pair<Standard_Integer, word>> flags;
@@ -451,43 +459,40 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 			const auto& n1 = eff->Node1();
 			const auto& n2 = eff->Node2();
 
-			if (NOT Geo_Tools::IsOneCommonPointTwoTriangles(v0, v1, nodeId, n0->Index(), n1->Index(), n2->Index()))
+			if (NOT Geo_Tools::IsOneCommonPointTwoTriangles(v0, v1, nodeId, n0->Index(), n1->Index(), n2->Index()) &&
+				Geo_Tools::IsIntersectionTwoTriangles_cgal(node0->Coord(), node1->Coord(), node.Coord(),
+				                                           n0->Coord(), n1->Coord(), n2->Coord()))
 			{
-				if (Geo_Tools::IsIntersectionTwoTriangles_cgal(node0->Coord(), node1->Coord(), node.Coord(), n0->Coord(), n1->Coord(), n2->Coord()))
-				{
-					flag = 1;
+				flag = 1;
 #ifdef FindValidNode_DEBUG
 					auto paired = std::make_pair(x->Index(), "intersection");
 					flags.push_back(std::move(paired));
 #endif // FindValidNode_DEBUG
-					break;
-				}
+				break;
 			}
 
-			if (NOT Geo_Tools::IsOneCommonPointTwoTriangles(v1, v2, nodeId, n0->Index(), n1->Index(), n2->Index()))
+			if (NOT Geo_Tools::IsOneCommonPointTwoTriangles(v1, v2, nodeId, n0->Index(), n1->Index(), n2->Index()) &&
+				Geo_Tools::IsIntersectionTwoTriangles_cgal(node1->Coord(), node2->Coord(), node.Coord(), n0->Coord(),
+				                                           n1->Coord(), n2->Coord()))
 			{
-				if (Geo_Tools::IsIntersectionTwoTriangles_cgal(node1->Coord(), node2->Coord(), node.Coord(), n0->Coord(), n1->Coord(), n2->Coord()))
-				{
-					flag = 1;
+				flag = 1;
 #ifdef FindValidNode_DEBUG
 					auto paired = std::make_pair(x->Index(), "intersection");
 					flags.push_back(std::move(paired));
 #endif // FindValidNode_DEBUG
-					break;
-				}
+				break;
 			}
 
-			if (NOT Geo_Tools::IsOneCommonPointTwoTriangles(v2, v0, nodeId, n0->Index(), n1->Index(), n2->Index()))
+			if (NOT Geo_Tools::IsOneCommonPointTwoTriangles(v2, v0, nodeId, n0->Index(), n1->Index(), n2->Index()) &&
+				Geo_Tools::IsIntersectionTwoTriangles_cgal(node2->Coord(), node0->Coord(), node.Coord(), n0->Coord(),
+				                                           n1->Coord(), n2->Coord()))
 			{
-				if (Geo_Tools::IsIntersectionTwoTriangles_cgal(node2->Coord(), node0->Coord(), node.Coord(), n0->Coord(), n1->Coord(), n2->Coord()))
-				{
-					flag = 1;
+				flag = 1;
 #ifdef FindValidNode_DEBUG
 					auto paired = std::make_pair(x->Index(), "intersection");
 					flags.push_back(std::move(paired));
 #endif // FindValidNode_DEBUG
-					break;
-				}
+				break;
 			}
 		}
 
@@ -516,7 +521,7 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 
 		if (flag) continue;
 
-		if ((x NOT_EQUAL newNode) AND CheckAngle(current, node, AngleCriterion))
+		if ((x NOT_EQUAL newNode) /*AND CheckAngle(current, node, AngleCriterion)*/)
 		{
 			flag = 3;
 #ifdef FindValidNode_DEBUG
@@ -529,43 +534,37 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 		// Checking the distance between the effective nodes and the new triangles [1/17/2023 Payvand]
 		for (const auto& n : nodes)
 		{
-			if (IsNewFace(node0, node1, x))
+			if (IsNewFace(node0, node1, x) && Geo_Tools::CalcSquareDistancePointFromTriangle_cgal(
+				n->Coord(), P0, P1, x->Coord()) < minDisFactorSq)
 			{
-				if (Geo_Tools::CalcSquareDistancePointFromTriangle_cgal(n->Coord(), P0, P1, x->Coord()) < minDisFactorSq)
-				{
-					flag = 4;
+				flag = 4;
 #ifdef FindValidNode_DEBUG
 					auto paired = std::make_pair(x->Index(), "min. PT dis");
 					flags.push_back(std::move(paired));
 #endif // FindValidNode_DEBUG
-					break;
-				}
+				break;
 			}
 
-			if (IsNewFace(node1, node2, x))
+			if (IsNewFace(node1, node2, x) && Geo_Tools::CalcSquareDistancePointFromTriangle_cgal(
+				n->Coord(), P1, P2, x->Coord()) < minDisFactorSq)
 			{
-				if (Geo_Tools::CalcSquareDistancePointFromTriangle_cgal(n->Coord(), P1, P2, x->Coord()) < minDisFactorSq)
-				{
-					flag = 4;
+				flag = 4;
 #ifdef FindValidNode_DEBUG
 					auto paired = std::make_pair(x->Index(), "min. PT dis");
 					flags.push_back(std::move(paired));
 #endif // FindValidNode_DEBUG
-					break;
-				}
+				break;
 			}
 
-			if (IsNewFace(node2, node0, x))
+			if (IsNewFace(node2, node0, x) && Geo_Tools::CalcSquareDistancePointFromTriangle_cgal(
+				n->Coord(), P2, P0, x->Coord()) < minDisFactorSq)
 			{
-				if (Geo_Tools::CalcSquareDistancePointFromTriangle_cgal(n->Coord(), P2, P0, x->Coord()) < minDisFactorSq)
-				{
-					flag = 4;
+				flag = 4;
 #ifdef FindValidNode_DEBUG
 					auto paired = std::make_pair(x->Index(), "min. PT dis");
 					flags.push_back(std::move(paired));
 #endif // FindValidNode_DEBUG
-					break;
-				}
+				break;
 			}
 		}
 
@@ -578,7 +577,8 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 
 			if (IsNewSegment(node0, x))
 			{
-				if (Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly(P0, x->Coord(), Aft3d_Tools::GetCoord0(*seg), Aft3d_Tools::GetCoord1(*seg)) < minDisFactorSq)
+				if (Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly(
+					P0, x->Coord(), Aft3d_Tools::GetCoord0(*seg), Aft3d_Tools::GetCoord1(*seg)) < minDisFactorSq)
 				{
 					flag = 5;
 #ifdef FindValidNode_DEBUG
@@ -591,7 +591,8 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 
 			if (IsNewSegment(node1, x))
 			{
-				if (Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly(P1, x->Coord(), Aft3d_Tools::GetCoord0(*seg), Aft3d_Tools::GetCoord1(*seg)) < minDisFactorSq)
+				if (Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly(
+					P1, x->Coord(), Aft3d_Tools::GetCoord0(*seg), Aft3d_Tools::GetCoord1(*seg)) < minDisFactorSq)
 				{
 					flag = 5;
 #ifdef FindValidNode_DEBUG
@@ -604,7 +605,8 @@ void tnbLib::legLib::Aft3d_Volume::FindValidNode
 
 			if (IsNewSegment(node2, x))
 			{
-				if (Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly(P2, x->Coord(), Aft3d_Tools::GetCoord0(*seg), Aft3d_Tools::GetCoord1(*seg)) < minDisFactorSq)
+				if (Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly(
+					P2, x->Coord(), Aft3d_Tools::GetCoord0(*seg), Aft3d_Tools::GetCoord1(*seg)) < minDisFactorSq)
 				{
 					flag = 5;
 #ifdef FindValidNode_DEBUG
@@ -653,6 +655,74 @@ void tnbLib::legLib::Aft3d_Volume::UpdateFront()
 	RemoveEntitiesFromGeometry();
 
 	RegisterElement();
+}
+
+void tnbLib::legLib::Aft3d_Volume::Import(const Entity3d_Triangulation& theVolume)
+{
+	if (verbose)
+	{
+		Info << "\n";
+		Global_Tools::PrintFooterFunc("Aft3d_Volume::Import(Triangulation)");
+		Info << "\n";
+	}
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Make topology...\n";
+	}
+	const auto topo_mesh = std::make_shared<Entity3d_TopoTriangulation>(theVolume);
+	Mesh.MaxNodeIdxRef() = theVolume.NbPoints();
+	Mesh.MaxEdgeIdxRef() = topo_mesh->NbSegments();
+	Mesh.MaxElementIdxRef() = theVolume.NbConnectivity();
+	Mesh.MaxElementIdxRef() = 0;
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Create the boundaries...\n";
+	}
+	// Creating the boundaries
+	CreateBoundary(*topo_mesh);
+	if (verbose)
+	{
+		Info << " \n"
+			<< " - Import the nodes...\n";
+	}
+	// Retrieving the nodes
+	const auto nodes = Aft3d_Tools::RetrieveNodes(*theBoundary_);
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Import the edges...\n";
+	}
+	// Retrieving the edges
+	auto edges = Aft3d_Tools::RetrieveEdges(*theBoundary_);
+	// computing the dimension of the region
+	const auto region = Geo_BoxTools::GetBox(Aft3d_Tools::RetriveGeometries(nodes), 0);
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Register the nodes...\n";
+	}
+	// Set searching the region
+	EngineRef() = std::make_shared<Geo_AdTree<std::shared_ptr<Aft3d_Node>>>();
+	Engine()->SetGeometryCoordFunc([](const std::shared_ptr<Aft3d_Node>& node)-> const Pnt3d& {return node->Coord(); });
+	Engine()->SetGeometryRegion(region.Expanded(region.Diameter() * 1.e-3));
+	// registering the nodes
+	Engine()->InsertToGeometry(nodes);
+	if (verbose)
+	{
+		Info << "\n"
+			<< " - Make the front...\n";
+	}
+	// creating the front
+	FrontHandler.InsertToFronts(*theBoundary_);
+	//.
+	// The triangulation has been successfully imported.
+	if (verbose)
+	{
+		Info << "\n";
+		Global_Tools::PrintFooterFunc("Aft3d_Volume::Import(Triangulation)");
+	}
 }
 
 Standard_Boolean 
