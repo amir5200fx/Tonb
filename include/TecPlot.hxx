@@ -156,6 +156,30 @@ namespace tnbLib
 			std::fstream& file
 		);
 
+		TnbGeo_EXPORT void WriteCellCenteredFeQuadrilateralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbElements,
+			const Standard_Integer NbVar,
+			std::stringstream& theStream
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeQuadrilateralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbElements,
+			const Standard_Integer NbVar,
+			OFstream& theFile
+		);
+
+		TnbGeo_EXPORT void WriteCellCenteredFeQuadrilateralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbElements,
+			const Standard_Integer NbVars,
+			std::fstream& file
+		);
+
 		TnbGeo_EXPORT void WriteCellCenteredFeTriangular3DZone
 		(
 			const Standard_Integer NbNodes,
@@ -668,6 +692,16 @@ namespace tnbLib
 			const std::vector<std::array<Type, nbVAR>>& var, 
 			const std::vector<Pnt2d>& thePoints, 
 			const std::vector<connectivity::triple>& Triangles, 
+			std::fstream& file
+		);
+
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::quadruple>& Triangles,
 			std::fstream& file
 		);
 

@@ -808,6 +808,25 @@ namespace tnbLib
 			WriteCellCenteredField(Triangles, var, file);
 		}
 
+		template<class Type, size_t nbVAR>
+		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt2d>& thePoints,
+			const std::vector<connectivity::quadruple>& Elements, std::fstream& file)
+		{
+			word Variables = "VARIABLES = X Y " + theVarNames;
+			file << Variables << "\n";
+
+			WriteCellCenteredFeQuadrilateralZone
+			(
+				static_cast<Standard_Integer>(thePoints.size()),
+				static_cast<Standard_Integer>(Elements.size()),
+				static_cast<Standard_Integer>(nbVAR), file);
+
+			WritePointsVariables(thePoints, file);
+
+			WriteCellCenteredField(Elements, var, file);
+		}
+
 		template <class Type, size_t nbVAR>
 		void ExportCellCenteredField(const word& theVarNames, const std::vector<std::array<Type, nbVAR>>& var,
 			const std::vector<Pnt3d>& thePoints, const std::vector<connectivity::quadruple>& theElements,
