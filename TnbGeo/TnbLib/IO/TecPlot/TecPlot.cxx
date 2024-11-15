@@ -190,8 +190,7 @@ void tnbLib::Io::WriteFeTriangleZone
 		<< NbNodes
 		<< ", E = "
 		<< NbTriangles
-		<< ", DATAPACKING= POINT, ZONETYPE= FETRIANGLE";
-	theFile << endl;
+		<< ", DATAPACKING= POINT, ZONETYPE= FETRIANGLE\n";
 }
 
 void tnbLib::Io::WriteFeQuadrilateralZone(const Standard_Integer NbNodes, const Standard_Integer NbTriangles,
@@ -217,8 +216,7 @@ void tnbLib::Io::WriteFeQuadrilateralZone
 		<< NbNodes
 		<< ", E = "
 		<< NbTriangles
-		<< ", DATAPACKING= POINT, ZONETYPE= FEQUADRILATERAL";
-	theFile << endl;
+		<< ", DATAPACKING= POINT, ZONETYPE= FEQUADRILATERAL\n";
 }
 
 void tnbLib::Io::WriteFeTetrahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbTets,
@@ -244,8 +242,7 @@ void tnbLib::Io::WriteFeTetrahedralZone
 		<< NbNodes
 		<< ", E = "
 		<< NbTets
-		<< ", DATAPACKING= POINT, ZONETYPE= FETETRAHEDRON";
-	theFile << endl;
+		<< ", DATAPACKING= POINT, ZONETYPE= FETETRAHEDRON\n";
 }
 
 void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
@@ -256,8 +253,7 @@ void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Sta
 		<< NbNodes
 		<< ", E = "
 		<< NbElements
-		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK";
-	theFile << endl;
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK\n";
 }
 
 void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
@@ -268,8 +264,7 @@ void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Sta
 		<< NbNodes
 		<< ", E = "
 		<< NbElements
-		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK";
-	theFile << endl;
+		<< ", DATAPACKING= POINT, ZONETYPE= FEBRICK\n";
 }
 
 void tnbLib::Io::WriteFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
@@ -301,7 +296,6 @@ void tnbLib::Io::WriteCellCenteredFeTriangularZone(const Standard_Integer NbNode
 		theStream << "  ";
 	}
 	theStream << "]=CELLCENTERED)\n";
-	theStream << "\n";
 }
 
 void tnbLib::Io::WriteCellCenteredFeTriangularZone
@@ -327,7 +321,81 @@ void tnbLib::Io::WriteCellCenteredFeTriangularZone
 		theFile << "  ";
 	}
 	theFile << "]=CELLCENTERED)\n";
-	theFile << endl;
+}
+
+void tnbLib::Io::WriteCellCenteredFeQuadrilateralZone
+(
+	const Standard_Integer NbNodes,
+	const Standard_Integer NbElements,
+	const Standard_Integer NbVar,
+	OFstream& theFile
+)
+{
+	theFile
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E= "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEQUADRILATERAL, VARLOCATION=([1,2]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		theFile << 3 + K;
+		++K;
+		if (K >= NbVar) break;
+		theFile << "  ";
+	}
+	theFile << "]=CELLCENTERED)\n";
+}
+
+void tnbLib::Io::WriteCellCenteredFeQuadrilateralZone
+(
+	const Standard_Integer NbNodes,
+	const Standard_Integer NbElements,
+	const Standard_Integer NbVar,
+	std::stringstream& theFile
+)
+{
+	theFile
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E= "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEQUADRILATERAL, VARLOCATION=([1,2]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		theFile << 3 + K;
+		++K;
+		if (K >= NbVar) break;
+		theFile << "  ";
+	}
+	theFile << "]=CELLCENTERED)\n";
+}
+
+void tnbLib::Io::WriteCellCenteredFeQuadrilateralZone
+(
+	const Standard_Integer NbNodes,
+	const Standard_Integer NbElements,
+	const Standard_Integer NbVar,
+	std::fstream& theFile
+)
+{
+	theFile
+		<< "ZONE N= "
+		<< NbNodes
+		<< ", E= "
+		<< NbElements
+		<< ", DATAPACKING=BLOCK, ZONETYPE=FEQUADRILATERAL, VARLOCATION=([1,2]=NODAL, [";
+	Standard_Integer K = 0;
+	while (Standard_True)
+	{
+		theFile << 3 + K;
+		++K;
+		if (K >= NbVar) break;
+		theFile << "  ";
+	}
+	theFile << "]=CELLCENTERED)\n";
 }
 
 void tnbLib::Io::WriteCellCenteredFeTriangular3DZone(const Standard_Integer NbNodes, const Standard_Integer NbTris,
@@ -348,7 +416,6 @@ void tnbLib::Io::WriteCellCenteredFeTriangular3DZone(const Standard_Integer NbNo
 		theStream << "  ";
 	}
 	theStream << "]=CELLCENTERED)\n";
-	theStream << "\n";
 }
 
 void tnbLib::Io::WriteCellCenteredFeTriangular3DZone
@@ -374,7 +441,6 @@ void tnbLib::Io::WriteCellCenteredFeTriangular3DZone
 		theFile << "  ";
 	}
 	theFile << "]=CELLCENTERED)\n";
-	theFile << endl;
 }
 
 void tnbLib::Io::WriteCellCenteredFeTetrahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbTets,
@@ -395,7 +461,6 @@ void tnbLib::Io::WriteCellCenteredFeTetrahedralZone(const Standard_Integer NbNod
 		theStream << "  ";
 	}
 	theStream << "]=CELLCENTERED)\n";
-	theStream << "\n";
 }
 
 void tnbLib::Io::WriteCellCenteredFeTetrahedralZone
@@ -421,7 +486,6 @@ void tnbLib::Io::WriteCellCenteredFeTetrahedralZone
 		theFile << "  ";
 	}
 	theFile << "]=CELLCENTERED)\n";
-	theFile << endl;
 }
 
 void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
@@ -442,7 +506,6 @@ void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNode
 		theFile << "  ";
 	}
 	theFile << "]=CELLCENTERED)\n";
-	theFile << endl;
 }
 
 void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
@@ -463,7 +526,6 @@ void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNode
 		file << "  ";
 	}
 	file << "]=CELLCENTERED)\n";
-	file << endl;
 }
 
 void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNodes, const Standard_Integer NbElements,
@@ -484,7 +546,6 @@ void tnbLib::Io::WriteCellCenteredFeHexahedralZone(const Standard_Integer NbNode
 		file << "  ";
 	}
 	file << "]=CELLCENTERED)\n";
-	file << endl;
 }
 
 void tnbLib::Io::WriteFeBrickZone(const Standard_Integer NbNodes, const Standard_Integer NbBricks,
@@ -511,8 +572,7 @@ void tnbLib::Io::WriteFeBrickZone
 		<< NbNodes
 		<< ", E = "
 		<< NbBricks
-		<< ", DATAPACKING=POINT, ZONETYPE=FEBRICK";
-	theFile << endl;
+		<< ", DATAPACKING=POINT, ZONETYPE=FEBRICK\n";
 }
 
 void tnbLib::Io::WriteIorderedZone
@@ -537,8 +597,7 @@ void tnbLib::Io::WriteIorderedZone
 	theFile
 		<< "ZONE I= "
 		<< NbNodes
-		<< ", DATAPACKING=BLOCK";
-	theFile << endl;
+		<< ", DATAPACKING=BLOCK\n";
 }
 
 void tnbLib::Io::ExportMesh
