@@ -68,3 +68,11 @@ void tnbLib::Entity3d_CmpConnect_Brick::Update(const std::vector<Standard_Intege
 		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
 	}
 }
+
+void tnbLib::Entity3d_CmpConnect_Brick::Update(const std::map<Standard_Integer, Standard_Integer>& indices)
+{
+	for (auto& i: theCmpts_)
+	{
+		i = indices.at(i);
+	}
+}

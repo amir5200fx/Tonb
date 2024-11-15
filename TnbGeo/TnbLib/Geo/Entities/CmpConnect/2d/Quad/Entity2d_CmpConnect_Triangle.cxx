@@ -68,8 +68,16 @@ tnbLib::Entity2d_CmpConnect_Triangle::Copy() const
 
 void tnbLib::Entity2d_CmpConnect_Triangle::Update(const std::vector<Standard_Integer>& indices)
 {
-	for (int i = 0; i < nbCmpts; i++)
+	for (auto& i : theCmpts_)
 	{
-		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
+		i = indices.at(i - 1);
+	}
+}
+
+void tnbLib::Entity2d_CmpConnect_Triangle::Update(const std::map<Standard_Integer, Standard_Integer>& indices)
+{
+	for (auto& i: theCmpts_)
+	{
+		i = indices.at(i);
 	}
 }

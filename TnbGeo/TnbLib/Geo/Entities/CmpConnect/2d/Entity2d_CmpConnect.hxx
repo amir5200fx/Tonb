@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <vector>
+#include <map>
 #include <array>
 
 #include <Standard_TypeDef.hxx>
@@ -68,7 +69,7 @@ namespace tnbLib
 		virtual std::shared_ptr<Entity2d_CmpConnect> Copy() const = 0;
 
 		virtual void Update(const std::vector<Standard_Integer>&) = 0;
-		
+		virtual void Update(const std::map<Standard_Integer, Standard_Integer>&) = 0;
 	};
 }
 
