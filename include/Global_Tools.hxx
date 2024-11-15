@@ -144,6 +144,8 @@ namespace tnbLib
 		static TnbGlobal_EXPORT std::string ConvertToUpperCase(const std::string& s);
 		static TnbGlobal_EXPORT std::string ConvertToLowerCase(const std::string& s);
 
+		static TnbGlobal_EXPORT void PrintHeaderFunc(const std::string& func_name);
+		static TnbGlobal_EXPORT void PrintFooterFunc(const std::string& func_name);
 	};
 }
 

@@ -57,3 +57,11 @@ void tnbLib::Entity2d_CmpConnect_Polygon::Update(const std::vector<Standard_Inte
 		theCmpts_.at(i) = indices.at(theCmpts_.at(i) - 1);
 	}
 }
+
+void tnbLib::Entity2d_CmpConnect_Polygon::Update(const std::map<Standard_Integer, Standard_Integer>& indices)
+{
+	for (auto& i: theCmpts_)
+	{
+		i = indices.at(i);
+	}
+}
