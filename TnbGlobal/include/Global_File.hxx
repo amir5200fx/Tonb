@@ -3,16 +3,12 @@
 #define _Global_File_Header
 
 #include <Global_Module.hxx>
-#include <Global_Timer.hxx>
 #include <Global_Serialization.hxx>
 #include <word.hxx>
-#include <TnbError.hxx>
-#include <OSstream.hxx>
 
 #include <boost/filesystem.hpp>
 
 #include <vector>
-#include <memory>
 
 namespace tnbLib
 {

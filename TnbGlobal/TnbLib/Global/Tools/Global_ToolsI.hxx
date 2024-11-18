@@ -3,7 +3,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+//#include <gp.hxx>
 #endif // _DEBUG
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -135,7 +135,7 @@ namespace tnbLib
 		)
 	{
 #ifdef _DEBUG
-		if (std::abs(x1 - x0) < gp::Resolution())
+		if (std::abs(x1 - x0) < 1.e-28)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "divided by zero has been detected!" << endl

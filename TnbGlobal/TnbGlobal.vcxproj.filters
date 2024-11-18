@@ -58,11 +58,11 @@
     <Filter Include="TnbLib\Global\chaiscript">
       <UniqueIdentifier>{f36543db-cb3d-4df7-815c-c36c16331dd7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Global\version">
-      <UniqueIdentifier>{62395551-dcb1-45f1-a3c8-5a72a5efd60c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Global\verbose">
       <UniqueIdentifier>{b631238b-0303-4a55-abe0-c01f9626dc64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\config">
+      <UniqueIdentifier>{28c49ba2-533c-4979-8834-50c1af241114}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,14 +171,29 @@
     <ClInclude Include="TnbLib\Global\chaiscript\Global_Chaiscript.hxx">
       <Filter>TnbLib\Global\chaiscript</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Global\version\Global_Version.hxx">
-      <Filter>TnbLib\Global\version</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Global\verbose\Global_Verbose.hxx">
       <Filter>TnbLib\Global\verbose</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Global\chaiscript\Global_ChaiscriptFwd.hxx">
       <Filter>TnbLib\Global\chaiscript</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\config\Global_Config.hxx">
+      <Filter>TnbLib\Global\config</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_CascadeTypes.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_TypeDef.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Real.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Interger.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Handle.hxx">
+      <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -220,9 +235,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Global\verbose\Global_Verbose.cxx">
       <Filter>TnbLib\Global\verbose</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Global\version\Global_Version.cxx">
-      <Filter>TnbLib\Global\version</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

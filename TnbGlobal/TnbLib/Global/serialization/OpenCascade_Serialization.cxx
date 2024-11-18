@@ -5,17 +5,17 @@
 #endif // DebugInfo
 
 
-#include <BinTools_Curve2dSet.hxx>
-#include <GeomTools.hxx>
+#include <opencascade/BinTools_Curve2dSet.hxx>
+#include <opencascade/GeomTools.hxx>
 #include <istream>
 
-#include <gp_Pln.hxx>
-#include <Poly_Triangle.hxx>
-#include <Geom2d_Curve.hxx>
-#include <Geom_Curve.hxx>
-#include <Geom_Surface.hxx>
-#include <TopoDS_Shape.hxx>
-#include <BRepTools.hxx>
+//#include <opencascade/gp_Pln.hxx>
+//#include <opencascade/Poly_Triangle.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
+#include <opencascade/Geom_Surface.hxx>
+//#include <opencascade/TopoDS_Shape.hxx>
+#include <opencascade/BRepTools.hxx>
 
 //template<>
 //void boost::serialization::save
@@ -164,7 +164,7 @@ void boost::serialization::save
 	ar << s;
 }
 
-#include <BRep_Builder.hxx>
+#include <opencascade/BRep_Builder.hxx>
 
 template<>
 void boost::serialization::load
