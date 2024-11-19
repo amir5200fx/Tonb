@@ -2,7 +2,7 @@
 #ifndef _Entity2d_LineRef_Header
 #define _Entity2d_LineRef_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <Geo_Module.hxx>
 
 namespace tnbLib

@@ -26,20 +26,20 @@
 #undef DebugInfo
 #endif // DebugInfo
 
-#include <Poly_Triangulation.hxx>
-#include <Geom_BSplineSurface.hxx>
-#include <Geom_Surface.hxx>
-#include <TopoDS.hxx>
-#include <TopoDS_Face.hxx>
-#include <TopoDS_Edge.hxx>
-#include <BRepTools.hxx>
-#include <BRep_Tool.hxx>
-#include <BRepLib.hxx>
-#include <TopExp_Explorer.hxx>
-#include <ShapeFix_Wire.hxx>
-#include <BRepTools_WireExplorer.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
-#include <Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
+#include <opencascade/Geom_BSplineSurface.hxx>
+#include <opencascade/Geom_Surface.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/TopoDS_Face.hxx>
+#include <opencascade/TopoDS_Edge.hxx>
+#include <opencascade/BRepTools.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/BRepLib.hxx>
+#include <opencascade/TopExp_Explorer.hxx>
+#include <opencascade/ShapeFix_Wire.hxx>
+#include <opencascade/BRepTools_WireExplorer.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
 
 #include <exception>
 

@@ -75,8 +75,8 @@ tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 {
 }
 
-#include <Geom2dAPI_InterCurveCurve.hxx>
-#include <Geom2d_Line.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Geom2d_Line.hxx>
 
 Standard_Real 
 tnbLib::geoLib::ProfileFun_Geom::Value

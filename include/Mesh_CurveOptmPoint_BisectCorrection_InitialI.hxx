@@ -6,7 +6,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 template<class gCurveType, class MetricPrcsrType>
 inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, MetricPrcsrType>::Perform()
 {

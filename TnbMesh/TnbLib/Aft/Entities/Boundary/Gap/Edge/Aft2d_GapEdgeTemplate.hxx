@@ -3,8 +3,7 @@
 #define _Aft2d_GapEdgeTemplate_Header
 
 #include <Entity2d_PolygonFwd.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

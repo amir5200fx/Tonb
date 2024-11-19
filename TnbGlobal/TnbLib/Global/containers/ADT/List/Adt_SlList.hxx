@@ -2,7 +2,7 @@
 #ifndef _Adt_SlList_Header
 #define _Adt_SlList_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <algorithm>
 
 namespace tnbLib

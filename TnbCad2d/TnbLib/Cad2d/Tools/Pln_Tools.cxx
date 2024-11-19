@@ -24,24 +24,24 @@
 #include <Geo_BoxTools.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
-#include <gp_Pln.hxx>
-#include <Bnd_Box2d.hxx>
-#include <BndLib_Add2dCurve.hxx>
-#include <BSplCLib.hxx>
-#include <Geom_Plane.hxx>
-#include <Geom2d_Line.hxx>
-#include <Geom2d_Circle.hxx>
-#include <Geom2d_BoundedCurve.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
-#include <Geom2dConvert.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
-#include <Geom2dAPI_InterCurveCurve.hxx>
-#include <BRep_Tool.hxx>
-#include <TopExp_Explorer.hxx>
-#include <TopoDS.hxx>
-#include <TopoDS_Edge.hxx>
-#include <TopoDS_Shape.hxx>
-#include <Precision.hxx>
+#include <opencascade/gp_Pln.hxx>
+#include <opencascade/Bnd_Box2d.hxx>
+#include <opencascade/BndLib_Add2dCurve.hxx>
+#include <opencascade/BSplCLib.hxx>
+#include <opencascade/Geom_Plane.hxx>
+#include <opencascade/Geom2d_Line.hxx>
+#include <opencascade/Geom2d_Circle.hxx>
+#include <opencascade/Geom2d_BoundedCurve.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
+#include <opencascade/Geom2dConvert.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/TopExp_Explorer.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/TopoDS_Edge.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
+#include <opencascade/Precision.hxx>
 
 Standard_Real 
 tnbLib::Pln_Tools::CalcPrecision

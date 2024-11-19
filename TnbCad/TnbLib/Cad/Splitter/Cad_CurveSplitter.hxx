@@ -2,10 +2,9 @@
 #ifndef _Cad_CurveSplitter_Header
 #define _Cad_CurveSplitter_Header
 
-#include <Global_Done.hxx>
 #include <Cad_Module.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [1/16/2022 Amir]
 class Geom_Curve;

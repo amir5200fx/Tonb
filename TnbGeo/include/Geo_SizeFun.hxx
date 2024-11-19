@@ -2,7 +2,7 @@
 #ifndef _Geo_SizeFun_Header
 #define _Geo_SizeFun_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 
@@ -20,14 +20,14 @@ namespace tnbLib
 
 		// default constructor [6/5/2022 Amir]
 
-		Geo_SizeFun()
-		{}
+		Geo_SizeFun() = default;
 
 
 		// constructors [6/5/2022 Amir]
 
 
 	public:
+		virtual ~Geo_SizeFun() = default;
 
 		typedef Point ptType;
 

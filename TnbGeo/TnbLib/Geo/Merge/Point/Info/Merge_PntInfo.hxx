@@ -2,10 +2,9 @@
 #ifndef _Merge_PntInfo_Header
 #define _Merge_PntInfo_Header
 
-#include <Standard_TypeDef.hxx>
-
 #include <Global_Serialization.hxx>
 #include <Geo_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -4,9 +4,8 @@
 
 #include <Cad_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
-
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>

@@ -19,14 +19,14 @@
 
 #include <predicates.h>
 
-#include <Poly_Triangulation.hxx>
-#include <Poly_Triangle.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
+#include <opencascade/Poly_Triangle.hxx>
 
 #ifdef Handle
 #undef Handle
 #endif // Handle
-#include <gp_Pln.hxx>
-#include <gp_Lin2d.hxx>
+#include <opencascade/gp_Pln.hxx>
+#include <opencascade/gp_Lin2d.hxx>
 
 
 const Standard_Real tnbLib::Geo_Tools::OnePerTwo = 1.0 / 2.0;

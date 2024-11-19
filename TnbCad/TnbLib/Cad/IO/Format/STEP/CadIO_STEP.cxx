@@ -11,9 +11,9 @@
 #endif // DebugInfo
 
 
-#include <STEPControl_Reader.hxx>
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
+#include <opencascade/STEPControl_Reader.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BRepBndLib.hxx>
 #include <Cad_Tools.hxx>
 
 unsigned short tnbLib::CadIO_STEP::verbose(0);

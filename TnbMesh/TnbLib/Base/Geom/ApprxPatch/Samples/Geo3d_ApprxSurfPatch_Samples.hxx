@@ -7,8 +7,6 @@
 #include <Entity2d_TriangleFwd.hxx>
 #include <Pnt2d.hxx>
 
-#include <Standard_TypeDef.hxx>
-
 #include <memory>
 #include <vector>
 

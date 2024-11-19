@@ -5,27 +5,27 @@
 #include <Global_Serialization.hxx>
 #include <Geo_Module.hxx>
 
-#include <gp_XY.hxx>
-#include <gp_XYZ.hxx>
-#include <gp_Pnt2d.hxx>
-#include <gp_Pnt.hxx>
-#include <gp_Dir2d.hxx>
-#include <gp_Dir.hxx>
-#include <gp_Ax1.hxx>
-#include <gp_Ax2.hxx>
-#include <gp_Dir.hxx>
-#include <gp_Ax2d.hxx>
-#include <gp_Mat2d.hxx>
-#include <gp_Mat.hxx>
-#include <gp_Vec.hxx>
-#include <gp_Vec2d.hxx>
-#include <gp_Trsf2d.hxx>
-#include <gp_Trsf.hxx>
+#include <opencascade/gp_XY.hxx>
+#include <opencascade/gp_XYZ.hxx>
+#include <opencascade/gp_Pnt2d.hxx>
+#include <opencascade/gp_Pnt.hxx>
+#include <opencascade/gp_Dir2d.hxx>
+#include <opencascade/gp_Dir.hxx>
+#include <opencascade/gp_Ax1.hxx>
+#include <opencascade/gp_Ax2.hxx>
+#include <opencascade/gp_Dir.hxx>
+#include <opencascade/gp_Ax2d.hxx>
+#include <opencascade/gp_Mat2d.hxx>
+#include <opencascade/gp_Mat.hxx>
+#include <opencascade/gp_Vec.hxx>
+#include <opencascade/gp_Vec2d.hxx>
+#include <opencascade/gp_Trsf2d.hxx>
+#include <opencascade/gp_Trsf.hxx>
 
-#include <TColgp_Array1OfPnt.hxx>
-#include <TColgp_Array1OfPnt2d.hxx>
-#include <TShort_Array1OfShortReal.hxx>
-#include <Poly_Array1OfTriangle.hxx>
+#include <opencascade/TColgp_Array1OfPnt.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/TShort_Array1OfShortReal.hxx>
+#include <opencascade/Poly_Array1OfTriangle.hxx>
 
 // Forward Declarations
 class Geom2d_Curve;

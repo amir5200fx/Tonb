@@ -13,14 +13,14 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Poly_Triangulation.hxx>
-#include <Geom_BoundedCurve.hxx>
-#include <Geom_Surface.hxx>
-#include <Geom_BSplineSurface.hxx>
-#include <BRep_Tool.hxx>
-#include <TopoDS.hxx>
-#include <TopoDS_Face.hxx>
-#include <TopExp_Explorer.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
+#include <opencascade/Geom_BoundedCurve.hxx>
+#include <opencascade/Geom_Surface.hxx>
+#include <opencascade/Geom_BSplineSurface.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/TopoDS_Face.hxx>
+#include <opencascade/TopExp_Explorer.hxx>
 
 std::shared_ptr<tnbLib::Entity3d_Chain> 
 tnbLib::Cad_PreviewTools::RetrieveChain

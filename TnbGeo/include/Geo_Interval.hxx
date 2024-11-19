@@ -2,7 +2,7 @@
 #ifndef _Geo_Interval_Header
 #define _Geo_Interval_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

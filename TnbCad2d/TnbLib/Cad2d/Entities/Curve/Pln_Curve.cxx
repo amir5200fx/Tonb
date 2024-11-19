@@ -8,15 +8,15 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom2d_BoundedCurve.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <Geom2d_Line.hxx>
-#include <StdFail_NotDone.hxx>
-#include <Bnd_Box2d.hxx>
-#include <BndLib_Add2dCurve.hxx>
-#include <Geom2dAPI_Interpolate.hxx>
-#include <TColgp_HArray1OfPnt2d.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_BoundedCurve.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/Geom2d_Line.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
+#include <opencascade/Bnd_Box2d.hxx>
+#include <opencascade/BndLib_Add2dCurve.hxx>
+#include <opencascade/Geom2dAPI_Interpolate.hxx>
+#include <opencascade/TColgp_HArray1OfPnt2d.hxx>
 
 const std::string tnbLib::Pln_Curve::extension = ".plncurve";
 

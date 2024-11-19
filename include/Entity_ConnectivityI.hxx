@@ -1,5 +1,5 @@
 #pragma once
-#include <Standard_Integer.hxx>
+#include <Global_Interger.hxx>
 #include <algorithm>
 namespace tnbLib
 {

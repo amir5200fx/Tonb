@@ -2,7 +2,7 @@
 #ifndef _NumAlg_GaussQuadrature_Nodes_Header
 #define _NumAlg_GaussQuadrature_Nodes_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <NumAlg_Module.hxx>
 
 namespace tnbLib

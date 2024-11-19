@@ -3,7 +3,7 @@
 #include <Vec2d.hxx>
 #include <Geo_Tools.hxx>
 
-#include <Geom2d_BSplineCurve.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
 
 void tnbLib::Cad2d_QuadraticArc::Perform()
 {

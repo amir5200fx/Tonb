@@ -6,11 +6,6 @@
 #include <NumAlg_Module.hxx>
 #include <Global_Serialization.hxx>
 #include <Global_Done.hxx>
-#include <TnbError.hxx>
-#include <OSstream.hxx>
-
-#include <Standard_TypeDef.hxx>
-#include <Standard_Real.hxx>
 
 #include <vector>
 #include <memory>

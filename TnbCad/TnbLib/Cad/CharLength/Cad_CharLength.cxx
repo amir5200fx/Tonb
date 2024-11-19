@@ -6,8 +6,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom_Surface.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 const std::shared_ptr<tnbLib::Cad_CharLength_Info> tnbLib::Cad_CharLength::DEFAULT_INFO =
 std::make_shared<tnbLib::Cad_CharLength_Info>();

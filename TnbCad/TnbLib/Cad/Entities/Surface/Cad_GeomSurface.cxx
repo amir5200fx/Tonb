@@ -10,7 +10,7 @@
 #endif // DebugInfo
 
 
-#include <Geom_BoundedSurface.hxx>
+#include <opencascade/Geom_BoundedSurface.hxx>
 
 const std::string tnbLib::Cad_GeomSurface::extension = ".gsurf";
 
@@ -158,9 +158,9 @@ tnbLib::Cad_GeomSurface::ParametricBoundingBox() const
 }
 
 //#include <BndLib_AddSurface.hxx>
-#include <BRepBuilderAPI_MakeFace.hxx>
-#include <BRepBndLib.hxx>
-#include <Bnd_Box.hxx>
+#include <opencascade/BRepBuilderAPI_MakeFace.hxx>
+#include <opencascade/BRepBndLib.hxx>
+#include <opencascade/Bnd_Box.hxx>
 
 #include <Cad_Tools.hxx>
 #include <Entity3d_Box.hxx>

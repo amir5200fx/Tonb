@@ -2,7 +2,7 @@
 #ifndef _Vec2d_Header
 #define _Vec2d_Header
 
-#include <gp_Vec2d.hxx>
+#include <opencascade/gp_Vec2d.hxx>
 #include <Pnt2d.hxx>
 #include <Geo_Serialization.hxx>
 

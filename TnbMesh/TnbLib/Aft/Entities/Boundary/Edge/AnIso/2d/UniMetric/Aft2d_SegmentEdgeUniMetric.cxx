@@ -10,8 +10,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Standard_Transient.hxx>
-#include <Standard_Type.hxx>
+#include <opencascade/Standard_Transient.hxx>
 
 template<>
 std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdgeUniMetric>>

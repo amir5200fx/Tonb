@@ -2,10 +2,9 @@
 #ifndef _Pln_VertexAdaptor_Header
 #define _Pln_VertexAdaptor_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Cad2d_Module.hxx>
 #include <Global_Macros.hxx>
 #include <Global_Serialization.hxx>
-#include <Cad2d_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

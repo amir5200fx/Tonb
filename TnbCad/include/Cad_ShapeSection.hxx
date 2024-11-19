@@ -2,11 +2,11 @@
 #ifndef _Cad_ShapeSection_Header
 #define _Cad_ShapeSection_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Done.hxx>
 #include <Cad_Module.hxx>
+#include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
-#include <TopoDS_Shape.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 
 //- Forward Declarations

@@ -2,8 +2,8 @@
 #ifndef _Mesh_LaplacianSmoothingInfo_Header
 #define _Mesh_LaplacianSmoothingInfo_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -2,11 +2,12 @@
 #ifndef _Cad_EntityPrecision_Header
 #define _Cad_EntityPrecision_Header
 
-#include <Precision.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Global_Serialization.hxx>
+
+#include <opencascade/Precision.hxx>
 
 namespace tnbLib
 {

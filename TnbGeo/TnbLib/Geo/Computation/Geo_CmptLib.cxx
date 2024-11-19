@@ -1,6 +1,6 @@
 #include <Geo_CmptLib.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Triangle.hxx>

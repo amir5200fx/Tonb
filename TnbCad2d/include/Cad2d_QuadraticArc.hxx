@@ -7,7 +7,7 @@
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_BSplineCurve;
 

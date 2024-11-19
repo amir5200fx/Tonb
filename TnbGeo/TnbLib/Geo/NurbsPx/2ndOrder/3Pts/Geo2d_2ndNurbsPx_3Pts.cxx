@@ -5,10 +5,10 @@
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 
-#include <TColgp_Array1OfPnt2d.hxx>
-#include <TColStd_Array1OfInteger.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <StdFail_NotDone.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 void tnbLib::Geo2d_2ndNurbsPx_3Pts::Perform()
 {

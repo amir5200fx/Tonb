@@ -2,11 +2,11 @@
 
 #include <Pnt2d.hxx>
 
-#include <gp_Ax2d.hxx>
-#include <gp_Circ2d.hxx>
-#include <gp_Elips2d.hxx>
-#include <gp_Hypr2d.hxx>
-#include <gp_Parab2d.hxx>
+#include <opencascade/gp_Ax2d.hxx>
+#include <opencascade/gp_Circ2d.hxx>
+#include <opencascade/gp_Elips2d.hxx>
+#include <opencascade/gp_Hypr2d.hxx>
+#include <opencascade/gp_Parab2d.hxx>
 
 gp_Circ2d 
 tnbLib::Pln_CascadeTools::CreateCircle
@@ -65,11 +65,11 @@ tnbLib::Pln_CascadeTools::CreateParabola
 	return std::move(p);
 }
 
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
-#include <gp_Pnt2d.hxx>
-#include <Geom2d_Curve.hxx>
-#include <Geom2d_Curve.hxx>
-#include <TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/gp_Pnt2d.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
 
 
 std::pair<tnbLib::Pnt2d, Standard_Real>

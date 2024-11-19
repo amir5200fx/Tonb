@@ -4,7 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Fade_3D.h>
+#include <fade3d/Fade_3D.h>
 
 namespace tnbLib
 {

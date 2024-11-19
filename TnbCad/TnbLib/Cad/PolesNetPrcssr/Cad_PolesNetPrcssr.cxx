@@ -6,7 +6,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_BSplineSurface.hxx>
+#include <opencascade/Geom_BSplineSurface.hxx>
 
 Standard_Integer 
 tnbLib::Cad_PolesNetPrcssr::NbRows() const

@@ -6,7 +6,7 @@
 #include <Global_Serialization.hxx>
 #include <Cad2d_Module.hxx>
 
-#include <gp_Ax2.hxx>
+#include <opencascade/gp_Ax2.hxx>
 
 #include <memory>
 

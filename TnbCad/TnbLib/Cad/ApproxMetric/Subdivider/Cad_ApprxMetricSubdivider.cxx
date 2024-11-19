@@ -7,7 +7,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 const std::shared_ptr<tnbLib::Cad_ApprxMetricCriterion> tnbLib::Cad_ApprxMetricSubdivider::DEFAULT_CRITERION =
 std::make_shared<tnbLib::cadLib::ApprxMetricCriterion_MinMax>();

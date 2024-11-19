@@ -6,7 +6,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 #include <Pnt3d.hxx>
 #include <Dir3d.hxx>

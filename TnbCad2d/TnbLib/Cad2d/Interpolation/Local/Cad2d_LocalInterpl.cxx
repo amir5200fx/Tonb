@@ -9,10 +9,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_BSplineCurve.hxx>
-#include <TColStd_Array1OfReal.hxx>
-#include <TColStd_Array1OfInteger.hxx>
-#include <TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/TColStd_Array1OfReal.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
 
 tnbLib::Cad2d_LocalInterpl::Cad2d_LocalInterpl(const std::vector<Pnt2d>& theQ)
 	: theQ_(theQ)

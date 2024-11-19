@@ -2,9 +2,9 @@
 #ifndef _TModel_FixWire_Info_Header
 #define _TModel_FixWire_Info_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_AccessMethod.hxx>
 #include <Cad_Module.hxx>
+#include <Global_AccessMethod.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

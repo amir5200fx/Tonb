@@ -7,8 +7,8 @@
 #include <Dir2d.hxx>
 #include <Vec2d.hxx>
 
-#include <gp_Ax2.hxx>
-#include <gp_Ax2d.hxx>
+#include <opencascade/gp_Ax2.hxx>
+#include <opencascade/gp_Ax2d.hxx>
 
 tnbLib::Pnt2d tnbLib::api::geo::make_pnt_2d(double x, double y)
 {

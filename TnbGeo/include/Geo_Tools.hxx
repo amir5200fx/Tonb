@@ -28,7 +28,7 @@
 #include <vector>
 #include <memory>
 
-#include <armadillo.h>
+#include <armadillo>
 
 class gp_Pln;
 class gp_Lin2d;

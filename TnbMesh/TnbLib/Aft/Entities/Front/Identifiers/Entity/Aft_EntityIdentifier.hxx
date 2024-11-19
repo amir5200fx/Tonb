@@ -2,8 +2,8 @@
 #ifndef _Aft_EntityIdentifier_Header
 #define _Aft_EntityIdentifier_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <xtr1common>
 

@@ -2,8 +2,6 @@
 #ifndef _Geo2d_SamplePoints_Header
 #define _Geo2d_SamplePoints_Header
 
-#include <Standard_TypeDef.hxx>
-
 #include <Geo_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Pnt2d.hxx>

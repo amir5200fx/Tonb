@@ -2,8 +2,6 @@
 #ifndef _Cad_Tools_Header
 #define _Cad_Tools_Header
 
-#include <Standard_Handle.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Entity_Segment.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>

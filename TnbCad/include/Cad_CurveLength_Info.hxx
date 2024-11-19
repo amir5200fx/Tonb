@@ -2,9 +2,9 @@
 #ifndef _Cad_CurveLength_Info_Header
 #define _Cad_CurveLength_Info_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Cad_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

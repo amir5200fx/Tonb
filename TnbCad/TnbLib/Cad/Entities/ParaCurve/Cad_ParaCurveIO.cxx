@@ -2,7 +2,7 @@
 
 #include <OpenCascade_Serialization.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Cad_ParaCurve)
 {

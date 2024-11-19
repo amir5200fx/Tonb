@@ -6,7 +6,6 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Standard_Failure.hxx>
 namespace tnbLib
 {
 

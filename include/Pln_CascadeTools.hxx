@@ -2,9 +2,9 @@
 #ifndef _Pln_CascadeTools_Header
 #define _Pln_CascadeTools_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
 #include <Cad2d_Module.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 class gp_Ax2d;
 class gp_Circ2d;

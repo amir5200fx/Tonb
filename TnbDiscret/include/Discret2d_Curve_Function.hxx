@@ -2,11 +2,9 @@
 #ifndef _Discret2d_Curve_Function_Header
 #define _Discret2d_Curve_Function_Header
 
-#include <Discret_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {
@@ -27,14 +25,14 @@ namespace tnbLib
 
 		// default constructor [11/7/2022 Amir]
 
-		Discret2d_Curve_Function()
-		{}
+		Discret2d_Curve_Function() = default;
 
 
 		// constructors [11/7/2022 Amir]
 
 
 	public:
+		virtual ~Discret2d_Curve_Function() = default;
 
 
 		// public functions and operators [11/7/2022 Amir]

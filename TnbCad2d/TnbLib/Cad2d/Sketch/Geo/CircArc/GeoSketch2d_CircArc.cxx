@@ -4,10 +4,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp_Circ2d.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
-#include <GCE2d_MakeArcOfCircle.hxx>
-#include <StdFail_NotDone.hxx>
+#include <opencascade/gp_Circ2d.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
+#include <opencascade/GCE2d_MakeArcOfCircle.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 tnbLib::GeoSketch2d_CircArc::GeoSketch2d_CircArc
 (

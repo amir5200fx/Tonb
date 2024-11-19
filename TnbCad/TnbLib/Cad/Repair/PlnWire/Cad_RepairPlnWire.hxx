@@ -5,8 +5,7 @@
 #include <Pnt2d.hxx>
 #include <Vec2d.hxx>
 #include <Global_Indexed.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <exception>

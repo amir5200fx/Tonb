@@ -3,10 +3,10 @@
 #define _Geo_TessellatePolygon_Header
 
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -2,10 +2,10 @@
 #ifndef _GModel_Curve_Header
 #define _GModel_Curve_Header
 
-#include <Standard_Handle.hxx>
 #include <GModel_Entity.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Cad_Module.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Curve;
 

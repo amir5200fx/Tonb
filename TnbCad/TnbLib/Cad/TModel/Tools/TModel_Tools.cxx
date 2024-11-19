@@ -22,8 +22,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2dAPI_InterCurveCurve.hxx>
-#include <Bnd_Box.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Bnd_Box.hxx>
 
 tnbLib::Entity3d_Box
 tnbLib::TModel_Tools::CalcBoundingBox

@@ -3,8 +3,7 @@
 #define _Cad_CurveTools_Header
 
 #include <Cad_Module.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Curve;
 

@@ -6,8 +6,8 @@
 #undef DebugInfo
 #endif // DebugInfo
 
-#include <BRepTools.hxx>
-#include <BRep_Builder.hxx>
+#include <opencascade/BRepTools.hxx>
+#include <opencascade/BRep_Builder.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::GModel_SurfaceGeometry)
 {

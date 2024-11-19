@@ -5,8 +5,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
-#include <gp_Trsf2d.hxx>
+#include <opencascade/gp.hxx>
+#include <opencascade/gp_Trsf2d.hxx>
 
 template<>
 void tnbLib::Cad_gMetricRepair::Perform()

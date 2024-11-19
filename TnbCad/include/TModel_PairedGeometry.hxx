@@ -2,10 +2,10 @@
 #ifndef _TModel_PairedGeometry_Header
 #define _TModel_PairedGeometry_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 #include <Cad_Module.hxx>
 #include <OFstream.hxx>
 

@@ -6,10 +6,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Precision.hxx>
-#include <Geom2d_Line.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Precision.hxx>
+#include <opencascade/Geom2d_Line.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 
 tnbLib::GeoSketch2d_Segment::GeoSketch2d_Segment
 (

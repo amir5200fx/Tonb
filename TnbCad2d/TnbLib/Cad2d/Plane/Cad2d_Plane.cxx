@@ -14,10 +14,10 @@
 #include <Pln_CurveTools.hxx>
 #include <Cad2d_Plane_Info.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <gp.hxx>
-#include <gp_Ax2.hxx>
-#include <gp_Trsf2d.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/gp.hxx>
+#include <opencascade/gp_Ax2.hxx>
+#include <opencascade/gp_Trsf2d.hxx>
 
 void tnbLib::Cad2d_Plane::SetOuter
 (

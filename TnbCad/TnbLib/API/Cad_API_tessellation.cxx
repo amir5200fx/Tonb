@@ -13,7 +13,7 @@
 #undef DebugInfo
 #endif // DebugInfo
 
-#include <Poly_Triangulation.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
 
 tnbLib::api::cad::Tessellation::Tessellation(const chai::Cad&)
 	: obj{ std::make_shared<FastDiscrete_Params>() }

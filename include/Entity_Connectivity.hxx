@@ -2,7 +2,6 @@
 #ifndef _Entity_Connectivity_Header
 #define _Entity_Connectivity_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Geo_Module.hxx>
 #include <Global_Serialization.hxx>
 #include <Istream.hxx>

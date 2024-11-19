@@ -4,10 +4,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <GC_MakeSegment.hxx>
-#include <GeomAPI_Interpolate.hxx>
-#include <TColgp_HArray1OfPnt.hxx>
-#include <StdFail_NotDone.hxx>
+#include <opencascade/GC_MakeSegment.hxx>
+#include <opencascade/GeomAPI_Interpolate.hxx>
+#include <opencascade/TColgp_HArray1OfPnt.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 Handle(Geom_Curve)
 tnbLib::Cad_CurveTools::Interpolation

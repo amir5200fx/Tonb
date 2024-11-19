@@ -2,8 +2,8 @@
 #ifndef _Geo_ProfileFun_Geom_Header
 #define _Geo_ProfileFun_Geom_Header
 
-#include <Standard_Handle.hxx>
 #include <Geo_ProfileFun.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 

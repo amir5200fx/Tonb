@@ -6,9 +6,9 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
-#include <gp_Trsf2d.hxx>
-#include <Standard_TypeDef.hxx>
+#include <opencascade/gp_Trsf2d.hxx>
 
 class Geom_Surface;
 

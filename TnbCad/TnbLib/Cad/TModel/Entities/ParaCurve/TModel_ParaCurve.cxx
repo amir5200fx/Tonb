@@ -5,11 +5,11 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom2d_BoundedCurve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_BoundedCurve.hxx>
 
-#include <Bnd_Box2d.hxx>
-#include <BndLib_Add2dCurve.hxx>
+#include <opencascade/Bnd_Box2d.hxx>
+#include <opencascade/BndLib_Add2dCurve.hxx>
 #include <Pln_Tools.hxx>
 #include <TModel_Tools.hxx>
 

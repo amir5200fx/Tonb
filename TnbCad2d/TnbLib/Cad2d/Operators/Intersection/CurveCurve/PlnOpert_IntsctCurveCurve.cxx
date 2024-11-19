@@ -10,10 +10,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Standard_Handle.hxx>
-#include <Geom2dAPI_InterCurveCurve.hxx>
-#include <Geom2dInt_GInter.hxx>
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Standard_Handle.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Geom2dInt_GInter.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 void tnbLib::PlnOpert_IntsctCurveCurve::Perform()
 {

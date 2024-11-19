@@ -5,10 +5,10 @@
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Geo_Traits.hxx>
 
-#include <gp_Pnt2d.hxx>
-#include <gp_Pnt.hxx>
-#include <gp_Vec2d.hxx>
-#include <gp_Vec.hxx>
+#include <Pnt3d.hxx>
+#include <Pnt2d.hxx>
+#include <Vec3d.hxx>
+#include <Vec2d.hxx>
 
 #include <memory>
 

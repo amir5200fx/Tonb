@@ -7,27 +7,27 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Bnd_Box2d.hxx>
-#include <Geom2d_Line.hxx>
-#include <Geom2d_Circle.hxx>
-#include <Geom2d_BoundedCurve.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
-#include <Geom2dAPI_InterCurveCurve.hxx>
-#include <Geom2dAPI_Interpolate.hxx>
-#include <TColgp_HArray1OfPnt2d.hxx>
+#include <opencascade/Bnd_Box2d.hxx>
+#include <opencascade/Geom2d_Line.hxx>
+#include <opencascade/Geom2d_Circle.hxx>
+#include <opencascade/Geom2d_BoundedCurve.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Geom2dAPI_Interpolate.hxx>
+#include <opencascade/TColgp_HArray1OfPnt2d.hxx>
 
-#include <Standard_Handle.hxx>
-#include <Geom2d_Curve.hxx>
-#include <GCE2d_MakeSegment.hxx>
-#include <GCE2d_MakeArcOfCircle.hxx>
-#include <GCE2d_MakeArcOfEllipse.hxx>
-#include <GCE2d_MakeArcOfHyperbola.hxx>
-#include <GCE2d_MakeArcOfParabola.hxx>
-#include <GCE2d_MakeCircle.hxx>
-#include <GCE2d_MakeEllipse.hxx>
-#include <Standard_Failure.hxx>
+#include <opencascade/Standard_Handle.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/GCE2d_MakeSegment.hxx>
+#include <opencascade/GCE2d_MakeArcOfCircle.hxx>
+#include <opencascade/GCE2d_MakeArcOfEllipse.hxx>
+#include <opencascade/GCE2d_MakeArcOfHyperbola.hxx>
+#include <opencascade/GCE2d_MakeArcOfParabola.hxx>
+#include <opencascade/GCE2d_MakeCircle.hxx>
+#include <opencascade/GCE2d_MakeEllipse.hxx>
+#include <opencascade/Standard_Failure.hxx>
 
 #include <algorithm>
 

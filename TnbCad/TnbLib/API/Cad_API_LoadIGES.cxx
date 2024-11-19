@@ -9,10 +9,10 @@
 #undef DebugInfo
 #endif // DebugInfo
 
-#include <TopoDS_Shape.hxx>
-#include <IGESControl_Reader.hxx>
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
+#include <opencascade/IGESControl_Reader.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BRepBndLib.hxx>
 
 tnbLib::api::cad::Shape tnbLib::api::cad::load_iges(const std::string& file_name, unsigned short verbose)
 {

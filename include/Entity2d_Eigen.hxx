@@ -5,7 +5,7 @@
 #include <Global_Done.hxx>
 #include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
-#include <armadillo.h>
+#include <armadillo>
 
 
 namespace tnbLib
@@ -28,78 +28,42 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Pnt2d theE1_;
-		Pnt2d theE2_;
+		Pnt2d theE1_ = Pnt2d::null;
+		Pnt2d theE2_ = Pnt2d::null;
 
-		Standard_Real theH1_;
-		Standard_Real theH2_;
+		Standard_Real theH1_ = 0;
+		Standard_Real theH2_ = 0;
 
-		Standard_Real theLamda1_;
-		Standard_Real theLamda2_;
+		Standard_Real theLamda1_ = 0;
+		Standard_Real theLamda2_ = 0;
 
 	public:
 
+		// default constructor
 		Entity2d_Eigen()
-		{}
+			= default;
 
-		const Pnt2d& E1() const
-		{
-			return theE1_;
-		}
+		// constructors
 
-		const Pnt2d& E2() const
-		{
-			return theE2_;
-		}
+		// Public functions and operators
+		const auto& E1() const { return theE1_; }
+		const auto& E2() const { return theE2_; }
 
-		Standard_Real H1() const
-		{
-			return theH1_;
-		}
+		auto H1() const { return theH1_; }
+		auto H2() const { return theH2_; }
+		auto& H1() { return theH1_; }
+		auto& H2() { return theH2_; }
 
-		Standard_Real& H1()
-		{
-			return theH1_;
-		}
-
-		Standard_Real H2() const
-		{
-			return theH2_;
-		}
-
-		Standard_Real& H2()
-		{
-			return theH2_;
-		}
-
-		Standard_Real Lamda1() const
-		{
-			return theLamda1_;
-		}
-
-		Standard_Real& Lamda1()
-		{
-			return theLamda1_;
-		}
-
-		Standard_Real Lamda2() const
-		{
-			return theLamda2_;
-		}
-
-		Standard_Real& Lamda2()
-		{
-			return theLamda2_;
-		}
+		auto Lamda1() const { return theLamda1_; }
+		auto Lamda2() const { return theLamda2_; }
+		auto& Lamda1() { return theLamda1_; }
+		auto& Lamda2() { return theLamda2_; }
 
 		TnbGeo_EXPORT void CalcEigen(const Entity2d_Metric1& M);
-
 		TnbGeo_EXPORT void CalcEigen(const arma::mat22& M);
-
 		TnbGeo_EXPORT void CalcGenEigen(const Entity2d_Metric1& A, const Entity2d_Metric1& B);
 
 		TnbGeo_EXPORT void ExportToPlt(std::fstream& File) const;
-
 		TnbGeo_EXPORT void ExportToPlt(const Pnt2d& Centre, OFstream& File) const;
 
 		TnbGeo_EXPORT void Print(Standard_OStream& ostream = cout) const;

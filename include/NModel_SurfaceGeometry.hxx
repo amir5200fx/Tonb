@@ -2,10 +2,11 @@
 #ifndef _NModel_SurfaceGeometry_Header
 #define _NModel_SurfaceGeometry_Header
 
-#include <Standard_Handle.hxx>
-#include <TopoDS_Face.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Handle.hxx>
 #include <OFstream.hxx>
+
+#include <opencascade/TopoDS_Face.hxx>
 
 class Geom_Surface;
 class Poly_Triangulation;

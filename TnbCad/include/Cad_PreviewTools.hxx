@@ -2,13 +2,13 @@
 #ifndef _Cad_PreviewTools_Header
 #define _Cad_PreviewTools_Header
 
-#include <Standard_Handle.hxx>
-#include <Standard_TypeDef.hxx>
+#include <Cad_Module.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity3d_ChainFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
-#include <Cad_Module.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Curve;
 class Geom_Surface;

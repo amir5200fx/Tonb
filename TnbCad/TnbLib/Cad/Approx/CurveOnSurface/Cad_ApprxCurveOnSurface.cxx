@@ -12,8 +12,8 @@
 
 #include <vector>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 namespace tnbLib
 {

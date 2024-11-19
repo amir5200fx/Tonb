@@ -5,8 +5,8 @@
 #include <OSstream.hxx>
 #include <Global_Macros.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom2d_BoundedCurve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_BoundedCurve.hxx>
 
 tnbLib::Cad_ParaCurve::Cad_ParaCurve
 (
@@ -136,8 +136,8 @@ tnbLib::Cad_ParaCurve::Value_normParam(const Standard_Real x) const
 	return std::move(value);
 }
 
-#include <Bnd_Box2d.hxx>
-#include <BndLib_Add2dCurve.hxx>
+#include <opencascade/Bnd_Box2d.hxx>
+#include <opencascade/BndLib_Add2dCurve.hxx>
 #include <Pln_Tools.hxx>
 
 tnbLib::Entity2d_Box 

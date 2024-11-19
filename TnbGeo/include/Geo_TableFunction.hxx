@@ -2,8 +2,8 @@
 #ifndef _Geo_TableFunction_Header
 #define _Geo_TableFunction_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Geo_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

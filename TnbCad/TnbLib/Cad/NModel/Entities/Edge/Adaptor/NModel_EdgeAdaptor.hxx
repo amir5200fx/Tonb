@@ -4,7 +4,7 @@
 
 #include <Global_AccessMethod.hxx>
 
-#include <TopoDS_Edge.hxx>
+#include <opencascade/TopoDS_Edge.hxx>
 
 #include <memory>
 

@@ -19,8 +19,8 @@ class gp_Trsf2d;
 class gp_Circ2d;
 class gp_Elips2d;
 
-#include <gp.hxx>
-#include <gp_Ax2.hxx>
+#include <opencascade/gp.hxx>
+#include <opencascade/gp_Ax2.hxx>
 
 namespace tnbLib
 {
