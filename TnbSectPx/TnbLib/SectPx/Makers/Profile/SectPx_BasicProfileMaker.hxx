@@ -2,9 +2,9 @@
 #ifndef _SectPx_BasicProfileMaker_Header
 #define _SectPx_BasicProfileMaker_Header
 
-#include <Standard_Handle.hxx>
 #include <SectPx_Maker.hxx>
 #include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 

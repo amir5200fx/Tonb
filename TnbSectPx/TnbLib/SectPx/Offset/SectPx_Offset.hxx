@@ -2,8 +2,8 @@
 #ifndef _SectPx_Offset_Header
 #define _SectPx_Offset_Header
 
-#include <Standard_TypeDef.hxx>
 #include <SectPx_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

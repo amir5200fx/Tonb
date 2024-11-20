@@ -5,12 +5,12 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <StdFail_NotDone.hxx>
-#include <BSplCLib.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <TColStd_Array1OfReal.hxx>
-#include <TColStd_Array1OfInteger.hxx>
-#include <TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
+#include <opencascade/BSplCLib.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/TColStd_Array1OfReal.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
 
 void tnbLib::SectPx_Curve::Perform(const Standard_Integer deg)
 {

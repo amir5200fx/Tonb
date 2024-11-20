@@ -6,7 +6,7 @@
 #include <Geo_Serialization.hxx>
 #include <json.hpp>
 
-#include <gp_Ax2d.hxx>
+#include <opencascade/gp_Ax2d.hxx>
 
 const std::string tnbLib::Server_GeoObj_Axis2d_F1::Params::centre = "centre";
 const std::string tnbLib::Server_GeoObj_Axis2d_F1::Params::dir = "dir";

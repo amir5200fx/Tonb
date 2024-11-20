@@ -14,7 +14,7 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <json.hpp>
 
-#include <StdFail_NotDone.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 void tnbLib::Server_Mesh2dObj_MetricPrcsr_Settings::Construct(const std::string& theValue)
 {

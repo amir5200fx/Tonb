@@ -5,8 +5,9 @@
 #include <SectPx_Entity.hxx>
 
 #include <Pnt2d.hxx>
-#include <TColStd_Array1OfReal.hxx>
-#include <TColStd_Array1OfInteger.hxx>
+
+#include <opencascade/TColStd_Array1OfReal.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
 
 #include <vector>
 

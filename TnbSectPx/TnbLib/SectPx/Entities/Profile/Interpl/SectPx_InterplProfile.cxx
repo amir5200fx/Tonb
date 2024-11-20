@@ -10,7 +10,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_BSplineCurve.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
 
 void tnbLib::SectPx_InterplProfile::Update() const
 {

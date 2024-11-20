@@ -5,7 +5,7 @@
 #include <Server_Error.hxx>
 #include <sstream>
 
-#include <StdFail_NotDone.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 #define defineTnbServerObject(ObjectName)									\
 class ObjectName															\

@@ -2,9 +2,9 @@
 #ifndef _SectPx_Curve_Header
 #define _SectPx_Curve_Header
 
-#include <Standard_Handle.hxx>
-#include <Global_Done.hxx>
 #include <SectPx_Module.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 

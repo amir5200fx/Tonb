@@ -2,11 +2,11 @@
 #ifndef _SectPx_ScatterRegistry_Header
 #define _SectPx_ScatterRegistry_Header
 
-#include <Global_Serialization.hxx>
-#include <Standard_TypeDef.hxx>
 #include <SectPx_ParsFwd.hxx>
 #include <SectPx_RegObjType.hxx>
 #include <SectPx_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>
