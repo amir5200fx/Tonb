@@ -3,8 +3,7 @@
 #define _GeoMetricFun2d_Plane_Header
 
 #include <GeoMetricFun2d_Uniform.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [12/24/2021 Amir]
 class Geom_Plane;

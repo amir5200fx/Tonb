@@ -1,6 +1,6 @@
 #pragma once
-#include <Standard_Real.hxx>
 #include <Mesh_ReferenceValues.hxx>
+#include <Global_Real.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

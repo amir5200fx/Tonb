@@ -1,7 +1,7 @@
 #include <GeoMetricFun2d_Cylinder.hxx>
 
 #include <OpenCascade_Serialization.hxx>
-#include <Geom_CylindricalSurface.hxx>
+#include <opencascade/Geom_CylindricalSurface.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::GeoMetricFun2d_Cylinder)
 {

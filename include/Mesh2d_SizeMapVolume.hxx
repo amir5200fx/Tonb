@@ -8,8 +8,7 @@
 #include <Global_Serialization.hxx>
 #include <Global_Done.hxx>
 #include <Global_Indexed.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 
@@ -31,13 +30,14 @@ namespace tnbLib
 		
 	protected:
 
-		// default contructor
+		// default constructor
 
 		Mesh2d_SizeMapVolume() = default;
 
 		auto& BoundaryRef() { return theBoundary_; }
 		
 	public:
+		virtual ~Mesh2d_SizeMapVolume() = default;
 
 		// Public functions and operators
 

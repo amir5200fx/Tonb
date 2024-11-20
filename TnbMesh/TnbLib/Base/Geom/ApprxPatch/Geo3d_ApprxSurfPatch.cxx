@@ -12,7 +12,7 @@
 
 #include <algorithm>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 Standard_Boolean 
 tnbLib::Geo3d_ApprxSurfPatch::QuadTreeObject::doSubdivide

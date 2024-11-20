@@ -2,10 +2,10 @@
 #ifndef _Mesh_Conditions_Header
 #define _Mesh_Conditions_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
-#include <Mesh_Module.hxx>
 #include <Mesh_SurfaceCurvatureInfo.hxx>
+#include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

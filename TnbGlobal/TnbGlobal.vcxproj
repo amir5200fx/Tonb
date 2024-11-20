@@ -157,7 +157,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_FileI.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Handle.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Interger.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Precision.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Real.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Transient.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_TypeDef.hxx" />
     <ClInclude Include="TnbLib\Global\verbose\Global_Verbose.hxx" />
     <None Include="TnbLib\Global\global\Global_FileM.hxx">

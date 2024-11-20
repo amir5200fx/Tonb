@@ -162,9 +162,9 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 #include <Entity2d_Triangulation.hxx>
 #include <Entity3d_Box.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Global_Handle.hxx>
 
-#include <Standard_Handle.hxx>
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 template<class SurfType>
 inline tnbLib::Pnt2d 

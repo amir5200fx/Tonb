@@ -2,13 +2,12 @@
 #ifndef _Cad_SingularityTopologyTools_Header
 #define _Cad_SingularityTopologyTools_Header
 
-#include <Entity2d_ChainFwd.hxx>
 #include <Mesh_Module.hxx>
+#include <Entity2d_ChainFwd.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>
-
-#include <Standard_Handle.hxx>
 
 class Geom2d_Curve;
 

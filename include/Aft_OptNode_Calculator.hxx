@@ -2,15 +2,14 @@
 #ifndef _Aft_OptNode_Calculator_Header
 #define _Aft_OptNode_Calculator_Header
 
+#include <Mesh_Module.hxx>
+#include <Geo_SizeFunctionTraits.hxx>
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_Done.hxx>
 #include <Global_Serialization.hxx>
-#include <Mesh_Module.hxx>
-#include <Geo_SizeFunctionTraits.hxx>
+#include <Global_Real.hxx>
 //#include <Aft_MetricPrcsr.hxx>
-
-#include <Standard_Real.hxx>
 
 #include <memory>
 

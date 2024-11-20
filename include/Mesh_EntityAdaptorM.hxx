@@ -2,8 +2,8 @@
 #ifndef _Mesh_EntityAdaptorM_Header
 #define _Mesh_EntityAdaptorM_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 #include <memory>

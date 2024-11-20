@@ -2,7 +2,7 @@
 #ifndef _Geo_Sort_Header
 #define _Geo_Sort_Header
 
-#include <Global_TypeDef.hxx>
+#include <Standard_TypeDef.hxx>
 
 #include <iostream>
 #include <vector>

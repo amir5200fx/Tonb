@@ -2,13 +2,12 @@
 #ifndef _Cad_ColorApprxMetric_Header
 #define _Cad_ColorApprxMetric_Header
 
-#include <Standard_Handle.hxx>
-
-#include <Global_Done.hxx>
-#include <Entity2d_TriangulationFwd.hxx>
-#include <Entity2d_PolygonFwd.hxx>
 #include <Mesh2d_ElementFwd.hxx>
 #include <Mesh_Module.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>

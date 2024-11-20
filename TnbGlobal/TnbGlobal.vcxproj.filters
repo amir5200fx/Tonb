@@ -195,6 +195,12 @@
     <ClInclude Include="TnbLib\Global\global\Global_Handle.hxx">
       <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Transient.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Precision.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">

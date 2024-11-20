@@ -2,7 +2,7 @@
 #ifndef _Mesh2d_ApproxCurveFwd_Header
 #define _Mesh2d_ApproxCurveFwd_Header
 
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 

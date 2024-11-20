@@ -7,7 +7,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 
 template<>
 void tnbLib::Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial::Perform()

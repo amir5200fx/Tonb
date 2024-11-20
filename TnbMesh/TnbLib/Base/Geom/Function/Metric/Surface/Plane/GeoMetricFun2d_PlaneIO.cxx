@@ -1,7 +1,7 @@
 #include <GeoMetricFun2d_Plane.hxx>
 
 #include <OpenCascade_Serialization.hxx>
-#include <Geom_Plane.hxx>
+#include <opencascade/Geom_Plane.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::GeoMetricFun2d_Plane)
 {

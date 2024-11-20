@@ -2,9 +2,9 @@
 #ifndef _Mesh_VariationRate_Header
 #define _Mesh_VariationRate_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Mesh_VariationRateInfo.hxx>
 #include <Mesh_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

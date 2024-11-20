@@ -32,8 +32,6 @@
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <Geo2d_MetricPrcsrUniMetricFwd.hxx>
 
-#include <Standard_TypeDef.hxx>
-
 #include <memory>
 #include <vector>
 #include <map>

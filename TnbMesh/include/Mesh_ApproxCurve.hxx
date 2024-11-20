@@ -6,14 +6,13 @@
 #include <Entity_Polygon.hxx>
 #include <Geo_Traits.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>
 
-#include <Standard_TypeDef.hxx>
-
-#include <Geom_Curve.hxx>
-#include <Standard_Handle.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 namespace tnbLib
 {

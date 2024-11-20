@@ -7,7 +7,7 @@
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Triangulation.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 std::vector<std::shared_ptr<tnbLib::Pln_Curve>>
 tnbLib::Cad_SingularityTools::RetrieveSides

@@ -2,9 +2,9 @@
 #ifndef _GeoMesh_Data_Header
 #define _GeoMesh_Data_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>

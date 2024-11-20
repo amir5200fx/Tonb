@@ -17,9 +17,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
-#include <armadillo.h>
+#include <armadillo>
 
 using namespace arma;
 

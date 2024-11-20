@@ -4,7 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 template<class FrontType, class SizeFun, class MetricFun, class InfoType>
 inline Standard_Boolean tnbLib::Aft_CorrOptNode_IterativeTools::Correct
 (

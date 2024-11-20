@@ -2,7 +2,7 @@
 #ifndef _Mesh_IO_Header
 #define _Mesh_IO_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 #include <memory>

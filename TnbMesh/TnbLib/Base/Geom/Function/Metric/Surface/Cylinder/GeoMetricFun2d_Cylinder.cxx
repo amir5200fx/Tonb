@@ -3,7 +3,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_CylindricalSurface.hxx>
+#include <opencascade/Geom_CylindricalSurface.hxx>
 
 void tnbLib::GeoMetricFun2d_Cylinder::CalcMetric()
 {

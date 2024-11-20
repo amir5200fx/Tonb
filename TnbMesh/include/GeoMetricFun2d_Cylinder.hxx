@@ -3,8 +3,7 @@
 #define _GeoMetricFun2d_Cylinder_Header
 
 #include <GeoMetricFun2d_Uniform.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [6/13/2023 Payvand]
 class Geom_CylindricalSurface;

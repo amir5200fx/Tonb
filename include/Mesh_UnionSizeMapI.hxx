@@ -1,7 +1,6 @@
 #pragma once
-#include <Standard_Real.hxx>
-
 #include <Geo_BoxTools.hxx>
+#include <Global_Real.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib

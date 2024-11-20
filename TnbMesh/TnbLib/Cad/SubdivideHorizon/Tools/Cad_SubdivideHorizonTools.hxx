@@ -3,12 +3,11 @@
 #define _Cad_SubdivideHorizonTools_Header
 
 #include <Mesh_Module.hxx>
+#include <Global_Handle.hxx>
 
 #include <vector>
 
 class Geom2d_Curve;
-
-#include <Standard_Handle.hxx>
 
 namespace tnbLib
 {

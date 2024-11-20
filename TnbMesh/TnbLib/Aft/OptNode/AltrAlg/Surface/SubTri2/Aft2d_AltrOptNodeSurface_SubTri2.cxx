@@ -12,7 +12,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 const Standard_Integer tnbLib::Aft2d_AltrOptNodeSurface_SubTri2::DEFAULT_MAX_LEV = 3;
 const Standard_Real tnbLib::Aft2d_AltrOptNodeSurface_SubTri2::DEFAULT_TOLERANCE = 0.01;

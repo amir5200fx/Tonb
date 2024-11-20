@@ -2,13 +2,12 @@
 #ifndef _Cad_SingularityTools_Header
 #define _Cad_SingularityTools_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
-
+#include <Mesh_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
-#include <Mesh_Module.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 #include <vector>
 #include <memory>
