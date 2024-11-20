@@ -5,11 +5,10 @@
 #include <MeshPost_QualityMap.hxx>
 #include <MeshPost_LaplacianSmoothing_Traits.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

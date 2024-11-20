@@ -5,12 +5,11 @@
 #include <MeshPost_LaplacianSmoothing_AvgFunTraits.hxx>
 #include <MeshPost_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>
 #include <map>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {
