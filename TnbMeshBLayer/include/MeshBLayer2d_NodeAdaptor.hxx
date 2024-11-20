@@ -2,10 +2,10 @@
 #ifndef _MeshBLayer2d_NodeAdaptor_Header
 #define _MeshBLayer2d_NodeAdaptor_Header
 
+#include <Global_TypeDef.hxx>
+
 #include <map>
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {
