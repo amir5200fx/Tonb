@@ -57,19 +57,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common\Foam\lib;$(SolutionDir)Common\fade3d\Win64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Common\fade3d\Win64;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
     <IncludePath>$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common\Foam\lib;$(SolutionDir)Common\fade3d\Win64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Common\fade3d\Win64;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
     <OutDir>$(SolutionDir)$(Platform)\Debug\</OutDir>
     <IntDir>$(Platform)\Debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Common\Foam\lib;$(SolutionDir)Common\fade3d\Win64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Common\fade3d\Win64;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -85,7 +85,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>TnbBased.lib;fade3D_x64_v141_Debug.lib</AdditionalDependencies>
+      <AdditionalDependencies>TnbBased.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
@@ -108,7 +108,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>TnbBased.lib;fade3D_x64_v141_Debug.lib</AdditionalDependencies>
+      <AdditionalDependencies>TnbBased.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -133,7 +133,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>TnbBase.lib;fade3D_x64_v141_Release.lib</AdditionalDependencies>
+      <AdditionalDependencies>TnbBase.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
