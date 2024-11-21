@@ -100,7 +100,7 @@ void tnbLib::fadeLib::Geo3d_DelTri::Perform()
 #else
 	FatalErrorIn(FunctionSIG) << "\n"
 		<< "Fade3d library hasn't been activated.\n"
-		<< " - Please adjust TNB_CONFIG_USE_FADE3D macro.\n"
+		<< " - Please define TNB_CONFIG_USE_FADE3D macro inside the Global_Config.hxx and recompile the library.\n"
 		<< abort(FatalError);
 #endif
 
