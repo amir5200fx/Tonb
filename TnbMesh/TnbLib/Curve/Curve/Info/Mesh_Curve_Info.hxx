@@ -2,10 +2,10 @@
 #ifndef _Mesh_Curve_Info_Header
 #define _Mesh_Curve_Info_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Mesh_Module.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
-#include <Mesh_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

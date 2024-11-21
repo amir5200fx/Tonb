@@ -2,22 +2,21 @@
 #ifndef _Pln_Curve_Header
 #define _Pln_Curve_Header
 
-#include <Standard_Handle.hxx>
-#include <Global_AccessMethod.hxx>
+#include <Cad2d_Module.hxx>
 #include <Pln_Entity.hxx>
 #include <Pnt2d.hxx>
 #include <Vec2d.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Serialization.hxx>
-#include <Cad2d_Module.hxx>
+#include <Global_AccessMethod.hxx>
 
 class Geom2d_Curve;
 class gp_Ax2d;
 class gp_Ax22d;
 class gp_Trsf2d;
 
-#include <Precision.hxx>
+#include <opencascade/Precision.hxx>
 
 #include <memory>
 #include <vector>

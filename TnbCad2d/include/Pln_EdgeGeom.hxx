@@ -2,11 +2,11 @@
 #ifndef _Pln_EdgeGeom_Header
 #define _Pln_EdgeGeom_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Cad2d_Module.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
-#include <Cad2d_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

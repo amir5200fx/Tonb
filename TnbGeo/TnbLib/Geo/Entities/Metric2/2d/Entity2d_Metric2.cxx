@@ -1,7 +1,7 @@
 #include <Entity2d_Metric2.hxx>
 
 #include <Entity2d_Metric1.hxx>
-#include <armadillo.h>
+#include <armadillo>
 
 using namespace arma;
 

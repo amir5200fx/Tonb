@@ -4,7 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 template<>
 std::shared_ptr<tnbLib::Entity2d_Polygon>

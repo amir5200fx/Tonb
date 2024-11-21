@@ -2,7 +2,6 @@
 #ifndef _NumAlg_FalsePos_Info_Header
 #define _NumAlg_FalsePos_Info_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
 #include <NumAlg_Module.hxx>

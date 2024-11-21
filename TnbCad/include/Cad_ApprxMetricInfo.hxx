@@ -2,11 +2,9 @@
 #ifndef _Cad_ApprxMetricInfo_Header
 #define _Cad_ApprxMetricInfo_Header
 
-#include <Standard_TypeDef.hxx>
-
-#include <Global_Serialization.hxx>
-#include <Merge_PntInfo.hxx>
 #include <Cad_Module.hxx>
+#include <Merge_PntInfo.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 

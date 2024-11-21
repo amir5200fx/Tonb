@@ -2,10 +2,9 @@
 #ifndef _Mesh_OptNode_Analytical_Header
 #define _Mesh_OptNode_Analytical_Header
 
-#include <Global_Done.hxx>
-#include <Standard_TypeDef.hxx>
-
 #include <Aft_OptNode_AnalyticalTraits.hxx>
+#include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

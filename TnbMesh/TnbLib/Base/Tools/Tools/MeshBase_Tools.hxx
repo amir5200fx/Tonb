@@ -2,8 +2,6 @@
 #ifndef _MeshBase_Tools_Header
 #define _MeshBase_Tools_Header
 
-#include <Standard_Handle.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Mesh_Module.hxx>
 #include <Mesh3d_FacetFwd.hxx>
 #include <Mesh3d_ElementFwd.hxx>
@@ -16,12 +14,14 @@
 #include <GeoMesh3d_SingleBackgroundFwd.hxx>
 #include <GeoMesh2d_MetricBackgroundFwd.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
-#include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_MetricMeshValueFwd.hxx>
 #include <Entity2d_MeshValueFwd.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

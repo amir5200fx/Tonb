@@ -4,8 +4,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Curve.hxx>
-#include <Geom_BoundedCurve.hxx>
+#include <opencascade/Geom_Curve.hxx>
+#include <opencascade/Geom_BoundedCurve.hxx>
 
 void tnbLib::TModel_Curve::CheckBoundary
 (
@@ -84,9 +84,9 @@ tnbLib::TModel_Curve::Value_normParam
 	return std::move(value);
 }
 
-#include <Bnd_Box.hxx>
-#include <BndLib_Add3dCurve.hxx>
-#include <GeomAdaptor_Curve.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BndLib_Add3dCurve.hxx>
+#include <opencascade/GeomAdaptor_Curve.hxx>
 
 tnbLib::Entity3d_Box 
 tnbLib::TModel_Curve::CalcBoundingBox() const

@@ -2,7 +2,6 @@
 #ifndef _MeshBLayer2d_Offset2_Header
 #define _MeshBLayer2d_Offset2_Header
 
-#include <Extrema_POnCurv.hxx>
 #include <MeshBLayer_Module.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Pnt2d.hxx>
@@ -11,6 +10,8 @@
 
 #include <memory>
 #include <vector>
+
+#include <opencascade/Extrema_POnCurv.hxx>
 
 namespace tnbLib
 {

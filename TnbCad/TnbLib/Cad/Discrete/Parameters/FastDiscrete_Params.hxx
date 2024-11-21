@@ -2,10 +2,10 @@
 #ifndef _FastDiscrete_Params_Header
 #define _FastDiscrete_Params_Header
 
+#include <Global_TypeDef.hxx>
 #include <Global_Serialization.hxx>
 
-#include <Standard_TypeDef.hxx>
-#include <Precision.hxx>
+#include <opencascade/Precision.hxx>
 
 namespace tnbLib
 {

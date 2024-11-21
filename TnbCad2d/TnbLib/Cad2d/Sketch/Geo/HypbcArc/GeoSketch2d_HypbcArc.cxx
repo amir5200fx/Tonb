@@ -4,7 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <GCE2d_MakeArcOfHyperbola.hxx>
+#include <opencascade/GCE2d_MakeArcOfHyperbola.hxx>
 
 tnbLib::GeoSketch2d_HypbcArc::GeoSketch2d_HypbcArc
 (

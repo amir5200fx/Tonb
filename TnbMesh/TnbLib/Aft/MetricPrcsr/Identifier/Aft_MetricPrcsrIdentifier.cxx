@@ -5,7 +5,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 tnbLib::Pnt3d
 tnbLib::Aft_MetricPrcsrIdentifier<tnbLib::Aft2d_EdgeSurface>::CalcCoord3D(const Pnt2d& thePt) const

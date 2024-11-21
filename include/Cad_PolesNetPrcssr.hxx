@@ -2,10 +2,9 @@
 #ifndef _Cad_PolesNetPrcssr_Header
 #define _Cad_PolesNetPrcssr_Header
 
-#include <Standard_Handle.hxx>
-#include <Standard_TypeDef.hxx>
-
 #include <Cad_Module.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 class Geom_BSplineSurface;
 
 #include <vector>

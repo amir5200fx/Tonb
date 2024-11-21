@@ -2,14 +2,14 @@
 #ifndef _Cad_Shape_Header
 #define _Cad_Shape_Header
 
-#include <Standard_Handle.hxx>
+#include <Cad_Module.hxx>
+#include <Entity3d_BoxFwd.hxx>
 #include <Global_Serialization.hxx>
 #include <Global_Named.hxx>
 #include <Global_Indexed.hxx>
-#include <Cad_Module.hxx>
-#include <Entity3d_BoxFwd.hxx>
+#include <Global_Handle.hxx>
 
-#include <TopoDS_Shape.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 namespace tnbLib
 {

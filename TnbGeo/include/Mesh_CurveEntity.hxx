@@ -2,9 +2,9 @@
 #ifndef _Mesh_CurveEntity_Header
 #define _Mesh_CurveEntity_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Geo_Traits.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

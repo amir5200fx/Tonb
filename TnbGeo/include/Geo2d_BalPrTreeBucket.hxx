@@ -2,7 +2,7 @@
 #ifndef _Geo2d_BalPrTreeBucket_Header
 #define _Geo2d_BalPrTreeBucket_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <set>
 

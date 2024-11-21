@@ -2,6 +2,7 @@
 #ifndef _Entity2d_CmpConnect_Header
 #define _Entity2d_CmpConnect_Header
 
+#include <Global_TypeDef.hxx>
 #include <Geo_Module.hxx>
 #include <Global_Serialization.hxx>
 
@@ -9,8 +10,6 @@
 #include <vector>
 #include <map>
 #include <array>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -2,9 +2,9 @@
 #ifndef _SectPx_PntConstructor_Header
 #define _SectPx_PntConstructor_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
 #include <SectPx_PntConstructorAdaptor.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

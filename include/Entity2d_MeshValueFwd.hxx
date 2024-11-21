@@ -2,8 +2,8 @@
 #ifndef _Entity2d_MeshValueFwd_Header
 #define _Entity2d_MeshValueFwd_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

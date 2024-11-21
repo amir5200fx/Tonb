@@ -2,9 +2,9 @@
 #ifndef _TModel_VertexAdaptor_Header
 #define _TModel_VertexAdaptor_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Cad_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>

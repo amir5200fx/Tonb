@@ -29,8 +29,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Curve.hxx>
-#include <Standard_Handle.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 std::shared_ptr<tnbLib::Geo_BasicApprxCurve_Info> tnbLib::BoundarySizeMap3d_UniformSegmentTool::DEFAULT_INFO =
 std::make_shared<tnbLib::Geo_BasicApprxCurve_Info>();

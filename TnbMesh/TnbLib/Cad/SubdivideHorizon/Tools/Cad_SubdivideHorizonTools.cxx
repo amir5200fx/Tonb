@@ -3,8 +3,8 @@
 #include <Pnt2d.hxx>
 #include <Pln_Tools.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
 
 std::pair<Standard_Real, Standard_Real> 
 tnbLib::Cad_SubdivideHorizonTools::RetrieveParams

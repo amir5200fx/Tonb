@@ -6,8 +6,8 @@
 
 #include <json.hpp>
 
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
-#include <StdFail_NotDone.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 const std::string tnbLib::Server_Cad2dObj_PrjPntCrv::Params::u0("u0");
 const std::string tnbLib::Server_Cad2dObj_PrjPntCrv::Params::u1("u1");

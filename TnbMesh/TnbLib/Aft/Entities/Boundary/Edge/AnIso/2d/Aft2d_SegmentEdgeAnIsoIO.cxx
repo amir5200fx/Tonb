@@ -1,9 +1,9 @@
 #include <Aft2d_SegmentEdgeAnIso.hxx>
 
-#include <Standard_Transient.hxx>
-#include <Standard_Type.hxx>
 #include <Aft2d_PlnCurveAnIso.hxx>
 #include <Aft2d_ElementAnIso.hxx>
+
+#include <opencascade/Standard_Transient.hxx>
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh_BndEdgeGeomAdaptorBase<tnbLib::Aft2d_PlnCurveAnIso>)

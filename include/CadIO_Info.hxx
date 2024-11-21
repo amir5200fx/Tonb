@@ -2,8 +2,8 @@
 #ifndef _CadIO_Info_Header
 #define _CadIO_Info_Header
 
-#include <Standard_TypeDef.hxx>
 #include <fileName.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

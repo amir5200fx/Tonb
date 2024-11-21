@@ -5,10 +5,10 @@
 #endif // DebugInfo
 
 
-#include <TopoDS_Shape.hxx>
-#include <BRepPrimAPI_MakeBox.hxx>
-#include <BRepPrimAPI_MakeCylinder.hxx>
-#include <BRepPrimAPI_MakeSphere.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
+#include <opencascade/BRepPrimAPI_MakeBox.hxx>
+#include <opencascade/BRepPrimAPI_MakeCylinder.hxx>
+#include <opencascade/BRepPrimAPI_MakeSphere.hxx>
 
 TopoDS_Shape 
 tnbLib::Cad_ShapeTools::Box

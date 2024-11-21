@@ -4,8 +4,8 @@
 #include <Geo_Serialization.hxx>
 #include <Cad2d_Plane.hxx>
 
-#include <gp_Ax2d.hxx>
-#include <gp_Circ2d.hxx>
+#include <opencascade/gp_Ax2d.hxx>
+#include <opencascade/gp_Circ2d.hxx>
 
 #include <json.hpp>
 

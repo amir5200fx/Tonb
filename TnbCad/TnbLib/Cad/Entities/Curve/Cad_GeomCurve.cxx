@@ -9,13 +9,13 @@
 #endif // DebugInfo
 
 
-#include <Geom_Curve.hxx>
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
-#include <BRepAdaptor_Curve.hxx>
-#include <BndLib_Add3dCurve.hxx>
-#include <BRepBuilderAPI_MakeEdge.hxx>
-#include <Adaptor3d_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BRepBndLib.hxx>
+#include <opencascade/BRepAdaptor_Curve.hxx>
+#include <opencascade/BndLib_Add3dCurve.hxx>
+#include <opencascade/BRepBuilderAPI_MakeEdge.hxx>
+#include <opencascade/Adaptor3d_Curve.hxx>
 
 const std::string tnbLib::Cad_GeomCurve::extension = ".gcurve";
 

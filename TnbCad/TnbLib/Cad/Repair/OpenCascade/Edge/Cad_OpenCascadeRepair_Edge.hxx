@@ -3,9 +3,9 @@
 #define _Cad_OpenCascadeRepair_Edge_Header
 
 #include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
-#include <Standard_Handle.hxx>
-#include <TopoDS_Edge.hxx>
+#include <opencascade/TopoDS_Edge.hxx>
 
 // Forward Declarations
 class TopoDS_Edge;

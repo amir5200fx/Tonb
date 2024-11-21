@@ -3,8 +3,8 @@
 #include <TModel_Curve.hxx>
 #include <TModel_Vertex.hxx>
 
-#include <TopoDS.hxx>
-#include <BRep_Tool.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/BRep_Tool.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_Edge)
 {

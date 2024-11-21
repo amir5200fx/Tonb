@@ -4,7 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 Standard_Integer tnbLib::Geo3d_ApprxSurfPatch_hSizeFunMode::DEFAULT_NB_SAMPLES = 3;
 

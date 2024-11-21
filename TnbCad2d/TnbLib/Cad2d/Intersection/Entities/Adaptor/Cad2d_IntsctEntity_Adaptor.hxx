@@ -2,9 +2,9 @@
 #ifndef _Cad2d_IntsctEntity_Adaptor_Header
 #define _Cad2d_IntsctEntity_Adaptor_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 #include <memory>

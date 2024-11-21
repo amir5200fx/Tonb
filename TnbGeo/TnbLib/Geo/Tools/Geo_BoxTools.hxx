@@ -2,7 +2,6 @@
 #ifndef _Geo_BoxTools_Header
 #define _Geo_BoxTools_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>

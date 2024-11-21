@@ -2,15 +2,13 @@
 #ifndef _MeshBLayer2d_Offset_Header
 #define _MeshBLayer2d_Offset_Header
 
+#include <MeshBLayer_Module.hxx>
 #include <Entity2d_QuadMeshFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
-
-#include "MeshBLayer_Module.hxx"
 
 namespace tnbLib
 {

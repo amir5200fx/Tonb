@@ -3,7 +3,7 @@
 #include <Cad_Shape.hxx>
 #include <Pnt3d.hxx>
 
-#include <gp_Ax2.hxx>
+#include <opencascade/gp_Ax2.hxx>
 
 #ifdef DebugInfo
 #undef DebugInfo

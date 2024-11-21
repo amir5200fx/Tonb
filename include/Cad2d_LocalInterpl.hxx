@@ -2,11 +2,10 @@
 #ifndef _Cad2d_LocalInterpl_Header
 #define _Cad2d_LocalInterpl_Header
 
-#include <Standard_Handle.hxx>
-
-#include <Global_Done.hxx>
-#include <Pnt2d.hxx>
 #include <Cad2d_Module.hxx>
+#include <Pnt2d.hxx>
+#include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 

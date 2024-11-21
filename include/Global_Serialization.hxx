@@ -2,7 +2,7 @@
 #ifndef _Global_Serialization_Header
 #define _Global_Serialization_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_CascadeTypes.hxx>
 
 #ifndef BOOST_SERIALIZATION_DYN_LINK
 #define BOOST_SERIALIZATION_DYN_LINK

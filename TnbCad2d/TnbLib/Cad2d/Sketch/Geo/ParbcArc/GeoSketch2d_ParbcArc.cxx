@@ -4,7 +4,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <GCE2d_MakeArcOfParabola.hxx>
+#include <opencascade/GCE2d_MakeArcOfParabola.hxx>
 
 tnbLib::GeoSketch2d_ParbcArc::GeoSketch2d_ParbcArc
 (

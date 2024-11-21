@@ -3,7 +3,7 @@
 #define _Geo_MxCifOctree_Node_Header
 
 #include <Global_AccessMethod.hxx>
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>

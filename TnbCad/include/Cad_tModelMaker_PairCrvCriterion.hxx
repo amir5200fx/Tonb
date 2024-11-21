@@ -2,11 +2,11 @@
 #ifndef _Cad_tModelMaker_PairCrvCriterion_Header
 #define _Cad_tModelMaker_PairCrvCriterion_Header
 
-#include <Standard_TypeDef.hxx>
 //#include <Standard_Handle.hxx>
 
-#include <Global_Serialization.hxx>
 #include <Cad_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

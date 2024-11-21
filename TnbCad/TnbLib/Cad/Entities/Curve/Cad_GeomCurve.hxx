@@ -5,10 +5,10 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_Handle.hxx>
 #include <Cad_Module.hxx>
 #include <Entity3d_BoxFwd.hxx>
 
-#include <Standard_Handle.hxx>
 
 class Geom_Curve;
 

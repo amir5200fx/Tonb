@@ -5,8 +5,6 @@
 #include <Entity2d_PolygonFwd.hxx>
 #include <Pnt2d.hxx>
 
-#include <Standard_TypeDef.hxx>
-
 #include <memory>
 
 namespace tnbLib

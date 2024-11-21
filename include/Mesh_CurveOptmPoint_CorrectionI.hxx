@@ -4,7 +4,7 @@
 #include <Global_Macros.hxx>
 #include <Geo_CurveLength.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 
 namespace tnbLib
 {

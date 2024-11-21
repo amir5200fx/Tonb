@@ -3,11 +3,10 @@
 #define _Cad_ModifySingularPlane_Polygon_Header
 
 #include <Cad_ModifySingularPlane_PolygonPoint.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

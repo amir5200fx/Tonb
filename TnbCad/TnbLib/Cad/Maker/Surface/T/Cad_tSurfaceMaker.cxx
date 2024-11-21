@@ -17,12 +17,12 @@
 #endif // DebugInfo
 
 
-#include <TopoDS.hxx>
-#include <BRepTools.hxx>
-#include <BRep_Tool.hxx>
-#include <BRepTools_WireExplorer.hxx>
-#include <ShapeFix_Wire.hxx>
-#include <TopExp_Explorer.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/BRepTools.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/BRepTools_WireExplorer.hxx>
+#include <opencascade/ShapeFix_Wire.hxx>
+#include <opencascade/TopExp_Explorer.hxx>
 
 const std::shared_ptr<tnbLib::Cad_tSurfaceMaker::MakerInfo> tnbLib::Cad_tSurfaceMaker::DEFAULT_INFO =
 std::make_shared<tnbLib::Cad_tSurfaceMaker::MakerInfo>();

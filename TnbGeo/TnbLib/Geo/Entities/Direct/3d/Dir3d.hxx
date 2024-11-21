@@ -2,7 +2,7 @@
 #ifndef _Dir3d_Header
 #define _Dir3d_Header
 
-#include <gp_Dir.hxx>
+#include <opencascade/gp_Dir.hxx>
 #include <Vec3d.hxx>
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>

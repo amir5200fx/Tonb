@@ -5,7 +5,7 @@
 #include <NumAlg_Module.hxx>
 #include <Global_Done.hxx>
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 #include <memory>

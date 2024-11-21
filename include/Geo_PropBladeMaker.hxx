@@ -3,7 +3,7 @@
 #define _Geo_PropBladeMaker_Header
 
 #include <Geo2d_AirfoilSectionFwd.hxx>
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 #include <memory>

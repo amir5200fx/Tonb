@@ -2,9 +2,9 @@
 #ifndef _Geo_CurveIntegrand_Header
 #define _Geo_CurveIntegrand_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
 #include <Geo_Traits.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 namespace tnbLib
 {

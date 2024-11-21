@@ -1,9 +1,9 @@
 #include <Cad_Boolean.hxx>
 
-#include <BRepAlgoAPI_Fuse.hxx>
-#include <BRepAlgoAPI_Cut.hxx>
-#include <BRepAlgoAPI_Common.hxx>
-#include <TopoDS_Shape.hxx>
+#include <opencascade/BRepAlgoAPI_Fuse.hxx>
+#include <opencascade/BRepAlgoAPI_Cut.hxx>
+#include <opencascade/BRepAlgoAPI_Common.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 TopoDS_Shape 
 tnbLib::Cad_Boolean::Union

@@ -1,4 +1,4 @@
-#include <Extrema_POnCurv2d.hxx>
+#include <opencascade/Extrema_POnCurv2d.hxx>
 #include <Merge3d_Triangulation.hxx>
 
 #include <Geo3d_BalPrTree.hxx>

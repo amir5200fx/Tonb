@@ -2,7 +2,7 @@
 #ifndef _Aft2d_SingularEdgeTemplate_Header
 #define _Aft2d_SingularEdgeTemplate_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

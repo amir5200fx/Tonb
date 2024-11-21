@@ -2,7 +2,7 @@
 #ifndef _Entity_Polygon_Header
 #define _Entity_Polygon_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <Geo_Traits.hxx>
 #include <Geo_Module.hxx>
 #include <Global_Serialization.hxx>

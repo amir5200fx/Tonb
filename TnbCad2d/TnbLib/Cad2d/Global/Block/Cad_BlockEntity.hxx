@@ -2,16 +2,17 @@
 #ifndef _Cad_BlockEntity_Header
 #define _Cad_BlockEntity_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Standard_OStream.hxx>
+#include <Cad2d_Module.hxx>
 #include <Global_Named.hxx>
 #include <Global_Serialization.hxx>
-#include <Cad2d_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>
 #include <map>
 #include <list>
+
+#include <opencascade/Standard_OStream.hxx>
 
 namespace tnbLib
 {

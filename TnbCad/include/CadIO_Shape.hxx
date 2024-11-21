@@ -2,11 +2,11 @@
 #ifndef _CadIO_Shape_Header
 #define _CadIO_Shape_Header
 
+#include <Entity3d_Box.hxx>
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
-#include <Entity3d_Box.hxx>
 
-#include <TopoDS_Shape.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 namespace tnbLib
 {

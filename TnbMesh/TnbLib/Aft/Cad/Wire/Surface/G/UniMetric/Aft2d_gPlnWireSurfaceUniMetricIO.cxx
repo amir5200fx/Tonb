@@ -1,7 +1,7 @@
 #include <Aft2d_gPlnWireSurfaceUniMetric.hxx>
 
-#include <Standard_Transient.hxx>
 #include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
+#include <opencascade/Standard_Transient.hxx>
 
 namespace tnbLib
 {

@@ -5,10 +5,9 @@
 #include <MeshPost_Module.hxx>
 #include <MeshPost_QualityMapTraits.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

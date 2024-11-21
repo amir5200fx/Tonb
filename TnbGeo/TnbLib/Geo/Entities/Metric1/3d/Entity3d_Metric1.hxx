@@ -2,12 +2,11 @@
 #ifndef _Entity3d_Metric1_Header
 #define _Entity3d_Metric1_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
-#include <armadillo.h>
+#include <armadillo>
 
 #include <iostream>
 #include <fstream>

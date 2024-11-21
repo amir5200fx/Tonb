@@ -2,11 +2,11 @@
 #ifndef _Mesh_SurfaceSizeValues_Header
 #define _Mesh_SurfaceSizeValues_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
-#include <Mesh_Module.hxx>
-#include <Mesh_SizeMethodInfo.hxx>
 #include <Mesh_RelativeAbsoluteInfo.hxx>
+#include <Mesh_SizeMethodInfo.hxx>
+#include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

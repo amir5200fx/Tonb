@@ -3,11 +3,10 @@
 #define _Geo3d_BalPrTreeNode_Header
 
 #include <Entity3d_BoxFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <string>
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

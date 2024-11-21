@@ -2,10 +2,10 @@
 #ifndef _Mesh_PlnCurve_Base_Header
 #define _Mesh_PlnCurve_Base_Header
 
-#include <Standard_Handle.hxx>
+#include <Mesh_Module.hxx>
 #include <Entity2d_Chain.hxx>
 #include <Entity2d_Polygon.hxx>
-#include <Mesh_Module.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>

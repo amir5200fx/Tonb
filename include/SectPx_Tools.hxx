@@ -2,14 +2,14 @@
 #ifndef _SectPx_Tools_Header
 #define _SectPx_Tools_Header
 
-#include <Pnt2d.hxx>
 #include <SectPx_Segment.hxx>
 #include <SectPx_Module.hxx>
 #include <SectPx_JoinPriority.hxx>
+#include <Pnt2d.hxx>
 
-#include <TColStd_Array1OfReal.hxx>
-#include <TColStd_Array1OfInteger.hxx>
-#include <TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/TColStd_Array1OfReal.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
 
 #include <vector>
 

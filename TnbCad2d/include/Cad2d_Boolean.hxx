@@ -2,8 +2,8 @@
 #ifndef _Cad2d_Boolean_Header
 #define _Cad2d_Boolean_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Cad2d_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

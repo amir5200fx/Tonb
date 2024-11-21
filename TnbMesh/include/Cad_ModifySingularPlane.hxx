@@ -13,14 +13,6 @@
 #include <memory>
 #include <vector>
 
-#include "GModel_Surface.hxx"
-#include "GModel_ParaCurve.hxx"
-#include "Aft2d_gPlnCurveSurface.hxx"
-#include "Aft2d_gRegionPlaneSurface.hxx"
-#include "Aft2d_gPlnWireSurface.hxx"
-
-#include <Standard_TypeDef.hxx>
-
 namespace tnbLib
 {
 

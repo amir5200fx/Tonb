@@ -7,7 +7,7 @@
 #include <Entity3d_Box.hxx>
 #include <OFstream.hxx>
 
-#include <TopoDS_Shape.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 #include <vector>
 

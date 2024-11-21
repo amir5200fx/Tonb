@@ -2,14 +2,14 @@
 #ifndef _Mesh_Curve_Header
 #define _Mesh_Curve_Header
 
-#include <Standard_Handle.hxx>
-#include <Global_Done.hxx>
-#include <Entity_Polygon.hxx>
-#include <Geo_Traits.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveEntity.hxx>
 #include <Mesh_Module.hxx>
 #include <Mesh_CurveTraits.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
+#include <Entity_Polygon.hxx>
+#include <Geo_Traits.hxx>
 
 namespace tnbLib
 {

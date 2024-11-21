@@ -4,7 +4,7 @@
 #include <Geo3d_ApprxCurve.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 
-#include <Geom_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 void tnbLib::NModel_EdgeGeometry::Discrete
 (

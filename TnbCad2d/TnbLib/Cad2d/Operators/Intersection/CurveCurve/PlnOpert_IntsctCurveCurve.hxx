@@ -3,9 +3,9 @@
 #define _PlnOpert_IntsctCurveCurve_Header
 
 #include <Global_AccessMethod.hxx>
-#include <Standard_TypeDef.hxx>
-#include <Global_Done.hxx>
 #include <Cad2d_Module.hxx>
+#include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

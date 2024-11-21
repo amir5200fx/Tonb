@@ -1,6 +1,6 @@
 #include <Entity2d_Eigen.hxx>
 
-#include <armadillo.h>
+#include <armadillo>
 
 using namespace arma;
 

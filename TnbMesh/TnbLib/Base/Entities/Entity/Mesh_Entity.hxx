@@ -2,7 +2,6 @@
 #ifndef _Mesh_Entity_Header
 #define _Mesh_Entity_Header
 
-#include <Standard_Transient.hxx>
 #include <Global_Indexed.hxx>
 #include <Mesh_Module.hxx>
 

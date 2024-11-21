@@ -2,9 +2,9 @@
 #ifndef _Cad2d_Modeler_SelectList_Header
 #define _Cad2d_Modeler_SelectList_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Cad2d_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 #include <memory>

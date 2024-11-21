@@ -3,7 +3,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <BSplCLib.hxx>
+#include <opencascade/BSplCLib.hxx>
 
 void tnbLib::SectPx_KnotVector::SetDefaults()
 {

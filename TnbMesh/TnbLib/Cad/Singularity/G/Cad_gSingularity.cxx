@@ -39,8 +39,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Geom_Surface.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 
 unsigned short tnbLib::Cad_gSingularity::verbose(0);
 const Standard_Real tnbLib::Cad_gSingularity::DEFAULT_WEIGHT = 1.25;

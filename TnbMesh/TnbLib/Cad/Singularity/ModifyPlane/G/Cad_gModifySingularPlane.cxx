@@ -3,6 +3,9 @@
 #include <Cad_ModifySingularPlaneTools.hxx>
 #include <Cad_SingularityTopology.hxx>
 #include <Cad_ColorApprxMetric.hxx>
+#include <Aft2d_gRegionPlaneSurface.hxx>
+#include <Aft2d_gPlnWireSurface.hxx>
+#include <Aft2d_gPlnCurveSurface.hxx>
 #include <Mesh2d_Element.hxx>
 #include <TecPlot.hxx>
 
@@ -125,14 +128,6 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 	auto wireApprox =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::GetPolygons(modifiedWires, ApproxInfo());
 
-	{
-		OFstream myFile("modified.plt");
-		for (const auto& x : wireApprox)
-		{
-			x->ExportToPlt(myFile);
-		}
-		std::exit(1);
-	}
 	RegisterPolygons(wireApprox);
 
 	auto topology =

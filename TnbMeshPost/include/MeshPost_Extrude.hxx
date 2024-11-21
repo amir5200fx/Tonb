@@ -8,13 +8,9 @@
 #include <Pnt2d.hxx>
 #include <Global_Indexed.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
-
-#include "MeshPost_Extrude.hxx"
-#include "MeshPost_Extrude.hxx"
 
 namespace tnbLib
 {

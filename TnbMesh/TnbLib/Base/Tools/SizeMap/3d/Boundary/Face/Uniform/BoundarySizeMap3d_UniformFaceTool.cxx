@@ -40,7 +40,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Poly_Triangulation.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
 
 
 namespace tnbLib

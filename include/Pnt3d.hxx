@@ -2,7 +2,7 @@
 #ifndef _Pnt3d_Header
 #define _Pnt3d_Header
 
-#include <gp_Pnt.hxx>
+#include <opencascade/gp_Pnt.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <Geo_Module.hxx>

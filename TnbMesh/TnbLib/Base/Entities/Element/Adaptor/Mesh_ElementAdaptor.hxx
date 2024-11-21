@@ -2,11 +2,11 @@
 #ifndef _Mesh_ElementAdaptor_Header
 #define _Mesh_ElementAdaptor_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_AccessMethod.hxx>
-#include <Global_Serialization.hxx>
 #include <Mesh_ElementType.hxx>
 #include <Mesh_Module.hxx>
+#include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <array>

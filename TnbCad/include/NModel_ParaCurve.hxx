@@ -4,11 +4,11 @@
 
 #include <NModel_Entity.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Global_Handle.hxx>
 #include <OFstream.hxx>
 
-#include <Standard_Handle.hxx>
-
-#include <Geom2d_Curve.hxx>
+// Forward Declarations
+class Geom2d_Curve;
 
 namespace tnbLib
 {

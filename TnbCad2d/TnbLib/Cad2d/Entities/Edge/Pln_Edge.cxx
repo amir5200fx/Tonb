@@ -6,7 +6,7 @@
 #include <Pln_Curve.hxx>
 #include <Pln_Ring.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 const std::string tnbLib::Pln_Edge::extension = ".edge2d";
 

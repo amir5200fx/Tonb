@@ -2,7 +2,7 @@
 #ifndef _Traits_Header
 #define _Traits_Header
 
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 #include <xtr1common>
 #include <memory>

@@ -8,30 +8,30 @@
 #undef DebugInfo
 #endif // DebugInfo
 
-#include <TopoDS_Face.hxx>
-#include <TopoDS_Wire.hxx>
-#include <TopoDS.hxx>
-#include <TopExp_Explorer.hxx>
-#include <BRepTools_WireExplorer.hxx>
-#include <BRep_Tool.hxx>
-#include <BRepTools.hxx>
-#include <BRepBndLib.hxx>
-#include <BndLib_AddSurface.hxx>
-#include <BRepMesh_FastDiscret.hxx>
-#include <BRepMesh_EdgeDiscret.hxx>
-#include <Bnd_Box.hxx>
-#include <Poly_Triangulation.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
-#include <GeomConvert.hxx>
-#include <GeomAdaptor_Surface.hxx>
-#include <Geom2dConvert.hxx>
-#include <Geom_BSplineSurface.hxx>
-#include <Geom_RectangularTrimmedSurface.hxx>
+#include <opencascade/TopoDS_Face.hxx>
+#include <opencascade/TopoDS_Wire.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/TopExp_Explorer.hxx>
+#include <opencascade/BRepTools_WireExplorer.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/BRepTools.hxx>
+#include <opencascade/BRepBndLib.hxx>
+#include <opencascade/BndLib_AddSurface.hxx>
+#include <opencascade/BRepMesh_FastDiscret.hxx>
+#include <opencascade/BRepMesh_EdgeDiscret.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
+#include <opencascade/GeomConvert.hxx>
+#include <opencascade/GeomAdaptor_Surface.hxx>
+#include <opencascade/Geom2dConvert.hxx>
+#include <opencascade/Geom_BSplineSurface.hxx>
+#include <opencascade/Geom_RectangularTrimmedSurface.hxx>
 
-#include <IMeshTools_MeshBuilder.hxx>
+#include <opencascade/IMeshTools_MeshBuilder.hxx>
 
-#include <BRepMesh_IncrementalMesh.hxx>
+#include <opencascade/BRepMesh_IncrementalMesh.hxx>
 
 void tnbLib::Cad_FastDiscrete::Triangulation
 (

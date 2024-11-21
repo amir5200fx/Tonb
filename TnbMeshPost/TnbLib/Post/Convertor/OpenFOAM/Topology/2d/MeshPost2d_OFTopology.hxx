@@ -6,8 +6,7 @@
 #include <Entity_Connectivity.hxx>
 #include <Global_Done.hxx>
 #include <Global_Indexed.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 

@@ -1,10 +1,18 @@
 #include <Geo3d_DelTri_Fade3d.hxx>
 
 #include <Entity3d_Tetrahedralization.hxx>
+#include <Global_Config.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Fade_3D.h>
+#ifdef TNB_CONFIG_USE_FADE3D
+
+#include <fade3d/Fade_3D.h>
+#ifdef _DEBUG
+#pragma comment(lib, "fade3D_x64_v141_Debug.lib")
+#else
+#pragma comment(lib, "fade3D_x64_v141_Release.lib")
+#endif
 
 namespace tnbLib
 {
@@ -54,8 +62,11 @@ namespace tnbLib
 	}
 }
 
+#endif
+
 void tnbLib::fadeLib::Geo3d_DelTri::Perform()
 {
+#ifdef TNB_CONFIG_USE_FADE3D
 	if (Points().size() < 4)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -85,4 +96,12 @@ void tnbLib::fadeLib::Geo3d_DelTri::Perform()
 	theTriangulation_ = std::move(myTets);
 
 	Change_IsDone() = Standard_True;
+
+#else
+	FatalErrorIn(FunctionSIG) << "\n"
+		<< "Fade3d library hasn't been activated.\n"
+		<< " - Please define TNB_CONFIG_USE_FADE3D macro inside the Global_Config.hxx and recompile the library.\n"
+		<< abort(FatalError);
+#endif
+
 }

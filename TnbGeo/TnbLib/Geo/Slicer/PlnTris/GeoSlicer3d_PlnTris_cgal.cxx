@@ -6,7 +6,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp_Pln.hxx>
+#include <opencascade/gp_Pln.hxx>
 
 #ifdef Handle
 #undef Handle

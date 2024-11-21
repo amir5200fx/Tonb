@@ -1,10 +1,9 @@
 #pragma once
 #include <MeshPost_LaplacianSmoothing_AvgFun.hxx>
 #include <MeshPost_LaplacianSmoothing_Info.hxx>
+#include <Global_Real.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-#include <Standard_Real.hxx>
 
 template<class MetricMap>
 inline Standard_Real 

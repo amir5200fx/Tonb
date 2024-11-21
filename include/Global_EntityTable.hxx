@@ -3,7 +3,7 @@
 #define _Global_EntityTable_Header
 
 #include <Global_Named.hxx>
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 

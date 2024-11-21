@@ -11,9 +11,9 @@
 #endif // DebugInfo
 
 
-#include <IGESControl_Reader.hxx>
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
+#include <opencascade/IGESControl_Reader.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BRepBndLib.hxx>
 #include <Cad_Tools.hxx>
 
 unsigned short tnbLib::CadIO_IGES::verbose(0);

@@ -8,9 +8,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <GeomAPI_ProjectPointOnCurve.hxx>
-#include <GeomAPI_ProjectPointOnSurf.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/GeomAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/GeomAPI_ProjectPointOnSurf.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 
 template<>
 std::pair

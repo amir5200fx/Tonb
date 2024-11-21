@@ -2,6 +2,7 @@
 #ifndef _Discret2d_Curve_UniLengthFun_Header
 #define _Discret2d_Curve_UniLengthFun_Header
 
+#include <Discret_Module.hxx>
 #include <Discret2d_Curve_LengthFun.hxx>
 
 namespace tnbLib

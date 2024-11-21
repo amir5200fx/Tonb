@@ -2,9 +2,8 @@
 #ifndef _Cad_MetricCalculator_Header
 #define _Cad_MetricCalculator_Header
 
-#include <Standard_Handle.hxx>
-
 #include <Cad_Module.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [12/31/2021 Amir]
 class Geom_Surface;

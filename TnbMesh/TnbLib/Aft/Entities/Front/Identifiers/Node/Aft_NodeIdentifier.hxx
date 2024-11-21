@@ -2,13 +2,12 @@
 #ifndef _Aft_NodeIdentifier_Header
 #define _Aft_NodeIdentifier_Header
 
-#include <Standard_TypeDef.hxx>
-
-#include <Global_AccessMethod.hxx>
-#include <Global_Serialization.hxx>
+#include <Aft_NodeType.hxx>
 #include <Entity2d_Metric1.hxx>
 #include <Pnt3d.hxx>
-#include <Aft_NodeType.hxx>
+#include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

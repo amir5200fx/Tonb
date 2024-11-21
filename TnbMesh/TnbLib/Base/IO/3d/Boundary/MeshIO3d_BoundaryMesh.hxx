@@ -4,11 +4,10 @@
 #include <Mesh_Module.hxx>
 #include <Entity3d_SurfTriangulationFwd.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

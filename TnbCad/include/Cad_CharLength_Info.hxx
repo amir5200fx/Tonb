@@ -3,8 +3,8 @@
 #define _Cad_CharLength_Info_Header
 
 #include <Cad_Module.hxx>
+#include <Global_TypeDef.hxx>
 
-#include <Standard_TypeDef.hxx>
 
 #include <memory>
 

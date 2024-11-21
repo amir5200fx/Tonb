@@ -2,7 +2,7 @@
 
 #include <Entity2d_Metric1.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 Standard_Real tnbLib::GeoMetricFun2d_ExactSurface::Epsilon = 1.0E-6;
 

@@ -3,8 +3,7 @@
 #define _Cad_OpenCascadeRepair_Header
 
 #include <Global_Done.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class TopoDS_Shape;
 

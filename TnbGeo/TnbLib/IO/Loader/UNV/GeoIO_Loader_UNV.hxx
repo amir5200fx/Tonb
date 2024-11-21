@@ -2,12 +2,11 @@
 #ifndef _GeoIO_Loader_UNV_Header
 #define _GeoIO_Loader_UNV_Header
 
+#include <Global_TypeDef.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

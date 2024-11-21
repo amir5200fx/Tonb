@@ -4,11 +4,10 @@
 
 #include <Discret_CurveInfo.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

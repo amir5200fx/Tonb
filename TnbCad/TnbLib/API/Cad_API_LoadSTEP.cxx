@@ -10,10 +10,10 @@
 #undef DebugInfo
 #endif // DebugInfo
 
-#include <TopoDS_Shape.hxx>
-#include <STEPControl_Reader.hxx>
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
+#include <opencascade/STEPControl_Reader.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BRepBndLib.hxx>
 
 tnbLib::api::cad::Shape tnbLib::api::cad::load_step(const std::string& file_name, unsigned short verbose)
 {

@@ -5,7 +5,7 @@
 #include <TModel_Wire.hxx>
 #include <TModel_Edge.hxx>
 
-#include <TopoDS.hxx>
+#include <opencascade/TopoDS.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_EdgeAdaptor)
 {

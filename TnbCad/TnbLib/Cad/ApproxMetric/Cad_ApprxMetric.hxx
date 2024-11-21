@@ -3,12 +3,12 @@
 #define _Cad_ApprxMetric_Header
 
 #include <Cad_Module.hxx>
-#include <Global_Done.hxx>
-#include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_MeshValueFwd.hxx>
 #include <Entity2d_Metric1.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>

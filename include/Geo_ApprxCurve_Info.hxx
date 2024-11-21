@@ -6,8 +6,6 @@
 #include <Global_Serialization.hxx>
 #include <Geo_Module.hxx>
 
-#include <Standard_TypeDef.hxx>
-
 namespace tnbLib
 {
 

@@ -2,10 +2,10 @@
 #ifndef _Mesh_CurveOptmPoint_Correction_Info_Header
 #define _Mesh_CurveOptmPoint_Correction_Info_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Geo_Module.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
-#include <Geo_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

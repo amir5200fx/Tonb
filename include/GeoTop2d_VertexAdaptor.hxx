@@ -4,12 +4,12 @@
 
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 #include <vector>
 #include <memory>
 
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

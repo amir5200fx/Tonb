@@ -2,11 +2,10 @@
 #ifndef _GeoSizeFun2d_Surface_Header
 #define _GeoSizeFun2d_Surface_Header
 
-#include <Entity2d_Box.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo3d_SizeFunction.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Entity2d_Box.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Surface;
 
