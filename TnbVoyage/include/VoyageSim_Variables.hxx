@@ -2,7 +2,6 @@
 #ifndef _VoyageSim_Variables_Header
 #define _VoyageSim_Variables_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Pnt2d.hxx>
 
 namespace tnbLib

@@ -4,8 +4,7 @@
 
 #include <Voyage_Entity.hxx>
 #include <Entity2d_PolygonFwd.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

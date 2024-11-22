@@ -2,8 +2,8 @@
 #ifndef _VoyageGeo_SingleVelocityBackgroundFwd_Header
 #define _VoyageGeo_SingleVelocityBackgroundFwd_Header
 
-#include <Standard_TypeDef.hxx>
 #include <GeoMesh2d_DataFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {
