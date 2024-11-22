@@ -2,10 +2,10 @@
 #ifndef _Pln_EntityPrecision_Header
 #define _Pln_EntityPrecision_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Cad2d_Module.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
-#include <Cad2d_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

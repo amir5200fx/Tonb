@@ -3,11 +3,10 @@
 #define _GeoIO_Writer_OBJ_Header
 
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Global_TypeDef.hxx>
 #include <word.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

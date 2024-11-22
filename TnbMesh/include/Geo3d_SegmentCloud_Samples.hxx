@@ -4,10 +4,9 @@
 
 #include <Mesh_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

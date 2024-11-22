@@ -2,14 +2,13 @@
 #ifndef _Cad_SingularityHorizons_Header
 #define _Cad_SingularityHorizons_Header
 
-#include <Global_Done.hxx>
+#include <Mesh_Module.hxx>
+#include <Geo2d_PolygonGraphFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
-#include <Geo2d_PolygonGraphFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
-#include <Mesh_Module.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 #include <vector>
 #include <memory>

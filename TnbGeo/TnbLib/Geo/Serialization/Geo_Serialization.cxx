@@ -1,7 +1,7 @@
 #include <Geo_Serialization.hxx>
 
-#include <Poly_Triangulation.hxx>
-#include <gp_Pln.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
+#include <opencascade/gp_Pln.hxx>
 
 template<>
 void boost::serialization::save

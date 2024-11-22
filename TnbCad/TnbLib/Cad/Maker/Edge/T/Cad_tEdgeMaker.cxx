@@ -10,12 +10,12 @@
 #include <Cad_tEdgeMakerInfo.hxx>
 #include <Cad_tEdgeMakerInfo_Absolute.hxx>
 
-#include <TopLoc_Location.hxx>
-#include <BRep_Tool.hxx>
-#include <BRepLib.hxx>
-#include <Geom2d_Curve.hxx>
-#include <Precision.hxx>
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/TopLoc_Location.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/BRepLib.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Precision.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 
 const std::shared_ptr<tnbLib::Cad_tEdgeMakerInfo> tnbLib::Cad_tEdgeMaker::DEFAULT_INFO =
 std::make_shared<tnbLib::Cad_tEdgeMakerInfo_Absolute>(Precision::Confusion());

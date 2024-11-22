@@ -2,7 +2,7 @@
 #ifndef _Geom_PriorityList_Header
 #define _Geom_PriorityList_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <Global_Serialization.hxx>
 #include <Geo_Module.hxx>
 #include <TnbError.hxx>

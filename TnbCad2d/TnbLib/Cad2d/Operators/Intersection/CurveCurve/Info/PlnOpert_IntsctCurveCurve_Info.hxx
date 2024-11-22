@@ -2,9 +2,9 @@
 #ifndef _PlnOpert_IntsctCurveCurve_Info_Header
 #define _PlnOpert_IntsctCurveCurve_Info_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_AccessMethod.hxx>
 #include <Cad2d_Module.hxx>
+#include <Global_AccessMethod.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

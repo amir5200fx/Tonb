@@ -2,9 +2,9 @@
 #ifndef _SectPx_Pole_CornerAdaptor_Header
 #define _SectPx_Pole_CornerAdaptor_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
 #include <SectPx_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 #include <memory>

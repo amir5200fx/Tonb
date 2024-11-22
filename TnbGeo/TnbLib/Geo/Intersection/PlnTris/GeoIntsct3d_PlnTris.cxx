@@ -5,7 +5,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp_Pln.hxx>
+#include <opencascade/gp_Pln.hxx>
 
 const unsigned short tnbLib::GeoIntsct3d_PlnTris::pntIntsct::nbPoints = 1;
 const unsigned short tnbLib::GeoIntsct3d_PlnTris::segIntsct::nbPoints = 2;

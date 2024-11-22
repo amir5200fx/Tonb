@@ -2,8 +2,8 @@
 #ifndef _Aft2d_FrontInfoAdaptorTemplate_Header
 #define _Aft2d_FrontInfoAdaptorTemplate_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

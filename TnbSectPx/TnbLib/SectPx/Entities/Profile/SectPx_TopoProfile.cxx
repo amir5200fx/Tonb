@@ -8,9 +8,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <StdFail_NotDone.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <BSplCLib.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/BSplCLib.hxx>
 
 tnbLib::SectPx_TopoProfile::SectPx_TopoProfile
 (

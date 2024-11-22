@@ -9,10 +9,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <BRep_Tool.hxx>
-#include <TopLoc_Location.hxx>
-#include <TopoDS.hxx>
-#include <TopoDS_Face.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/TopLoc_Location.hxx>
+#include <opencascade/TopoDS.hxx>
+#include <opencascade/TopoDS_Face.hxx>
 
 const Standard_Real tnbLib::VoyageGeo_Earth::Radius = 6371.0;
 

@@ -2,8 +2,8 @@
 #ifndef _Entity3d_TetrahedralizationTools_Header
 #define _Entity3d_TetrahedralizationTools_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Geo_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <utility>
 

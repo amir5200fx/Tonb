@@ -2,9 +2,9 @@
 #ifndef _Cad2d_Plane_Manager_Header
 #define _Cad2d_Plane_Manager_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
 #include <Cad2d_Module.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

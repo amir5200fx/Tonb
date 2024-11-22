@@ -2,8 +2,7 @@
 #ifndef _Global_Bound_Header
 #define _Global_Bound_Header
 
-#include <Standard_Real.hxx>
-#include <Standard_Integer.hxx>
+#include <Global_CascadeTypes.hxx>
 #include <Global_Serialization.hxx>
 
 namespace tnbLib

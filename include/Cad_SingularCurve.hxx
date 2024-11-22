@@ -2,17 +2,16 @@
 #ifndef _Cad_SingularCurve_Header
 #define _Cad_SingularCurve_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
 #include <Cad_SingularCurveTraits.hxx>
 #include <Entity2d_Polygon.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 class Geom_Curve;
 class Geom_Surface;
-
-#include <Standard_Handle.hxx>
 
 namespace tnbLib
 {

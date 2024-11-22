@@ -4,9 +4,8 @@
 
 #include <word.hxx>
 #include <Global_Serialization.hxx>
-
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 

@@ -2,9 +2,9 @@
 #ifndef _TModel_EdgeGeometry_Header
 #define _TModel_EdgeGeometry_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_Handle.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Cad_Module.hxx>
 

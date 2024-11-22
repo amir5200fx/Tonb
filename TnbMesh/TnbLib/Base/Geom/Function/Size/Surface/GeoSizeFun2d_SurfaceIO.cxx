@@ -3,7 +3,7 @@
 #include <OpenCascade_Serialization.hxx>
 #include <Geo3d_SizeFunction.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::GeoSizeFun2d_Surface)
 {

@@ -2,9 +2,9 @@
 #ifndef _SectPx_ParTools_Header
 #define _SectPx_ParTools_Header
 
-#include <Standard_TypeDef.hxx>
 #include <SectPx_ParsFwd.hxx>
 #include <SectPx_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>

@@ -19,8 +19,6 @@
 #include <string>
 #include <sstream>
 
-#include <Standard_TypeDef.hxx>
-
 namespace tnbLib
 {
 

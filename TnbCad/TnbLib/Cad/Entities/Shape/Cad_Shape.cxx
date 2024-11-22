@@ -51,8 +51,8 @@ tnbLib::Cad_Shape::Cad_Shape
 	CalcBoundingBox();
 }
 
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
+#include <opencascade/Bnd_Box.hxx>
+#include <opencascade/BRepBndLib.hxx>
 
 void tnbLib::Cad_Shape::CalcBoundingBox()
 {

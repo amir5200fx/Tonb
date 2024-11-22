@@ -12,7 +12,7 @@
 #include <Cad2d_Modeler_SelectList.hxx>
 #include <Cad_EntityManager.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 
 #include <memory>
 #include <map>

@@ -12,7 +12,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 const Standard_Integer tnbLib::Cad_CurveSplitter::DEFAULT_NB_SEGMENTS(15);
 const std::shared_ptr<tnbLib::Cad_CurveSplitter_Info> tnbLib::Cad_CurveSplitter::DEFAULT_INFO =

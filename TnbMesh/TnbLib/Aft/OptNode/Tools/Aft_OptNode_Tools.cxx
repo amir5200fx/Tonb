@@ -6,7 +6,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 
 std::tuple<tnbLib::Pnt2d, tnbLib::Pnt2d, Standard_Boolean> 
 tnbLib::Aft_OptNode_Tools::BisectInitialGuess

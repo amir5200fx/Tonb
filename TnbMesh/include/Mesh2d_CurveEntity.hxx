@@ -5,7 +5,7 @@
 #include <Mesh_CurveEntity.hxx>
 #include <Geo2d_MetricPrcsr.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 namespace tnbLib
 {

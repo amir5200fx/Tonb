@@ -2,9 +2,9 @@
 #ifndef _SectPx_CoordAdaptor_Header
 #define _SectPx_CoordAdaptor_Header
 
-#include <Standard_TypeDef.hxx>
 #include <SectPx_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>

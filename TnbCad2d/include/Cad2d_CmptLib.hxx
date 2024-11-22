@@ -2,9 +2,9 @@
 #ifndef _Cad2d_CmptLib_Header
 #define _Cad2d_CmptLib_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
 #include <Cad2d_Module.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 class gp_Trsf2d;

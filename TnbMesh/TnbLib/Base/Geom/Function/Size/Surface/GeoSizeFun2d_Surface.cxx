@@ -5,7 +5,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 Standard_Real
 tnbLib::GeoSizeFun2d_Surface::Value

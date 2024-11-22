@@ -5,7 +5,7 @@
 #include <Global_Done.hxx>
 #include <Cad_Module.hxx>
 
-#include <TopoDS_Face.hxx>
+#include <opencascade/TopoDS_Face.hxx>
 
 #include <memory>
 

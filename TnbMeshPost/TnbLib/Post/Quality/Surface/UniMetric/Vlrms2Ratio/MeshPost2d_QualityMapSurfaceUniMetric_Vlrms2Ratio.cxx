@@ -8,7 +8,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 Standard_Real 
 tnbLib::MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio::CalcQuality

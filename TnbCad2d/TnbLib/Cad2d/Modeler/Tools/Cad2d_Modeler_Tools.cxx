@@ -12,8 +12,8 @@
 #include <Cad2d_Modeler_Corner.hxx>
 #include <Cad2d_Modeler_Segment.hxx>
 
-#include <Standard_Handle.hxx>
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <Global_Handle.hxx>
 
 #include <algorithm>
 

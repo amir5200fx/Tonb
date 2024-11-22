@@ -10,7 +10,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
 
 #include <Cad2d_VertexEdgeIntersection.hxx>
 #include <Pln_Vertex.hxx>

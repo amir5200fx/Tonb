@@ -3,15 +3,12 @@
 #define _Cad_SubdivideHorizon_Header
 
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>
 #include <list>
 #include <vector>
-
-#include <Standard_TypeDef.hxx>
-
-#include "GModel_ParaCurve.hxx"
 
 namespace tnbLib
 {

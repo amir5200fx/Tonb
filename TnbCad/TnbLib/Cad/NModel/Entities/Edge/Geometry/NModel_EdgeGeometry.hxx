@@ -2,10 +2,10 @@
 #ifndef _NModel_EdgeGeometry_Header
 #define _NModel_EdgeGeometry_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Cad_Module.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Entity3d_PolygonFwd.hxx>
-#include <Cad_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

@@ -3,7 +3,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Plane.hxx>
+#include <opencascade/Geom_Plane.hxx>
 
 void tnbLib::GeoMetricFun2d_Plane::CalcMetric()
 {

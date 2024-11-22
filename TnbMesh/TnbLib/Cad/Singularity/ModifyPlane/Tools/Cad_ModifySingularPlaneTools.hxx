@@ -6,13 +6,12 @@
 #include <Cad_SubdivideHorizon.hxx>
 #include <Cad_SingularZone.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>
 #include <list>
 #include <map>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

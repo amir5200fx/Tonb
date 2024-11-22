@@ -2,7 +2,7 @@
 #ifndef _Geo2d_BasicApprxCurveAdaptorFwd_Header
 #define _Geo2d_BasicApprxCurveAdaptorFwd_Header
 
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [8/25/2022 Amir]
 class Geom2d_Curve;

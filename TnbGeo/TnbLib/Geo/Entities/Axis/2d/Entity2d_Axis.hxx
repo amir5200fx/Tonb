@@ -4,7 +4,7 @@
 #include <Geo_Module.hxx>
 #include <Global_ChaiscriptFwd.hxx>
 
-#include <gp_Ax2d.hxx>
+#include <opencascade/gp_Ax2d.hxx>
 
 namespace tnbLib
 {

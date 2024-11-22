@@ -6,8 +6,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2dAPI_InterCurveCurve.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
+#include <opencascade/Geom2dAPI_InterCurveCurve.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
 
 const std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Cad2d_RepairWire::DEFAULT_INTEG_INFO =
 std::make_shared<tnbLib::NumAlg_AdaptiveInteg_Info>();

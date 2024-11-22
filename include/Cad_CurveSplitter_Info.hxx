@@ -2,9 +2,9 @@
 #ifndef _Cad_CurveSplitter_Info_Header
 #define _Cad_CurveSplitter_Info_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Cad_Module.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 

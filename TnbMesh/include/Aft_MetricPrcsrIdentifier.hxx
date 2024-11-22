@@ -5,8 +5,7 @@
 #include <Aft2d_EdgeSurfaceFwd.hxx>
 #include <Mesh_Module.hxx>
 #include <Global_Serialization.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Surface;
 

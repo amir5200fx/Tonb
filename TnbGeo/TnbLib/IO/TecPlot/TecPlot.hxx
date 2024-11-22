@@ -2,7 +2,6 @@
 #ifndef _TecPlot_Header
 #define _TecPlot_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity_Connectivity.hxx>
 #include <Geo_Module.hxx>
 #include <OFstream.hxx>

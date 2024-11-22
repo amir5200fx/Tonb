@@ -2,14 +2,13 @@
 #ifndef _Mesh_PlnCurve_Header
 #define _Mesh_PlnCurve_Header
 
-#include <Global_Indexed.hxx>
 #include <Mesh_Module.hxx>
 #include <Mesh_PlnCurve_Base.hxx>
 #include <Mesh_PlnCurve_Traits.hxx>
 #include <Geo_MetricPrcsr.hxx>
 #include <Entity_Polygon.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Indexed.hxx>
+#include <Global_Handle.hxx>
 
 namespace tnbLib
 {

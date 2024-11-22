@@ -2,7 +2,7 @@
 #ifndef _Mesh3d_SetSourcesCalcRadius_Header
 #define _Mesh3d_SetSourcesCalcRadius_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

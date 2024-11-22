@@ -2,7 +2,7 @@
 #ifndef _Global_Indexed_Header
 #define _Global_Indexed_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_CascadeTypes.hxx>
 #include <Global_Serialization.hxx>
 
 namespace tnbLib

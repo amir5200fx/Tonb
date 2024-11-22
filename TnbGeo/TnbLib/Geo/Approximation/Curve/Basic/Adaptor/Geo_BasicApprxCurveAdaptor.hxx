@@ -5,8 +5,6 @@
 #include <Geo_BasicApprxCurve_Traits.hxx>
 #include <Geo_Traits.hxx>
 
-#include <Standard_TypeDef.hxx>
-
 namespace tnbLib
 {
 

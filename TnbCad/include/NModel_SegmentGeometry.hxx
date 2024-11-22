@@ -2,9 +2,9 @@
 #ifndef _NModel_SegmentGeometry_Header
 #define _NModel_SegmentGeometry_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_TypeDef.hxx>
 #include <OFstream.hxx>
 
 #include <memory>

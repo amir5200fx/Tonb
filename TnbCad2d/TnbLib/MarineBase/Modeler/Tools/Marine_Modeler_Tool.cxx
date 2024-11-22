@@ -6,7 +6,7 @@
 #include <Pln_Ring.hxx>
 #include <Marine_PlnCurves.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 std::shared_ptr<tnbLib::Pln_Curve> 
 tnbLib::marineLib::Modeler_Tools::MakeCurve

@@ -5,12 +5,12 @@
 #include <NumAlg_Module.hxx>
 #include <Global_Serialization.hxx>
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 
 namespace tnbLib
 {

@@ -5,11 +5,11 @@
 #endif // DebugInfo
 
 
-#include <BinTools_Curve2dSet.hxx>
-#include <GeomTools.hxx>
+#include <opencascade/BinTools_Curve2dSet.hxx>
+#include <opencascade/GeomTools.hxx>
 #include <istream>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::geoLib::ProfileFun_Geom)
 {

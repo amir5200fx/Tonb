@@ -2,7 +2,6 @@
 #ifndef _NumAlg_Secant_Info_Header
 #define _NumAlg_Secant_Info_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
 #include <NumAlg_Secant_Condition.hxx>

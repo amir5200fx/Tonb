@@ -5,8 +5,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom2d_BSplineCurve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
 
 void tnbLib::NModel_ParaCurve::CheckBoundary
 (
@@ -85,8 +85,8 @@ tnbLib::NModel_ParaCurve::Value_normParam
 	return std::move(value);
 }
 
-#include <Bnd_Box2d.hxx>
-#include <BndLib_Add2dCurve.hxx>
+#include <opencascade/Bnd_Box2d.hxx>
+#include <opencascade/BndLib_Add2dCurve.hxx>
 
 tnbLib::Entity2d_Box
 tnbLib::NModel_ParaCurve::CalcBoundingBox() const

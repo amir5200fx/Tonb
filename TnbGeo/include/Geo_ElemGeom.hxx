@@ -2,14 +2,13 @@
 #ifndef _Geo_ElemGeom_Header
 #define _Geo_ElemGeom_Header
 
+#include <Global_TypeDef.hxx>
 #include <Geo_Module.hxx>
 #include <Global_Serialization.hxx>
 
 #include <array>
 #include <vector>
 #include <string>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -2,7 +2,7 @@
 #ifndef _UnitSystem_Header
 #define _UnitSystem_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <scalar.hxx>
 #include <Global_Module.hxx>
 

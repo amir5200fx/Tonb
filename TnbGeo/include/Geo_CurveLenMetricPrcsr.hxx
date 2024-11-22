@@ -3,8 +3,7 @@
 #define _Geo_CurveLenMetricPrcsr_Header
 
 #include <Geo_Traits.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

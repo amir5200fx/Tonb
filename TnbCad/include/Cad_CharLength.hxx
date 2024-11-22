@@ -6,8 +6,7 @@
 #include <Cad_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Global_Done.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Surface;
 

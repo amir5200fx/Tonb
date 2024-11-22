@@ -9,10 +9,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
-#include <Geom_Surface.hxx>
-#include <TColgp_HArray1OfPnt.hxx>
-#include <GeomAPI_Interpolate.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
+#include <opencascade/Geom_Surface.hxx>
+#include <opencascade/TColgp_HArray1OfPnt.hxx>
+#include <opencascade/GeomAPI_Interpolate.hxx>
 
 std::shared_ptr<tnbLib::Geo_ApprxCurve_Info> tnbLib::Cad_SingularCurveBase::ApproxInfo =
 std::make_shared<tnbLib::Geo_ApprxCurve_Info>();

@@ -4,8 +4,7 @@
 
 #include <NModel_Entity.hxx>
 #include <Entity3d_BoxFwd.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_Curve;
 

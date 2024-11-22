@@ -1,6 +1,6 @@
 #include <Cad_tEdgeMakerInfo_Relative.hxx>
 
-#include <Precision.hxx>
+#include <opencascade/Precision.hxx>
 
 #include <Entity3d_Box.hxx>
 #include <TnbError.hxx>

@@ -3,9 +3,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Precision.hxx>
-#include <Geom2d_Ellipse.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
+#include <opencascade/Precision.hxx>
+#include <opencascade/Geom2d_Ellipse.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
 
 tnbLib::GeoSketch2d_Ellipse::GeoSketch2d_Ellipse
 (

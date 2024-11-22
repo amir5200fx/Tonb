@@ -9,12 +9,14 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 namespace tnbLib
 {
 
-	Standard_Boolean IsDegenerated(const Handle(Geom2d_Curve)& theCurve, const Handle(Geom_Surface)& theSurface, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo, const Standard_Real theTol)
+	Standard_Boolean IsDegenerated(const Handle(Geom2d_Curve)& theCurve, const Handle(Geom_Surface)& theSurface,
+	                               const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo,
+	                               const Standard_Real theTol)
 	{
 		auto len = Cad_Tools::CalcLength(theCurve, theSurface, theInfo);
 		return len <= theTol;

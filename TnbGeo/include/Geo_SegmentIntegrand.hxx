@@ -2,7 +2,7 @@
 #ifndef _Geo_SegmentIntegrand_Header
 #define _Geo_SegmentIntegrand_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

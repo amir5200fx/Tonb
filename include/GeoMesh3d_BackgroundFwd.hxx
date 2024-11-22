@@ -2,8 +2,8 @@
 #ifndef _GeoMesh3d_BackgroundFwd_Header
 #define _GeoMesh3d_BackgroundFwd_Header
 
-#include <Standard_TypeDef.hxx>
 #include <GeoMesh3d_DataFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

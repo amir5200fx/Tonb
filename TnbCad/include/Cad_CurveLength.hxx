@@ -4,8 +4,7 @@
 
 #include <Cad_CurveLength_Info.hxx>
 #include <Global_Done.hxx>
-
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [1/16/2022 Amir]
 class Geom_Curve;

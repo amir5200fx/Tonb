@@ -2,8 +2,8 @@
 #ifndef _Aft_FrontInfo_Header
 #define _Aft_FrontInfo_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity_Box.hxx>
+#include <Global_TypeDef.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

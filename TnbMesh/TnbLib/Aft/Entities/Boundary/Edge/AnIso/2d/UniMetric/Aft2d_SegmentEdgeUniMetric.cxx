@@ -1,17 +1,15 @@
 #include <Aft2d_SegmentEdgeUniMetric.hxx>
 
-#include <Entity2d_Polygon.hxx>
 #include <Aft2d_PlnCurveUniMetric.hxx>
 #include <Aft2d_NodeAnIso.hxx>
 #include <Aft2d_CornerNodeUniMetric.hxx>
 #include <Aft2d_SegmentNodeUniMetric.hxx>
 #include <Aft2d_ElementAnIso.hxx>
 #include <Aft2d_CornerGapNodeUniMetric.hxx>
+#include <Entity2d_Polygon.hxx>
+#include <Global_Transient.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-#include <Standard_Transient.hxx>
-#include <Standard_Type.hxx>
 
 template<>
 std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdgeUniMetric>>

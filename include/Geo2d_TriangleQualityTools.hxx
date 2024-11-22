@@ -3,8 +3,7 @@
 #define _Geo2d_TriangleQualityTools_Header
 
 #include <Geo_Module.hxx>
-
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

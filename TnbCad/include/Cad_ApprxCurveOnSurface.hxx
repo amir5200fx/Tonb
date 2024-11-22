@@ -2,16 +2,17 @@
 #ifndef _Cad_ApprxCurveOnSurface_Header
 #define _Cad_ApprxCurveOnSurface_Header
 
-#include <Global_Done.hxx>
-#include <Entity2d_PolygonFwd.hxx>
 #include <Cad_Module.hxx>
+#include <Entity2d_PolygonFwd.hxx>
+#include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 
 class Geom2d_Curve;
 class Geom_Surface;
 
-#include <Standard_Handle.hxx>
 
 namespace tnbLib
 {

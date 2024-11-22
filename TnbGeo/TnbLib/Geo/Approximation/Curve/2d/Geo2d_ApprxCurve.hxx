@@ -2,11 +2,11 @@
 #ifndef _Geo2d_ApprxCurve_Header
 #define _Geo2d_ApprxCurve_Header
 
-#include <Standard_Handle.hxx>
 #include <Geo_ApprxCurve.hxx>
 #include <Entity2d_Chain.hxx>
+#include <Global_Handle.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 #include <memory>
 

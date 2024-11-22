@@ -4,12 +4,11 @@
 
 #include <Mesh_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [9/2/2022 Amir]
 class Geom_Surface;
-
-#include <Standard_TypeDef.hxx>
-#include <Standard_Handle.hxx>
 
 #include <memory>
 

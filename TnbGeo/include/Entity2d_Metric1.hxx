@@ -2,12 +2,10 @@
 #ifndef _Entity2d_Metric1_Header
 #define _Entity2d_Metric1_Header
 
-#include <Standard_TypeDef.hxx>
-
 #include <Global_Serialization.hxx>
 #include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
-#include <armadillo.h>
+#include <armadillo>
 
 #include <iostream>
 #include <fstream>

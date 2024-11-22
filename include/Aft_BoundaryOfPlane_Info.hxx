@@ -2,10 +2,10 @@
 #ifndef _Aft_BoundaryOfPlane_Info_Header
 #define _Aft_BoundaryOfPlane_Info_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_AccessMethod.hxx>
 #include <Mesh_Module.hxx>
+#include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <map>

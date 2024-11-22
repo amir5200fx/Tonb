@@ -8,10 +8,9 @@
 #include <TModel_ParaCurve.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Pln_Tools.hxx>
+#include <Global_Precision.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-#include <Precision.hxx>
 
 template<>
 std::pair
@@ -46,8 +45,7 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::Split
 	auto C1 = std::make_shared<Aft2d_gPlnCurveSurface>(std::move(c1));
 	auto t = std::make_pair(std::move(C0), std::move(C1));
 	return std::move(t);*/
-	auto t = theCurve->Split(x);
-	return std::move(t);
+	return theCurve->Split(x);
 }
 
 template<>
@@ -71,8 +69,7 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::GetPoly
 	const auto& polygons = alg->Polygons();
 	Pln_Tools::WatertightWire(polygons);
 
-	auto wire = Pln_Tools::MergeApproxWire(polygons, Precision::PConfusion());
-	return std::move(wire);
+	return  Pln_Tools::MergeApproxWire(polygons, Precision::PConfusion());
 }
 
 #ifdef _DEBUG

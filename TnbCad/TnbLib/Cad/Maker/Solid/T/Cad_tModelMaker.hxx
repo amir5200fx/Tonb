@@ -6,7 +6,7 @@
 #include <Cad_Module.hxx>
 #include <Cad_TModelManagersFwd.hxx>
 
-#include <TopoDS_Shape.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 #include <memory>
 

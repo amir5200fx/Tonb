@@ -2,10 +2,10 @@
 #ifndef _Marine_Modeler_Tools_Header
 #define _Marine_Modeler_Tools_Header
 
-#include <Standard_Handle.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Cad2d_Module.hxx>
 #include <Marine_PlnCurveType.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 #include <vector>

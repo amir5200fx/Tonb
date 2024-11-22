@@ -2,7 +2,7 @@
 #ifndef _NumAlg_System_Header
 #define _NumAlg_System_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <NumAlg_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>

@@ -13,8 +13,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Precision.hxx>
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Precision.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 #include <Entity2d_Polygon.hxx>
 

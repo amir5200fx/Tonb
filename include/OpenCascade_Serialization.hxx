@@ -2,13 +2,13 @@
 #ifndef _OpenCascade_Serialization_Header
 #define _OpenCascade_Serialization_Header
 
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 #include <Global_Serialization.hxx>
 
-#include <TColgp_Array1OfPnt.hxx>
-#include <TColgp_Array1OfPnt2d.hxx>
-#include <TShort_Array1OfShortReal.hxx>
-#include <Poly_Array1OfTriangle.hxx>
+#include <opencascade/TColgp_Array1OfPnt.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/TShort_Array1OfShortReal.hxx>
+#include <opencascade/Poly_Array1OfTriangle.hxx>
 
 // Forward Declarations
 class Geom2d_Curve;

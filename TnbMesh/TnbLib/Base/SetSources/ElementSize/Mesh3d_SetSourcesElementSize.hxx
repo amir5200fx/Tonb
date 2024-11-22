@@ -3,10 +3,9 @@
 #define _Mesh3d_SetSourcesElementSize_Header
 
 #include <Mesh_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -2,10 +2,10 @@
 #ifndef _Cad_GeomSurface_Header
 #define _Cad_GeomSurface_Header
 
-#include <Standard_Handle.hxx>
 #include <Global_Serialization.hxx>
 #include <Global_Named.hxx>
 #include <Global_Indexed.hxx>
+#include <Global_Handle.hxx>
 #include <Cad_Module.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>

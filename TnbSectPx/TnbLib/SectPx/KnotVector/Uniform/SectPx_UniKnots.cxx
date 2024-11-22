@@ -3,7 +3,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <BSplCLib.hxx>
+#include <opencascade/BSplCLib.hxx>
 
 //std::vector<Standard_Real> 
 //tnbLib::SectPx_UniKnots::CreateKnots

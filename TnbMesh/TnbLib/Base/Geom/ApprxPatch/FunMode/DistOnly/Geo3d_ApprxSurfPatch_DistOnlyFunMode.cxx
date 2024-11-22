@@ -9,12 +9,12 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom_Surface.hxx>
-#include <Geom_Plane.hxx>
+#include <opencascade/Geom_Surface.hxx>
+#include <opencascade/Geom_Plane.hxx>
 
-#include <gp_Pln.hxx>
-#include <gp_Vec.hxx>
-#include <gp_Dir.hxx>
+#include <opencascade/gp_Pln.hxx>
+#include <opencascade/gp_Vec.hxx>
+#include <opencascade/gp_Dir.hxx>
 
 namespace tnbLib
 {

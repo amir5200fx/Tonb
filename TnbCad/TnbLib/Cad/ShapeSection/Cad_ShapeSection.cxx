@@ -6,8 +6,8 @@
 #ifdef DebugInfo
 #undef DebugInfo
 #endif // DebugInfo
-#include <BRepAlgoAPI_Section.hxx>
-#include <BOPAlgo_Builder.hxx>
+#include <opencascade/BRepAlgoAPI_Section.hxx>
+#include <opencascade/BOPAlgo_Builder.hxx>
 
 tnbLib::Cad_ShapeSection::Cad_ShapeSection
 (

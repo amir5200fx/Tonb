@@ -3,9 +3,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Precision.hxx>
-#include <Geom2d_Circle.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
+#include <opencascade/Precision.hxx>
+#include <opencascade/Geom2d_Circle.hxx>
+#include <opencascade/Geom2d_TrimmedCurve.hxx>
 
 tnbLib::GeoSketch2d_Circle::GeoSketch2d_Circle
 (

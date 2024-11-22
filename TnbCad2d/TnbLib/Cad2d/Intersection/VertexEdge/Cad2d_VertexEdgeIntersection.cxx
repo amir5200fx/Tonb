@@ -9,7 +9,7 @@
 #include <Cad2d_IntsctEntity_OrthSegment.hxx>
 #include <Cad2d_IntsctEntity_Pair.hxx>
 
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 
 std::shared_ptr<tnbLib::Cad2d_VertexEdgeIntersection> 
 tnbLib::Cad2d_VertexEdgeIntersection::operator()

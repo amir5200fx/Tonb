@@ -2,10 +2,11 @@
 #ifndef _Adt_Ary1d_Header
 #define _Adt_Ary1d_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Standard_OStream.hxx>
+#include <Global_TypeDef.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#include <opencascade/Standard_OStream.hxx>
 
 namespace tnbLib
 {

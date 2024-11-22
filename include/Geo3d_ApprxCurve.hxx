@@ -4,10 +4,9 @@
 
 #include <Geo2d_ApprxCurve.hxx>
 #include <Entity3d_Chain.hxx>
+#include <Global_Handle.hxx>
 
-#include <Standard_Handle.hxx>
-
-#include <Geom_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 #include <memory>
 

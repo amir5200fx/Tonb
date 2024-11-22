@@ -2,10 +2,9 @@
 #ifndef _Cad_ApprxMetricSubdivider_Header
 #define _Cad_ApprxMetricSubdivider_Header
 
-#include <Standard_Handle.hxx>
-
 #include <Cad_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
 

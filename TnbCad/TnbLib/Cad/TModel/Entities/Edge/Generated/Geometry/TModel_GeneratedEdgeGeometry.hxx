@@ -3,10 +3,10 @@
 #define _TModel_GeneratedEdgeGeometry_Header
 
 #include <Cad_Module.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

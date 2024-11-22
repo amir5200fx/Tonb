@@ -2,7 +2,7 @@
 #ifndef _VoyageMesh_Entity_Header
 #define _VoyageMesh_Entity_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

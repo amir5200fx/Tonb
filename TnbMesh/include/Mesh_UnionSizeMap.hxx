@@ -2,11 +2,11 @@
 #ifndef _Mesh_UnionSizeMap_Header
 #define _Mesh_UnionSizeMap_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Done.hxx>
-#include <Entity_Box.hxx>
 #include <Mesh_UnionSizeMap_Traits.hxx>
 #include <Mesh_Module.hxx>
+#include <Entity_Box.hxx>
+#include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <list>

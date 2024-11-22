@@ -1389,8 +1389,8 @@ namespace tnbLib
 #include <Cad_tSurfaceMaker.hxx>
 #include <TModel_Surface.hxx>
 
-#include <TopExp_Explorer.hxx>
-#include <TopoDS.hxx>
+#include <opencascade/TopExp_Explorer.hxx>
+#include <opencascade/TopoDS.hxx>
 
 namespace tnbLib
 {

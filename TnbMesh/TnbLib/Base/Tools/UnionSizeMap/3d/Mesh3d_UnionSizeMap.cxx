@@ -18,7 +18,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Poly_Triangulation.hxx>
+#include <opencascade/Poly_Triangulation.hxx>
 
 unsigned short tnbLib::Mesh3d_UnionSizeMap::verbose(0);
 const Standard_Integer tnbLib::Mesh3d_UnionSizeMap::DEFAULT_MAX_UNBALANCING(2);

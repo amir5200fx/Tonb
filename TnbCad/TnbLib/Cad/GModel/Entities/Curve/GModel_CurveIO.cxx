@@ -2,7 +2,7 @@
 
 #include <OpenCascade_Serialization.hxx>
 
-#include <Geom_Curve.hxx>
+#include <opencascade/Geom_Curve.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::GModel_Curve)
 {

@@ -2,9 +2,10 @@
 #ifndef _SectPx_ProfileMaker_Header
 #define _SectPx_ProfileMaker_Header
 
-#include <Standard_Handle.hxx>
 #include <SectPx_BasicProfileMaker.hxx>
 #include <Global_Done.hxx>
+#include <Global_TypeDef.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 
@@ -33,12 +34,13 @@ namespace tnbLib
 
 			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
-			Profile()
-			{}
-
+		protected:
+			// default constructor
+			Profile() = default;
 
 		public:
 
+			// constructors
 			Profile
 			(
 				const std::shared_ptr<SectPx_TopoProfile>& theProfile,
@@ -48,6 +50,7 @@ namespace tnbLib
 				, theProfile_(theProfile)
 			{}
 
+			// Public functions and operators
 
 			const auto& TopoProfile() const
 			{

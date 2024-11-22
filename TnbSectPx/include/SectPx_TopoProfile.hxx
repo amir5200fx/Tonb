@@ -2,9 +2,9 @@
 #ifndef _SectPx_Profile_Header
 #define _SectPx_Profile_Header
 
-#include <Standard_Handle.hxx>
-#include <Pnt2d.hxx>
 #include <SectPx_RegObj.hxx>
+#include <Pnt2d.hxx>
+#include <Global_Handle.hxx>
 
 #include <vector>
 

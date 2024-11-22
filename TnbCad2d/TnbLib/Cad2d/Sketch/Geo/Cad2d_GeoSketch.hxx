@@ -6,7 +6,7 @@
 #include <Cad2d_Module.hxx>
 #include <OFstream.hxx>
 
-#include <Standard_Handle.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 

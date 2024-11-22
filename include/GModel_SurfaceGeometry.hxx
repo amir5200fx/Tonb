@@ -2,15 +2,16 @@
 #ifndef _GModel_SurfaceGeometry_Header
 #define _GModel_SurfaceGeometry_Header
 
-#include <Standard_Handle.hxx>
-#include <TopoDS_Face.hxx>
 #include <Cad_Module.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_Handle.hxx>
 #include <OFstream.hxx>
 
 class Geom_Surface;
 class Poly_Triangulation;
+
+#include <opencascade/TopoDS_Face.hxx>
 
 namespace tnbLib
 {

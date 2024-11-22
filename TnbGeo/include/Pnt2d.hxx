@@ -2,12 +2,11 @@
 #ifndef _Pnt2d_Header
 #define _Pnt2d_Header
 
-#include <gp_Pnt2d.hxx>
-#include <IOstream.hxx>
 #include <Geo_Module.hxx>
 #include <Geo_Serialization.hxx>
 
-#include <sstream>
+#include <opencascade/gp_Pnt2d.hxx>
+#include <IOstream.hxx>
 
 namespace tnbLib
 {

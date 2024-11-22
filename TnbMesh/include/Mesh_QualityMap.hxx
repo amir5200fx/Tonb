@@ -2,7 +2,7 @@
 #ifndef _Mesh_QualityMap_Header
 #define _Mesh_QualityMap_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 

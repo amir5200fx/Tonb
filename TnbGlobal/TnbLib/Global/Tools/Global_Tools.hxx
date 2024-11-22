@@ -2,9 +2,8 @@
 #ifndef _Global_Tools_Header
 #define _Global_Tools_Header
 
+#include <Global_TypeDef.hxx>
 #include <Global_Module.hxx>
-
-#include <Standard_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

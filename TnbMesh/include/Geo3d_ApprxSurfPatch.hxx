@@ -7,11 +7,10 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <Pnt2d.hxx>
 #include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 // Forward Declarations [9/1/2022 Amir]
 class Geom_Surface;
-
-#include <Standard_Handle.hxx>
 
 #include <memory>
 

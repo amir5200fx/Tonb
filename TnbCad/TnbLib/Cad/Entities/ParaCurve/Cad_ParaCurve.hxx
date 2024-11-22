@@ -6,11 +6,11 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Global_Handle.hxx>
 
 class Geom2d_Curve;
 class gp_Trsf2d;
 
-#include <Standard_Handle.hxx>
 
 namespace tnbLib
 {

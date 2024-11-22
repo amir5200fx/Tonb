@@ -2,13 +2,13 @@
 #ifndef _Aft_CorrOptNode_IterativeTools_Header
 #define _Aft_CorrOptNode_IterativeTools_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Geo_SizeFunctionTraits.hxx>
 #include <GeoMetricFun2d_UniformFwd.hxx>
 #include <Geo2d_MetricPrcsrUniMetricFwd.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
 #include <Aft2d_EdgeAnIsoFwd.hxx>
 #include <Aft2d_EdgeSurfaceFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -2,7 +2,7 @@
 #ifndef _NumAlg_GaussQuadrature_Weights_Header
 #define _NumAlg_GaussQuadrature_Weights_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 #include <NumAlg_Module.hxx>
 
 namespace tnbLib

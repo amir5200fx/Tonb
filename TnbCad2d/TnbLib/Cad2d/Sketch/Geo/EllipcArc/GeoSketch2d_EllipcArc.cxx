@@ -3,8 +3,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <GCE2d_MakeArcOfEllipse.hxx>
-#include <StdFail_NotDone.hxx>
+#include <opencascade/GCE2d_MakeArcOfEllipse.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 tnbLib::GeoSketch2d_EllipcArc::GeoSketch2d_EllipcArc
 (

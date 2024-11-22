@@ -9,13 +9,15 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <gp.hxx>
+#include <opencascade/gp.hxx>
 
 namespace tnbLib
 {
 
 	struct NumAlg_Bisection_Function
 	{
+		virtual ~NumAlg_Bisection_Function() = default;
+
 		virtual Standard_Real Value(const Standard_Real) const
 		{
 			Iter::ChackFun("Standard_Real Value(const Standard_Real) const");
@@ -59,7 +61,7 @@ namespace tnbLib
 
 		//- default constructor
 
-		NumAlg_Bisection_Alg(const fun& theFunc)
+		explicit NumAlg_Bisection_Alg(const fun& theFunc)
 			: fun(theFunc)
 		{}
 

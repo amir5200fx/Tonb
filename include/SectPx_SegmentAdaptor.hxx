@@ -2,10 +2,10 @@
 #ifndef _SectPx_SegmentAdaptor_Header
 #define _SectPx_SegmentAdaptor_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_Serialization.hxx>
 #include <SectPx_Module.hxx>
 #include <Pnt2d.hxx>
+#include <Global_Serialization.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 #include <vector>

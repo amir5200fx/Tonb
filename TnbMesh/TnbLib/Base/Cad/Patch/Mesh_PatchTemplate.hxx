@@ -2,14 +2,13 @@
 #ifndef _Mesh_PatchTemplate_Header
 #define _Mesh_PatchTemplate_Header
 
-#include <Global_Indexed.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Mesh_PatchTemplate_Traits.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Global_Indexed.hxx>
+#include <Global_Handle.hxx>
 
 #include <memory>
-#include <vector>
 
 namespace tnbLib
 {

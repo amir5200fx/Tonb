@@ -1,7 +1,7 @@
 #include <GeoMetricFun2d_ExactSurface.hxx>
 
 #include <OpenCascade_Serialization.hxx>
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::GeoMetricFun2d_ExactSurface)
 {

@@ -2,7 +2,7 @@
 #ifndef _Entity_Box_Header
 #define _Entity_Box_Header
 
-#include <Standard_Real.hxx>
+#include <Global_TypeDef.hxx>
 #include <Global_Macros.hxx>
 #include <Global_Serialization.hxx>
 #include <Geo_Traits.hxx>

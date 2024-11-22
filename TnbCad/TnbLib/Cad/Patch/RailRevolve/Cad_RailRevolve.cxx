@@ -9,19 +9,19 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Precision.hxx>
-#include <gp_Pln.hxx>
-#include <Geom_BSplineCurve.hxx>
-#include <Geom_BSplineSurface.hxx>
-#include <Geom_Plane.hxx>
-#include <Geom_Line.hxx>
-#include <GeomAPI_ProjectPointOnCurve.hxx>
-#include <GeomAPI_ProjectPointOnSurf.hxx>
-#include <GeomAPI_IntCS.hxx>
-#include <TColgp_Array2OfPnt.hxx>
-#include <TColStd_Array1OfReal.hxx>
-#include <TColStd_Array1OfInteger.hxx>
-#include <TColStd_Array2OfReal.hxx>
+#include <opencascade/Precision.hxx>
+#include <opencascade/gp_Pln.hxx>
+#include <opencascade/Geom_BSplineCurve.hxx>
+#include <opencascade/Geom_BSplineSurface.hxx>
+#include <opencascade/Geom_Plane.hxx>
+#include <opencascade/Geom_Line.hxx>
+#include <opencascade/GeomAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/GeomAPI_ProjectPointOnSurf.hxx>
+#include <opencascade/GeomAPI_IntCS.hxx>
+#include <opencascade/TColgp_Array2OfPnt.hxx>
+#include <opencascade/TColStd_Array1OfReal.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
+#include <opencascade/TColStd_Array2OfReal.hxx>
 
 namespace tnbLib
 {

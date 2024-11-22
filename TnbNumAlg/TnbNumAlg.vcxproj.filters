@@ -206,9 +206,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
-      <Filter>TnbLib\NumAlg\Integration\Function</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\NumAlg\Integration\Adaptive\Info\NumAlg_AdaptiveInteg_Info.cxx">
       <Filter>TnbLib\NumAlg\Integration\Adaptive\Info</Filter>
     </ClCompile>

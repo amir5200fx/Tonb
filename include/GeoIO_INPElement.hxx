@@ -4,12 +4,11 @@
 
 #include <Geo_Module.hxx>
 #include <Global_Indexed.hxx>
+#include <Global_TypeDef.hxx>
 #include <Istream.hxx>
 #include <word.hxx>
 
 #include <vector>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

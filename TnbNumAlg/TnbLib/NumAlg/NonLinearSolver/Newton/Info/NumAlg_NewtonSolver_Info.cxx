@@ -1,7 +1,5 @@
 #include <NumAlg_NewtonSolver_Info.hxx>
 
-#include <Standard_Real.hxx>
-
 tnbLib::NumAlg_NewtonSolver_Info::NumAlg_NewtonSolver_Info()
 	: theMaxIterations_(MAX_NB_ITERATIONS)
 	, theIter_(0)

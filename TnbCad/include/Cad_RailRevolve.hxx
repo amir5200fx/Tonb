@@ -2,14 +2,14 @@
 #ifndef _Cad_RailRevolve_Header
 #define _Cad_RailRevolve_Header
 
-#include <Global_Done.hxx>
 #include <Cad_Module.hxx>
+#include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 class Geom_BSplineCurve;
 class Geom_BSplineSurface;
 
-#include <Standard_Handle.hxx>
-#include <gp_Ax1.hxx>
+#include <opencascade/gp_Ax1.hxx>
 
 namespace tnbLib
 {

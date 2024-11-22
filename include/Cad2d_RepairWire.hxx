@@ -4,10 +4,10 @@
 
 #include <Cad2d_Module.hxx>
 #include <Global_Done.hxx>
+#include <Global_Handle.hxx>
 
 #include <vector>
 
-#include <Standard_Handle.hxx>
 
 class Geom2d_Curve;
 

@@ -6,8 +6,6 @@
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
 
-#include <Standard_TypeDef.hxx>
-
 namespace tnbLib
 {
 

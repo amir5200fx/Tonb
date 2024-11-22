@@ -2,9 +2,9 @@
 #ifndef _Adt_AvlTree_Header
 #define _Adt_AvlTree_Header
 
-#include <Global_Macros.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Adt_List.hxx>
+#include <Global_Macros.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <vector>
 #include <list>

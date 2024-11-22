@@ -2,7 +2,7 @@
 #ifndef _Geo3d_ApprxSpaceNode_Header
 #define _Geo3d_ApprxSpaceNode_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -5,8 +5,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <Geom2dAPI_ProjectPointOnCurve.hxx>
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 template<class WireType>
 inline Standard_Real 
 tnbLib::Cad_RepairPlnWire<WireType>::GetParameter

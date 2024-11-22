@@ -6,7 +6,7 @@
 #include <Mesh_CurveEntity.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 
-#include <Geom2d_Curve.hxx>
+#include <opencascade/Geom2d_Curve.hxx>
 
 
 #endif // !_Mesh2d_CurveEntityAnIso_Header

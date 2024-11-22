@@ -2,10 +2,10 @@
 #ifndef _Pln_CurveTools_Header
 #define _Pln_CurveTools_Header
 
-#include <Standard_Handle.hxx>
+#include <Cad2d_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
-#include <Cad2d_Module.hxx>
+#include <Global_Handle.hxx>
 #include <OFstream.hxx>
 
 class gp_Ax2d;

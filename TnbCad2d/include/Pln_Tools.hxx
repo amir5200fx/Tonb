@@ -2,7 +2,6 @@
 #ifndef _Pln_Tools_Header
 #define _Pln_Tools_Header
 
-#include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
@@ -10,7 +9,7 @@
 #include <Cad2d_Module.hxx>
 #include <Pln_Orientation.hxx>
 
-#include <Precision.hxx>
+#include <opencascade/Precision.hxx>
 
 #include <list>
 #include <vector>

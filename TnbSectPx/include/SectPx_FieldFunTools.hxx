@@ -2,8 +2,8 @@
 #ifndef _SectPx_FieldFunTools_Header
 #define _SectPx_FieldFunTools_Header
 
-#include <Standard_TypeDef.hxx>
 #include <SectPx_Module.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

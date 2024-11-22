@@ -2,7 +2,7 @@
 #ifndef _Knit_ChainRegistry_Header
 #define _Knit_ChainRegistry_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <map>
 #include <vector>

@@ -7,8 +7,8 @@
 
 #include <memory>
 
-#include <TopoDS_Edge.hxx>
-#include <TopoDS_Face.hxx>
+#include <opencascade/TopoDS_Edge.hxx>
+#include <opencascade/TopoDS_Face.hxx>
 
 namespace tnbLib
 {

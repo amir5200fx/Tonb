@@ -2,7 +2,7 @@
 #ifndef _Mesh_CurveTraits_Header
 #define _Mesh_CurveTraits_Header
 
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

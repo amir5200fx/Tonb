@@ -3,10 +3,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <TopoDS_Edge.hxx>
-#include <BRep_Tool.hxx>
-#include <BRepLib.hxx>
-#include <BRepLib_EdgeError.hxx>
+#include <opencascade/TopoDS_Edge.hxx>
+#include <opencascade/BRep_Tool.hxx>
+#include <opencascade/BRepLib.hxx>
+#include <opencascade/BRepLib_EdgeError.hxx>
 
 unsigned short tnbLib::cadLib::OpenCascadeRepair_Edge::verbose(0);
 

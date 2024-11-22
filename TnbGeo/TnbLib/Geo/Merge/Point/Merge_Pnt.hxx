@@ -3,7 +3,6 @@
 #define _Merge_Pnt_Header
 
 #include <Global_Macros.hxx>
-#include <Standard_TypeDef.hxx>
 #include <Merge_PntAlg.hxx>
 #include <Geo_Module.hxx>
 #include <Traits.hxx>

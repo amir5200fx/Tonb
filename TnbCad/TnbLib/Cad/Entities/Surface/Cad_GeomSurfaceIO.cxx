@@ -2,7 +2,7 @@
 
 #include <OpenCascade_Serialization.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Cad_GeomSurface)
 {

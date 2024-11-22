@@ -18,7 +18,7 @@
 #include <Aft2d_gSegmentEdgeUniMetric.hxx>
 #include <Aft2d_tSegmentEdgeUniMetric.hxx>
 
-#include <Geom_Surface.hxx>
+#include <opencascade/Geom_Surface.hxx>
 
 const tnbLib::Pnt2d& 
 tnbLib::Aft_Tools::GetCoord0(const Aft2d_Edge& theEdge)

@@ -2,9 +2,9 @@
 #ifndef _Cad_SingularityBase_Header
 #define _Cad_SingularityBase_Header
 
-#include <Standard_TypeDef.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 class Geom_Surface;
 
