@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)d</TargetName>
-    <IncludePath>$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\exprtk\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\exprtk\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

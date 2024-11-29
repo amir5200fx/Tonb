@@ -31,10 +31,4 @@ void tnbLib::VoyageGeo_SingleVelocityBackground::ExportToVtk(OFstream& File) con
 	NotImplemented;
 }
 
-template<>
-void tnbLib::VoyageGeo_SingleVelocityBackground::ExportToVtk(std::ostream& st) const
-{
-	NotImplemented;
-}
-
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::VoyageGeo_SingleVelocityBackground);

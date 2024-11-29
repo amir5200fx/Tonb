@@ -3,7 +3,8 @@
 #define _Voyage_Wave_Header
 
 #include <Global_Serialization.hxx>
-#include <Global_TypeDef.hxx>
+
+#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

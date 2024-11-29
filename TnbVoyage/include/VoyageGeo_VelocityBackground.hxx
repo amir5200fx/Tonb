@@ -34,8 +34,6 @@ namespace tnbLib
 	TnbVoyage_EXPORT void VoyageGeo_SingleVelocityBackground::ExportToPlt(OFstream& File) const;
 	template<>
 	TnbVoyage_EXPORT void VoyageGeo_SingleVelocityBackground::ExportToVtk(OFstream& File) const;
-	template<>
-	TnbVoyage_EXPORT void VoyageGeo_SingleVelocityBackground::ExportToVtk(std::ostream& st) const;
 }
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::VoyageGeo_VelocityBackground);
