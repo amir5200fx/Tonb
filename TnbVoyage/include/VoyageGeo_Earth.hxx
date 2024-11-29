@@ -4,10 +4,9 @@
 
 #include <Voyage_Module.hxx>
 #include <Geo2d_MetricFunctionFwd.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
-
-#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

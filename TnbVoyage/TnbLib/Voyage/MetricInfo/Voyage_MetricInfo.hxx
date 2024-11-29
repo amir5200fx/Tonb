@@ -3,7 +3,7 @@
 #define _Voyage_MetricInfo_Header
 
 #include <Voyage_Module.hxx>
-#include <Standard_TypeDef.hxx>
+#include <Global_TypeDef.hxx>
 
 #include <memory>
 

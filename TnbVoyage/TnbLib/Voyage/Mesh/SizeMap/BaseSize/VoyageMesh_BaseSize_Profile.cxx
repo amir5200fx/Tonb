@@ -15,10 +15,10 @@
 #include <TecPlot.hxx>
 #endif
 
-#include <TColgp_Array1OfPnt2d.hxx>
-#include <TColStd_Array1OfInteger.hxx>
-#include <Geom2d_BSplineCurve.hxx>
-#include <StdFail_NotDone.hxx>
+#include <opencascade/TColgp_Array1OfPnt2d.hxx>
+#include <opencascade/TColStd_Array1OfInteger.hxx>
+#include <opencascade/Geom2d_BSplineCurve.hxx>
+#include <opencascade/StdFail_NotDone.hxx>
 
 Standard_Real 
 tnbLib::VoyageMesh_BaseSize::RetrieveHmax

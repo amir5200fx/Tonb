@@ -2,7 +2,8 @@
 
 #include <VoyageMesh_Edge.hxx>
 #include <Entity2d_Metric1.hxx>
-#include <armadillo.h>
+
+#include <armadillo>
 
 using namespace arma;
 

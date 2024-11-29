@@ -1,7 +1,8 @@
 #include <VoyageGeo_GreateCircleNav.hxx>
 
 #include <Geo_Tools.hxx>
-#include <gp.hxx>
+
+#include <opencascade/gp.hxx>
 
 #define CHECK_ANGLE(x)  \
 if (x < -PI) x += 2 * PI; \
