@@ -532,10 +532,10 @@ tnbLib::Cad2d_Modeler::AddEdge
 	{
 		theEdge->Name() = "edge nb. " + std::to_string(theEdge->Index());
 	}
-	else
+	/*else
 	{
 		theEdge->Name() = "edge nb. " + std::to_string(theEdge->Index()) + " (" + theEdge->Name() + ")";
-	}
+	}*/
 	if (verbose)
 	{
 		Info << " - edge's name: " << theEdge->Name() << endl;
@@ -829,17 +829,14 @@ tnbLib::Cad2d_Modeler::Import
 	{
 		return AddRing(ring);
 	}
-	else if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(theEdge))
+	if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(theEdge))
 	{
 		return AddEdge(seg);
 	}
-	else
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "unspecified type of edge has been detected!" << endl
-			<< abort(FatalError);
-		return 0;
-	}
+	FatalErrorIn(FunctionSIG)
+		<< "unspecified type of edge has been detected!" << endl
+		<< abort(FatalError);
+	return 0;
 }
 
 void tnbLib::Cad2d_Modeler::Import
