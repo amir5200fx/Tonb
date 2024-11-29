@@ -2,10 +2,10 @@
 #ifndef _Voyage_Profile_Header
 #define _Voyage_Profile_Header
 
-#include <Voyage_Module.hxx>
-#include <Global_TypeDef.hxx>
-
 #include <memory>
+#include <Voyage_Module.hxx>
+
+#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

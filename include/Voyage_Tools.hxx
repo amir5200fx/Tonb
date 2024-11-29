@@ -17,6 +17,8 @@
 #include <memory>
 #include <vector>
 
+#include <Standard_TypeDef.hxx>
+
 namespace tnbLib
 {
 

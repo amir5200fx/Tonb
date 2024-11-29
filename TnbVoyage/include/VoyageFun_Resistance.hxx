@@ -2,7 +2,7 @@
 #ifndef _VoyageFun_Resistance_Header
 #define _VoyageFun_Resistance_Header
 
-#include <Global_TypeDef.hxx>
+#include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {

@@ -22,7 +22,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <opencascade/Geom2d_Curve.hxx>
+#include <Geom2d_Curve.hxx>
 
 Standard_Integer tnbLib::VoyageGeo_PathGeneration::DEFAULT_NB_SAMPLES = 30;
 

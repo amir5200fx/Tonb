@@ -14,7 +14,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <opencascade/Geom2d_Curve.hxx>
+#include <Geom2d_Curve.hxx>
 
 void tnbLib::Voyage_PathDiscret::Perform()
 {
