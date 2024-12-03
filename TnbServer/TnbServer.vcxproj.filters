@@ -163,6 +163,9 @@
     <Filter Include="TnbLib\Server\Objects\Cad\Surface">
       <UniqueIdentifier>{15de140c-686f-46ba-ac82-fc0dcf7b8cae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global\Busy">
+      <UniqueIdentifier>{c88c4a88-0867-45ab-9703-8a73d94438cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
@@ -348,6 +351,9 @@
     <ClInclude Include="TnbLib\Server\Objects\Cad\Surface\Server_CadObj_Surface.hxx">
       <Filter>TnbLib\Server\Objects\Cad\Surface</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Server\Objects\Global\Busy\Server_GlobalObj_Busy.hxx">
+      <Filter>TnbLib\Server\Objects\Global\Busy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
@@ -526,6 +532,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Server\Objects\Cad\Surface\Server_CadObj_Surface.cxx">
       <Filter>TnbLib\Server\Objects\Cad\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Server\Objects\Global\Busy\Server_GlobalObj_Busy.cxx">
+      <Filter>TnbLib\Server\Objects\Global\Busy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

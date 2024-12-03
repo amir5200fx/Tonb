@@ -26,6 +26,7 @@ void tnbLib::Server::Construct(const Command& theCommand, const Flag& theFlag, c
 	const auto& sense = theSense.stream;
 	switch (Commands.at(theCommand_))
 	{
+		switchToMakeTnbServerObject(objects::im_busy, im_busy, value, sense)
 
 		// Global objects
 		switchToMakeTnbServerObject(objects::make_int, create_int, value, sense)

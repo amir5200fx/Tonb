@@ -6,7 +6,6 @@
 
 namespace tnbLib
 {
-
 	defineTnbServerObject(Server_GlobalObj_Int);
 }
 

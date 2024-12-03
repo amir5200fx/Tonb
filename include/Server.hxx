@@ -186,6 +186,8 @@ namespace tnbLib
 			load_openfoam_bcs,
 			write_openfoam_init_cnds,
 			write_openfoam_bcs,
+
+			im_busy,
 			
 			exit
 		};
@@ -222,6 +224,8 @@ namespace tnbLib
 		// Private functions and operators
 
 		// global functions
+		declareTnbServerFunction(im_busy);
+
 		void create_real(const std::string&, const std::string&);
 		declareTnbServerFunction(make_real_first);
 		declareTnbServerFunction(make_real_last);
