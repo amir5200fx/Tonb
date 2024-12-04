@@ -4,6 +4,7 @@ std::map<std::string, tnbLib::Server::objects> tnbLib::Server::Commands;
 
 using namespace tnbLib;
 
+#include <Server_GlobalObj_Busy.hxx>
 #include <Server_GlobalObj_Int.hxx>
 #include <Server_GlobalObj_Real.hxx>
 #include <Server_GlobalObj_Bool.hxx>
@@ -16,6 +17,8 @@ using namespace tnbLib;
 #include <Server_GeoObj_Ray2d.hxx>
 #include <Server_MeshObj.hxx>
 #include <Server_GeoObj_Ray2d.hxx>
+
+defineAndRegisterTnbServerObject(Server_GlobalObj_Busy, Server::objects::im_busy, "im_busy");
 
 // the interger object
 defineAndRegisterTnbServerObject(Server_GlobalObj_Int, Server::objects::make_int, "make_int");
