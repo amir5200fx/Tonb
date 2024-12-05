@@ -39,89 +39,78 @@ typedef CGAL::Polygon_2<Kernel> Polygon_2;
 
 namespace tnbLib
 {
-
-	Point_2 get_cgalPoint(const Pnt2d& p)
+	// Some helper functions
+	namespace
 	{
-		Point_2 pt(p.X(), p.Y());
-		return std::move(pt);
-	}
+		Point_2 get_cgal_point(const Pnt2d& p)
+		{
+			return { p.X(), p.Y() };
+		}
 
-	Point_3 get_cgalPoint(const Pnt3d& p)
-	{
-		Point_3 pt(p.X(), p.Y(), p.Z());
-		return std::move(pt);
-	}
+		Point_3 get_cgal_point(const Pnt3d& p)
+		{
+			return { p.X(), p.Y(), p.Z() };
+		}
 
-	Segment_2 get_cgalSegment(const Entity2d_Segment& s)
-	{
-		Segment_2 seg(get_cgalPoint(s.P0()), get_cgalPoint(s.P1()));
-		return std::move(seg);
-	}
+		Segment_2 get_cgal_segment(const Entity2d_Segment& s)
+		{
+			return { get_cgal_point(s.P0()), get_cgal_point(s.P1()) };
+		}
 
-	Segment_3 get_cgalSegment(const Entity3d_Segment& s)
-	{
-		Segment_3 seg(get_cgalPoint(s.P0()), get_cgalPoint(s.P1()));
-		return std::move(seg);
-	}
+		/*Segment_3 get_cgal_segment(const Entity3d_Segment& s)
+		{
+			return { get_cgal_point(s.P0()), get_cgal_point(s.P1()) };
+		}*/
 
-	Segment_3 get_cgalSegment(const Entity3d_SegmentRef& s)
-	{
-		Segment_3 seg(get_cgalPoint(s.P0()), get_cgalPoint(s.P1()));
-		return std::move(seg);
-	}
+		Segment_3 get_cgal_segment(const Entity3d_SegmentRef& s)
+		{
+			return { get_cgal_point(s.P0()), get_cgal_point(s.P1()) };
+		}
 
-	Pnt2d get_Point(const Point_2& p)
-	{
-		Pnt2d pt(p.x(), p.y());
-		return std::move(pt);
-	}
+		Pnt2d get_point(const Point_2& p)
+		{
+			return { p.x(), p.y() };
+		}
 
-	Pnt3d get_Point(const Point_3& p)
-	{
-		Pnt3d pt(p.x(), p.y(), p.z());
-		return std::move(pt);
-	}
+		/*Pnt3d get_point(const Point_3& p)
+		{
+			return { p.x(), p.y(), p.z() };
+		}*/
 
-	Direction_2 get_cgalDirection(const Dir2d& d)
-	{
-		Direction_2 dir(d.X(), d.Y());
-		return std::move(dir);
-	}
+		Direction_2 get_cgal_direction(const Dir2d& d)
+		{
+			return { d.X(), d.Y() };
+		}
 
-	Dir2d get_Dir(const Direction_2& d)
-	{
-		Dir2d dir(d.dx(), d.dy());
-		return std::move(dir);
-	}
+		Dir2d get_dir(const Direction_2& d)
+		{
+			return { d.dx(), d.dy() };
+		}
 
-	Line_2 get_cgalLine(const Entity2d_Line& l)
-	{
-		Line_2 line(get_cgalPoint(l.P()), get_cgalDirection(l.Dir()));
-		return std::move(line);
-	}
+		Line_2 get_cgal_line(const Entity2d_Line& l)
+		{
+			return { get_cgal_point(l.P()), get_cgal_direction(l.Dir()) };
+		}
 
-	Line_2 get_cgalLine(const Entity2d_LineRef& l)
-	{
-		Line_2 line(get_cgalPoint(l.P()), get_cgalDirection(l.Dir()));
-		return std::move(line);
-	}
+		Line_2 get_cgal_line(const Entity2d_LineRef& l)
+		{
+			return { get_cgal_point(l.P()), get_cgal_direction(l.Dir()) };
+		}
 
-	Ray_2 get_cgalRay(const Entity2d_Ray& r)
-	{
-		Ray_2 ray(get_cgalPoint(r.Coord()), get_cgalDirection(r.Direction()));
-		return std::move(ray);
-	}
+		Ray_2 get_cgal_ray(const Entity2d_Ray& r)
+		{
+			return { get_cgal_point(r.Coord()), get_cgal_direction(r.Direction()) };
+		}
 
-	Triangle_2 get_cgalTriange(const Entity2d_Triangle& t)
-	{
-		Triangle_2 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
-		return std::move(tri);
-	}
+		Triangle_2 get_cgal_triangle(const Entity2d_Triangle& t)
+		{
+			return { get_cgal_point(t.P0()), get_cgal_point(t.P1()), get_cgal_point(t.P2()) };
+		}
 
-	Triangle_3 get_cgalTriange(const Entity3d_Triangle& t)
-	{
-		Triangle_3 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
-		return std::move(tri);
+		Triangle_3 get_cgal_triangle(const Entity3d_Triangle& t)
+		{
+			return { get_cgal_point(t.P0()), get_cgal_point(t.P1()), get_cgal_point(t.P2()) };
+		}
 	}
 }
 
@@ -145,8 +134,8 @@ tnbLib::Geo_Tools::CalcSquareDistancePointFromTriangle_cgal
 	const Pnt3d& theP2
 )
 {
-	auto pt = get_cgalPoint(thePoint);
-	Triangle_3 tri(get_cgalPoint(theP0), get_cgalPoint(theP1), get_cgalPoint(theP2));
+	const auto pt = get_cgal_point(thePoint);
+	const Triangle_3 tri(get_cgal_point(theP0), get_cgal_point(theP1), get_cgal_point(theP2));
 
 	return cgal_object.compute_squared_distance_2_object()(pt, tri);
 }
@@ -159,8 +148,8 @@ tnbLib::Geo_Tools::SquareDistance_cgal
 	const Pnt2d & theP1
 )
 {
-	Point_2 Q(theQ.X(), theQ.Y());
-	Segment_2 S(Point_2(theP0.X(), theP0.Y()), Point_2(theP1.X(), theP1.Y()));
+	const Point_2 Q(theQ.X(), theQ.Y());
+	const Segment_2 S(Point_2(theP0.X(), theP0.Y()), Point_2(theP1.X(), theP1.Y()));
 
 	return cgal_object.compute_squared_distance_2_object()(Q, S);
 }
@@ -173,8 +162,8 @@ tnbLib::Geo_Tools::SquareDistance_cgal
 	const Pnt3d & theP1
 )
 {
-	Point_3 Q(theQ.X(), theQ.Y(), theQ.Z());
-	Segment_3 S(Point_3(theP0.X(), theP0.Y(), theP0.Z()), Point_3(theP1.X(), theP1.Y(), theP1.Z()));
+	const Point_3 Q(theQ.X(), theQ.Y(), theQ.Z());
+	const Segment_3 S(Point_3(theP0.X(), theP0.Y(), theP0.Z()), Point_3(theP1.X(), theP1.Y(), theP1.Z()));
 
 	return cgal_object.compute_squared_distance_3_object()(Q, S);
 }
@@ -188,9 +177,9 @@ tnbLib::Geo_Tools::SquareDistance_cgal
 	const Pnt3d & theP2
 )
 {
-	Point_3 Q(theQ.X(), theQ.Y(), theQ.Z());
+	const Point_3 Q(theQ.X(), theQ.Y(), theQ.Z());
 
-	Triangle_3 S(Point_3(theP0.X(), theP0.Y(), theP0.Z()),
+	const Triangle_3 S(Point_3(theP0.X(), theP0.Y(), theP0.Z()),
 		Point_3(theP1.X(), theP1.Y(), theP1.Z()),
 		Point_3(theP2.X(), theP2.Y(), theP2.Z()));
 
@@ -206,8 +195,8 @@ tnbLib::Geo_Tools::SquareDistanceSegments_cgal
 	const Pnt3d & theP1
 )
 {
-	Segment_3 S0(Point_3(theQ0.X(), theQ0.Y(), theQ0.Z()), Point_3(theQ1.X(), theQ1.Y(), theQ1.Z()));
-	Segment_3 S1(Point_3(theP0.X(), theP0.Y(), theP0.Z()), Point_3(theP1.X(), theP1.Y(), theP1.Z()));
+	const Segment_3 S0(Point_3(theQ0.X(), theQ0.Y(), theQ0.Z()), Point_3(theQ1.X(), theQ1.Y(), theQ1.Z()));
+	const Segment_3 S1(Point_3(theP0.X(), theP0.Y(), theP0.Z()), Point_3(theP1.X(), theP1.Y(), theP1.Z()));
 
 	return cgal_object.compute_squared_distance_3_object()(S0, S1);
 }
@@ -220,8 +209,8 @@ tnbLib::Geo_Tools::SquareDistance_cgal
 )
 {
 	auto[a, b, c, d] = GetCoefficients(thePlane);
-	Plane_3 pln(a, b, c, d);
-	Point_3 pt(thePoint.X(), thePoint.Y(), thePoint.Z());
+	const Plane_3 pln(a, b, c, d);
+	const Point_3 pt(thePoint.X(), thePoint.Y(), thePoint.Z());
 
 	return cgal_object.compute_squared_distance_3_object()(pt, pln);
 }
@@ -234,8 +223,8 @@ tnbLib::Geo_Tools::Oriented_cgal
 	const Pnt2d & theP1
 )
 {
-	Vector_2 dv0(theP0.X() - theQ.X(), theP0.Y() - theQ.Y());
-	Vector_2 dv1(theP1.X() - theQ.X(), theP1.Y() - theQ.Y());
+	const Vector_2 dv0(theP0.X() - theQ.X(), theP0.Y() - theQ.Y());
+	const Vector_2 dv1(theP1.X() - theQ.X(), theP1.Y() - theQ.Y());
 
 	return cgal_object.compute_determinant_2_object()(dv0, dv1);
 }
@@ -253,9 +242,9 @@ tnbLib::Geo_Tools::Oriented_cgal
 	Vector_3 bd(theP2.X() - theP0.X(), theP2.Y() - theP0.Y(), theP2.Z() - theP0.Z());
 	Vector_3 cd(theP2.X() - theP1.X(), theP2.Y() - theP1.Y(), theP2.Z() - theP1.Z());*/
 
-	Vector_3 ad(theQ.X() - theP0.X(), theQ.Y() - theP0.Y(), theQ.Z() - theP0.Z());
-	Vector_3 bd(theQ.X() - theP1.X(), theQ.Y() - theP1.Y(), theQ.Z() - theP1.Z());
-	Vector_3 cd(theQ.X() - theP2.X(), theQ.Y() - theP2.Y(), theQ.Z() - theP2.Z());
+	const Vector_3 ad(theQ.X() - theP0.X(), theQ.Y() - theP0.Y(), theQ.Z() - theP0.Z());
+	const Vector_3 bd(theQ.X() - theP1.X(), theQ.Y() - theP1.Y(), theQ.Z() - theP1.Z());
+	const Vector_3 cd(theQ.X() - theP2.X(), theQ.Y() - theP2.Y(), theQ.Z() - theP2.Z());
 
 	return cgal_object.compute_determinant_3_object()(ad, bd, cd);
 }
@@ -268,18 +257,18 @@ tnbLib::Geo_Tools::IsPointInsidePolygon
 )
 {
 	const auto& poly = thePolygon.Polygon();
-	CGAL::Bounded_side side = CGAL::bounded_side_2(poly.begin(), poly.end(), get_cgalPoint(theCoord));
-	if (side == CGAL::ON_BOUNDED_SIDE) {
+	const CGAL::Bounded_side side = CGAL::bounded_side_2(poly.begin(), poly.end(), get_cgal_point(theCoord));
+	if (side == CGAL::ON_BOUNDED_SIDE) 
+	{
 		return Standard_True;
 	}
-	else if (side == CGAL::ON_BOUNDARY) {
+	if (side == CGAL::ON_BOUNDARY) 
+	{
 		// Point is on the boundary of the polygon.;
 		return Standard_False;
 	}
-	else {
-		// Point is outside the polygon;
-		return Standard_False;
-	}
+	// Point is outside the polygon;
+	return Standard_False;
 	//return thePolygon.Polygon().oriented_side(get_cgalPoint(theCoord)) IS_EQUAL CGAL::ON_POSITIVE_SIDE;
 }
 
@@ -292,8 +281,8 @@ tnbLib::Geo_Tools::HasIntersection_cgal
 	const Pnt2d & theP1
 )
 {
-	Segment_2 S1(Point_2(theQ0.X(), theQ0.Y()), Point_2(theQ1.X(), theQ1.Y()));
-	Segment_2 S2(Point_2(theP0.X(), theP0.Y()), Point_2(theP1.X(), theP1.Y()));
+	const Segment_2 S1(Point_2(theQ0.X(), theQ0.Y()), Point_2(theQ1.X(), theQ1.Y()));
+	const Segment_2 S2(Point_2(theP0.X(), theP0.Y()), Point_2(theP1.X(), theP1.Y()));
 
 	return cgal_object.do_intersect_2_object()(S1, S2);
 }
@@ -308,8 +297,8 @@ tnbLib::Geo_Tools::IsIntersectionSegmentTriangle_cgal
 	const Pnt3d& theQ2
 )
 {
-	Segment_3 seg(get_cgalPoint(theP0), get_cgalPoint(theP1));
-	Triangle_3 tri(get_cgalPoint(theQ0), get_cgalPoint(theQ1), get_cgalPoint(theQ2));
+	const Segment_3 seg(get_cgal_point(theP0), get_cgal_point(theP1));
+	const Triangle_3 tri(get_cgal_point(theQ0), get_cgal_point(theQ1), get_cgal_point(theQ2));
 
 	return cgal_object.do_intersect_3_object()(seg, tri);
 }
@@ -325,8 +314,8 @@ tnbLib::Geo_Tools::IsIntersectionTwoTriangles_cgal
 	const Pnt3d& theQ2
 )
 {
-	Triangle_3 tri0(get_cgalPoint(theP0), get_cgalPoint(theP1), get_cgalPoint(theP2));
-	Triangle_3 tri1(get_cgalPoint(theQ0), get_cgalPoint(theQ1), get_cgalPoint(theQ2));
+	const Triangle_3 tri0(get_cgal_point(theP0), get_cgal_point(theP1), get_cgal_point(theP2));
+	const Triangle_3 tri1(get_cgal_point(theQ0), get_cgal_point(theQ1), get_cgal_point(theQ2));
 
 	return cgal_object.do_intersect_3_object()(tri0, tri1);
 }
@@ -343,7 +332,7 @@ tnbLib::Geo_Tools::IsCcwOrder_cgal
 		poly.push_back(Point_2(x.X(), x.Y()));
 	}
 
-	bool IsClockwise = (poly.orientation() == CGAL::COUNTERCLOCKWISE);
+	const bool IsClockwise = poly.orientation() == CGAL::COUNTERCLOCKWISE;
 	return IsClockwise;
 }
 
@@ -369,12 +358,11 @@ tnbLib::Geo_Tools::ProjectToPlane_cgal
 )
 {	
 	auto[a, b, c, d] = GetCoefficients(thePlane);
-	Plane_3 plane(a, b, c, d);
-	Point_3 pt(thePoint.X(), thePoint.Y(), thePoint.Z());
-	
-	auto proj = plane.projection(pt);
-	Pnt3d p(proj.x(), proj.y(), proj.z());
-	return std::move(p);
+	const Plane_3 plane(a, b, c, d);
+	const Point_3 pt(thePoint.X(), thePoint.Y(), thePoint.Z());
+
+	const auto proj = plane.projection(pt);
+	return { proj.x(), proj.y(), proj.z() };
 }
 
 tnbLib::Pnt2d 
@@ -384,10 +372,9 @@ tnbLib::Geo_Tools::ProjectToLine_cgal
 	const Entity2d_Line & line
 )
 {
-	auto l = get_cgalLine(line);
-	auto prj = l.projection(get_cgalPoint(pt));
-	auto p = get_Point(prj);
-	return std::move(p);
+	const auto l = get_cgal_line(line);
+	const auto prj = l.projection(get_cgal_point(pt));
+	return get_point(prj);
 }
 
 tnbLib::Pnt2d 
@@ -397,10 +384,8 @@ tnbLib::Geo_Tools::ProjectToLine_cgal
 	const Entity2d_LineRef & line
 )
 {
-	auto l = get_cgalLine(line);
-	auto prj = l.projection(get_cgalPoint(pt));
-	auto p = get_Point(prj);
-	return std::move(p);
+	const auto l = get_cgal_line(line);
+	return get_point(l.projection(get_cgal_point(pt)));
 }
 
 std::shared_ptr<tnbLib::Geo_Tools::IntersectEntity2d> 
@@ -410,35 +395,19 @@ tnbLib::Geo_Tools::Intersection_cgal
 	const Entity2d_Segment & theSeg1
 )
 {
-	auto seg0 = get_cgalSegment(theSeg0);
-	auto seg1 = get_cgalSegment(theSeg1);
-
-	CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
-		result = intersection(seg0, seg1);
+	const CGAL::cpp11::result_of<Intersect_2(Segment_2, Segment_2)>::type
+		result = intersection(get_cgal_segment(theSeg0), get_cgal_segment(theSeg1));
 	if (result)
 	{
-		if (const Segment_2* s = boost::get<Segment_2>(&*result))
+		if (const Segment_2* s = std::get_if<Segment_2>(&*result))
 		{
-			auto p0 = get_Point(s->point(0));
-			auto p1 = get_Point(s->point(1));
-
-			Entity2d_Segment seg(std::move(p0), std::move(p1));
-			auto ent = std::make_shared<SegmentIntersectEntity2d>(std::move(seg));
-			return std::move(ent);
+			return std::make_shared<SegmentIntersectEntity2d>(Entity2d_Segment{
+				get_point(s->point(0)), get_point(s->point(1))
+			});
 		}
-		else
-		{
-			const Point_2* p = boost::get<Point_2>(&*result);
-			auto pt = get_Point(*p);
-			auto ent = std::make_shared<PointIntersectEntity2d>(std::move(pt));
-			return std::move(ent);
-		}
+		return std::make_shared<PointIntersectEntity2d>(get_point(*std::get_if<Point_2>(&*result)));
 	}
-	else
-	{
-		auto ent = std::make_shared<IntersectEntity2d>();
-		return std::move(ent);
-	}
+	return {};
 }
 
 std::shared_ptr<tnbLib::Geo_Tools::IntersectEntity2d>
@@ -448,35 +417,17 @@ tnbLib::Geo_Tools::Intersection_cgal
 	const Entity2d_Line & theLine1
 )
 {
-	auto line0 = get_cgalLine(theLine0);
-	auto line1 = get_cgalLine(theLine1);
-
-	CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
-		result = intersection(line0, line1);
+	const CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
+		result = intersection(get_cgal_line(theLine0), get_cgal_line(theLine1));
 	if (result)
 	{
-		if (const Line_2* l = boost::get<Line_2>(&*result))
+		if (const Line_2* l = std::get_if<Line_2>(&*result))
 		{
-			auto dir = get_Dir(l->direction());
-			auto pt = get_Point(l->point());
-
-			Entity2d_Line line(std::move(pt), std::move(dir));
-			auto ent = std::make_shared<LineIntersectEntity2d>(std::move(line));
-			return std::move(ent);
+			return std::make_shared<LineIntersectEntity2d>(Entity2d_Line{ get_point(l->point()), get_dir(l->direction()) });
 		}
-		else
-		{
-			const Point_2* p = boost::get<Point_2>(&*result);
-			auto pt = get_Point(*p);
-			auto ent = std::make_shared<PointIntersectEntity2d>(std::move(pt));
-			return std::move(ent);
-		}
+		return std::make_shared<PointIntersectEntity2d>(get_point(*std::get_if<Point_2>(&*result)));
 	}
-	else
-	{
-		auto ent = std::make_shared<IntersectEntity2d>();
-		return std::move(ent);
-	}
+	return {};
 }
 
 std::shared_ptr<tnbLib::Geo_Tools::IntersectEntity2d>
@@ -486,35 +437,17 @@ tnbLib::Geo_Tools::Intersection_cgal
 	const Entity2d_LineRef& theLine1
 )
 {
-	auto line0 = get_cgalLine(theLine0);
-	auto line1 = get_cgalLine(theLine1);
-
-	CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
-		result = intersection(line0, line1);
+	const CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
+		result = intersection(get_cgal_line(theLine0), get_cgal_line(theLine1));
 	if (result)
 	{
-		if (const Line_2* l = boost::get<Line_2>(&*result))
+		if (const Line_2* l = std::get_if<Line_2>(&*result))
 		{
-			auto dir = get_Dir(l->direction());
-			auto pt = get_Point(l->point());
-
-			Entity2d_Line line(std::move(pt), std::move(dir));
-			auto ent = std::make_shared<LineIntersectEntity2d>(std::move(line));
-			return std::move(ent);
+			return std::make_shared<LineIntersectEntity2d>(Entity2d_Line{ get_point(l->point()), get_dir(l->direction()) });
 		}
-		else
-		{
-			const Point_2* p = boost::get<Point_2>(&*result);
-			auto pt = get_Point(*p);
-			auto ent = std::make_shared<PointIntersectEntity2d>(std::move(pt));
-			return std::move(ent);
-		}
+		return std::make_shared<PointIntersectEntity2d>(get_point(*std::get_if<Point_2>(&*result)));
 	}
-	else
-	{
-		auto ent = std::make_shared<IntersectEntity2d>();
-		return std::move(ent);
-	}
+	return {};
 }
 
 std::vector<tnbLib::Pnt2d> 
@@ -524,56 +457,44 @@ tnbLib::Geo_Tools::Intersecction_cgal
 	const Entity2d_Triangle & theTri1
 )
 {
-	auto tri0 = get_cgalTriange(theTri0);
-	auto tri1 = get_cgalTriange(theTri1);
+	const auto tri0 = get_cgal_triangle(theTri0);
+	const auto tri1 = get_cgal_triangle(theTri1);
 
-	CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
+	const CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
 		result = intersection(tri0, tri1);
 	if (result)
 	{
-		std::vector<tnbLib::Pnt2d> pnts;
-		if (const Point_2* p = boost::get<Point_2>(&*result))
+		std::vector<Pnt2d> pnts;
+		if (const Point_2* p = std::get_if<Point_2>(&*result))
 		{
 			pnts.reserve(1);
-			auto pt = get_Point(*p);
-			pnts.push_back(std::move(pt));
-			return std::move(pnts);
+			pnts.push_back(get_point(*p));
+			return pnts;
 		}
-		else if (const Segment_2* s = boost::get<Segment_2>(&*result))
+		if (const Segment_2* s = std::get_if<Segment_2>(&*result))
 		{
 			pnts.reserve(2);
-			auto pt0 = get_Point(s->point(0));
-			auto pt1 = get_Point(s->point(1));
-			pnts.push_back(std::move(pt0));
-			pnts.push_back(std::move(pt1));
-			return std::move(pnts);
+			pnts.push_back(get_point(s->point(0)));
+			pnts.push_back(get_point(s->point(1)));
+			return pnts;
 		}
-		else if (const Triangle_2* t = boost::get<Triangle_2>(&*result))
+		if (const Triangle_2* t = std::get_if<Triangle_2>(&*result))
 		{
 			pnts.reserve(3);
-			auto pt0 = get_Point(t->vertex(0));
-			auto pt1 = get_Point(t->vertex(1));
-			auto pt2 = get_Point(t->vertex(2));
-			pnts.push_back(std::move(pt0));
-			pnts.push_back(std::move(pt1));
-			pnts.push_back(std::move(pt2));
-			return std::move(pnts);
+			pnts.push_back(get_point(t->vertex(0)));
+			pnts.push_back(get_point(t->vertex(1)));
+			pnts.push_back(get_point(t->vertex(2)));
+			return pnts;
 		}
-		else
+		const std::vector<Point_2>* v = std::get_if<std::vector<Point_2>>(&*result);
+		pnts.reserve(v->size());
+		for (const auto& x : *v)
 		{
-			const std::vector<Point_2>* v = boost::get<std::vector<Point_2>>(&*result);
-			pnts.reserve(v->size());
-			for (const auto& x : *v)
-			{
-				pnts.push_back(get_Point(x));
-			}
-			return std::move(pnts);
+			pnts.push_back(get_point(x));
 		}
+		return pnts;
 	}
-	else
-	{
-		return std::vector<tnbLib::Pnt2d>();
-	}
+	return {};
 }
 
 Standard_Boolean 
@@ -583,11 +504,8 @@ tnbLib::Geo_Tools::IsIntersect_cgal
 	const Entity3d_Triangle & theTri
 )
 {
-	auto tri = get_cgalTriange(theTri);
-	auto seg = get_cgalSegment(theSeg);
-
-	const auto result = intersection(seg, tri);
-	return (Standard_Boolean)result;
+	const auto result = intersection(get_cgal_segment(theSeg), get_cgal_triangle(theTri));
+	return static_cast<Standard_Boolean>(result);
 }
 
 std::pair<tnbLib::Pnt2d, Standard_Boolean> 
@@ -597,31 +515,20 @@ tnbLib::Geo_Tools::CalcIntersectionPoint_cgal
 	const Entity2d_Ray& theRay2
 )
 {
-	auto r0 = get_cgalRay(theRay1);
-	auto r1 = get_cgalRay(theRay2);
+	const auto r0 = get_cgal_ray(theRay1);
+	const auto r1 = get_cgal_ray(theRay2);
 
-	CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
+	const CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
 		result = intersection(r0, r1);
 	if (result)
 	{
-		if (const Point_2* p = boost::get<Point_2>(&*result))
+		if (const Point_2* p = std::get_if<Point_2>(&*result))
 		{
-			auto pt = get_Point(*p);
-
-			auto paired = std::make_pair(std::move(pt), Standard_True);
-			return std::move(paired);
+			return { get_point(*p), Standard_True };
 		}
-		else
-		{
-			auto paired = std::make_pair(Pnt2d(0, 0), Standard_False);
-			return std::move(paired);
-		}
+		return { Pnt2d(0, 0), Standard_False };
 	}
-	else
-	{
-		auto paired = std::make_pair(Pnt2d(0, 0), Standard_False);
-		return std::move(paired);
-	}
+	return { Pnt2d(0, 0), Standard_False };
 }
 
 //std::shared_ptr<tnbLib::Entity2d_Polygon> 
