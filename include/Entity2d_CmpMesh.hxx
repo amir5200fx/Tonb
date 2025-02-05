@@ -71,12 +71,14 @@ namespace tnbLib
 		TnbGeo_EXPORT std::vector<Pnt2d> GetElement(const Standard_Integer theIndex) const;
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_Box> CalcBoundingBox() const;
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpMesh> Copy() const;
+		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpMesh> Reversed() const;
 
 		TnbGeo_EXPORT void Add(const Entity2d_CmpMesh&);
 		TnbGeo_EXPORT void Add(const Entity2d_Triangulation&);
 		TnbGeo_EXPORT void Add(const Entity2d_QuadMesh&);
 		TnbGeo_EXPORT void Import(const Entity2d_Triangulation&);
 		TnbGeo_EXPORT void Import(const Entity2d_QuadMesh&);
+		TnbGeo_EXPORT void Reverse() const;
 
 		TnbGeo_EXPORT void ExportToPlt(OFstream&) const;
 		TnbGeo_EXPORT void ExportToVtk(std::fstream&) const;

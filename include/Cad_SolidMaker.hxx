@@ -9,7 +9,7 @@
 #include <memory>
 #include <vector>
 
-#include <TopoDS_Shape.hxx>
+#include <opencascade/TopoDS_Shape.hxx>
 
 namespace tnbLib
 {

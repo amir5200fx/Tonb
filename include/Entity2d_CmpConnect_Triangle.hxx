@@ -43,17 +43,14 @@ namespace tnbLib
 
 		// default constructor
 
-		Entity2d_CmpConnect_Triangle(): theCmpts_({0,0,0}) {}
+		Entity2d_CmpConnect_Triangle() : theCmpts_{ {0,0,0} } {}
 
 		// constructors
 
 		Entity2d_CmpConnect_Triangle(const Array3& theCmpts)
-			: theCmpts_(theCmpts)
+			: theCmpts_{ theCmpts }
 		{}
 
-		Entity2d_CmpConnect_Triangle(Array3&& theCmpts)
-			: theCmpts_(std::move(theCmpts))
-		{}
 
 		TnbGeo_EXPORT Entity2d_CmpConnect_Triangle(const connectivity::triple&);
 
@@ -75,6 +72,7 @@ namespace tnbLib
 
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Copy() const override;
 
+		TnbGeo_EXPORT void Reverse() override;
 		TnbGeo_EXPORT void Update(const std::vector<Standard_Integer>&) override;
 		TnbGeo_EXPORT void Update(const std::map<Standard_Integer, Standard_Integer>&) override;
 	};
