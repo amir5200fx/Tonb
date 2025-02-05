@@ -4,6 +4,8 @@
 
 #include <Vec2d.hxx>
 
+#include <Standard_TypeDef.hxx>
+
 namespace tnbLib
 {
 

@@ -6,6 +6,9 @@
 
 using namespace tnbLib;
 
+#include <Server_GlobalObj_Busy.hxx>
+createTnbServerObject(im_busy, Server_GlobalObj_Busy)
+
 #include <Server_GlobalObj_Int.hxx>
 createTnbServerObject(create_int, Server_GlobalObj_Int)
 

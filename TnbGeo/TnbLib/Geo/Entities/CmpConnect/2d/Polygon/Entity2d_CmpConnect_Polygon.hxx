@@ -27,11 +27,8 @@ namespace tnbLib
 		// default constructor
 		Entity2d_CmpConnect_Polygon() = default;
 		// constructors
-		explicit Entity2d_CmpConnect_Polygon(const std::vector<Standard_Integer>& theCmpts)
-			: theCmpts_(theCmpts)
-		{}
-		explicit Entity2d_CmpConnect_Polygon(std::vector<Standard_Integer>&& theCmpts)
-			: theCmpts_(std::move(theCmpts))
+		explicit Entity2d_CmpConnect_Polygon(std::vector<Standard_Integer> theCmpts)
+			: theCmpts_{std::move(theCmpts)}
 		{}
 		// Public functions and operators
 		TnbGeo_EXPORT Standard_Boolean IsPolygon() const override;
@@ -50,6 +47,7 @@ namespace tnbLib
 
 		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Copy() const override;
 
+		TnbGeo_EXPORT void Reverse() override;
 		TnbGeo_EXPORT void Update(const std::vector<Standard_Integer>&) override;
 		TnbGeo_EXPORT void Update(const std::map<Standard_Integer, Standard_Integer>&) override;
 	};

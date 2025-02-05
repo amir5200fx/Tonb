@@ -43,13 +43,16 @@ namespace tnbLib
 		{}
 
 		// Public functions and operators
-		auto Value(const Standard_Integer theIndex) const { return theCmpts_.at(theIndex); }
+		[[nodiscard]] auto Value(const Standard_Integer theIndex) const { return theCmpts_.at(theIndex); }
 		auto& Value(const Standard_Integer theIndex) { return theCmpts_.at(theIndex); }
 
-		const auto& Cmpts() const { return theCmpts_; }
+		[[nodiscard]] const auto& Cmpts() const { return theCmpts_; }
 		auto& CmptsRef() { return theCmpts_; }
 
-		Standard_Boolean IsDegenerated() const;
+		[[nodiscard]] Standard_Boolean IsDegenerated() const;
+		[[nodiscard]] Entity_Connectivity Reversed() const;
+
+		void Reverse();
 
 		template<int Dim, int Reduct>
 		friend Istream& operator>>(Istream& is, Entity_Connectivity<Dim, Reduct>& theEntity);

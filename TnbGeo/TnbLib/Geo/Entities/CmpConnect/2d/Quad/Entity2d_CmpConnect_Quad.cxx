@@ -68,6 +68,11 @@ tnbLib::Entity2d_CmpConnect_Quad::Copy() const
 	return std::move(t);
 }
 
+void tnbLib::Entity2d_CmpConnect_Quad::Reverse()
+{
+	std::reverse(theCmpts_.begin(), theCmpts_.end());
+}
+
 void tnbLib::Entity2d_CmpConnect_Quad::Update(const std::vector<Standard_Integer>& indices)
 {
 	for (int i = 0; i < nbCmpts; i++)

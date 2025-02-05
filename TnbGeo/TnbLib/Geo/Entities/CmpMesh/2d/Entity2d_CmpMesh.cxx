@@ -98,6 +98,13 @@ tnbLib::Entity2d_CmpMesh::Copy() const
 	return std::make_shared<Entity2d_CmpMesh>(std::move(coords), std::move(ids));
 }
 
+std::shared_ptr<tnbLib::Entity2d_CmpMesh> tnbLib::Entity2d_CmpMesh::Reversed() const
+{
+	auto copy = Copy();
+	copy->Reverse();
+	return copy;
+}
+
 namespace tnbLib
 {
 	auto MaxID(const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theIds)
@@ -188,6 +195,14 @@ void tnbLib::Entity2d_CmpMesh::Import(const Entity2d_Triangulation& theMesh)
 void tnbLib::Entity2d_CmpMesh::Import(const Entity2d_QuadMesh& theMesh)
 {
 	*this = *Convert(theMesh);
+}
+
+void tnbLib::Entity2d_CmpMesh::Reverse() const
+{
+	for (const auto& i: theIndices_)
+	{
+		i->Reverse();
+	}
 }
 
 std::shared_ptr<tnbLib::Entity2d_CmpMesh>

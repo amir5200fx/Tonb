@@ -83,4 +83,18 @@ namespace tnbLib
 		}
 		return std::move(connectivities);
 	}
+
+	template <int Dim, int Reduct>
+	void Entity_Connectivity<Dim, Reduct>::Reverse()
+	{
+		std::reverse(theCmpts_.begin(), theCmpts_.end());
+	}
+}
+
+template <int Dim, int Reduct>
+tnbLib::Entity_Connectivity<Dim, Reduct> tnbLib::Entity_Connectivity<Dim, Reduct>::Reversed() const
+{
+	auto copy = *this;
+	copy.Reverse();
+	return copy;
 }

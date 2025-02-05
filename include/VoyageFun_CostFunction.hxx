@@ -6,6 +6,8 @@
 
 #include <memory>
 
+#include <Standard_TypeDef.hxx>
+
 namespace tnbLib
 {
 

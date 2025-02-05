@@ -31,9 +31,9 @@
 
 #include <set>
 
-#include <opencascade/Geom_Surface.hxx>
-#include <opencascade/gp_Trsf2d.hxx>
-#include <opencascade/gp_Ax2d.hxx>
+#include <Geom_Surface.hxx>
+#include <gp_Trsf2d.hxx>
+#include <gp_Ax2d.hxx>
 
 std::shared_ptr<tnbLib::Entity2d_Box> 
 tnbLib::Voyage_Tools::RetrieveDomain
