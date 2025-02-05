@@ -66,6 +66,11 @@ tnbLib::Entity2d_CmpConnect_Triangle::Copy() const
 	return std::move(t);
 }
 
+void tnbLib::Entity2d_CmpConnect_Triangle::Reverse()
+{
+	std::reverse(theCmpts_.begin(), theCmpts_.end());
+}
+
 void tnbLib::Entity2d_CmpConnect_Triangle::Update(const std::vector<Standard_Integer>& indices)
 {
 	for (auto& i : theCmpts_)
