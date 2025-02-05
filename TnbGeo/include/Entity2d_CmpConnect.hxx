@@ -66,7 +66,9 @@ namespace tnbLib
 		virtual std::vector<Pnt2d> RetrievePolygon(const std::vector<Pnt2d>&) const = 0;
 
 		virtual std::shared_ptr<Entity2d_CmpConnect> Copy() const = 0;
+		TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Reversed() const;
 
+		virtual void Reverse() = 0;
 		virtual void Update(const std::vector<Standard_Integer>&) = 0;
 		virtual void Update(const std::map<Standard_Integer, Standard_Integer>&) = 0;
 	};

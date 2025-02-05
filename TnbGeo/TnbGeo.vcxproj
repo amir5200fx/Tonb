@@ -56,19 +56,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(VTK_INCLUDEDIR);$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Common\fade3d\Win64;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
-    <IncludePath>$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(VTK_INCLUDEDIR);$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Common\fade3d\Win64;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
     <OutDir>$(SolutionDir)$(Platform)\Debug\</OutDir>
     <IntDir>$(Platform)\Debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(VTK_INCLUDEDIR);$(SolutionDir)Common\fade3d;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Common\fade3d\Win64;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -745,6 +745,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\Pyramid\Entity3d_CmpConnect_PyramidIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\Tetrahedron\Entity3d_CmpConnect_Tetrahedron.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\CmpConnect\3d\Tetrahedron\Entity3d_CmpConnect_TetrahedronIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\2d\Entity2d_CmpConnect.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\2d\Entity2d_CmpMesh.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\2d\Entity2d_CmpMeshIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\3d\Entity3d_CmpMesh.cxx" />

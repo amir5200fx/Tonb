@@ -3686,6 +3686,9 @@
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TopoTriangulation.cxx">
       <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\CmpMesh\2d\Entity2d_CmpConnect.cxx">
+      <Filter>TnbLib\Geo\Entities\CmpConnet\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">

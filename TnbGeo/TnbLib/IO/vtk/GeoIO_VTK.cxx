@@ -671,13 +671,13 @@ void tnbLib::vtkLib::WriteMesh(const Entity3d_Polygon& thePoly, const std::strin
 	WriteMesh(*chain, theTitle, theFile);
 }
 
-#include <vtk/vtkSmartPointer.h>
-#include <vtk/vtkPoints.h>
-#include <vtk/vtkPointData.h>
-#include <vtk/vtkCellArray.h>
-#include <vtk/vtkDoubleArray.h>
-#include <vtk/vtkPolyData.h>
-#include <vtk/vtkDataSetWriter.h>
+#include <vtkSmartPointer.h>
+#include <vtkPoints.h>
+#include <vtkPointData.h>
+#include <vtkCellArray.h>
+#include <vtkDoubleArray.h>
+#include <vtkPolyData.h>
+#include <vtkDataSetWriter.h>
 
 void tnbLib::vtkLib::WriteMesh(const Entity2d_CmpMesh& mesh, const std::string& theTitle, std::fstream& file)
 {

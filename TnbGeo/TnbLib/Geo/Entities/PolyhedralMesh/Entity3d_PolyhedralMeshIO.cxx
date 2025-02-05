@@ -1,11 +1,11 @@
 #include <Entity3d_PolyhedralMesh.hxx>
 
-#include <vtk/vtkSmartPointer.h>
-#include <vtk/vtkPoints.h>
-#include <vtk/vtkCellArray.h>
-#include <vtk/vtkPolyhedron.h>
-#include <vtk/vtkUnstructuredGrid.h>
-#include <vtk/vtkUnstructuredGridWriter.h>
+#include <vtkSmartPointer.h>
+#include <vtkPoints.h>
+#include <vtkCellArray.h>
+#include <vtkPolyhedron.h>
+#include <vtkUnstructuredGrid.h>
+#include <vtkUnstructuredGridWriter.h>
 
 void tnbLib::Entity3d_PolyhedralMesh::ExportToVtk(std::fstream& file) const
 {
