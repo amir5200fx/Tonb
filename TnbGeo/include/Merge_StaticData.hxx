@@ -149,7 +149,7 @@ namespace tnbLib
 			item.Connectivity() = theItem.Connectivity();
 		}
 
-		void Perform()
+		void Perform(std::vector<Standard_Boolean>* exempt_pnts = nullptr)
 		{
 			if (!theItem_)
 			{
@@ -161,7 +161,7 @@ namespace tnbLib
 
 			// Merging the points
 			theAlg_.SetCoords(item.Points());
-			theAlg_.Perform();
+			theAlg_.Perform(exempt_pnts);
 
 			// Import Merged Points to the item
 			item.Points() = theAlg_.CompactPoints();

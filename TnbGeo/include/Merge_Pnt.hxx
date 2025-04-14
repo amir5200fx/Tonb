@@ -442,33 +442,47 @@ namespace tnbLib
 			inode.Index = item.Index;
 		}
 
-		void Merge()
+		void Merge(std::vector<Standard_Boolean>* exempt_list_ptr = nullptr)
 		{
 			nodeTable table(Params::MaxIndex() + 1);
-			Standard_Integer
-				key,
-				Flag;
 
-			for (const auto& inode : theNodes_)
+			for (Standard_Integer i = 0; i < theNodes_.size(); i++)
 			{
-				const auto& Pt = inode->Coord;
+				const auto& inode = theNodes_.at(i);
+				const auto& pt = inode->Coord;
 
-				nodeList Found = Search(Pt, table);
-
-				Flag = 0;
-				for (const auto& item : Found)
+				if (exempt_list_ptr)
 				{
-					if (Pt.Distance(item->Coord) <= Base::Radius())
+					const auto& exempt_list = *exempt_list_ptr;
+					if (exempt_list.at(i))
 					{
-						Flag = 1;
+						Standard_Integer key = Key(pt);
+
+						if (!table[key])
+						{
+							table[key] = std::make_shared<nodeList>();
+						}
+						table[key]->push_back(inode);  // register the node
+						continue; // Skip the node to be merged.
+					}
+				}
+
+				nodeList found = Search(pt, table);
+
+				Standard_Integer flag = 0;
+				for (const auto& item : found)
+				{
+					if (pt.Distance(item->Coord) <= Base::Radius())
+					{
+						flag = 1;
 						UpdateNode<Alg>(*inode, *item);
 						break;
 					}
 				}
 
-				if (!Flag)
+				if (!flag)
 				{
-					key = Key(Pt);
+					Standard_Integer key = Key(pt);
 
 					if (!table[key])
 					{
@@ -605,7 +619,7 @@ namespace tnbLib
 			return theNodes_;
 		}
 
-		void Perform()
+		void Perform(std::vector<Standard_Boolean>* exempts = nullptr)
 		{
 			if (IsNULL(theCoords_))
 			{
@@ -635,7 +649,7 @@ namespace tnbLib
 
 			theNodes_ = GetNodes(*theCoords_);
 
-			Merge();
+			Merge(exempts);
 
 			Change_IsDone() = Standard_True;
 		}

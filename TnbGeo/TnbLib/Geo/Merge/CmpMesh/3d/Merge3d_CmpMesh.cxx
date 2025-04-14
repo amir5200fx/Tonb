@@ -8,7 +8,7 @@ void tnbLib::Merge_StaticData<tnbLib::Entity3d_CmpMesh, tnbLib::Merge_PntAlg_Mea
 	mesh.IndicesRef() = input.Indices();
 }
 
-void tnbLib::Merge_StaticData<tnbLib::Entity3d_CmpMesh, tnbLib::Merge_PntAlg_Mean>::Perform()
+void tnbLib::Merge_StaticData<tnbLib::Entity3d_CmpMesh, tnbLib::Merge_PntAlg_Mean>::Perform(std::vector<Standard_Boolean>* exempts)
 {
 	if (NOT theMerged_)
 	{
@@ -19,10 +19,10 @@ void tnbLib::Merge_StaticData<tnbLib::Entity3d_CmpMesh, tnbLib::Merge_PntAlg_Mea
 	auto& mesh = *theMerged_;
 	// Merge points
 	theMergePnt_.SetCoords(mesh.Coords());
-	theMergePnt_.Perform();
+	theMergePnt_.Perform(exempts);
 
 	mesh.CoordsRef() = theMergePnt_.CompactPoints();
-	auto indices = theMergePnt_.CompactIndices();
+	const auto indices = theMergePnt_.CompactIndices();
 	for (const auto& i: mesh.Connectivity())
 	{
 		i->Update(indices);

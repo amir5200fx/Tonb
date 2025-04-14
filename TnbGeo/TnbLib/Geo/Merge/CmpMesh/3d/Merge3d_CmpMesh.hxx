@@ -10,7 +10,7 @@
 
 namespace tnbLib
 {
-	typedef Merge_StaticData<Entity3d_CmpMesh> Merge3d_CmpMesgh;
+	typedef Merge_StaticData<Entity3d_CmpMesh> Merge3d_CmpMesh;
 
 	template<>
 	class Merge_StaticData<Entity3d_CmpMesh, Merge_PntAlg_Mean>
@@ -36,7 +36,7 @@ namespace tnbLib
 		}
 		const auto& Merged() const { return theMerged_; }
 		TnbGeo_EXPORT void Import(const Entity3d_CmpMesh&);
-		TnbGeo_EXPORT void Perform();
+		TnbGeo_EXPORT void Perform(std::vector<Standard_Boolean>* exempts = nullptr);
 	};
 }
 

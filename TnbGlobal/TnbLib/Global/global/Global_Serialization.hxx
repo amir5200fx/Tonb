@@ -54,24 +54,24 @@
 #define TNB_iARCH_FILE_TYPE boost::archive::polymorphic_text_iarchive
 #define TNB_oARCH_FILE_TYPE boost::archive::polymorphic_text_oarchive
 
-#define TNB_SERIALIZATION(Export)	 														\
-	template<class Archive> void save(Archive&, const unsigned int) const 							\
-	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< abort(FatalError); }				\
-	template<class Archive> void load(Archive&, const unsigned int) 								\
-	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< abort(FatalError); }				\
-	friend class boost::serialization::access;														\
-	template<>																						\
-	void Export save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const;		\
-	template<>																						\
-	void Export load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version);				\
+#define TNB_SERIALIZATION(Export)	 																				\
+	template<class Archive> void save(Archive&, const unsigned int) const 											\
+	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< tnbLib::abort(tnbLib::FatalError); }				\
+	template<class Archive> void load(Archive&, const unsigned int) 												\
+	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< tnbLib::abort(tnbLib::FatalError); }				\
+	friend class boost::serialization::access;																		\
+	template<>																										\
+	void Export save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const;						\
+	template<>																										\
+	void Export load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version);								\
 	BOOST_SERIALIZATION_SPLIT_MEMBER()
 
 #define TNB_SAVE_IMPLEMENTATION(C)															\
-template<>																			\
+template<>																					\
 void C::save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const
 
-#define TNB_LOAD_IMPLEMENTATION(C) 									\
-template<>														\
+#define TNB_LOAD_IMPLEMENTATION(C) 															\
+template<>																					\
 void C::load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version)	
 
 #include <word.hxx>
