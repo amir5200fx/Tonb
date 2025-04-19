@@ -33,14 +33,20 @@ namespace tnbLib
 
 		//- default constructor
 
-		Geo_UniDistb()
+		Geo_UniDistb(): theSize_(0)
 		{}
 
 	public:
 
-		Geo_UniDistb(const Standard_Integer theSize)
+		// constructors
+
+		explicit Geo_UniDistb(const Standard_Integer theSize)
 			: theSize_(theSize)
 		{}
+
+		TnbGeo_EXPORT Geo_UniDistb(Standard_Real lower, Standard_Real upper, Standard_Integer size);
+
+		// - Public functions and operators
 
 		TnbGeo_EXPORT void Perform();
 

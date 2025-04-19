@@ -4,6 +4,13 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+tnbLib::Geo_CosineDistb::Geo_CosineDistb(const Standard_Real lower, const Standard_Real upper, const Standard_Integer size)
+	: Geo_xDistb(lower, upper)
+	, theSize_(size)
+{
+	Perform();
+}
+
 void tnbLib::Geo_CosineDistb::Perform()
 {
 	static const Standard_Real phi = 3.14159265358979323846;

@@ -4,6 +4,13 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+tnbLib::Geo_UniDistb::Geo_UniDistb(const Standard_Real lower, const Standard_Real upper, const Standard_Integer size)
+	: Geo_xDistb(lower, upper)
+	, theSize_(size)
+{
+	Perform();
+}
+
 void tnbLib::Geo_UniDistb::Perform()
 {
 	if (theSize_ < 2)
@@ -13,7 +20,7 @@ void tnbLib::Geo_UniDistb::Perform()
 			<< abort(FatalError);
 	}
 
-	const auto dx = (Upper() - Lower()) / (Standard_Real)(theSize_);
+	const auto dx = (Upper() - Lower()) / static_cast<Standard_Real>(theSize_);
 	const auto x0 = Lower();
 
 	auto& sections = ChangeValues();
