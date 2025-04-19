@@ -64,6 +64,7 @@
 #include <opencascade/Poly_PolygonOnTriangulation.hxx>
 #include <opencascade/Bnd_Box.hxx>
 #include <opencascade/BRep_Tool.hxx>
+#include <opencascade/BRep_Builder.hxx>
 #include <opencascade/BRepLib.hxx>
 #include <opencascade/BRepBndLib.hxx>
 #include <opencascade/BRepTools.hxx>
@@ -78,6 +79,7 @@
 #include <opencascade/TopoDS_Edge.hxx>
 #include <opencascade/TopLoc_Location.hxx>
 #include <opencascade/ShapeFix_Wire.hxx>
+#include <opencascade/ShapeConstruct_ProjectCurveOnSurface.hxx>
 #include <opencascade/IGESControl_Controller.hxx>
 #include <opencascade/IGESControl_Writer.hxx>
 #include <opencascade/STEPControl_Controller.hxx>
@@ -2658,6 +2660,163 @@ tnbLib::Cad_Tools::RetrieveFaceMap
 		myMap.insert(std::move(paired));
 	}
 	return std::move(myMap);
+}
+
+void tnbLib::Cad_Tools::ComputeParCurve(const TopoDS_Edge& edge, const TopoDS_Face& face)
+{
+	BRep_Builder B;
+	TopLoc_Location LocFac;
+
+	Handle(Geom_Surface) S = BRep_Tool::Surface(face, LocFac);
+	Handle(Standard_Type) styp = S->DynamicType();
+
+	if (styp == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
+		S = Handle(Geom_RectangularTrimmedSurface)::DownCast(S)->BasisSurface();
+		styp = S->DynamicType();
+	}
+
+	if (styp == STANDARD_TYPE(Geom_Plane)) {
+		return;
+	}
+
+	Standard_Real Umin, Umax, Vmin, Vmax;
+	BRepTools::UVBounds(face, Umin, Umax, Vmin, Vmax);
+
+	Standard_Real f, l;
+
+	Handle(Geom2d_Curve) aC2d = BRep_Tool::CurveOnSurface(edge, face, f, l);
+	if (!aC2d.IsNull()) {
+		gp_Pnt2d p2d;
+		aC2d->D0((f + l) * 0.5, p2d);
+		Standard_Boolean IsIn = Standard_True;
+		if ((p2d.X() < Umin - Precision::PConfusion()) ||
+			(p2d.X() > Umax + Precision::PConfusion()))
+			IsIn = Standard_False;
+		if ((p2d.Y() < Vmin - Precision::PConfusion()) ||
+			(p2d.Y() > Vmax + Precision::PConfusion()))
+			IsIn = Standard_False;
+
+		if (IsIn)
+			return;
+	}
+
+	TopLoc_Location Loc;
+	Handle(Geom_Curve) C = BRep_Tool::Curve(edge, Loc, f, l);
+	if (!Loc.IsIdentity()) {
+		Handle(Geom_Geometry) GG = C->Transformed(Loc.Transformation());
+		C = Handle(Geom_Curve)::DownCast(GG);
+	}
+
+	if (C->DynamicType() != STANDARD_TYPE(Geom_TrimmedCurve)) {
+		C = new Geom_TrimmedCurve(C, f, l);
+	}
+
+	S = BRep_Tool::Surface(face);
+
+	Standard_Real TolFirst = -1, TolLast = -1;
+	TopoDS_Vertex V1, V2;
+	TopExp::Vertices(edge, V1, V2);
+	if (!V1.IsNull())
+		TolFirst = BRep_Tool::Tolerance(V1);
+	if (!V2.IsNull())
+		TolLast = BRep_Tool::Tolerance(V2);
+
+	Standard_Real tol2d = Precision::Confusion();
+	Handle(Geom2d_Curve) C2d;
+	ShapeConstruct_ProjectCurveOnSurface aToolProj;
+	aToolProj.Init(S, tol2d);
+
+	aToolProj.Perform(C, f, l, C2d, TolFirst, TolLast);
+	if (C2d.IsNull())
+	{
+		return;
+	}
+
+	gp_Pnt2d pf(C2d->Value(f));
+	gp_Pnt2d pl(C2d->Value(l));
+	gp_Pnt PF, PL;
+	S->D0(pf.X(), pf.Y(), PF);
+	S->D0(pl.X(), pl.Y(), PL);
+	if (edge.Orientation() == TopAbs_REVERSED) {
+		V1 = TopExp::LastVertex(edge);
+		V1.Reverse();
+	}
+	else {
+		V1 = TopExp::FirstVertex(edge);
+	}
+	if (edge.Orientation() == TopAbs_REVERSED) {
+		V2 = TopExp::FirstVertex(edge);
+		V2.Reverse();
+	}
+	else {
+		V2 = TopExp::LastVertex(edge);
+	}
+
+	if (!V1.IsNull() && V2.IsNull()) {
+		//Handling of internal vertices
+		Standard_Real old1 = BRep_Tool::Tolerance(V1);
+		Standard_Real old2 = BRep_Tool::Tolerance(V2);
+		gp_Pnt pnt1 = BRep_Tool::Pnt(V1);
+		gp_Pnt pnt2 = BRep_Tool::Pnt(V2);
+		Standard_Real tol1 = pnt1.Distance(PF);
+		Standard_Real tol2 = pnt2.Distance(PL);
+		B.UpdateVertex(V1, Max(old1, tol1));
+		B.UpdateVertex(V2, Max(old2, tol2));
+	}
+
+	if (S->IsUPeriodic()) {
+		Standard_Real up = S->UPeriod();
+		Standard_Real tolu = Precision::PConfusion();// Epsilon(up);
+		Standard_Integer nbtra = 0;
+		Standard_Real theUmin = Min(pf.X(), pl.X());
+		Standard_Real theUmax = Max(pf.X(), pl.X());
+
+		if (theUmin < Umin - tolu) {
+			while (theUmin < Umin - tolu) {
+				theUmin += up;
+				nbtra++;
+			}
+		}
+		else if (theUmax > Umax + tolu) {
+			while (theUmax > Umax + tolu) {
+				theUmax -= up;
+				nbtra--;
+			}
+		}
+
+		if (nbtra != 0) {
+			C2d->Translate(gp_Vec2d(nbtra * up, 0.));
+		}
+	}
+
+	if (S->IsVPeriodic()) {
+		Standard_Real vp = S->VPeriod();
+		Standard_Real tolv = Precision::PConfusion();// Epsilon(vp);
+		Standard_Integer nbtra = 0;
+		Standard_Real theVmin = Min(pf.Y(), pl.Y());
+		Standard_Real theVmax = Max(pf.Y(), pl.Y());
+
+		if (theVmin < Vmin - tolv) {
+			while (theVmin < Vmin - tolv) {
+				theVmin += vp; theVmax += vp;
+				nbtra++;
+			}
+		}
+		else if (theVmax > Vmax + tolv) {
+			while (theVmax > Vmax + tolv) {
+				theVmax -= vp; theVmin -= vp;
+				nbtra--;
+			}
+		}
+
+		if (nbtra != 0) {
+			C2d->Translate(gp_Vec2d(0., nbtra * vp));
+		}
+	}
+	B.UpdateEdge(edge, C2d, face, BRep_Tool::Tolerance(edge));
+
+	B.SameParameter(edge, Standard_False);
+	BRepLib::SameParameter(edge, tol2d);
 }
 
 void tnbLib::Cad_Tools::Connect
