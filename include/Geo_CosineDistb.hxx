@@ -33,14 +33,21 @@ namespace tnbLib
 
 		//- default constructor
 
-		Geo_CosineDistb()
-		{}
+		Geo_CosineDistb(): theSize_(0)
+		{
+		}
 
 	public:
+
+		// Constructors
 
 		Geo_CosineDistb(const Standard_Integer theSize)
 			: theSize_(theSize)
 		{}
+
+		TnbGeo_EXPORT Geo_CosineDistb(Standard_Real lower, Standard_Real upper, Standard_Integer size);
+
+		//- Public functions and operators
 
 		TnbGeo_EXPORT void Perform();
 	};

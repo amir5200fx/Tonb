@@ -32,40 +32,58 @@ namespace tnbLib
 			Standard_Real theDx_;
 			Standard_Real theDy_;
 
+			//- Private functions and operators
+			friend class boost::serialization::access;
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar& theXmin_;
+				ar& theYmin_;
+
+				ar& theXmax_;
+				ar& theYmax_;
+
+				ar& theDx_;
+				ar& theDy_;
+			}
+
 		public:
 
 			AffineTrsf_PtsToUnitSqObj()
-			{}
+				: theXmin_(0), theYmin_(0), theXmax_(0)
+				, theYmax_(0), theDx_(0), theDy_(0)
+			{
+			}
 
 			//- public functions and operators
 
 
-			auto Xmin() const
+			[[nodiscard]] auto Xmin() const
 			{
 				return theXmin_;
 			}
 
-			auto Xmax() const
+			[[nodiscard]] auto Xmax() const
 			{
 				return theXmax_;
 			}
 
-			auto Ymin() const
+			[[nodiscard]] auto Ymin() const
 			{
 				return theYmin_;
 			}
 
-			auto Ymax() const
+			[[nodiscard]] auto Ymax() const
 			{
 				return theYmax_;
 			}
 
-			auto Dx() const
+			[[nodiscard]] auto Dx() const
 			{
 				return theDx_;
 			}
 
-			auto Dy() const
+			[[nodiscard]] auto Dy() const
 			{
 				return theDy_;
 			}
@@ -85,9 +103,19 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			const std::vector<Pnt2d> thePts_;
+			std::vector<Pnt2d> thePts_;
 
 			AffineTrsf_PtsToUnitSqObj theObj_;
+
+			//- Private functions and operators
+			friend class boost::serialization::access;
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar& boost::serialization::base_object<Global_Done>(*this);
+				ar& thePts_;
+				ar& theObj_;
+			}
 
 		public:
 
@@ -96,8 +124,8 @@ namespace tnbLib
 
 			//- constructors
 
-			AffineTrsf_PtsToUnitSq(const std::vector<Pnt2d>& theQ)
-				: thePts_(theQ)
+			explicit AffineTrsf_PtsToUnitSq(std::vector<Pnt2d> theQ)
+				: thePts_(std::move(theQ))
 			{}
 
 

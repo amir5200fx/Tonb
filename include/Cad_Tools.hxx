@@ -491,6 +491,8 @@ namespace tnbLib
 
 		static TnbCad_EXPORT std::map<Standard_Integer, TopoDS_Face> RetrieveFaceMap(const TopoDS_Shape& theShape);
 
+		static TnbCad_EXPORT void ComputeParCurve(const TopoDS_Edge& edge, const TopoDS_Face& face);
+
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Surface>&);
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Edge>&);
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Wire>&);

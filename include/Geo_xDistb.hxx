@@ -35,22 +35,31 @@ namespace tnbLib
 			ar & theValues_;
 		}
 
-	public:
+	protected:
 
-		Geo_xDistb()
+		// default constructor
+		Geo_xDistb() = default;
+
+		// constructors
+		Geo_xDistb(const Standard_Real lower, const Standard_Real upper)
+			: Global_Bound(lower, upper)
 		{}
 
-		auto Size() const
-		{
-			return (Standard_Integer)theValues_.size();
-		}
-
-		const auto& Values() const
+		// Protected functions and operators
+		auto& ChangeValues()
 		{
 			return theValues_;
 		}
+	public:
 
-		auto& ChangeValues()
+		// Public function and operators
+
+		[[nodiscard]] auto Size() const
+		{
+			return static_cast<Standard_Integer>(theValues_.size());
+		}
+
+		[[nodiscard]] const auto& Values() const
 		{
 			return theValues_;
 		}
