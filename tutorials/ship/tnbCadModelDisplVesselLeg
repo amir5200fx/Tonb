@@ -2,4 +2,4 @@ setVerbose(1);
 
 execute("myShip");
 
-exportSTEP("myShip");
+exportSTEP("myShip.step");
