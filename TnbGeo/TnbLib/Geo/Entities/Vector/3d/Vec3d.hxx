@@ -79,6 +79,11 @@ namespace tnbLib
 			return *this;
 		}
 		Vec3d& operator=(const Vec3d& other) = default;
+
+		void operator-=(const Vec3d& right);
+		void operator+=(const Vec3d& right);
+		void operator*=(Standard_Real scalar);
+		void operator/=(Standard_Real scalar);
 	};
 }
 

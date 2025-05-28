@@ -537,8 +537,8 @@ int main(int argc, char* argv[])
 				<< " # IO functions: " << endl << endl
 
 				<< " - saveTo(name [optional])" << endl
-				<< " - exportAsIGES(name [optional])" << endl
-				<< " - exportAsSTEP(name [optional])" << endl << endl
+				<< " - exportIGES(name)" << endl
+				<< " - exportSTEP(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl
 

@@ -96,6 +96,9 @@ namespace tnbLib
 		TnbGeo_EXPORT void WriteMesh(const Entity2d_CmpMesh&, const std::string& theTitle, std::fstream&);
 		TnbGeo_EXPORT void WriteMesh(const Entity3d_CmpMeshSurface&, const std::string& theTitle, std::fstream&);
 
+		TnbGeo_EXPORT void ExportField(const Entity2d_Triangulation&, const std::vector<Standard_Real>&, const std::string& scalar, const std::string& file_name);
+		TnbGeo_EXPORT void ExportField(const Entity3d_Triangulation&, const std::vector<Standard_Real>&, const std::string& scalar, const std::string& file_name);
+		void ExportField(const Entity3d_Tetrahedralization&, const std::vector<Standard_Real>&, const std::string& file_name);
 		TnbGeo_EXPORT void ExportField(const Entity2d_Triangulation&, const std::vector<Standard_Real>& theField, std::stringstream&);
 		TnbGeo_EXPORT void ExportField(const Entity3d_Tetrahedralization&, const std::vector<Standard_Real>& theField, std::stringstream&);
 	}

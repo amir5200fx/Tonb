@@ -64,6 +64,9 @@
     <Filter Include="TnbLib\Global\config">
       <UniqueIdentifier>{28c49ba2-533c-4979-8834-50c1af241114}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Global\NewFilter1">
+      <UniqueIdentifier>{d4f09681-3e9c-45e9-933e-77fd2ff7c01c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx">

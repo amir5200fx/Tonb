@@ -1947,6 +1947,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tonb", "tonb", "{FB757C16-5
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tonbApi", "API\tonb\tonbApi\tonbApi.vcxproj", "{FA38553F-1F28-4F86-9157-EAE1B269B38A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "copyDependencies", "copyDependencies\copyDependencies.vcxproj", "{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -8225,6 +8227,24 @@ Global
 		{FA38553F-1F28-4F86-9157-EAE1B269B38A}.Release|x64.Build.0 = Release|x64
 		{FA38553F-1F28-4F86-9157-EAE1B269B38A}.Release|x86.ActiveCfg = Release|Win32
 		{FA38553F-1F28-4F86-9157-EAE1B269B38A}.Release|x86.Build.0 = Release|Win32
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Debug|Any CPU.Build.0 = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Debug|x64.ActiveCfg = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Debug|x64.Build.0 = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Debug|x86.ActiveCfg = Debug|Win32
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Debug|x86.Build.0 = Debug|Win32
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.DebugNoCopy|Any CPU.ActiveCfg = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.DebugNoCopy|Any CPU.Build.0 = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.DebugNoCopy|x64.ActiveCfg = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.DebugNoCopy|x64.Build.0 = Debug|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.DebugNoCopy|x86.ActiveCfg = Debug|Win32
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.DebugNoCopy|x86.Build.0 = Debug|Win32
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Release|Any CPU.ActiveCfg = Release|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Release|Any CPU.Build.0 = Release|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Release|x64.ActiveCfg = Release|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Release|x64.Build.0 = Release|x64
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Release|x86.ActiveCfg = Release|Win32
+		{134A3BB2-0841-4220-BA0B-CD8FC4170E6C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

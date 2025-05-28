@@ -12,7 +12,7 @@ namespace tnbLib
 		)
 	{
 		auto maxIndex0 = IntegerFirst();
-		for (const Entity_Connectivity<Dim>& x : theC)
+		for (const auto& x : theC)
 		{
 			for (size_t i = 0; i < x.nbCmpts; i++)
 			{
