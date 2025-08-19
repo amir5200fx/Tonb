@@ -189,8 +189,7 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 		/*auto pt2d = curveOnPlane->Value(MEAN(curveOnPlane->FirstParameter(), curveOnPlane->LastParameter()));
 		auto pm = patch->Value(pt2d.X(), pt2d.Y());
 		auto vtx = std::make_shared<TModel_Vertex>(0, std::move(pm));*/
-		std::cout << "yess, it's degenerated." << std::endl;
-		PAUSE;
+
 		auto curveOnPlane = std::make_shared<TModel_ParaDegenCurve>(pCurve);
 		newEdge = std::make_shared<TModel_SingularEdge>(curveOnPlane);
 	}

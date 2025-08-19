@@ -30,6 +30,7 @@
 #include <opencascade/Standard_Failure.hxx>
 
 #include <algorithm>
+#include <TensorTemplateI.hxx>
 
 Handle(Geom2d_Curve)
 tnbLib::Pln_CurveTools::Trim
@@ -225,16 +226,17 @@ tnbLib::Pln_CurveTools::MakeSegment
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeSegment maker(theP0, theP1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeSegment maker(theP0, theP1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the segment: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -245,16 +247,17 @@ tnbLib::Pln_CurveTools::MakeCircArc
 	const Pnt2d & theP2
 )
 {
-	GCE2d_MakeArcOfCircle maker(theP0, theP1, theP2);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfCircle maker(theP0, theP1, theP2);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -265,16 +268,17 @@ tnbLib::Pln_CurveTools::MakeCircArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfCircle maker(theP0, theV0, theP1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfCircle maker(theP0, theV0, theP1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -285,16 +289,17 @@ tnbLib::Pln_CurveTools::MakeCircArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfCircle maker(theCirc, theAlpha0, theAlpha1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfCircle maker(theCirc, theAlpha0, theAlpha1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -305,16 +310,17 @@ tnbLib::Pln_CurveTools::MakeCircArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfCircle maker(theCirc, theP0, theP1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfCircle maker(theCirc, theP0, theP1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle arc: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -325,16 +331,17 @@ tnbLib::Pln_CurveTools::MakeElipsArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfEllipse maker(theElips, theAlpha0, theAlpha1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfEllipse maker(theElips, theAlpha0, theAlpha1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the elliptic arc:\n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -345,16 +352,17 @@ tnbLib::Pln_CurveTools::MakeElipsArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfEllipse maker(theElips, theP0, theP1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfEllipse maker(theElips, theP0, theP1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the elliptic arc: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -365,16 +373,16 @@ tnbLib::Pln_CurveTools::MakeHyprArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfHyperbola maker(theHypr, theAlpha0, theAlpha1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfHyperbola maker(theHypr, theAlpha0, theAlpha1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the hyperbolic arc: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -385,16 +393,16 @@ tnbLib::Pln_CurveTools::MakeHyprArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfHyperbola maker(theHypr, theP0, theP1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfHyperbola maker(theHypr, theP0, theP1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the hyperbolic arc: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -405,16 +413,16 @@ tnbLib::Pln_CurveTools::MakeParbArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfParabola maker(theParab, theAlpha0, theAlpha1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfParabola maker(theParab, theAlpha0, theAlpha1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the parabolic curve: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -425,16 +433,16 @@ tnbLib::Pln_CurveTools::MakeParbArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfParabola maker(theParab, theP0, theP1);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeArcOfParabola maker(theParab, theP0, theP1);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the parabolic curve:\n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -443,16 +451,16 @@ tnbLib::Pln_CurveTools::MakeCircle
 	const gp_Circ2d & C
 )
 {
-	GCE2d_MakeCircle maker(C);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeCircle maker(C);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -462,16 +470,16 @@ tnbLib::Pln_CurveTools::MakeCircle
 	const Pnt2d & theP
 )
 {
-	GCE2d_MakeCircle maker(C, theP);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeCircle maker(C, theP);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -482,16 +490,16 @@ tnbLib::Pln_CurveTools::MakeCircle
 	const Pnt2d & theP2
 )
 {
-	GCE2d_MakeCircle maker(theP0, theP1, theP2);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeCircle maker(theP0, theP1, theP2);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -501,16 +509,16 @@ tnbLib::Pln_CurveTools::MakeCircle
 	const Standard_Real theRadius
 )
 {
-	GCE2d_MakeCircle maker(theC, theRadius);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeCircle maker(theC, theRadius);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -520,16 +528,16 @@ tnbLib::Pln_CurveTools::MakeCircle
 	const Pnt2d & theP
 )
 {
-	GCE2d_MakeCircle maker(theC, theP);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeCircle maker(theC, theP);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the circle: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -538,16 +546,16 @@ tnbLib::Pln_CurveTools::MakeEllipse
 	const gp_Elips2d & E
 )
 {
-	GCE2d_MakeEllipse maker(E);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeEllipse maker(E);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the ellipse: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 Handle(Geom2d_Curve)
@@ -558,16 +566,16 @@ tnbLib::Pln_CurveTools::MakeEllipse
 	const Pnt2d & theCenter
 )
 {
-	GCE2d_MakeEllipse maker(theS0, theS1, theCenter);
-	if (maker.IsDone())
-	{
-		const auto& geom = maker.Value();
-		return std::move(geom);
+	try {
+		GCE2d_MakeEllipse maker(theS0, theS1, theCenter);
+		return maker.Value();
 	}
-	else
-	{
-		return nullptr;
+	catch (const StdFail_NotDone& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't make the ellipse: \n"
+			<< tnbLib::abort(FatalError);
 	}
+	return nullptr;
 }
 
 void tnbLib::Pln_CurveTools::ExportToPlt

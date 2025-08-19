@@ -2,7 +2,6 @@
 
 #include <Pnt2d.hxx>
 
-#include <opencascade/gp_Ax2d.hxx>
 #include <opencascade/gp_Circ2d.hxx>
 #include <opencascade/gp_Elips2d.hxx>
 #include <opencascade/gp_Hypr2d.hxx>
@@ -15,8 +14,16 @@ tnbLib::Pln_CascadeTools::CreateCircle
 	const Standard_Real theRadius
 )
 {
-	gp_Circ2d c(theAx, theRadius);
-	return std::move(c);
+	try {
+		return { theAx, theRadius };
+	}
+	catch (const Standard_ConstructionError& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't construct the circle: \n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
+	}
+	return {};
 }
 
 gp_Elips2d 
@@ -27,8 +34,16 @@ tnbLib::Pln_CascadeTools::CreateEllipse
 	const Standard_Real theMinorRadius
 )
 {
-	gp_Elips2d e(theMajorAx, theMajorRadius, theMinorRadius);
-	return std::move(e);
+	try {
+		return { theMajorAx, theMajorRadius, theMinorRadius };
+	}
+	catch (const Standard_ConstructionError& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't construct the ellipse.\n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
+	}
+	return{};
 }
 
 gp_Hypr2d 
@@ -39,8 +54,16 @@ tnbLib::Pln_CascadeTools::CreateHyperbola
 	const Standard_Real theMinorRadius
 )
 {
-	gp_Hypr2d h(theMajorAxis, theMajorRadius, theMinorRadius);
-	return std::move(h);
+	try {
+		return { theMajorAxis, theMajorRadius, theMinorRadius };
+	}
+	catch (const Standard_ConstructionError& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't construct the hyperbola.\n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
+	}
+	return {};
 }
 
 gp_Parab2d 
@@ -50,8 +73,16 @@ tnbLib::Pln_CascadeTools::CreateParabola
 	const Standard_Real theFocalLength
 )
 {
-	gp_Parab2d p(theMirrorAxis, theFocalLength);
-	return std::move(p);
+	try {
+		return { theMirrorAxis, theFocalLength };
+	}
+	catch (const Standard_ConstructionError& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't construct the parabola.\n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
+	}
+	return {};
 }
 
 gp_Parab2d 
@@ -61,13 +92,20 @@ tnbLib::Pln_CascadeTools::CreateParabola
 	const Pnt2d & theFocus
 )
 {
-	gp_Parab2d p(theMirrorAxis, theFocus);
-	return std::move(p);
+	try {
+		return { theMirrorAxis, theFocus };
+	}
+	catch (const Standard_ConstructionError& err) {
+		FatalErrorIn(FunctionSIG) << "\n"
+			<< "Couldn't construct the parabola.\n"
+			<< err.GetMessageString() << "\n"
+			<< tnbLib::abort(FatalError);
+	}
+	return {};
 }
 
 #include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 #include <opencascade/gp_Pnt2d.hxx>
-#include <opencascade/Geom2d_Curve.hxx>
 #include <opencascade/Geom2d_Curve.hxx>
 #include <opencascade/TColgp_Array1OfPnt2d.hxx>
 
@@ -86,11 +124,8 @@ tnbLib::Pln_CascadeTools::Project(const Pnt2d& thePnt, const opencascade::handle
 		auto p = projector.LowerDistanceParameter();
 		return { pt, p };
 	}
-	else
-	{
-		FatalErrorIn(FunctionSIG) << endl
-			<< " couldn't calculate the projected point!" << endl
-			<< abort(FatalError);
-	}
+	FatalErrorIn(FunctionSIG) << endl
+		<< " couldn't calculate the projected point!" << endl
+		<< abort(FatalError);
 	return { Pnt2d::null, 0 };
 }

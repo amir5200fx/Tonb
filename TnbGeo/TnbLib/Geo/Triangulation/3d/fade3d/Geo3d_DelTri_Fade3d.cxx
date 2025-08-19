@@ -4,7 +4,6 @@
 #include <Global_Config.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
 #ifdef TNB_CONFIG_USE_FADE3D
 
 #include <fade3d/Fade_3D.h>
