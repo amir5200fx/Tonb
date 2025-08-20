@@ -1,6 +1,18 @@
 cmake_minimum_required(VERSION 3.23)
 
 # Enable vcpkg integration
+# Only set if the user didn't already pass - DCMAKE_TOOLCHAIN_FILE=...
+if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    if (DEFINED ENV{VCPKG_ROOT})
+        # CMake is fine with forward slashes on all platforms
+        set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "Vcpkg toolchain file" FORCE)
+        message(STATUS "Using vcpkg toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+    else ()
+        message(FATAL_ERROR
+            "VCPKG_ROOT is not set in the environment."
+            "Set it, or pass -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg.cmake")
+    endif ()
+endif ()
 set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         CACHE STRING "Vcpkg toolchain file")
 
