@@ -13,8 +13,6 @@ if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
             "Set it, or pass -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg.cmake")
     endif ()
 endif ()
-set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
-        CACHE STRING "Vcpkg toolchain file")
 
 project(Tonb
         VERSION 0.1.0
