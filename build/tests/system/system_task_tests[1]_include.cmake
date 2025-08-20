@@ -1,0 +1,5 @@
+if(EXISTS "/home/amir/dev/Tonb/build/tests/system/system_task_tests[1]_tests.cmake")
+  include("/home/amir/dev/Tonb/build/tests/system/system_task_tests[1]_tests.cmake")
+else()
+  add_test(system_task_tests_NOT_BUILT system_task_tests_NOT_BUILT)
+endif()

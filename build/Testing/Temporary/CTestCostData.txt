@@ -1,0 +1,5 @@
+TaskTests.CompletesSuccessfully 2 0.0171488
+TaskTests.CancelsCooperatively 2 0.0178521
+TaskTests.FailsWithExceptionAndSetsStatus 2 0.00723818
+TaskTests.ProgressCallbackCollectsSamples 2 0.014447
+---

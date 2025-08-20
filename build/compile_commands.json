@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/amir/dev/Tonb/build/libs/system",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_NO_LIB -DBOOST_ATOMIC_STATIC_LINK -DBOOST_CHRONO_NO_LIB -DBOOST_CHRONO_STATIC_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_CONTAINER_STATIC_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_DATE_TIME_STATIC_LINK -DBOOST_SERIALIZATION_NO_LIB -DBOOST_SERIALIZATION_STATIC_LINK -DBOOST_THREAD_NO_LIB -DBOOST_THREAD_STATIC_LINK -DBOOST_THREAD_USE_LIB -DTNBSYSTEM_EXPORTS -DTnbSystem_EXPORTS -I/home/amir/dev/Tonb/libs/system/include -isystem /home/amir/dev/vcpkg/installed/x64-linux/include -std=c++20 -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -o CMakeFiles/TnbSystem.dir/src/task.cxx.o -c /home/amir/dev/Tonb/libs/system/src/task.cxx",
+  "file": "/home/amir/dev/Tonb/libs/system/src/task.cxx",
+  "output": "libs/system/CMakeFiles/TnbSystem.dir/src/task.cxx.o"
+},
+{
+  "directory": "/home/amir/dev/Tonb/build/tests/system",
+  "command": "/usr/bin/c++ -DBOOST_ATOMIC_NO_LIB -DBOOST_ATOMIC_STATIC_LINK -DBOOST_CHRONO_NO_LIB -DBOOST_CHRONO_STATIC_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_CONTAINER_STATIC_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_DATE_TIME_STATIC_LINK -DBOOST_SERIALIZATION_NO_LIB -DBOOST_SERIALIZATION_STATIC_LINK -DBOOST_THREAD_NO_LIB -DBOOST_THREAD_STATIC_LINK -DBOOST_THREAD_USE_LIB -I/home/amir/dev/Tonb/libs/system/include -isystem /home/amir/dev/vcpkg/installed/x64-linux/include -std=c++20 -fPIE -o CMakeFiles/system_task_tests.dir/test_task.cxx.o -c /home/amir/dev/Tonb/tests/system/test_task.cxx",
+  "file": "/home/amir/dev/Tonb/tests/system/test_task.cxx",
+  "output": "tests/system/CMakeFiles/system_task_tests.dir/test_task.cxx.o"
+}
+]
