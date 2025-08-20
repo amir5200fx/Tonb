@@ -6,6 +6,7 @@ target_sources(TnbSystem
         PRIVATE
         src/task.cxx
         src/log.cxx
+        src/serialization/io.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
