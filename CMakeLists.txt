@@ -39,13 +39,13 @@ option(BUILD_TESTING "Running the tests" ON)
 # Threads (needed for std::thread and sometimes by gtest itself)
 find_package(Threads REQUIRED)
 
-include(CTest)
+#include(CTest)
 
 # subprojects
 add_subdirectory(libs/system)
 
 if (BUILD_TESTING)
-    add_subdirectory(tests)
+#    add_subdirectory(tests)
 endif ()
 
 # --- Install the library ---

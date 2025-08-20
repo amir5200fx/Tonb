@@ -5,6 +5,7 @@ add_library(tonb::system ALIAS TnbSystem)
 target_sources(TnbSystem
         PRIVATE
         src/task.cxx
+        src/log.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include

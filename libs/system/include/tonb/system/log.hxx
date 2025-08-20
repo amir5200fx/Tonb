@@ -5,6 +5,8 @@
 #ifndef TONB_SYSTEM_LOG_HXX
 #define TONB_SYSTEM_LOG_HXX
 
+#include <tonb/system/module.hxx>
+
 #include <atomic>
 #include <chrono>
 #include <cstdint>
@@ -22,6 +24,7 @@
 #include <utility>
 #include <vector>
 #include <source_location>
+#include <iostream>
 
 namespace tonb::system {
 
@@ -46,7 +49,8 @@ namespace tonb::system {
 
     enum class LogLevel : std::uint8_t { trace, debug, info, warn, error, critical, Off };
 
-    inline constexpr std::string_view to_string(const LogLevel lvl) {
+    TNB_NODISCARD
+    inline constexpr std::string_view to_string(const LogLevel lvl) noexcept {
         switch (lvl) {
             case LogLevel::trace:    return "trace";
             case LogLevel::debug:    return "debug";
@@ -112,78 +116,13 @@ namespace tonb::system {
         explicit ConsoleSink(const bool with_timestamp = true, const bool colour = true)
             : with_ts_(with_timestamp), colour_(colour) {}
 
-        void write(const LogRecord& rec) override {
-            std::lock_guard<std::mutex> lock(mu_);
-
-            std::ostream& os = (rec.level >= LogLevel::warn) ? std::cerr : std::cout;
-            if (colour_) os << level_colour(rec.level);
-
-            if (with_ts_) os << timestamp(rec.ts) << ' ';
-            os << '[' << to_string(rec.level) << ']';
-            if (!rec.component.empty()) os << '[' << rec.component << ']';
-            if (!rec.task_id.empty())   os << "(id=" << rec.task_id << ')';
-            os << ' ' << rec.message;
-
-            if (!rec.fields.empty()) {
-                os << " {";
-                for (std::size_t i = 0; i < rec.fields.size(); ++i) {
-                    os << rec.fields[i].first << '=' << quote(rec.fields[i].second);
-                    if (i + 1 < rec.fields.size()) os << ", ";
-                }
-                os << '}';
-            }
-
-            // Useful but concise source hint
-            if (!rec.file.empty()) {
-                os << "  @" << short_file(rec.file) << ':' << rec.line;
-            }
-            if (colour_) os << "\033[0m";
-            os << '\n';
-        }
+        TNBSYSTEM_EXPORT void write(const LogRecord& rec) override;
 
     private:
-        static std::string timestamp(const LogRecord::Clock::time_point tp) {
-            using namespace std::chrono;
-            const auto t = LogRecord::Clock::to_time_t(tp);
-            std::tm tm{};
-        #if defined(_WIN32)
-            localtime_s(&tm, &t);
-        #else
-            localtime_r(&t, &tm);
-        #endif
-            char buf[20];
-            std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
-            return std::string(buf);
-        }
-
-        static std::string short_file(const std::string_view path) {
-            const auto pos = path.find_last_of("/\\");
-            return std::string(pos == std::string_view::npos ? path : path.substr(pos + 1));
-        }
-
-        static std::string quote(const std::string_view v) {
-            std::string out; out.reserve(v.size() + 2);
-            out.push_back('"');
-            for (char c : v) {
-                if (c == '"' || c == '\\') out.push_back('\\');
-                out.push_back(c);
-            }
-            out.push_back('"');
-            return out;
-        }
-
-        static const char* level_colour(const LogLevel lvl) {
-            switch (lvl) {
-                case LogLevel::trace:    return "\033[2m";        // dim
-                case LogLevel::debug:    return "\033[36m";       // cyan
-                case LogLevel::info:     return "\033[32m";       // green
-                case LogLevel::warn:     return "\033[33m";       // yellow
-                case LogLevel::error:    return "\033[31m";       // red
-                case LogLevel::critical: return "\033[41;97m";    // red bg, white fg
-                case LogLevel::Off:      return "\033[0m";
-            }
-            return "\033[0m";
-        }
+        static TNBSYSTEM_EXPORT std::string timestamp(LogRecord::Clock::time_point tp);
+        static TNBSYSTEM_EXPORT std::string short_file(std::string_view path);
+        static TNBSYSTEM_EXPORT std::string quote(std::string_view v);
+        static TNBSYSTEM_EXPORT const char* level_colour(LogLevel lvl);
 
         std::mutex mu_;
         bool with_ts_;
@@ -199,54 +138,12 @@ namespace tonb::system {
     public:
         explicit JsonFileSink(std::string path) : path_(std::move(path)), out_(path_, std::ios::app) {}
 
-        void write(const LogRecord& rec) override {
-            std::lock_guard<std::mutex> lock(mu_);
-            if (!out_.is_open()) return;
-            out_ << "{"
-                 << R"("ts":")" << iso8601(rec.ts) << R"(",)"
-                 << R"("level":")" << to_string(rec.level) << R"(",)"
-                 << R"("component":")" << esc(rec.component) << R"(",)"
-                 << R"("task_id":")" << esc(rec.task_id) << R"(",)"
-                 << R"("thread":")" << thread_id_string(rec.tid) << R"(",)"
-                 << R"("file":")" << esc(rec.file) << R"(",)"
-                 << R"("line":)" << rec.line << ","
-                 << R"("function":")" << esc(rec.function) << R"(",)"
-                 << R"("message":")" << esc(rec.message) << R"(",)"
-                 << R"("fields":{)";
-            for (std::size_t i = 0; i < rec.fields.size(); ++i) {
-                out_ << '"' << esc(rec.fields[i].first) << "\":\"" << esc(rec.fields[i].second) << '"';
-                if (i + 1 < rec.fields.size()) out_ << ',';
-            }
-            out_ << "}}\n";
-            out_.flush();
-        }
+        TNBSYSTEM_EXPORT void write(const LogRecord& rec) override;
 
     private:
-        static std::string iso8601(const LogRecord::Clock::time_point tp) {
-            using namespace std::chrono;
-            const auto t = LogRecord::Clock::to_time_t(tp);
-            std::tm tm{};
-        #if defined(_WIN32)
-            gmtime_s(&tm, &t);
-        #else
-            gmtime_r(&t, &tm);
-        #endif
-            char buf[25];
-            std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%SZ", &tm);
-            return std::string(buf);
-        }
-        static std::string esc(const std::string_view s) {
-            std::ostringstream os;
-            for (char c : s) {
-                switch (c) { case '\\': os << "\\\\"; break; case '"': os << "\\\""; break;
-                             case '\n': os << "\\n"; break; case '\r': os << "\\r"; break;
-                             case '\t': os << "\\t"; break; default: os << c; }
-            }
-            return os.str();
-        }
-        static std::string thread_id_string(const std::thread::id& id) {
-            std::ostringstream os; os << id; return os.str();
-        }
+        static TNBSYSTEM_EXPORT std::string iso8601(LogRecord::Clock::time_point tp);
+        static TNBSYSTEM_EXPORT std::string esc(std::string_view s);
+        static TNBSYSTEM_EXPORT std::string thread_id_string(const std::thread::id& id);
 
         std::mutex   mu_;
         std::string  path_;
@@ -264,19 +161,10 @@ namespace tonb::system {
         /// @param interval_ms Minimum milliseconds between allowed messages per key.
         explicit RateLimiter(const std::uint64_t interval_ms = 1000) : interval_ms_(interval_ms) {}
 
-        bool allow(const std::string_view key) {
-            const auto now = now_ms();
-            std::lock_guard<std::mutex> lock(mu_);
-            auto& last = last_ms_[std::string(key)];
-            if (now - last >= interval_ms_) { last = now; return true; }
-            return false;
-        }
+        TNBSYSTEM_ND_EXPORT bool allow(std::string_view key);
 
     private:
-        static std::uint64_t now_ms() {
-            using namespace std::chrono;
-            return duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
-        }
+        static std::uint64_t now_ms();
         std::mutex mu_;
         std::map<std::string, std::uint64_t> last_ms_;
         std::uint64_t interval_ms_;
@@ -313,20 +201,11 @@ namespace tonb::system {
         TNB_NODISCARD LogLevel level() const { return level_.load(std::memory_order_acquire); }
 
         /// Fixed context enrichment (component/task_id and key=value pairs).
+        TNBSYSTEM_ND_EXPORT
         std::shared_ptr<Logger> with_context(
             std::string component,
             std::string task_id = {},
-            const std::initializer_list<std::pair<std::string,std::string>> kv = {}) const
-        {
-            auto child = std::make_shared<Logger>(level(), std::move(component), std::move(task_id));
-            // share sinks
-            {
-                std::lock_guard<std::mutex> lock(mu_);
-                child->sinks_ = sinks_;
-            }
-            child->fields_.assign(kv.begin(), kv.end());
-            return child;
-        }
+            std::initializer_list<std::pair<std::string,std::string>> kv = {}) const;
 
         // ---- Convenience methods (message only) ----
         void trace (const std::string_view msg) const { log(LogLevel::trace,    msg); }
@@ -362,27 +241,11 @@ namespace tonb::system {
         /* similarly for warn/error/trace/critical if you like */
 
         // ---- Full API with fields and source location ----
-        void log(const LogLevel lvl,
-                 const std::string_view message,
-                 const std::initializer_list<std::pair<std::string,std::string>> fields = {},
-                 const std::source_location& loc = std::source_location::current()) const {
-            if (lvl < level()) return;
-            // Merge fixed + call-time fields
-            std::vector<std::pair<std::string,std::string>> merged = fields_;
-            merged.insert(merged.end(), fields.begin(), fields.end());
-
-            const LogRecord rec{
-                lvl,
-                std::string(message),
-                component_,
-                task_id_,
-                merged,
-                loc
-            };
-            // Fan-out to sinks
-            std::lock_guard<std::mutex> lock(mu_);
-            for (auto& s : sinks_) s->write(rec);
-        }
+        TNBSYSTEM_EXPORT
+        void log(LogLevel lvl,
+                 std::string_view message,
+                 std::initializer_list<std::pair<std::string,std::string>> fields = {},
+                 const std::source_location& loc = std::source_location::current()) const;
 
         /// RAII scope timer: logs on destruction with elapsed ms.
         class Scope {
@@ -393,12 +256,7 @@ namespace tonb::system {
             {
                 if (lg_) lg_->log(lvl_, "started " + what_);
             }
-            ~Scope() {
-                using namespace std::chrono;
-                if (!lg_) return;
-                const auto ms = duration_cast<milliseconds>(steady_clock::now() - start_).count();
-                lg_->log(lvl_, "finished " + what_, {{"duration_ms", std::to_string(ms)}});
-            }
+            TNBSYSTEM_EXPORT ~Scope();
         private:
             std::shared_ptr<Logger> lg_;
             LogLevel lvl_;
