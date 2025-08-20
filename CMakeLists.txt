@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 
 # Enable vcpkg integration
-set(CMAKE_TOOLCHAIN_FILE "/home/amir/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         CACHE STRING "Vcpkg toolchain file")
 
 project(Tonb
