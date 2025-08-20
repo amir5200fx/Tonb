@@ -10,6 +10,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/amir/dev/Tonb/CMakeLists.txt"
   "CMakeFiles/4.1.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.1.0/CMakeSystem.cmake"
+  "/home/amir/dev/Tonb/cmake/TonbConfig.cmake.in"
   "/home/amir/dev/Tonb/libs/system/CMakeLists.txt"
   "/home/amir/dev/Tonb/tests/CMakeLists.txt"
   "/home/amir/dev/Tonb/tests/system/CMakeLists.txt"
@@ -210,6 +211,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/amir/dev/vcpkg/installed/x64-linux/share/gtest/GTestTargets-release.cmake"
   "/home/amir/dev/vcpkg/installed/x64-linux/share/gtest/GTestTargets.cmake"
   "/home/amir/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+  "/snap/cmake/1479/share/cmake-4.1/Modules/BasicConfigVersion-SameMinorVersion.cmake.in"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeCXXInformation.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeCommonLanguageInclude.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeDependentOption.cmake"
@@ -217,6 +219,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeGenericSystem.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeInitializeConfigs.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeLanguageInformation.cmake"
+  "/snap/cmake/1479/share/cmake-4.1/Modules/CMakePackageConfigHelpers.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeSystemSpecificInformation.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CMakeSystemSpecificInitialize.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/CTest.cmake"
@@ -233,6 +236,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/cmake/1479/share/cmake-4.1/Modules/FindPackageHandleStandardArgs.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/FindPackageMessage.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/FindThreads.cmake"
+  "/snap/cmake/1479/share/cmake-4.1/Modules/GNUInstallDirs.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/GoogleTest.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/Internal/CMakeCommonLinkerInformation.cmake"
@@ -247,6 +251,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/cmake/1479/share/cmake-4.1/Modules/Platform/Linux-Initialize.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/Platform/Linux.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Modules/Platform/UnixPaths.cmake"
+  "/snap/cmake/1479/share/cmake-4.1/Modules/WriteBasicConfigVersionFile.cmake"
   "/snap/cmake/1479/share/cmake-4.1/Templates/CTestScript.cmake.in"
   )
 
@@ -260,6 +265,8 @@ set(CMAKE_MAKEFILE_OUTPUTS
 set(CMAKE_MAKEFILE_PRODUCTS
   "DartConfiguration.tcl"
   "CMakeFiles/CTestScript.cmake"
+  "TonbConfigVersion.cmake"
+  "TonbConfig.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "libs/system/CMakeFiles/CMakeDirectoryInformation.cmake"
   "tests/CMakeFiles/CMakeDirectoryInformation.cmake"

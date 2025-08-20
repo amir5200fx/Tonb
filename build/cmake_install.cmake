@@ -52,6 +52,48 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/amir/dev/Tonb/build/tests/cmake_install.cmake")
 endif()
 
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTnbSystem.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTnbSystem.so")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTnbSystem.so"
+         RPATH "")
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/amir/dev/Tonb/build/libs/system/libTnbSystem.so")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTnbSystem.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTnbSystem.so")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTnbSystem.so")
+    endif()
+  endif()
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/tonb/system" TYPE FILE FILES
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/verbosity.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/module.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/run_context.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/task.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/log.hxx"
+    )
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/tonb/system/serialization" TYPE FILE FILES
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/serialization/default_archive.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/serialization/type_tag.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/serialization/wire.hxx"
+    "/home/amir/dev/Tonb/libs/system/include/tonb/system/serialization/io.hxx"
+    )
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/tonb" TYPE FILE FILES
+    "/home/amir/dev/Tonb/build/TonbConfig.cmake"
+    "/home/amir/dev/Tonb/build/TonbConfigVersion.cmake"
+    )
+endif()
+
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)

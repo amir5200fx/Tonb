@@ -19,6 +19,9 @@ project(Tonb
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES CXX)
 
+# NEW: standard install dirs (bin/lib/include)
+include(GNUInstallDirs)
+
 # Global policies
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -44,5 +47,34 @@ add_subdirectory(libs/system)
 if (BUILD_TESTING)
     add_subdirectory(tests)
 endif ()
+
+# --- Install the library ---
+
+install(TARGETS TnbSystem
+        EXPORT TonbTargets
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# --- Package config files ---
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+        "${CMAKE_CURRENT_BINARY_DIR}/TonbConfigVersion.cmake"
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY SameMinorVersion
+)
+
+configure_package_config_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/TonbConfig.cmake.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/TonbConfig.cmake"
+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tonb
+)
+
+install(FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/TonbConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/TonbConfigVersion.cmake"
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tonb)
 
 
