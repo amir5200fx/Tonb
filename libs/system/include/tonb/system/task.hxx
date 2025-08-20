@@ -159,8 +159,17 @@ protected:
     void log(const LogLevel lvl, const std::string_view msg) {
         if (logger_) {
             // Use a child logger with fixed context if available.
-            auto child = logger_->with_context(std::string(name_), id_);
+            const auto child = logger_->with_context(std::string(name_), id_);
             child->log(lvl, msg);
+        }
+    }
+
+    // forward structured fields to the underlying logger
+    void log(const LogLevel lvl, const std::string_view msg,
+             const std::initializer_list<std::pair<std::string, std::string> > fields) {
+        if (logger_) {
+            const auto child = logger_->with_context(std::string(name_), id_);
+            child->log(lvl, msg, fields);
         }
     }
 

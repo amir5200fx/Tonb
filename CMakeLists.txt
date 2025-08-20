@@ -43,6 +43,7 @@ find_package(Threads REQUIRED)
 
 # subprojects
 add_subdirectory(libs/system)
+add_subdirectory(demos)
 
 if (BUILD_TESTING)
 #    add_subdirectory(tests)
