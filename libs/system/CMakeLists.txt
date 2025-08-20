@@ -20,6 +20,7 @@ target_sources(TnbSystem
         include/tonb/system/run_context.hxx
         include/tonb/system/task.hxx
         include/tonb/system/log.hxx
+        include/tonb/system/log1.hxx
 )
 
 if (TNB_WITH_CEREAL)

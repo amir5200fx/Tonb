@@ -108,6 +108,9 @@ namespace tonb::system {
         virtual void write(const LogRecord& rec) = 0;
     };
 
+    // Optional capabilities for sinks (queried via dynamic_cast)
+
+
     /** @class ConsoleSink
      *  @brief Thread-safe console sink (stdout for info and below, stderr for warn and above).
      */
