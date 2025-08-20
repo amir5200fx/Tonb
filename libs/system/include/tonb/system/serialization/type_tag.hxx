@@ -5,7 +5,7 @@
 #ifndef TONB_SYSTEM_SERIALIZATION_TYPE_TAG_HXX
 #define TONB_SYSTEM_SERIALIZATION_TYPE_TAG_HXX
 
-#include <tonb/system/log.hxx>
+#include <tonb/system/log.hxx-backup>
 #include <tonb/system/module.hxx>
 
 #include <cstdint>

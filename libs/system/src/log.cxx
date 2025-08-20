@@ -32,6 +32,12 @@ void tonb::system::ConsoleSink::write(const LogRecord &rec) {
     os << '\n';
 }
 
+void tonb::system::ConsoleSink::flush() {
+    std::lock_guard<std::mutex> lock(mu_);
+    std::cout.flush();
+    std::cerr.flush();
+}
+
 std::string tonb::system::ConsoleSink::timestamp(const LogRecord::Clock::time_point tp) {
     using namespace std::chrono;
     const auto t = LogRecord::Clock::to_time_t(tp);
@@ -70,7 +76,7 @@ const char * tonb::system::ConsoleSink::level_colour(const LogLevel lvl) {
         case LogLevel::warn:     return "\033[33m";       // yellow
         case LogLevel::error:    return "\033[31m";       // red
         case LogLevel::critical: return "\033[41;97m";    // red bg, white fg
-        case LogLevel::Off:      return "\033[0m";
+        case LogLevel::off:      return "\033[0m";
     }
     return "\033[0m";
 }
@@ -94,6 +100,11 @@ void tonb::system::JsonFileSink::write(const LogRecord &rec) {
         if (i + 1 < rec.fields.size()) out_ << ',';
     }
     out_ << "}}\n";
+    out_.flush();
+}
+
+void tonb::system::JsonFileSink::flush() {
+    std::lock_guard<std::mutex> lock(mu_);
     out_.flush();
 }
 
@@ -150,8 +161,36 @@ std::shared_ptr<tonb::system::Logger> tonb::system::Logger::with_context(std::st
     return child;
 }
 
+void tonb::system::Logger::flush() const {
+    std::lock_guard<std::mutex> lock(mu_);
+    for (auto& sink : sinks_) {
+        if (auto* f = dynamic_cast<FlushableSink*>(sink.get())) f->flush();
+    }
+}
+
+void tonb::system::Logger::rewind() const {
+    std::lock_guard<std::mutex> lock(mu_);
+    for (auto& sink : sinks_) {
+        if (auto* f = dynamic_cast<RewindableSink*>(sink.get())) f->rewind();
+    }
+}
+
+void tonb::system::Logger::rewind(const std::size_t n) const {
+    std::lock_guard<std::mutex> lock(mu_);
+    for (auto& sink : sinks_) {
+        if (auto* r = dynamic_cast<RewindableSink*>(sink.get())) r->rewind_count(n);
+    }
+}
+
+void tonb::system::Logger::rewind_to_last() const {
+    std::lock_guard<std::mutex> lock(mu_);
+    for (auto& sink : sinks_) {
+        if (auto* r = dynamic_cast<RewindableSink*>(sink.get())) r->rewind_to_last();
+    }
+}
+
 void tonb::system::Logger::log(const LogLevel lvl, const std::string_view message,
-    const std::initializer_list<std::pair<std::string, std::string>> fields, const std::source_location &loc) const {
+                               const std::initializer_list<std::pair<std::string, std::string>> fields, const std::source_location &loc) const {
     if (lvl < level()) return;
     // Merge fixed + call-time fields
     std::vector<std::pair<std::string,std::string>> merged = fields_;
@@ -175,4 +214,94 @@ tonb::system::Logger::Scope::~Scope() {
     if (!lg_) return;
     const auto ms = duration_cast<milliseconds>(steady_clock::now() - start_).count();
     lg_->log(lvl_, "finished " + what_, {{"duration_ms", std::to_string(ms)}});
+}
+
+void tonb::system::BufferedTextSink::maybe_flush_on_overflow_unlocked() {
+    if (max_buf_ == 0) return;
+    if (buffer_.size() <= max_buf_) return;
+    if (auto_flush_on_overflow_) {
+        do_flush_unlocked();
+    } else {
+        // keep only tail within limit
+        buffer_.erase(0,  buffer_.size() - max_buf_);
+    }
+}
+
+void tonb::system::BufferedTextSink::do_flush_unlocked() {
+    if (!out_ || buffer_.empty()) return;
+    out_(buffer_);
+    last_flushed_ = buffer_;
+    buffer_.clear();
+}
+
+std::string tonb::system::BufferedTextSink::format(const LogRecord &rec) {
+    std::ostringstream os;
+    if (with_ts_static_) os << timestamp(rec.ts) <<' ';
+    os <<'['<< to_string(rec.level)<<']';
+    if (!rec.component.empty()) os<<'['<<rec.component<<']';
+    if (!rec.task_id.empty()) os<<'['<<rec.task_id<<']';
+    os << ' ' << rec.message;
+    if (!rec.fields.empty()) {
+        os << " {";
+        for (std::size_t i = 0; i < rec.fields.size(); i++) {
+            os << rec.fields[i].first << "=\" " << rec.fields[i].second << '"';
+            if (i + 1 < rec.fields.size()) os << ", ";
+        }
+        os << '}';
+    }
+    if (!rec.fields.empty() && rec.line > 0) {
+        const auto pos = rec.file.find_last_of("/\\");
+        os << "  @" << (pos == std::string::npos ? rec.file : rec.file.substr(pos + 1)) << ':' << rec.line;
+    }
+    os << '\n';
+    return os.str();
+}
+
+std::string tonb::system::BufferedTextSink::timestamp(const LogRecord::Clock::time_point tp) {
+    using namespace std::chrono;
+    const auto t = LogRecord::Clock::to_time_t(tp);
+    std::tm tm{};
+#if defined(_WIN32)
+    localtime_s(&tm, &t);
+#else
+    localtime_r(&t, &tm);
+#endif
+    char buf[20];
+    std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
+    return std::string(buf);
+}
+
+void tonb::system::BufferedTextSink::write(const LogRecord &rec) {
+    std::lock_guard<std::mutex> lock(mu_);
+    // append formatted line
+    append_line(format(rec));
+    maybe_flush_on_overflow_unlocked();
+    // If you want "auto flush on delimiter" semantics like your old version, enable this:
+    if (!flush_delim_.empty() && buffer_.find(flush_delim_) != std::string::npos) {
+        do_flush_unlocked();
+    }
+}
+
+void tonb::system::BufferedTextSink::flush() {
+    std::lock_guard<std::mutex> lock(mu_);
+    do_flush_unlocked();
+}
+
+void tonb::system::BufferedTextSink::rewind() {
+    std::lock_guard<std::mutex> lock(mu_);
+    buffer_.clear();
+}
+
+void tonb::system::BufferedTextSink::rewind_count(std::size_t n) {
+    std::lock_guard<std::mutex> lock(mu_);
+    if (n >= buffer_.size()) {
+        buffer_.clear();
+    } else {
+        buffer_.erase(buffer_.size() - n);
+    }
+}
+
+void tonb::system::BufferedTextSink::rewind_to_last() {
+    std::lock_guard<std::mutex> lock(mu_);
+    buffer_ = last_flushed_;
 }
