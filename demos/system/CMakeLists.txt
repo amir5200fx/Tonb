@@ -33,7 +33,7 @@ foreach (src IN LISTS DEMO_SOURCES)
     # Standard, warnings, and threads
     target_compile_features(${name} PRIVATE cxx_std_20)
     if (MSVC)
-        target_compile_options(${name} PRIVATE /w4 /permissive-)
+        target_compile_options(${name} PRIVATE /W4 /permissive-)
     else ()
         target_compile_options(${name} PRIVATE -Wall -Wextra -Wpedantic)
     endif ()
