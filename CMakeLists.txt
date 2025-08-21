@@ -15,7 +15,7 @@ if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif ()
 
 project(Tonb
-        VERSION 0.1.0
+        VERSION 0.18.0
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES CXX)
 
@@ -48,18 +48,18 @@ endif ()
 # Split core into major/minor/patch
 string(REPLACE "." ";" _vparts "${TONB_SEMVER_CORE}")
 list(GET _vparts 0 TONB_SEMVER_MAJOR)
-list(GET _VPARTS 1 TONB_SEMVER_MINOR)
+list(GET _vparts 1 TONB_SEMVER_MINOR)
 list(GET _vparts 2 TONB_SEMVER_PATCH)
 
 message(STATUS "Tonb git: ${TONB_GIT_DESC}")
-message(STATUS "Tonb so: VERSION=${TONB_SEMVER_COR}  SOVERSION=${TONB_SEMVER_MAJOR}")
+message(STATUS "Tonb so: VERSION=${TONB_SEMVER_CORE}  SOVERSION=${TONB_SEMVER_MAJOR}")
 
 # Combine SemVer from project() with the Git description (if available)
-#if (TONB_GIT_DESC)
-#    set(TONB_FULL_VERSION "${PROJECT_VERSION} (${TONB_GIT_DESC})")
-#else ()
-#    set(TONB_FULL_VERSION "${PROJECT_VERSION}")
-#endif ()
+if (TONB_GIT_DESC)
+    set(TONB_FULL_VERSION "${PROJECT_VERSION} (${TONB_GIT_DESC})")
+else ()
+    set(TONB_FULL_VERSION "${PROJECT_VERSION}")
+endif ()
 
 # NEW: standard install dirs (bin/lib/include)
 include(GNUInstallDirs)

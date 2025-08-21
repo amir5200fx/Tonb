@@ -4,8 +4,8 @@ add_library(tonb::system ALIAS TnbSystem)
 
 # My library target
 set_target_properties(TnbSystem PROPERTIES
-        VERSION ${PROJECT_VERSION}
-        SOVERSION ${PROJECT_VERSION_MAJOR}
+        VERSION ${TONB_SEMVER_CORE}         # e.g. 0.18.0 -> libTnbSystem.so.0.18.0
+        SOVERSION ${TONB_SEMVER_MAJOR}      # e.g. 0      -> libTnbSystem.so.0
 )
 
 configure_file(
