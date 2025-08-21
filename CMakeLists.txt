@@ -19,6 +19,68 @@ project(Tonb
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES CXX)
 
+option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
+
+# ---- Doxygen ----
+find_package(Doxygen QUIET)
+find_program(SPHINX_BUILD sphinx-build)
+
+if (DOXYGEN_FOUND)
+    add_custom_target(doxygen
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/docs/doxygen
+            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+            COMMENT "Generating API documentation with Doxygen")
+endif()
+
+if (DOXYGEN_FOUND AND SPHINX_BUILD)
+    add_custom_target(sphinx
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/docs/sphinx/html
+            COMMAND ${CMAKE_COMMAND} -E env
+            DOXYGEN_XML_DIR=${CMAKE_BINARY_DIR}/docs/doxygen/xml
+            ${SPHINX_BUILD} -b html
+            -c ${CMAKE_SOURCE_DIR}/docs/sphinx
+            ${CMAKE_SOURCE_DIR}/docs
+            ${CMAKE_BINARY_DIR}/docs/sphinx/html
+            DEPENDS doxygen
+            COMMENT "Building Sphinx docs with Sphinx")
+    add_custom_target(docs ALL DEPENDS sphinx)
+endif()
+
+#find_package(Doxygen QUIET)
+#if (TONB_BUILD_DOCS AND DOXYGEN_FOUND)
+#    set(DOXYGEN_IN   ${CMAKE_SOURCE_DIR}/docs/Doxyfile.in)
+#    set(DOXYGEN_OUT  ${CMAKE_BINARY_DIR}/Doxyfile)
+#    set(DOXY_OUT_DIR ${CMAKE_BINARY_DIR}/docs/doxygen)
+#
+#    file(MAKE_DIRECTORY ${DOXY_OUT_DIR})
+#    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+#
+#    add_custom_target(doxygen
+#            COMMAND ${CMAKE_COMMAND} -E make_directory ${DOXY_OUT_DIR}
+#            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+#            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+#            COMMENT "Generating API documentation with Doxygen" VERBATIM)
+#endif()
+#
+## ---- Sphinx ----
+#find_program(SPHINX_BUILD sphinx-build)
+#if (TONB_BUILD_DOCS AND DOXYGEN_FOUND AND SPHINX_BUILD)
+#    set(SPHINX_SRC_DIR   ${CMAKE_SOURCE_DIR}/docs/sphinx)           # where index.rst lives
+#    set(SPHINX_CONF_DIR  ${CMAKE_BINARY_DIR}/docs/sphinx)           # generated conf.py lives here
+#    set(SPHINX_HTML_DIR  ${CMAKE_BINARY_DIR}/docs/sphinx/html)
+#
+#    file(MAKE_DIRECTORY ${SPHINX_CONF_DIR} ${SPHINX_HTML_DIR})
+#    configure_file(${SPHINX_SRC_DIR}/conf.py.in ${SPHINX_CONF_DIR}/conf.py @ONLY)
+#
+#    add_custom_target(sphinx
+#            COMMAND ${CMAKE_COMMAND} -E make_directory ${SPHINX_HTML_DIR}
+#            COMMAND ${SPHINX_BUILD} -b html -c ${SPHINX_CONF_DIR} ${SPHINX_SRC_DIR} ${SPHINX_HTML_DIR}
+#            DEPENDS doxygen
+#            COMMENT "Building Sphinx docs" VERBATIM)
+#
+#    add_custom_target(docs ALL DEPENDS doxygen sphinx)
+#endif()
+
 # --- Git describe (full build id) + numeric SemVer core -----------------------
 find_package(Git QUIET)
 
@@ -120,4 +182,23 @@ install(FILES
         "${CMAKE_CURRENT_BINARY_DIR}/TonbConfigVersion.cmake"
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tonb)
 
+
+# ---- Packing (CPack) ---
+set(CPACK_PACKAGE_NAME "tonb")
+set(CPACK_PACKAGE_VENDOR "Tonb Project")
+set(CPACK_PACKAGE_CONTACT "a.amirsolaymani@gmail.com")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Tonb core system library, headers, and demos")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+
+# version info comes from project()
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+
+# Linux .deb niceties (Pop!-OS/Ubuntu)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)  # auto-detect shared lib deps
+set(CPACK_GENERATOR "TGZ;DEB")          # tar.gz and .deb; adjust as you like
+
+include(CPack)                          # generates CPackConfig.cmake
+
+# e.g., in demos/system/CMakeLists.txt
+install(TARGETS demo_logger RUNTIME DESTINATION bin)
 

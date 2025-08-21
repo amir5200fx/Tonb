@@ -1,0 +1,26 @@
+# Sphinx conf.py (configured by CMake)
+import os
+import sys
+
+project = "@PROJECT_NAME@"
+release = "@PROJECT_VERSION@"
+
+# IMPORTANT: tell Sphinx where the master/root doc is (relative to source dir)
+root_doc = "index"
+master_doc = root_doc  # for older Sphinx
+
+extensions = [
+    "breathe",
+    "myst_parser",
+]
+
+# Doxygen XML location
+
+breathe_projects = {"tonb": os.path.abspath("../../../build/docs/doxygen/xml")}
+breathe_default_project = "tonb"
+
+html_theme = "furo"
+templates_path = ["_templates"]
+exclude_patterns = []
+myst_enable_extensions = ["colon_fence"]
+
