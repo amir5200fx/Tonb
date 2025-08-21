@@ -44,8 +44,8 @@ target_include_directories(TnbSystem PUBLIC
 
 # Hide everything by default on GCC/Clang; only TNBSYSTEM_EXPORT is visible
 set_target_properties(TnbSystem PROPERTIES
-        CXX_VISIBILITY_PRESET hidden
-        VISIBILITY_INLINES_HIDDEN YES)
+        CXX_VISIBILITY_PRESET default
+        VISIBILITY_INLINES_HIDDEN NO)
 
 target_compile_features(TnbSystem PUBLIC cxx_std_20)
 
