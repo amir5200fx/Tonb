@@ -19,6 +19,48 @@ project(Tonb
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES CXX)
 
+# --- Git describe (full build id) + numeric SemVer core -----------------------
+find_package(Git QUIET)
+
+# Combine SemVer from project() with the Git description (if available)
+set(TONB_GIT_DESC "")
+set(TONB_SEMVER_CORE "${PROJECT_VERSION}") # fallback to project() version if set
+if (Git_FOUND)
+    execute_process(
+            COMMAND ${GIT_EXECUTABLE} describe --tags --dirty --always
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE TONB_GIT_DESC
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_QUIET
+    )
+
+    if (TONB_GIT_DESC)
+        # Strip leading 'v' and grab the first N.N.N group for SONAME
+        string(REGEX REPLACE "^v" "" _desc "${TONB_GIT_DESC}")
+        string(REGEX MATCH "^[0-9]+\\.[0-9]+\\.[0-9]+" TONB_SEMVER_CORE "${_desc}")
+    endif ()
+endif ()
+
+if (NOT TONB_SEMVER_CORE)
+    set(TONB_SEMVER_CORE "0.0.0")
+endif ()
+
+# Split core into major/minor/patch
+string(REPLACE "." ";" _vparts "${TONB_SEMVER_CORE}")
+list(GET _vparts 0 TONB_SEMVER_MAJOR)
+list(GET _VPARTS 1 TONB_SEMVER_MINOR)
+list(GET _vparts 2 TONB_SEMVER_PATCH)
+
+message(STATUS "Tonb git: ${TONB_GIT_DESC}")
+message(STATUS "Tonb so: VERSION=${TONB_SEMVER_COR}  SOVERSION=${TONB_SEMVER_MAJOR}")
+
+# Combine SemVer from project() with the Git description (if available)
+#if (TONB_GIT_DESC)
+#    set(TONB_FULL_VERSION "${PROJECT_VERSION} (${TONB_GIT_DESC})")
+#else ()
+#    set(TONB_FULL_VERSION "${PROJECT_VERSION}")
+#endif ()
+
 # NEW: standard install dirs (bin/lib/include)
 include(GNUInstallDirs)
 

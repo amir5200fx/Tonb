@@ -2,6 +2,18 @@
 add_library(TnbSystem)
 add_library(tonb::system ALIAS TnbSystem)
 
+# My library target
+set_target_properties(TnbSystem PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/tonb/system/version.hxx.in
+        ${CMAKE_CURRENT_BINARY_DIR}/include/tonb/system/version.hxx
+        @ONLY
+)
+
 target_sources(TnbSystem
         PRIVATE
         src/task.cxx
@@ -40,6 +52,7 @@ endif ()
 
 target_include_directories(TnbSystem PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<INSTALL_INTERFACE:include>)
 
 # Hide everything by default on GCC/Clang; only TNBSYSTEM_EXPORT is visible
@@ -61,3 +74,9 @@ endif ()
 install(TARGETS TnbSystem
         EXPORT tonbTargets
         FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# Install the generated header, too:
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/include/tonb/system/version.hxx
+        DESTINATION include/tonb/system
+)

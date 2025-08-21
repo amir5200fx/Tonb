@@ -2,6 +2,8 @@
 
 include(CMakeFindDependencyMacro)
 
+find_package(Tonb CONFIG REQUIRED)  # gets the exact version
+
 # Required dependencies (from vcpkg or my system)
 find_dependency(Thread CONFIG REQUIRED)
 
