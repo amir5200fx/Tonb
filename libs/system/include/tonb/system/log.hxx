@@ -111,18 +111,18 @@ namespace tonb::system {
      */
     class ISink {
         public:
-        virtual ~ISink() = default;
+        TNBSYSTEM_EXPORT virtual ~ISink();
         virtual void write(const LogRecord& rec) = 0;
     };
 
     // Optional capabilities for sinks (queried via dynamic_cast)
     struct FlushableSink {
-        virtual ~FlushableSink() = default;
+        TNBSYSTEM_EXPORT virtual ~FlushableSink();
         virtual void flush() = 0;
     };
 
     struct RewindableSink {
-        virtual ~RewindableSink() = default;
+        TNBSYSTEM_EXPORT virtual ~RewindableSink();
         virtual void rewind() = 0;
         virtual void rewind_count(std::size_t n) = 0;
         virtual void rewind_to_last() = 0;
@@ -131,7 +131,7 @@ namespace tonb::system {
     /** @class ConsoleSink
      *  @brief Thread-safe console sink (stdout for info and below, stderr for warn and above).
      */
-    class ConsoleSink : public ISink, public FlushableSink {
+    class ConsoleSink final : public ISink, public FlushableSink {
         /*Private Data*/
 
         std::mutex mu_;
@@ -148,6 +148,8 @@ namespace tonb::system {
         explicit ConsoleSink(const bool with_timestamp = true, const bool colour = true)
             : with_ts_(with_timestamp), colour_(colour) {}
 
+        TNBSYSTEM_EXPORT ~ConsoleSink() override;
+
         TNBSYSTEM_EXPORT void write(const LogRecord& rec) override;
         TNBSYSTEM_EXPORT void flush() override;
     };
@@ -157,7 +159,7 @@ namespace tonb::system {
      *
      *  @note Suitable for inspection by tools (jq, logstash, etc.).
      */
-    class JsonFileSink : public ISink, public FlushableSink {
+    class JsonFileSink final : public ISink, public FlushableSink {
         /*Private Data*/
 
         std::mutex mu_;
@@ -172,6 +174,8 @@ namespace tonb::system {
 
     public:
         explicit JsonFileSink(std::string path) : path_(std::move(path)), out_(path_, std::ios::app) {}
+
+        TNBSYSTEM_EXPORT ~JsonFileSink() override;
 
         // Public functions and operators
         TNBSYSTEM_EXPORT void write(const LogRecord& rec) override;
@@ -355,6 +359,8 @@ namespace tonb::system {
             : out_(std::move(out)) {}
 
         // Public functions and operators
+
+        TNBSYSTEM_EXPORT ~BufferedTextSink() override;
 
         // Formatting options (tweak to taste)
         void set_timestamp(const bool on) {with_ts_ = on;}

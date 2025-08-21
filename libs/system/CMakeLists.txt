@@ -6,6 +6,7 @@ target_sources(TnbSystem
         PRIVATE
         src/task.cxx
         src/log.cxx
+        src/log_anchors.cxx
         src/serialization/io.cxx
         PUBLIC
         FILE_SET HEADERS
