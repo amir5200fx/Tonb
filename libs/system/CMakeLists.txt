@@ -1,6 +1,6 @@
 # libs/system/CMakeLists.txt
 add_library(TnbSystem)
-add_library(tonb::system ALIAS TnbSystem)
+add_library(Tonb::System ALIAS TnbSystem)
 
 # My library target
 set_target_properties(TnbSystem PROPERTIES
@@ -32,7 +32,6 @@ target_sources(TnbSystem
         include/tonb/system/module.hxx
         include/tonb/system/run_context.hxx
         include/tonb/system/task.hxx
-        include/tonb/system/log.hxx-backup
         include/tonb/system/log.hxx
 )
 
@@ -43,7 +42,7 @@ else ()
     if (POLICY CMP0167)
         cmake_policy(SET CMP0167 NEW)
     endif ()
-    find_package(Boost REQUIRED COMPONENTS serialization)
+    find_package(Boost CONFIG REQUIRED COMPONENTS serialization)  # add components you need
     target_link_libraries(TnbSystem PUBLIC Boost::serialization)
     if (MSVC)
         target_compile_definitions(TnbSystem PUBLIC BOOST_ALL_NO_LIB)
@@ -55,7 +54,6 @@ target_include_directories(TnbSystem PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<INSTALL_INTERFACE:include>)
 
-# Hide everything by default on GCC/Clang; only TNBSYSTEM_EXPORT is visible
 set_target_properties(TnbSystem PROPERTIES
         CXX_VISIBILITY_PRESET default
         VISIBILITY_INLINES_HIDDEN NO)
@@ -70,13 +68,13 @@ if (NOT BUILD_SHARED_LIBS)
     target_compile_definitions(TnbSystem PUBLIC TNBSYSTEM_STATIC_MODULE)
 endif ()
 
-
-install(TARGETS TnbSystem
-        EXPORT tonbTargets
-        FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-# Install the generated header, too:
-install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/include/tonb/system/version.hxx
-        DESTINATION include/tonb/system
-)
+# REMOVE this whole block in libs/system:
+#install(TARGETS TnbSystem
+#        EXPORT tonbTargets
+#        FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#
+## Install the generated header, too:
+#install(FILES
+#        ${CMAKE_CURRENT_BINARY_DIR}/include/tonb/system/version.hxx
+#        DESTINATION include/tonb/system
+#)
