@@ -17,7 +17,7 @@ namespace tonb::cad::occt::core {
     struct occt_edge_access {
         static Edge make(const TopoDS_Edge& edge) {
             if (edge.IsNull()) return {};
-            return Edge{std::make_shared<Edge::Impl>(Edge::Impl{std::move(edge)})};
+            return Edge{std::make_shared<Edge::Impl>(Edge::Impl{edge})};
         }
         static TopoDS_Edge get(const Edge& edge) {
             return (edge.pimple_ ? edge.pimple_->edge : TopoDS_Edge{});
