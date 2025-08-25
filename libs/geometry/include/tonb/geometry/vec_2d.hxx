@@ -87,7 +87,7 @@ namespace tonb::geometry {
         static TNBGEOM_EXPORT const int nb_cmpts;
 
         // default constructor
-        TNBGEOM_ND_EXPORT Vec2d() noexcept;
+        TNBGEOM_EXPORT Vec2d() noexcept;
 
         // constructors
         Vec2d(const real x, const real y) noexcept : components_{x, y} {}
@@ -103,20 +103,20 @@ namespace tonb::geometry {
 
         // Access
         TNB_NODISCARD const auto& components() const noexcept { return components_; }
-        TNB_NODISCARD constexpr real u(const Vec2d& other) const noexcept {return components_[0];}
-        TNB_NODISCARD constexpr real v(const Vec2d& other) const noexcept {return components_[1];}
+        TNB_NODISCARD constexpr real u() const noexcept {return components_[0];}
+        TNB_NODISCARD constexpr real v() const noexcept {return components_[1];}
 
         void set_u(const real u) noexcept {components_[0] = u;}
         void set_v(const real v) noexcept {components_[1] = v;}
 
         TNB_NODISCARD constexpr real operator[](const size_t i) const noexcept {return components_[i];}
-        TNB_NODISCARD constexpr const real& operator[](const size_t i) noexcept {return components_[i];}
+        TNB_NODISCARD constexpr real& operator[](const size_t i) noexcept {return components_[i];}
 
         // common operators
         TNBGEOM_EXPORT Vec2d& operator+=(const Vec2d& rhs) noexcept;
         TNBGEOM_EXPORT Vec2d& operator-=(const Vec2d& rhs) noexcept;
-        TNBGEOM_EXPORT Vec2d& operator*=(const real rhs) noexcept;
-        TNBGEOM_EXPORT Vec2d& operator/=(const real rhs) noexcept;
+        TNBGEOM_EXPORT Vec2d& operator*=(real rhs) noexcept;
+        TNBGEOM_EXPORT Vec2d& operator/=(real rhs) noexcept;
 
         // transformation
 
