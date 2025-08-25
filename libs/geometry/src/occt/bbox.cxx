@@ -2,7 +2,7 @@
 // Created by amir on 8/24/25.
 //
 #include <tonb/geometry/occt/bbox.hxx>
-#include <tonb/geometry/occt/adapters.hxx>
+#include <tonb/geometry/occt/core/adapters.hxx>
 #include <tonb/geometry/meta/box_3d.hxx>
 #include <tonb/geometry/pnt_3d.hxx>
 
