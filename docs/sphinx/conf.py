@@ -1,25 +1,39 @@
-import os
+# docs/sphinx/conf.py
+import os, pathlib
 
 project = "Tonb"
 release = "0.19.0"
-
 root_doc = "index"
-master_doc = root_doc
 
 extensions = ["breathe", "myst_parser"]
 html_theme = "furo"
 myst_enable_extensions = ["colon_fence"]
 
-# Get Doxygen XML dir from env; fall back to a reasonable default
-xml_dir = os.environ.get(
-    "DOXYGEN_XML_DIR",
-    os.path.abspath(os.path.join("..", "..", "build", "docs", "doxygen", "xml")),
-)
-breathe_projects = {"tonb": xml_dir}
-breathe_default_project = "tonb"
+here = pathlib.Path(__file__).resolve().parent
 
-# Treat these as harmless attributes in C/C++ declarations
+# 1) Prefer CMake-provided env var
+xml_dir = os.environ.get("DOXYGEN_XML_DIR")
+
+# 2) Otherwise, try common fallbacks relative to this file
+if not xml_dir:
+    candidates = [
+        here.parent / "doxygen" / "xml",                  # in-source doxygen run
+        here.parent.parent / "build" / "docs" / "doxygen" / "xml",  # rare in-source build/
+    ]
+    for c in candidates:
+        if c.exists():
+            xml_dir = str(c)
+            break
+
+if not xml_dir or not os.path.exists(xml_dir):
+    raise RuntimeError(f"Cannot find Doxygen XML (set DOXYGEN_XML_DIR). Tried: {xml_dir}")
+
+breathe_projects = {"Tonb": xml_dir}
+breathe_default_project = "Tonb"
+
+# Make these macros harmless in signatures
 cpp_id_attributes = ['TNBSYSTEM_EXPORT', 'TNB_NODISCARD', 'TNBSYSTEM_ND_EXPORT']
-c_id_attributes = ['TNBSYSTEM_EXPORT']  # if you also document C code
+c_id_attributes = ['TNBSYSTEM_EXPORT']
+
 
 

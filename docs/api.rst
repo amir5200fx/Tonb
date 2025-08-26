@@ -2,4 +2,4 @@ API Reference
 =============
 
 .. doxygenindex::
-   :project: tonb
+   :project: Tonb
