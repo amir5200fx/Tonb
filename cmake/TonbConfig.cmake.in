@@ -2,6 +2,12 @@
 
 include(CMakeFindDependencyMacro)
 
+set(TONB_WITH_OCCT @TONB_WIT_OCCT@)
+
+if (TONB_WITH_OCCT)
+    find_dependency(OpenCASCADE CONFIG) # will bring in the imported targets
+endif()
+
 find_package(Tonb CONFIG REQUIRED)  # gets the exact version
 
 # Required dependencies (from vcpkg or my system)
