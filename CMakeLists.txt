@@ -202,7 +202,7 @@ install(TARGETS TonbSystem TonbBase TonbGeometry TonbCAD
 
 # Install the export file
 install(EXPORT TonbTargets
-        NAMESPACE Tonb::
+        NAMESPACE Tonb::        # creates Tonb::System, Tonb::Base, …
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Tonb
 )
 set_target_properties(TonbSystem PROPERTIES EXPORT_NAME System)

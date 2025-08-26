@@ -26,6 +26,10 @@ namespace tonb::geometry::occt {
     Point& Point::set_y(const real v) noexcept {pimpl_->p.SetY(v); return *this;}
     Point& Point::set_z(const real v) noexcept {pimpl_->p.SetZ(v); return *this;}
 
+    std::array<real, 3> Point::xyz() const noexcept {
+      return {pimpl_->p.X(), pimpl_->p.Y(), pimpl_->p.Z()};
+    }
+
     Point Point::moved(const std::array<real, 3>& d) const noexcept {
         return Point{x() + d[0], y() + d[1], z() + d[2]};
     }

@@ -4,8 +4,7 @@ add_library(Tonb::Geometry ALIAS TonbGeometry)
 
 if (TONB_WITH_OCCT)
     # Prefer the config package (vcpkg, official builds)
-    find_package(OpenCASCADE CONFIG QUIET
-            COMPONENTS FoundationClasses)
+    find_package(OpenCASCADE CONFIG REQUIRED)
     if (NOT OpenCASCADE_FOUND)
         find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
     endif ()
@@ -18,9 +17,20 @@ if (TONB_WITH_OCCT)
         )
     endif ()
 
+    set(OCCT_LIBS)
+    foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath)
+        if (TARGET OpenCASCADE::${lib})
+            list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+        elseif(TARGET ${lib})
+            list(APPEND OCCT_LIBS ${lib})
+        else ()
+            message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+        endif ()
+    endforeach ()
     add_library(TonbOcctAdapters INTERFACE)
     add_library(Tonb::OcctAdapters ALIAS TonbOcctAdapters)
-    target_link_libraries(TonbOcctAdapters INTERFACE Tonb::Geometry OpenCASCADE::FoundationClasses)
+    target_link_libraries(TonbGeometry PRIVATE ${OCCT_LIBS})
+    target_link_libraries(TonbOcctAdapters INTERFACE Tonb::Geometry)
     target_compile_definitions(TonbOcctAdapters INTERFACE TONB_HAS_OCCT_ADAPTERS=1)
 
     # Install the interface target

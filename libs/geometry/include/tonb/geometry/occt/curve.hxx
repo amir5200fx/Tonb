@@ -14,6 +14,7 @@
 
 #include <memory>
 #include <optional>
+#include <array>
 
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>

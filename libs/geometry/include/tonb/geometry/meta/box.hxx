@@ -43,6 +43,7 @@
 #include <tonb/base/range.hxx>
 
 #include <array>
+#include <vector>
 
 namespace tonb::geometry::meta {
     template<class Point>

@@ -50,7 +50,7 @@ namespace tonb::base {
     static_assert(EPS_ABS > static_cast<real>(0), "EPS_ABS ended up as 0 — check 'real' typedef");
     static_assert(EPS_REL > static_cast<real>(0), "EPS_REL ended up as 0 — check 'real' typedef");
 
-    TNB_NODISCARD inline constexpr bool near_zero(const real x,
+    TNB_NODISCARD inline bool near_zero(const real x,
                                                const real eps_abs = EPS_ABS,
                                                const real eps_rel = EPS_REL,
                                                const real scale   = 1.0) noexcept
