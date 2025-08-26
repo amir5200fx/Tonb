@@ -32,7 +32,16 @@ breathe_projects = {"Tonb": xml_dir}
 breathe_default_project = "Tonb"
 
 # Make these macros harmless in signatures
-cpp_id_attributes = ['TNBSYSTEM_EXPORT', 'TNB_NODISCARD', 'TNBSYSTEM_ND_EXPORT']
+cpp_id_attributes = ['TNBSYSTEM_EXPORT',
+                     'TNB_NODISCARD',
+                     'TNBSYSTEM_ND_EXPORT',
+                     'TNBBASE_ND_EXPORT',
+                     'TNBBASE_EXPORT',
+                     'TNBGEOM_ND_EXPORT',
+                     'TNBGEOM_EXPORT',
+                     'TNBCAD_ND_EXPORT',
+                     'TNBCAD_EXPORT',
+                     'Handle']
 c_id_attributes = ['TNBSYSTEM_EXPORT']
 
 

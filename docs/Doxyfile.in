@@ -1,23 +1,15 @@
-# Doxyfile.in — configured by CMake
-PROJECT_NAME           = "@PROJECT_NAME@"
-PROJECT_NUMBER         = "@PROJECT_VERSION@"
-
-OUTPUT_DIRECTORY       = "@CMAKE_BINARY_DIR@/docs/doxygen"
-CREATE_SUBDIRS         = NO
-GENERATE_HTML          = YES
-HTML_OUTPUT            = html
-GENERATE_XML           = YES
-XML_OUTPUT             = xml
-GENERATE_TREEVIEW      = YES
 FULL_PATH_NAMES        = NO
-STRIP_FROM_PATH        = @CMAKE_SOURCE_DIR@
+STRIP_FROM_PATH        = "@CMAKE_SOURCE_DIR@"
 SOURCE_BROWSER         = YES
 
-INPUT                  = @CMAKE_SOURCE_DIR@/libs/system/include \
-                         @CMAKE_SOURCE_DIR@/libs/base/include
+INPUT                  = "@CMAKE_SOURCE_DIR@/libs/system/include" \
+                         "@CMAKE_SOURCE_DIR@/libs/base/include"   \
+                         "@CMAKE_SOURCE_DIR@/libs/geometry/include" \
+                         "@CMAKE_SOURCE_DIR@/libs/cad/include"
 FILE_PATTERNS          = *.h *.hpp *.hxx *.hh
 RECURSIVE              = YES
 
+# Extraction policy
 EXTRACT_ALL            = NO
 EXTRACT_PRIVATE        = NO
 EXTRACT_STATIC         = NO
@@ -26,18 +18,51 @@ HIDE_UNDOC_CLASSES     = YES
 JAVADOC_AUTOBRIEF      = YES
 MULTILINE_CPP_IS_BRIEF = YES
 MARKDOWN_SUPPORT       = YES
-USE_MDFILE_AS_MAINPAGE = @CMAKE_SOURCE_DIR@/README.md
+USE_MDFILE_AS_MAINPAGE = "@CMAKE_SOURCE_DIR@/README.md"
 
+# Output formats
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+GENERATE_LATEX         = NO          # speed up if you don't need PDFs
+GENERATE_TREEVIEW      = YES
+
+# Graphviz / dot
 HAVE_DOT               = YES
 DOT_IMAGE_FORMAT       = svg
+DOT_TRANSPARENT        = YES
+DOT_GRAPH_MAX_NODES    = 75          # avoid huge unreadable graphs
 
+# Warnings
 QUIET                  = YES
 WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
 WARN_LOGFILE           = "@CMAKE_BINARY_DIR@/docs/doxygen/warnings.log"
 
+# Preprocessing / macros
 ENABLE_PREPROCESSING   = YES
-MACRO_EXPANSION        = NO
-PREDEFINED += TNBSYSTEM_EXPORT=
-PREDEFINED += TNB_NODISCARD=
-PREDEFINED += TNBSYSTEM_ND_EXPORT=
-PREDEFINED += TNBBASE_EXPORT=
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+SKIP_FUNCTION_MACROS   = YES
+
+# Known project macros (treat as empty so they don't pollute signatures)
+PREDEFINED             += DOXYGEN_SHOULD_SKIP_THIS
+PREDEFINED             += TNBSYSTEM_EXPORT=
+PREDEFINED             += TNB_NODISCARD=
+PREDEFINED             += TNBSYSTEM_ND_EXPORT=
+PREDEFINED             += TNBBASE_EXPORT=
+PREDEFINED             += TNBBASE_ND_EXPORT=
+PREDEFINED             += TNBGEOM_ND_EXPORT=
+PREDEFINED             += TNBGEOM_EXPORT=
+PREDEFINED             += TNBCAD_ND_EXPORT=
+PREDEFINED             += TNBCAD_EXPORT=
+PREDEFINED             += Handle=
+
+# Optional: make Doxygen friendlier with heavy templates (requires Doxygen built with libclang)
+ CLANG_ASSISTED_PARSING = YES
+ CLANG_OPTIONS          = -std=c++20
+
+# Optional: exclude internal or 3rdparty dirs
+ EXCLUDE_PATTERNS       = */detail/* */internal/* */third_party/*
