@@ -1,11 +1,11 @@
 # libs/system/CMakeLists.txt
-add_library(TnbSystem)
-add_library(Tonb::System ALIAS TnbSystem)
+add_library(TonbSystem)
+add_library(Tonb::System ALIAS TonbSystem)
 
 # My library target
-set_target_properties(TnbSystem PROPERTIES
-        VERSION ${TONB_SEMVER_CORE}         # e.g. 0.18.0 -> libTnbSystem.so.0.18.0
-        SOVERSION ${TONB_SEMVER_MAJOR}      # e.g. 0      -> libTnbSystem.so.0
+set_target_properties(TonbSystem PROPERTIES
+        VERSION ${TONB_SEMVER_CORE}         # e.g. 0.18.0 -> libTonbSystem.so.0.18.0
+        SOVERSION ${TONB_SEMVER_MAJOR}      # e.g. 0      -> libTonbSystem.so.0
 )
 
 configure_file(
@@ -14,7 +14,7 @@ configure_file(
         @ONLY
 )
 
-target_sources(TnbSystem
+target_sources(TonbSystem
         PRIVATE
         src/task.cxx
         src/log.cxx
@@ -37,44 +37,33 @@ target_sources(TnbSystem
 
 if (TNB_WITH_CEREAL)
     find_package(cereal CONFIG REQUIRED)  # header-only
-    target_link_libraries(TnbSystem PUBLIC cereal::cereal)
+    target_link_libraries(TonbSystem PUBLIC cereal::cereal)
 else ()
     if (POLICY CMP0167)
         cmake_policy(SET CMP0167 NEW)
     endif ()
     find_package(Boost CONFIG REQUIRED COMPONENTS serialization)  # add components you need
-    target_link_libraries(TnbSystem PUBLIC Boost::serialization)
+    target_link_libraries(TonbSystem PUBLIC Boost::serialization)
     if (MSVC)
-        target_compile_definitions(TnbSystem PUBLIC BOOST_ALL_NO_LIB)
+        target_compile_definitions(TonbSystem PUBLIC BOOST_ALL_NO_LIB)
     endif ()
 endif ()
 
-target_include_directories(TnbSystem PUBLIC
+target_include_directories(TonbSystem PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<INSTALL_INTERFACE:include>)
 
-set_target_properties(TnbSystem PROPERTIES
+set_target_properties(TonbSystem PROPERTIES
         CXX_VISIBILITY_PRESET default
         VISIBILITY_INLINES_HIDDEN NO)
 
-target_compile_features(TnbSystem PUBLIC cxx_std_20)
+target_compile_features(TonbSystem PUBLIC cxx_std_20)
 
 # When building the shared lib, this flag marks we are *producing* the symbols
-target_compile_definitions(TnbSystem PRIVATE TNBSYSTEM_EXPORTS)
+target_compile_definitions(TonbSystem PRIVATE TNBSYSTEM_EXPORTS)
 
 # If you flip to static build, make exports no-ops for consumers
 if (NOT BUILD_SHARED_LIBS)
-    target_compile_definitions(TnbSystem PUBLIC TNBSYSTEM_STATIC_MODULE)
+    target_compile_definitions(TonbSystem PUBLIC TNBSYSTEM_STATIC_MODULE)
 endif ()
-
-# REMOVE this whole block in libs/system:
-#install(TARGETS TnbSystem
-#        EXPORT tonbTargets
-#        FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-#
-## Install the generated header, too:
-#install(FILES
-#        ${CMAKE_CURRENT_BINARY_DIR}/include/tonb/system/version.hxx
-#        DESTINATION include/tonb/system
-#)

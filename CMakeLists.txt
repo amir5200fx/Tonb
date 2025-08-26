@@ -20,11 +20,35 @@ project(Tonb
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES CXX)
 
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
+option(TNB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
+option(BUILD_TESTING "Running the tests" OFF)
+
 option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
+
+# ---- OCCT ----
+
+option(TONB_WITH_OCCT "Build OCCT adaptors" ON)
+
+include(GNUInstallDirs)
+
+# Generate tonb/config.hxx with 0/1 macros
+configure_file(
+        ${CMAKE_SOURCE_DIR}/cmake/tonb_config.hxx.in
+        ${CMAKE_BINARY_DIR}/generated/tonb/config.hxx
+        @ONLY
+)
 
 # ---- Doxygen ----
 find_package(Doxygen QUIET)
 find_program(SPHINX_BUILD sphinx-build)
+
+#if (TONB_BUILD_DOCS AND DOXYGEN_FOUND AND SPHINX_BUILD)
+#    # ... your current doxygen + sphinx targets ...
+#    add_custom_target(docs DEPENDS sphinx)
+#elseif(TONB_BUILD_DOCS)
+#    message(STATUS "Docs disabled: Doxygen found=${DOXYGEN_FOUND}, sphinx-build found=${SPHINX_BUILD}")
+#endif()
 
 if (TONB_BUILD_DOCS AND DOXYGEN_FOUND)
     set(DOXYGEN_IN ${CMAKE_SOURCE_DIR}/docs/Doxyfile.in)
@@ -115,29 +139,52 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # So CLion uses compile_commands.json reliably
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)                # good for static->shared linkage
 
-option(TNB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
-option(BUILD_TESTING "Running the tests" OFF)
+
 
 # Threads (needed for std::thread and sometimes by gtest itself)
 find_package(Threads REQUIRED)
 
 include(CTest)
-
 # subprojects
 add_subdirectory(libs/system)
+add_subdirectory(libs/base)
+add_subdirectory(libs/geometry)
+add_subdirectory(libs/cad)
 add_subdirectory(demos)
 
 if (BUILD_TESTING)
     add_subdirectory(tests)
 endif ()
 
+# Make it visible to all Tonb targets during build
+# (do this once, after you've created your library targets)
+target_include_directories(TonbSystem  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbBase    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbGeometry PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbCAD PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+
+# Install the generated header
+install(FILES ${CMAKE_BINARY_DIR}/generated/tonb/config.hxx
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tonb)
+
 # --- Install the library ---
 
-set_target_properties(TnbSystem PROPERTIES
+set_target_properties(TonbSystem PROPERTIES
         VERSION   "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
+set_target_properties(TonbBase PROPERTIES
+        VERSION "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
+set_target_properties(TonbGeometry PROPERTIES
+        VERSION "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
+set_target_properties(TonbCAD PROPERTIES
+        VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
 )
 
@@ -145,7 +192,7 @@ set_target_properties(TnbSystem PROPERTIES
 include(CMakePackageConfigHelpers)
 
 # Install the library once (from the root), and attach it to export set "TonbTargets"
-install(TARGETS TnbSystem
+install(TARGETS TonbSystem TonbBase TonbGeometry TonbCAD
         EXPORT TonbTargets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -158,7 +205,10 @@ install(EXPORT TonbTargets
         NAMESPACE Tonb::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Tonb
 )
-set_target_properties(TnbSystem PROPERTIES EXPORT_NAME System)
+set_target_properties(TonbSystem PROPERTIES EXPORT_NAME System)
+set_target_properties(TonbBase PROPERTIES EXPORT_NAME Base)
+set_target_properties(TonbGeometry PROPERTIES EXPORT_NAME Geometry)
+set_target_properties(TonbCAD PROPERTIES EXPORT_NAME CAD)
 
 # Configure + install Config files in the same folder (note the capital T)
 configure_package_config_file(
