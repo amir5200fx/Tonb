@@ -52,6 +52,8 @@ namespace tonb::geometry::meta {
 
         template<bool cond, typename U>
         using EnableIf = std::enable_if_t<cond, U>;
+        template<bool B, class T = void>
+        using EnableIf_t = std::enable_if_t<B, T>;
 
         template<int Dim>
         using is_two_dimension = base::traits::is_two_dimension<Dim>;
@@ -152,24 +154,21 @@ namespace tonb::geometry::meta {
         real volume() const noexcept;
 
         template<class U = void>
-        EnableIf<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
-        extend(real dx, real dy) {
-            extend({dx, dy});
-            return;
-        }
+        inline EnableIf_t< is_two_dimension< static_cast<int>(Point::dim) >::value, U >
+        extend(const real dx, const real dy) {extend(dx, dy); return U{};}
         template<class U = Box>
-        EnableIf<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
+        EnableIf_t<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
         extended(real dx, real dy) const {return extended({dx, dy});}
 
         template<class U = void>
-        EnableIf<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
+        EnableIf_t<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
         extend(real dx, real dy, real dz) {
             extend({dx, dy, dz});
-            return;
+            return U{};
         }
 
         template<class U = Box>
-        EnableIf<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
+        EnableIf_t<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
         extended(real dx, real dy, real dz) const {return extended({dx, dy, dz});}
 
         Box extended(const std::array<real, Point::dim>& components) const;

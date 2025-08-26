@@ -2,6 +2,7 @@
 // Created by amir on 8/23/25.
 //
 #pragma once
+#include <cmath>
 namespace tonb::geometry::meta {
 
     template<class Point>
