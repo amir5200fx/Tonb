@@ -58,7 +58,7 @@ namespace tonb::cad::occt {
         Handle(Geom_Curve) c = BRep_Tool::Curve(pimple_->edge, u0, u1);
         if (c.IsNull()) return 0.0;
 
-        GeomAdaptor_Curve gac(c, u0, u1);
+        const GeomAdaptor_Curve gac(c, u0, u1);
         // length with tolerance; fails back to analytic if possible.
         return GCPnts_AbscissaPoint::Length(gac, u0, u1, tol);
     }
@@ -102,7 +102,7 @@ namespace tonb::cad::occt {
     std::pair<Edge::Point3, Edge::Point3> Edge::endpoints() const {
         Point3 a{0,0,0}, b{0,0,0};
         if (!is_valid()) {
-            return {std::move(a), std::move(b)};
+            return {a, b};
         }
 
         TopoDS_Vertex v1, v2;
@@ -115,7 +115,7 @@ namespace tonb::cad::occt {
             const auto p = BRep_Tool::Pnt(v2);
             b = geometry::occt::core::from_gp_to_array(p);
         }
-        return {std::move(a), std::move(b)};
+        return {a, b};
     }
 
     Edge::Curve Edge::curve() const {
