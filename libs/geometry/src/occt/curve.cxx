@@ -38,7 +38,7 @@ namespace tonb::geometry::occt {
         return gac.Degree();
     }
 
-    std::optional<std::pair<real, real> > Curve::parameter_range() const {
+    std::optional<std::pair<real, real> > Curve::parameter_range() const noexcept {
         if (!is_valid()) return std::nullopt;
         const auto bc = Handle(Geom_BoundedCurve)::DownCast(pimpl_->h);
         if (bc.IsNull()) return std::nullopt;

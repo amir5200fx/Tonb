@@ -50,13 +50,13 @@ namespace tonb::geometry::occt {
         TNBGEOM_ND_EXPORT int degree() const noexcept;
 
         /// Parameter range if the curve is bounded. std::nullopt if unbounded.
-        TNBGEOM_ND_EXPORT std::optional<std::pair<real, real>> parameter_range() const;
+        TNBGEOM_ND_EXPORT std::optional<std::pair<real, real>> parameter_range() const noexcept;
 
         /// Evaluate point at parameter u
         TNBGEOM_ND_EXPORT std::array<real, 3> value(double u) const;
 
         /// Evaluate point and first derivative at u.
-        struct D1{std::array<real, 3> p{}; std::array<real, 3> q{}; std::array<real, 3> v{};};
+        struct D1{std::array<real, 3> p{}; std::array<real, 3> q{};};
         TNBGEOM_ND_EXPORT D1 d1(double u) const;
 
         /// Returns a trimmed sub-curve [u0, u1]. If not supported, returns invalid.

@@ -18,7 +18,7 @@ namespace tonb::geometry::occt {
     int Curve::degree() const noexcept {
         return -1;
     }
-    std::optional<std::pair<real, real> > Curve::parameter_range() const {
+    std::optional<std::pair<real, real> > Curve::parameter_range() const noexcept {
         return std::nullopt;
     }
     std::array<real, 3> Curve::value(double u) const {
