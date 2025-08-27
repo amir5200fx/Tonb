@@ -2,9 +2,7 @@
 // Created by amir on 8/24/25.
 //
 
-#ifndef TONB_GEOMETRY_OCCT_TRANSFORM_HELPERS_HXX
-#define TONB_GEOMETRY_OCCT_TRANSFORM_HELPERS_HXX
-
+#pragma once
 #include <tonb/geometry/occt/transform.hxx>
 #include <opencascade/gp_Trsf.hxx>
 
@@ -26,4 +24,3 @@ namespace tonb::geometry::occt::core {
         }
     };
 }
-#endif //TONB_GEOMETRY_OCCT_TRANSFORM_HELPERS_HXX
