@@ -8,7 +8,6 @@
 #include <tonb/cad/occt/location.hxx>
 #include <tonb/cad/occt/core/location_helpers.hxx>
 #include <tonb/geometry/occt/core/adapters.hxx>
-#include <tonb/geometry/occt/core/vector_helpers.hxx>
 
 // OCCT
 #include <opencascade/TopLoc_Location.hxx>
