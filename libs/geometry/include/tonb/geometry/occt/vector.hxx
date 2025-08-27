@@ -50,11 +50,11 @@ namespace tonb::geometry::occt {
         TNBGEOM_ND_EXPORT real v() const noexcept;
         TNBGEOM_ND_EXPORT real w() const noexcept;
 
-        Vector& set_u(real v) noexcept;
-        Vector& set_v(real v) noexcept;
-        Vector& set_w(real v) noexcept;
+        TNBGEOM_EXPORT Vector& set_u(real v) noexcept;
+        TNBGEOM_EXPORT Vector& set_v(real v) noexcept;
+        TNBGEOM_EXPORT Vector& set_w(real v) noexcept;
 
-        TNBGEOM_ND_EXPORT std::array<real, 3> uvw() const noexcept {return {u(), v(), w()};}
+        TNB_NODISCARD std::array<real, 3> uvw() const noexcept {return {u(), v(), w()};}
 
         // Norms
         TNBGEOM_ND_EXPORT real squared_norm() const noexcept;
