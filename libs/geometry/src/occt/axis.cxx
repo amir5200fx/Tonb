@@ -20,7 +20,7 @@
 
 namespace tonb::geometry::occt {
 
-    static inline bool near_zero3(const real x, const real y, const real z, const real eps = 1.e-15) {
+    inline bool near_zero3(const real x, const real y, const real z, const real eps = 1.e-15) {
         return (x*x + y*y + z*z) <= eps *eps;
     }
 
@@ -32,7 +32,7 @@ namespace tonb::geometry::occt {
     Axis Axis::from_point_dir(const Point &origin, const Vector &dir) noexcept {
         auto impl = std::make_shared<Axis::Impl>();
         if (near_zero3(dir.u(), dir.v(), dir.w())) {
-            impl->ax=gp_Ax1(gp_Pnt(0, 0, 1), gp_Dir(0, 0, 1));
+            impl->ax=gp_Ax1(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1));
             impl->valid=false;
         } else {
             impl->ax = gp_Ax1(core::occt_point_access::get(origin), core::occt_vector_access::get(dir));
