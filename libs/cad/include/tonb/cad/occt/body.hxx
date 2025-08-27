@@ -76,6 +76,9 @@
 #ifndef TONB_CAD_OCCT_BODY_HXX
 #define TONB_CAD_OCCT_BODY_HXX
 #include <tonb/cad/module.hxx>
+#include <tonb/cad/occt/face.hxx>
+#include <tonb/cad/occt/location.hxx>
+#include <vector>
 #include <memory>
 #include <string>
 
@@ -84,6 +87,8 @@ namespace tonb::geometry::occt {
     class BBox;
 }
 namespace tonb::cad::occt {
+    // Forward Declarations
+    class Face;
     class Body {
     public:
 
@@ -108,9 +113,25 @@ namespace tonb::cad::occt {
          *         `false` for default bodies or when built without a backend.
          */
         TNBCAD_ND_EXPORT bool is_valid() const noexcept;
-
         TNBCAD_ND_EXPORT BBox bbox() const;
 
+        /// Collect all faces with the **orientation they have** inside `shape`.
+        /// Duplicates may appear if the same face is used multiple times.
+        /// This is usually what you want if orientation matters for downstream ops.
+        TNBCAD_ND_EXPORT std::vector<Face> oriented_face() const;
+
+        /// Collect **unique** faces (no duplicates) with **FORWARD** orientation.
+        /// Useful for building sets or when orientation doesn't matter.
+        TNBCAD_ND_EXPORT std::vector<Face> unique_forward_faces() const;
+
+        struct FaceOccurrence {
+            Face face;  // same Body & orientation, Location() set to identity
+            Location location;  // accumulated placement of this occurrence
+        };
+        /// Collect all face occurrences in `shape`, preserving per-occurrence placement.
+        /// Faces that appear multiple times (e.g. via instances) will be returned multiple times,
+        /// each with its own location.
+        TNBCAD_ND_EXPORT std::vector<FaceOccurrence> occurrence_faces() const;
     private:
         struct Impl;
         std::shared_ptr<Impl> p_{};   // type erased backend
