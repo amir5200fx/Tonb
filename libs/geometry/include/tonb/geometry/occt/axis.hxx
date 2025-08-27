@@ -8,7 +8,6 @@
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
 
-#include <array>
 #include <memory>
 
 /**
@@ -49,7 +48,7 @@ namespace tonb::geometry::occt {
         /// Origin (point).
         TNBGEOM_ND_EXPORT Point origin() const noexcept;
 
-        // Unit direction (vector). Undefined if !is_valid() (returns {0,0,0}).
+        /// Unit direction (vector). Undefined if !is_valid() (returns {0,0,0}).
         TNBGEOM_ND_EXPORT Vector direction() const noexcept;
 
         /// Returns a copy with a new origin.
