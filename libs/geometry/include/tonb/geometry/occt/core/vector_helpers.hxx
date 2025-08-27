@@ -15,7 +15,7 @@ namespace tonb::geometry::occt::core {
             return Vector(std::array{static_cast<real>(v.X()), static_cast<real>(v.Y()), static_cast<real>(v.Z())});
         }
         static gp_Vec get(const Vector& v) {
-            return {static_cast<Standard_Real>(v.u()), static_cast<Standard_Real>(v.v()), static_cast<Standard_Real>(v.w())};
+            return v.pimpl_ ? v.pimpl_->v : gp_Vec();
         }
     };
 }
