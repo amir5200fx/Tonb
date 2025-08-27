@@ -16,7 +16,7 @@ if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif ()
 
 project(Tonb
-        VERSION 0.19.0
+        VERSION 0.20.0
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES CXX)
 
@@ -151,6 +151,7 @@ include(CTest)
 add_subdirectory(libs/system)
 add_subdirectory(libs/base)
 add_subdirectory(libs/geometry)
+add_subdirectory(libs/cad2d)
 add_subdirectory(libs/cad)
 add_subdirectory(demos)
 
@@ -163,6 +164,7 @@ endif ()
 target_include_directories(TonbSystem  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbBase    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbGeometry PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+#target_include_directories(TnbCA2d PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbCAD PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 
 # Install the generated header
@@ -183,6 +185,10 @@ set_target_properties(TonbGeometry PROPERTIES
         VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
 )
+set_target_properties(TonbCAD2d PROPERTIES
+        VERSION "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
 set_target_properties(TonbCAD PROPERTIES
         VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
@@ -192,7 +198,7 @@ set_target_properties(TonbCAD PROPERTIES
 include(CMakePackageConfigHelpers)
 
 # Install the library once (from the root), and attach it to export set "TonbTargets"
-install(TARGETS TonbSystem TonbBase TonbGeometry TonbCAD
+install(TARGETS TonbSystem TonbBase TonbGeometry TonbCAD2d TonbCAD
         EXPORT TonbTargets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -208,6 +214,7 @@ install(EXPORT TonbTargets
 set_target_properties(TonbSystem PROPERTIES EXPORT_NAME System)
 set_target_properties(TonbBase PROPERTIES EXPORT_NAME Base)
 set_target_properties(TonbGeometry PROPERTIES EXPORT_NAME Geometry)
+set_target_properties(TonbCAD2d PROPERTIES EXPORT_NAME CAD2d)
 set_target_properties(TonbCAD PROPERTIES EXPORT_NAME CAD)
 
 # Configure + install Config files in the same folder (note the capital T)
