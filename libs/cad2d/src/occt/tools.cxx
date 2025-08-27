@@ -13,7 +13,7 @@
 #include <opencascade/Standard_Failure.hxx>
 
 namespace tonb::cad2d::occt {
-    geometry::occt::Curve2d make_segment(const geometry::occt::Point2d& p0, const geometry::occt::Point2d& p1) {
+    geometry::occt::Curve2d Tools::make_segment(const geometry::occt::Point2d& p0, const geometry::occt::Point2d& p1) {
         try {
             using namespace geometry::occt;
             const GCE2d_MakeSegment maker(core::occt_point_2d_access::get(p0), core::occt_point_2d_access::get(p1));
@@ -22,7 +22,7 @@ namespace tonb::cad2d::occt {
             throw std::runtime_error(std::string("thrown OCCT exception: ") + err.GetMessageString());
         }
     }
-    geometry::occt::Curve2d make_circle_arc(const geometry::occt::Point2d& p0, const geometry::occt::Point2d& p1, const geometry::occt::Point2d& p2) {
+    geometry::occt::Curve2d Tools::make_circle_arc(const geometry::occt::Point2d& p0, const geometry::occt::Point2d& p1, const geometry::occt::Point2d& p2) {
         try {
             using namespace geometry::occt;
             const GCE2d_MakeArcOfCircle maker(core::occt_point_2d_access::get(p0), core::occt_point_2d_access::get(p1), core::occt_point_2d_access::get(p2));

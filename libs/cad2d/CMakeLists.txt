@@ -61,7 +61,6 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/point_fwd.hxx
         include/tonb/cad2d/transform.hxx
         include/tonb/cad2d/transform_fwd.hxx
-        include/tonb/cad2d/vector.hxx
         include/tonb/cad2d/vector_fwd.hxx
         include/tonb/cad2d/curve.hxx
         include/tonb/cad2d/curve_fwd.hxx

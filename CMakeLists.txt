@@ -169,7 +169,7 @@ endif ()
 target_include_directories(TonbSystem  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbBase    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbGeometry PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
-#target_include_directories(TnbCA2d PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbCAD2d PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbCAD PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 
 # Install the generated header

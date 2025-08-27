@@ -18,7 +18,7 @@ if (TONB_WITH_OCCT)
     endif ()
 
     set(OCCT_LIBS)
-    foreach (lib TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo)
+    foreach (lib TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
         if (TARGET OpenCASCADE::${lib})
             list(APPEND OCCT_LIBS OpenCASCADE::${lib})
         elseif(TARGET ${lib})
