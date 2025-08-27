@@ -51,6 +51,7 @@ set_target_properties(TonbCAD2d PROPERTIES
 target_sources(TonbCAD2d
         PRIVATE
         src/tools.cxx
+        src/occt/tools.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -67,6 +68,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/axis.hxx
         include/tonb/cad2d/axis_fwd.hxx
         include/tonb/cad2d/tools.hxx
+        include/tonb/cad2d/occt/tools.hxx
 )
 
 # Backend-specific sources

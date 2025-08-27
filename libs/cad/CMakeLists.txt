@@ -1,4 +1,4 @@
-# libs/geometry/CMakeLists.txt
+# libs/cad/CMakeLists.txt
 add_library(TonbCAD)
 add_library(Tonb::CAD ALIAS TonbCAD)
 
@@ -51,14 +51,35 @@ set_target_properties(TonbCAD PROPERTIES
 target_sources(TonbCAD
         PRIVATE
         src/occt/body.cxx
+        src/tools.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
         FILES
         include/tonb/cad/occt/body.hxx
         include/tonb/cad/occt/edge.hxx
+        include/tonb/cad/occt/face.hxx
+        include/tonb/cad/occt/location.hxx
         include/tonb/cad/occt/tools.hxx
+        include/tonb/cad/point.hxx
+        include/tonb/cad/vector.hxx
+        include/tonb/cad/bbox.hxx
+        include/tonb/cad/bbox_fwd.hxx
+        include/tonb/cad/curve.hxx
+        include/tonb/cad/curve_fwd.hxx
+        include/tonb/cad/edge.hxx
+        include/tonb/cad/edge_fwd.hxx
+        include/tonb/cad/surface.hxx
+        include/tonb/cad/surface_fwd.hxx
+        include/tonb/cad/location.hxx
+        include/tonb/cad/face.hxx
+        include/tonb/cad/face_fwd.hxx
+        include/tonb/cad/body.hxx
+        include/tonb/cad/body_fwd.hxx
+        include/tonb/cad/tools.hxx
         include/tonb/cad/module.hxx
+        include/tonb/cad/axis.hxx
+        include/tonb/cad/axis_fwd.hxx
 )
 
 # Backend-specific sources
@@ -67,6 +88,12 @@ target_sources(TonbCAD PRIVATE
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/body.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/edge.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/edge.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/face.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/face.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/location.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/location.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/tools.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/tools.cxx>
 )
 
 if (TNB_WITH_CEREAL)

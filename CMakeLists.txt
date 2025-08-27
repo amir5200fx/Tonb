@@ -33,6 +33,7 @@ option(TONB_WITH_OCCT "Build OCCT adaptors" ON)
 include(GNUInstallDirs)
 
 # Generate tonb/config.hxx with 0/1 macros
+set(DOXYGEN_OUT_DIR "${CMAKE_BINARY_DIR}/docs/doxygen")
 configure_file(
         ${CMAKE_SOURCE_DIR}/cmake/tonb_config.hxx.in
         ${CMAKE_BINARY_DIR}/generated/tonb/config.hxx
@@ -154,6 +155,10 @@ add_subdirectory(libs/geometry)
 add_subdirectory(libs/cad2d)
 add_subdirectory(libs/cad)
 add_subdirectory(demos)
+
+add_custom_target(TonbAll
+        DEPENDS TonbSystem TonbBase TonbGeometry TonbCAD2d TonbCAD
+)
 
 if (BUILD_TESTING)
     add_subdirectory(tests)

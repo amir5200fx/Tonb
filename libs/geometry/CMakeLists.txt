@@ -73,11 +73,17 @@ target_sources(TonbGeometry
         include/tonb/geometry/meta/triangulation_3d_fwd.hxx
         include/tonb/geometry/occt/bbox.hxx
         include/tonb/geometry/occt/curve.hxx
+        include/tonb/geometry/occt/curve_2d.hxx
+        include/tonb/geometry/occt/surface.hxx
         include/tonb/geometry/occt/tools.hxx
         include/tonb/geometry/occt/point.hxx
+        include/tonb/geometry/occt/point_2d.hxx
         include/tonb/geometry/occt/vector.hxx
+        include/tonb/geometry/occt/vector_2d.hxx
         include/tonb/geometry/occt/axis.hxx
+        include/tonb/geometry/occt/axis_2d.hxx
         include/tonb/geometry/occt/transform.hxx
+        include/tonb/geometry/occt/transform_2d.hxx
         #include/tonb/geometry/occt/adapters.hxx
 )
 
@@ -87,16 +93,28 @@ target_sources(TonbGeometry PRIVATE
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/bbox.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/curve.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/curve.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/curve_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/curve_2d.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/surface.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/surface.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/tools.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/tools.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/transform.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/transform.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/transform_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/transform_2d.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/point.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/point.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/point_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/point_2d.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/vector.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/vector.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/vector_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/vector_2d.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/axis.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/axis_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis_2d.cxx>
 )
 
 if (TNB_WITH_CEREAL)
