@@ -67,4 +67,11 @@ namespace tonb::base {
      */
     using size_type = std::size_t;
 }
+namespace tonb {
+    using index_t = base::index_t;
+    using uindex_t = base::uindex_t;
+
+    using count_t = base::count_t;
+    using size_type = base::size_type;
+}
 #endif //TONB_INDEX_TYPES_HXX
