@@ -3,6 +3,8 @@
 //
 #include <tonb/io/vtk/mesh_writer.hxx>
 
+#include <tonb/io/vtk/error.hxx>
+
 #include <vtkSmartPointer.h>
 #include <vtkPoints.h>
 #include <vtkCellArray.h>
@@ -12,11 +14,6 @@
 #include <vtkXMLPolyDataWriter.h>
 
 namespace tonb::io::vtk {
-
-    void vtk_throwing_error_callback(vtkObject *caller, unsigned long event_id, void * client_data, void* cell_data) {
-        const auto msg = static_cast<const char*>(cell_data);
-        throw std::runtime_error(std::string("VTK error: ") + (msg ? msg : ""));
-    }
 
     bool MeshWriter::write_quad_surface_vtp(const std::vector<std::array<real, 3> > &points,
                                             const std::vector<std::array<index_t, 4> > &quads,
@@ -46,23 +43,16 @@ namespace tonb::io::vtk {
         poly->SetPoints(vtkPts);
         poly->SetPolys(cells);
 
-        const auto cb = vtkSmartPointer<vtkCallbackCommand>::New();
-        cb->SetCallback(vtk_throwing_error_callback);
-
         // Write file
         const auto writer = vtkSmartPointer<vtkXMLPolyDataWriter>::New();
-        writer->AddObserver(vtkCommand::ErrorEvent, cb);
+        ErrorToException guard(writer);
 
         writer->SetFileName(file_path.c_str());
         writer->SetInputData(poly);
         writer->SetDataMode(binary ? vtkXMLWriter::Appended : vtkXMLWriter::Ascii);
         writer->SetCompressorTypeToZLib();
 
-        try {
-            return writer->Write() == 1;
-        } catch (const std::exception &e) {
-            throw std::runtime_error(std::string("MeshWriter::write_quad_surface_vtp: ") + e.what());
-        }
+        return writer->Write() == 1;
     }
 
 }
