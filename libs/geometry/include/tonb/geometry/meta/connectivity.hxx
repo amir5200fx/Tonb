@@ -28,6 +28,7 @@
  */
 
 #include <tonb/geometry/module.hxx>
+#include <tonb/base/index_types.hxx>
 #include <array>
 #include <vector>
 #include <cstddef>
@@ -46,7 +47,7 @@ namespace tonb::geometry::meta {
     template<std::size_t N, class Tag = void>
     class Connectivity {
     public:
-        using Array = std::array<std::size_t, N>;
+        using Array = std::array<index_t, N>;
     private:
         /*Private Data*/
 
