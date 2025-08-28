@@ -8,3 +8,4 @@ endif ()
 
 # Add more demo group here later (e.g. cad/, geometry/, ...)
 add_subdirectory(system)
+add_subdirectory(io)
