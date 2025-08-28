@@ -15,6 +15,16 @@ namespace tonb::io::vtk {
     using namespace tonb::base;
     class MeshWriter {
     public:
+
+        /**
+         * @brief Write a quad surface mesh to a .vtp file (VTK XML polyData).
+         *
+         * @param points    Vector of vertex positions [N x 3]
+         * @param quads     Vector of quads [M x 4], each entry is vertex index (0-based)
+         * @param file_path Output file path (should end with .vtp)
+         * @param binary    If true, use appended binary mode (smaller, faster); else ASCII
+         * @return true if write succeeded
+         */
         static TNBIO_EXPORT bool write_quad_surface_vtp(const std::vector<std::array<real, 3> > &points,
                                                         const std::vector<std::array<index_t, 4> > &quads,
                                                         const std::string &file_path, bool binary = true);
