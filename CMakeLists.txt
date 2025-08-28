@@ -151,6 +151,7 @@ include(CTest)
 # subprojects
 add_subdirectory(libs/system)
 add_subdirectory(libs/base)
+add_subdirectory(libs/io)
 add_subdirectory(libs/geometry)
 add_subdirectory(libs/cad2d)
 add_subdirectory(libs/cad)
@@ -167,6 +168,7 @@ endif ()
 # Make it visible to all Tonb targets during build
 # (do this once, after you've created your library targets)
 target_include_directories(TonbSystem  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbIO    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbBase    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbGeometry PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbCAD2d PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
@@ -183,6 +185,10 @@ set_target_properties(TonbSystem PROPERTIES
         SOVERSION "${_lib_sov}"
 )
 set_target_properties(TonbBase PROPERTIES
+        VERSION "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
+set_target_properties(TonbIO PROPERTIES
         VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
 )
@@ -203,7 +209,7 @@ set_target_properties(TonbCAD PROPERTIES
 include(CMakePackageConfigHelpers)
 
 # Install the library once (from the root), and attach it to export set "TonbTargets"
-install(TARGETS TonbSystem TonbBase TonbGeometry TonbCAD2d TonbCAD
+install(TARGETS TonbSystem TonbBase TonbIO TonbGeometry TonbCAD2d TonbCAD
         EXPORT TonbTargets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
