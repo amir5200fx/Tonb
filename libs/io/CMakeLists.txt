@@ -52,12 +52,14 @@ target_sources(TonbIO
         PRIVATE
         src/tmp.cxx
         src/vtk/mesh_writer.cxx
+        src/vtk/mesh_reader.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
         FILES
         include/tonb/io/module.hxx
         include/tonb/io/vtk/mesh_writer.hxx
+        include/tonb/io/vtk/mesh_reader.hxx
 )
 
 # Backend-specific sources
