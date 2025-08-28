@@ -28,7 +28,8 @@ std::size_t tonb::geometry::meta::find_max_id(const std::vector<Connectivity<N, 
 }
 
 template<std::size_t N, class Tag>
-std::vector<tonb::geometry::meta::Connectivity<N, Tag> > tonb::geometry::meta::merge(const std::vector<Connectivity<N, Tag> > &components1, const std::vector<Connectivity<N, Tag> > &components2) {
+std::vector<tonb::geometry::meta::Connectivity<N, Tag> > tonb::geometry::meta::merge(
+    const std::vector<Connectivity<N, Tag> > &components1, const std::vector<Connectivity<N, Tag> > &components2) {
     const auto max_id = find_max_id(components1);
     std::vector<Connectivity<N, Tag>> merged;
     merged.reserve(components1.size() + components2.size());
