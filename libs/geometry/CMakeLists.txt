@@ -55,6 +55,8 @@ target_sources(TonbGeometry
         src/meta/box2d.cxx
         src/meta/box3d.cxx
         src/meta/connectivity.cxx
+        src/meta/quad_mesh_3d.cxx
+        src/meta/meta_impl.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -71,6 +73,10 @@ target_sources(TonbGeometry
         include/tonb/geometry/meta/triangulation_2d_fwd.hxx
         include/tonb/geometry/meta/triangulation_3d.hxx
         include/tonb/geometry/meta/triangulation_3d_fwd.hxx
+        include/tonb/geometry/meta/quad_mesh_2d.hxx
+        include/tonb/geometry/meta/quad_mesh_2d_fwd.hxx
+        include/tonb/geometry/meta/quad_mesh_3d.hxx
+        include/tonb/geometry/meta/quad_mesh_3d_fwd.hxx
         include/tonb/geometry/occt/bbox.hxx
         include/tonb/geometry/occt/curve.hxx
         include/tonb/geometry/occt/curve_2d.hxx
@@ -137,7 +143,9 @@ target_include_directories(TonbGeometry PUBLIC
         $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(TonbGeometry
-        PUBLIC Tonb::Base
+        PUBLIC
+        Tonb::Base
+        Tonb::IO
 )
 
 set_target_properties(TonbGeometry PROPERTIES
