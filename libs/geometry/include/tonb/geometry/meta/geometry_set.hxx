@@ -153,8 +153,8 @@ namespace tonb::geometry::meta {
 
         // io functions
 
-        void export_to_plt(std::ostream& os) const noexcept;
-        void export_to_vtk(std::ostream& os) const noexcept;
+        void export_to_plt(std::ostream& os) const;
+        void export_to_vtk(const std::string& path, bool binary = true) const;
     };
 }
 #endif //TONB_GEOMETRY_META_TOPOLOGY_HXX
