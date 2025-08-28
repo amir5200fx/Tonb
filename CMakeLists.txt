@@ -22,7 +22,7 @@ project(Tonb
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
 option(TNB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
-option(BUILD_TESTING "Running the tests" OFF)
+option(BUILD_TESTING "Running the tests" ON)
 
 option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
 
@@ -162,8 +162,12 @@ add_custom_target(TonbAll
 )
 
 if (BUILD_TESTING)
+    message(STATUS "Tests are going to be build")
     add_subdirectory(tests)
+else ()
+    message(STATUS "No test are going to be build")
 endif ()
+#add_subdirectory(tests)
 
 # Make it visible to all Tonb targets during build
 # (do this once, after you've created your library targets)
