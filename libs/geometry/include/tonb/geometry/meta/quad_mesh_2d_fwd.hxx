@@ -5,6 +5,7 @@
 #ifndef TONB_GEOMETRY_META_QUAD_MESH_2D_FWD_HXX
 #define TONB_GEOMETRY_META_QUAD_MESH_2D_FWD_HXX
 #include <cstdint>
+#include <cstddef>
 /**
  * @file
  * @brief Forward declarations for 2D quad mesh types
@@ -26,7 +27,7 @@ namespace tonb::geometry {
     class Pnt2d;
     namespace meta {
         // Forward Declarations
-        template<std::size_t, class Tag>
+        template<std::size_t N, class Tag>
         class Connectivity;
 
         template<class Point, class IDs>

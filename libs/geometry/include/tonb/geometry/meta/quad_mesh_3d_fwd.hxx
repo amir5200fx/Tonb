@@ -27,7 +27,7 @@ namespace tonb::geometry {
     class Pnt3d;
     namespace meta {
         // Forward Declarations
-        template<std::size_t, class Tag>
+        template<std::size_t N, class Tag>
         class Connectivity;
 
         template<class Point, class IDs>
