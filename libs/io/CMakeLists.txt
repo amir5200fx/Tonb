@@ -50,7 +50,6 @@ set_target_properties(TonbIO PROPERTIES
 
 target_sources(TonbIO
         PRIVATE
-        src/tmp.cxx
         src/vtk/mesh_writer.cxx
         src/vtk/mesh_reader.cxx
         PUBLIC
@@ -83,7 +82,52 @@ else ()
 endif ()
 
 # ---- VTK ------------------
-find_package(VTK 9.0 CONFIG REQUIRED COMPONENTS
+# ---- VTK (works with 8.2 and 9.x) ---------------------------------
+# First, probe VTK without components to learn its version
+find_package(VTK QUIET)
+if (NOT VTK_FOUND)
+    message(FATAL_ERROR "VTK not found")
+endif()
+
+# Surface major version for optional source guards
+if (DEFINED VTK_MAJOR_VERSION)
+    set(TONB_VTK_MAJOR ${VTK_MAJOR_VERSION})
+elseif (DEFINED VTK_VERSION)
+    string(REGEX MATCH "^[0-9]+" TONB_VTK_MAJOR "${VTK_VERSION}")
+endif()
+if (TONB_VTK_MAJOR)
+    target_compile_definitions(TonbIO PUBLIC TONB_VTK_MAJOR=${TONB_VTK_MAJOR})
+endif()
+
+if (VTK_VERSION VERSION_LESS "8.90.0")
+    # ----- Legacy VTK 8.x style (Windows: 8.2) -----
+    message(STATUS "Configuring for legacy VTK ${VTK_VERSION}")
+    # Re-run REQUIRED without components (VTK 8.x component names differ)
+    find_package(VTK REQUIRED)
+    include(${VTK_USE_FILE})
+    target_link_libraries(TonbIO PRIVATE ${VTK_LIBRARIES})
+else()
+    # ----- Modern VTK 9.x style (Linux: 9.5) -----
+    message(STATUS "Configuring for modern VTK ${VTK_VERSION}")
+    # Now we can safely request the exact modules we use
+    find_package(VTK REQUIRED COMPONENTS
+            CommonCore
+            CommonDataModel
+            FiltersCore
+            IOXML
+    )
+    target_link_libraries(TonbIO PUBLIC
+            VTK::CommonCore
+            VTK::CommonDataModel
+            VTK::FiltersCore
+            VTK::IOXML
+    )
+    if (COMMAND vtk_module_autoinit)
+        vtk_module_autoinit(TARGETS TonbIO MODULES ${VTK_LIBRARIES})
+    endif()
+endif()
+
+#[[find_package(VTK 9.0 CONFIG REQUIRED COMPONENTS
         CommonCore
         CommonDataModel
         FiltersCore
@@ -96,7 +140,7 @@ target_link_libraries(TonbIO
         VTK::CommonDataModel
         VTK::FiltersCore
         VTK::IOXML
-)
+)]]
 
 target_include_directories(TonbIO PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

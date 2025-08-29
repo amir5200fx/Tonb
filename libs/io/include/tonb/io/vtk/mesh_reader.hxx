@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <array>
+#include <string>
 
 namespace tonb::io::vtk {
     class MeshReader {

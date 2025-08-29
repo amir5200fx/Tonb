@@ -52,6 +52,7 @@ target_sources(TonbCAD
         PRIVATE
         src/occt/body.cxx
         src/tools.cxx
+        src/occt/impl.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include

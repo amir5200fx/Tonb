@@ -22,7 +22,7 @@ project(Tonb
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
 option(TNB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
-option(BUILD_TESTING "Running the tests" ON)
+option(BUILD_TESTING "Running the tests" OFF)
 
 option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
 
@@ -158,14 +158,14 @@ add_subdirectory(libs/cad)
 add_subdirectory(demos)
 
 add_custom_target(TonbAll
-        DEPENDS TonbSystem TonbBase TonbGeometry TonbCAD2d TonbCAD
+        DEPENDS TonbSystem TonbBase TonbGeometry TonbCAD2d TonbCAD TonbIO
 )
 
 if (BUILD_TESTING)
-    message(STATUS "Tests are going to be build")
+    message(STATUS "Tests are going to be built")
     add_subdirectory(tests)
 else ()
-    message(STATUS "No test are going to be build")
+    message(STATUS "No test are going to be built")
 endif ()
 #add_subdirectory(tests)
 
@@ -231,6 +231,7 @@ set_target_properties(TonbBase PROPERTIES EXPORT_NAME Base)
 set_target_properties(TonbGeometry PROPERTIES EXPORT_NAME Geometry)
 set_target_properties(TonbCAD2d PROPERTIES EXPORT_NAME CAD2d)
 set_target_properties(TonbCAD PROPERTIES EXPORT_NAME CAD)
+set_target_properties(TonbIO PROPERTIES EXPORT_NAME IO)
 
 # Configure + install Config files in the same folder (note the capital T)
 configure_package_config_file(

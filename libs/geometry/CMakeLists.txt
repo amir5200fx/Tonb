@@ -57,15 +57,21 @@ target_sources(TonbGeometry
         src/meta/connectivity.cxx
         src/meta/quad_mesh_3d.cxx
         src/meta/meta_impl.cxx
+        src/occt/impl.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
         FILES
         include/tonb/geometry/module.hxx
+        include/tonb/geometry/cartesian_direction.hxx
         include/tonb/geometry/pnt_2d.hxx
         include/tonb/geometry/pnt_3d.hxx
         include/tonb/geometry/meta/box.hxx
         include/tonb/geometry/meta/box_i.hxx
+        include/tonb/geometry/meta/box_2d.hxx
+        include/tonb/geometry/meta/box_2d_fwd.hxx
+        include/tonb/geometry/meta/box_3d.hxx
+        include/tonb/geometry/meta/box_3d_fwd.hxx
         include/tonb/geometry/meta/geometry_set.hxx
         include/tonb/geometry/meta/connectivity.hxx
         include/tonb/geometry/meta/connectivity_i.hxx
@@ -77,6 +83,7 @@ target_sources(TonbGeometry
         include/tonb/geometry/meta/quad_mesh_2d_fwd.hxx
         include/tonb/geometry/meta/quad_mesh_3d.hxx
         include/tonb/geometry/meta/quad_mesh_3d_fwd.hxx
+        include/tonb/geometry/occt/occt.hxx
         include/tonb/geometry/occt/bbox.hxx
         include/tonb/geometry/occt/curve.hxx
         include/tonb/geometry/occt/curve_2d.hxx

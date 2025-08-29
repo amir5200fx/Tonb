@@ -16,6 +16,7 @@ target_sources(TonbBase
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
         FILES
         include/tonb/base/module.hxx
+        include/tonb/base/traits/traits.hxx
         include/tonb/base/index_tag.hxx
         include/tonb/base/precision.hxx
         include/tonb/base/index_types.hxx
