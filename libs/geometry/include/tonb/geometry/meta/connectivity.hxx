@@ -71,7 +71,7 @@ namespace tonb::geometry::meta {
             for (auto x : components_) if (x == i) { return true; } return false;
         }
         void reverse();
-        TNBGEOM_ND_EXPORT Connectivity reversed() const noexcept;
+        TNB_NODISCARD Connectivity reversed() const noexcept;
 
         friend constexpr bool operator==(const Connectivity & lhs, const Connectivity & rhs) = default;
     };
