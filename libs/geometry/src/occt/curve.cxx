@@ -8,8 +8,10 @@
 #include <tonb/geometry/occt/curve.hxx>
 #include <tonb/geometry/occt/core/adapters.hxx>
 #include <tonb/geometry/occt/core/curve_helpers.hxx>
+#include <tonb/geometry/occt/core/point_helpers.hxx>
 
 // OCCT
+#include <opencascade/GeomAPI_ProjectPointOnCurve.hxx>
 #include <opencascade/Geom_Curve.hxx>
 #include <opencascade/Geom_BoundedCurve.hxx>
 #include <opencascade/Geom_TrimmedCurve.hxx>
@@ -63,6 +65,33 @@ namespace tonb::geometry::occt {
         if (t.IsNull()) return {};
         return Curve{std::make_shared<Impl>(Impl{std::move(t)})};
     }
+
+    Curve Curve::reversed() const {
+        if (!is_valid()) return {};
+        auto r = pimpl_->h->Reversed();
+        if (r.IsNull()) return {};
+        return Curve{std::make_shared<Impl>(Impl{std::move(r)})};
+    }
+    void Curve::reverse() const {
+        if (!is_valid()) return;
+        pimpl_->h->Reverse();
+    }
+
+    Curve::MinDistanceProjected Curve::project(const Point & pt) const {
+        if (!is_valid()) {
+            throw std::runtime_error("Curve::project(): Curve is not valid");
+        }
+        GeomAPI_ProjectPointOnCurve projector;
+        projector.Init(occt::core::occt_point_access::get(pt), pimpl_->h);
+        if (projector.NbPoints() > 0) {
+            return {
+                core::occt_point_access::make(projector.NearestPoint()),
+                static_cast<real>(projector.LowerDistanceParameter())
+            };
+        }
+        throw std::runtime_error("Projection failed!");
+    }
+
 
     // ---- interop friend access
 

@@ -8,9 +8,11 @@
 #include <memory>
 #include <optional>
 #include <array>
+#include <vector>
 
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
+#include <tonb/geometry/occt/point_2d.hxx>
 
 namespace tonb::geometry::occt {
     // Forward Declarations
@@ -63,6 +65,12 @@ namespace tonb::geometry::occt {
 
         TNBGEOM_ND_EXPORT Curve2d mirrored(const Axis2d&) const;
         TNBGEOM_ND_EXPORT Curve2d mirrored(const Point2d&) const;
+
+        TNBGEOM_ND_EXPORT Curve2d reversed() const;
+        TNBGEOM_EXPORT void reverse() const;
+
+        struct MinDistanceProjected {Point2d point; real parameter;};
+        TNBGEOM_ND_EXPORT MinDistanceProjected project(const Point2d&) const;
 
     private:
 

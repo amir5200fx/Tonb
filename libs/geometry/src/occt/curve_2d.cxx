@@ -8,18 +8,18 @@
 #include <tonb/geometry/occt/curve_2d.hxx>
 #include <tonb/geometry/occt/core/adapters.hxx>
 #include <tonb/geometry/occt/core/curve_2d_helpers.hxx>
+#include <tonb/geometry/occt/core/point_2d_helpers.hxx>
+#include <tonb/geometry/occt/axis_2d.hxx>
+#include <tonb/geometry/occt/core/axis_2d_helpers.hxx>
 
 // OCCT
+#include <opencascade/Geom2dAPI_ProjectPointOnCurve.hxx>
 #include <opencascade/Geom2d_Curve.hxx>
 #include <opencascade/Geom2d_BoundedCurve.hxx>
 #include <opencascade/Geom2d_TrimmedCurve.hxx>
 #include <opencascade/Geom2dAdaptor_Curve.hxx>
 #include <opencascade/gp_Pnt2d.hxx>
 #include <opencascade/gp_Vec2d.hxx>
-
-#include <tonb/geometry/occt/axis_2d.hxx>
-#include <tonb/geometry/occt/core/axis_2d_helpers.hxx>
-#include <tonb/geometry/occt/core/point_2d_helpers.hxx>
 
 namespace tonb::geometry::occt {
 
@@ -83,6 +83,30 @@ namespace tonb::geometry::occt {
         auto mirrored = Handle(Geom2d_Curve)::DownCast(pimpl_->h->Mirrored(core::occt_point_2d_access::get(a)));
         if (mirrored.IsNull()) return {};
         return Curve2d{std::make_shared<Impl>(std::move(mirrored))};
+    }
+
+    Curve2d Curve2d::reversed() const {
+        if (!is_valid()) return {};
+        auto r = pimpl_->h->Reversed();
+        if (r.IsNull()) return {};
+        return Curve2d{std::make_shared<Impl>(std::move(r))};
+    }
+    void Curve2d::reverse() const {
+        if (!is_valid()) return;
+        pimpl_->h->Reverse();
+    }
+
+    Curve2d::MinDistanceProjected Curve2d::project(const Point2d& pt) const {
+        if (!is_valid()) throw std::runtime_error("Curve2d::project(): curve is not valid!");
+        Geom2dAPI_ProjectPointOnCurve projector;
+        projector.Init(occt::core::occt_point_2d_access::get(pt), pimpl_->h);
+        if (projector.NbPoints() > 0) {
+            return {
+                core::occt_point_2d_access::make(projector.NearestPoint()),
+                static_cast<real>(projector.LowerDistanceParameter())
+            };
+        }
+        throw std::runtime_error("Projection failed!");
     }
 }
 #else

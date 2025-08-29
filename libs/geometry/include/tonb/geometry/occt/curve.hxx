@@ -15,9 +15,11 @@
 #include <memory>
 #include <optional>
 #include <array>
+#include <vector>
 
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
+#include <tonb/geometry/occt/point.hxx>
 
 namespace tonb::geometry::occt {
     namespace core {
@@ -62,6 +64,11 @@ namespace tonb::geometry::occt {
         /// Returns a trimmed sub-curve [u0, u1]. If not supported, returns invalid.
         TNBGEOM_ND_EXPORT Curve trimmed(double u0, double u1) const;
 
+        TNBGEOM_ND_EXPORT Curve reversed() const;
+        TNBGEOM_EXPORT void reverse() const;
+
+        struct MinDistanceProjected {Point point; real parameter;};
+        TNBGEOM_ND_EXPORT MinDistanceProjected project(const Point&) const;
     private:
 
         /*Private Data*/
