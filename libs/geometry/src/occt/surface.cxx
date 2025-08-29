@@ -28,8 +28,8 @@ namespace tonb::geometry::occt {
         if (!is_valid()) return std::nullopt;
         Standard_Real u0, u1, v0, v1;
         pimpl_->h->Bounds(u0, u1, v0, v1);
-        const auto bs = Handle(Geom_BoundedSurface)::DownCast(pimpl_->h);
-        if (bs.IsNull()) return std::nullopt;
+        //const auto bs = Handle(Geom_BoundedSurface)::DownCast(pimpl_->h);
+        //if (bs.IsNull()) return std::nullopt;
         return std::make_tuple(static_cast<real>(u0), static_cast<real>(u1), static_cast<real>(v0),
                                static_cast<real>(v1));
     }
