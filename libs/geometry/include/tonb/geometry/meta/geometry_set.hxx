@@ -132,7 +132,9 @@ namespace tonb::geometry::meta {
         TNB_NODISCARD bool contains_bounding_box() const noexcept {return static_cast<bool>(box_);}
 
         const auto& points() const noexcept {return points_;}
+        auto& points_data() noexcept {return points_;}
         const auto& ids() const noexcept {return ids_;}
+        auto& ids_data() noexcept {return ids_;}
         const auto& bounding_box() const noexcept {return box_;}
 
         void set_bounding_box(std::shared_ptr<box_t> box) noexcept {box_ = std::move(box);}
