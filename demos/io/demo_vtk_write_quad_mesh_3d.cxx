@@ -57,7 +57,7 @@ int main(const int argc, char** argv) {
         };
 
         std::cout << "Writing: " << out_path << "\n";
-        if (!io::vtk::MeshWriter::write_quad_surface_vtp(points, quads, out_path)) {
+        if (!io::vtk::MeshWriter::write_quad_surface_vtp(points, quads, out_path.string())) {
             std::cerr << "Writer failed\n";
             return 2;
         }
