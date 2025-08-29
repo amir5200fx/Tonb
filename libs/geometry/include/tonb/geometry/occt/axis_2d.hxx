@@ -40,7 +40,7 @@ namespace tonb::geometry::occt {
 
         /// Factory from point and direction; direction will be normalized
         /// if |dir| ~ 0 returns an invalid axis;
-        static Axis2d from_point_dir(const Point2d& origin, const Vector2d& dir) noexcept;
+        static TNBGEOM_EXPORT Axis2d from_point_dir(const Point2d& origin, const Vector2d& dir) noexcept;
 
         /// True if the direction is non-zero (i.e, axis is meaningful).
         TNBGEOM_ND_EXPORT bool is_valid() const noexcept;
