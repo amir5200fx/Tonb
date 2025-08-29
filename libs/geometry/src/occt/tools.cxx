@@ -8,6 +8,7 @@
 #include <tonb/geometry/occt/curve.hxx>
 #include <tonb/geometry/occt/core/adapters.hxx>
 #include <tonb/geometry/occt/core/curve_helpers.hxx>
+#include <tonb/geometry/occt/core/point_helpers.hxx>
 
 #include <opencascade/GeomAPI_Interpolate.hxx>
 #include <opencascade/TColgp_HArray1OfPnt.hxx>
@@ -16,7 +17,7 @@
 
 namespace tonb::geometry::occt {
 
-    Curve Tools::interpolate(const std::vector<Pnt3d> &qs, const real tol) {
+    Curve Tools::interpolate(const std::vector<Point> &qs, const real tol) {
         if (qs.empty()) {
             throw std::runtime_error("Tools::interpolate: empty qs vector");
         }
@@ -25,7 +26,7 @@ namespace tonb::geometry::occt {
         }
         Handle(TColgp_HArray1OfPnt) points = new TColgp_HArray1OfPnt(1, static_cast<int>(qs.size()));
         for (int i = 0; i < qs.size(); i++) {
-            points->SetValue(i + 1, core::to_gp(qs[i]));
+            points->SetValue(i + 1, core::occt_point_access::get(qs[i]));
         }
         try {
             GeomAPI_Interpolate app(points, false, tol);
