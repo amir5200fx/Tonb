@@ -7,17 +7,17 @@
 
 namespace tonb::geometry::occt {
     struct Curve2d::Impl {
-        Handle(Geom2d_Curve) h;
+        opencascade::handle<Geom2d_Curve> h;
     };
 }
 
 namespace tonb::geometry::occt::core {
     struct occt_curve_2d_access {
-        static Curve2d make(const Handle(Geom2d_Curve)& h) {
+        static Curve2d make(const opencascade::handle<Geom2d_Curve>& h) {
             if (h.IsNull()) return {};
             return Curve2d(std::make_shared<Curve2d::Impl>(Curve2d::Impl{h}));
         }
-        static Handle(Geom2d_Curve) get(const Curve2d& curve) {
+        static opencascade::handle<Geom2d_Curve> get(const Curve2d& curve) {
             return (curve.pimpl_ ? curve.pimpl_->h : nullptr);
         }
     };
