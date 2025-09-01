@@ -1,7 +1,8 @@
 @PACKAGE_INIT@
 include(CMakeFindDependencyMacro)
 
-set(TONB_WITH_OCCT @TONB_WIT_OCCT@)
+set(TONB_WITH_OCCT @TONB_WITH_OCCT@)
+set(TONB_WITH_CGAL @TONB_WITH_CGAL@)
 
 if (TONB_WITH_OCCT)
     find_dependency(OpenCASCADE CONFIG REQUIRED
