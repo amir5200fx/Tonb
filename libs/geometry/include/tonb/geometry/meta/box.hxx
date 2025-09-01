@@ -65,6 +65,8 @@ namespace tonb::geometry::meta {
 
         struct Utility;
 
+        static constexpr int DimI = static_cast<int>(Point::dim);
+
     private:
         /*Private Data*/
 
@@ -155,21 +157,21 @@ namespace tonb::geometry::meta {
         real volume() const noexcept;
 
         template<class U = void>
-        inline EnableIf_t< is_two_dimension< static_cast<int>(Point::dim) >::value, U >
+        inline EnableIf_t< is_two_dimension<DimI>::value, U >
         extend(const real dx, const real dy) {extend(dx, dy); return U{};}
         template<class U = Box>
-        EnableIf_t<is_two_dimension<static_cast<int>(Point::dim)>::value, U>
+        EnableIf_t<is_two_dimension<DimI>::value, U>
         extended(real dx, real dy) const {return extended({dx, dy});}
 
         template<class U = void>
-        EnableIf_t<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
+        EnableIf_t<is_three_dimension<DimI>::value, U>
         extend(real dx, real dy, real dz) {
             extend({dx, dy, dz});
             return U{};
         }
 
         template<class U = Box>
-        EnableIf_t<is_three_dimension<static_cast<int>(Point::dim)>::value, U>
+        EnableIf_t<is_three_dimension<DimI>::value, U>
         extended(real dx, real dy, real dz) const {return extended({dx, dy, dz});}
 
         Box extended(const std::array<real, Point::dim>& components) const;
