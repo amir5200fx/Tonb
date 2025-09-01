@@ -2,10 +2,11 @@ FULL_PATH_NAMES        = NO
 STRIP_FROM_PATH        = "@CMAKE_SOURCE_DIR@"
 SOURCE_BROWSER         = YES
 
-INPUT                  = "@CMAKE_SOURCE_DIR@/libs/system/include" \
-                         "@CMAKE_SOURCE_DIR@/libs/base/include"   \
-                         "@CMAKE_SOURCE_DIR@/libs/geometry/include" \
-                         "@CMAKE_SOURCE_DIR@/libs/cad/include"
+INPUT                  = "@CMAKE_SOURCE_DIR@/libs/system/include"       \
+                         "@CMAKE_SOURCE_DIR@/libs/base/include"         \
+                         "@CMAKE_SOURCE_DIR@/libs/geometry/include"     \
+                         "@CMAKE_SOURCE_DIR@/libs/cad/include"          \
+                         "@CMAKE_SOURCE_DIR@/libs/io/include"
 FILE_PATTERNS          = *.h *.hpp *.hxx *.hh
 RECURSIVE              = YES
 
@@ -27,6 +28,7 @@ GENERATE_XML           = YES
 XML_OUTPUT             = xml
 GENERATE_LATEX         = NO          # speed up if you don't need PDFs
 GENERATE_TREEVIEW      = YES
+OUTPUT_DIRECTORY       = "@CMAKE_BINARY_DIR@/docs/doxygen"
 
 # Graphviz / dot
 HAVE_DOT               = YES
@@ -58,6 +60,7 @@ PREDEFINED             += TNBGEOM_ND_EXPORT=
 PREDEFINED             += TNBGEOM_EXPORT=
 PREDEFINED             += TNBCAD_ND_EXPORT=
 PREDEFINED             += TNBCAD_EXPORT=
+PREDEFINED             += TNBIO_EXPORT=
 PREDEFINED             += Handle=
 
 # Optional: make Doxygen friendlier with heavy templates (requires Doxygen built with libclang)

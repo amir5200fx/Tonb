@@ -1,5 +1,6 @@
 # docs/sphinx/conf.py
-import os, pathlib
+import os
+import pathlib
 
 project = "Tonb"
 release = "0.19.0"
@@ -10,39 +11,30 @@ html_theme = "furo"
 myst_enable_extensions = ["colon_fence"]
 
 here = pathlib.Path(__file__).resolve().parent
+repo_root = here.parent  # docs/
+# If your repo layout is <repo>/docs/sphinx/conf.py, .parent is docs/
+# build dir default: <repo>/build/docs/doxygen/xml
+default_xml = repo_root.parent / "build" / "docs" / "doxygen" / "xml"
 
 # 1) Prefer CMake-provided env var
 xml_dir = os.environ.get("DOXYGEN_XML_DIR")
-
-# 2) Otherwise, try common fallbacks relative to this file
 if not xml_dir:
-    candidates = [
-        here.parent / "doxygen" / "xml",                  # in-source doxygen run
-        here.parent.parent / "build" / "docs" / "doxygen" / "xml",  # rare in-source build/
-    ]
-    for c in candidates:
-        if c.exists():
-            xml_dir = str(c)
-            break
+    # 2) Fall back to the default build path
+    xml_dir = str(default_xml)
 
-if not xml_dir or not os.path.exists(xml_dir):
-    raise RuntimeError(f"Cannot find Doxygen XML (set DOXYGEN_XML_DIR). Tried: {xml_dir}")
+xml_dir_path = pathlib.Path(xml_dir)
+if not (xml_dir_path / "index.xml").exists():
+    raise RuntimeError(f"Cannot find Doxygen XML (set DOXYGEN_XML_DIR). Tried: {xml_dir_path}")
 
-breathe_projects = {"Tonb": xml_dir}
+breathe_projects = {"Tonb": str(xml_dir_path)}
 breathe_default_project = "Tonb"
 
-# Make these macros harmless in signatures
-cpp_id_attributes = ['TNBSYSTEM_EXPORT',
-                     'TNB_NODISCARD',
-                     'TNBSYSTEM_ND_EXPORT',
-                     'TNBBASE_ND_EXPORT',
-                     'TNBBASE_EXPORT',
-                     'TNBGEOM_ND_EXPORT',
-                     'TNBGEOM_EXPORT',
-                     'TNBCAD_ND_EXPORT',
-                     'TNBCAD_EXPORT',
-                     'Handle']
+# Optional: attribute names to ignore in C/C++ signatures so Breathe doesn't choke
+cpp_id_attributes = [
+    'TNBSYSTEM_EXPORT', 'TNB_NODISCARD', 'TNBSYSTEM_ND_EXPORT',
+    'TNBBASE_ND_EXPORT', 'TNBBASE_EXPORT',
+    'TNBGEOM_ND_EXPORT', 'TNBGEOM_EXPORT',
+    'TNBCAD_ND_EXPORT', 'TNBCAD_EXPORT',
+    'TNBIO_EXPORT', 'Handle'
+]
 c_id_attributes = ['TNBSYSTEM_EXPORT']
-
-
-
