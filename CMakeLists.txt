@@ -30,6 +30,12 @@ option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
 
 option(TONB_WITH_OCCT "Build OCCT adaptors" ON)
 
+# ---- CGAL ----
+option(TONB_WITH_CGAL "Enable CGAL-based functions" ON)
+
+# ---- EIGEN ----
+option(TONB_WITH_EIGEN "Enable Eigen-backed implementations" ON)
+
 include(GNUInstallDirs)
 
 # Generate tonb/config.hxx with 0/1 macros

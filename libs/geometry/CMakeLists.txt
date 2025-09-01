@@ -42,6 +42,61 @@ if (TONB_WITH_OCCT)
     )
 endif ()
 
+if (TONB_WITH_CGAL)
+    # Prefer config package (vcpkg/conan/homebrew installs ship them)
+    find_package(CGAL CONFIG REQUIRED)
+    if (NOT CGAL_FOUND)
+        find_package(CGAL QUIET)
+    endif ()
+
+    if (NOT CGAL_FOUND)
+        message(FATAL_ERROR "CGAL not found. Install with:
+- vcpkg: vcpkg install cgal
+- ubuntu: sudo apt-get install libcgal-dev
+- macOS: brew install cgal")
+    endif ()
+
+    # Keep the pattern you use for OCCT: provide an interface adapter target
+    add_library(TonbCgalAdapters INTERFACE)
+    add_library(Tonb::CgalAdapters ALIAS TonbCgalAdapters)
+    target_link_libraries(TonbCgalAdapters INTERFACE Tonb::Geometry)
+    target_compile_definitions(TonbCgalAdapters INTERFACE TONB_HAS_CGAL_ADAPTERS=1)
+
+    # Link CGAL into TonbGeometry privately (your headers remain CGAL-free)
+    target_link_libraries(TonbGeometry PRIVATE CGAL::CGAL)
+
+    # Install the interface target (like OCCT)
+    install(TARGETS TonbCgalAdapters EXPORT TonbTargets)
+
+endif ()
+
+if (TONB_WITH_EIGEN)
+    find_package(Eigen3 CONFIG REQUIRED)
+    if (NOT Eigen3_FOUND)
+        find_package(Eigen3 QUIET NO_MODULE)
+    endif ()
+
+    if (NOT Eigen3_FOUND)
+        message(FATAL_ERROR "Eigen3 not found. Install with:
+- vcpkg: vcpkg install eigen3
+- ubuntu: sudo apt-get install libeigen3-dev
+- macOS: brew install eigen")
+    endif ()
+
+    # Interface adapter like CGAL
+    add_library(TonbEigenAdapters INTERFACE)
+    add_library(Tonb::EigenAdapters ALIAS TonbEigenAdapters)
+
+    target_link_libraries(TonbEigenAdapters INTERFACE Tonb::Geometry)
+    target_compile_definitions(TonbEigenAdapters INTERFACE TONB_HAS_EIGEN_ADAPTERS=1)
+
+    # Keep Eigen private to TonbGeometry
+    target_link_libraries(TonbGeometry PRIVATE Eigen3::Eigen)
+
+    install(TARGETS TonbEigenAdapters EXPORT TonbTargets)
+endif ()
+
+
 # My library target
 set_target_properties(TonbGeometry PROPERTIES
         VERSION ${TONB_SEMVER_CORE}         # e.g. 0.18.0 -> libTonbGeometry.so.0.18.0
@@ -52,12 +107,16 @@ target_sources(TonbGeometry
         PRIVATE
         src/pnt_2d.cxx
         src/pnt_3d.cxx
+        src/tools.cxx
         src/meta/box2d.cxx
         src/meta/box3d.cxx
         src/meta/connectivity.cxx
         src/meta/quad_mesh_3d.cxx
         src/meta/meta_impl.cxx
         src/occt/impl.cxx
+        src/triangulation/delaunay_2d.cxx
+        src/spatial/impl.cxx
+        src/field/mesh_interpolator_2d.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -66,6 +125,8 @@ target_sources(TonbGeometry
         include/tonb/geometry/cartesian_direction.hxx
         include/tonb/geometry/pnt_2d.hxx
         include/tonb/geometry/pnt_3d.hxx
+        include/tonb/geometry/tools.hxx
+        include/tonb/geometry/tools_i.hxx
         include/tonb/geometry/meta/box.hxx
         include/tonb/geometry/meta/box_i.hxx
         include/tonb/geometry/meta/box_2d.hxx
@@ -97,7 +158,10 @@ target_sources(TonbGeometry
         include/tonb/geometry/occt/axis_2d.hxx
         include/tonb/geometry/occt/transform.hxx
         include/tonb/geometry/occt/transform_2d.hxx
-        #include/tonb/geometry/occt/adapters.hxx
+        include/tonb/geometry/triangulation/delaunay_2d.hxx
+        include/tonb/geometry/spatial/grid_2d.hxx
+        include/tonb/geometry/spatial/cgal/balanced_quad_tree.hxx
+        include/tonb/geometry/field/mesh_interpolator_2d.hxx
 )
 
 # Backend-specific sources
@@ -128,6 +192,12 @@ target_sources(TonbGeometry PRIVATE
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/axis_2d.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis_2d.cxx>
+)
+
+# Backend-specific sources (CGAL quadtree on/off)
+target_sources(TonbGeometry PRIVATE
+        $<$<BOOL:${TONB_WITH_CGAL}>:${CMAKE_CURRENT_SOURCE_DIR}/src/spatial/cgal/balanced_quad_tree.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_CGAL}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/spatial/cgal/null/balanced_quad_tree.cxx>
 )
 
 if (TNB_WITH_CEREAL)
