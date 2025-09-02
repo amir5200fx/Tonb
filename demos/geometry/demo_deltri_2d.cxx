@@ -10,11 +10,11 @@
 #include <tonb/geometry/pnt_2d.hxx>
 
 #include <vector>
-#include <array>
 #include <random>
 #include <fstream>
 #include <iostream>
 #include <unordered_map>
+#include <numbers>
 
 using namespace tonb;
 using namespace tonb::geometry;
@@ -48,7 +48,7 @@ static std::vector<Pnt2d> make_points() {
     // circle
     const int nCircle = 64;
     for (int i = 0; i < nCircle; ++i) {
-        double t = (2.0 * M_PI * i) / nCircle;
+        const double t = (2.0 * std::numbers::pi * i) / nCircle;
         double x = std::cos(t) + uni(rng);
         double y = std::sin(t) + uni(rng);
         pts.emplace_back(x, y);
@@ -57,8 +57,8 @@ static std::vector<Pnt2d> make_points() {
     // random interior
     std::uniform_real_distribution<double> uni01(0.0, 1.0);
     for (int i = 0; i < 80; ++i) {
-        double r = 0.8 * std::sqrt(uni01(rng));     // pull points inward
-        double t = 2.0 * M_PI * uni01(rng);
+        const double r = 0.8 * std::sqrt(uni01(rng));     // pull points inward
+        const double t = 2.0 * std::numbers::pi * uni01(rng);
         pts.emplace_back(r * std::cos(t), r * std::sin(t));
     }
 
@@ -89,7 +89,7 @@ static int count_boundary_edges(const triangulation::Delaunay2d::TriMesh& m) {
 
     auto add_edge = [&](int i, int j) {
         if (i > j) std::swap(i, j);
-        Edge e{i, j};
+        const Edge e{i, j};
         counts[e] += 1;
     };
 
@@ -119,7 +119,7 @@ int main() {
     Options opt;
     opt.build_neighbors = true;
     opt.robust_predicates = true;
-    auto mesh = Delaunay2d::triangulate(pts, opt);
+    const auto mesh = Delaunay2d::triangulate(pts, opt);
 
     // 3) Report
     std::cout << "Points:     " << mesh.points.size() << "\n";
