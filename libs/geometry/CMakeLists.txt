@@ -144,6 +144,7 @@ target_sources(TonbGeometry
         include/tonb/geometry/meta/quad_mesh_2d_fwd.hxx
         include/tonb/geometry/meta/quad_mesh_3d.hxx
         include/tonb/geometry/meta/quad_mesh_3d_fwd.hxx
+        include/tonb/geometry/occt/precision.hxx
         include/tonb/geometry/occt/occt.hxx
         include/tonb/geometry/occt/bbox.hxx
         include/tonb/geometry/occt/curve.hxx
@@ -166,6 +167,8 @@ target_sources(TonbGeometry
 
 # Backend-specific sources
 target_sources(TonbGeometry PRIVATE
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/precision.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/precision.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/bbox.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/bbox.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/curve.cxx>
