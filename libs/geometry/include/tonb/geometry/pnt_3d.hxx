@@ -44,6 +44,8 @@ namespace tonb::geometry {
         inline static constexpr int nb_cmpts = 3;
         static TNBGEOM_EXPORT const Pnt3d null;
 
+        using ptType = Pnt3d;
+
         enum {
             dim = 3
         };
