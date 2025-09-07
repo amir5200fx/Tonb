@@ -1,12 +1,5 @@
-//
-// Created by amir on 8/31/25.
-//
-#pragma once
-#ifndef TONB_GEOMETRY_SPATIAL_GRID_2D_HXX
-#define TONB_GEOMETRY_SPATIAL_GRID_2D_HXX
-
 /**
- * @file grid_2d.hxx
+* @file grid_2d.hxx
  * @brief A lightweight uniform grid (spatial hash) for 2D point-like items.
  *
  * @details
@@ -54,6 +47,9 @@
  * }
  * @endcode
  */
+#pragma once
+#ifndef TONB_GEOMETRY_SPATIAL_GRID_2D_HXX
+#define TONB_GEOMETRY_SPATIAL_GRID_2D_HXX
 
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
