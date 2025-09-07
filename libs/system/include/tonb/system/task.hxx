@@ -7,7 +7,7 @@
 
 #include <tonb/system/module.hxx>
 #include <tonb/system/run_context.hxx>
-#include <tonb/system/log.hxx-backup>
+#include <tonb/system/log.hxx>
 
 #include <atomic>
 #include <chrono>
