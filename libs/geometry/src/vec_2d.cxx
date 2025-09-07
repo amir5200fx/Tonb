@@ -2,6 +2,7 @@
 // Created by amir on 8/25/25.
 //
 #include <cmath>
+#include <stdexcept>
 #include <tonb/geometry/vec_2d.hxx>
 
 namespace tonb::geometry {

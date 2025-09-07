@@ -8,6 +8,10 @@
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
 
+#include <array>
+#include <limits>
+#include <algorithm>
+
 /**
  * @file
  * @brief 3D vector type with basic linear algebra utilities.

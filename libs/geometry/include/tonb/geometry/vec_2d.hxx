@@ -68,6 +68,9 @@
  *
  */
 
+#include <array>
+#include <limits>
+
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
 
@@ -110,7 +113,7 @@ namespace tonb::geometry {
         void set_v(const real v) noexcept {components_[1] = v;}
 
         TNB_NODISCARD constexpr real operator[](const size_t i) const noexcept {return components_[i];}
-        TNB_NODISCARD constexpr real& operator[](const size_t i) noexcept {return components_[i];}
+        TNB_NODISCARD real& operator[](const size_t i) noexcept {return components_[i];}
 
         // common operators
         TNBGEOM_EXPORT Vec2d& operator+=(const Vec2d& rhs) noexcept;
