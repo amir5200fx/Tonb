@@ -73,6 +73,7 @@ namespace tonb::base {
 
         TNB_NODISCARD bool empty() const noexcept;
         TNB_NODISCARD bool inside(T x) const noexcept;
+        TNB_NODISCARD T mid() const noexcept;
 
         void set(T lower, T upper);
     };

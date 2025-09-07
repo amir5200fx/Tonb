@@ -20,6 +20,11 @@ bool tonb::base::Range<T>::inside(T x) const noexcept{
 }
 
 template<class T>
+T tonb::base::Range<T>::mid() const noexcept {
+    return 0.5 * (data_.first + data_.second);
+}
+
+template<class T>
 void tonb::base::Range<T>::set(T lower, T upper) {
     data_.first = lower;
     data_.second = upper;
