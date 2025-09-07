@@ -371,52 +371,6 @@ namespace tonb::geometry::field {
         UniformGridIndex grid_;
     };
 
-    // static SpMat cotangent_laplacian(const MeshInterpolator2d::TriMesh::Impl& M) {
-    //     const auto nV = static_cast<index_t>(M.V.rows());
-    //     std::vector<std::map<index_t, real>> adj(nV);
-    //
-    //     auto cot = [&](const Vec2& u, const Vec2& v) {
-    //         const real dot = u.dot(v);
-    //         const real cross = std::abs(u.x()*v.y()-u.y()*v.x());
-    //         if(cross<1e-20) return 0.0;
-    //         return dot/cross;
-    //     };
-    //
-    //     for (index_t f = 0; f < M.F.rows(); ++f) {
-    //         const index_t i = M.F(f,0);
-    //         const index_t j = M.F(f,1);
-    //         const index_t k = M.F(f,2);
-    //         Vec2 vi = M.V.row(i);
-    //         Vec2 vj = M.V.row(j);
-    //         Vec2 vk = M.V.row(k);
-    //         const real cij = cot(vk-vi, vk-vj);
-    //         const real cjk = cot(vi-vj, vi-vk);
-    //         const real cki = cot(vj-vk, vj-vi);
-    //         auto add = [&](const int a, const int b, const double w) {
-    //             adj[a][b]+=0.5*w; adj[b][a]+=0.5*w;
-    //         };
-    //         add(i,j,cij);
-    //         add(j,k,cjk);
-    //         add(k,i,cki);
-    //     }
-    //
-    //     std::vector<Triplet> trips; trips.reserve(nV*6);
-    //     for (index_t i = 0; i < nV; ++i) {
-    //         real diag = 0.0;
-    //         for (const auto& kv: adj[i]) {
-    //             index_t j = kv.first;
-    //             const real w = kv.second;
-    //             if (w != 0.0) {
-    //                 trips.emplace_back(i,j,-w); diag+=w;
-    //             }
-    //         }
-    //         trips.emplace_back(i,i,diag);
-    //     }
-    //     SpMat L(nV,nV);
-    //     L.setFromTriplets(trips.begin(), trips.end());
-    //     return L;
-    // }
-
     static SpMat cotangent_laplacian(const MeshInterpolator2d::TriMesh::Impl& M) {
         const auto nV = static_cast<index_t>(M.V.rows());
         std::vector<std::map<index_t, real>> adj(nV);
