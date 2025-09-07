@@ -107,6 +107,8 @@ target_sources(TonbGeometry
         PRIVATE
         src/pnt_2d.cxx
         src/pnt_3d.cxx
+        src/vec_2d.cxx
+        src/vec_3d.cxx
         src/tools.cxx
         src/meta/box2d.cxx
         src/meta/box3d.cxx
@@ -116,6 +118,9 @@ target_sources(TonbGeometry
         src/occt/impl.cxx
         src/triangulation/delaunay_2d.cxx
         src/spatial/impl.cxx
+        src/spatial/point_locator_2d.cxx
+        src/spatial/tri_mesh_2d.cxx
+        src/spatial/uniform_grid_2d.cxx
         src/field/mesh_interpolator_2d.cxx
         PUBLIC
         FILE_SET HEADERS
@@ -124,7 +129,9 @@ target_sources(TonbGeometry
         include/tonb/geometry/module.hxx
         include/tonb/geometry/cartesian_direction.hxx
         include/tonb/geometry/pnt_2d.hxx
+        include/tonb/geometry/vec_2d.hxx
         include/tonb/geometry/pnt_3d.hxx
+        include/tonb/geometry/vec_3d.hxx
         include/tonb/geometry/tools.hxx
         include/tonb/geometry/tools_i.hxx
         include/tonb/geometry/meta/box.hxx
@@ -161,7 +168,11 @@ target_sources(TonbGeometry
         include/tonb/geometry/occt/transform_2d.hxx
         include/tonb/geometry/triangulation/delaunay_2d.hxx
         include/tonb/geometry/spatial/grid_2d.hxx
+        include/tonb/geometry/spatial/ad_tree.hxx
         include/tonb/geometry/spatial/cgal/balanced_quad_tree.hxx
+        include/tonb/geometry/spatial/point_locator_2d.hxx
+        include/tonb/geometry/spatial/tri_mesh_2d.hxx
+        include/tonb/geometry/spatial/uniform_grid_2d.hxx
         include/tonb/geometry/field/mesh_interpolator_2d.hxx
 )
 
