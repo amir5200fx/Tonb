@@ -92,6 +92,31 @@ namespace tonb::geometry::occt {
         throw std::runtime_error("Projection failed!");
     }
 
+    std::expected<std::optional<Curve::ProjectionResult>, Curve::ProjectionError> Curve::try_project_point(
+        const std::array<double, 3> & pt) const noexcept {
+        if (!is_valid()) {
+            return std::unexpected(ProjectionError{ProjectionErrc::null_curve, "Null curve handle"});
+        }
+        try {
+            GeomAPI_ProjectPointOnCurve projector;
+            projector.Init({pt[0], pt[1], pt[2]}, pimpl_->h);
+
+            if (projector.NbPoints() == 0) {
+                return std::optional<ProjectionResult>{};
+            }
+            const auto ppt = projector.NearestPoint();
+            ProjectionResult r{
+                {ppt.X(), ppt.Y(), ppt.Z()},
+                projector.LowerDistanceParameter(),
+                projector.LowerDistance()
+            };
+            return std::optional<Curve::ProjectionResult>{std::move(r)};
+        } catch (Standard_Failure& e) {
+            const char* msg = e.GetMessageString();
+            return std::unexpected(ProjectionError{ProjectionErrc::null_curve, msg ? msg: "OCCT Standard_Failure"});
+        }
+    }
+
 
     // ---- interop friend access
 
