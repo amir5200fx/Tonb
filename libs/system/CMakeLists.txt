@@ -35,7 +35,7 @@ target_sources(TonbSystem
         include/tonb/system/log.hxx
 )
 
-if (TNB_WITH_CEREAL)
+if (TONB_WITH_CEREAL)
     find_package(cereal CONFIG REQUIRED)  # header-only
     target_link_libraries(TonbSystem PUBLIC cereal::cereal)
 else ()
