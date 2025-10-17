@@ -12,12 +12,16 @@
 
 // OCCT
 #include <opencascade/GeomAPI_ProjectPointOnCurve.hxx>
+#include <opencascade/GCPnts_AbscissaPoint.hxx>
 #include <opencascade/Geom_Curve.hxx>
 #include <opencascade/Geom_BoundedCurve.hxx>
 #include <opencascade/Geom_TrimmedCurve.hxx>
+#include <opencascade/Geom_BSplineCurve.hxx>
 #include <opencascade/GeomAdaptor_Curve.hxx>
+#include <opencascade/GeomConvert.hxx>
 #include <opencascade/gp_Pnt.hxx>
 #include <opencascade/gp_Vec.hxx>
+#include <opencascade/Standard_Failure.hxx>
 
 namespace tonb::geometry::occt {
 
@@ -38,6 +42,61 @@ namespace tonb::geometry::occt {
         const GeomAdaptor_Curve gac(pimpl_->h);
         // Note: Degree() is meaningful for polynomial/spline curves; for others is returns a small value.
         return gac.Degree();
+    }
+
+    bool Curve::is_bspline() const noexcept {
+        return is_valid() && Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+    }
+    int Curve::nb_poles() const noexcept {
+        if (!is_valid()) return 0;
+        const auto bspline = Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+        return bspline ? bspline->NbPoles() : 0;
+    }
+    std::vector<Point> Curve::poles() const noexcept {
+        if (!is_valid()) return {};
+        const auto bspline = Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+        if (!bspline) return {};
+        std::vector<Point> poles; poles.reserve(bspline->NbPoles());
+        for (const auto& p: bspline->Poles()) {
+            poles.emplace_back(p.X(), p.Y(), p.Z());
+        }
+        return poles;
+    }
+
+    Point Curve::pole(const int index) const noexcept {
+        if (!is_valid()) return {};
+        const auto bspline = Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+        if (!bspline) return {};
+        return core::occt_point_access::make(bspline->Pole(index));
+    }
+
+    bool Curve::is_nurbs() const noexcept {
+        if (!is_valid()) return false;
+        const auto bspline = Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+        if (!bspline) return false;
+        return static_cast<bool>(bspline->Weights());
+    }
+
+    std::vector<real> Curve::weights() const noexcept {
+        if (!is_valid()) return {};
+        const auto bspline = Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+        if (!bspline) return {};
+        if (!bspline->Weights()) return {};
+        std::vector<real> weights; weights.reserve(bspline->NbPoles());
+        for (const auto w: *bspline->Weights()) weights.emplace_back(w);
+        return weights;
+    }
+
+    real Curve::weight(const int index) const {
+        if (!is_valid()) return -1;
+        const auto bspline = Handle(Geom_BSplineCurve)::DownCast(pimpl_->h);
+        if (!bspline) return -1;
+        if (!bspline->Weights()) return -1;
+        try {
+            return bspline->Weight(index);
+        } catch (const Standard_Failure& err) {
+            throw std::invalid_argument("Curve::weight: bad index");
+        }
     }
 
     std::optional<std::pair<real, real> > Curve::parameter_range() const noexcept {
@@ -72,6 +131,14 @@ namespace tonb::geometry::occt {
         if (r.IsNull()) return {};
         return Curve{std::make_shared<Impl>(Impl{std::move(r)})};
     }
+
+    Curve Curve::bspline() const {
+        if (!is_valid()) return {};
+        Handle(Geom_BSplineCurve) converted = GeomConvert::CurveToBSplineCurve(pimpl_->h);
+        if (converted.IsNull()) return {};
+        return Curve{std::make_shared<Impl>(Impl{std::move(converted)})};
+    }
+
     void Curve::reverse() const {
         if (!is_valid()) return;
         pimpl_->h->Reverse();
@@ -110,11 +177,25 @@ namespace tonb::geometry::occt {
                 projector.LowerDistanceParameter(),
                 projector.LowerDistance()
             };
-            return std::optional<Curve::ProjectionResult>{std::move(r)};
+            return std::optional<Curve::ProjectionResult>{r};
         } catch (Standard_Failure& e) {
             const char* msg = e.GetMessageString();
             return std::unexpected(ProjectionError{ProjectionErrc::null_curve, msg ? msg: "OCCT Standard_Failure"});
         }
+    }
+
+    double Curve::calc_length() const {
+        if (!is_valid()) return 0;
+        const auto& c = pimpl_->h;
+        // Ensure the curve has a finite range.
+        const Standard_Real u1 = c->FirstParameter();
+        const Standard_Real u2 = c->LastParameter();
+
+        if (!Precision::IsInfinite(u1) && !Precision::IsInfinite(u2)) {
+            const GeomAdaptor_Curve ac(c, u1, u2);
+            return GCPnts_AbscissaPoint::Length(ac, u1, u2);
+        }
+        return std::numeric_limits<double>::infinity();
     }
 
 

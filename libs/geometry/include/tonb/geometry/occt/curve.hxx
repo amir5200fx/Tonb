@@ -22,6 +22,7 @@
 #include <array>
 #include <vector>
 #include <expected>
+#include <string>
 
 #include <tonb/geometry/module.hxx>
 #include <tonb/base/precision.hxx>
@@ -57,6 +58,15 @@ namespace tonb::geometry::occt {
         /// Polynomial/spline degree if known; otherwise returns -1.
         TNBGEOM_ND_EXPORT int degree() const noexcept;
 
+        TNBGEOM_ND_EXPORT bool is_bspline() const noexcept;
+        TNBGEOM_ND_EXPORT int nb_poles() const noexcept;
+        TNBGEOM_ND_EXPORT std::vector<Point> poles() const noexcept;
+        TNBGEOM_ND_EXPORT Point pole(int index) const noexcept;
+
+        TNBGEOM_ND_EXPORT bool is_nurbs() const noexcept;
+        TNBGEOM_ND_EXPORT std::vector<real> weights() const noexcept;
+        TNBGEOM_ND_EXPORT real weight(int index) const;
+
         /// Parameter range if the curve is bounded. std::nullopt if unbounded.
         TNBGEOM_ND_EXPORT std::optional<std::pair<real, real>> parameter_range() const noexcept;
 
@@ -71,6 +81,7 @@ namespace tonb::geometry::occt {
         TNBGEOM_ND_EXPORT Curve trimmed(double u0, double u1) const;
 
         TNBGEOM_ND_EXPORT Curve reversed() const;
+        TNBGEOM_ND_EXPORT Curve bspline() const;
         TNBGEOM_EXPORT void reverse() const;
 
         /**
@@ -127,7 +138,7 @@ namespace tonb::geometry::occt {
          */
         struct ProjectionResult {
             std::array<double, 3> point;
-            real value;
+            real parameter;
             real distance;
         };
         /**
@@ -158,6 +169,8 @@ namespace tonb::geometry::occt {
          */
         TNBGEOM_ND_EXPORT std::expected<std::optional<ProjectionResult>, ProjectionError>
         try_project_point(const std::array<double, 3>& p) const noexcept;
+
+        TNBGEOM_ND_EXPORT double calc_length() const;
     private:
 
         /*Private Data*/

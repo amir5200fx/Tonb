@@ -45,6 +45,18 @@ namespace tonb::geometry::occt {
         /// Is the curve periodic?
         TNBGEOM_ND_EXPORT bool is_periodic() const noexcept;
 
+        TNBGEOM_ND_EXPORT bool is_bspline() const noexcept;
+        TNBGEOM_ND_EXPORT int nb_poles() const noexcept;
+        TNBGEOM_ND_EXPORT std::vector<Point2d> poles() const noexcept;
+        TNBGEOM_ND_EXPORT Point2d pole(int index) const noexcept;
+
+        TNBGEOM_ND_EXPORT bool is_nurbs() const noexcept;
+        TNBGEOM_ND_EXPORT std::vector<real> weights() const noexcept;
+        TNBGEOM_ND_EXPORT real weight(int index) const;
+
+        TNBGEOM_ND_EXPORT std::vector<real> knots() const noexcept;
+        TNBGEOM_ND_EXPORT std::vector<int> multiplicities() const noexcept;
+
         /// Polynomial/spline degree if known; otherwise returns -1.
         TNBGEOM_ND_EXPORT int degree() const noexcept;
 
@@ -62,6 +74,7 @@ namespace tonb::geometry::occt {
 
         /// Returns a trimmed sub-curve [u0, u1]. If not supported, returns invalid.
         TNBGEOM_ND_EXPORT Curve2d trimmed(real u0, real u1) const;
+        TNBGEOM_ND_EXPORT Curve2d bspline() const;
 
         TNBGEOM_ND_EXPORT Curve2d mirrored(const Axis2d&) const;
         TNBGEOM_ND_EXPORT Curve2d mirrored(const Point2d&) const;
@@ -71,6 +84,8 @@ namespace tonb::geometry::occt {
 
         struct MinDistanceProjected {Point2d point; real parameter;};
         TNBGEOM_ND_EXPORT MinDistanceProjected project(const Point2d&) const;
+
+        TNBGEOM_ND_EXPORT double calc_length() const;
 
     private:
 
