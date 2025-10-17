@@ -4,6 +4,8 @@
 #pragma once
 #ifndef TONB_GEOMETRY_TOOLS_HXX
 #define TONB_GEOMETRY_TOOLS_HXX
+#include <tonb/geometry/meta/quad_mesh_3d_fwd.hxx>
+#include <tonb/geometry/meta/triangulation_3d.hxx>
 #include <tonb/geometry/pnt_2d.hxx>
 #include <tonb/base/index_types.hxx>
 
@@ -99,6 +101,8 @@ namespace tonb::geometry {
 
         /** @brief Clamp barycentrics to the nearest point on the triangle (edge/vertex if outside). */
         static std::array<real, 3> clamp_bary(const std::array<real, 3>& w) noexcept;
+
+        static TNBGEOM_EXPORT meta::Triangulation3d triangulate(const meta::QuadMesh3d&) noexcept;
     };
 }
 #include <tonb/geometry/tools_i.hxx>
