@@ -1,6 +1,8 @@
 //
 // Created by amir on 8/28/25.
 //
+#include <tonb/config.hxx>
+#if defined(TONB_HAS_VTK)
 #include <tonb/io/vtk/mesh_reader.hxx>
 
 #include <tonb/io/vtk/error.hxx>
@@ -68,3 +70,5 @@ namespace tonb::io::vtk {
     }
 
 }
+#else
+#endif
