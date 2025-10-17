@@ -11,6 +11,7 @@
 #include <tonb/geometry/occt/core/surface_helpers.hxx>
 
 //OCCT
+#include <opencascade/BRepBuilderAPI_MakeFace.hxx>
 #include <opencascade/TopoDS_Face.hxx>
 #include <opencascade/TopAbs_Orientation.hxx>
 #include <opencascade/TopLoc_Location.hxx>
@@ -21,17 +22,34 @@
 #include <opencascade/Geom_Surface.hxx>
 #include <opencascade/GeomLProp_SLProps.hxx>
 
-#include <gp_Pnt.hxx>
-#include <gp_Dir.hxx>
-#include <gp_Vec.hxx>
-#include <gp_Trsf.hxx>
+#include <opencascade/gp_Pnt.hxx>
+#include <opencascade/gp_Dir.hxx>
+#include <opencascade/gp_Vec.hxx>
+#include <opencascade/gp_Trsf.hxx>
+
+#include <opencascade/IGESControl_Controller.hxx>
+#include <opencascade/IGESControl_Writer.hxx>
+#include <opencascade/Interface_Static.hxx>
+#include <opencascade/STEPControl_Writer.hxx>
+#include <opencascade/STEPControl_StepModelType.hxx>
+#include <opencascade/IFSelect_ReturnStatus.hxx>
 
 #include <stdexcept>
 #include <utility>
+#include <CGAL/IO/io.h>
 
 #include "tonb/cad/occt/core/location_helpers.hxx"
 
 namespace tonb::cad::occt {
+    Face::Face(const Surface & surface, real tol) {
+        // get opaque ptr
+        const void* opaque = surface.native_backend_handle();
+        auto& h = *reinterpret_cast<const opencascade::handle<Geom_Surface>*>(opaque);
+        if (!h.IsNull()) {
+            TopoDS_Face face = BRepBuilderAPI_MakeFace(h, tol);
+            pimpl_ = std::make_shared<Impl>(std::move(face));
+        }
+    }
 
     bool Face::is_valid() const noexcept {
         return pimpl_ && !pimpl_->f.IsNull();
@@ -123,6 +141,75 @@ namespace tonb::cad::occt {
         // s can be null (e.g., degenerate face, invalid topology)
         if (s.IsNull()) return {};
         return {geometry::occt::core::occt_surface_access::make(s), core::occt_location_access::make(loc)};
+    }
+
+    bool Face::export_iges(const std::string &file_name, const std::string& unit) const {
+        if (!is_valid()) return false;
+        try {
+            IGESControl_Controller::Init();
+
+            // Set parameters first (global state)
+            Interface_Static::SetCVal("write.iges.unit", unit.c_str());
+            Interface_Static::SetIVal("write.iges.brep.mode", 1); // BREP
+
+            IGESControl_Writer writer(unit.c_str(), 0);
+            writer.AddShape(core::occt_face_access::get(*this));
+
+            return writer.Write(file_name.c_str()); // returns Standard_Boolean
+        }
+        catch (const Standard_Failure& e) {
+            // log e.GetMessageString() if you have logging
+            return false;
+        }
+        catch (const std::exception&) {
+            return false;
+        }
+        catch (...) {
+            return false;
+        }
+    }
+
+    bool Face::export_step_AP242(const std::string &file_name, std::string& msg) const {
+        if (!is_valid()) {
+            msg = "Invalid Face";
+            return false;
+        }
+        try {
+            Interface_Static::SetCVal("write.step.schema", "AP242");
+            STEPControl_Writer writer;
+            // Transfer geometry "as is" (no tessellation)
+            IFSelect_ReturnStatus tr = writer.Transfer(core::occt_face_access::get(*this), STEPControl_AsIs);
+            if (tr != IFSelect_RetDone) {
+                std::ostringstream oss;
+                oss << "STEP transfer failed (status "<< static_cast<int>(tr) <<")";
+                msg = oss.str();
+                return false;
+            }
+            // Write the .step/.stp file
+            const IFSelect_ReturnStatus wr = writer.Write(file_name.c_str());
+            if (wr != IFSelect_RetDone) {
+                std::ostringstream oss;
+                oss << "STEP write failed (status "<< static_cast<int>(wr) << ")\n";
+                msg = oss.str();
+                return false;
+            }
+            return true;
+        } catch (const Standard_Failure& e) {
+            std::ostringstream oss;
+            oss << "OCCT error: " << e.GetMessageString() << "\n";
+            msg = oss.str();
+            return false;
+        }
+        catch (const std::exception& e) {
+            std::ostringstream oss;
+            oss << "OCCT error: " << e.what() << "\n";
+            msg = oss.str();
+            return false;
+        }
+        catch (...) {
+            msg = "OCCT error: unknown error.\n";
+            return false;
+        }
     }
 }
 

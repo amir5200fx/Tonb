@@ -25,6 +25,7 @@
 #include <optional>
 #include <tuple>
 #include <utility>
+#include <string>
 
 #include "tonb/geometry/module.hxx"
 
@@ -51,6 +52,9 @@ namespace tonb::cad::occt {
         Face(Face&&) noexcept = default;
         Face& operator=(Face const&) noexcept = default;
         Face& operator=(Face&&) noexcept = default;
+
+        // Constructors
+        explicit TNBCAD_EXPORT Face(const Surface&, real tol = 1.e-6);
 
         // Public functions and operators
 
@@ -103,6 +107,53 @@ namespace tonb::cad::occt {
          *   Always check s.IsNull() before use.
          */
         TNBCAD_ND_EXPORT std::pair<Surface, Location> surface() const;
+
+        /**
+         * @brief Export this face to an IGES file in B-Rep mode.
+         *
+         * Writes the current face as IGES using OCCT's writer in B-Rep mode.
+         * Units are tagged in teh file header according to @param unit . The function
+         * is non-throwing; OCCT and standard exceptions are caught internally and a
+         * boolean status is returned.
+         *
+         * @param file_name Output file path (e.g. "part.iges" or "part.igs").
+         * @param unit      Units string for the IGES header, for example "MM", "M" or "IN".
+         *                  Defaults to "MM".
+         *
+         * @return  true on successful transfer and write, false otherwise.
+         *
+         * @note
+         * - The export operates on the topological face, so any location stored on the
+         *   shape is taken into account by the writer.
+         * - This function focuses on geometry and topology. Per-face colour, layers,
+         *   and names requires an XDE route and are not included here.
+         * - The implementation uses try-catch around OCCT calls and will not throw.
+         */
+        TNBCAD_ND_EXPORT bool export_iges(const std::string& file_name, const std::string& unit = "MM") const;
+        /**
+         * @brief Export this face to a STEP file using the AP242 schema.
+         *
+         * Writes the current face to STEP (AP242). Diagnostic information and any error
+         * description are returned via @p msg. The function is non-throwing;
+         * OCCT and standard exceptions are caught internally and a boolean status is
+         * required.
+         *
+         * @param file_name Output file path (e.g. "part.step" or "part.stp").
+         * @param msg       Output string that receives a short status or error message.
+         *                  It is cleared and then written by the function.
+         *
+         * @return true on successful transfer and write, false otherwise. On failure,
+         *         @p msg contains a brief reason if available.
+         *
+         * @note
+         * - Geometry and topology of the face are exported. If colour, layers, names,
+         *   or other product-structure metadata are required, prefer an XDE-based
+         *   writer.
+         * - Shape location is respected by the writer, so the exported placement
+         *   matches the face's current location in the model.
+         * - The implementation uses try-catch around OCCT calls and will not throw.
+         */
+        TNBCAD_ND_EXPORT bool export_step_AP242(const std::string& file_name, std::string& msg) const;
 
     private:
         /*Private Data*/
