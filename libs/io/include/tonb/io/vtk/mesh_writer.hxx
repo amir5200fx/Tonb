@@ -28,6 +28,19 @@ namespace tonb::io::vtk {
         static TNBIO_EXPORT bool write_quad_surface_vtp(const std::vector<std::array<real, 3> > &points,
                                                         const std::vector<std::array<index_t, 4> > &quads,
                                                         const std::string &file_path, bool binary = true);
+
+        /**
+         * @brief Write a triangle surface mesh to a .vtp file (VTK XML PolyData).
+         *
+         * @param points Vector of vertex positions [N x 3]
+         * @param tris   Vector of triangles [M x 3], each entry is vertex index (0-based)
+         * @param file_path Output file path (should end with .vtp)
+         * @param binary If true, use appended binary mode (smaller, faster); else ASCII
+         * @return true if write succeeded
+         */
+        static TNBIO_EXPORT bool write_tri_surface_vtp(const std::vector<std::array<real, 3> > &points,
+                                                       const std::vector<std::array<index_t, 3> > &tris,
+                                                       const std::string &file_path, bool binary = true);
     };
 }
 #endif //TONB_IO_VTK_MESH_WRITER_HXX
