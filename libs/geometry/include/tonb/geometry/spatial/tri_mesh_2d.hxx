@@ -48,7 +48,7 @@
 namespace tonb::geometry::spatial {
 
     /**
-     * @class TriMesh2d
+     * @struct TriMesh2d
      * @brief Minimal 2D triangle mesh container for geometry and spatial queries.
      *
      * @details
@@ -96,7 +96,7 @@ namespace tonb::geometry::spatial {
          * @note This is a lightweight accessor that simply wraps V[vi]
          *       into a Vec2 object.
          */
-        inline Vec2d v2(const index_t vi) const { return {V[vi][0], V[vi][1]}; }
+        TNB_NODISCARD Vec2d v2(const index_t vi) const { return {V[vi][0], V[vi][1]}; }
 
         /**
          * @brief Build the triangle-to-triangle adjacency list.
