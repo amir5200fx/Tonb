@@ -132,7 +132,21 @@ namespace tonb::geometry::occt {
          * @param closePeriodic  if true and the surface is periodic in U/V, do not duplicate the seam vertices.
          * @throws std::logic_error if the surface is invalid or bounds are unavailable.
          */
-        TNBGEOM_EXPORT QuadMesh make_uniform_quad_mesh(int nu, int nv, bool closePeriodic = true) const;
+        TNBGEOM_ND_EXPORT QuadMesh make_uniform_quad_mesh(int nu, int nv, bool closePeriodic = true) const;
+
+        /// Return an opaque pointer to the backend-native handle object.
+        /// For OCCT builds, this is a pointer to `opencascade::handle<Geom_Surface>`.
+        /// Lifetime: only valid while *this* Surface object (and its pimpl) remain alive.
+        /// Returns nullptr if invalid.
+        TNBGEOM_EXPORT void* native_backend_handle() noexcept;
+
+        /// Const variant of native_backend_handle().
+        TNBGEOM_ND_EXPORT const void* native_backend_handle() const noexcept;
+
+        /// Construct a Surface from an opaque pointer obtained via native_backend_handle().
+        /// For OCCT builds, `ptr` must point to a valid `opencascade::handle<Geom_Surface>`.
+        /// If ptr is null, returns an invalid Surface.
+        static TNBGEOM_EXPORT Surface from_native_backend_handle(const void* ptr);
 
     private:
         /*Private Data*/

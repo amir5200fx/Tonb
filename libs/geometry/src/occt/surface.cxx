@@ -180,6 +180,31 @@ namespace tonb::geometry::occt {
         return mesh;
     }
 
+    void * Surface::native_backend_handle() noexcept {
+        if (!pimpl_) return nullptr;
+        // Expose the address of the *handle object* (NOT the underlying Geom_Surface*).
+        return static_cast<void*>(&(pimpl_->h));
+    }
+
+    const void * Surface::native_backend_handle() const noexcept {
+        if (!pimpl_) return nullptr;
+        // Expose the address of the *handle object* (NOT the underlying Geom_Surface*).
+        return static_cast<void*>(&(pimpl_->h));
+    }
+
+    Surface Surface::from_native_backend_handle(const void *ptr) {
+        Surface s; // invalid by default
+        if (!ptr) return s;
+
+        // The pointer is expected to point to an opencascade::handle<Geom_Surface>
+        // Copy-construct out internal handle from it.
+        const opencascade::handle<Geom_Surface>& href =
+            *reinterpret_cast<const opencascade::handle<Geom_Surface>*>(ptr);
+
+        // Build pIpml from the handle
+        s.pimpl_ = std::make_shared<Impl>(Impl{href});
+        return s;
+    }
 }
 #else
 static_assert(true, "src/occt/surface.cxx compiled without TONB_WITH_OCCT");
