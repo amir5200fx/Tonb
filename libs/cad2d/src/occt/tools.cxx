@@ -6,6 +6,7 @@
 #include <tonb/cad2d/occt/tools.hxx>
 #include <tonb/geometry/occt/core/point_2d_helpers.hxx>
 #include <tonb/geometry/occt/core/curve_2d_helpers.hxx>
+#include <tonb/geometry/occt/core/circle_2d_helpers.hxx>
 
 // OCCT
 #include <opencascade/GCE2d_MakeSegment.hxx>
@@ -26,6 +27,16 @@ namespace tonb::cad2d::occt {
         try {
             using namespace geometry::occt;
             const GCE2d_MakeArcOfCircle maker(core::occt_point_2d_access::get(p0), core::occt_point_2d_access::get(p1), core::occt_point_2d_access::get(p2));
+            return core::occt_curve_2d_access::make(maker.Value());
+        } catch (const Standard_Failure& err) {
+            throw std::runtime_error(std::string("thrown OCCT exception: ") + err.GetMessageString());
+        }
+    }
+
+    Tools::Curve Tools::make_circle_arc(const Circle &circle, const double angle0, const double angle1) {
+        try {
+            using namespace geometry::occt;
+            const GCE2d_MakeArcOfCircle maker(core::occt_circle_2d_access::get(circle), angle0, angle1);
             return core::occt_curve_2d_access::make(maker.Value());
         } catch (const Standard_Failure& err) {
             throw std::runtime_error(std::string("thrown OCCT exception: ") + err.GetMessageString());
