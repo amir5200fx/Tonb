@@ -26,6 +26,7 @@ namespace tonb::geometry::occt {
 
     // Forward Declarations
     class Vector2d;
+    class Direction2d;
     class Point2d;
     class Transform2d;
     namespace core {
@@ -49,14 +50,14 @@ namespace tonb::geometry::occt {
         TNBGEOM_ND_EXPORT Point2d origin() const noexcept;
 
         /// Unit direction (vector). Undefined if !is_valid() (returns {0,0})
-        TNBGEOM_ND_EXPORT Vector2d direction() const noexcept;
+        TNBGEOM_ND_EXPORT Direction2d direction() const noexcept;
 
         /// Returns a copy with a new origin.
         TNBGEOM_ND_EXPORT Axis2d with_origin(const Point2d& origin) const noexcept;
 
         /// Returns a copy with a new direction (re-normalized).
         /// If |dir| ~ 0, result is invalid
-        TNBGEOM_ND_EXPORT Axis2d with_direction(const Vector2d& dir) const noexcept;
+        TNBGEOM_ND_EXPORT Axis2d with_direction(const Direction2d& dir) const noexcept;
 
         /// Translate by delta.
         TNBGEOM_ND_EXPORT Axis2d moved(const Vector2d& delta) const;

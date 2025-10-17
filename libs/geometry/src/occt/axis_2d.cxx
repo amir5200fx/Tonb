@@ -10,6 +10,7 @@
 #include <tonb/geometry/occt/core/axis_2d_helpers.hxx>
 #include <tonb/geometry/occt/core/point_2d_helpers.hxx>
 #include <tonb/geometry/occt/core/vector_2d_helpers.hxx>
+#include <tonb/geometry/occt/core/direction_2d_helpers.hxx>
 #include <tonb/geometry/occt/core/transform_2d_helpers.hxx>
 #include <tonb/geometry/occt/vector_2d.hxx>
 
@@ -50,10 +51,10 @@ namespace tonb::geometry::occt {
         return core::occt_point_2d_access::make(p);
     }
 
-    Vector2d Axis2d::direction() const noexcept {
+    Direction2d Axis2d::direction() const noexcept {
         if (!is_valid()) return {0, 0};
         const gp_Dir2d d = pimpl_->ax.Direction();
-        return core::occt_vector_2d_access::make(d);
+        return core::occt_dir_2d_access::make(d);
     }
 
     Axis2d Axis2d::with_origin(const Point2d &origin) const noexcept {
@@ -63,13 +64,13 @@ namespace tonb::geometry::occt {
         return Axis2d(std::move(impl));
     }
 
-    Axis2d Axis2d::with_direction(const Vector2d &dir) const noexcept {
+    Axis2d Axis2d::with_direction(const Direction2d &dir) const noexcept {
         if (!pimpl_) return *this;
         auto impl = std::make_shared<Axis2d::Impl>(*pimpl_);
         if (near_zero2(dir.u(), dir.v())) {
             impl->valid = false;
         } else {
-            impl->ax.SetDirection(core::occt_vector_2d_access::get(dir));
+            impl->ax.SetDirection(core::occt_dir_2d_access::get(dir));
             impl->valid=true;
         }
         return Axis2d(std::move(impl));
