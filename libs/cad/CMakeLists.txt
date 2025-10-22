@@ -4,8 +4,7 @@ add_library(Tonb::CAD ALIAS TonbCAD)
 
 if (TONB_WITH_OCCT)
     # Prefer the config package (vcpkg, official builds)
-    find_package(OpenCASCADE REQUIRED
-            COMPONENTS FoundationClasses ModelingData ModelingAlgorithms DataExchange)
+    find_package(OpenCASCADE CONFIG REQUIRED)
     if (NOT OpenCASCADE_FOUND)
         find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
     endif ()
