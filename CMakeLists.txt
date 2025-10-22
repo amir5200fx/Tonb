@@ -175,6 +175,8 @@ else ()
 endif ()
 #add_subdirectory(tests)
 
+#add_subdirectory(apps)
+
 # Make it visible to all Tonb targets during build
 # (do this once, after you've created your library targets)
 target_include_directories(TonbSystem  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
