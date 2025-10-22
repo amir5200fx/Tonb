@@ -18,7 +18,7 @@ if (TONB_WITH_OCCT)
     endif ()
 
     set(OCCT_LIBS)
-    foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath)
+    foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath TKGeomBase)
         if (TARGET OpenCASCADE::${lib})
             list(APPEND OCCT_LIBS OpenCASCADE::${lib})
         elseif(TARGET ${lib})
@@ -29,7 +29,7 @@ if (TONB_WITH_OCCT)
     endforeach ()
     add_library(TonbOcctAdapters INTERFACE)
     add_library(Tonb::OcctAdapters ALIAS TonbOcctAdapters)
-    target_link_libraries(TonbGeometry PRIVATE ${OCCT_LIBS})
+    target_link_libraries(TonbGeometry PUBLIC ${OCCT_LIBS})
     target_link_libraries(TonbOcctAdapters INTERFACE Tonb::Geometry)
     target_compile_definitions(TonbOcctAdapters INTERFACE TONB_HAS_OCCT_ADAPTERS=1)
 
@@ -63,7 +63,7 @@ if (TONB_WITH_CGAL)
     target_compile_definitions(TonbCgalAdapters INTERFACE TONB_HAS_CGAL_ADAPTERS=1)
 
     # Link CGAL into TonbGeometry privately (your headers remain CGAL-free)
-    target_link_libraries(TonbGeometry PRIVATE CGAL::CGAL)
+    target_link_libraries(TonbGeometry PUBLIC CGAL::CGAL)
 
     # Install the interface target (like OCCT)
     install(TARGETS TonbCgalAdapters EXPORT TonbTargets)
@@ -91,7 +91,7 @@ if (TONB_WITH_EIGEN)
     target_compile_definitions(TonbEigenAdapters INTERFACE TONB_HAS_EIGEN_ADAPTERS=1)
 
     # Keep Eigen private to TonbGeometry
-    target_link_libraries(TonbGeometry PRIVATE Eigen3::Eigen)
+    target_link_libraries(TonbGeometry PUBLIC Eigen3::Eigen)
 
     install(TARGETS TonbEigenAdapters EXPORT TonbTargets)
 endif ()
@@ -107,6 +107,8 @@ target_sources(TonbGeometry
         PRIVATE
         src/pnt_2d.cxx
         src/pnt_3d.cxx
+        src/vec_2d.cxx
+        src/vec_3d.cxx
         src/tools.cxx
         src/meta/box2d.cxx
         src/meta/box3d.cxx
@@ -116,6 +118,9 @@ target_sources(TonbGeometry
         src/occt/impl.cxx
         src/triangulation/delaunay_2d.cxx
         src/spatial/impl.cxx
+        src/spatial/point_locator_2d.cxx
+        src/spatial/tri_mesh_2d.cxx
+        src/spatial/uniform_grid_2d.cxx
         src/field/mesh_interpolator_2d.cxx
         PUBLIC
         FILE_SET HEADERS
@@ -124,7 +129,9 @@ target_sources(TonbGeometry
         include/tonb/geometry/module.hxx
         include/tonb/geometry/cartesian_direction.hxx
         include/tonb/geometry/pnt_2d.hxx
+        include/tonb/geometry/vec_2d.hxx
         include/tonb/geometry/pnt_3d.hxx
+        include/tonb/geometry/vec_3d.hxx
         include/tonb/geometry/tools.hxx
         include/tonb/geometry/tools_i.hxx
         include/tonb/geometry/meta/box.hxx
@@ -144,6 +151,7 @@ target_sources(TonbGeometry
         include/tonb/geometry/meta/quad_mesh_2d_fwd.hxx
         include/tonb/geometry/meta/quad_mesh_3d.hxx
         include/tonb/geometry/meta/quad_mesh_3d_fwd.hxx
+        include/tonb/geometry/occt/precision.hxx
         include/tonb/geometry/occt/occt.hxx
         include/tonb/geometry/occt/bbox.hxx
         include/tonb/geometry/occt/curve.hxx
@@ -154,18 +162,26 @@ target_sources(TonbGeometry
         include/tonb/geometry/occt/point_2d.hxx
         include/tonb/geometry/occt/vector.hxx
         include/tonb/geometry/occt/vector_2d.hxx
+        include/tonb/geometry/occt/direction_2d.hxx
         include/tonb/geometry/occt/axis.hxx
         include/tonb/geometry/occt/axis_2d.hxx
         include/tonb/geometry/occt/transform.hxx
         include/tonb/geometry/occt/transform_2d.hxx
+        include/tonb/geometry/occt/circle_2d.hxx
         include/tonb/geometry/triangulation/delaunay_2d.hxx
         include/tonb/geometry/spatial/grid_2d.hxx
+        include/tonb/geometry/spatial/ad_tree.hxx
         include/tonb/geometry/spatial/cgal/balanced_quad_tree.hxx
+        include/tonb/geometry/spatial/point_locator_2d.hxx
+        include/tonb/geometry/spatial/tri_mesh_2d.hxx
+        include/tonb/geometry/spatial/uniform_grid_2d.hxx
         include/tonb/geometry/field/mesh_interpolator_2d.hxx
 )
 
 # Backend-specific sources
 target_sources(TonbGeometry PRIVATE
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/precision.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/precision.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/bbox.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/bbox.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/curve.cxx>
@@ -188,10 +204,16 @@ target_sources(TonbGeometry PRIVATE
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/vector.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/vector_2d.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/vector_2d.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/dir_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/dir_2d.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/axis.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis.cxx>
         $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/axis_2d.cxx>
         $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis_2d.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/axis2_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/axis2_2d.cxx>
+        $<$<BOOL:${TONB_WITH_OCCT}>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/circle_2d.cxx>
+        $<$<NOT:$<BOOL:${TONB_WITH_OCCT}>>:${CMAKE_CURRENT_SOURCE_DIR}/src/occt/null/circle_2d.cxx>
 )
 
 # Backend-specific sources (CGAL quadtree on/off)
@@ -229,7 +251,7 @@ set_target_properties(TonbGeometry PROPERTIES
         CXX_VISIBILITY_PRESET default
         VISIBILITY_INLINES_HIDDEN NO)
 
-target_compile_features(TonbGeometry PUBLIC cxx_std_20)
+target_compile_features(TonbGeometry PUBLIC cxx_std_23)
 
 # When building the shared lib, this flag marks we are *producing* the symbols
 target_compile_definitions(TonbGeometry PRIVATE TNBGEOM_EXPORTS)

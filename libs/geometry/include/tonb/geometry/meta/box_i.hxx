@@ -5,6 +5,34 @@
 #include <cmath>
 namespace tonb::geometry::meta {
 
+
+    template<class Point>
+    Box<Point> Box<Point>::from_vector(const std::vector<Point> & pts) noexcept {
+        Point min, max;
+        for (int d = 0; d < Point::dim; ++d) min[d] = std::numeric_limits<real>::max();
+        for (int d = 0; d < Point::dim; ++d) max[d] = std::numeric_limits<real>::min();
+        for (const auto& pt : pts) {
+            for (int d = 0; d < Point::dim; ++d) {
+                if (pt[d] < min[d]) min[d] = pt[d];
+                if (pt[d] > max[d]) max[d] = pt[d];
+            }
+        }
+        return {min, max};
+    }
+
+    template<class Point>
+    Box<Point> Box<Point>::from_radius_and_center(const real r, const Point &c) noexcept {
+        auto translate = [](const Point& pt, const real v) noexcept {
+            auto p = pt;
+            for (int d = 0; d < Point::dim; ++d) {
+                p[d] += v;
+            }
+            return p;
+        };
+        return {translate(c, -r), translate(c, r)};
+    }
+
+
     template<class Point>
     void Box<Point>::normalize() noexcept {
         for (size_t d = 0; d < static_cast<size_t>(Point::dim); ++d) {
@@ -65,6 +93,24 @@ namespace tonb::geometry::meta {
             corners_[1][d] += components[d];
         }
     }
+
+    template<class Point>
+    Box<Point> Box<Point>::half(Direction d, const int side) const {
+        const auto val = static_cast<std::underlying_type_t<Direction>>(d);
+        int i = static_cast<int>(val);
+        if (side == 0) {
+            auto p = corners_[1];
+            p[i] = 0.5 * (corners_[0][i] + corners_[1][i]);
+            return {corners_[0], std::move(p)};
+        }
+        if (side == 1) {
+            auto p = corners_[0];
+            p[i] = 0.5 * (corners_[1][i] - corners_[0][i]);
+            return {std::move(p), corners_[1]};
+        }
+        throw std::runtime_error("Box::half(): invalid side");
+    }
+
 
     template<class Point>
     std::array<real, Point::dim> Box<Point>::length() const noexcept {

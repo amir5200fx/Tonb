@@ -21,7 +21,7 @@ project(Tonb
         LANGUAGES CXX)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
-option(TNB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
+option(TONB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
 option(BUILD_TESTING "Running the tests" OFF)
 
 option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
@@ -35,6 +35,12 @@ option(TONB_WITH_CGAL "Enable CGAL-based functions" ON)
 
 # ---- EIGEN ----
 option(TONB_WITH_EIGEN "Enable Eigen-backed implementations" ON)
+
+# ---- VTK -----
+option(TONB_WITH_VTK "Enable VTK-based functions" ON)
+#if (TONB_WITH_VTK)
+#    set(TONB_VTK_MAJOR "")
+#endif ()
 
 include(GNUInstallDirs)
 
@@ -186,6 +192,9 @@ target_include_directories(TonbGeometry PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_
 target_include_directories(TonbCAD2d PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbCAD PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 
+add_executable(Tonb main.cxx)
+
+target_link_libraries(Tonb PRIVATE TonbSystem TonbIO TonbBase TonbGeometry TonbCAD2d TonbCAD)
 # Install the generated header
 install(FILES ${CMAKE_BINARY_DIR}/generated/tonb/config.hxx
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tonb)
@@ -245,7 +254,10 @@ set_target_properties(TonbIO PROPERTIES EXPORT_NAME IO)
 configure_package_config_file(
         "${CMAKE_CURRENT_SOURCE_DIR}/cmake/TonbConfig.cmake.in"
         "${CMAKE_CURRENT_BINARY_DIR}/TonbConfig.cmake"
-        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Tonb)
+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Tonb
+        NO_SET_AND_CHECK_MACRO
+        NO_CHECK_REQUIRED_COMPONENTS_MACRO
+)
 
 write_basic_package_version_file(
         "${CMAKE_CURRENT_BINARY_DIR}/TonbConfigVersion.cmake"

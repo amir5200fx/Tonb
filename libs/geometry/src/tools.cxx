@@ -3,6 +3,10 @@
 //
 #include <tonb/geometry/tools.hxx>
 
+#include <tonb/geometry/meta/quad_mesh_3d.hxx>
+#include <tonb/geometry/meta/triangulation_3d.hxx>
+#include <tonb/geometry/meta/box_3d.hxx>
+
 namespace tonb::geometry {
     index_t Tools::locate_triangle(const WalkTriMesh2dContext &ctx, index_t seed_tri, index_t p_idx) {
         assert(p_idx >= 0 && p_idx < static_cast<index_t>(ctx.P->size()));
@@ -36,4 +40,13 @@ namespace tonb::geometry {
         return -1;
     }
 
+    meta::Triangulation3d Tools::triangulate(const meta::QuadMesh3d & q) noexcept {
+        std::vector<meta::detail::Tri> ids;
+        ids.reserve(q.id_count() * 2);
+        for (const auto& q_id: q.ids()) {
+            ids.emplace_back(meta::detail::Tri{{q_id[0], q_id[1], q_id[2]}});
+            ids.emplace_back(meta::detail::Tri{{q_id[2], q_id[3], q_id[0]}});
+        }
+        return {q.points(), std::move(ids)};
+    }
 }

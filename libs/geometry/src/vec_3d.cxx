@@ -1,9 +1,11 @@
 //
 // Created by amir on 8/25/25.
 //
-#include <cmath>
-#include <math.h>
 #include <tonb/geometry/vec_3d.hxx>
+
+#include <cmath>
+#include <cmath>
+#include <stdexcept>
 
 namespace tonb::geometry {
 

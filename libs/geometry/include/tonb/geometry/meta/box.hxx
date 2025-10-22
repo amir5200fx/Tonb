@@ -84,7 +84,7 @@ namespace tonb::geometry::meta {
         Box(const Box&) noexcept = default;
         Box(Box&& other) noexcept = default;
 
-        static Box from_vector(const std::vector<Point>&);
+        static Box from_vector(const std::vector<Point>&) noexcept;
         /**
          * @brief Create a box from explicit min/max corners.
          * @param mn Minimum corner {xmin, ymin, zmin}.
@@ -92,6 +92,7 @@ namespace tonb::geometry::meta {
          * @return A valid box with the given extents.
          */
         static Box from_min_max(const Point& mn, const Point& mx) noexcept;
+        static Box from_radius_and_center(real r, const Point& c) noexcept;
 
         // Public functions and operators
 
@@ -179,6 +180,8 @@ namespace tonb::geometry::meta {
 
         template<class Sub>
         Box subdivide(Sub s) const;
+        /// Half the box in d direction and return the side 0 or 1
+        Box half(Direction d, int side) const;
 
         std::array<real, Point::dim> length() const noexcept;
 

@@ -27,7 +27,7 @@ if (TONB_WITH_OCCT)
             message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
         endif ()
     endforeach ()
-    target_link_libraries(TonbCAD2d PRIVATE ${OCCT_LIBS})
+    target_link_libraries(TonbCAD2d PUBLIC ${OCCT_LIBS})
     add_library(TonbCAD2dOcctAdapters INTERFACE)
     add_library(Tonb::CAD2dOcctAdapters ALIAS TonbCAD2dOcctAdapters)
     target_link_libraries(TonbCAD2dOcctAdapters INTERFACE Tonb::CAD2d OpenCASCADE::FoundationClasses)
@@ -72,7 +72,7 @@ target_sources(TonbCAD2d
 
 # Backend-specific sources
 
-if (TNB_WITH_CEREAL)
+if (TONB_WITH_CEREAL)
     find_package(cereal CONFIG REQUIRED)  # header-only
     target_link_libraries(TonbCAD2d PUBLIC cereal::cereal)
 else ()

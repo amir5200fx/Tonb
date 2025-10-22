@@ -4,6 +4,8 @@
 #pragma once
 #ifndef TONB_GEOMETRY_TOOLS_HXX
 #define TONB_GEOMETRY_TOOLS_HXX
+#include <tonb/geometry/meta/quad_mesh_3d_fwd.hxx>
+#include <tonb/geometry/meta/triangulation_3d.hxx>
 #include <tonb/geometry/pnt_2d.hxx>
 #include <tonb/base/index_types.hxx>
 
@@ -86,6 +88,21 @@ namespace tonb::geometry {
 
         template<std::size_t N>
         static index_t local_index_of(const std::array<index_t, N>& cell, index_t v);
+
+        static bool have_intersection(real a0, real a1, real b0, real b1);
+
+        /** @brief 2D signed area * 2 of triangle (ax,ay)-(bx,by)-(cx,cy). */
+        static real orient2d(real ax, real ay, real bx, real by, real cx, real cy) noexcept;
+        /** @brief Barycentric coords of p w.r.t. triangle (a,b,c). Returns (1/3,1/3,1/3) if degenerate. */
+        static std::array<real, 3> barycentric(real px, real py, real ax, real ay, real bx, real by, real cx, real cy) noexcept;
+
+        /** @brief Inside test with tolerance. */
+        static bool inside_bary(const std::array<real, 3>& w, real tol = 1.e-14) noexcept;
+
+        /** @brief Clamp barycentrics to the nearest point on the triangle (edge/vertex if outside). */
+        static std::array<real, 3> clamp_bary(const std::array<real, 3>& w) noexcept;
+
+        static TNBGEOM_EXPORT meta::Triangulation3d triangulate(const meta::QuadMesh3d&) noexcept;
     };
 }
 #include <tonb/geometry/tools_i.hxx>

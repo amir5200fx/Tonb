@@ -53,6 +53,8 @@ namespace tonb::geometry {
         inline static constexpr int nb_cmpts = 2;
         static TNBGEOM_EXPORT const Pnt2d null;
 
+        using ptType = Pnt2d;
+
         enum {
             dim = 2
         };

@@ -66,6 +66,7 @@ double fxy = interp.evaluate(v_pct, {0.42,0.58});
 #include <vector>
 #include <array>
 #include <memory>
+#include <string>
 
 
 namespace tonb::geometry::field {
@@ -110,27 +111,27 @@ namespace tonb::geometry::field {
         public:
 
             /// default constructor
-            TriMesh();
+            TNBGEOM_EXPORT TriMesh();
 
             /// move/copy lifecylce.
-            TriMesh(const TriMesh&);
-            TriMesh(TriMesh&&) noexcept;
+            TNBGEOM_EXPORT TriMesh(const TriMesh&);
+            TNBGEOM_EXPORT TriMesh(TriMesh&&) noexcept;
 
-            TriMesh& operator=(const TriMesh&);
-            TriMesh& operator=(TriMesh&&) noexcept;
+            TNBGEOM_EXPORT TriMesh& operator=(const TriMesh&);
+            TNBGEOM_EXPORT TriMesh& operator=(TriMesh&&) noexcept;
 
-            ~TriMesh();
+            TNBGEOM_EXPORT ~TriMesh();
 
             // Public functions and operators
 
             /// @brief Set mesh vertices from raw coordinates.
-            void set_vertices(const std::vector<std::array<real, 2>>&);
+            TNBGEOM_EXPORT void set_vertices(const std::vector<std::array<real, 2>>&);
             /// @brief Set mesh vertices from @ref tonb::geometry::Pnt2d.
-            void set_vertices(const std::vector<Pnt2d>&);
+            TNBGEOM_EXPORT void set_vertices(const std::vector<Pnt2d>&);
             /// @brief Set triangular faces (each as 3 vertex indices, 0-based).
-            void set_faces(const std::vector<std::array<index_t, 3>>&);
+            TNBGEOM_EXPORT void set_faces(const std::vector<std::array<index_t, 3>>&);
             /// @brief Build per-face adjacency (across edges) for triangle walking.
-            void build_adjacency();
+            TNBGEOM_EXPORT void build_adjacency();
 
             /// @return Number of vertices
             TNBGEOM_ND_EXPORT index_t vertex_count() const;
@@ -179,15 +180,15 @@ namespace tonb::geometry::field {
         };
 
         // Constructors
-        explicit MeshInterpolator2d(const TriMesh&, int grid_cells_per_axis=-1);
+        explicit TNBGEOM_EXPORT MeshInterpolator2d(const TriMesh&, int grid_cells_per_axis=-1);
 
-        MeshInterpolator2d(const MeshInterpolator2d&);
-        MeshInterpolator2d(MeshInterpolator2d&&) noexcept;
+        TNBGEOM_EXPORT MeshInterpolator2d(const MeshInterpolator2d&);
+        TNBGEOM_EXPORT MeshInterpolator2d(MeshInterpolator2d&&) noexcept;
 
-        MeshInterpolator2d& operator=(const MeshInterpolator2d&);
-        MeshInterpolator2d& operator=(MeshInterpolator2d&&) noexcept;
+        TNBGEOM_EXPORT MeshInterpolator2d& operator=(const MeshInterpolator2d&);
+        TNBGEOM_EXPORT MeshInterpolator2d& operator=(MeshInterpolator2d&&) noexcept;
 
-        ~MeshInterpolator2d();
+        TNBGEOM_EXPORT ~MeshInterpolator2d();
 
         // Public functions and operators
 

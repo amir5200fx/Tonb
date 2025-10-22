@@ -21,6 +21,7 @@
 #cmakedefine01 TONB_WITH_OCCT
 #cmakedefine01 TONB_WITH_CGAL
 #cmakedefine01 TONB_WITH_EIGEN
+#cmakedefine01 TONB_WITH_VTK
 
 // Convenience aliases (if you prefer HAS_* names)
 #if TONB_WITH_OCCT
@@ -41,10 +42,26 @@
   #define TONB_HAS_EIGEN 0
 #endif
 
+#if TONB_WITH_VTK
+   #define TONB_HAS_VTK 1
+#else
+   #define TONB_HAS_VTK 0
+#endif
+
+/* If Cmake figured out the VTK major, it will #define this to a number
+   Otherwise it will leave it undefined and we'll derive it from vtkversion.h */
+#cmakedefine TONB_VTK_MAJOR @TONB_VTK_MAJOR@
+
+#if TONB_WIT_VTK && !defined(TONB_VTK_MAJOR)
+    #include <vtkVersion.h> // provides VTK_MAJOR_VERSION
+    #define TONB_VTK_MAJOR VTK_MAJOR_VERSION
+#endif
+
 // Optional: a compact compile-time string for logging/banners
 #define TONB_FEATURES_OCCT   (TONB_HAS_OCCT ? "on" : "off")
 #define TONB_FEATURES_CGAL   (TONB_HAS_CGAL ? "on" : "off")
 #define TONB_FEATURES_EIGEN  (TONB_HAS_EIGEN ? "on" : "off")
+#define TONB_FEATURES_VTK    (TONB_HAS_VTK ? "on" : "off")
 
 /* Keep old name if you prefer it in headers */
 #define TONB_HAS_OCCT_ADAPTERS TONB_HAS_OCCT
