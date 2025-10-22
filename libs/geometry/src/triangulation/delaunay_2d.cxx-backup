@@ -1,0 +1,360 @@
+//
+// Created by amir on 8/29/25.
+//
+#include <tonb/geometry/triangulation/delaunay_2d.hxx>
+
+#include <tonb/geometry/tools.hxx>
+
+#include <iostream>
+
+using namespace tonb;
+using namespace tonb::geometry;
+
+#include <cassert>
+#include <cmath>
+#include <limits>
+#include <algorithm>
+
+namespace {
+
+    struct Mesh {
+        std::vector<Pnt2d> P;                      // all points, original then super triangle
+        std::vector<std::array<index_t,3>> V;          // triangle -> vertex indices
+        std::vector<std::array<index_t,3>> N;          // triangle -> neighbour triangle ids, -1 if none
+
+        int add_tri(const std::array<index_t,3> v, const std::array<index_t,3> n = {-1,-1,-1}) {
+            V.push_back(v);
+            N.push_back(n);
+            return static_cast<int>(V.size()) - 1;
+        }
+    };
+
+    struct WalkContext {
+        const std::vector<Pnt2d>* P{};
+        const std::vector<std::array<index_t,3>>* V{};
+        const std::vector<std::array<index_t,3>>* N{};
+    };
+
+    // find a triangle that contains point pIdx using a walking strategy.
+    // seedTri is a hint; if invalid, start at 0.
+    index_t locate_triangle_iter(const WalkContext& ctx, const index_t seedTri, const index_t pIdx) {
+        assert(pIdx >= 0 && pIdx < static_cast<int>(ctx.P->size()));
+        if (ctx.V->empty()) return -1;
+        index_t t = (seedTri >= 0 && seedTri < static_cast<index_t>(ctx.V->size())) ? seedTri : 0;
+        const Pnt2d& p = (*ctx.P)[pIdx];
+
+        // walk until p is inside triangle t, or we fail
+        for (index_t iter=0; iter < static_cast<index_t>(ctx.V->size())*2; ++iter) {
+            const auto& tri = (*ctx.V)[t];
+            const Pnt2d& a = (*ctx.P)[tri[0]];
+            const Pnt2d& b = (*ctx.P)[tri[1]];
+            const Pnt2d& c = (*ctx.P)[tri[2]];
+
+            const real o0 = Tools::orient(a,b,p);
+            const real o1 = Tools::orient(b,c,p);
+            const real o2 = Tools::orient(c,a,p);
+
+            if (o0 >= 0 && o1 >= 0 && o2 >= 0) return t; // inside or on edges for CCW
+
+            // choose an edge to cross. If outside across ab, go to neighbour opposite ab, etc.
+            const auto& neigh = (*ctx.N)[t];
+            if (o0 < 0 && neigh[2] != -1) { t = neigh[2]; continue; } // opposite ab is index 2
+            if (o1 < 0 && neigh[0] != -1) { t = neigh[0]; continue; } // opposite bc is index 0
+            if (o2 < 0 && neigh[1] != -1) { t = neigh[1]; continue; } // opposite ca is index 1
+
+            // no neighbour to cross. give up
+            return -1;
+        }
+        return -1;
+    }
+
+    // returns local index (0,1,2) of vertex v in tri, or -1
+    inline index_t local_index_of(const std::array<index_t,3>& tri, const index_t v) {
+        for (index_t i=0;i<3;++i) if (tri[i]==v) return i;
+        return -1;
+    }
+
+    // link triangle a's edge ea to triangle b, and symmetrically link b's corresponding edge.
+    void link_neighbors(Mesh& m, const index_t a, const index_t ea, const index_t b) {
+        m.N[a][ea] = b;
+        if (b >= 0) {
+            // find which edge of b faces a
+            const auto& vb = m.V[b];
+            const auto& va = m.V[a];
+            // edge ea of a is the edge opposite vertex va[ea]
+            // find shared edge in b: the two vertices that are not vb[k]
+            // we search by matching the two vertices of the edge
+            index_t avOpp = va[ea];
+            // the edge endpoints in a are the other two vertices
+            const index_t av0 = va[(ea+1)%3], av1 = va[(ea+2)%3];
+            // find which edge in b has the same pair (order independent)
+            for (index_t eb=0; eb<3; ++eb) {
+                const index_t bv1 = vb[(eb+2)%3];
+                if (const index_t bv0 = vb[(eb+1)%3]; (bv0==av0 && bv1==av1) || (bv0==av1 && bv1==av0)) {
+                    m.N[b][eb] = a;
+                    return;
+                }
+            }
+        }
+    }
+
+    // helper: ensure CCW for stored triangles
+    inline double orient(const Pnt2d& A, const Pnt2d& B, const Pnt2d& C){
+        return (B.x()-A.x())*(C.y()-A.y()) - (B.y()-A.y())*(C.x()-A.x());
+    }
+
+    // inline void ensure_ccw(const std::vector<Pnt2d>& P, std::array<int,3>& t){
+    //     if (orient(P[t[0]], P[t[1]], P[t[2]]) <= 0.0) std::swap(t[1], t[2]);
+    // }
+
+    // helper: find local edge index in tri whose edge has endpoints (u,v)
+    inline void ensure_ccw(const std::vector<Pnt2d>& P, std::array<index_t,3>& t) {
+        const auto &A=P[t[0]], &B=P[t[1]], &C=P[t[2]];
+        const double o = (B.x()-A.x())*(C.y()-A.y()) - (B.y()-A.y())*(C.x()-A.x());
+        if (o <= 0.0) std::swap(t[1], t[2]);
+    }
+
+    inline int edge_index_of(const std::array<index_t,3>& T, index_t u, index_t v){
+        for (int e=0;e<3;++e){
+            index_t a=T[(e+1)%3], b=T[(e+2)%3];
+            if ((a==u && b==v) || (a==v && b==u)) return e;
+        }
+        return -1;
+    }
+
+
+    bool try_flip(Mesh& m, index_t tL, index_t tR) {
+    if (tL < 0 || tR < 0) return false;
+
+    const auto vL = m.V[tL];
+    const auto vR = m.V[tR];
+
+    // shared edge A-B, opposites C (in tL) and D (in tR)
+    index_t A=-1,B=-1,C=-1,D=-1, shared[2]; int sc=0;
+    for (int i=0;i<3;++i) {
+        bool inR = (vR[0]==vL[i] || vR[1]==vL[i] || vR[2]==vL[i]);
+        if (inR) shared[sc++] = vL[i]; else C = vL[i];
+    }
+    if (sc!=2) return false;
+    A = shared[0]; B = shared[1];
+    for (int i=0;i<3;++i) if (vR[i]!=A && vR[i]!=B) { D=vR[i]; break; }
+    if (C<0 || D<0) return false;
+
+    const Pnt2d &a=m.P[A], &b=m.P[B], &c=m.P[C], &d=m.P[D];
+    const double o   = (b.x()-a.x())*(c.y()-a.y()) - (b.y()-a.y())*(c.x()-a.x());
+    const double det = Tools::in_circle_fast(a,b,c,d);   // >0 means inside if (a,b,c) is CCW
+    const bool illegal = (o > 0.0) ? (det > 0.0) : (det < 0.0);
+    if (!illegal) return false;                          // do NOT flip legal edges
+
+    // neighbours around old pair (by vertex positions, not guessed indices)
+    int ia = local_index_of(vL, A), ib = local_index_of(vL, B), ic = local_index_of(vL, C);
+    int ja = local_index_of(vR, A), jb = local_index_of(vR, B), jd = local_index_of(vR, D);
+    index_t nBC = m.N[tL][ia];  // across (B,C)
+    index_t nCA = m.N[tL][ib];  // across (C,A)
+    index_t nBD = m.N[tR][ja];  // across (B,D)
+    index_t nDA = m.N[tR][jb];  // across (D,A)
+
+    // rewrite triangles and enforce CCW
+    m.V[tL] = {C, A, D};
+    m.V[tR] = {D, B, C};
+    ensure_ccw(m.P, m.V[tL]);
+    ensure_ccw(m.P, m.V[tR]);
+    m.N[tL] = {-1,-1,-1};
+    m.N[tR] = {-1,-1,-1};
+
+    auto link_by_edge = [&](index_t T, index_t u, index_t v, index_t U){
+        int eT = edge_index_of(m.V[T], u, v);
+        assert(eT>=0);                               // triangles must share this edge
+        link_neighbors(m, T, eT, U);                 // symmetric by endpoints
+    };
+
+    // new shared edge (C,D)
+    link_by_edge(tL, C, D, tR);
+    link_by_edge(tR, C, D, tL);
+
+    // reattach outside neighbours to the correct edges
+    if (nBC >= 0) link_by_edge(tR, B, C, nBC);
+    if (nCA >= 0) link_by_edge(tL, C, A, nCA);
+    if (nBD >= 0) link_by_edge(tR, B, D, nBD);
+    if (nDA >= 0) link_by_edge(tL, D, A, nDA);
+
+    return true;
+}
+
+
+    // Build a super triangle that encloses all points, return indices of the three new points
+    std::array<index_t, 3> add_supper_triangle(Mesh& m, std::span<const Pnt2d> pts) {
+        double xmin=+std::numeric_limits<double>::infinity();
+        double ymin=+std::numeric_limits<double>::infinity();
+        double xmax=-xmin, ymax=-ymin;
+        for (auto& p : pts) {
+            xmin = std::min(xmin, p.x()); xmax = std::max(xmax, p.x());
+            ymin = std::min(ymin, p.y()); ymax = std::max(ymax, p.y());
+        }
+
+        const double cx = 0.5*(xmin+xmax);
+        const double cy = 0.5*(ymin+ymax);
+        const double span = std::max(xmax-xmin, ymax-ymin);
+        const double k = 10.0;
+
+        const int s0 = static_cast<int>(m.P.size()); m.P.emplace_back(cx - k*span, cy - span);
+        const int s1 = static_cast<int>(m.P.size()); m.P.emplace_back(cx + k*span, cy - span);
+        const int s2 = static_cast<int>(m.P.size()); m.P.emplace_back(cx,           cy + k*span);
+        // single initial triangle
+        m.add_tri({s0,s1,s2}, {-1,-1,-1});
+        return {s0,s1,s2};
+    }
+
+    // inline void ensure_ccw(const std::vector<Pnt2d>& P, std::array<index_t,3>& t) {
+    //     const auto& A = P[t[0]], &B = P[t[1]], &C = P[t[2]];
+    //     const double o = (B.x()-A.x())*(C.y()-A.y()) - (B.y()-A.y())*(C.x()-A.x());
+    //     if (o <= 0.0) std::swap(t[1], t[2]); // enforce CCW
+    // }
+
+}
+
+triangulation::Delaunay2D::TriMesh triangulation::Delaunay2D::triangulate(std::span<const Pnt2d> pts, triangulation::Delaunay2DOptions opt) {
+    TriMesh out;
+    out.points.assign(pts.begin(), pts.end());
+
+    Mesh m;
+    m.P = out.points; // start with original points
+    const auto s = add_supper_triangle(m, pts);
+
+    const WalkContext wctx{ &m.P, &m.V, &m.N };
+
+    index_t seed = 0;
+    // insert each original point by index
+    for (index_t ip = 0; ip < static_cast<index_t>(pts.size()); ++ip) {
+        //std::cout<<"\n ****************iteration = "<<ip<<"\n";
+        // locate containing triangle
+        index_t t = locate_triangle_iter(wctx, seed, ip);
+        //std::cout<<"current triangle = "<<t<<std::endl;
+        if (t < 0) {
+            // fallback: linear scan
+            for (index_t k=0;k<static_cast<index_t>(m.V.size());++k) { if (locate_triangle_iter(wctx, k, ip) >= 0) { t=k; break; } }
+            if (t < 0) continue; // degenerate input or duplicate point
+        }
+        seed = t;
+
+        // split triangle t into three
+        auto tri = m.V[t];
+        auto nei = m.N[t];
+        const index_t t0 = t;
+        const index_t t1 = m.add_tri({tri[1], tri[2], ip}); ensure_ccw(m.P, m.V[t1]);
+        const index_t t2 = m.add_tri({tri[2], tri[0], ip}); ensure_ccw(m.P, m.V[t2]);
+
+        // std::cout<<"tri = "<<tri[0] <<", "<<tri[1]<<", "<<tri[2]<<std::endl;
+        // std::cout<<"neigh = "<<nei[0]<<", "<<nei[1]<<", "<<nei[2]<<std::endl;
+        // std::cout<<std::endl;
+
+        // rewrite t0 as {tri[0], tri[1], ip}
+        m.V[t0] = {tri[0], tri[1], ip}; ensure_ccw(m.P, m.V[t0]);
+
+        // std::cout<<"current list = \n";
+        // for (auto tt: m.V) {
+        //     std::cout<<tt[0]<<", "<<tt[1]<<", "<<tt[2]<<std::endl;
+        // }
+        // std::cout<<"end of current list\n";
+
+        // reset neighbours,
+        m.N[t0] = {-1,-1,-1};
+        m.N[t1] = {-1,-1,-1};
+        m.N[t2] = {-1,-1,-1};
+
+        // wire the three new triangles as a fan around ip
+        // Opposite index 2 is the edge made of the first two vertices in our order
+        link_neighbors(m, t0, 0, t1);
+        link_neighbors(m, t1, 0, t2);
+        link_neighbors(m, t2, 0, t0);
+
+        // reattach the three external neighbours of old t to the new fan edges
+        // old t neighbours: nei[0] opposite tri[0], nei[1] opposite tri[1], nei[2] opposite tri[2]
+        if (nei[0] >= 0) link_neighbors(m, t1, 2, nei[0]); // edge (tri[1],tri[2])
+        if (nei[1] >= 0) link_neighbors(m, t2, 2, nei[1]); // edge (tri[2],tri[0])
+        if (nei[2] >= 0) link_neighbors(m, t0, 2, nei[2]); // edge (tri[0],tri[1])
+
+        // legalise edges around ip with local flips
+        bool changed = true;
+        index_t safety = 0;
+        // std::cout<<"before reconnecting: \n";
+        // std::cout<< "t0 = " <<m.V[t0][0]<<", "<<m.V[t0][1]<<", "<<m.V[t0][2]<<"\n";
+        // std::cout<< "t1 = " <<m.V[t1][0]<<", "<<m.V[t1][1]<<", "<<m.V[t1][2]<<"\n";
+        // std::cout<< "t2 = " <<m.V[t2][0]<<", "<<m.V[t2][1]<<", "<<m.V[t2][2]<<"\n";
+        //
+        // std::cout<< "n0 = " <<m.N[t0][0]<<", "<<m.N[t0][1]<<", "<<m.N[t0][2]<<"\n";
+        // std::cout<< "n1 = " <<m.N[t1][0]<<", "<<m.N[t1][1]<<", "<<m.N[t1][2]<<"\n";
+        // std::cout<< "n2 = " <<m.N[t2][0]<<", "<<m.N[t2][1]<<", "<<m.N[t2][2]<<"\n";
+        // std::cout<<"\n";
+
+        //std::system("pause");
+
+        // while (changed && safety++ < 1000) {
+        //     changed = false;
+        //     // check neighbours of the three affected triangles and flip if needed
+        //     const index_t candidates[3] = {t0,t1,t2};
+        //     for (index_t c = 0; c < 3; ++c) {
+        //         const index_t triId = candidates[c];
+        //         for (index_t e = 0; e < 3; ++e) {
+        //             const index_t nb = m.N[triId][e];
+        //             if (nb < 0) continue;
+        //             // if shared edge is illegal, flip
+        //             if (try_flip(m, triId, nb)) { changed = true; }
+        //         }
+        //     }
+        // }
+
+        struct EdgeRef{ index_t t,e; };
+        std::vector<EdgeRef> stack;
+        auto push_edge = [&](index_t t, index_t e){
+            if (t>=0 && e>=0 && e<3 && m.N[t][e] >= 0) stack.push_back({t,e});
+        };
+
+        push_edge(t0,0); push_edge(t1,0); push_edge(t2,0);  // central fan edges
+
+        while (!stack.empty()){
+            auto [ta,ea] = stack.back(); stack.pop_back();
+            index_t tb = m.N[ta][ea]; if (tb < 0) continue;
+            if (try_flip(m, ta, tb)) {
+                for (int e=0;e<3;++e) { push_edge(ta,e); push_edge(tb,e); }
+            }
+        }
+
+        // std::cout<<"after reconnecting: \n";
+        // std::cout<< "t0 = " <<m.V[t0][0]<<", "<<m.V[t0][1]<<", "<<m.V[t0][2]<<"\n";
+        // std::cout<< "t1 = " <<m.V[t1][0]<<", "<<m.V[t1][1]<<", "<<m.V[t1][2]<<"\n";
+        // std::cout<< "t2 = " <<m.V[t2][0]<<", "<<m.V[t2][1]<<", "<<m.V[t2][2]<<"\n";
+        //
+        // std::cout<< "n0 = " <<m.N[t0][0]<<", "<<m.N[t0][1]<<", "<<m.N[t0][2]<<"\n";
+        // std::cout<< "n1 = " <<m.N[t1][0]<<", "<<m.N[t1][1]<<", "<<m.N[t1][2]<<"\n";
+        // std::cout<< "n2 = " <<m.N[t2][0]<<", "<<m.N[t2][1]<<", "<<m.N[t2][2]<<"\n";
+        // std::cout<<"\n";
+    }
+
+    // remove triangles that include any super-triangle vertex
+    const auto isSuper = [&](const index_t v){ return v==s[0] || v==s[1] || v==s[2]; };
+    std::vector<index_t> remap(m.V.size(), -1);
+    //std::cout<<"triangles ....\n";
+    for (index_t i = 0; i < static_cast<index_t>(m.V.size()); ++i) {
+        const auto& v = m.V[i];
+        //std::cout<<"v0 = "<<v[0]<<", v1 ="<< v[1]<<", v2 ="<<v[2]<<"\n";
+        if (isSuper(v[0]) || isSuper(v[1]) || isSuper(v[2])) continue;
+        remap[i] = static_cast<index_t>(out.tris.size());
+        out.tris.emplace_back(v);
+    }
+
+    if (opt.build_neighbors) {
+        out.neigh.reserve(out.tris.size());
+        for (index_t i=0;i<static_cast<index_t>(m.V.size());++i) {
+            if (remap[i] < 0) continue;
+            std::array<index_t,3> nn{-1,-1,-1};
+            for (index_t e = 0; e < 3; ++e) {
+                const index_t nb = m.N[i][e];
+                nn[e] = (nb>=0 && remap[nb]>=0) ? remap[nb] : -1;
+            }
+            out.neigh.emplace_back(nn);
+        }
+    }
+
+    return out;
+}
