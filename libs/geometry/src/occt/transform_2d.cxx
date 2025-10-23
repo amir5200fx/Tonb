@@ -8,6 +8,7 @@
 #include <tonb/geometry/occt/point_2d.hxx>
 #include <tonb/geometry/occt/axis_2d.hxx>
 #include <tonb/geometry/occt/vector_2d.hxx>
+#include <tonb/geometry/occt/direction_2d.hxx>
 #include <tonb/geometry/occt/core/transform_2d_helpers.hxx>
 #include <tonb/geometry/occt/core/point_2d_helpers.hxx>
 #include <tonb/geometry/occt/core/axis_2d_helpers.hxx>
