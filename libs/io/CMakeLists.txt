@@ -2,45 +2,45 @@
 add_library(TonbIO)
 add_library(Tonb::IO ALIAS TonbIO)
 
-if (TONB_WITH_OCCT)
-    # Prefer the config package (vcpkg, official builds)
-    find_package(OpenCASCADE CONFIG REQUIRED)
-    if (NOT OpenCASCADE_FOUND)
-        find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
-    endif ()
-
-    if (NOT OpenCASCADE_FOUND)
-        message(FATAL_ERROR "OpenCASCADE not found. Install with:
-        - vcpkg: vcpkg install opencascade
-        - Ubuntu: sudo apt-get install libocct-dev
-        - Windows: vcpkg install opencascade:x64-windows"
-        )
-    endif ()
-
-    set(OCCT_LIBS)
-    foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath)
-        if (TARGET OpenCASCADE::${lib})
-            list(APPEND OCCT_LIBS OpenCASCADE::${lib})
-        elseif(TARGET ${lib})
-            list(APPEND OCCT_LIBS ${lib})
-        else ()
-            message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
-        endif ()
-    endforeach ()
-    target_link_libraries(TonbIO PUBLIC ${OCCT_LIBS})
-    add_library(TonbIOOcctAdapters INTERFACE)
-    add_library(Tonb::IOOcctAdapters ALIAS TonbIOOcctAdapters)
-    target_link_libraries(TonbIOOcctAdapters INTERFACE Tonb::IO OpenCASCADE::FoundationClasses)
-    target_compile_definitions(TonbIOOcctAdapters INTERFACE TONB_HAS_OCCT_ADAPTERS=1)
-
-    # Install the interface target
-    install(TARGETS TonbIOOcctAdapters EXPORT TonbTargets)
-
-    # Install the adapter header only when ON
-#    install(FILES include/tonb/io/occt/core/adapters.hxx
-#            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tonb/io/occt
-#    )
-endif ()
+#if (TONB_WITH_OCCT)
+#    # Prefer the config package (vcpkg, official builds)
+#    find_package(OpenCASCADE CONFIG REQUIRED)
+#    if (NOT OpenCASCADE_FOUND)
+#        find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
+#    endif ()
+#
+#    if (NOT OpenCASCADE_FOUND)
+#        message(FATAL_ERROR "OpenCASCADE not found. Install with:
+#        - vcpkg: vcpkg install opencascade
+#        - Ubuntu: sudo apt-get install libocct-dev
+#        - Windows: vcpkg install opencascade:x64-windows"
+#        )
+#    endif ()
+#
+#    set(OCCT_LIBS)
+#    foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath)
+#        if (TARGET OpenCASCADE::${lib})
+#            list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+#        elseif(TARGET ${lib})
+#            list(APPEND OCCT_LIBS ${lib})
+#        else ()
+#            message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+#        endif ()
+#    endforeach ()
+#    target_link_libraries(TonbIO PUBLIC ${OCCT_LIBS})
+#    add_library(TonbIOOcctAdapters INTERFACE)
+#    add_library(Tonb::IOOcctAdapters ALIAS TonbIOOcctAdapters)
+#    target_link_libraries(TonbIOOcctAdapters INTERFACE Tonb::IO OpenCASCADE::FoundationClasses)
+#    target_compile_definitions(TonbIOOcctAdapters INTERFACE TONB_HAS_OCCT_ADAPTERS=1)
+#
+#    # Install the interface target
+#    install(TARGETS TonbIOOcctAdapters EXPORT TonbTargets)
+#
+#    # Install the adapter header only when ON
+##    install(FILES include/tonb/io/occt/core/adapters.hxx
+##            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tonb/io/occt
+##    )
+#endif ()
 
 # My library target
 set_target_properties(TonbIO PROPERTIES

@@ -6,7 +6,7 @@ if (TONB_WITH_OCCT)
     # Prefer the config package (vcpkg, official builds)
     find_package(OpenCASCADE CONFIG REQUIRED)
     if (NOT OpenCASCADE_FOUND)
-        find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
+        find_package(OpenCASCADE CONFIG QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
     endif ()
 
     if (NOT OpenCASCADE_FOUND)
@@ -17,16 +17,35 @@ if (TONB_WITH_OCCT)
         )
     endif ()
 
+    # Prefer aggregate component targets on Debian/Ubuntu,
+    # fall back to per-toolkit names if available (vcpkg, upstream builds).
     set(OCCT_LIBS)
-    foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath TKGeomBase)
-        if (TARGET OpenCASCADE::${lib})
-            list(APPEND OCCT_LIBS OpenCASCADE::${lib})
-        elseif(TARGET ${lib})
-            list(APPEND OCCT_LIBS ${lib})
-        else ()
-            message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
-        endif ()
-    endforeach ()
+
+    if (TARGET OpenCASCADE::FoundationClasses
+            AND TARGET OpenCASCADE::ModelingData
+            AND TARGET OpenCASCADE::ModelingAlgorithms
+            AND TARGET OpenCASCADE::Visualization
+            AND TARGET OpenCASCADE::DataExchange)
+
+        list(APPEND OCCT_LIBS
+                OpenCASCADE::FoundationClasses
+                OpenCASCADE::ModelingData
+                OpenCASCADE::ModelingAlgorithms
+                OpenCASCADE::Visualization
+                OpenCASCADE::DataExchange)
+
+    else ()
+        foreach (lib TKGeomAlgo TKernel TKG2d TKG3d TKMath TKGeomBase)
+            if (TARGET OpenCASCADE::${lib})
+                list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+            elseif(TARGET ${lib})
+                list(APPEND OCCT_LIBS ${lib})
+            else ()
+                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+            endif ()
+        endforeach ()
+    endif ()
+
     add_library(TonbOcctAdapters INTERFACE)
     add_library(Tonb::OcctAdapters ALIAS TonbOcctAdapters)
     target_link_libraries(TonbGeometry PUBLIC ${OCCT_LIBS})

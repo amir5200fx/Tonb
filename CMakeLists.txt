@@ -5,8 +5,9 @@ cmake_policy(SET CMP0167 NEW)
 
 # Enable vcpkg integration
 # Only set if the user didn't already pass - DCMAKE_TOOLCHAIN_FILE=...
+option(TONB_ENABLE_VCPKG "Use vcpkg toolchain" ON)
 if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    if (DEFINED ENV{VCPKG_ROOT})
+    if (TONB_ENABLE_VCPKG AND DEFINED ENV{VCPKG_ROOT})
         # CMake is fine with forward slashes on all platforms
         set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "Vcpkg toolchain file" FORCE)
         message(STATUS "Using vcpkg toolchain: ${CMAKE_TOOLCHAIN_FILE}")

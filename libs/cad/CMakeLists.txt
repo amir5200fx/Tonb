@@ -17,22 +17,42 @@ if (TONB_WITH_OCCT)
         )
     endif ()
 
-    # Core (you already had these)
-    set(OCCT_CORE TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
-
-    # Data exchange (needed for your errors)
-    set(OCCT_XS   TKXSBase TKDEIGES TKDESTEP)
-
+    # Prefer aggregate component targets on Debian/Ubuntu,
+    # fall back to per-toolkit names if available (vcpkg, upstream builds).
     set(OCCT_LIBS)
-    foreach(lib ${OCCT_CORE} ${OCCT_XS})
-        if (TARGET OpenCASCADE::${lib})
-            list(APPEND OCCT_LIBS OpenCASCADE::${lib})
-        elseif (TARGET ${lib})
-            list(APPEND OCCT_LIBS ${lib})
-        else()
-            message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
-        endif()
-    endforeach()
+
+    # Aggregate targets available on Ubuntu (24.04):
+    if (TARGET OpenCASCADE::FoundationClasses
+        AND TARGET OpenCASCADE::ModelingData
+        AND TARGET OpenCASCADE::ModelingAlgorithms
+        AND TARGET OpenCASCADE::Visualization
+        AND TARGET OpenCASCADE::DataExchange)
+
+        list(APPEND OCCT_LIBS
+            OpenCASCADE::FoundationClasses
+            OpenCASCADE::ModelingData
+            OpenCASCADE::ModelingAlgorithms
+            OpenCASCADE::Visualization
+            OpenCASCADE::DataExchange)
+
+    else ()
+        # Per-toolkit targets (common with vcpkg / official builds)
+        # Core (you already had these)
+        set(OCCT_CORE TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
+
+        # Data exchange (needed for your errors)
+        set(OCCT_XS   TKXSBase TKDEIGES TKDESTEP)
+
+        foreach(lib ${OCCT_CORE} ${OCCT_XS})
+            if (TARGET OpenCASCADE::${lib})
+                list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+            elseif (TARGET ${lib})
+                list(APPEND OCCT_LIBS ${lib})
+            else()
+                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+            endif()
+        endforeach()
+    endif ()
 
     target_link_libraries(TonbCAD PUBLIC ${OCCT_LIBS})
     add_library(TonbCADOcctAdapters INTERFACE)
