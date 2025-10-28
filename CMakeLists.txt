@@ -19,7 +19,7 @@ endif ()
 project(Tonb
         VERSION 0.20.0
         DESCRIPTION "TONB multi-library workspace"
-        LANGUAGES CXX)
+        LANGUAGES C CXX)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
 option(TONB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)

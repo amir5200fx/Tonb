@@ -17,6 +17,11 @@ if (TONB_WITH_OCCT)
         )
     endif ()
 
+    # --- Put OCCT's include root on the path so inner headers resolve
+    if (DEFINED OpenCASCADE_INCLUDE_DIR)
+        target_include_directories(TonbGeometry PUBLIC ${OpenCASCADE_INCLUDE_DIR})
+    endif ()
+
     # Prefer aggregate component targets on Debian/Ubuntu,
     # fall back to per-toolkit names if available (vcpkg, upstream builds).
     set(OCCT_LIBS)

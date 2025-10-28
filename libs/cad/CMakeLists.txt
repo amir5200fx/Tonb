@@ -3,65 +3,161 @@ add_library(TonbCAD)
 add_library(Tonb::CAD ALIAS TonbCAD)
 
 if (TONB_WITH_OCCT)
-    # Prefer the config package (vcpkg, official builds)
-    find_package(OpenCASCADE CONFIG REQUIRED)
-    if (NOT OpenCASCADE_FOUND)
-        find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
-    endif ()
+
+    # 1) Prefer official CONFIG package with components
+    #    (vcpkg, upstream installs, some distros)
+    find_package(OpenCASCADE CONFIG QUIET
+            COMPONENTS FoundationClasses ModelingData ModelingAlgorithms Visualization DataExchange)
 
     if (NOT OpenCASCADE_FOUND)
-        message(FATAL_ERROR "OpenCASCADE not found. Install with:
-        - vcpkg: vcpkg install opencascade
-        - Ubuntu: sudo apt-get install libocct-dev
-        - Windows: vcpkg install opencascade:x64-windows"
-        )
-    endif ()
+        # 2) Fallback to legacy find-module that populates *_LIBRARIES / *_INCLUDE_DIR
+        find_package(OpenCASCADE QUIET)
+    endif()
 
-    # Prefer aggregate component targets on Debian/Ubuntu,
-    # fall back to per-toolkit names if available (vcpkg, upstream builds).
-    set(OCCT_LIBS)
+    set(OCCT_LIBS "")
 
-    # Aggregate targets available on Ubuntu (24.04):
     if (TARGET OpenCASCADE::FoundationClasses
-        AND TARGET OpenCASCADE::ModelingData
-        AND TARGET OpenCASCADE::ModelingAlgorithms
-        AND TARGET OpenCASCADE::Visualization
-        AND TARGET OpenCASCADE::DataExchange)
+            AND TARGET OpenCASCADE::ModelingData
+            AND TARGET OpenCASCADE::ModelingAlgorithms
+            AND TARGET OpenCASCADE::Visualization
+            AND TARGET OpenCASCADE::DataExchange)
 
+        # Aggregate high-level targets (Debian/Ubuntu or modern exports)
         list(APPEND OCCT_LIBS
-            OpenCASCADE::FoundationClasses
-            OpenCASCADE::ModelingData
-            OpenCASCADE::ModelingAlgorithms
-            OpenCASCADE::Visualization
-            OpenCASCADE::DataExchange)
+                OpenCASCADE::FoundationClasses
+                OpenCASCADE::ModelingData
+                OpenCASCADE::ModelingAlgorithms
+                OpenCASCADE::Visualization
+                OpenCASCADE::DataExchange)
 
-    else ()
-        # Per-toolkit targets (common with vcpkg / official builds)
-        # Core (you already had these)
-        set(OCCT_CORE TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
+    elseif (OpenCASCADE_FOUND AND OpenCASCADE_LIBRARIES)
+        # Legacy find-module variables
+        target_include_directories(TonbCAD PUBLIC ${OpenCASCADE_INCLUDE_DIR})
+        list(APPEND OCCT_LIBS ${OpenCASCADE_LIBRARIES})
 
-        # Data exchange (needed for your errors)
-        set(OCCT_XS   TKXSBase TKDEIGES TKDESTEP)
+    else()
+        # 3) Last resort: tolerate both naming families for per-toolkit libs
+        #    Works with Ubuntu exports (TKIGES/TKSTEP*) and newer TKDE* names.
+        set(_OCCT_CORE
+                TKernel TKG2d TKG3d TKMath TKBRep TKGeomBase TKGeomAlgo TKTopAlgo TKPrim)
 
-        foreach(lib ${OCCT_CORE} ${OCCT_XS})
+        set(_OCCT_XS_CANDIDATES
+                OpenCASCADE::DataExchange
+                OpenCASCADE::TKDEIGES OpenCASCADE::TKDESTEP OpenCASCADE::TKXSBase
+                OpenCASCADE::TKIGES   OpenCASCADE::TKSTEP    OpenCASCADE::TKSTEPAttr
+                OpenCASCADE::TKSTEPBase OpenCASCADE::TKSTEP209 OpenCASCADE::TKSTEPCAF
+                TKDEIGES TKDESTEP TKXSBase
+                TKIGES   TKSTEP    TKSTEPAttr TKSTEPBase TKSTEP209 TKSTEPCAF)
+
+        # Collect core
+        foreach(lib ${_OCCT_CORE})
             if (TARGET OpenCASCADE::${lib})
                 list(APPEND OCCT_LIBS OpenCASCADE::${lib})
             elseif (TARGET ${lib})
                 list(APPEND OCCT_LIBS ${lib})
-            else()
-                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
             endif()
         endforeach()
-    endif ()
+
+        # Collect at least one data-exchange lib
+        set(_found_xs FALSE)
+        foreach(lib ${_OCCT_XS_CANDIDATES})
+            if (TARGET ${lib})
+                list(APPEND OCCT_LIBS ${lib})
+                set(_found_xs TRUE)
+            endif()
+        endforeach()
+
+        if (NOT OCCT_LIBS OR NOT _found_xs)
+            message(FATAL_ERROR
+                    "OCCT data-exchange toolkits not found. Your OCCT export may use "
+                    "legacy names (TKIGES/TKSTEP*) or the aggregate OpenCASCADE::DataExchange. "
+                    "Install a build that includes Data Exchange or set OpenCASCADE_DIR.")
+        endif()
+    endif()
 
     target_link_libraries(TonbCAD PUBLIC ${OCCT_LIBS})
+
+    # Small adapter interface target; keep robust for both CONFIG and legacy modes
     add_library(TonbCADOcctAdapters INTERFACE)
     add_library(Tonb::CADOcctAdapters ALIAS TonbCADOcctAdapters)
-    target_link_libraries(TonbCADOcctAdapters INTERFACE Tonb::CAD OpenCASCADE::FoundationClasses)
+
+    if (TARGET OpenCASCADE::FoundationClasses)
+        target_link_libraries(TonbCADOcctAdapters INTERFACE Tonb::CAD OpenCASCADE::FoundationClasses)
+    elseif (OpenCASCADE_FOUND AND OpenCASCADE_LIBRARIES)
+        target_link_libraries(TonbCADOcctAdapters INTERFACE Tonb::CAD ${OpenCASCADE_LIBRARIES})
+        target_include_directories(TonbCADOcctAdapters INTERFACE ${OpenCASCADE_INCLUDE_DIR})
+    else()
+        # Last-resort: try plain TKernel when neither of the above is available
+        if (TARGET TKernel)
+            target_link_libraries(TonbCADOcctAdapters INTERFACE Tonb::CAD TKernel)
+        else()
+            message(FATAL_ERROR "Cannot wire TonbCADOcctAdapters: no OCCT core target visible.")
+        endif()
+    endif()
+
     target_compile_definitions(TonbCADOcctAdapters INTERFACE TONB_HAS_OCCT_ADAPTERS=1)
 
-    # Install the interface target
     install(TARGETS TonbCADOcctAdapters EXPORT TonbTargets)
+
+#    # Prefer the config package (vcpkg, official builds)
+#    find_package(OpenCASCADE CONFIG REQUIRED)
+#    if (NOT OpenCASCADE_FOUND)
+#        find_package(OpenCASCADE QUIET)  # provides OpenCASCADE_LIBRARIES/INCLUDE_DIR
+#    endif ()
+#
+#    if (NOT OpenCASCADE_FOUND)
+#        message(FATAL_ERROR "OpenCASCADE not found. Install with:
+#        - vcpkg: vcpkg install opencascade
+#        - Ubuntu: sudo apt-get install libocct-dev
+#        - Windows: vcpkg install opencascade:x64-windows"
+#        )
+#    endif ()
+#
+#    # Prefer aggregate component targets on Debian/Ubuntu,
+#    # fall back to per-toolkit names if available (vcpkg, upstream builds).
+#    set(OCCT_LIBS)
+#
+#    # Aggregate targets available on Ubuntu (24.04):
+#    if (TARGET OpenCASCADE::FoundationClasses
+#        AND TARGET OpenCASCADE::ModelingData
+#        AND TARGET OpenCASCADE::ModelingAlgorithms
+#        AND TARGET OpenCASCADE::Visualization
+#        AND TARGET OpenCASCADE::DataExchange)
+#
+#        list(APPEND OCCT_LIBS
+#            OpenCASCADE::FoundationClasses
+#            OpenCASCADE::ModelingData
+#            OpenCASCADE::ModelingAlgorithms
+#            OpenCASCADE::Visualization
+#            OpenCASCADE::DataExchange)
+#
+#    else ()
+#        # Per-toolkit targets (common with vcpkg / official builds)
+#        # Core (you already had these)
+#        set(OCCT_CORE TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
+#
+#        # Data exchange (needed for your errors)
+#        set(OCCT_XS   TKXSBase TKDEIGES TKDESTEP)
+#
+#        foreach(lib ${OCCT_CORE} ${OCCT_XS})
+#            if (TARGET OpenCASCADE::${lib})
+#                list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+#            elseif (TARGET ${lib})
+#                list(APPEND OCCT_LIBS ${lib})
+#            else()
+#                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+#            endif()
+#        endforeach()
+#    endif ()
+
+#    target_link_libraries(TonbCAD PUBLIC ${OCCT_LIBS})
+#    add_library(TonbCADOcctAdapters INTERFACE)
+#    add_library(Tonb::CADOcctAdapters ALIAS TonbCADOcctAdapters)
+#    target_link_libraries(TonbCADOcctAdapters INTERFACE Tonb::CAD OpenCASCADE::FoundationClasses)
+#    target_compile_definitions(TonbCADOcctAdapters INTERFACE TONB_HAS_OCCT_ADAPTERS=1)
+#
+#    # Install the interface target
+#    install(TARGETS TonbCADOcctAdapters EXPORT TonbTargets)
 
     # Install the adapter header only when ON
 #    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/tonb/geometry/occt/adapters.hxx
