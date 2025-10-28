@@ -68,7 +68,8 @@ namespace tonb::geometry::meta {
         constexpr auto& components() noexcept {return components_;}
 
         TNB_NODISCARD constexpr bool contains(const std::size_t i) const noexcept {
-            for (auto x : components_) if (x == i) { return true; } return false;
+          for (auto x : components_) if (x == i) return true;
+          return false;
         }
         void reverse();
         TNB_NODISCARD Connectivity reversed() const noexcept;
