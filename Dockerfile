@@ -1,110 +1,108 @@
-FROM ubuntu:24.04 AS builder
-LABEL authors="amir"
+# --------------------- Tonb Docker (Ubuntu 24.04) -------------------
+# Multi-stage: builder has all toolchains; runtime is slim.
+# Toggle features via --build-arg (defaults match the CMake options).
+
+ARG UBUNTU_VER=24.04
+FROM ubuntu:${UBUNTU_VER} AS builder
+LABEL maintainder="Amir"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Toggles features (match your CMAKE options)
-# Turn VTK OFF if you don't need it; it makes builds large $ slow.
-ARG WITH_OCCT=OFF
+# ---- Feature toggles (match CMake options) ----
+ARG WITH_OCCT=ON
 ARG WITH_CGAL=ON
 ARG WITH_EIGEN=ON
-ARG WITH_VTK=OFF
+ARG WITH_VTK=ON
 ARG BUILD_DOCS=OFF
-ARG BUIL_TESTING=OFF
+ARG BUILD_TESTING=OFF
 ARG BUILD_SHARED_LIBS=ON
 ARG CMAKE_BUILD_TYPE=Release
 
-ARG CMAKE_VERSION=4.1.2
-ARG CMAKE_TAR=cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
-ARG CMAKE_DIR=/opt/cmake-${CMAKE_VERSION}-linux-x86_64
-
-
-
-# ----- Tooling & core libs -----------
-RUN apt-get update && apt-get install -y software-properties-common && \
-    add-apt-repository universe && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    git curl ca-certificates build-essential pkg-config \
-    ninja-build python3 zip unzip tar \
-    autoconf automake libtool m4 gettext yasm nasm \
-    libssl-dev libffi-dev zlib1g-dev \
-    libx11-dev libxext-dev libglu1-mesa-dev libgl1-mesa-dev \
+# ---- Base tools ----
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    build-essential \
+    git \
+    ninja-build \
+    pkg-config \
+    curl \
+    python3 \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Tools needed by vcpkg's python3 port (autoreconf toolchain)
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    autoconf automake m4 libtool libtool-bin gettext texinfo pkg-config \
-    make build-essential \
-    libssl-dev libffi-dev zlib1g-dev \
-  && rm -rf /var/lib/apt/lists/*
+# Install CMake 4.x from kitware
+ARG CMAKE_VER=4.1.2
+RUN curl -fsSL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VER}/cmake-${CMAKE_VER}-linux-x86_64.sh \
+      -o /tmp/cmake-${CMAKE_VER}-linux-x86_64.sh \
+    && chmod +x /tmp/cmake-${CMAKE_VER}-linux-x86_64.sh \
+    && /tmp/cmake-${CMAKE_VER}-linux-x86_64.sh --skip-license --prefix=/usr/local \
+    && rm /tmp/cmake-${CMAKE_VER}-linux-x86_64.sh
 
+# ---- Libraries (installed conditionally to keep image lean) ----
+# Eigen (header-only)
+RUN if [ "$WITH_EIGEN" = "ON" ]; then \
+    apt-get update && apt-get install -y --no-install-recommends libeigen3-dev && \
+    rm -rf /var/lib/apt/list/* ; \
+fi
 
-# Install CMake (prebuilt) and put it first on PATH
-RUN curl -fsSL "https://github.com/Kitware/CMAKE/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}" \
-    -o "/tmp/${CMAKE_TAR}" \
-    && mkdir -p /opt \
-    && tar -xzf "/tmp/${CMAKE_TAR}" -C /opt \
-    && ln -sf ${CMAKE_DIR}/bin/* /usr/local/bin/ \
-    && cmake --version
+# Boost (needed unless TONB_WITH_CEREAL=ON) \
+RUN apt-get update && apt-get install -y --no-install-recommends libboost-all-dev && \
+    rm -rf /var/lib/apt/lists/*
 
-# ---- VCPKG -----
-ENV VCPKG_ROOT=/opt/vcpkg
-ENV VCPKG_FORCE_SYSTEM_BINARIES=1
-ENV VCPKG_DEFAULT_TRIPLET=x64-linux
-ENV VCPKG_BUILD_TYPE=release
-ENV VCPKG_ONLY_RELEASE=1
-ENV VCPKG_FEATURE_FLAGS=manifests,binarycaching,only-release
-# Write cache inside the image layers (or point at an external cache)
-ENV VCPKG_BINARY_SOURCES="clear;default,readwrite"
-
-RUN git clone --depth=1 https://github.com/microsoft/vcpkg.git ${VCPKG_ROOT} \
-    && ${VCPKG_ROOT}/bootstrap-vcpkg.sh -disableMetrics
-
-# ----- Dependencies ------
-# Better: standard triplet
-RUN ${VCPKG_ROOT}/vcpkg install --clean-after-build \
-    boost-serialization:x64-linux \
-    eigen3:x64-linux
-
-
-RUN if [ "$WITH_OCCT" = "ON" ]; then \
-    ${VCPKG_ROOT}/vcpkg install --clean-after-build opencascade:x64-linux-release; \
-    fi
-
+# CGAL (pulls GMP/MPFR and recommends TBB) \
 RUN if [ "$WITH_CGAL" = "ON" ]; then \
-    ${VCPKG_ROOT}/vcpkg install --clean-after-build cgal:x64-linux-release; \
-    fi
+    apt-get update && apt-get install -y --no-install-recommends \
+    libcgal-dev \
+    libcgal-demo && \
+    rm -rf /var/lib/apt/lists/* ; \
+fi
 
-# ----- Optional: VTK (only if requested) ----
+# VTK (9.x on Ubuntu 24.04). Turn ON only if you need VTK-based features. \
 RUN if [ "$WITH_VTK" = "ON" ]; then \
     apt-get update && apt-get install -y --no-install-recommends libvtk9-dev && \
     rm -rf /var/lib/apt/lists/* ; \
-    fi
+fi
 
+# OpenCASCADE (OCCT) dev meta-packages (split by module in Ubuntu). \
+RUN if [ "$WITH_OCCT" = "ON" ]; then \
+    apt-get update && apt-get install -y --no-install-recommends \
+    xfonts-scalable \
+    libocct-data-exchange-dev \
+    libocct-draw-dev \
+    libocct-modeling-algorithms-dev \
+    libocct-modeling-data-dev \
+    libocct-ocaf-dev \
+    libocct-visualization-dev \
+    libocct-foundation-dev && \
+    rm -rf /var/lib/apt/lists/* ; \
+fi
+
+# Docs (optional) \
+
+# ---- Source ----
 WORKDIR /src
+# Copy only metadata first for better build caching
+COPY CMakeLists.txt ./
+COPY cmake ./cmake
+# Copy the rest
 COPY . .
 
-# ---- Configure (Release only) ----
-RUN rm -rf build CMakeCache.txt CMakeFiles
+# ---- Configure ----
+# Note: Defaults to system packages. If you want vcpkg, set VCPKG_ROOT at build time and add:
+#   -DTONB_ENABLE_VCPKG=ON (CMakeLists enables toolchain if VCPKG_ROOT is set)
 RUN cmake -S . -B build -G Ninja \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
     -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} \
-    -DBUILD_TESTING=${BUILD_TESTING} \
-    -DTONB_BUILD_DOCS=${BUILD_DOCS} \
     -DTONB_WITH_OCCT=${WITH_OCCT} \
     -DTONB_WITH_CGAL=${WITH_CGAL} \
     -DTONB_WITH_EIGEN=${WITH_EIGEN} \
-    -DTONB_WITH_VTK=${WITH_VTK}
+    -DTONB_WITH_VTK=${WITH_VTK} \
+    -DTONB_BUILD_DOCS=${BUILD_DOCS} \
+    -DBUILD_TESTING=${BUILD_TESTING}
 
-# ----- Build -----
-RUN cmake --build build -j --target Tonb && strip build/Tonb || true
+# ---- Build ---- \
+RUN cmake --build build -j && \
+    (strip build/Tonb || true)
 
-
-# ================= runtime ===========================
-FROM ubuntu:24.04 AS runtime
-WORKDIR /app
-COPY --from=builder /src/build/Tonb /app/Tonb
-RUN useradd -m runner
-USER runner
-
-ENTRYPOINT ["/app/Tonb"]
+# ---- install artifacts ---- \
+RUN cmake --install build
