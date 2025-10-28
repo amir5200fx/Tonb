@@ -8,7 +8,13 @@
 // CGAL
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/Quadtree.h>
+#include <CGAL/version.h>
+#if CGAL_VERSION_NR >= 1060000000
 #include <CGAL/Orthtree_traits.h>
+#else
+#include <CGAL/Orthtree.h>
+#include <CGAL/Orthtree_traits_2.h>
+#endif
 
 #include <optional>
 
@@ -102,12 +108,16 @@ namespace tonb::geometry::spatial::cgal {
         std::vector<Box> out;
         if (!impl_->qt) return out;
 
-        using QT = Impl::Quadtree;
-        for (const auto node : impl_->qt->traverse(CGAL::Orthtrees::Leaves_traversal<QT>(*impl_->qt))) {
-            const auto b = impl_->qt->bbox(node);
-            out.push_back(Box{b.xmax(), b.ymin(), b.xmax(), b.ymax()});
-        }
-        return out;
+#if CGAL_VERSION_NR >= 1060000000
+      auto leaves = impl_->qt->traverse(CGAL::Orthtrees::Leaves_traversal<QT>(*impl_->qt));
+      #else
+      auto leaves = impl_->qt->traverse(CGAL::Orthtrees::Leaves_traversal());
+#endif
+      for (const auto node : leaves) {
+        const auto b = impl_->qt->bbox(node);
+        out.push_back(Box{b.xmax(), b.ymin(), b.xmax(), b.ymax()});
+      }
+      return out;
     }
 
 }
