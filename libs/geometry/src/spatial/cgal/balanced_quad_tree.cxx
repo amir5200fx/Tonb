@@ -109,8 +109,8 @@ namespace tonb::geometry::spatial::cgal {
         if (!impl_->qt) return out;
 
 #if CGAL_VERSION_NR >= 1060000000
-      auto leaves = impl_->qt->traverse(CGAL::Orthtrees::Leaves_traversal<QT>(*impl_->qt));
         using QT = Impl::Quadtree;
+        const auto leaves = impl_->qt->traverse(CGAL::Orthtrees::Leaves_traversal<QT>(*impl_->qt));
       #else
         const auto leaves = impl_->qt->traverse(CGAL::Orthtrees::Leaves_traversal());
 #endif
