@@ -21,6 +21,22 @@ project(Tonb
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES C CXX)
 
+# --------------------------------------------------------------------
+# Windows SDK targeting (to avoid ext-ms-win-* API set dependency)
+# This only affects Windows + MSVC; Linux builds ignore it.
+# --------------------------------------------------------------------
+if (WIN32)
+    # Choose a Windows SDK version that actually exists on your machine.
+    # 10.0.19041.0 is a safe, common Windows 10 SDK example.
+    # Make sure this version is installed in Visual Studio.
+    set(CMAKE_SYSTEM_VERSION 10.0.19041)
+
+    if (MSVC)
+        # For Visual Studio generators, explicitly select the SDK
+        set(CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION "10.0.19041.0")
+    endif ()
+endif ()
+
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
 option(TONB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
 option(BUILD_TESTING "Running the tests" OFF)
