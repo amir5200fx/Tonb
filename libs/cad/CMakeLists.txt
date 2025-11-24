@@ -133,21 +133,48 @@ if (TONB_WITH_OCCT)
 
     else ()
         # Per-toolkit targets (common with vcpkg / official builds)
-        # Core (you already had these)
-        set(OCCT_CORE TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
+        # Core toolkits
+        set(OCCT_CORE
+                TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
 
-        # Data exchange (needed for your errors)
-        set(OCCT_XS   TKXSBase TKDEIGES TKDESTEP)
+        # Data exchange: some of these may be missing on Linux (e.g. TKDEIGES)
+        set(OCCT_XS
+                TKXSBase TKDEIGES TKDESTEP)
 
-        foreach(lib ${OCCT_CORE} ${OCCT_XS})
+        # Collect core toolkits
+        foreach(lib ${OCCT_CORE})
             if (TARGET OpenCASCADE::${lib})
                 list(APPEND OCCT_LIBS OpenCASCADE::${lib})
             elseif (TARGET ${lib})
                 list(APPEND OCCT_LIBS ${lib})
-            else()
+            elseif (WIN32)
+                # On Windows keep behaviour strict
                 message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
             endif()
         endforeach()
+
+        # Collect at least one data-exchange toolkit
+        set(_found_xs FALSE)
+        foreach(lib ${OCCT_XS})
+            if (TARGET OpenCASCADE::${lib})
+                list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+                set(_found_xs TRUE)
+            elseif (TARGET ${lib})
+                list(APPEND OCCT_LIBS ${lib})
+                set(_found_xs TRUE)
+            elseif (WIN32)
+                # On Windows we still want all of them present
+                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+            endif()
+        endforeach()
+
+        # Final sanity check (both platforms)
+        if (NOT OCCT_LIBS OR NOT _found_xs)
+            message(FATAL_ERROR
+                    "OCCT data-exchange toolkits not found. Your OCCT export may use "
+                    "different names (TKIGES/TKSTEP* or aggregate OpenCASCADE::DataExchange). "
+                    "Install a build that includes Data Exchange or set OpenCASCADE_DIR.")
+        endif()
     endif ()
 
     target_link_libraries(TonbCAD PUBLIC ${OCCT_LIBS})
