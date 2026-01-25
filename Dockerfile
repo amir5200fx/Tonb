@@ -80,7 +80,7 @@ fi
 # Docs (optional) \
 
 # ---- Source ----
-WORKDIR /src
+WORKDIR /src/tonb
 # Copy only metadata first for better build caching
 COPY CMakeLists.txt ./
 COPY cmake ./cmake

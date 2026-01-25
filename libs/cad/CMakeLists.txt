@@ -135,21 +135,59 @@ if (TONB_WITH_OCCT)
         # Per-toolkit targets (common with vcpkg / official builds)
         # Core toolkits
         set(OCCT_CORE
-                TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim)
+                TKGeomBase TKGeomAlgo TKernel TKG2d TKG3d TKMath TKBRep TKTopAlgo TKPrim TKXSBase)
 
         # Data exchange: some of these may be missing on Linux (e.g. TKDEIGES)
         set(OCCT_XS
-                TKXSBase TKDEIGES TKDESTEP)
+                TKDEIGES TKDESTEP
+                TKIGES TKSTEP TKSTEPAttr TKSTEPBase TKSTEP209 TKSTEPCAF)
 
+        # Collect core toolkits
+#        foreach(lib ${OCCT_CORE})
+#            if (TARGET OpenCASCADE::${lib})
+#                list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+#            elseif (TARGET ${lib})
+#                list(APPEND OCCT_LIBS ${lib})
+#            elseif (WIN32)
+#                # On Windows keep behaviour strict
+#                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+#            endif()
+#        endforeach()
+#
+#        # Collect at least one data-exchange toolkit
+#        set(_found_xs FALSE)
+#        foreach(lib ${OCCT_XS})
+#            if (TARGET OpenCASCADE::${lib})
+#                list(APPEND OCCT_LIBS OpenCASCADE::${lib})
+#                set(_found_xs TRUE)
+#            elseif (TARGET ${lib})
+#                list(APPEND OCCT_LIBS ${lib})
+#                set(_found_xs TRUE)
+#            elseif (WIN32)
+#                # On Windows we still want all of them present
+#                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+#            endif()
+#        endforeach()
+#
+#        # Final sanity check (both platforms)
+#        if (NOT OCCT_LIBS OR NOT _found_xs)
+#            message(FATAL_ERROR
+#                    "OCCT data-exchange toolkits not found. Your OCCT export may use "
+#                    "different names (TKIGES/TKSTEP* or aggregate OpenCASCADE::DataExchange). "
+#                    "Install a build that includes Data Exchange or set OpenCASCADE_DIR.")
+#        endif()
         # Collect core toolkits
         foreach(lib ${OCCT_CORE})
             if (TARGET OpenCASCADE::${lib})
                 list(APPEND OCCT_LIBS OpenCASCADE::${lib})
             elseif (TARGET ${lib})
                 list(APPEND OCCT_LIBS ${lib})
-            elseif (WIN32)
-                # On Windows keep behaviour strict
-                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+            else()
+                # Try to find the raw library by name (Ubuntu style)
+                find_library(_occt_${lib}_LIB NAMES ${lib})
+                if (_occt_${lib}_LIB)
+                    list(APPEND OCCT_LIBS ${_occt_${lib}_LIB})
+                endif()
             endif()
         endforeach()
 
@@ -162,18 +200,20 @@ if (TONB_WITH_OCCT)
             elseif (TARGET ${lib})
                 list(APPEND OCCT_LIBS ${lib})
                 set(_found_xs TRUE)
-            elseif (WIN32)
-                # On Windows we still want all of them present
-                message(FATAL_ERROR "OCCT toolkit target not found: ${lib}")
+            else()
+                find_library(_occt_${lib}_LIB NAMES ${lib})
+                if (_occt_${lib}_LIB)
+                    list(APPEND OCCT_LIBS ${_occt_${lib}_LIB})
+                    set(_found_xs TRUE)
+                endif()
             endif()
         endforeach()
 
-        # Final sanity check (both platforms)
         if (NOT OCCT_LIBS OR NOT _found_xs)
             message(FATAL_ERROR
-                    "OCCT data-exchange toolkits not found. Your OCCT export may use "
-                    "different names (TKIGES/TKSTEP* or aggregate OpenCASCADE::DataExchange). "
-                    "Install a build that includes Data Exchange or set OpenCASCADE_DIR.")
+                    "OCCT data-exchange toolkits not found. "
+                    "Checked core: ${OCCT_CORE}, XS: ${OCCT_XS}. "
+                    "Make sure libocct-data-exchange-dev (or equivalent) is installed.")
         endif()
     endif ()
 
