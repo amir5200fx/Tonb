@@ -6,8 +6,9 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Highlights
-- **New cad2d topology core**: Introduced a fully re-designed, OCCT-free 2D topology layer with builders, validators, and comprehensive test converage.
+- **New cad2d topology core**: Introduced a fully re-designed, OCCT-free 2D topology layer with builders, validators, and comprehensive test coverage.
 - **Validation-first architecture**: Topology invariants are now explicitly checked via a dedicated validation module, enabling early error detection and safer future geometry integration.
+- **cad2d geometry binding introduced**: Added the first geometry integration layer via curve storage and geometry-aware half-edge construction, without exposing OCCT in topology.
 
 ### Added
 - **cad2d topology entities** (pure topology, no geometry kernel dependency):
@@ -28,6 +29,15 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
   - Deterministic unit tests covering half-edges, wires, faces, and full shapes
   - Negative test intentionally breaking invariants to verify validators
   - Shared test helpers for building canonical square faces
+- **Geometry binding layer (`cad2d/geom`)**:
+  - `CurveStore` for owning and indexing `cad2d::Curve` objects behind stable topology ids
+  - Clear separation between pure topology and geometry-backed construction
+- **Geometry-aware builders**:
+  - Half-edge creation from geometry curves with validated parameter ranges and orientation 
+  - Twin half-edge creation bound to a single stored curve
+- **Geometry tests**:
+  - GoogleTest coverage for curve storage, retrieval, and geometry-aware half-edge construction
+  - Tests remain backend-safe (no OCCT leakage into cad2d topology)
 
 ### Changed
 - **cad2d architecture**:
@@ -36,10 +46,12 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Internal API discipline**:
   - Consistent use of `std::shared_ptr` ownership and explicit `weak_ptr` links
   - Deterministic validation order for reproducible diagnostics and tests
+- **cad2d build flow**:
+  - half-edge construction can now be driven directly from geometry curves while preserving topology purity.
 
 ### Notes
 - This release establishes a **stable foundation** for upcoming geometry binding (`cad2d/geom`) and higher-level algorithms.
-- Geometry-dependent operations (curve evaluation, intersections, containment) are intentionally deferred and will build on this topology core.
+- Geometry-dependent operations beyond curve binding (e.g., intersections, containment, trimming validation) are intentionally deferred and will build on the new geometry-aware topology foundation.
 
 ## [0.19.0] - 2025-08-21
 ### Highlights

@@ -17,7 +17,11 @@
 #include <tonb/cad2d/topo/shape.hxx>
 #include <tonb/cad2d/topo/halfedge.hxx>
 #include <tonb/cad2d/topo/result.hxx>
+#include <tonb/cad2d/curve_fwd.hxx>
 
+namespace tonb::cad2d::geom {
+    class CurveStore;
+}
 namespace tonb::cad2d::build {
 
     class HalfEdgeBuilder {
@@ -65,6 +69,44 @@ namespace tonb::cad2d::build {
         TNBCAD2D_ND_EXPORT topo::Result<std::pair<std::shared_ptr<topo::HalfEdge>, std::shared_ptr<topo::HalfEdge> > >
         create_pair(const std::shared_ptr<topo::Vertex> &a, const std::shared_ptr<topo::Vertex> &b, topo::Id curveId,
                     double u0, double u1, double tol = 1.e-9) const;
+
+        /**
+         * @brief Create a single half-edge by binding a cad2d::Curve through a CurveStore.
+         *
+         * This function:
+         * - validates that the curve is valid and bounded (parameter_range exists)
+         * - validates (u0, u1) ordering matches the requested orientation
+         * - registers the curve in the store and uses the returned curve id
+         * - delegates allocation and connectivity to create(...)
+         *
+         * @param store Geometry curve registry.
+         * @param curve Curve wrapper to bind.
+         * @param start Start vertex.
+         * @param end End vertex.
+         * @param u0 Start parameter.
+         * @param u1 End parameter.
+         * @param dir Orientation along curve (forward expects u0<u1, reversed expects u0?u1).
+         * @param tol local edge tolerance.
+         * @param eps Parametric epsilon used for domain checks.
+         */
+        TNBCAD2D_ND_EXPORT topo::Result<std::shared_ptr<topo::HalfEdge> > create_from_curve(
+            geom::CurveStore &store, const Curve &curve, const std::shared_ptr<topo::Vertex> &start,
+            const std::shared_ptr<topo::Vertex> &end, real u0, real u1, topo::Orientation dir, real tol = 1.e-9,
+            real eps = 1.e-12) const;
+
+        /**
+         * @brief Create a twin pari by binding a cad2d::Curve through a CurveStore.
+         *
+         * This is equivalent to:
+         *  - register curve once in store
+         *  - create_pair(...) using the retuned curve id
+         *
+         * The returned pair is (ab, ba). The reverse edge uses swapped parameters and reversed orientation.
+         */
+        TNBCAD2D_ND_EXPORT topo::Result<std::pair<std::shared_ptr<topo::HalfEdge>, std::shared_ptr<topo::HalfEdge> > >
+        create_pair_from_curve(geom::CurveStore &store, const Curve &curve, const std::shared_ptr<topo::Vertex> &a,
+                               const std::shared_ptr<topo::Vertex> &b, real u0, real u1, real tol = 1.e-9,
+                               real eps = 1.e-12) const;
     private:
       topo::Shape& shape_;
     };

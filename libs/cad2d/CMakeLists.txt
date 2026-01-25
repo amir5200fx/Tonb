@@ -63,6 +63,8 @@ target_sources(TonbCAD2d
         src/validate/wire_checks.cxx
         src/validate/face_checks.cxx
         src/validate/shape_checks.cxx
+        src/geom/curve_store.cxx
+        src/geom/curve_ops.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -96,6 +98,8 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/validate/wire_checks.hxx
         include/tonb/cad2d/validate/face_checks.hxx
         include/tonb/cad2d/validate/shape_checks.hxx
+        include/tonb/cad2d/geom/curve_store.hxx
+        include/tonb/cad2d/geom/curve_ops.hxx
 )
 
 # Backend-specific sources
