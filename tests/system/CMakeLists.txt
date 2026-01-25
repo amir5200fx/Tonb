@@ -5,7 +5,7 @@ add_executable(system_task_tests
 )
 
 target_link_libraries(system_task_tests PRIVATE
-        TnbSystem
+        TonbSystem
         GTest::gtest_main
         Threads::Threads
 )

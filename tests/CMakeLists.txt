@@ -8,3 +8,4 @@ find_package(Threads REQUIRED)
 # Keep suites in subfolders if you like
 add_subdirectory(system)
 add_subdirectory(io)
+add_subdirectory(cad2d)

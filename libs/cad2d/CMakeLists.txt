@@ -52,6 +52,17 @@ target_sources(TonbCAD2d
         PRIVATE
         src/tools.cxx
         src/occt/tools.cxx
+        src/topo/wire.cxx
+        src/topo/face.cxx
+        src/topo/shape.cxx
+        src/builder/vertex_builder.cxx
+        src/builder/halfedge_builder.cxx
+        src/builder/face_builder.cxx
+        src/builder/wire_builder.cxx
+        src/validate/halfedge_checks.cxx
+        src/validate/wire_checks.cxx
+        src/validate/face_checks.cxx
+        src/validate/shape_checks.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -68,6 +79,23 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/axis_fwd.hxx
         include/tonb/cad2d/tools.hxx
         include/tonb/cad2d/occt/tools.hxx
+        include/tonb/cad2d/topo/vertex.hxx
+        include/tonb/cad2d/topo/halfedge.hxx
+        include/tonb/cad2d/topo/orientation.hxx
+        include/tonb/cad2d/topo/id.hxx
+        include/tonb/cad2d/topo/tolerance.hxx
+        include/tonb/cad2d/topo/result.hxx
+        include/tonb/cad2d/topo/wire.hxx
+        include/tonb/cad2d/topo/face.hxx
+        include/tonb/cad2d/topo/shape.hxx
+        include/tonb/cad2d/builder/vertex_builder.hxx
+        include/tonb/cad2d/builder/halfedge_builder.hxx
+        include/tonb/cad2d/builder/face_builder.hxx
+        include/tonb/cad2d/builder/wire_builder.hxx
+        include/tonb/cad2d/validate/halfedge_checks.hxx
+        include/tonb/cad2d/validate/wire_checks.hxx
+        include/tonb/cad2d/validate/face_checks.hxx
+        include/tonb/cad2d/validate/shape_checks.hxx
 )
 
 # Backend-specific sources
