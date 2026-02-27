@@ -175,6 +175,7 @@ target_sources(TonbGeometry
         include/tonb/geometry/meta/quad_mesh_2d_fwd.hxx
         include/tonb/geometry/meta/quad_mesh_3d.hxx
         include/tonb/geometry/meta/quad_mesh_3d_fwd.hxx
+        include/tonb/geometry/meta/metric_2d.hxx
         include/tonb/geometry/occt/precision.hxx
         include/tonb/geometry/occt/occt.hxx
         include/tonb/geometry/occt/bbox.hxx
@@ -199,7 +200,16 @@ target_sources(TonbGeometry
         include/tonb/geometry/spatial/point_locator_2d.hxx
         include/tonb/geometry/spatial/tri_mesh_2d.hxx
         include/tonb/geometry/spatial/uniform_grid_2d.hxx
+        include/tonb/geometry/spatial/hash_grid_2d.hxx
+        include/tonb/geometry/spatial/private/hash_grid_2d_imp.hxx
         include/tonb/geometry/field/mesh_interpolator_2d.hxx
+        include/tonb/geometry/field/size_func.hxx
+        include/tonb/geometry/field/size_func_2d.hxx
+        include/tonb/geometry/field/size_func_2d_fwd.hxx
+        include/tonb/geometry/field/uniform_size_func.hxx
+        include/tonb/geometry/field/uniform_size_func_2d_fwd.hxx
+        include/tonb/geometry/field/uniform_size_funct_2d.hxx
+        include/tonb/geometry/utils/hash.hxx
 )
 
 # Backend-specific sources

@@ -5,6 +5,7 @@
 //#include <tonb/geometry/spatial/balanced_quad_tree.hxx>
 #include <tonb/geometry/spatial/grid_2d.hxx>
 #include <tonb/geometry/spatial/ad_tree.hxx>
+#include <tonb/geometry/spatial/hash_grid_2d.hxx>
 
 using namespace tonb;
 using namespace tonb::geometry;
