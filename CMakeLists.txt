@@ -39,7 +39,7 @@ endif ()
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)  # OFF => static
 option(TONB_WITH_CEREAL "Use cereal instead of Boost.Serialization" OFF)
-option(BUILD_TESTING "Running the tests" OFF)
+option(BUILD_TESTING "Running the tests" ON)
 
 option(TONB_BUILD_DOCS "Build documentation (Doxygen + Sphinx)" ON)
 
@@ -181,13 +181,15 @@ include(CTest)
 add_subdirectory(libs/system)
 add_subdirectory(libs/base)
 add_subdirectory(libs/io)
+add_subdirectory(libs/numerics)
 add_subdirectory(libs/geometry)
 add_subdirectory(libs/cad2d)
 add_subdirectory(libs/cad)
+add_subdirectory(libs/mesh)
 add_subdirectory(demos)
 
 add_custom_target(TonbAll
-        DEPENDS TonbSystem TonbBase TonbGeometry TonbCAD2d TonbCAD TonbIO
+        DEPENDS TonbSystem TonbBase TonbNumerics TonbGeometry TonbCAD2d TonbCAD TonbIO TonbMesh
 )
 
 if (BUILD_TESTING)
@@ -205,13 +207,15 @@ endif ()
 target_include_directories(TonbSystem  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbIO    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbBase    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbNumerics    PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbGeometry PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbCAD2d PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 target_include_directories(TonbCAD PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
+target_include_directories(TonbMesh PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/generated>)
 
 add_executable(Tonb main.cxx)
 
-target_link_libraries(Tonb PRIVATE TonbSystem TonbIO TonbBase TonbGeometry TonbCAD2d TonbCAD)
+target_link_libraries(Tonb PRIVATE TonbSystem TonbIO TonbBase TonbNumerics TonbGeometry TonbCAD2d TonbCAD TonbMesh)
 # Install the generated header
 install(FILES ${CMAKE_BINARY_DIR}/generated/tonb/config.hxx
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tonb)
@@ -230,6 +234,10 @@ set_target_properties(TonbIO PROPERTIES
         VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
 )
+set_target_properties(TonbNumerics PROPERTIES
+        VERSION "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
 set_target_properties(TonbGeometry PROPERTIES
         VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
@@ -242,12 +250,16 @@ set_target_properties(TonbCAD PROPERTIES
         VERSION "${_lib_ver}"
         SOVERSION "${_lib_sov}"
 )
+set_target_properties(TonbMesh PROPERTIES
+        VERSION "${_lib_ver}"
+        SOVERSION "${_lib_sov}"
+)
 
 # right before configure_package_config_file(...)
 include(CMakePackageConfigHelpers)
 
 # Install the library once (from the root), and attach it to export set "TonbTargets"
-install(TARGETS TonbSystem TonbBase TonbIO TonbGeometry TonbCAD2d TonbCAD
+install(TARGETS TonbSystem TonbBase TonbNumerics TonbIO TonbGeometry TonbCAD2d TonbCAD TonbMesh
         EXPORT TonbTargets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -262,9 +274,11 @@ install(EXPORT TonbTargets
 )
 set_target_properties(TonbSystem PROPERTIES EXPORT_NAME System)
 set_target_properties(TonbBase PROPERTIES EXPORT_NAME Base)
+set_target_properties(TonbNumerics PROPERTIES EXPORT_NAME Numerics)
 set_target_properties(TonbGeometry PROPERTIES EXPORT_NAME Geometry)
 set_target_properties(TonbCAD2d PROPERTIES EXPORT_NAME CAD2d)
 set_target_properties(TonbCAD PROPERTIES EXPORT_NAME CAD)
+set_target_properties(TonbMesh PROPERTIES EXPORT_NAME Mesh)
 set_target_properties(TonbIO PROPERTIES EXPORT_NAME IO)
 
 # Configure + install Config files in the same folder (note the capital T)

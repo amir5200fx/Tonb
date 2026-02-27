@@ -63,6 +63,8 @@ target_sources(TonbCAD2d
         src/validate/wire_checks.cxx
         src/validate/face_checks.cxx
         src/validate/shape_checks.cxx
+        src/validate/geom_consistency.cxx
+        src/validate/halfedge_geometry.cxx
         src/geom/curve_store.cxx
         src/geom/curve_ops.cxx
         PUBLIC
@@ -98,6 +100,8 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/validate/wire_checks.hxx
         include/tonb/cad2d/validate/face_checks.hxx
         include/tonb/cad2d/validate/shape_checks.hxx
+        include/tonb/cad2d/validate/geom_consistency.hxx
+        include/tonb/cad2d/validate/halfedge_geometry.hxx
         include/tonb/cad2d/geom/curve_store.hxx
         include/tonb/cad2d/geom/curve_ops.hxx
 )
