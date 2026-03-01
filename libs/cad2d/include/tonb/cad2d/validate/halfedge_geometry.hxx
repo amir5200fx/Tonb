@@ -24,6 +24,7 @@
 #include <tonb/cad2d/topo/halfedge.hxx>
 #include <tonb/cad2d/topo/tolerance.hxx>
 #include <tonb/cad2d/topo/result.hxx>
+#include <tonb/cad2d/module.hxx>
 
 namespace tonb::cad2d::validate {
     /**
@@ -49,7 +50,9 @@ namespace tonb::cad2d::validate {
      *
      * @return topo::Result<void> success or failure with diagnostic message.
      */
-    topo::Result<void> check_halfedge_geometry(const std::shared_ptr<topo::HalfEdge>& e, const geom::CurveStore& store, const topo::Tolerance& tol);
+    TNBCAD2D_EXPORT topo::Result<void> check_halfedge_geometry(const std::shared_ptr<topo::HalfEdge> &e,
+                                                               const geom::CurveStore &store,
+                                                               const topo::Tolerance &tol);
 }
 
 #endif //TONB_HALFEDGE_GEOMETRY_HXX

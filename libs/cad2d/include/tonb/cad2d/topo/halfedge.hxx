@@ -83,6 +83,8 @@ namespace tonb::cad2d::topo {
          * @return A pair (u0, u1) representing the trimmed domain of the curve.
          */
         TNB_NODISCARD std::pair<real, real> param_range() const noexcept {return {u0_, u1_};}
+        TNB_NODISCARD real u0() const noexcept {return u0_;}
+        TNB_NODISCARD real u1() const noexcept {return u1_;}
 
         /**
          * @brief Get the traversal orientation along the curve.
