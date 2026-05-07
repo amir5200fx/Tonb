@@ -47,6 +47,7 @@ namespace tonb::cad2d::topo {
     class HalfEdge;
     class Wire;
     class Face;
+    class Edge;
 
     /**
      * @class Shape
@@ -145,6 +146,13 @@ namespace tonb::cad2d::topo {
         TNBCAD2D_ND_EXPORT std::shared_ptr<HalfEdge> make_halfedge(Id curveId, double u0, double u1, Orientation dir, double tol = 1.e-9);
 
         /**
+         * @brief Create and register a new edge.
+         *
+         * @return Shared pointer to the newly created edge.
+         */
+        TNBCAD2D_ND_EXPORT std::shared_ptr<Edge> make_edge();
+
+        /**
          * @brief Create and register a new wire.
          *
          * @return Shared pointer to the newly created wire.
@@ -176,6 +184,12 @@ namespace tonb::cad2d::topo {
         TNBCAD2D_ND_EXPORT std::shared_ptr<HalfEdge> halfedge(Id id) const noexcept;
 
         /**
+         * @brief Get an Edge by Id.
+         * @return Shared pointer if found, otherwise nullptr.
+         */
+        TNBCAD2D_ND_EXPORT std::shared_ptr<Edge> edge(Id id) const noexcept;
+
+        /**
          * @brief Get a wire by Id.
          * @return Shared pointer if found, otherwise nullptr.
          */
@@ -201,6 +215,11 @@ namespace tonb::cad2d::topo {
          * @brief Return a snapshot list of all half-edges.
          */
         TNBCAD2D_ND_EXPORT std::vector<std::shared_ptr<HalfEdge>> halfedges() const;
+
+        /**
+         * @brief Return a snapshot list of all topological edges.
+         */
+        TNBCAD2D_ND_EXPORT std::vector<std::shared_ptr<Edge>> edges() const;
 
         /**
          * @brief Return a snapshot list of all wires.
@@ -234,6 +253,13 @@ namespace tonb::cad2d::topo {
          * @return True if removed, false if not found.
          */
         TNBCAD2D_ND_EXPORT bool erase_halfedge(Id id) noexcept;
+
+        /**
+         * @brief Remove an edge from the registry.
+         * @param id Edge identifier.
+         * @return True if removed, false if not found.
+         */
+        TNBCAD2D_ND_EXPORT bool erase_edge(Id id) noexcept;
 
         /**
          * @brief Remove a wire from the registry.
@@ -302,6 +328,7 @@ namespace tonb::cad2d::topo {
         std::unordered_map<Id, std::shared_ptr<HalfEdge>> halfedges_;
         std::unordered_map<Id, std::shared_ptr<Wire>> wires_;
         std::unordered_map<Id, std::shared_ptr<Face>> faces_;
+        std::unordered_map<Id, std::shared_ptr<Edge>> edges_;
     };
 }
 #endif //TONB_CAD2D_TOPO_SHAPE_HXX

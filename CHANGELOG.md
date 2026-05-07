@@ -6,52 +6,41 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Highlights
-- **New cad2d topology core**: Introduced a fully re-designed, OCCT-free 2D topology layer with builders, validators, and comprehensive test coverage.
-- **Validation-first architecture**: Topology invariants are now explicitly checked via a dedicated validation module, enabling early error detection and safer future geometry integration.
-- **cad2d geometry binding introduced**: Added the first geometry integration layer via curve storage and geometry-aware half-edge construction, without exposing OCCT in topology.
+- **Geometry consistency validation completed for cad2d**: Finished the full vNext geometry-validation milestone, including vertex–curve agreement checks, curve-domain and degeneracy validation, optional shape-level geometry validation, and standardised diagnostic behaviour.
+- **Validation diagnostics strengthened**: Geometry validation now uses stable error-code mappings and consistent message prefixes, with targeted tests locking down representative diagnostic cases.
+- **Project-wide feature-config propagation introduced**: Added a generated configuration-header path so build-time feature macros such as `TONB_WITH_OCCT` can be propagated consistently through the codebase and tests.
 
 ### Added
-- **cad2d topology entities** (pure topology, no geometry kernel dependency):
-  - `Vertex`, `HalfEdge`, `Wire`, `Face`, and `Shape`
-  - Stable `Id` system and tolerance-aware point handling
-- **Builder layer (`cad2d/build`)**:
-  - `VartexBuilder`, `HalfEdgeBuilder`, `WireBuilder`, `FaceBuilder`
-  - Defensive construction using `Result<T>` with explicit error reporting
-- **Validation layer (`cad2d/validate`)**:
-  - Half-edge checks (endpoints, twin symmetry, next/prev consistency)
-  - Wire checks (boundary integrity, continuity, closure, next/prev vs boundary order)
-  - Face checks (outer/holes validity, edge disjointness)
-  - Shape checks (registry integrity and full topology validation)
-- **Result-based error handling**:
-  - Explicit `Result<T>` / `Result<void>` pattern across builders and validators
-  - Structured error codes and descriptive diagnostics
-- **GoogleTest test suite** for cad2d topology:
-  - Deterministic unit tests covering half-edges, wires, faces, and full shapes
-  - Negative test intentionally breaking invariants to verify validators
-  - Shared test helpers for building canonical square faces
-- **Geometry binding layer (`cad2d/geom`)**:
-  - `CurveStore` for owning and indexing `cad2d::Curve` objects behind stable topology ids
-  - Clear separation between pure topology and geometry-backed construction
-- **Geometry-aware builders**:
-  - Half-edge creation from geometry curves with validated parameter ranges and orientation 
-  - Twin half-edge creation bound to a single stored curve
-- **Geometry tests**:
-  - GoogleTest coverage for curve storage, retrieval, and geometry-aware half-edge construction
-  - Tests remain backend-safe (no OCCT leakage into cad2d topology)
+- **Geometry-aware half-edge validation**:
+    - validation of stored `curve_id`, `u0`, and `u1` against the referenced curve in `geom::CurveStore`
+    - endpoint agreement checks between evaluated curve points and half-edge start/end vertices
+    - curve-domain checks with tolerance-aware parameter validation
+    - degenerate-span detection for invalid zero-length parameter ranges
+    - orientation/parameter-order consistency checks for forward and reversed half-edges
+- **Shape-level optional geometry validation**:
+    - geometry checks can now be enabled from `validate::check_shape(...)` without changing topology-only behaviour
+    - missing or invalid curve bindings are now caught at shape-validation level when geometry validation is enabled
+- **Geometry validation diagnostic tests**:
+    - message-prefix and error-code assertions for representative geometry-validation failures
+    - validator-side out-of-domain tests using direct half-edge construction for corrupted/imported states
+    - strengthened regression coverage for endpoint mismatch, missing curve, domain violation, degeneracy, and orientation handling
+- **Generated Tonb config header path**:
+    - build-generated project configuration header for propagating feature macros such as `TONB_WITH_OCCT`
+    - unified feature-flag usage between library code and tests without local source-level macro definitions
 
 ### Changed
-- **cad2d architecture**:
-  - Clear separation between topology, builders, validation, and future geometry binding
-  - Topology is now independent of OCCT; geometry will be introduced in a higher layer
-- **Internal API discipline**:
-  - Consistent use of `std::shared_ptr` ownership and explicit `weak_ptr` links
-  - Deterministic validation order for reproducible diagnostics and tests
-- **cad2d build flow**:
-  - half-edge construction can now be driven directly from geometry curves while preserving topology purity.
+- **cad2d validation flow**:
+    - geometry validation is now treated as a first-class extension of the validation layer rather than only a builder-side safeguard
+    - manually created, imported, or corrupted half-edge states can now be rejected by validators even if builders would have prevented them at construction time
+- **Geometry validation diagnostics**:
+    - standardised message prefix for geometry-validation failures
+    - stable mapping of representative geometry failures onto existing `ErrorCode` categories
+- **Test configuration discipline**:
+    - tests now rely on configured build-time feature propagation instead of ad hoc local macro definitions for OCCT-enabled coverage
 
 ### Notes
-- This release establishes a **stable foundation** for upcoming geometry binding (`cad2d/geom`) and higher-level algorithms.
-- Geometry-dependent operations beyond curve binding (e.g., intersections, containment, trimming validation) are intentionally deferred and will build on the new geometry-aware topology foundation.
+- This completes **Milestone vNext — Geometry Consistency Validation (Option B)**.
+- The next planned milestone is **vNext+1 — Edge Abstraction (Topology Usability)**, introducing `topo::Edge` as the explicit owner of twin half-edge pairs.
 
 ## [0.19.0] - 2025-08-21
 ### Highlights
@@ -97,3 +86,4 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
   ```cmake
   find_package(tonb CONFIG REQUIRED)
   target_link_libraries(your_target PRIVATE tonb::system)
+  ```

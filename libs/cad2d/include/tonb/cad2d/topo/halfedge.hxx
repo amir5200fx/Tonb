@@ -28,6 +28,7 @@ namespace tonb::cad2d::topo {
     // Forward Declarations
     class Vertex;
     class Face;
+    class Edge;
 
     using Id = std::uint64_t;
 
@@ -100,6 +101,10 @@ namespace tonb::cad2d::topo {
 
         /// @name Topological links
         /// @{
+        ///
+
+        /// Return the owning topological edge, if one is assigned.
+        TNB_NODISCARD std::shared_ptr<Edge> edge() const noexcept {return edge_.lock();}
 
         /// Reference to the starting vertex (non-owning).
         TNB_NODISCARD std::shared_ptr<Vertex> start() const noexcept {return v_start_.lock();}
@@ -126,6 +131,12 @@ namespace tonb::cad2d::topo {
         void set_next(std::weak_ptr<HalfEdge> he) noexcept {next_ = std::move(he);}
         void set_prev(std::weak_ptr<HalfEdge> he) noexcept {prev_ = std::move(he);}
         void set_left_face(std::weak_ptr<Face> f) noexcept {left_face_ = std::move(f);}
+
+        /**
+         * @brief Assign the owning topological edge.
+         * @param e Non-owning reference to the owner edge.
+         */
+        void set_edge(std::weak_ptr<Edge> e) noexcept {edge_ = std::move(e);}
 
         /// @}
 
@@ -190,6 +201,7 @@ namespace tonb::cad2d::topo {
         std::weak_ptr<HalfEdge> next_;      ///< Next edge in boundary loop
         std::weak_ptr<HalfEdge> prev_;      ///< Previous edge in boundary loop
         std::weak_ptr<Face> left_face_;     ///< Adjacent face on the left
+        std::weak_ptr<Edge> edge_;
     };
 }
 #endif //TONB_CAD2D_TOPO_HALFEDGE_HXX
