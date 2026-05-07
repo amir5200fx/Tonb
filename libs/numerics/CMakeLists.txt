@@ -17,6 +17,7 @@ target_sources(TonbNumerics
         include/tonb/numerics/bisection.hxx
         include/tonb/numerics/integration.hxx
         include/tonb/numerics/newton.hxx
+        include/tonb/numerics/arc_length_integration.hxx
 )
 
 target_link_libraries(TonbNumerics
