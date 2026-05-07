@@ -1,55 +1,63 @@
 //
 // Created by amir on 2/27/26.
 //
-#pragma once
 /**
  * @file halfedge_geometry.hxx
- * @brief Geometry-aware validation checks for topology half-edges.
+ * @brief Geometry-aware validation routines for a single topology half-edge.
  *
- * This module adds validation that requires geometry access via cad2d wrappers.
+ * This module is the bridge between pure topology and the cad2d geometry
+ * registry. It validates that a topo::HalfEdge is not only topologically well
+ * formed, but also geometrically consistent with the curve segment it claims to
+ * represent.
  *
- * Design constraints:
- *  - Must not include OCCT headers
- *  - Must operate on cad2d::Curve wrapper objects via geom::CurveStore.
- *  - Must return topo::Result<void> (no exceptions propagate).
+ * Architectural position
+ * ----------------------
+ * - topo/ remains geometry-kernel-free and stores only curve ids and parameters.
+ * - geom/ owns the actual cad2d::Curve wrapper objects via geom::CurveStore.
+ * - validate/halfedge_geometry uses the store to resolve the bound curve and
+ *   compare curve-derived points with topological vertices.
  *
- * Current scope:
- * - Validate that the start/end vertices of a HalfEdge match the curve evaluation
- *   at its stored parameters u0/u1 within the provided tolerance.
+ * Checks performed here
+ * ---------------------
+ * - half-edge pointer validity
+ * - endpoint vertex availability
+ * - non-zero curve id
+ * - curve existence in the supplied store
+ * - finite and ordered curve parameter domain
+ * - finite stored parameters u0 and u1
+ * - parameter inclusion in the curve domain, with tolerance
+ * - non-degenerate parametric span
+ * - orientation agreement with parameter ordering
+ * - endpoint agreement between curve evaluation and topology vertices
+ *
+ * This module intentionally does not validate neighbouring edges, wires, or
+ * face-level properties. Those are handled elsewhere.
  */
-#ifndef TONB_HALFEDGE_GEOMETRY_HXX
-#define TONB_HALFEDGE_GEOMETRY_HXX
+#pragma once
+#ifndef TONB_CAD2D_VALIDATE_HALFEDGE_GEOMETRY_HXX
+#define TONB_CAD2D_VALIDATE_HALFEDGE_GEOMETRY_HXX
 
 #include <tonb/cad2d/geom/curve_store.hxx>
 #include <tonb/cad2d/topo/halfedge.hxx>
 #include <tonb/cad2d/topo/tolerance.hxx>
 #include <tonb/cad2d/topo/result.hxx>
+#include <tonb/cad2d/module.hxx>
+
+#include <memory>
 
 namespace tonb::cad2d::validate {
+
     /**
-     * @brief Validate half-edge endpoint agreement with its bound curve.
+     * @brief Validate geometric consistency of a half-edge against CurveStore.
      *
-     * @details
-     * For a given half-edge e:
-     *  - curve_id must be non-zero
-     *  - curve must exist in store
-     *  - Let P0 = curve.value(u0), P1 = curve.value(u1)
-     *  - Let V0 = e->start()->position(), V1 = e->end()->position()
-     *  - Require |P0 - V0| <= tol.linear and |P1 - V1| <= tol.linear
-     *
-     * Notes:
-     *  - This function is geometry-aware and should be called only when caller
-     *    has access to the CurveStore that owns the referenced curve ids.
-     *  - This function does not validate parameter domain, degeneracy, or orientation.
-     *    Those are handled by a separate issue (Issue 2).
-     *
-     * @param e     Half-edge to validate.
-     * @param store Curve registry used to resolve curve_id -> cad2d::Curve.
-     * @param tol   Tolerance policy used for agreement check.
-     *
-     * @return topo::Result<void> success or failure with diagnostic message.
+     * @param e Half-edge to validate.
+     * @param store Geometry registry used to resolve curve ids.
+     * @param tol Validation tolerance policy.
+     * @return Success if the half-edge is geometrically consistent with its bound curve.
      */
-    topo::Result<void> check_halfedge_geometry(const std::shared_ptr<topo::HalfEdge>& e, const geom::CurveStore& store, const topo::Tolerance& tol);
+    TNBCAD2D_ND_EXPORT topo::Result<void> check_halfedge_geometry(const std::shared_ptr<topo::HalfEdge>& e,
+                                                                  const geom::CurveStore& store,
+                                                                  const topo::Tolerance& tol);
 }
 
-#endif //TONB_HALFEDGE_GEOMETRY_HXX
+#endif // TONB_CAD2D_VALIDATE_HALFEDGE_GEOMETRY_HXX
