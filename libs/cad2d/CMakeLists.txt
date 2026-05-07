@@ -69,6 +69,7 @@ target_sources(TonbCAD2d
         src/validate/edge_checks.cxx
         src/geom/curve_store.cxx
         src/geom/curve_ops.cxx
+        src/geom/intersection_result.cxx
         src/algo/wire_length.cxx
         src/algo/face_area.cxx
         PUBLIC
@@ -110,6 +111,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/validate/edge_checks.hxx
         include/tonb/cad2d/geom/curve_store.hxx
         include/tonb/cad2d/geom/curve_ops.hxx
+        include/tonb/cad2d/geom/intersection_result.hxx
         include/tonb/cad2d/algo/wire_length.hxx
         include/tonb/cad2d/algo/face_area.hxx
 )

@@ -3,6 +3,33 @@ All notable changes to this project will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Highlights
+- **Public 2D intersection result model introduced for cad2d**: Added the first public, kernel-agnostic result types for 2D curve-curve intersection queries, covering isolated points, tangent points, overlap intervals, and explicit unsupported/failure outcomes.
+- **Curve intersections foundation started**: Began Milestone vNext+4 by defining the public API surface that later intersection implementations will return without forcing future redesign of the result model.
+
+### Added
+- **Public intersection result types in `cad2d/geom`**:
+    - result model for isolated point intersections with parameters on both input curves
+    - result model for overlap / coincident intervals with parameter spans on both input curves
+    - explicit tangent-point classification where relevant
+    - explicit unsupported and failure outcomes with stable diagnostics
+- **Intersection result diagnostics**:
+    - stable, documented representation of empty successful queries versus unsupported/failure cases
+    - kernel-agnostic public API surface even when future implementations are backed internally by OCCT
+- **Intersection result test coverage**:
+    - regression test for line-line style crossing represented as one point with parameters on both curves
+    - regression test for disjoint query represented as a successful empty intersection result
+    - regression test for coincident overlapping segment-style query represented as overlap interval rather than ambiguous point output
+    - regression test for tangent-point classification and explicit unsupported/failure diagnostics
+
+### Notes
+- This begins **Milestone vNext+4 — Curve Intersections Foundation**.
+- Issue 8 currently covers the **public result-type and API model only**. The actual bounded span intersection implementation remains the next step.
+
+---
+
 ## [0.20.0] - 2026-05-07
 
 ### Highlights
