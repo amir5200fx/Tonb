@@ -1,0 +1,47 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+
+set(TONB_WITH_OCCT @TONB_WITH_OCCT@)
+set(TONB_WITH_CGAL @TONB_WITH_CGAL@)
+set(TONB_WITH_VTK @TONB_WITH_VTK@)
+set(TONB_WITH_CEREAL @TONB_WITH_CEREAL@)
+set(TONB_VTK_MAJOR @TONB_VTK_MAJOR@) # if you set this during configure
+set(TONB_WITH_EIGEN @TONB_WITH_EIGEN@)
+
+if (TONB_WITH_OCCT)
+    find_dependency(OpenCASCADE CONFIG REQUIRED)
+endif()
+
+if (TONB_WITH_CGAL)
+    find_dependency(CGAL)
+endif()
+
+# Optional: print message for consumers
+if (TONB_WITH_VTK)
+    message(STATUS "Tonb: Built with VTK support")
+else()
+    message(STATUS "Tonb: Build without VTK support")
+endif()
+
+if (TONB_WITH_VTK)
+    if (TONB_VTK_MAJOR AND TONB_VTK_MAJOR LESS 9)
+        # VTK 8.x: no component list
+        find_dependency(VTK)
+    else()
+        # VTK 9.x: match what TonbIO links PUBLIC
+        find_dependency(VTK COMPONENTS
+            CommonCore CommonDataModel FiltersCore IOXML)
+    endif()
+endif()
+
+if (TONB_WITH_EIGEN)
+    find_dependency(Eigen3 3.3 CONFIG REQUIRED)
+endif()
+
+# Required dependencies (from vcpkg or my system)
+find_dependency(Threads)
+
+find_dependency(Boost CONFIG REQUIRED COMPONENTS serialization)
+
+# Finally, bring in the installed Tonb Target(s)
+include("${CMAKE_CURRENT_LIST_DIR}/TonbTargets.cmake")

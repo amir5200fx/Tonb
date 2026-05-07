@@ -1,0 +1,30 @@
+build/
+CMakeCache.txt/
+CMakeFiles/
+.vscode/
+.idea/
+.git/
+*.o
+*.obj
+*.log
+docs/_build/
+Legacy/
+
+# Build dirs
+build-*/
+cmake-build*/
+out/
+dist/
+
+# Vcpkg installed tree if you vendor it
+vcpkg/
+.vcpkg-root
+
+# IDE / VCS
+.gitignore
+*.user
+
+# Large or generated docs
+docs/html/
+docs/doxygen/
+*.tmp

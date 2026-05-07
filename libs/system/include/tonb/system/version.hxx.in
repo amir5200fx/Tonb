@@ -1,0 +1,23 @@
+//
+// Created by amir on 8/21/25.
+//
+#pragma once
+#ifndef TONB_SYSTEM_VERSION_HXX
+#define TONB_SYSTEM_VERSION_HXX
+#include <string_view>
+
+#define TONB_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define TONB_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define TONB_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define TONB_VERSION_SEMVER "@PROJECT_VERSION@"
+#define TONB_VERSION_FULL "@TONB_FULL_VERSION@"
+
+namespace tonb::system {
+    inline std::string_view version_semver() {return TONB_VERSION_SEMVER;}
+    inline std::string_view version_full() {return TONB_VERSION_FULL;}  // e.g., 0.3.0 (v0.3.0-12-gabc1234)
+
+    inline int version_major() {return TONB_VERSION_MAJOR;}
+    inline int version_minor() {return TONB_VERSION_MINOR;}
+    inline int version_patch() {return TONB_VERSION_PATCH;}
+}
+#endif //TONB_SYSTEM_VERSION_HXX

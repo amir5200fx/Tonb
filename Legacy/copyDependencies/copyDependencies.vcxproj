@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{134a3bb2-0841-4220-ba0b-cd8fc4170e6c}</ProjectGuid>
+    <RootNamespace>copyDependencies</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /D "$(SolutionDir)Common\Foam\lib\TnbBase.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libcoll64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libhwid64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libhwloc-5.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpiautodbl_seti8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpiautodbl_seti8r8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpiautodbl_setr8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpio64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpirun64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtcoll64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpiautodbl_seti8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpiautodbl_seti8r8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpiautodbl_setr8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpio64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtpcdmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtpcmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libpcdmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libpcmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libtopology2_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-hpc.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-lsf.1.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-lsf.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-nosched.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonCore-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkIOLegacy-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonDataModel-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkIOCore-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtklz4-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonExecutionModel-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtklzma-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkzlib-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtksys-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonMisc-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonTransforms-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonSystem-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonMath-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkdoubleconversion-8.2.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /D "$(SolutionDir)Common\Foam\lib\TnbBase.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libcoll64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libhwid64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libhwloc-5.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpiautodbl_seti8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpiautodbl_seti8r8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpiautodbl_setr8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpio64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmpirun64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtcoll64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpiautodbl_seti8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpiautodbl_seti8r8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpiautodbl_setr8_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtmpio64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtpcdmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libmtpcmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libpcdmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libpcmpi64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\libtopology2_64.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-hpc.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-lsf.1.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-lsf.dll" "$(OutDir)"
+xcopy /Y /D "$(SolutionDir)Common\mpi\lib\wlm-nosched.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonCore-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkIOLegacy-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonDataModel-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkIOCore-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtklz4-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonExecutionModel-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtklzma-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkzlib-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtksys-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonMisc-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonTransforms-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonSystem-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkCommonMath-8.2.dll" "$(OutDir)"
+xcopy /Y /D "$(VTK_ROOT)\bin\vtkdoubleconversion-8.2.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
