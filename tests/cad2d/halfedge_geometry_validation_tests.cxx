@@ -11,7 +11,7 @@
  */
 #include <gtest/gtest.h>
 
-#define TONB_WITH_OCCT
+#include <tonb/config.hxx>
 #include <tonb/cad2d/tools.hxx>
 #include <tonb/cad2d/geom/curve_store.hxx>
 #include <tonb/cad2d/validate/halfedge_geometry.hxx>

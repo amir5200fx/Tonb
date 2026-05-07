@@ -43,6 +43,7 @@ namespace tonb::cad2d::validate {
     struct ShapeCheckOptions {
         bool check_vertices = true;         ///< Reserved for future vertex-specific structural checks.
         bool check_halfedges = true;        ///< Run topology-only half-edge checks.
+        bool check_edges = true;            ///< Run first-class edge checks.
         bool check_wires = true;            ///< Run wire checks.
         bool check_faces = true;            ///< Run face checks.
         bool check_geometry = false;        ///< Run geometry-aware half-edge checks when a CurveStore is available.

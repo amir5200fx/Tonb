@@ -9,6 +9,7 @@
 
 #include <tonb/cad2d/topo/halfedge.hxx>
 #include <tonb/cad2d/topo/vertex.hxx>
+#include <tonb/cad2d/topo/edge.hxx>
 #include <tonb/cad2d/topo/orientation.hxx>
 #include <tonb/cad2d/topo/id.hxx>
 
@@ -115,10 +116,37 @@ namespace tonb::cad2d::validate {
         return {};
     }
 
+    topo::Result<void> check_edge_link(const std::shared_ptr<topo::HalfEdge>& e) {
+        if (!e) {
+            return fail("HalfEdgeChecks: half-edge pointer is null", topo::ErrorCode::invalid_input);
+        }
+        const auto owner = e->edge();
+        if (!owner) {
+            return {};
+        }
+        const auto fwd = owner->forward();
+        const auto rev = owner->reverse();
+        if (!fwd || !rev) {
+            return fail(ctx(e) + ": owning topo::Edge does not resolve a complete half-edge pair", topo::ErrorCode::topology_error);
+        }
+        const bool is_forward = (fwd->id() == e->id());
+        const bool is_reverse = (rev->id() == e->id());
+        if (!is_forward && !is_reverse) {
+            return fail(ctx(e) + ": half-edge points to an owning topo::Edge that does not contain it", topo::ErrorCode::topology_error);
+        }
+        const auto t = e->twin();
+        const auto sibling = is_forward ? rev : fwd;
+        if (!t || t->id() != sibling->id()) {
+            return fail(ctx(e) + ": half-edge twin is inconsistent with the sibling stored in its owner edge", topo::ErrorCode::topology_error);
+        }
+        return {};
+    }
+
     topo::Result<void> check_halfedge(const std::shared_ptr<topo::HalfEdge>& e) {
         if (auto r = check_endpoints(e); !r) return r;
         if (auto r = check_twin(e); !r) return r;
         if (auto r = check_next_prev(e); !r) return r;
+        if (auto r = check_edge_link(e); !r) return r;
         return {};
     }
 }

@@ -55,6 +55,7 @@ target_sources(TonbCAD2d
         src/topo/wire.cxx
         src/topo/face.cxx
         src/topo/shape.cxx
+        src/topo/edge.cxx
         src/builder/vertex_builder.cxx
         src/builder/halfedge_builder.cxx
         src/builder/face_builder.cxx
@@ -65,6 +66,7 @@ target_sources(TonbCAD2d
         src/validate/shape_checks.cxx
         src/validate/geom_consistency.cxx
         src/validate/halfedge_geometry.cxx
+        src/validate/edge_checks.cxx
         src/geom/curve_store.cxx
         src/geom/curve_ops.cxx
         PUBLIC
@@ -92,6 +94,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/topo/wire.hxx
         include/tonb/cad2d/topo/face.hxx
         include/tonb/cad2d/topo/shape.hxx
+        include/tonb/cad2d/topo/edge.hxx
         include/tonb/cad2d/builder/vertex_builder.hxx
         include/tonb/cad2d/builder/halfedge_builder.hxx
         include/tonb/cad2d/builder/face_builder.hxx
@@ -102,6 +105,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/validate/shape_checks.hxx
         include/tonb/cad2d/validate/geom_consistency.hxx
         include/tonb/cad2d/validate/halfedge_geometry.hxx
+        include/tonb/cad2d/validate/edge_checks.hxx
         include/tonb/cad2d/geom/curve_store.hxx
         include/tonb/cad2d/geom/curve_ops.hxx
 )

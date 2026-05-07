@@ -6,6 +6,8 @@ add_executable(test_cad2d_validate
         geom_curve_store_tests.cxx
         halfedge_builder_geometry_tests.cxx
         halfedge_geometry_validation_tests.cxx
+        edge_builder_tests.cxx
+        edge_validation_tests.cxx
 )
 
 target_link_libraries(test_cad2d_validate PRIVATE

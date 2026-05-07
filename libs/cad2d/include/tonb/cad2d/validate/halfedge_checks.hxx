@@ -1,8 +1,5 @@
-//
-// Created by amir on 1/24/26.
-//
 /**
- * @file halfedge_checks.hxx
+* @file halfedge_checks.hxx
  * @brief Topology-only validation routines for individual half-edges.
  *
  * This module contains the fundamental, non-geometric checks that establish
@@ -17,6 +14,7 @@
  * - start / end vertex references
  * - twin symmetry and basic twin compatibility
  * - next / prev reciprocity and self-link exclusion
+ * - optional owner-edge consistency when a topo::Edge back-reference exists
  *
  * The following concerns are deliberately out of scope here:
  *
@@ -100,6 +98,16 @@ namespace tonb::cad2d::validate {
      * @return Success if next/prev links are absent or structurally valid.
      */
     TNBCAD2D_ND_EXPORT topo::Result<void> check_next_prev(const std::shared_ptr<topo::HalfEdge>& e);
+
+    /**
+     * @brief Validate that the half-edge is consistent with its owning topo::Edge, if any.
+     *
+     * Missing edge ownership is allowed because isolated half-edges may still exist
+     * in intermediate modelling states. When an owner edge is present, however, the
+     * half-edge must appear as either the forward or reverse member of that edge, and
+     * its twin must be the sibling member stored there.
+     */
+    TNBCAD2D_ND_EXPORT topo::Result<void> check_edge_link(const std::shared_ptr<topo::HalfEdge>& e);
 
     /**
      * @brief Run the complete topology-only half-edge validation sequence.
