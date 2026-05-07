@@ -22,6 +22,6 @@ target_sources(TonbMesh
 )
 
 target_link_libraries(TonbMesh
-        PUBLIC Tonb::Base Tonb::Geometry
+        PUBLIC Tonb::Base Tonb::Geometry Tonb::Numerics
 )
 

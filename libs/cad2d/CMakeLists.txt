@@ -69,6 +69,7 @@ target_sources(TonbCAD2d
         src/validate/edge_checks.cxx
         src/geom/curve_store.cxx
         src/geom/curve_ops.cxx
+        src/algo/wire_length.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -108,6 +109,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/validate/edge_checks.hxx
         include/tonb/cad2d/geom/curve_store.hxx
         include/tonb/cad2d/geom/curve_ops.hxx
+        include/tonb/cad2d/algo/wire_length.hxx
 )
 
 # Backend-specific sources
@@ -134,6 +136,7 @@ target_include_directories(TonbCAD2d PUBLIC
 target_link_libraries(TonbCAD2d
         PUBLIC Tonb::Geometry
         PUBLIC Tonb::Base
+        PUBLIC Tonb::Numerics
         PUBLIC Tonb::System
 )
 

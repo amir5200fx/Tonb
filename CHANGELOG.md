@@ -9,6 +9,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Geometry consistency validation completed for cad2d**: Finished the full vNext geometry-validation milestone, including vertex–curve agreement checks, curve-domain and degeneracy validation, optional shape-level geometry validation, and standardised diagnostic behaviour.
 - **Validation diagnostics strengthened**: Geometry validation now uses stable error-code mappings and consistent message prefixes, with targeted tests locking down representative diagnostic cases.
 - **Project-wide feature-config propagation introduced**: Added a generated configuration-header path so build-time feature macros such as `TONB_WITH_OCCT` can be propagated consistently through the codebase and tests.
+- **Wire geometric length utility introduced**: Added a geometry-aware wire-length algorithm in `cad2d/algo`, backed by a public robust arc-length integration API in `numerics`.
 
 ### Added
 - **Geometry-aware half-edge validation**:
@@ -27,6 +28,15 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Generated Tonb config header path**:
     - build-generated project configuration header for propagating feature macros such as `TONB_WITH_OCCT`
     - unified feature-flag usage between library code and tests without local source-level macro definitions
+- **Public numerics arc-length integration API**:
+    - adaptive arc-length integration for planar parametric curves exposed as a public numerics facility
+    - deterministic, tolerance-driven refinement with explicit work limits and convergence metadata
+    - intended for reuse by higher-level CAD and geometry algorithms
+- **Wire length utility in `cad2d/algo`**:
+    - geometric wire-length computation by summing per-half-edge arc lengths from `curve_id`, `u0`, and `u1`
+    - explicit failure reporting for missing curves, invalid parameters, non-finite spans, and unsupported unbounded domains
+- **Wire-length test coverage**:
+    - regression test verifying that a square built from segment edges returns a total length of approximately 4 within tolerance
 
 ### Changed
 - **cad2d validation flow**:
@@ -37,10 +47,15 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - stable mapping of representative geometry failures onto existing `ErrorCode` categories
 - **Test configuration discipline**:
     - tests now rely on configured build-time feature propagation instead of ad hoc local macro definitions for OCCT-enabled coverage
+- **Numerical integration layering**:
+    - robust arc-length integration is now exposed from `numerics` as a public reusable API rather than being embedded privately inside `cad2d`
+- **cad2d algorithm layering**:
+    - wire-length computation is implemented as an algorithm-layer consumer of topology, geometry storage, and public numerics utilities
 
 ### Notes
 - This completes **Milestone vNext — Geometry Consistency Validation (Option B)**.
-- The next planned milestone is **vNext+1 — Edge Abstraction (Topology Usability)**, introducing `topo::Edge` as the explicit owner of twin half-edge pairs.
+- This also completes **Milestone vNext+2 — Wire Geometry Utilities**, introducing the first wire-level geometric utility.
+- The next planned milestone is **vNext+3 — Face Geometry Basics**, beginning with signed-area and orientation utilities.
 
 ## [0.19.0] - 2025-08-21
 ### Highlights
