@@ -70,6 +70,7 @@ target_sources(TonbCAD2d
         src/geom/curve_store.cxx
         src/geom/curve_ops.cxx
         src/algo/wire_length.cxx
+        src/algo/face_area.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -110,6 +111,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/geom/curve_store.hxx
         include/tonb/cad2d/geom/curve_ops.hxx
         include/tonb/cad2d/algo/wire_length.hxx
+        include/tonb/cad2d/algo/face_area.hxx
 )
 
 # Backend-specific sources

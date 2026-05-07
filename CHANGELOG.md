@@ -3,13 +3,14 @@ All notable changes to this project will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.20.0] - 2026-05-07
 
 ### Highlights
 - **Geometry consistency validation completed for cad2d**: Finished the full vNext geometry-validation milestone, including vertex–curve agreement checks, curve-domain and degeneracy validation, optional shape-level geometry validation, and standardised diagnostic behaviour.
 - **Validation diagnostics strengthened**: Geometry validation now uses stable error-code mappings and consistent message prefixes, with targeted tests locking down representative diagnostic cases.
 - **Project-wide feature-config propagation introduced**: Added a generated configuration-header path so build-time feature macros such as `TONB_WITH_OCCT` can be propagated consistently through the codebase and tests.
 - **Wire geometric length utility introduced**: Added a geometry-aware wire-length algorithm in `cad2d/algo`, backed by a public robust arc-length integration API in `numerics`.
+- **Polygonal face area and orientation utilities introduced**: Added the first face-level geometric utilities in `cad2d/algo`, including signed area, loop orientation classification, and standard face-orientation helpers for segment-only polygonal faces.
 
 ### Added
 - **Geometry-aware half-edge validation**:
@@ -37,6 +38,15 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - explicit failure reporting for missing curves, invalid parameters, non-finite spans, and unsupported unbounded domains
 - **Wire-length test coverage**:
     - regression test verifying that a square built from segment edges returns a total length of approximately 4 within tolerance
+- **Polygonal face area and orientation utilities in `cad2d/algo`**:
+    - signed polygonal area computation for wires and faces using segment-only geometric spans
+    - loop orientation classification based on signed-area sign
+    - face-level orientation checks using the documented convention of outer CCW and holes CW
+    - face-orientation normalisation helpers based on reversing wires through existing twin half-edges
+    - explicit rejection of non-linear spans for the current polygon-only milestone scope
+- **Face-area test coverage**:
+    - regression test verifying that a unit square face returns signed area ≈ 1
+    - regression test verifying that a hole subtracts correctly from the outer face area
 
 ### Changed
 - **cad2d validation flow**:
@@ -51,11 +61,13 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - robust arc-length integration is now exposed from `numerics` as a public reusable API rather than being embedded privately inside `cad2d`
 - **cad2d algorithm layering**:
     - wire-length computation is implemented as an algorithm-layer consumer of topology, geometry storage, and public numerics utilities
+    - polygonal face-area computation is implemented as an algorithm-layer consumer of topology, geometry storage, and existing orientation conventions
 
 ### Notes
 - This completes **Milestone vNext — Geometry Consistency Validation (Option B)**.
 - This also completes **Milestone vNext+2 — Wire Geometry Utilities**, introducing the first wire-level geometric utility.
-- The next planned milestone is **vNext+3 — Face Geometry Basics**, beginning with signed-area and orientation utilities.
+- This also completes **Milestone vNext+3 — Face Geometry Basics**, introducing signed-area and orientation utilities for segment-only polygonal faces.
+- The next planned milestone is **vNext+4 — Curve Intersections Foundation**.
 
 ## [0.19.0] - 2025-08-21
 ### Highlights
