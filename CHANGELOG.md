@@ -6,6 +6,64 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Highlights
+- **Root-level foundation layer introduced for Tonb**: Added a new reusable `foundation/` module tree, ported and adapted from GeoForge, to provide shared infrastructure for future shells and tooling.
+- **Shell-oriented infrastructure established**: Added reusable command-line, workspace, logging, export, failure, configuration, and utility foundations intended to support upcoming root-level shells such as `shell/cad2d`.
+- **GeoForge foundations adapted to Tonb conventions**: Integrated the imported foundation code into Tonb-native include paths, namespaces, module macros, and build wiring.
+
+### Added
+- **Root-level Tonb foundation module**:
+    - new `foundation/` tree added at the repository root as a reusable infrastructure layer outside `libs/` and `shell/`
+    - new `TonbFoundation` target with `Tonb::Foundation` alias
+    - integrated root CMake wiring for building and installing the foundation module
+- **CLI foundation infrastructure**:
+    - command path representation
+    - command registry support
+    - command specification/help metadata support
+    - help rendering utilities
+    - parse utilities for command-line style token handling
+    - text-table support for structured terminal output
+- **Workspace foundation infrastructure**:
+    - workspace model and standard workspace-area handling
+    - default workspace path support
+    - workspace lifecycle utilities
+    - workspace persistence helpers
+- **Logging foundation infrastructure**:
+    - structured logger support
+    - log context support
+    - Tonb foundation log macros
+    - console, text-file, NDJSON, and buffered sink support
+- **Failure and export foundation infrastructure**:
+    - failure-code, severity, diagnostics, and exception support
+    - export bundle models and bundle-writing support
+    - export naming, path, and profile utilities
+    - integrity-oriented export support carried over from the GeoForge foundation set
+- **Configuration and utility foundation infrastructure**:
+    - configuration helpers adapted into the Tonb foundation layer
+    - shared utility support required by the imported foundation modules
+- **Tonb-native foundation module header**:
+    - `tonb/foundation/module.hxx` added for export/import control and shared module visibility handling
+- **Foundation module documentation**:
+    - README documenting the role of the new foundation layer as the reusable basis for future Tonb shells and tooling
+
+### Changed
+- **Foundation namespace and include adaptation**:
+    - ported GeoForge foundation headers and sources into Tonb-native `tonb/foundation/...` include paths
+    - adapted imported code to Tonb-style namespaces and module structure
+- **Tonb build integration**:
+    - aligned the imported foundation layer with Tonb build, target, and install conventions
+- **Bundle integrity implementation cleanup**:
+    - removed an unnecessary OpenSSL include during the Tonb port of the foundation bundle-integrity implementation
+
+### Notes
+- This foundation work is intended to support upcoming root-level shell development, beginning with `shell/cad2d`.
+- The imported GeoForge foundations were integrated as a Tonb-native root-level infrastructure layer rather than being embedded directly into a product-specific shell.
+- The current integration keeps the module structure broad and reusable so it can later be split further if needed.
+
+---
+
+## [0.21.0] - 2026-05-08
+
+### Highlights
 - **Public 2D intersection result model introduced for cad2d**: Added the first public, kernel-agnostic result types for 2D curve-curve intersection queries, covering isolated points, tangent points, overlap intervals, and explicit unsupported or failure outcomes.
 - **Initial bounded span intersection API introduced**: Added the first real bounded curve-span intersection API in `cad2d/geom`, with deterministic segment-segment support and initial representative support for segment-arc and arc-arc cases.
 - **Half-edge span intersection utility introduced**: Added the first `cad2d/algo` bridge utility that resolves half-edge curve bindings from `CurveStore` and forwards bounded-span queries through the geometry intersection layer.

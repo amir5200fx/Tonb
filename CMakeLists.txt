@@ -187,6 +187,7 @@ add_subdirectory(libs/cad2d)
 add_subdirectory(libs/cad)
 add_subdirectory(libs/mesh)
 add_subdirectory(demos)
+add_subdirectory(foundation)
 
 add_custom_target(TonbAll
         DEPENDS TonbSystem TonbBase TonbNumerics TonbGeometry TonbCAD2d TonbCAD TonbIO TonbMesh
