@@ -12,6 +12,7 @@ add_executable(test_cad2d_validate
         face_area_tests.cxx
         intersection_result_tests.cxx
         curve_intersections_tests.cxx
+        halfedge_intersections_tests.cxx
 )
 
 target_link_libraries(test_cad2d_validate PRIVATE

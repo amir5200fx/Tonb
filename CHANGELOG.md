@@ -8,7 +8,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ### Highlights
 - **Public 2D intersection result model introduced for cad2d**: Added the first public, kernel-agnostic result types for 2D curve-curve intersection queries, covering isolated points, tangent points, overlap intervals, and explicit unsupported or failure outcomes.
 - **Initial bounded span intersection API introduced**: Added the first real bounded curve-span intersection API in `cad2d/geom`, with deterministic segment-segment support and initial representative support for segment-arc and arc-arc cases.
-- **Curve intersections foundation advanced**: Milestone vNext+4 now includes both the public result model and the first bounded-span solver layer, without changing the public intersection report format.
+- **Half-edge span intersection utility introduced**: Added the first `cad2d/algo` bridge utility that resolves half-edge curve bindings from `CurveStore` and forwards bounded-span queries through the geometry intersection layer.
+- **Curve intersections foundation advanced**: Milestone vNext+4 now includes the public result model, the first bounded-span solver layer, and the first topology-level half-edge intersection integration utility, without changing the public intersection report format.
 
 ### Added
 - **Public intersection result types in `cad2d/geom`**:
@@ -34,6 +35,15 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - non-overlapping collinear segment test returning no point intersection
     - representative segment-arc intersection test
     - representative arc-arc intersection test
+- **Half-edge span intersection utility in `cad2d/algo`**:
+    - public half-edge-aware intersection entry point that accepts two topology half-edges and a `geom::CurveStore`
+    - topology-to-geometry bridge that resolves half-edge curve bindings and delegates bounded-span queries to `geom::intersect_bounded_spans(...)`
+    - half-edge-aware point and overlap result items carrying half-edge ids and per-span parameters on both inputs
+    - explicit failure reporting for null half-edges, missing curve bindings, and invalid curve ids
+- **Half-edge intersection test coverage**:
+    - crossing half-edges test returning the expected point intersection in half-edge/span terms
+    - invalid curve-id test failing cleanly through `Result`
+    - disjoint-span test verifying that identical underlying geometry with separated half-edge parameter spans returns no intersections
 
 ### Changed
 - **Intersection result usability**:
@@ -46,7 +56,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - This continues **Milestone vNext+4 — Curve Intersections Foundation**.
 - Issue 8 covers the **public result-type and API model**.
 - Issue 9 adds the **initial bounded-span intersection solver**, with segment-first support and representative arc cases.
-- Topology-level half-edge span intersection remains the next integration step.
+- Issue 10 adds the **topology-level half-edge span intersection bridge** in `cad2d/algo`, linking `topo::HalfEdge` and `geom::CurveStore` to the existing bounded-span geometry solver.
 
 ---
 

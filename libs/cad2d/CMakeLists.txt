@@ -73,6 +73,7 @@ target_sources(TonbCAD2d
         src/geom/intersection.cxx
         src/algo/wire_length.cxx
         src/algo/face_area.cxx
+        src/algo/halfedge_intersection.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -116,6 +117,7 @@ target_sources(TonbCAD2d
         include/tonb/cad2d/geom/intersection.hxx
         include/tonb/cad2d/algo/wire_length.hxx
         include/tonb/cad2d/algo/face_area.hxx
+        include/tonb/cad2d/algo/halfedge_intersection.hxx
 )
 
 # Backend-specific sources
