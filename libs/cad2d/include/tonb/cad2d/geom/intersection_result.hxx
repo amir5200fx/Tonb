@@ -168,6 +168,25 @@ namespace tonb::cad2d::geom {
     };
 
     /**
+     * @name Public shorthand aliases
+     * @brief Stable short names intended for direct use by public intersection APIs.
+     *
+     * The longer `CurveIntersection*` names remain the primary documented model.
+     * These aliases provide a cleaner surface for callers and for later
+     * bounded-span/topology-level intersection APIs without changing the
+     * underlying result model.
+     */
+    ///@{
+    using IntersectionStatus = CurveIntersectionStatus;
+    using IntersectionPointKind = CurveIntersectionPointKind;
+    using IntersectionItemKind = CurveIntersectionItemKind;
+    using IntersectionPoint = CurveIntersectionPoint;
+    using IntersectionOverlap = CurveIntersectionOverlap;
+    using IntersectionItem = CurveIntersectionItem;
+    using IntersectionResult = CurveIntersectionReport;
+    ///@}
+
+    /**
      * @brief Construct a successful empty intersection report.
      *
      * This represents a valid query that found no intersections.
