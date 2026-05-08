@@ -6,27 +6,47 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Highlights
-- **Public 2D intersection result model introduced for cad2d**: Added the first public, kernel-agnostic result types for 2D curve-curve intersection queries, covering isolated points, tangent points, overlap intervals, and explicit unsupported/failure outcomes.
-- **Curve intersections foundation started**: Began Milestone vNext+4 by defining the public API surface that later intersection implementations will return without forcing future redesign of the result model.
+- **Public 2D intersection result model introduced for cad2d**: Added the first public, kernel-agnostic result types for 2D curve-curve intersection queries, covering isolated points, tangent points, overlap intervals, and explicit unsupported or failure outcomes.
+- **Initial bounded span intersection API introduced**: Added the first real bounded curve-span intersection API in `cad2d/geom`, with deterministic segment-segment support and initial representative support for segment-arc and arc-arc cases.
+- **Curve intersections foundation advanced**: Milestone vNext+4 now includes both the public result model and the first bounded-span solver layer, without changing the public intersection report format.
 
 ### Added
 - **Public intersection result types in `cad2d/geom`**:
     - result model for isolated point intersections with parameters on both input curves
-    - result model for overlap / coincident intervals with parameter spans on both input curves
+    - result model for overlap or coincident intervals with parameter spans on both input curves
     - explicit tangent-point classification where relevant
     - explicit unsupported and failure outcomes with stable diagnostics
 - **Intersection result diagnostics**:
-    - stable, documented representation of empty successful queries versus unsupported/failure cases
-    - kernel-agnostic public API surface even when future implementations are backed internally by OCCT
+    - stable, documented representation of empty successful queries versus unsupported or failure cases
+    - kernel-agnostic public API surface even when later implementations are backed internally by OCCT
 - **Intersection result test coverage**:
     - regression test for line-line style crossing represented as one point with parameters on both curves
     - regression test for disjoint query represented as a successful empty intersection result
     - regression test for coincident overlapping segment-style query represented as overlap interval rather than ambiguous point output
-    - regression test for tangent-point classification and explicit unsupported/failure diagnostics
+    - regression test for tangent-point classification and explicit unsupported or failure diagnostics
+- **Bounded span intersection API in `cad2d/geom`**:
+    - public `intersect_bounded_spans(...)` entry point for bounded 2D curve-span queries
+    - deterministic manual segment-segment intersection path
+    - initial circular support for representative segment-arc and arc-arc cases
+    - explicit `Result` failures for unsupported span combinations
+- **Initial bounded-span intersection test coverage**:
+    - orthogonal segment-segment intersection test
+    - non-overlapping collinear segment test returning no point intersection
+    - representative segment-arc intersection test
+    - representative arc-arc intersection test
+
+### Changed
+- **Intersection result usability**:
+    - added stable short public aliases such as `IntersectionResult`, `IntersectionPoint`, and `IntersectionOverlap` on top of the documented `CurveIntersection*` model
+- **Curve intersection implementation alignment**:
+    - aligned bounded-span solver code and tests with the actual public variant-based intersection result model
+    - removed assumptions about separate `points` and `overlaps` containers in favour of the documented `items` result representation
 
 ### Notes
-- This begins **Milestone vNext+4 — Curve Intersections Foundation**.
-- Issue 8 currently covers the **public result-type and API model only**. The actual bounded span intersection implementation remains the next step.
+- This continues **Milestone vNext+4 — Curve Intersections Foundation**.
+- Issue 8 covers the **public result-type and API model**.
+- Issue 9 adds the **initial bounded-span intersection solver**, with segment-first support and representative arc cases.
+- Topology-level half-edge span intersection remains the next integration step.
 
 ---
 
