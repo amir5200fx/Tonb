@@ -11,6 +11,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **GeoForge foundations adapted to Tonb conventions**: Integrated the imported foundation code into Tonb-native include paths, namespaces, module macros, and build wiring.
 - **Root-level cad2d shell module introduced**: Added the first dedicated `shell/cad2d` module outside `libs/`, establishing the build, public-header, and target foundation for the future AutoCAD-like `cad2d` shell.
 - **cad2d shell module scaffolded for future expansion**: Added the initial `ShellApp` façade, Tonb-native shell export macros, placeholder shell runtime headers, and basic smoke-test coverage so later session, tokenisation, UI, and command infrastructure can be developed on a real module boundary.
+- **cad2d shell session model introduced**: Added the first real `ShellSession` orchestration root for `shell/cad2d`, with named curve-store and shape domains, active-context tracking, shape-to-curve-store binding, primary selection, runtime flags, and deterministic status/reset support.
+- **Session foundation prepared for CAD-like growth**: The new shell session model is intentionally structured to support future selection-set, alias-handle, journaling, and undo/redo style workflows without embedding CAD algorithms into the shell state layer.
 
 ### Added
 - **Root-level Tonb foundation module**:
@@ -60,6 +62,18 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Initial cad2d shell implementation and smoke testing**:
     - minimal `ShellApp` implementation for the new shell module
     - basic smoke-test coverage verifying shell target linkage and public header availability
+- **cad2d shell session model**:
+    - first real `ShellSession` state root for the new shell module
+    - first-class session ownership for named curve stores and named topology shapes
+    - active curve-store tracking and active shape tracking
+    - explicit shape-to-curve-store binding support to keep shell workflows practical while preserving the clean topo/geom split in `cad2d`
+    - minimal primary-selection model as the first step toward future CAD-like selection workflows
+    - shell runtime flags stored as part of session state
+    - deterministic session `reset()` and `status()` support
+- **cad2d shell session test coverage**:
+    - regression tests for deterministic session creation and reset behavior
+    - regression tests for active shape and active curve-store assignment
+    - regression tests for storing and reporting shape-to-curve-store bindings
 
 ### Changed
 - **Foundation namespace and include adaptation**:
@@ -68,6 +82,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Tonb build integration**:
     - aligned the imported foundation layer with Tonb build, target, and install conventions
     - extended the root build to include the new `shell/cad2d` module
+    - extended the shell module build to compile and test the first real session subsystem
 - **Bundle integrity implementation cleanup**:
     - removed an unnecessary OpenSSL include during the Tonb port of the foundation bundle-integrity implementation
 
@@ -76,7 +91,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - The imported GeoForge foundations were integrated as a Tonb-native root-level infrastructure layer rather than being embedded directly into a product-specific shell.
 - The current integration keeps the module structure broad and reusable so it can later be split further if needed.
 - This completes **Issue 1 — Root-level cad2d Shell Module** from the cad2d shell roadmap.
-- The current `shell/cad2d` state is intentionally a module scaffold only; shell session, tokenisation, UI, command dispatch, and help infrastructure remain future issues built on top of this boundary.
+- This also completes **Issue 2 — Shell Session Model** from the cad2d shell roadmap.
+- The current `shell/cad2d` state now includes a real session foundation, but tokenisation, UI, command dispatch, and help infrastructure remain future issues built on top of this boundary.
 
 ---
 

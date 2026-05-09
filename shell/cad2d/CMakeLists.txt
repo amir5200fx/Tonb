@@ -4,12 +4,14 @@ add_library(Tonb::CAD2dShell ALIAS TonbCAD2dShell)
 target_sources(TonbCAD2dShell
         PRIVATE
         src/shell_app.cxx
+        src/shell_session.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
         FILES
         include/tonb/cad2d/shell/module.hxx
         include/tonb/cad2d/shell/shell_app.hxx
+        include/tonb/cad2d/shell/shell_session.hxx
 )
 
 target_include_directories(TonbCAD2dShell PUBLIC
