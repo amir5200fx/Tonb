@@ -19,6 +19,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Help foundation aligned with reusable CLI infrastructure**: The cad2d shell help layer now acts as a thin shell-specific adapter over foundation command specs, help registry structures, and rendering utilities, keeping generic help behavior in the shared root-level foundation module.
 - **cad2d tokenisation and parse utilities introduced using foundation**: Added the first shell-specific command-line tokenisation layer for `shell/cad2d`, with deterministic whitespace tokenisation, quoted-string preservation, explicit malformed-input failure, and positional parsing helpers built on top of the shared foundation parse utilities.
 - **Tokenisation foundation aligned with reusable parse infrastructure**: The cad2d shell now reuses the shared foundation scalar parse functions for strict positional argument conversion, while keeping command-line token splitting and positional argument views in the shell layer.
+- **cad2d core shell commands introduced**: Added the first real user-facing core command family for `shell/cad2d`, including `help`, `status`, `reset`, `quit`, and `exit`, routed through the command registry and backed by the session, help, and tokenisation foundations.
+- **Core command flow established for future shell features**: The shell now has a minimal but complete command execution loop foundation, with structured dispatch, readable status reporting, deterministic reset behavior, clean runtime termination control, and a real command family on top of the previously completed infrastructure layers.
 
 ### Added
 - **Root-level Tonb foundation module**:
@@ -116,6 +118,18 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - regression tests for preserving quoted tokens intact
     - regression tests for clean failure on malformed quoted input
     - regression tests for positional parsing helper behavior
+- **cad2d core shell commands**:
+    - first real shell command family for `help`, `status`, `reset`, `quit`, and `exit`
+    - structured command registration for core shell commands through the command registry
+    - `status` command reporting deterministic session state
+    - `reset` command clearing session state deterministically
+    - `quit` and `exit` commands setting runtime termination state cleanly
+    - `help` command integration over the foundation-backed help subsystem
+- **cad2d core command test coverage**:
+    - regression tests for `status` on an empty session
+    - regression tests for deterministic session clearing through `reset`
+    - regression tests for clean runtime termination flag handling through `quit` and `exit`
+    - regression tests for `help` command execution through the command registry
 
 ### Changed
 - **Foundation namespace and include adaptation**:
@@ -128,12 +142,16 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - extended the shell module build further to compile and test the first real command infrastructure subsystem
     - extended the shell/help build further so the cad2d help layer now depends on and reuses the shared foundation CLI/help module
     - extended the shell/tokenisation build further so the cad2d tokenisation layer now depends on and reuses the shared foundation CLI parse utilities
+    - extended the shell/commands build further so the first real core command family is now built and tested through the command registry infrastructure
 - **cad2d help architecture**:
     - replaced the earlier shell-local help duplication approach with a foundation-backed design
     - kept cad2d-specific help wiring in `shell/cad2d` while leaving generic metadata and rendering behavior in the reusable foundation layer
 - **cad2d tokenisation architecture**:
     - kept shell-specific token splitting and positional-argument views in `shell/cad2d`
     - reused foundation scalar parsing rather than duplicating integer, floating-point, and boolean parse helpers inside the shell layer
+- **cad2d shell execution flow**:
+    - moved the shell from infrastructure-only state to the first real command-executing state by adding a core command family that composes session state, command dispatch, help rendering, and tokenisation utilities
+    - corrected core-command help registration to avoid invalid empty root-namespace insertion against the foundation command registry
 - **Bundle integrity implementation cleanup**:
     - removed an unnecessary OpenSSL include during the Tonb port of the foundation bundle-integrity implementation
 
@@ -146,7 +164,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - This also completes **Issue 3 — Command Registry and Dispatch Infrastructure** from the cad2d shell roadmap.
 - This also completes **Issue 4 — Help Registry and Help Rendering** from the cad2d shell roadmap.
 - This also completes **Issue 5 — Tokenisation and Parse Utilities** from the cad2d shell roadmap.
-- The current `shell/cad2d` state now includes a real session foundation, command dispatch foundation, foundation-backed help subsystem, and foundation-backed tokenisation/parse layer, but higher-level command families remain future issues built on top of this boundary.
+- This also completes **Issue 6 — Core Shell Commands** from the cad2d shell roadmap.
+- The current `shell/cad2d` state now includes a real session foundation, command dispatch foundation, foundation-backed help subsystem, foundation-backed tokenisation/parse layer, and the first real core command family. Higher-level domain command families remain future issues built on top of this boundary.
 
 ---
 

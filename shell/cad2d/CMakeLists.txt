@@ -8,6 +8,7 @@ target_sources(TonbCAD2dShell
         src/shell_tokenise.cxx
         src/command/command_registry.cxx
         src/command/command_node.cxx
+        src/commands/shell_cmd_core.cxx
         src/help/help_renderer.cxx
         src/help/help_registry.cxx
         PUBLIC
@@ -22,6 +23,7 @@ target_sources(TonbCAD2dShell
         include/tonb/cad2d/shell/command/command_args.hxx
         include/tonb/cad2d/shell/command/command_context.hxx
         include/tonb/cad2d/shell/command/command_node.hxx
+        include/tonb/cad2d/shell/commands/shell_cmd_core.hxx
         include/tonb/cad2d/shell/help/command_spec.hxx
         include/tonb/cad2d/shell/help/help_registry.hxx
         include/tonb/cad2d/shell/help/help_renderer.hxx
