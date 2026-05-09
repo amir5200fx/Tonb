@@ -9,6 +9,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Root-level foundation layer introduced for Tonb**: Added a new reusable `foundation/` module tree, ported and adapted from GeoForge, to provide shared infrastructure for future shells and tooling.
 - **Shell-oriented infrastructure established**: Added reusable command-line, workspace, logging, export, failure, configuration, and utility foundations intended to support upcoming root-level shells such as `shell/cad2d`.
 - **GeoForge foundations adapted to Tonb conventions**: Integrated the imported foundation code into Tonb-native include paths, namespaces, module macros, and build wiring.
+- **Root-level cad2d shell module introduced**: Added the first dedicated `shell/cad2d` module outside `libs/`, establishing the build, public-header, and target foundation for the future AutoCAD-like `cad2d` shell.
+- **cad2d shell module scaffolded for future expansion**: Added the initial `ShellApp` façade, Tonb-native shell export macros, placeholder shell runtime headers, and basic smoke-test coverage so later session, tokenisation, UI, and command infrastructure can be developed on a real module boundary.
 
 ### Added
 - **Root-level Tonb foundation module**:
@@ -44,6 +46,20 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - `tonb/foundation/module.hxx` added for export/import control and shared module visibility handling
 - **Foundation module documentation**:
     - README documenting the role of the new foundation layer as the reusable basis for future Tonb shells and tooling
+- **Root-level cad2d shell module**:
+    - new `shell/` root module tree with dedicated `shell/cad2d` module outside `libs/`
+    - new `TonbCAD2dShell` target with `Tonb::CAD2dShell` alias
+    - root and module-level CMake wiring for building and installing the new shell module
+- **Tonb-native cad2d shell public headers**:
+    - `tonb/cad2d/shell/module.hxx` for shell-module export/import control
+    - initial public `ShellApp` façade in `tonb/cad2d/shell/shell_app.hxx`
+    - initial placeholder headers for future shell subsystems:
+        - `shell_session.hxx`
+        - `shell_tokenise.hxx`
+        - `shell_ui.hxx`
+- **Initial cad2d shell implementation and smoke testing**:
+    - minimal `ShellApp` implementation for the new shell module
+    - basic smoke-test coverage verifying shell target linkage and public header availability
 
 ### Changed
 - **Foundation namespace and include adaptation**:
@@ -51,6 +67,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - adapted imported code to Tonb-style namespaces and module structure
 - **Tonb build integration**:
     - aligned the imported foundation layer with Tonb build, target, and install conventions
+    - extended the root build to include the new `shell/cad2d` module
 - **Bundle integrity implementation cleanup**:
     - removed an unnecessary OpenSSL include during the Tonb port of the foundation bundle-integrity implementation
 
@@ -58,6 +75,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - This foundation work is intended to support upcoming root-level shell development, beginning with `shell/cad2d`.
 - The imported GeoForge foundations were integrated as a Tonb-native root-level infrastructure layer rather than being embedded directly into a product-specific shell.
 - The current integration keeps the module structure broad and reusable so it can later be split further if needed.
+- This completes **Issue 1 — Root-level cad2d Shell Module** from the cad2d shell roadmap.
+- The current `shell/cad2d` state is intentionally a module scaffold only; shell session, tokenisation, UI, command dispatch, and help infrastructure remain future issues built on top of this boundary.
 
 ---
 
