@@ -13,6 +13,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **cad2d shell module scaffolded for future expansion**: Added the initial `ShellApp` façade, Tonb-native shell export macros, placeholder shell runtime headers, and basic smoke-test coverage so later session, tokenisation, UI, and command infrastructure can be developed on a real module boundary.
 - **cad2d shell session model introduced**: Added the first real `ShellSession` orchestration root for `shell/cad2d`, with named curve-store and shape domains, active-context tracking, shape-to-curve-store binding, primary selection, runtime flags, and deterministic status/reset support.
 - **Session foundation prepared for CAD-like growth**: The new shell session model is intentionally structured to support future selection-set, alias-handle, journaling, and undo/redo style workflows without embedding CAD algorithms into the shell state layer.
+- **cad2d command registry and dispatch foundation introduced**: Added the first real hierarchical command infrastructure for `shell/cad2d`, with deterministic path lookup, alias support, structured command dispatch, and explicit invalid-command failures.
+- **Command infrastructure aligned with future shell growth**: The new registry/context/args model is designed to support later command families, help integration, tokenisation, and AutoCAD-like command workflows without collapsing everything into ad hoc handlers.
 
 ### Added
 - **Root-level Tonb foundation module**:
@@ -74,6 +76,21 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - regression tests for deterministic session creation and reset behavior
     - regression tests for active shape and active curve-store assignment
     - regression tests for storing and reporting shape-to-curve-store bindings
+- **cad2d command registry and dispatch infrastructure**:
+    - hierarchical command path model for shell command registration and lookup
+    - structured command argument model for dispatch-time token handling
+    - command execution context carrying session access and dispatch-facing state
+    - command node and registry types for clean command-family registration
+    - deterministic longest-prefix or equivalent path matching for nested commands
+    - alias support for command-path dispatch
+    - explicit unknown-command failure behavior
+    - deterministic rejection of conflicting alias or command registrations
+- **cad2d command infrastructure test coverage**:
+    - regression tests for simple command dispatch
+    - regression tests for nested command dispatch
+    - regression tests for clean unknown-command failure
+    - regression tests for alias dispatch behavior
+    - regression tests ensuring ambiguous or conflicting command registration is prevented deterministically
 
 ### Changed
 - **Foundation namespace and include adaptation**:
@@ -83,6 +100,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - aligned the imported foundation layer with Tonb build, target, and install conventions
     - extended the root build to include the new `shell/cad2d` module
     - extended the shell module build to compile and test the first real session subsystem
+    - extended the shell module build further to compile and test the first real command infrastructure subsystem
 - **Bundle integrity implementation cleanup**:
     - removed an unnecessary OpenSSL include during the Tonb port of the foundation bundle-integrity implementation
 
@@ -92,7 +110,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - The current integration keeps the module structure broad and reusable so it can later be split further if needed.
 - This completes **Issue 1 — Root-level cad2d Shell Module** from the cad2d shell roadmap.
 - This also completes **Issue 2 — Shell Session Model** from the cad2d shell roadmap.
-- The current `shell/cad2d` state now includes a real session foundation, but tokenisation, UI, command dispatch, and help infrastructure remain future issues built on top of this boundary.
+- This also completes **Issue 3 — Command Registry and Dispatch Infrastructure** from the cad2d shell roadmap.
+- The current `shell/cad2d` state now includes a real session foundation and command dispatch foundation, but help rendering, tokenisation, and higher-level command families remain future issues built on top of this boundary.
 
 ---
 
