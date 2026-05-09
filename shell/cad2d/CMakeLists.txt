@@ -5,6 +5,7 @@ target_sources(TonbCAD2dShell
         PRIVATE
         src/shell_app.cxx
         src/shell_session.cxx
+        src/shell_tokenise.cxx
         src/command/command_registry.cxx
         src/command/command_node.cxx
         src/help/help_renderer.cxx
@@ -16,6 +17,7 @@ target_sources(TonbCAD2dShell
         include/tonb/cad2d/shell/module.hxx
         include/tonb/cad2d/shell/shell_app.hxx
         include/tonb/cad2d/shell/shell_session.hxx
+        include/tonb/cad2d/shell/shell_tokenise.hxx
         include/tonb/cad2d/shell/command/command_registry.hxx
         include/tonb/cad2d/shell/command/command_args.hxx
         include/tonb/cad2d/shell/command/command_context.hxx
