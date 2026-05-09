@@ -15,6 +15,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Session foundation prepared for CAD-like growth**: The new shell session model is intentionally structured to support future selection-set, alias-handle, journaling, and undo/redo style workflows without embedding CAD algorithms into the shell state layer.
 - **cad2d command registry and dispatch foundation introduced**: Added the first real hierarchical command infrastructure for `shell/cad2d`, with deterministic path lookup, alias support, structured command dispatch, and explicit invalid-command failures.
 - **Command infrastructure aligned with future shell growth**: The new registry/context/args model is designed to support later command families, help integration, tokenisation, and AutoCAD-like command workflows without collapsing everything into ad hoc handlers.
+- **cad2d help registry and rendering introduced using foundation**: Added the first structured help subsystem for `shell/cad2d`, built on top of the Tonb foundation CLI/help layer rather than duplicating shell-local metadata and rendering infrastructure.
+- **Help foundation aligned with reusable CLI infrastructure**: The cad2d shell help layer now acts as a thin shell-specific adapter over foundation command specs, help registry structures, and rendering utilities, keeping generic help behavior in the shared root-level foundation module.
 
 ### Added
 - **Root-level Tonb foundation module**:
@@ -91,6 +93,16 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - regression tests for clean unknown-command failure
     - regression tests for alias dispatch behavior
     - regression tests ensuring ambiguous or conflicting command registration is prevented deterministically
+- **cad2d help registry and rendering infrastructure using foundation**:
+    - shell-facing help registry layer built on top of the foundation CLI/help subsystem
+    - thin shell alias/adaptor layer over foundation command-spec metadata types
+    - help rendering by command path via reusable foundation rendering utilities
+    - deterministic namespace listing for top-level and nested shell help views
+    - explicit unknown-help-path failure behavior
+- **cad2d help infrastructure test coverage**:
+    - regression tests for top-level help namespace listing
+    - regression tests for rendering help for a specific command path
+    - regression tests for clean failure on unknown help paths
 
 ### Changed
 - **Foundation namespace and include adaptation**:
@@ -101,6 +113,10 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
     - extended the root build to include the new `shell/cad2d` module
     - extended the shell module build to compile and test the first real session subsystem
     - extended the shell module build further to compile and test the first real command infrastructure subsystem
+    - extended the shell/help build further so the cad2d help layer now depends on and reuses the shared foundation CLI/help module
+- **cad2d help architecture**:
+    - replaced the earlier shell-local help duplication approach with a foundation-backed design
+    - kept cad2d-specific help wiring in `shell/cad2d` while leaving generic metadata and rendering behavior in the reusable foundation layer
 - **Bundle integrity implementation cleanup**:
     - removed an unnecessary OpenSSL include during the Tonb port of the foundation bundle-integrity implementation
 
@@ -111,7 +127,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - This completes **Issue 1 — Root-level cad2d Shell Module** from the cad2d shell roadmap.
 - This also completes **Issue 2 — Shell Session Model** from the cad2d shell roadmap.
 - This also completes **Issue 3 — Command Registry and Dispatch Infrastructure** from the cad2d shell roadmap.
-- The current `shell/cad2d` state now includes a real session foundation and command dispatch foundation, but help rendering, tokenisation, and higher-level command families remain future issues built on top of this boundary.
+- This also completes **Issue 4 — Help Registry and Help Rendering** from the cad2d shell roadmap.
+- The current `shell/cad2d` state now includes a real session foundation, command dispatch foundation, and foundation-backed help subsystem, but tokenisation and higher-level command families remain future issues built on top of this boundary.
 
 ---
 

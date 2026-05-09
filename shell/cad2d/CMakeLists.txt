@@ -7,6 +7,8 @@ target_sources(TonbCAD2dShell
         src/shell_session.cxx
         src/command/command_registry.cxx
         src/command/command_node.cxx
+        src/help/help_renderer.cxx
+        src/help/help_registry.cxx
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -18,6 +20,9 @@ target_sources(TonbCAD2dShell
         include/tonb/cad2d/shell/command/command_args.hxx
         include/tonb/cad2d/shell/command/command_context.hxx
         include/tonb/cad2d/shell/command/command_node.hxx
+        include/tonb/cad2d/shell/help/command_spec.hxx
+        include/tonb/cad2d/shell/help/help_registry.hxx
+        include/tonb/cad2d/shell/help/help_renderer.hxx
 )
 
 target_include_directories(TonbCAD2dShell PUBLIC
@@ -34,6 +39,7 @@ target_include_directories(TonbCAD2dShell
 target_link_libraries(TonbCAD2dShell
         PUBLIC Tonb::CAD2d
         PUBLIC Tonb::System
+        PUBLIC Tonb::Foundation
 )
 
 set_target_properties(TonbCAD2dShell PROPERTIES
