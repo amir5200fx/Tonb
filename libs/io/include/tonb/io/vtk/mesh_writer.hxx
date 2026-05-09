@@ -1,0 +1,46 @@
+//
+// Created by amir on 8/27/25.
+//
+#pragma once
+#ifndef TONB_IO_VTK_MESH_WRITER_HXX
+#define TONB_IO_VTK_MESH_WRITER_HXX
+#include <tonb/io/module.hxx>
+#include <tonb/base/precision.hxx>
+#include <tonb/base/index_types.hxx>
+
+#include <vector>
+#include <array>
+#include <string>
+namespace tonb::io::vtk {
+    using namespace tonb::base;
+    class MeshWriter {
+    public:
+
+        /**
+         * @brief Write a quad surface mesh to a .vtp file (VTK XML polyData).
+         *
+         * @param points    Vector of vertex positions [N x 3]
+         * @param quads     Vector of quads [M x 4], each entry is vertex index (0-based)
+         * @param file_path Output file path (should end with .vtp)
+         * @param binary    If true, use appended binary mode (smaller, faster); else ASCII
+         * @return true if write succeeded
+         */
+        static TNBIO_EXPORT bool write_quad_surface_vtp(const std::vector<std::array<real, 3> > &points,
+                                                        const std::vector<std::array<index_t, 4> > &quads,
+                                                        const std::string &file_path, bool binary = true);
+
+        /**
+         * @brief Write a triangle surface mesh to a .vtp file (VTK XML PolyData).
+         *
+         * @param points Vector of vertex positions [N x 3]
+         * @param tris   Vector of triangles [M x 3], each entry is vertex index (0-based)
+         * @param file_path Output file path (should end with .vtp)
+         * @param binary If true, use appended binary mode (smaller, faster); else ASCII
+         * @return true if write succeeded
+         */
+        static TNBIO_EXPORT bool write_tri_surface_vtp(const std::vector<std::array<real, 3> > &points,
+                                                       const std::vector<std::array<index_t, 3> > &tris,
+                                                       const std::string &file_path, bool binary = true);
+    };
+}
+#endif //TONB_IO_VTK_MESH_WRITER_HXX
