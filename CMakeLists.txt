@@ -17,7 +17,7 @@ if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif ()
 
 project(Tonb
-        VERSION 0.21.0
+        VERSION 0.22.0
         DESCRIPTION "TONB multi-library workspace"
         LANGUAGES C CXX)
 
