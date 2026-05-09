@@ -1,6 +1,7 @@
 add_executable(test_shell_cad2d_validate
         shell_session_tests.cxx
         command_registry_tests.cxx
+        help_register_tests.cxx
 )
 
 target_link_libraries(test_shell_cad2d_validate PRIVATE
